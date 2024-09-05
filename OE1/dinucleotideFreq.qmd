@@ -93,7 +93,7 @@ dinucleotide_data <- as.data.frame(lapply(dinucleotide_data, as.numeric))  # Con
 pca_result <- prcomp(dinucleotide_data, scale. = TRUE)
 
 # PCA summary
-summary(pca_result)
+# summary(pca_result)
 
 # Obtain the PCA scores (principal components for each observation)
 pca_scores <- as.data.frame(pca_result$x)
@@ -102,7 +102,7 @@ pca_scores <- as.data.frame(pca_result$x)
 pca_scores <- cbind(dinucleotide_table[, c("File", "ID")], pca_scores)
 
 # Show the first PCA results
-print(head(pca_scores))
+# print(head(pca_scores))
 
 
 ```
