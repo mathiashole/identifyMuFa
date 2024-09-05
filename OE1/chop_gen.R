@@ -55,15 +55,19 @@ execute_command <- function(command) {
   system(command)
 }
 
+
 # Function to process commands for each row in the data
-process_commands <- function(data) {
+process_commands <- function(data, output_dir) {
+  create_output_dir(output_dir)  # Ensure the output directory exists
+
+  data <- generate_file_names(data, output_dir)
+
   for (i in 1:nrow(data)) {
     cat("Processing row ", i, "\n")
     print(data[i, ])  # Print the entire row for debugging
 
-    # Generate commands for each step    
-    filter_seq_command <- generate_filter_seq_command(data$input_file[i])
-
+    # Generate commands for each step
+    filter_seq_command <- generate_filter_seq_command("/path/to/input_file.tsv")
     gscissors_command <- generate_gscissors_command(data$fasta_file[i], data$filtred_name_gff[i], data$out_gscissors[i])
     fasta_feature_command <- generate_fasta_feature_command(data$out_gscissors[i])
     distribution_command <- generate_distribution_command(data$stat_fasta_feature[i])
@@ -76,16 +80,16 @@ process_commands <- function(data) {
       next
     }
 
-    # execute_command(gscissors_command)
-    # if (!file.exists(data$out_gscissors[i])) {
-    #   cat("Error: GSCISSORS did not create the file", data$out_gscissors[i], "\n")
-    #   next
-    # }
+    execute_command(gscissors_command)
+    if (!file.exists(data$out_gscissors[i])) {
+      cat("Error: GSCISSORS did not create the file", data$out_gscissors[i], "\n")
+      next
+    }
 
-    # execute_command(fasta_feature_command)
-    # execute_command(distribution_command)
+    execute_command(fasta_feature_command)
+    execute_command(distribution_command)
 
-    # cat("Successfully processed", data$fasta_file[i], "and keywords:", data$keyword1[i], data$keyword2[i], "\n")
+    cat("Successfully processed", data$fasta_file[i], "and keywords:", data$keyword1[i], data$keyword2[i], "\n")
   }
 }
 
