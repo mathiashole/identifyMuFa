@@ -21,9 +21,10 @@ When you click the **Render** button a document will be generated that includes 
 ```{r}
 
 # Load necessary libraries
-library(data.table)
+#library(data.table)
 library(seqinr)
 library(ggplot2)
+library(ggfortify)
 library(Rtsne)
 
 ```
