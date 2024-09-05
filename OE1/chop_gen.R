@@ -99,6 +99,7 @@ if (length(args) != 1) {
   stop("Usage: chop_gen.R <file_with_arguments.tsv>")
 }
 
+load_libraries()
 input_file <- args[1]
 output_dir <- "output_directory"  # Define your output directory
 data <- read_input(input_file)
