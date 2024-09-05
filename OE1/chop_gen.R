@@ -30,17 +30,8 @@ read_input <- function(input_file) {
 # Función para procesar cada conjunto de argumentos
 process_filter_seq <- function(input_file) {
   # Leer el archivo de entrada
-  data <- read_tsv(input_file, col_names = FALSE)
-  colnames(data) <- c("fasta_file", "gff_file", "keyword1", "keyword2") # Ajustar los nombres de las columnas según sea necesario
-
-  # Rutas completas a los scripts
-  #FILTER_SEQ <- "/home/usuario/BASH/chack_gff/chack_gff.sh"
-  FILTER_SEQ <- "/home/usuario/BASH/chack_gff/chack_gff_v1.sh"
-  GSCISSORS <- "/home/usuario/Data_Rstudio/seqExtractor/GScissors/gscissors.pl"
-  #FASTA_FEATURE <- "/home/usuario/PERL/stat_seq/stat_seq.pl"
-  SEQ_A <- "/home/usuario/Data_Rstudio/chop_genome/seq_attributes/seq_attributes.R"
-  DISTRIBUTION <- "/home/usuario/Data_Rstudio/statistics_of_sequence/analyze_statistics.R"
-  #SEQ_A <- "/home/usuario/Data_Rstudio/statistics_of_sequence/render_quarto.R"
+  # data <- read_tsv(input_file, col_names = FALSE)
+  # colnames(data) <- c("fasta_file", "gff_file", "keyword1", "keyword2") # Ajustar los nombres de las columnas según sea necesario
 
   # Procesar cada fila del archivo
   data %>%
