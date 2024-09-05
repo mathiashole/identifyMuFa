@@ -84,3 +84,25 @@ library(reactable)
 reactable(dinucleotide_table[,c(3:16)], highlight = TRUE)
 
 ```
+```{r}
+
+dinucleotide_data <- dinucleotide_table[, -c(1, 2)]  # Exclude the first columns (File and ID)
+dinucleotide_data <- as.data.frame(lapply(dinucleotide_data, as.numeric))  # Convert to numeric
+
+# Perform PCA
+pca_result <- prcomp(dinucleotide_data, scale. = TRUE)
+
+# PCA summary
+summary(pca_result)
+
+# Obtain the PCA scores (principal components for each observation)
+pca_scores <- as.data.frame(pca_result$x)
+
+# Add the File and ID columns to the PCA results
+pca_scores <- cbind(dinucleotide_table[, c("File", "ID")], pca_scores)
+
+# Show the first PCA results
+print(head(pca_scores))
+
+
+```
