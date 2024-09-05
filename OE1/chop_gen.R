@@ -10,9 +10,22 @@ SEQ_A <- "/home/usuario/Data_Rstudio/chop_genome/seq_attributes/seq_attributes.R
 DISTRIBUTION <- "/home/usuario/Data_Rstudio/statistics_of_sequence/analyze_statistics.R"
 #SEQ_A <- "/home/usuario/Data_Rstudio/statistics_of_sequence/render_quarto.R"
 
-
 # Cargar librerías necesarias
 library(tidyverse)
+
+# Create output directory if it does not exist
+create_output_dir <- function(output_dir) {
+  if (!dir.exists(output_dir)) {
+    dir.create(output_dir, recursive = TRUE)
+  }
+}
+
+# Function to read input file and set column names
+read_input <- function(input_file) {
+  data <- read_tsv(input_file, col_names = FALSE)
+  colnames(data) <- c("fasta_file", "gff_file", "keyword1", "keyword2")
+  return(data)
+}
 
 # Función para procesar cada conjunto de argumentos
 process_filter_seq <- function(input_file) {
