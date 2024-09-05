@@ -5,6 +5,13 @@ load_libraries <- function() {
   library(tidyverse)
 }
 
+# Create output directory if it does not exist
+create_output_dir <- function(output_dir) {
+  if (!dir.exists(output_dir)) {
+    dir.create(output_dir, recursive = TRUE)
+  }
+}
+
 # Function to read input file and set column names
 read_input <- function(input_file) {
   data <- read_tsv(input_file, col_names = FALSE)
