@@ -72,16 +72,16 @@ process_commands <- function(data) {
       next
     }
 
-    execute_command(gscissors_command)
-    if (!file.exists(data$out_gscissors[i])) {
-      cat("Error: GSCISSORS did not create the file", data$out_gscissors[i], "\n")
-      next
-    }
+    # execute_command(gscissors_command)
+    # if (!file.exists(data$out_gscissors[i])) {
+    #   cat("Error: GSCISSORS did not create the file", data$out_gscissors[i], "\n")
+    #   next
+    # }
 
-    execute_command(fasta_feature_command)
-    execute_command(distribution_command)
+    # execute_command(fasta_feature_command)
+    # execute_command(distribution_command)
 
-    cat("Successfully processed", data$fasta_file[i], "and keywords:", data$keyword1[i], data$keyword2[i], "\n")
+    # cat("Successfully processed", data$fasta_file[i], "and keywords:", data$keyword1[i], data$keyword2[i], "\n")
   }
 }
 
@@ -100,7 +100,7 @@ process_commands <- function(data) {
   print(data)
   data <- generate_file_names(data)
   print(data)
- # process_commands(data)
+  process_commands(data)
 #}
 
 # Execute the main function
