@@ -1,0 +1,86 @@
+---
+title: "Dinucleotide frequency"
+author: "Mathias"
+format:
+  html:
+    theme: united
+    code-fold: true
+    code-link: true
+    number-sections: true
+    highlight-style: github
+---
+
+## Quarto
+
+![](https://img.itch.zone/aW1nLzE3MTEyNjE5LmdpZg==/original/2%2BYVZg.gif){style="float:right;" fig-alt="Illustration of a detective cat. Artwork by @shigemi.itch.io." width="301"}
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+
+# Load necessary libraries
+library(data.table)
+library(seqinr)
+library(ggplot2)
+library(Rtsne)
+
+```
+
+You can add options to executable code like this
+
+```{r}
+
+# Function to count dinucleotides
+count_dinucleotides <- function(sequence) {
+  # Count dinucleotides
+  counts <- seqinr::count(sequence, 2)
+  # Calculate frequencies
+  freqs <- counts / sum(counts)
+  freqs <- round(freqs, 3)
+  return(freqs)
+}
+
+# Read the multifasta files from the folder and calculate dinucleotide frequencies
+calculate_dinucleotide_frequencies <- function(directory) {
+  fasta_files <- list.files(path = directory, pattern = "^out_.*\\.fasta$", full.names = TRUE)
+  results <- data.frame() # Initialize empty data frame for results
+
+  # Iterate over each FASTA file in the folder
+  for (fasta_file in fasta_files) {
+    sequences <- read.fasta(fasta_file)
+    ids <- names(sequences)
+    
+    # Get dinucleotide frequencies for each sequence within a file
+    for (i in seq_along(sequences)) {
+      seq <- getSequence(sequences[[i]])
+      freqs <- count_dinucleotides(seq)
+      row <- c(File = fasta_file, ID = ids[i], freqs)  # Add file name
+
+      # Convert the row to a data frame and join it to results
+      row_df <- as.data.frame(t(row), stringsAsFactors = FALSE)
+      results <- rbind(results, row_df)
+    }
+  }
+
+  return(results)
+}
+
+# Define the working directory
+directory <- "/home/usuario/Data_Rstudio/chop_genome"
+
+# Run the function and get the dinucleotide frequency table
+dinucleotide_table <- calculate_dinucleotide_frequencies(directory)
+
+# Show the results table
+#print(dinucleotide_table)
+
+```
+
+```{r}
+library(reactable)
+
+reactable(dinucleotide_table[,c(3:16)], highlight = TRUE)
+
+```
