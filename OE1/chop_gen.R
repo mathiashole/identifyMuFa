@@ -25,28 +25,21 @@ generate_file_names <- function(data) {
     )
 }
 
-# Function to generate the command for filtering sequences
+# Function to generate commands for each step
 generate_filter_seq_command <- function(input_file) {
-  FILTER_SEQ <- "/home/usuario/BASH/chack_gff/chack_gff_v1.sh"
-  str_c(FILTER_SEQ, " ", input_file)
+  return(str_c("/home/usuario/BASH/chack_gff/chack_gff_v1.sh ", input_file))
 }
 
-# Function to generate the command for running GSCISSORS
-generate_gscissors_command <- function(fasta_file, filtred_name_gff, out_gscissors) {
-  GSCISSORS <- "/home/usuario/Data_Rstudio/seqExtractor/GScissors/gscissors.pl"
-  str_c(GSCISSORS, " --fasta ", fasta_file, " --coordinates ", filtred_name_gff, " --format gff --output ", out_gscissors)
+generate_gscissors_command <- function(fasta_file, gff_file, out_gscissors) {
+  return(str_c("/home/usuario/Data_Rstudio/seqExtractor/GScissors/gscissors.pl --fasta ", fasta_file, " --coordinates ", gff_file, " --format gff --output ", out_gscissors))
 }
 
-# Function to generate the command for analyzing sequence features
 generate_fasta_feature_command <- function(out_gscissors) {
-  SEQ_A <- "/home/usuario/Data_Rstudio/chop_genome/seq_attributes/seq_attributes.R"
-  str_c(SEQ_A, " ", out_gscissors)
+  return(str_c("/home/usuario/Data_Rstudio/chop_genome/seq_attributes/seq_attributes.R ", out_gscissors))
 }
 
-# Function to generate the command for analyzing sequence distribution
 generate_distribution_command <- function(stat_fasta_feature) {
-  DISTRIBUTION <- "/home/usuario/Data_Rstudio/statistics_of_sequence/analyze_statistics.R"
-  str_c(DISTRIBUTION, " ", stat_fasta_feature)
+  return(str_c("/home/usuario/Data_Rstudio/statistics_of_sequence/analyze_statistics.R ", stat_fasta_feature))
 }
 
 # Function to execute a command and print the command being executed
@@ -58,8 +51,12 @@ execute_command <- function(command) {
 # Function to process commands for each row in the data
 process_commands <- function(data) {
   for (i in 1:nrow(data)) {
-    # Generate commands for each step
+    cat("Processing row ", i, "\n")
+    print(data[i, ])  # Print the entire row for debugging
+
+    # Generate commands for each step    
     filter_seq_command <- generate_filter_seq_command(data$input_file[i])
+
     gscissors_command <- generate_gscissors_command(data$fasta_file[i], data$filtred_name_gff[i], data$out_gscissors[i])
     fasta_feature_command <- generate_fasta_feature_command(data$out_gscissors[i])
     distribution_command <- generate_distribution_command(data$stat_fasta_feature[i])
