@@ -86,7 +86,7 @@ dinucleotide_table <- calculate_dinucleotide_frequencies(directory)
 ```{r}
 library(reactable)
 
-reactable(dinucleotide_table[,c(3:16)], highlight = TRUE)
+reactable(dinucleotide_table[,c(1, 3:18)], highlight = TRUE)
 
 ```
 
