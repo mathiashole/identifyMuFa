@@ -89,7 +89,6 @@ reactable(dinucleotide_table[,c(3:16)], highlight = TRUE)
 
 ```
 
-
 ```{r}
 
 dinucleotide_data <- dinucleotide_table[, -c(1, 2)]  # Exclude the first columns (File and ID)
