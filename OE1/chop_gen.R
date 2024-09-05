@@ -93,26 +93,16 @@ process_commands <- function(data, output_dir) {
   }
 }
 
-# Main function to run the entire script
-#main <- function() {
-  load_libraries()
+# Main script
+args <- commandArgs(trailingOnly = TRUE)
+if (length(args) != 1) {
+  stop("Usage: chop_gen.R <file_with_arguments.tsv>")
+}
 
-  # Check for input file argument
-  args <- commandArgs(trailingOnly = TRUE)
-  if (length(args) == 0) {
-    stop("Usage: main.R <file_with_arguments.tsv>")
-  }
-
-  # Read and process the input file
-  data <- read_input(args[1])
-  print(data)
-  data <- generate_file_names(data)
-  print(data)
-  process_commands(data)
-#}
-
-# Execute the main function
-#main()
+input_file <- args[1]
+output_dir <- "output_directory"  # Define your output directory
+data <- read_input(input_file)
+process_commands(data, output_dir)
 
 
 # #!/usr/bin/env Rscript
