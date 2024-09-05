@@ -97,9 +97,6 @@ dinucleotide_data <- as.data.frame(lapply(dinucleotide_data, as.numeric))  # Con
 # Perform PCA
 pca_result <- prcomp(dinucleotide_data, scale. = TRUE)
 
-# PCA summary
-# summary(pca_result)
-
 # Obtain the PCA scores (principal components for each observation)
 pca_scores <- as.data.frame(pca_result$x)
 
@@ -108,6 +105,6 @@ pca_scores <- cbind(dinucleotide_table[, c("File", "ID")], pca_scores)
 
 # Show the first PCA results
 # print(head(pca_scores))
-
+autoplot(como, data = dinucleotide_table, colour = 'File', loadings = TRUE, loadings.label = TRUE, loadings.colour = 'grey64')
 
 ```
