@@ -106,6 +106,7 @@ pca_scores <- cbind(dinucleotide_table[, c("File", "ID")], pca_scores)
 
 # Show the first PCA results
 # print(head(pca_scores))
-autoplot(como, data = dinucleotide_table, colour = 'File', loadings = TRUE, loadings.label = TRUE, loadings.colour = 'grey64')
+autoplot(pca_result, data = dinucleotide_table, colour = 'File', loadings = TRUE,
+         loadings.label = TRUE, loadings.colour = 'grey64')
 
 ```
