@@ -56,19 +56,33 @@ transform_data <- function(data) {
 #   return(data)
 # }
 
-# Generate system commands for each step, directing output to output_directory
 generate_commands <- function(data) {
+  # we use rowwise to apply the function to each row individually
   data <- rowwise(data) %>%
     mutate(
-      # Pass output directory for each command to save results in the correct folder
-      filter_seq_command = str_c(FILTER_SEQ, " ", fasta_file, " > ", filtred_name_gff),
+      filter_seq_command = str_c(FILTER_SEQ, " ", input_file),
       gscissors_command = str_c(GSCISSORS, " --fasta ", fasta_file, " --coordinates ", filtred_name_gff, " --format gff --output ", out_gscissors),
       fasta_feature_command = str_c(SEQ_A, " ", out_gscissors),
       distribution_command = str_c(DISTRIBUTION, " ", stat_fasta_feature)
     )
   
+  # Return DataFrame with generated commands
   return(data)
 }
+
+# # Generate system commands for each step, directing output to output_directory
+# generate_commands <- function(data) {
+#   data <- rowwise(data) %>%
+#     mutate(
+#       # Pass output directory for each command to save results in the correct folder
+#       filter_seq_command = str_c(FILTER_SEQ, " ", fasta_file, " > ", filtred_name_gff),
+#       gscissors_command = str_c(GSCISSORS, " --fasta ", fasta_file, " --coordinates ", filtred_name_gff, " --format gff --output ", out_gscissors),
+#       fasta_feature_command = str_c(SEQ_A, " ", out_gscissors),
+#       distribution_command = str_c(DISTRIBUTION, " ", stat_fasta_feature)
+#     )
+  
+#   return(data)
+# }
 
 # Function to process each set of arguments
 execution_module <- function(data) {
