@@ -56,7 +56,7 @@ transform_data <- function(data) {
 #   return(data)
 # }
 
-generate_commands <- function(data, output_dir) {
+generate_commands <- function(data) {
   # we use rowwise to apply the function to each row individually
   data <- rowwise(data) %>%
     mutate(
@@ -131,7 +131,7 @@ data <- read_input(input_file)
 data_transformed <- transform_data(data)
 print(data_transformed)
 # Generate the commands
-data_with_commands <- generate_commands(data_transformed, output_dir)
+data_with_commands <- generate_commands(data_transformed)
 # Prit debugging
 print(data_with_commands)
 # Execution script
