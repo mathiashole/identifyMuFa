@@ -123,7 +123,10 @@ if (length(args) == 0) {
 input_file <- args[1]
 output_dir <- "output_directory"  # Define your output directory
 data <- read_input(input_file)
-
+# Apply the transformations
+data_transformed <- transform_data(data)
+# Generate the commands
+data_with_commands <- generate_commands(data_transformed)
 
 # #!/usr/bin/env Rscript
 
