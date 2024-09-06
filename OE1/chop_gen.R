@@ -56,37 +56,38 @@ generate_commands <- function(data) {
   return(data)
 }
 
-# # Función para procesar cada conjunto de argumentos
-# execution_module <- function(input_file) {
-#       for (i in 1:nrow(.)) {
-#         cat("Processing FILTER_SEQ: ", .$filter_seq_command[i], "\n")
-#         system(.$filter_seq_command[i])
+# Function to process each set of arguments
+execution_module <- function(input_file) {
+      for (i in 1:nrow(.)) {
+        cat("Processing FILTER_SEQ: ", .$filter_seq_command[i], "\n")
+        system(.$filter_seq_command[i])
         
-#         # Verificar si FILTER_SEQ creó el archivo esperado
-#         if (!file.exists(.$filtred_name_gff[i])) {
-#           cat("Error: FILTER_SEQ did not create the file", .$filtred_name_gff[i], "\n")
-#           next
-#         }
+        # Check if FILTER_SEQ created the expected file
+        # change directory from where you get the data!! DEBUGGING
+        if (!file.exists(.$filtred_name_gff[i])) {
+          cat("Error: FILTER_SEQ did not create the file", .$filtred_name_gff[i], "\n")
+          next
+        }
 
-#         cat("Processing GSCISSORS: ", .$gscissors_command[i], "\n")
-#         system(.$gscissors_command[i])
-#         if (!file.exists(.$out_gscissors[i])) {
-#           cat("Error: GSCISSORS did not create the file", .$out_gscissors[i], "\n")
-#           next
-#         }
+        # change directory from where you get the data!! DEBUGGING
+        cat("Processing GSCISSORS: ", .$gscissors_command[i], "\n")
+        system(.$gscissors_command[i])
+        if (!file.exists(.$out_gscissors[i])) {
+          cat("Error: GSCISSORS did not create the file", .$out_gscissors[i], "\n")
+          next
+        }
+        # change directory from where you get the data!! DEBUGGING
+        cat("Processing SEQ_A: ", .$fasta_feature_command[i], "\n")
+        system(.$fasta_feature_command[i])
+        # change directory from where you get the data!! DEBUGGING
+        cat("Processing DISTRIBUTION: ", .$distribution_command[i], "\n")
+        system(.$distribution_command[i])
 
-#         cat("Processing SEQ_A: ", .$fasta_feature_command[i], "\n")
-#         system(.$fasta_feature_command[i])
+        cat("Successfully processed", .$fasta_file[i], "and keywords:", .$keyword1[i], .$keyword2[i], "\n")
+      }
+}
 
-#         cat("Processing DISTRIBUTION: ", .$distribution_command[i], "\n")
-#         system(.$distribution_command[i])
-
-#         cat("Successfully processed", .$fasta_file[i], "and keywords:", .$keyword1[i], .$keyword2[i], "\n")
-#       }
-#     }
-# }
-
-# Verificar el número de argumentos
+# Check the number of arguments
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args) == 0) {
   stop("Usage: process_sequences.R <file_with_arguments.tsv>")
