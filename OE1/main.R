@@ -56,11 +56,11 @@ transform_data <- function(data) {
 #   return(data)
 # }
 
-generate_commands <- function(data) {
+generate_commands <- function(data, output_dir) {
   # we use rowwise to apply the function to each row individually
   data <- rowwise(data) %>%
     mutate(
-      filter_seq_command = str_c(FILTER_SEQ, " ", input_file),
+      filter_seq_command = str_c(FILTER_SEQ, " ", input_file, " > ", out_dir),
       gscissors_command = str_c(GSCISSORS, " --fasta ", fasta_file, " --coordinates ", filtred_name_gff, " --format gff --output ", out_gscissors),
       fasta_feature_command = str_c(SEQ_A, " ", out_gscissors),
       distribution_command = str_c(DISTRIBUTION, " ", stat_fasta_feature)
@@ -131,7 +131,7 @@ data <- read_input(input_file)
 data_transformed <- transform_data(data)
 print(data_transformed)
 # Generate the commands
-data_with_commands <- generate_commands(data_transformed)
+data_with_commands <- generate_commands(data_transformed, output_dir)
 # Prit debugging
 print(data_with_commands)
 # Execution script
