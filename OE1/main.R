@@ -37,21 +37,10 @@ transform_data <- function(data) {
     out_gscissors = str_c("out_:", keyword_sum, ":_", no_gff_basename, ".fasta"),
     stat_fasta_feature = str_c("stat_", keyword_sum, "_", no_gff_basename, ".tsv")
   )
-
-# transform_data <- function(data) {
-#   # Perform metadata transformations
-#   data <- mutate(data,
-#     gff_basename = basename(gff_file),
-#     no_gff_basename = str_remove(gff_basename, ".{4}$"),
-#     keyword_sum = paste(keyword1, keyword2, sep = "_"),
-#     filtred_name_gff = str_c("filtered_:", keyword_sum, ":_", gff_basename),
-#     out_gscissors = str_c("out_:", keyword_sum, ":_", no_gff_basename, ".fasta"),
-#     stat_fasta_feature = str_c("stat_", keyword_sum, "_", no_gff_basename, ".tsv")
-#   )
   
-#   # Returns the transformed DataFrame
-#   return(data)
-# }
+  # Returns the transformed DataFrame
+  return(data)
+}
 
 # # Transform the data for output filenames and paths
 # transform_data <- function(data, output_dir) {
