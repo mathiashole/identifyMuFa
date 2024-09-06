@@ -27,17 +27,31 @@ read_input <- function(input_file) {
   return(data)
 }
 
-transform_data <- function(data) {
-  # Perform metadata transformations
+# transform_data <- function(data) {
+#   # Perform metadata transformations
+#   data <- mutate(data,
+#     gff_basename = basename(gff_file),
+#     no_gff_basename = str_remove(gff_basename, ".{4}$"),
+#     keyword_sum = paste(keyword1, keyword2, sep = "_"),
+#     filtred_name_gff = str_c("filtered_:", keyword_sum, ":_", gff_basename),
+#     out_gscissors = str_c("out_:", keyword_sum, ":_", no_gff_basename, ".fasta"),
+#     stat_fasta_feature = str_c("stat_", keyword_sum, "_", no_gff_basename, ".tsv")
+#   )
+  
+#   # Returns the transformed DataFrame
+#   return(data)
+# }
+
+# Transform the data for output filenames and paths
+transform_data <- function(data, output_dir) {
   data <- mutate(data,
     gff_basename = basename(gff_file),
     no_gff_basename = str_remove(gff_basename, ".{4}$"),
     keyword_sum = paste(keyword1, keyword2, sep = "_"),
-    filtred_name_gff = str_c("filtered_:", keyword_sum, ":_", gff_basename),
-    out_gscissors = str_c("out_:", keyword_sum, ":_", no_gff_basename, ".fasta"),
-    stat_fasta_feature = str_c("stat_", keyword_sum, "_", no_gff_basename, ".tsv")
+    filtred_name_gff = file.path(output_dir, str_c("filtered_:", keyword_sum, ":_", gff_basename)),
+    out_gscissors = file.path(output_dir, str_c("out_:", keyword_sum, ":_", no_gff_basename, ".fasta")),
+    stat_fasta_feature = file.path(output_dir, str_c("stat_", keyword_sum, "_", no_gff_basename, ".tsv"))
   )
-  
   # Returns the transformed DataFrame
   return(data)
 }
@@ -61,7 +75,6 @@ execution_module <- function(data) {
       for (i in 1:nrow(data)) {
         cat("Processing FILTER_SEQ: ", data$filter_seq_command[i], "\n")
         system(data$filter_seq_command[i])
-        
         # Check if FILTER_SEQ created the expected file
         # change directory from where you get the data!! DEBUGGING
         if (!file.exists(data$filtred_name_gff[i])) {
@@ -101,7 +114,7 @@ input_file <- args[1]
 output_dir <- "output_directory"  # Define your output directory
 data <- read_input(input_file)
 # Apply the transformations
-data_transformed <- transform_data(data)
+data_transformed <- transform_data(data, output_dir)
 # Generate the commands
 data_with_commands <- generate_commands(data_transformed)
 # Prit debugging
