@@ -69,21 +69,21 @@ execution_module <- function(data) {
           next
         }
 
-        # change directory from where you get the data!! DEBUGGING
-        cat("Processing GSCISSORS: ", data$gscissors_command[i], "\n")
-        system(data$gscissors_command[i])
-        if (!file.exists(data$out_gscissors[i])) {
-          cat("Error: GSCISSORS did not create the file", data$out_gscissors[i], "\n")
-          next
-        }
-        # change directory from where you get the data!! DEBUGGING
-        cat("Processing SEQ_A: ", data$fasta_feature_command[i], "\n")
-        system(data$fasta_feature_command[i])
-        # change directory from where you get the data!! DEBUGGING
-        cat("Processing DISTRIBUTION: ", data$distribution_command[i], "\n")
-        system(data$distribution_command[i])
+        # # change directory from where you get the data!! DEBUGGING
+        # cat("Processing GSCISSORS: ", data$gscissors_command[i], "\n")
+        # system(data$gscissors_command[i])
+        # if (!file.exists(data$out_gscissors[i])) {
+        #   cat("Error: GSCISSORS did not create the file", data$out_gscissors[i], "\n")
+        #   next
+        # }
+        # # change directory from where you get the data!! DEBUGGING
+        # cat("Processing SEQ_A: ", data$fasta_feature_command[i], "\n")
+        # system(data$fasta_feature_command[i])
+        # # change directory from where you get the data!! DEBUGGING
+        # cat("Processing DISTRIBUTION: ", data$distribution_command[i], "\n")
+        # system(data$distribution_command[i])
 
-        cat("Successfully processed", data$fasta_file[i], "and keywords:", data$keyword1[i], data$keyword2[i], "\n")
+        # cat("Successfully processed", data$fasta_file[i], "and keywords:", data$keyword1[i], data$keyword2[i], "\n")
       }
 }
 
@@ -106,3 +106,5 @@ data_transformed <- transform_data(data)
 data_with_commands <- generate_commands(data_transformed)
 # Prit debugging
 print(data_with_commands)
+# Execution script
+execution_module(data_with_commands)
