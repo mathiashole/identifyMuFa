@@ -1,0 +1,331 @@
+---
+title: "Análisis de Secuencias"
+author: "Mathias"
+format:
+  html:
+    theme: united
+    code-fold: true
+    code-link: true
+    number-sections: true
+    highlight-style: github
+---
+
+```{r}
+#| label: show-genome
+#| echo: false
+#| warning: false
+
+# Especificar el directorio donde están los archivos
+directory <- "/home/usuario/Data_Rstudio/chop_genome"  # Cambia esto a la ruta de tu directorio
+
+# Obtener la lista de archivos que comienzan con 'out_' y terminan con '.fasta'
+genome_files <- list.files(path = directory, pattern = "^out_.*\\.fasta$", full.names = TRUE)
+genome_name <- sub(".*:_", "\\1", genome_files)
+
+prot_name <- sub(".*_:(.*):_.*", "\\1", genome_files)
+key_names <- sub("_.*", "\\1", prot_name)
+key_name <- unique(sort(key_names))
+
+```
+
+## Descripcion
+
+![](https://img.itch.zone/aW1nLzE3MTEyNjE5LmdpZg==/original/2%2BYVZg.gif){style="float:right;" fig-alt="Illustration of a detective cat. Artwork by @shigemi.itch.io." width="301"}
+
+Los datos utilizados en este análisis fueron obtenidas a partir de diferentes genomas de *Trypanosoma cruzi*, disponibles en [**tritrydb**](https://tritrypdb.org/tritrypdb/app) y [**NCBI**](https://www.ncbi.nlm.nih.gov/).
+
+A partir de estos genomas, se extrajeron secuencias de interés, con el fin de realizar análisis de contenido de `GC`, `longitud de las secuencias`, y otros aspectos relevantes para la caracterización de estas secuencias.
+
+### Genomas
+
+Este análisis utiliza los siguientes genomas ``r genome_name``. A partir de los cuales se obtienen las secuencias para su estudio.
+
+### Librerias y datos a usar
+
+Se cargan las `librerías` necesarias y se define el directorio que contiene las secuencias de `r key_name` en formato FASTA. Obtiendose una lista de `archivos` que cumplen con un patrón específico y se inicializa una tabla para almacenar los resultados del análisis.
+
+```{r}
+#| label: load-packages
+#| echo: true
+#| warning: false
+
+# Cargar las librerías necesarias
+library(seqinr)
+#library(dplyr)
+#library(ggplot2)
+library(tidyverse)
+library(gridExtra)
+
+# Especificar el directorio donde están los archivos
+directory <- "/home/usuario/Data_Rstudio/chop_genome"  # Cambia esto a la ruta de tu directorio
+
+# Obtener la lista de archivos que comienzan con 'out_' y terminan con '.fasta'
+fasta_files <- list.files(path = directory, pattern = "^out_.*\\.fasta$", full.names = TRUE)
+base_prot <- basename(fasta_files)
+
+# Inicializar una tabla para almacenar todos los resultados
+all_results <- tibble(
+  file = character(),
+  ID = character(),
+  Length = integer(),
+  GC_Content = numeric()
+)
+
+```
+
+### Archivos en formato FASTA de las secuencias de `r key_name`
+
+Se calculará el `%GC` y la `longitud` de las secuencias de `r key_name`: ``r base_prot``.
+
+```{r}
+#| label: show-documents
+#| echo: false
+#| warning: false
+
+# Mostrar la lista de archivos en una tabla
+knitr::kable(base_prot, col.names = c("Archivos FASTA"))
+
+```
+
+---
+
+## Procesamiento de Archivos FASTA
+
+Se leen las secuencias en formato FASTA, y para cada secuencia se extraen el `ID`, la `longitud (pb)` y el contenido de `GC (%)`. Estos datos se almacenan en una `tabla all_results`. Finalmente, se muestra esta tabla con los resultados obtenidos
+
+```{r}
+#| label: extract-info
+#| echo: true
+#| warning: false
+
+# Leer cada archivo FASTA y calcular las métricas
+for (fasta_file in fasta_files) {
+  # Leer el archivo FASTA
+  fasta_content <- read.fasta(fasta_file)
+  
+  # Nombre base del archivo
+  base_name <- basename(fasta_file)
+  # Expresión regular para extraer las partes necesarias
+  extracted_names <- sub(".*_([^_]+)\\.fasta$", "\\1", base_name)
+  #extracted_names <- str_remove_all(extracted_names, "^.*_")
+  
+  # Procesar cada secuencia en el archivo FASTA
+  for (sequence in fasta_content) {
+    id <- attr(sequence, "name")
+    length <- round(getLength(sequence), 0)
+    gc_content <- round(GC(sequence), 3)
+    
+    # Añadir los resultados a la tabla
+    all_results <- all_results %>%
+      add_row(file = extracted_names, ID = id, Length = length, GC_Content = gc_content)
+  }
+}
+
+# Mostrar los resultados (opcional)
+print(all_results)
+
+```
+
+### Resumen de Información de `r key_name` en cada genoma
+
+`Tabla resumen` agrupa las secuencias de `r key_name` por cada genoma, calculando el `número total de secuencias encontradas`, la `longitud` mínima, media y máxima, así como el contenido de `GC` mínimo, medio y máximo.
+
+```{r}
+#| label: summary-info
+#| echo: false
+#| warning: false
+
+# Crear una tabla con el conteo de secuencias por archivo
+file_sequence_counts <- all_results %>%
+  group_by(file) %>%
+  summarise(Total_Sequences = n(),
+            min_length = min(Length),
+            mean_length = round(mean(Length), 0),
+            max_length = max(Length),
+            min_gc = min(GC_Content),
+            mean_gc = round(mean(GC_Content), 3),
+            max_gc = max(GC_Content))
+
+# Mostrar la tabla de conteo de secuencias
+knitr::kable(file_sequence_counts)
+
+```
+
+---
+
+## Visualización de los Datos
+
+Se crean gráficos para visualizar la `distribución del contenido de GC` (%) y la `longitud de las secuencias` (pb) de `r key_name` de cada genoma.
+
+### Distribución del contenido de GC de las secuencias de `r key_name`
+
+```{r}
+#| label: plotting-gc
+#| fig-cap: "Secuencias por genoma y contenido GC."
+#| echo: true
+#| warning: false
+#| layout: [[100]]
+
+# Paleta de colores de Palmer Penguins
+palmer_colors <- c("#FF5A5F", "#00A699", "#FC642D", "#400080", "#d7d732")
+
+# Determinar el número de columnas para el facet_wrap
+num_files <- length(unique(all_results$file))
+
+
+# Crear el violin plot para GC_Content
+ggplot(all_results, aes(x = file, y = GC_Content)) +
+  geom_violin(fill = palmer_colors[2], alpha = 0.7, width = 0.5) +
+  geom_boxplot(width = 0.1, fill = "white", alpha = 0.5) +
+  geom_jitter(width = 0.1, alpha = 0.5, color = "black") +
+  theme_minimal() +
+  labs(#title = "Distribución del contenido de GC por archivo",
+       x = "Archivo",
+       y = "Contenido de GC")
+
+```
+
+### Distribución de la longitud de secuencias de `r key_name`
+
+```{r}
+#| label: plotting-length
+#| fig-cap: "Secuencias por genoma y largo total de la secuencia."
+#| echo: true
+#| warning: false
+#| layout: [[100]]
+
+# Crear el violin plot para Length
+ggplot(all_results, aes(x = file, y = Length)) +
+  geom_violin(fill = palmer_colors[1], alpha = 0.7, width = 0.5) +
+  geom_boxplot(width = 0.1, fill = "white", alpha = 0.5) +
+  geom_jitter(width = 0.1, alpha = 0.5, color = "black") +
+  facet_wrap(~file, ncol = num_files, scales = "free") +
+  theme_minimal() +
+  labs(#title = "Distribución de la longitud de secuencias por archivo",
+       x = "Archivo",
+       y = "Longitud")
+
+# Combinar todos los gráficos en uno solo usando grid.arrange
+# combined_plot <- grid.arrange(seq_length, seq_gc, nrow = 2)
+
+
+```
+
+
+-----
+
+## Filtrado de las secuencias de `r key_name` por el largo
+
+Las secuencias de `r key_name` poseen un largo minimo de (debe ser variable) 8000 pb??, siendo el largo minimo de filtrado. Las secuencias menores a este minimo se descartaran dado que no contienen a `r key_name` en su totalidad.
+
+```{r}
+#| label: filter-seq
+#| echo: true
+#| warning: false
+
+length_min <- mean(all_results$Length)
+
+filter_data_higher <- filter(all_results, Length >= length_min) 
+filter_data_smaller <- filter(all_results, Length <= length_min)
+
+# filter_seq_higher <- fasta_content[sapply(fasta_content, length) >= length_min]
+# filter_seq_smaller <- fasta_content[sapply(fasta_content, length) <= length_min]
+
+```
+
+
+### Resumen de Información de `r key_name` en cada genoma filtrado por el largo
+
+Se crea una nueva tabla resumen a partir de las `r key_name` `que comprenden el largo minimo` agrupandos por genomas, calculando el `número total` de secuencias, la `longitud` mínima, media y máxima, así como el contenido de `GC` mínimo, medio y máximo.
+
+```{r}
+#| label: plotting-function
+#| echo: false
+#| warning: false
+
+violin_plot <- function(data, file_col, value_col, num_files, n, archivo_label, y_label) {
+  ggplot(data, aes_string(x = file_col, y = value_col)) +
+    geom_violin(fill = palmer_colors[n], alpha = 0.7, width = 0.5) +
+    geom_boxplot(width = 0.1, fill = "white", alpha = 0.5) +
+    geom_jitter(width = 0.1, alpha = 0.5, color = "black") +
+    facet_wrap(as.formula(paste("~", file_col)), ncol = num_files, scales = "free") +
+    theme_minimal() +
+    labs(x = archivo_label, y = y_label)
+}
+
+
+```
+
+```{r}
+#| label: summary-info_higher
+#| echo: false
+#| warning: false
+
+# Crear una tabla con el conteo de secuencias por archivo
+file_sequence_counts <- filter_data_higher %>%
+  group_by(file) %>%
+  summarise(Total_Sequences = n(),
+            min_length = min(Length),
+            mean_length = round(mean(Length), 0),
+            max_length = max(Length),
+            min_gc = min(GC_Content),
+            mean_gc = round(mean(GC_Content), 3),
+            max_gc = max(GC_Content))
+
+# Mostrar la tabla de conteo de secuencias
+knitr::kable(file_sequence_counts)
+
+```
+
+### Distribución del contenido de GC de las secuencias de `r key_name` >= (lago minimo) debe ser variable
+
+```{r}
+#| label: plotting-GC-filter
+#| fig-cap: "Secuencias por genoma y largo total de la secuencia."
+#| echo: false
+#| warning: false
+#| layout: [[100]]
+
+violin_plot(filter_data_higher, "file", "GC_Content", num_files, 2, "Archivo", "Longitud")
+
+```
+
+### Distribucion de largo de las secuencias de `r key_name` >= (lago minimo) debe ser variable
+
+```{r}
+#| label: plotting-length-filter
+#| fig-cap: "Secuencias por genoma y largo total de la secuencia."
+#| echo: false
+#| warning: false
+#| layout: [[100]]
+
+violin_plot(filter_data_higher, "file", "Length", num_files, 1, "Archivo", "Longitud")
+
+```
+
+---
+
+## Resumen de Información de secuencias menores al largo minimo establecido
+
+Se crea una nueva tabla resumen a partir de las secuencias que se descartaran por no cumplir con el minimo establecido, se agrupa las secuencias por archivo, calculando el `número total` de secuencias, la `longitud` mínima, media y máxima, así como el contenido de `GC` mínimo, medio y máximo.
+
+```{r}
+#| label: summary-info-smaller
+#| echo: false
+#| warning: false
+
+# Crear una tabla con el conteo de secuencias por archivo
+file_sequence_counts <- filter_data_smaller %>%
+  group_by(file) %>%
+  summarise(Total_Sequences = n(),
+            min_length = min(Length),
+            mean_length = round(mean(Length), 0),
+            max_length = max(Length),
+            min_gc = min(GC_Content),
+            mean_gc = round(mean(GC_Content), 3),
+            max_gc = max(GC_Content))
+
+# Mostrar la tabla de conteo de secuencias
+knitr::kable(file_sequence_counts)
+
+```
