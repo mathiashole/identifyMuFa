@@ -118,8 +118,11 @@ if (length(args) == 0) {
   stop("Usage: process_sequences.R <file_with_arguments.tsv>")
 }
 
-# Procesar archivo de entrada
-process_filter_seq(args[1])
+# Execution section #
+
+input_file <- args[1]
+output_dir <- "output_directory"  # Define your output directory
+data <- read_input(input_file)
 
 
 # #!/usr/bin/env Rscript
