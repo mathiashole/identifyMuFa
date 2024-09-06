@@ -10,7 +10,7 @@ SEQ_A <- "/home/usuario/Data_Rstudio/chop_genome/seq_attributes/seq_attributes.R
 DISTRIBUTION <- "/home/usuario/Data_Rstudio/statistics_of_sequence/analyze_statistics.R"
 #SEQ_A <- "/home/usuario/Data_Rstudio/statistics_of_sequence/render_quarto.R"
 
-# Cargar librerías necesarias
+# Load necessary libraries
 library(tidyverse)
 
 # Create output directory if it does not exist
@@ -93,7 +93,9 @@ if (length(args) == 0) {
   stop("Usage: process_sequences.R <file_with_arguments.tsv>")
 }
 
+#####################
 # Execution section #
+#####################
 
 input_file <- args[1]
 output_dir <- "output_directory"  # Define your output directory
