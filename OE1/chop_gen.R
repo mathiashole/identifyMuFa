@@ -61,7 +61,7 @@ generate_commands <- function(data) {
   data <- rowwise(data) %>%
     mutate(
       #filter_seq_command = str_c(FILTER_SEQ, " ", input_file),
-      filter_seq_command = str_c(FILTER_SEQ, " ", fasta_file, " > ", filtred_name_gff)
+      filter_seq_command = str_c(FILTER_SEQ, " ", fasta_file, " > ", filtred_name_gff),
       gscissors_command = str_c(GSCISSORS, " --fasta ", fasta_file, " --coordinates ", filtred_name_gff, " --format gff --output ", out_gscissors),
       fasta_feature_command = str_c(SEQ_A, " ", out_gscissors),
       distribution_command = str_c(DISTRIBUTION, " ", stat_fasta_feature)
@@ -77,7 +77,6 @@ execution_module <- function(data) {
         cat("Processing FILTER_SEQ: ", data$filter_seq_command[i], "\n")
         system(data$filter_seq_command[i])
         # Check if FILTER_SEQ created the expected file
-        # change directory from where you get the data!! DEBUGGING
         if (!file.exists(data$filtred_name_gff[i])) {
           cat("Error: FILTER_SEQ did not create the file", data$filtred_name_gff[i], "\n")
           next
