@@ -111,8 +111,6 @@ combained_dinucleotide <- data.frame(
   "ta" = dinucleotide_table[,"ta"]
 )
 
-reactable(combained_dinucleotide, highlight = TRUE)
-
 ```
 
 ```{r}
