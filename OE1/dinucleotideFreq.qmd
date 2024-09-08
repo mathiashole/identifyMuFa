@@ -145,7 +145,7 @@ set.seed(123)
 data <- combained_dinucleotide[,-2]
 data$Genome <- factor(data$Genome)
 
-# Dividir en train y test
+# Split into train and test
 train_index <- sample(seq_len(nrow(data)), size = 0.7 * nrow(data))
 train_data <- data[train_index, ]
 test_data <- data[-train_index, ]
@@ -154,7 +154,7 @@ pca <- prcomp(train_data[, -1], scale. = TRUE)
 train_pca <- predict(pca, train_data[, -1])
 test_pca <- predict(pca, test_data[, -1])
 
-# Añadir la variable objetivo
+# Add target variable
 train_pca <- data.frame(train_pca, target = train_data$Genome)
 test_pca <- data.frame(test_pca, target = test_data$Genome)
 
