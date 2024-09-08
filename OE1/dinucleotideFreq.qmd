@@ -160,3 +160,38 @@ test_pca <- data.frame(test_pca, target = test_data$Genome)
 
 ```
 
+```{r}
+
+# Different supervised models
+# need more comments
+library(e1071)
+svm_model <- svm(target ~ ., data = train_pca, kernel = "linear")
+svm_predictions <- predict(svm_model, test_pca)
+svm_confusion <- table(Predicted = svm_predictions, Actual = test_pca$target)
+svm_accuracy <- sum(diag(svm_confusion)) / sum(svm_confusion)
+
+library(randomForest)
+rf_model <- randomForest(target ~ ., data = train_pca, ntree = 100)
+rf_predictions <- predict(rf_model, test_pca)
+rf_confusion <- table(Predicted = rf_predictions, Actual = test_pca$target)
+rf_accuracy <- sum(diag(rf_confusion)) / sum(rf_confusion)
+
+log_model <- glm(target ~ ., data = train_pca, family = binomial)
+log_predictions <- predict(log_model, test_pca, type = "response")
+log_pred_class <- ifelse(log_predictions > 0.5, levels(test_pca$target)[2], levels(test_pca$target)[1])
+log_confusion <- table(Predicted = log_pred_class, Actual = test_pca$target)
+log_accuracy <- sum(diag(log_confusion)) / sum(log_confusion)
+
+library(class)
+knn_predictions <- knn(train_pca[, -ncol(train_pca)], test_pca[, -ncol(test_pca)], train_pca$target, k = 5)
+knn_confusion <- table(Predicted = knn_predictions, Actual = test_pca$target)
+knn_accuracy <- sum(diag(knn_confusion)) / sum(knn_confusion)
+
+library(rpart)
+tree_model <- rpart(target ~ ., data = train_pca, method = "class")
+tree_predictions <- predict(tree_model, test_pca, type = "class")
+tree_confusion <- table(Predicted = tree_predictions, Actual = test_pca$target)
+tree_accuracy <- sum(diag(tree_confusion)) / sum(tree_confusion)
+
+```
+
