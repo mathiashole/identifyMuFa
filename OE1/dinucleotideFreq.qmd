@@ -195,3 +195,33 @@ tree_accuracy <- sum(diag(tree_confusion)) / sum(tree_confusion)
 
 ```
 
+
+```{r}
+
+# Evaluate the different supervised models
+results <- data.frame(
+  Model = c("SVM", "Random Forest", "Logistic Regression", "KNN", "Decision Tree"),
+  Accuracy = c(svm_accuracy, rf_accuracy, log_accuracy, knn_accuracy, tree_accuracy)
+)
+
+# Show results table
+print(results)
+
+classification_results <- data.frame(
+  Actual = test_pca$target,
+  SVM = svm_predictions,
+  Random_Forest = rf_predictions,
+  Logistic_Regression = log_pred_class,
+  KNN = knn_predictions,
+  Decision_Tree = tree_predictions
+)
+
+# Show results table
+head(classification_results)
+
+ggplot(results, aes(x = Model, y = Accuracy, fill = Model)) +
+  geom_bar(stat = "identity") +
+  theme_minimal() +
+  labs(title = "Comparación de Exactitud de los Modelos", y = "Exactitud", x = "Modelo")
+
+```
