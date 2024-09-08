@@ -198,6 +198,8 @@ tree_accuracy <- sum(diag(tree_confusion)) / sum(tree_confusion)
 
 ```{r}
 
+## missing confusion matrix, roc curve, recall and Fscore ##
+
 # Evaluate the different supervised models
 results <- data.frame(
   Model = c("SVM", "Random Forest", "Logistic Regression", "KNN", "Decision Tree"),
