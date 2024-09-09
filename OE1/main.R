@@ -2,8 +2,8 @@
 
 
 # call all scripts
-FILTER_SEQ <- "/home/usuario/BASH/chack_gff/chack_gff_v1.sh"
-# FILTER_SEQ <- "/home/usuario/BASH/chack_gff/chack_gff_v1.2.0.sh"
+# FILTER_SEQ <- "/home/usuario/BASH/chack_gff/chack_gff_v1.sh"
+FILTER_SEQ <- "/home/usuario/BASH/chack_gff/chack_gff_v1.2.0.sh"
 GSCISSORS <- "/home/usuario/Data_Rstudio/seqExtractor/GScissors/gscissors.pl"
 #FASTA_FEATURE <- "/home/usuario/PERL/stat_seq/stat_seq.pl"
 SEQ_A <- "/home/usuario/Data_Rstudio/chop_genome/seq_attributes/seq_attributes.R"
@@ -116,4 +116,5 @@ data_transformed <- transform_data(data)
 # Generate the commands
 data_with_commands <- generate_commands(data_transformed)
 # Execution script
-execution_module(data_with_commands)
+# execution_module(data_with_commands)
+file.exists(output_dir)
