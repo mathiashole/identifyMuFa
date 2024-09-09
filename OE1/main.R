@@ -63,19 +63,19 @@ generate_commands <- function(data) {
 }
 
 # Function to process each set of arguments
-execution_module <- function(data, output_dir) {
+execution_module <- function(data) {
       for (i in 1:nrow(data)) {
         cat("Processing FILTER_SEQ: ", data$filter_seq_command[i], "\n")
         system(data$filter_seq_command[i])
-        filtred_name_gff_base <- basename(data$filtred_name_gff[i])
-        dir_abs <- paste0(output_dir, filtred_name_gff_base)
-        # Check if FILTER_SEQ created the expected file
-        # if (!file.exists(data$filtred_name_gff[i])) {
-        if (!file.exists(dir_abs)) {
-          # cat("Error: FILTER_SEQ did not create the file", data$filtred_name_gff[i], "\n")
-          cat("Error: FILTER_SEQ did not create the file", dir_abs, "\n")
-          next
-        }
+        # filtred_name_gff_base <- basename(data$filtred_name_gff[i])
+        # dir_abs <- paste0(output_dir, filtred_name_gff_base)
+        # # Check if FILTER_SEQ created the expected file
+        # # if (!file.exists(data$filtred_name_gff[i])) {
+        # if (!file.exists(dir_abs)) {
+        #   # cat("Error: FILTER_SEQ did not create the file", data$filtred_name_gff[i], "\n")
+        #   cat("Error: FILTER_SEQ did not create the file", dir_abs, "\n")
+        #   next
+        # }
 
         # # change directory from where you get the data!! DEBUGGING
         # cat("Processing GSCISSORS: ", data$gscissors_command[i], "\n")
@@ -113,11 +113,7 @@ data <- read_input(input_file)
 # Apply the transformations
 # data_transformed <- transform_data(data, output_dir)
 data_transformed <- transform_data(data)
-# Prit debugging
-# print(data_transformed$filtred_name_gff)
-# print(data_transformed$out_gscissors)
-# print(output_dir)
 # Generate the commands
 data_with_commands <- generate_commands(data_transformed)
 # Execution script
-# execution_module(data_with_commands, output_dir)
+execution_module(data_with_commands, output_dir)
