@@ -3,7 +3,8 @@
 
 # call all scripts
 #FILTER_SEQ <- "/home/usuario/BASH/chack_gff/chack_gff.sh"
-FILTER_SEQ <- "/home/usuario/BASH/chack_gff/chack_gff_v1.sh"
+# FILTER_SEQ <- "/home/usuario/BASH/chack_gff/chack_gff_v1.sh"
+FILTER_SEQ <- "/home/usuario/BASH/chack_gff/chack_gff_v1.2.0.sh"
 FILTER_SEQS <- "/home/usuario/Data_Rstudio/masBioinfo/OE1/code/script"
 GSCISSORS <- "/home/usuario/Data_Rstudio/seqExtractor/GScissors/gscissors.pl"
 #FASTA_FEATURE <- "/home/usuario/PERL/stat_seq/stat_seq.pl"
@@ -40,7 +41,8 @@ transform_data <- function(data) {
     keyword_sum = paste(keyword1, keyword2, sep = "_"),
     filtred_name_gff = str_c("filtered_:", keyword_sum, ":_", gff_basename),
     out_gscissors = str_c("out_:", keyword_sum, ":_", no_gff_basename, ".fasta"),
-    stat_fasta_feature = str_c("stat_", keyword_sum, "_", no_gff_basename, ".tsv")
+    stat_fasta_feature = str_c("stat_", keyword_sum, "_", no_gff_basename, ".tsv"),
+    out_directory = output_dir
   )
   
   # Returns the transformed DataFrame
@@ -65,7 +67,7 @@ generate_commands <- function(data, output_dir) {
   # we use rowwise to apply the function to each row individually
   data <- rowwise(data) %>%
     mutate(
-      filter_seq_command = str_c(FILTER_SEQ, " ", input_file, " > ", output_dir),
+      filter_seq_command = str_c(FILTER_SEQ, " ", input_file, " ", output_dir),
       gscissors_command = str_c(GSCISSORS, " --fasta ", fasta_file, " --coordinates ", filtred_name_gff, " --format gff --output ", out_gscissors),
       fasta_feature_command = str_c(SEQ_A, " ", out_gscissors),
       distribution_command = str_c(DISTRIBUTION, " ", stat_fasta_feature)
@@ -135,10 +137,9 @@ data <- read_input(input_file)
 # Apply the transformations
 # data_transformed <- transform_data(data, output_dir)
 data_transformed <- transform_data(data)
-print(data_transformed)
-# Generate the commands
-data_with_commands <- generate_commands(data_transformed, output_dir)
 # Prit debugging
 print(data_with_commands)
+# Generate the commands
+data_with_commands <- generate_commands(data_transformed, output_dir)
 # Execution script
-execution_module(data_with_commands, output_dir)
+execution_module(data_with_commands)
