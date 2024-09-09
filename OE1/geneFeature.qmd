@@ -51,7 +51,7 @@ Este análisis utiliza los siguientes genomas ``r genome_name``. A partir de los
 
 ### Librerias y datos a usar
 
-Se cargan las `librerías` necesarias y se define el directorio que contiene las secuencias de ``r key_name`` en formato FASTA. Obtiendose una lista de `archivos` que cumplen con un patrón específico y se inicializa una tabla para almacenar los resultados del análisis.
+Se cargan las `bibliotecas` necesarias para el análisis de datos genómicos, así como para la manipulación, transformación y visualización de dataframes, junto con la generación de gráficos en formato de arreglo. A continuación, se crea una lista de archivos que contiene los `genomas` a analizar, y se inicializa una `tabla` destinada a almacenar los resultados del análisis de los archivos FASTA.
 
 ```{r}
 #| label: load-packages
@@ -62,6 +62,8 @@ Se cargan las `librerías` necesarias y se define el directorio que contiene las
 library(seqinr)
 library(tidyverse)
 library(gridExtra)
+library(reactable)
+
 
 # Especificar el directorio donde están los archivos
 directory <- "/home/usuario/Data_Rstudio/chop_genome"  # Cambia esto a la ruta de tu directorio
@@ -89,12 +91,6 @@ Se calculará el `%GC` y la `longitud` de las secuencias de `r key_name`: ``r ba
 #| echo: false
 #| warning: false
 
-library(reactable)
-
-# Mostrar la lista de archivos en una tabla
-base_prot <- as.data.frame(base_prot)
-colnames(base_prot)[1] <- "Archivos FASTA"
-reactable(base_prot, highlight = TRUE)
 
 ```
 
