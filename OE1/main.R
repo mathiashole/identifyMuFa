@@ -77,11 +77,6 @@ execution_module <- function(data, output_dir) {
           cat("Error: FILTER_SEQ did not create the file", data$filtred_name_gff[i], "\n")
           next
         }
-        # # Check if FILTER_SEQ created the expected file
-        # if (!file.exists(data$filtred_name_gff[i])) {
-        #   cat("Error: FILTER_SEQ did not create the file", data$filtred_name_gff[i], "\n")
-        #   next
-        # }
 
         # # change directory from where you get the data!! DEBUGGING
         # cat("Processing GSCISSORS: ", data$gscissors_command[i], "\n")
