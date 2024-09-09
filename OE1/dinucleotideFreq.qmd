@@ -45,27 +45,39 @@ count_dinucleotides <- function(sequence) {
   return(freqs)
 }
 
-# Read the multifasta files from the folder and calculate dinucleotide frequencies
-calculate_dinucleotide_frequencies <- function(directory) {
+# Function to count dinucleotides
+count_trinucleotides <- function(sequence) {
+  # Count dinucleotides
+  counts <- seqinr::count(sequence, 3)
+  # Calculate frequencies
+  freqs <- counts / sum(counts)
+  freqs <- round(freqs, 3)
+  return(freqs)
+}
+
+# Read the multifasta files from the folder and calculate dinucleotide or trinucleotide frequencies
+calculate_nucleotide_frequencies <- function(directory, type = "dinucleotide") {
   fasta_files <- list.files(path = directory, pattern = "^out_.*\\.fasta$", full.names = TRUE)
-  results <- data.frame() # Initialize empty data frame for results
+  results <- data.frame()  # Initialize empty data frame for results
 
   # Iterate over each FASTA file in the folder
   for (fasta_file in fasta_files) {
     sequences <- read.fasta(fasta_file)
     ids <- names(sequences)
-    # Base name of file
     base_name <- basename(fasta_file)
-    # Regular expresion for extract diferents parts
     extracted_names <- sub(".*_([^_]+)\\.fasta$", "\\1", base_name)
     
-    # Get dinucleotide frequencies for each sequence within a file
+    # Get dinucleotide or trinucleotide frequencies for each sequence within a file
     for (i in seq_along(sequences)) {
       seq <- getSequence(sequences[[i]])
-      freqs <- count_dinucleotides(seq)
-      row <- c(File = extracted_names, ID = ids[i], freqs)  # Add file name
-
-      # Convert the row to a data frame and join it to results
+      
+      if (type == "trinucleotide") {
+        freqs <- count_trinucleotides(seq)
+      } else {
+        freqs <- count_dinucleotides(seq)
+      }
+      
+      row <- c(File = extracted_names, ID = ids[i], freqs)
       row_df <- as.data.frame(t(row), stringsAsFactors = FALSE)
       results <- rbind(results, row_df)
     }
@@ -78,7 +90,7 @@ calculate_dinucleotide_frequencies <- function(directory) {
 directory <- "/home/usuario/Data_Rstudio/chop_genome"
 
 # Run the function and get the dinucleotide frequency table
-dinucleotide_table <- calculate_dinucleotide_frequencies(directory)
+dinucleotide_table <- calculate_nucleotide_frequencies(directory, type = "trinucleotide")
 
 ```
 
