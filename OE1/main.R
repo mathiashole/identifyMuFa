@@ -48,7 +48,7 @@ transform_data <- function(data) {
   return(data)
 }
 
-generate_commands <- function(data, output_dir) {
+generate_commands <- function(data) {
   # we use rowwise to apply the function to each row individually
   data <- rowwise(data) %>%
     mutate(
@@ -68,13 +68,13 @@ execution_module <- function(data, output_dir) {
       for (i in 1:nrow(data)) {
         cat("Processing FILTER_SEQ: ", data$filter_seq_command[i], "\n")
         system(data$filter_seq_command[i])
-        # Debugging output: print expected file and check output directory
-        cat("Expected file:", data$filtred_name_gff[i], "\n")
-        cat("Files in output directory:", list.files(output_dir), "\n")
-
+        filtred_name_gff_base <- basename(data$filtred_name_gff[i])
+        dir_abs <- paste0(output_dir, filtred_name_gff_base)
         # Check if FILTER_SEQ created the expected file
-        if (!file.exists(data$filtred_name_gff[i])) {
-          cat("Error: FILTER_SEQ did not create the file", data$filtred_name_gff[i], "\n")
+        # if (!file.exists(data$filtred_name_gff[i])) {
+        if (!file.exists(dir_abs)) {
+          # cat("Error: FILTER_SEQ did not create the file", data$filtred_name_gff[i], "\n")
+          cat("Error: FILTER_SEQ did not create the file", dir_abs, "\n")
           next
         }
 
@@ -118,6 +118,6 @@ print(data_transformed$filtred_name_gff)
 print(data_transformed$out_gscissors)
 print(output_dir)
 # Generate the commands
-data_with_commands <- generate_commands(data_transformed, output_dir)
+data_with_commands <- generate_commands(data_transformed)
 # Execution script
 execution_module(data_with_commands, output_dir)
