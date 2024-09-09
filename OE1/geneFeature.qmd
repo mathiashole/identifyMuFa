@@ -155,7 +155,7 @@ file_sequence_counts <- all_results %>%
             max_gc = max(GC_Content))
 
 # Mostrar la tabla de conteo de secuencias
-knitr::kable(file_sequence_counts)
+reactable(file_sequence_counts, highlight = TRUE)
 
 ```
 
@@ -281,7 +281,7 @@ file_sequence_counts <- filter_data_higher %>%
             max_gc = max(GC_Content))
 
 # Mostrar la tabla de conteo de secuencias
-knitr::kable(file_sequence_counts)
+reactable(file_sequence_counts, highlight = TRUE)
 
 ```
 
@@ -334,6 +334,6 @@ file_sequence_counts <- filter_data_smaller %>%
             max_gc = max(GC_Content))
 
 # Mostrar la tabla de conteo de secuencias
-knitr::kable(file_sequence_counts)
+reactable(file_sequence_counts, highlight = TRUE)
 
 ```
