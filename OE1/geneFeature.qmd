@@ -43,7 +43,7 @@ key_name <- unique(sort(key_names))
 
 Los datos utilizados en este análisis fueron obtenidas a partir de diferentes genomas de *Trypanosoma cruzi*, disponibles en [**tritrydb**](https://tritrypdb.org/tritrypdb/app) y [**NCBI**](https://www.ncbi.nlm.nih.gov/).
 
-A partir de estos genomas, se extrajeron secuencias de los genes ``r key_name``, con el objetivo de realizar análisis de contenido de `GC`, `longitud de las secuencias`, y otros aspectos relevantes para la caracterización de estas secuencias.
+A partir de estos genomas, se extrajeron secuencias de los genes ``r key_name``, con el objetivo de realizar análisis de contenido de `GC`, `longitud de las secuencias`, y otros aspectos relevantes para la caracterización de los genes de ``r key_name``.
 
 ### Genomas
 
@@ -60,8 +60,6 @@ Se cargan las `librerías` necesarias y se define el directorio que contiene las
 
 # Cargar las librerías necesarias
 library(seqinr)
-#library(dplyr)
-#library(ggplot2)
 library(tidyverse)
 library(gridExtra)
 
