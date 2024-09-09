@@ -128,9 +128,6 @@ for (fasta_file in fasta_files) {
   }
 }
 
-# Mostrar los resultados (opcional)
-print(all_results)
-
 ```
 
 ### Resumen de Información de `r key_name` en cada genoma
