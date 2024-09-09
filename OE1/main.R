@@ -2,7 +2,8 @@
 
 
 # call all scripts
-FILTER_SEQ <- "/home/usuario/BASH/chack_gff/chack_gff_v1.2.0.sh"
+FILTER_SEQ <- "/home/usuario/BASH/chack_gff/chack_gff_v1.sh"
+# FILTER_SEQ <- "/home/usuario/BASH/chack_gff/chack_gff_v1.2.0.sh"
 GSCISSORS <- "/home/usuario/Data_Rstudio/seqExtractor/GScissors/gscissors.pl"
 #FASTA_FEATURE <- "/home/usuario/PERL/stat_seq/stat_seq.pl"
 SEQ_A <- "/home/usuario/Data_Rstudio/chop_genome/seq_attributes/seq_attributes.R"
@@ -51,8 +52,7 @@ generate_commands <- function(data) {
   # we use rowwise to apply the function to each row individually
   data <- rowwise(data) %>%
     mutate(
-      filter_seq_command = str_c(FILTER_SEQ, " ", input_file, " ", "output_directory"),
-      # filter_seq_command = str_c(FILTER_SEQ, " ", input_file, " ", output_dir),
+      filter_seq_command = str_c(FILTER_SEQ, " ", input_file, " > output_directory/"),
       gscissors_command = str_c(GSCISSORS, " --fasta ", fasta_file, " --coordinates ", filtred_name_gff, " --format gff --output ", out_gscissors),
       fasta_feature_command = str_c(SEQ_A, " ", out_gscissors),
       distribution_command = str_c(DISTRIBUTION, " ", stat_fasta_feature)
