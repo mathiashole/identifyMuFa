@@ -220,7 +220,12 @@ results <- data.frame(
 
 # Show results table
 reactable(results, highlight = TRUE)
-#print(results)
+#print(results
+
+ggplot(results, aes(x = Model, y = Accuracy, fill = Model)) +
+  geom_bar(stat = "identity") +
+  theme_minimal() +
+  labs(title = "Comparación de Exactitud de los Modelos", y = "Exactitud", x = "Modelo")
 
 classification_results <- data.frame(
   Actual = test_pca$target,
@@ -235,9 +240,6 @@ classification_results <- data.frame(
 reactable(classification_results, highlight = TRUE)
 #head(classification_results)
 
-ggplot(results, aes(x = Model, y = Accuracy, fill = Model)) +
-  geom_bar(stat = "identity") +
-  theme_minimal() +
-  labs(title = "Comparación de Exactitud de los Modelos", y = "Exactitud", x = "Modelo")
+
 
 ```
