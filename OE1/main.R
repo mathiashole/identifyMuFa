@@ -121,3 +121,4 @@ data_transformed <- transform_data(data)
 data_with_commands <- generate_commands(data_transformed)
 # Execution script
 # execution_module(data_with_commands, output_dir)
+getwd()
