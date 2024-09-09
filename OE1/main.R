@@ -15,7 +15,7 @@ library(tidyverse)
 
 # Create output directory if it does not exist
 create_output_dir <- function(output_dir) {
-  execution_path <- dirname(dirname(FILTER_SEQS))
+  execution_path <- getwd()
   output_dir <- paste0(execution_path, "/", output_dir, "/")
   if (!dir.exists(output_dir)) {
     dir.create(output_dir, recursive = TRUE)
@@ -109,6 +109,7 @@ if (length(args) == 0) {
 input_file <- args[1]
 output_dir <- "output_directory"  # Define your output directory
 output_dir <- create_output_dir(output_dir)
+print(output_dir)
 data <- read_input(input_file)
 # Apply the transformations
 # data_transformed <- transform_data(data, output_dir)
@@ -121,4 +122,3 @@ data_transformed <- transform_data(data)
 data_with_commands <- generate_commands(data_transformed)
 # Execution script
 # execution_module(data_with_commands, output_dir)
-getwd()
