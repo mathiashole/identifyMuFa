@@ -3,7 +3,6 @@
 
 # call all scripts
 FILTER_SEQ <- "/home/usuario/BASH/chack_gff/chack_gff_v1.2.0.sh"
-FILTER_SEQS <- "/home/usuario/Data_Rstudio/masBioinfo/OE1/code/script"
 GSCISSORS <- "/home/usuario/Data_Rstudio/seqExtractor/GScissors/gscissors.pl"
 #FASTA_FEATURE <- "/home/usuario/PERL/stat_seq/stat_seq.pl"
 SEQ_A <- "/home/usuario/Data_Rstudio/chop_genome/seq_attributes/seq_attributes.R"
