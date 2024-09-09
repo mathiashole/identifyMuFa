@@ -186,7 +186,7 @@ num_files <- length(unique(all_results$file))
 ggplot(all_results, aes(x = file, y = GC_Content)) +
   geom_violin(fill = palmer_colors[2], alpha = 0.7, width = 0.5) +
   geom_boxplot(width = 0.1, fill = "white", alpha = 0.5) +
-  geom_jitter(width = 0.1, alpha = 0.2, color = "black") +
+  geom_jitter(width = 0.1, alpha = 0.1, color = "black") +
   theme_minimal() +
   labs(#title = "Distribución del contenido de GC por archivo",
        x = "Archivo",
@@ -207,7 +207,7 @@ ggplot(all_results, aes(x = file, y = GC_Content)) +
 ggplot(all_results, aes(x = file, y = Length)) +
   geom_violin(fill = palmer_colors[1], alpha = 0.7, width = 0.5) +
   geom_boxplot(width = 0.1, fill = "white", alpha = 0.5) +
-  geom_jitter(width = 0.1, alpha = 0.2, color = "black") +
+  geom_jitter(width = 0.1, alpha = 0.1, color = "black") +
   facet_wrap(~file, ncol = num_files, scales = "free") +
   theme_minimal() +
   labs(#title = "Distribución de la longitud de secuencias por archivo",
@@ -256,7 +256,7 @@ violin_plot <- function(data, file_col, value_col, num_files, n, archivo_label, 
   ggplot(data, aes_string(x = file_col, y = value_col)) +
     geom_violin(fill = palmer_colors[n], alpha = 0.7, width = 0.5) +
     geom_boxplot(width = 0.1, fill = "white", alpha = 0.5) +
-    geom_jitter(width = 0.1, alpha = 0.2, color = "black") +
+    geom_jitter(width = 0.1, alpha = 0.1, color = "black") +
     facet_wrap(as.formula(paste("~", file_col)), ncol = num_files, scales = "free") +
     theme_minimal() +
     labs(x = archivo_label, y = y_label)
