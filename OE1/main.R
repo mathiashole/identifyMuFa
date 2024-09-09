@@ -125,4 +125,4 @@ print(output_dir)
 # Generate the commands
 data_with_commands <- generate_commands(data_transformed, output_dir)
 # Execution script
-execution_module(data_with_commands)
+execution_module(data_with_commands, output_dir)
