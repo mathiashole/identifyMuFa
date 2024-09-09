@@ -4,6 +4,7 @@
 # call all scripts
 #FILTER_SEQ <- "/home/usuario/BASH/chack_gff/chack_gff.sh"
 FILTER_SEQ <- "/home/usuario/BASH/chack_gff/chack_gff_v1.sh"
+FILTER_SEQS <- "/home/usuario/Data_Rstudio/masBioinfo/OE1/code/script"
 GSCISSORS <- "/home/usuario/Data_Rstudio/seqExtractor/GScissors/gscissors.pl"
 #FASTA_FEATURE <- "/home/usuario/PERL/stat_seq/stat_seq.pl"
 SEQ_A <- "/home/usuario/Data_Rstudio/chop_genome/seq_attributes/seq_attributes.R"
@@ -15,9 +16,13 @@ library(tidyverse)
 
 # Create output directory if it does not exist
 create_output_dir <- function(output_dir) {
+  execution_path <- dirname(dirname(FILTER_SEQS))
+  output_dir <- paste0(execution_path, "/", output_dir, "/")
   if (!dir.exists(output_dir)) {
     dir.create(output_dir, recursive = TRUE)
   }
+
+  return(output_dir)
 }
 
 # Function to read input file and set column names
@@ -56,11 +61,11 @@ transform_data <- function(data) {
 #   return(data)
 # }
 
-generate_commands <- function(data) {
+generate_commands <- function(data, output_dir) {
   # we use rowwise to apply the function to each row individually
   data <- rowwise(data) %>%
     mutate(
-      filter_seq_command = str_c(FILTER_SEQ, " ", input_file),
+      filter_seq_command = str_c(FILTER_SEQ, " ", input_file, " > ", output_dir),
       gscissors_command = str_c(GSCISSORS, " --fasta ", fasta_file, " --coordinates ", filtred_name_gff, " --format gff --output ", out_gscissors),
       fasta_feature_command = str_c(SEQ_A, " ", out_gscissors),
       distribution_command = str_c(DISTRIBUTION, " ", stat_fasta_feature)
@@ -85,7 +90,7 @@ generate_commands <- function(data) {
 # }
 
 # Function to process each set of arguments
-execution_module <- function(data) {
+execution_module <- function(data, output_dir) {
       for (i in 1:nrow(data)) {
         cat("Processing FILTER_SEQ: ", data$filter_seq_command[i], "\n")
         system(data$filter_seq_command[i])
@@ -125,14 +130,15 @@ if (length(args) == 0) {
 
 input_file <- args[1]
 output_dir <- "output_directory"  # Define your output directory
+output_dir <- create_output_dir(output_dir)
 data <- read_input(input_file)
 # Apply the transformations
 # data_transformed <- transform_data(data, output_dir)
 data_transformed <- transform_data(data)
 print(data_transformed)
 # Generate the commands
-data_with_commands <- generate_commands(data_transformed)
+data_with_commands <- generate_commands(data_transformed, output_dir)
 # Prit debugging
 print(data_with_commands)
 # Execution script
-execution_module(data_with_commands)
+execution_module(data_with_commands, output_dir)
