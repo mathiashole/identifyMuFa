@@ -68,11 +68,20 @@ execution_module <- function(data, output_dir) {
       for (i in 1:nrow(data)) {
         cat("Processing FILTER_SEQ: ", data$filter_seq_command[i], "\n")
         system(data$filter_seq_command[i])
+        # Debugging output: print expected file and check output directory
+        cat("Expected file:", data$filtred_name_gff[i], "\n")
+        cat("Files in output directory:", list.files(output_dir), "\n")
+
         # Check if FILTER_SEQ created the expected file
         if (!file.exists(data$filtred_name_gff[i])) {
           cat("Error: FILTER_SEQ did not create the file", data$filtred_name_gff[i], "\n")
           next
         }
+        # # Check if FILTER_SEQ created the expected file
+        # if (!file.exists(data$filtred_name_gff[i])) {
+        #   cat("Error: FILTER_SEQ did not create the file", data$filtred_name_gff[i], "\n")
+        #   next
+        # }
 
         # # change directory from where you get the data!! DEBUGGING
         # cat("Processing GSCISSORS: ", data$gscissors_command[i], "\n")
