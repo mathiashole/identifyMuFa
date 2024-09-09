@@ -24,8 +24,12 @@ p {
 #| echo: false
 #| warning: false
 
+## VARIABLES QUE DEBEN SER ARGUMENTOS ##
 # Especificar el directorio donde están los archivos
 directory <- "/home/usuario/Data_Rstudio/chop_genome"  # Cambia esto a la ruta de tu directorio
+# leer tabla de datos ()
+data_init <- read.delim("/home/usuario/Proyectos/maestria/datos_ejecucion_genomas2.tsv.csv", sep = "\t", header = FALSE)
+########################################
 
 # Obtener la lista de archivos que comienzan con 'out_' y terminan con '.fasta'
 genome_files <- list.files(path = directory, pattern = "^out_.*\\.fasta$", full.names = TRUE)
