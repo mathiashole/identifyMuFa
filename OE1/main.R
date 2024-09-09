@@ -2,8 +2,6 @@
 
 
 # call all scripts
-#FILTER_SEQ <- "/home/usuario/BASH/chack_gff/chack_gff.sh"
-# FILTER_SEQ <- "/home/usuario/BASH/chack_gff/chack_gff_v1.sh"
 FILTER_SEQ <- "/home/usuario/BASH/chack_gff/chack_gff_v1.2.0.sh"
 FILTER_SEQS <- "/home/usuario/Data_Rstudio/masBioinfo/OE1/code/script"
 GSCISSORS <- "/home/usuario/Data_Rstudio/seqExtractor/GScissors/gscissors.pl"
@@ -42,7 +40,6 @@ transform_data <- function(data) {
     filtred_name_gff = str_c("filtered_:", keyword_sum, ":_", gff_basename),
     out_gscissors = str_c("out_:", keyword_sum, ":_", no_gff_basename, ".fasta"),
     stat_fasta_feature = str_c("stat_", keyword_sum, "_", no_gff_basename, ".tsv"),
-    out_directory = output_dir
   )
   
   # Returns the transformed DataFrame
@@ -110,7 +107,8 @@ data <- read_input(input_file)
 # data_transformed <- transform_data(data, output_dir)
 data_transformed <- transform_data(data)
 # Prit debugging
-print(data_with_commands)
+print(data$filtred_name_gff)
+print(data$out_gscissors)
 # Generate the commands
 data_with_commands <- generate_commands(data_transformed, output_dir)
 # Execution script
