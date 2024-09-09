@@ -53,7 +53,7 @@ generate_commands <- function(data, output_dir) {
   data <- rowwise(data) %>%
     mutate(
       filter_seq_command = str_c(FILTER_SEQ, " ", input_file, " ", output_dir),
-      gscissors_command = str_c(GSCISSORS, " --fasta ", fasta_file, " --coordinates ", filtred_name_gff, " --format gff --output ", out_gscissors),
+      gscissors_command = str_c(GSCISSORS, " --fasta ", fasta_file, " --coordinates ", output_dir, "/", filtred_name_gff, " --format gff --output ", output_dir, "/", out_gscissors),
       fasta_feature_command = str_c(SEQ_A, " ", out_gscissors),
       distribution_command = str_c(DISTRIBUTION, " ", stat_fasta_feature)
     )
@@ -74,9 +74,9 @@ execution_module <- function(data, output_dir) {
           next
         }
 
-        # # change directory from where you get the data!! DEBUGGING
-        # cat("Processing GSCISSORS: ", data$gscissors_command[i], "\n")
-        # system(data$gscissors_command[i])
+        # change directory from where you get the data!! DEBUGGING
+        cat("Processing GSCISSORS: ", data$gscissors_command[i], "\n")
+        system(data$gscissors_command[i])
         # if (!file.exists(data$out_gscissors[i])) {
         #   cat("Error: GSCISSORS did not create the file", data$out_gscissors[i], "\n")
         #   next
