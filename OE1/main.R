@@ -114,10 +114,10 @@ data <- read_input(input_file)
 # data_transformed <- transform_data(data, output_dir)
 data_transformed <- transform_data(data)
 # Prit debugging
-print(data_transformed$filtred_name_gff)
-print(data_transformed$out_gscissors)
-print(output_dir)
+# print(data_transformed$filtred_name_gff)
+# print(data_transformed$out_gscissors)
+# print(output_dir)
 # Generate the commands
 data_with_commands <- generate_commands(data_transformed)
 # Execution script
-execution_module(data_with_commands, output_dir)
+# execution_module(data_with_commands, output_dir)
