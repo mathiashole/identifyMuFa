@@ -38,6 +38,7 @@ genome_name <- sub(".*:_", "\\1", genome_files)
 prot_name <- sub(".*_:(.*):_.*", "\\1", genome_files)
 key_names <- sub("_.*", "\\1", prot_name)
 key_name <- unique(sort(key_names))
+genome_name <- basename(data_init$V1)
 
 ```
 
