@@ -49,20 +49,6 @@ transform_data <- function(data) {
   return(data)
 }
 
-# # Transform the data for output filenames and paths
-# transform_data <- function(data, output_dir) {
-#   data <- mutate(data,
-#     gff_basename = basename(gff_file),
-#     no_gff_basename = str_remove(gff_basename, ".{4}$"),
-#     keyword_sum = paste(keyword1, keyword2, sep = "_"),
-#     filtred_name_gff = file.path(output_dir, str_c("filtered_:", keyword_sum, ":_", gff_basename)),
-#     out_gscissors = file.path(output_dir, str_c("out_:", keyword_sum, ":_", no_gff_basename, ".fasta")),
-#     stat_fasta_feature = file.path(output_dir, str_c("stat_", keyword_sum, "_", no_gff_basename, ".tsv"))
-#   )
-#   # Returns the transformed DataFrame
-#   return(data)
-# }
-
 generate_commands <- function(data, output_dir) {
   # we use rowwise to apply the function to each row individually
   data <- rowwise(data) %>%
@@ -76,20 +62,6 @@ generate_commands <- function(data, output_dir) {
   # Return DataFrame with generated commands
   return(data)
 }
-
-# # Generate system commands for each step, directing output to output_directory
-# generate_commands <- function(data) {
-#   data <- rowwise(data) %>%
-#     mutate(
-#       # Pass output directory for each command to save results in the correct folder
-#       filter_seq_command = str_c(FILTER_SEQ, " ", fasta_file, " > ", filtred_name_gff),
-#       gscissors_command = str_c(GSCISSORS, " --fasta ", fasta_file, " --coordinates ", filtred_name_gff, " --format gff --output ", out_gscissors),
-#       fasta_feature_command = str_c(SEQ_A, " ", out_gscissors),
-#       distribution_command = str_c(DISTRIBUTION, " ", stat_fasta_feature)
-#     )
-  
-#   return(data)
-# }
 
 # Function to process each set of arguments
 execution_module <- function(data, output_dir) {
