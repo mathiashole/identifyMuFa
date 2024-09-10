@@ -94,39 +94,70 @@ all_results_genome <- tibble(
 #| echo: false
 #| warning: false
 
-calculate_fasta_feature <- function(fasta_files, type_fasta) {
-  all_results <- data.frame() # Inicializar el data frame para almacenar los resultados
-  if (type_fasta == "genome") {
-    all_results <- data.frame(file = character(), Length = numeric(), GC_Content = numeric(), stringsAsFactors = FALSE)
-  } else {
-    all_results <- data.frame(file = character(), ID = character(), Length = numeric(), GC_Content = numeric(), stringsAsFactors = FALSE)
-  }
+calculate_fasta_feature <- function(fasta_files){
+  
+  all_results <- data.frame(file = character(), ID = character(), Length = numeric(), GC_Content = numeric(), stringsAsFactors = FALSE)
 
+  # Leer cada archivo FASTA y calcular las métricas
   for (fasta_file in fasta_files) {
+    # Leer el archivo FASTA
     fasta_content <- read.fasta(fasta_file)
-    extracted_names <- sub(".*_([^_]+)\\.fasta$", "\\1", basename(fasta_file))
-
-    if (type_fasta == "genome") {
-      total_length <- sum(sapply(fasta_content, getLength))
-      total_gc <- sum(sapply(fasta_content, function(seq) GC(seq) * getLength(seq)))
-      genome_gc_content <- round(total_gc / total_length, 3)
-
+    
+    # Nombre base del archivo
+    base_name <- basename(fasta_file)
+    # Expresión regular para extraer las partes necesarias
+    extracted_names <- sub(".*_([^_]+)\\.fasta$", "\\1", base_name)
+    #extracted_names <- str_remove_all(extracted_names, "^.*_")
+    
+    # Procesar cada secuencia en el archivo FASTA
+    for (sequence in fasta_content) {
+      id <- attr(sequence, "name")
+      length <- round(getLength(sequence), 0)
+      gc_content <- round(GC(sequence), 3)
+      
+      # Añadir los resultados a la tabla
       all_results <- all_results %>%
-        add_row(file = extracted_names, Length = total_length, GC_Content = genome_gc_content)
-    } else {
-      for (sequence in fasta_content) {
-        id <- attr(sequence, "name")
-        length <- round(getLength(sequence), 0)
-        gc_content <- round(GC(sequence), 3)
-
-        all_results <- all_results %>%
-          add_row(file = extracted_names, ID = id, Length = length, GC_Content = gc_content)
-      }
+        add_row(file = extracted_names, ID = id, Length = length, GC_Content = gc_content)
     }
   }
-
+  
   return(all_results)
+  
 }
+
+# calculate_fasta_feature <- function(fasta_files, type_fasta) {
+#   all_results <- data.frame() # Inicializar el data frame para almacenar los resultados
+#   if (type_fasta == "genome") {
+#     all_results <- data.frame(file = character(), Length = numeric(), GC_Content = numeric(), stringsAsFactors = FALSE)
+#   } else {
+#     all_results <- data.frame(file = character(), ID = character(), Length = numeric(), GC_Content = numeric(), stringsAsFactors = FALSE)
+#   }
+
+#   for (fasta_file in fasta_files) {
+#     fasta_content <- read.fasta(fasta_file)
+#     extracted_names <- sub(".*_([^_]+)\\.fasta$", "\\1", basename(fasta_file))
+
+#     if (type_fasta == "genome") {
+#       total_length <- sum(sapply(fasta_content, getLength))
+#       total_gc <- sum(sapply(fasta_content, function(seq) GC(seq) * getLength(seq)))
+#       genome_gc_content <- round(total_gc / total_length, 3)
+
+#       all_results <- all_results %>%
+#         add_row(file = extracted_names, Length = total_length, GC_Content = genome_gc_content)
+#     } else {
+#       for (sequence in fasta_content) {
+#         id <- attr(sequence, "name")
+#         length <- round(getLength(sequence), 0)
+#         gc_content <- round(GC(sequence), 3)
+
+#         all_results <- all_results %>%
+#           add_row(file = extracted_names, ID = id, Length = length, GC_Content = gc_content)
+#       }
+#     }
+#   }
+
+#   return(all_results)
+# }
 
 epa <- calculate_fasta_feature(data_init$V1, "genome")
 
