@@ -32,13 +32,14 @@ data_init <- read.delim("/home/usuario/Proyectos/maestria/datos_ejecucion_genoma
 ########################################
 
 # Obtener la lista de archivos que comienzan con 'out_' y terminan con '.fasta'
-genome_files <- list.files(path = directory, pattern = "^out_.*\\.fasta$", full.names = TRUE)
-genome_name <- sub(".*:_", "\\1", genome_files)
+fasta_files <- list.files(path = directory, pattern = "^out_.*\\.fasta$", full.names = TRUE)
+genome_name <- basename(data_init$V1)
 
-prot_name <- sub(".*_:(.*):_.*", "\\1", genome_files)
+genes_work <- basename(fasta_files)
+prot_name <- sub(".*_:(.*):_.*", "\\1", fasta_files)
 key_names <- sub("_.*", "\\1", prot_name)
 key_name <- unique(sort(key_names))
-genome_name <- basename(data_init$V1)
+
 
 ```
 
@@ -69,14 +70,6 @@ library(tidyverse)
 library(gridExtra)
 library(reactable)
 
-
-# Especificar el directorio donde están los archivos
-directory <- "/home/usuario/Data_Rstudio/chop_genome"  # Cambia esto a la ruta de tu directorio
-
-# Obtener la lista de archivos que comienzan con 'out_' y terminan con '.fasta'
-fasta_files <- list.files(path = directory, pattern = "^out_.*\\.fasta$", full.names = TRUE)
-base_prot <- basename(fasta_files)
-
 # Inicializar una tabla para almacenar todos los resultados
 all_results <- tibble(
   file = character(),
@@ -89,7 +82,7 @@ all_results <- tibble(
 
 ### Archivos en formato FASTA de las secuencias de `r key_name`
 
-Se calculará el `%GC` y la `longitud` de las secuencias de `r key_name`: ``r base_prot``.
+Se calculará el `%GC` y la `longitud` de las secuencias de `r key_name`: ``r genes_work``.
 
 ```{r}
 #| label: show-documents
