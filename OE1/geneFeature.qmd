@@ -80,9 +80,7 @@ all_results <- tibble(
 
 ```
 
-### Archivos en formato FASTA de las secuencias de `r key_name`
-
-Se calculará el `%GC` y la `longitud` de las secuencias de `r key_name`: ``r genes_work``.
+### Procesamiento de los genomas
 
 ```{r}
 #| label: show-documents
@@ -91,6 +89,10 @@ Se calculará el `%GC` y la `longitud` de las secuencias de `r key_name`: ``r ge
 
 
 ```
+
+### Archivos en formato FASTA de las secuencias de `r key_name`
+
+Se calculará el `%GC` y la `longitud` de las secuencias de `r key_name`: ``r genes_work``.
 
 ---
 
