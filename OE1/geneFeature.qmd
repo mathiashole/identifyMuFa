@@ -72,7 +72,9 @@ library(reactable)
 
 ```
 
-### Procesamiento de los genomas
+## Procesamiento de los Archivos FASTA
+
+En el caso particular de procesar las secuencias fatas creamos una funcion que genera un dataframe vacio donde se iran guardando los elementos obtenidos a partir de una secuecnia dada. Luego, borramos el path de cada archivo para obtener el nombre de cada archivo, se obtiene el ide de cada unas de las secuencias dentro del archiv fasta, se calcula el largo de la secuencia con una funcion de la biblioteca SEQINR y se calcula el porcentje de GC con otra funcion de la misma biblioteca.. Finalmente, agregamos una fila como header y devolvmos el resultado de la funcion.
 
 ```{r}
 #| label: show-documents
@@ -125,7 +127,7 @@ Se calculará el `%GC` y la `longitud` de las secuencias de `r key_name`: ``r ge
 
 ---
 
-## Procesamiento de Archivos FASTA
+### Procesamiento de Archivos FASTA
 
 Se leen las secuencias en formato FASTA, y para cada secuencia se extraen el `ID`, la `longitud (pb)` y el contenido de `GC (%)`. Estos datos se almacenan en una `tabla all_results`. Finalmente, se muestra esta tabla con los resultados obtenidos
 
