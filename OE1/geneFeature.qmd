@@ -158,6 +158,8 @@ reactable(genomes_summary, highlight = TRUE)
 # Paleta de colores de Palmer Penguins
 palmer_colors <- c("#FF5A5F", "#00A699", "#FC642D", "#400080", "#d7d732")
 
+genomes$Length <- format(genomes$Length, scientific = TRUE) # Changed format
+
 # Determinar el número de columnas para el facet_wrap
 num_files <- length(unique(genomes$file))
 
