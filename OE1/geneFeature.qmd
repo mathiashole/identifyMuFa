@@ -181,7 +181,8 @@ ggplot(genomes, aes(x = file, y = GC_Content, fill = file)) +
   geom_boxplot(width = 0.1, fill = "white", alpha = 0.3) +
   # geom_jitter(width = 0.1, alpha = 0.1, color = "black") +
   scale_fill_brewer(palette = "Dark2") +  # Aplicar la paleta Dark2 de RColorBrewer
-  theme_minimal() +
+  theme_minimal_vgrid() + 
+  theme(axis.title.y = element_blank(), axis.line.y = element_blank(),  axis.ticks.y = element_blank()) +
   labs(
     x = "Archivo",
     y = "Contenido de GC"
