@@ -129,8 +129,21 @@ Se llama a la función recien creada para extraer diversas características de l
 #| warning: false
 
 # Llamamos a la funcion para obtener GC y largo de cada contig, de cada genoma
-genome <- calculate_fasta_feature(data_init$V1, "genome")
+genomes <- calculate_fasta_feature(data_init$V1, "genome")
 
+# Crear una tabla con el conteo de secuencias por archivo
+genomes_summary <- genomes %>%
+  group_by(file) %>%
+  summarise(Total_Sequences = n(),
+            min_length = min(Length),
+            mean_length = round(mean(Length), 0),
+            max_length = max(Length),
+            min_gc = min(GC_Content),
+            mean_gc = round(mean(GC_Content), 3),
+            max_gc = max(GC_Content))
+
+# Mostrar la tabla de conteo de secuencias
+reactable(genomes_summary, highlight = TRUE)
 
 
 ```
