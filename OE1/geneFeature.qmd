@@ -200,6 +200,13 @@ ggplot(genomes, aes(x = Length)) +
        y = "Frecuencia",
        title = "Histograma de la longitud de secuencias por archivo")
 
+ggplot(genomes, aes(x = file, y = Length)) +
+  geom_boxplot(outlier.shape = NA, fill = palmer_colors[1], alpha = 0.7, width = 0.5) +
+  facet_wrap(~file, ncol = num_files, scales = "fixed") +
+  theme_minimal() +
+  labs(x = "Archivo",
+       y = "Longitud de secuencia",
+       title = "Distribución de la longitud de secuencias por archivo")
 
 ```
 
