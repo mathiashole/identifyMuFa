@@ -296,16 +296,29 @@ palmer_colors <- c("#FF5A5F", "#00A699", "#FC642D", "#400080", "#d7d732")
 num_files <- length(unique(all_results$file))
 
 
-# Crear el violin plot para GC_Content
-ggplot(all_results, aes(x = file, y = GC_Content)) +
-  geom_violin(fill = palmer_colors[2], alpha = 0.7, width = 0.5) +
-  geom_boxplot(width = 0.1, fill = "white", alpha = 0.3) +
-  geom_jitter(width = 0.1, alpha = 0.1, color = "black") +
-  theme_minimal() +
-  labs(#title = "Distribución del contenido de GC por archivo",
-       x = "Archivo",
-       y = "Contenido de GC")
+# # Crear el violin plot para GC_Content
+# ggplot(all_results, aes(x = file, y = GC_Content)) +
+#   geom_violin(fill = palmer_colors[2], alpha = 0.7, width = 0.5) +
+#   geom_boxplot(width = 0.1, fill = "white", alpha = 0.3) +
+#   geom_jitter(width = 0.1, alpha = 0.1, color = "black") +
+#   theme_minimal() +
+#   labs(#title = "Distribución del contenido de GC por archivo",
+#        x = "Archivo",
+#        y = "Contenido de GC")
 
+# Crear el violin plot para GC_Content
+ggplot(all_results, aes(x = file, y = GC_Content, fill = file)) +
+  geom_violin(alpha = 0.7, width = 0.5) + 
+  geom_boxplot(width = 0.1, fill = "white", alpha = 0.3) +
+  # geom_jitter(width = 0.1, alpha = 0.1, color = "black") +
+  scale_fill_brewer(palette = "Dark2") +  # Aplicar la paleta Dark2 de RColorBrewer
+  xlab("Number of GC content") +
+  labs(
+    title = "Genome GC",
+    caption = "Data source: Facultad de Ciencias, Udelar"
+  ) +
+  theme_minimal_vgrid() + 
+  theme(axis.title.y = element_blank(), axis.line.y = element_blank(),  axis.ticks.y = element_blank())
 
 ```
 
