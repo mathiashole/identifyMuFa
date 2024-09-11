@@ -192,6 +192,15 @@ ggplot(genomes, aes(x = file, y = Length)) +
        y = "Longitud de secuencia",
        title = "Distribución de la longitud de secuencias por archivo")
 
+ggplot(genomes, aes(x = Length)) +
+  geom_histogram(binwidth = 1000, fill = palmer_colors[1], color = "black", alpha = 0.7) +
+  facet_wrap(~file, ncol = num_files, scales = "fixed") +
+  theme_minimal() +
+  labs(x = "Longitud de secuencia",
+       y = "Frecuencia",
+       title = "Histograma de la longitud de secuencias por archivo")
+
+
 ```
 
 ### Archivos en formato FASTA de las secuencias de `r key_name`
