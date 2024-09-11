@@ -77,7 +77,7 @@ library(reactable)
 Para procesar las secuencias FASTA, se crea una función que genera un dataframe vacío donde se almacenarán los elementos obtenidos a partir de una secuencia dada. Luego, se elimina la ruta del archivo para extraer el nombre del mismo. A continuación, se obtiene el identificador de cada una de las secuencias dentro del archivo FASTA, se calcula la longitud de la secuencia utilizando una función de la biblioteca SEQINR y, con otra función de la misma biblioteca, se calcula el porcentaje de bases GC. Finalmente, se agrega una fila de encabezado y se devuelve el resultado de la función.
 
 ```{r}
-#| label: show-documents
+#| label: created function
 #| echo: false
 #| warning: false
 
@@ -117,9 +117,11 @@ calculate_fasta_feature <- function(fasta_files, type){
 
 }
 
-epa <- calculate_fasta_feature(data_init$V1, "genome")
-
 ```
+
+### Características de los genomas
+
+Se llama a la función recien creada para extraer diversas características de los genomas. Estos datos son esenciales para analizar la composición genética de los genomas.
 
 ### Archivos en formato FASTA de las secuencias de `r key_name`
 
