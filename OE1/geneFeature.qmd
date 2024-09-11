@@ -179,7 +179,7 @@ num_files <- length(unique(genomes$file))
 ggplot(genomes, aes(x = file, y = GC_Content, fill = file)) +
   geom_violin(alpha = 0.7, width = 0.5) + 
   geom_boxplot(width = 0.1, fill = "white", alpha = 0.3) +
-  geom_jitter(width = 0.1, alpha = 0.1, color = "black") +
+  # geom_jitter(width = 0.1, alpha = 0.1, color = "black") +
   scale_fill_brewer(palette = "Dark2") +  # Aplicar la paleta Dark2 de RColorBrewer
   theme_minimal() +
   labs(
