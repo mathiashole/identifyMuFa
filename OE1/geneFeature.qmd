@@ -179,7 +179,7 @@ ggplot(genomes, aes(x = file, y = GC_Content, fill = file)) +
   geom_boxplot(width = 0.1, fill = "white", alpha = 0.3) +
   # geom_jitter(width = 0.1, alpha = 0.1, color = "black") +
   scale_fill_brewer(palette = "Dark2") +  # Aplicar la paleta Dark2 de RColorBrewer
-  xlab("Number of GC content") +
+  ylab("Number of GC content") +
   labs(
     title = "Genome GC",
     caption = "Data source: Facultad de Ciencias, Udelar"
@@ -312,7 +312,7 @@ ggplot(all_results, aes(x = file, y = GC_Content, fill = file)) +
   geom_boxplot(width = 0.1, fill = "white", alpha = 0.3) +
   # geom_jitter(width = 0.1, alpha = 0.1, color = "black") +
   scale_fill_brewer(palette = "Dark2") +  # Aplicar la paleta Dark2 de RColorBrewer
-  xlab("Number of GC content") +
+  ylab("Number of GC content") +
   labs(
     title = "Genome GC",
     caption = "Data source: Facultad de Ciencias, Udelar"
