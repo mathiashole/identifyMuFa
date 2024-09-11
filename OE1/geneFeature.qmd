@@ -169,7 +169,6 @@ library(ggbeeswarm)
 library(cowplot)
 
 genomes$Length <- as.numeric((format(genomes$Length, scientific = TRUE))) # Changed format
-palmer_colors <- c("#FF5A5F", "#00A699", "#FC642D", "#400080", "#d7d732")
 
 # Determinar el número de columnas para el facet_wrap
 num_files <- length(unique(genomes$file))
@@ -213,7 +212,7 @@ genomes %>%
   ggplot(aes(Length, reorder(file, -Length, FUN=median), color = file)) +
   #geom_jitter(shape=".") +
   # geom_quasirandom(shape = ".", groupOnX=FALSE, show.legend = FALSE) +
-  geom_quasirandom(groupOnX=FALSE, show.legend = FALSE, size = 3, dodge.width=0.9, alpha=.4) +
+  geom_quasirandom(groupOnX=FALSE, show.legend = FALSE, size = 1, dodge.width=0.9, alpha=.4) +
 #  geom_density_ridges() +
   scale_x_log10(
     breaks = c(10^2, 10^3, 10^4, 10^5, 10^6, 10^7, 10^8, 10^9, 10^10),
