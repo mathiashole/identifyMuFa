@@ -251,7 +251,7 @@ ggplot(all_results, aes(x = file, y = GC_Content)) +
        y = "Contenido de GC")
 
 # Crear el violin plot para Length
-ggplot(all_results, aes(x = file, y = Length)) +
+ggplot(genomes, aes(x = file, y = Length)) +
   geom_violin(fill = palmer_colors[1], alpha = 0.7, width = 0.5) +
   geom_boxplot(width = 0.1, fill = "white", alpha = 0.3) +
   geom_jitter(width = 0.1, alpha = 0.1, color = "black") +
