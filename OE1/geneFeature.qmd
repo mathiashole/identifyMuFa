@@ -174,49 +174,7 @@ ggplot(genomes, aes(x = file, y = GC_Content)) +
        x = "Archivo",
        y = "Contenido de GC")
 
-# Crear el violin plot para Length
-ggplot(genomes, aes(x = file, y = Length)) +
-  geom_violin(fill = palmer_colors[1], alpha = 0.7, width = 0.5) +
-  geom_boxplot(width = 0.1, fill = "white", alpha = 0.3) +
-  geom_jitter(width = 0.1, alpha = 0.1, color = "black") +
-  facet_wrap(~file, ncol = num_files, scales = "fixed") +
-  theme_minimal() +
-  labs(#title = "Distribución de la longitud de secuencias por archivo",
-       x = "Archivo",
-       y = "Longitud")
 
-ggplot(genomes, aes(x = file, y = Length)) +
-  geom_boxplot(outlier.shape = NA, fill = palmer_colors[1], alpha = 0.7, width = 0.5) +
-  geom_jitter(width = 0.1, alpha = 0.4, color = "black") +
-  facet_wrap(~file, ncol = num_files, scales = "fixed") +
-  theme_minimal() +
-  labs(x = "Archivo",
-       y = "Longitud de secuencia",
-       title = "Distribución de la longitud de secuencias por archivo")
-
-ggplot(genomes, aes(x = Length)) +
-  geom_histogram(binwidth = 1000, fill = palmer_colors[1], color = "black", alpha = 0.7) +
-  facet_wrap(~file, ncol = num_files, scales = "fixed") +
-  theme_minimal() +
-  labs(x = "Longitud de secuencia",
-       y = "Frecuencia",
-       title = "Histograma de la longitud de secuencias por archivo")
-
-ggplot(genomes, aes(x = file, y = Length)) +
-  geom_boxplot(outlier.shape = NA, fill = palmer_colors[1], alpha = 0.7, width = 0.5) +
-  facet_wrap(~file, ncol = num_files, scales = "fixed") +
-  theme_minimal() +
-  labs(x = "Archivo",
-       y = "Longitud de secuencia",
-       title = "Distribución de la longitud de secuencias por archivo")
-
-ggplot(genomes, aes(x = file, y = Length)) +
-  geom_violin(fill = palmer_colors[1], alpha = 0.7, width = 0.5) +
-  facet_wrap(~file, ncol = num_files, scales = "fixed") +
-  theme_minimal() +
-  labs(#title = "Distribución de la longitud de secuencias por archivo",
-       x = "Archivo",
-       y = "Longitud")
 
 ```
 
