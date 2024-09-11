@@ -225,7 +225,7 @@ genomes %>%
   xlab("Number of base pairs") +
   labs(
     title = "Genome size",
-    caption = "Data source: National Center for Biotechnology Information"
+    caption = "Data source: Facultad de Ciencias, Udelar"
   ) +
   theme_minimal_vgrid() + 
   theme(axis.title.y = element_blank(), axis.line.y = element_blank(),  axis.ticks.y = element_blank()) +
