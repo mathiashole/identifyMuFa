@@ -123,6 +123,18 @@ calculate_fasta_feature <- function(fasta_files, type){
 
 Se llama a la función recien creada para extraer diversas características de los genomas. Estos datos son esenciales para analizar la composición genética de los genomas.
 
+```{r}
+#| label: extract genome feature and created summary
+#| echo: true
+#| warning: false
+
+# Llamamos a la funcion para obtener GC y largo de cada contig, de cada genoma
+genome <- calculate_fasta_feature(data_init$V1, "genome")
+
+
+
+```
+
 ### Archivos en formato FASTA de las secuencias de `r key_name`
 
 Se calculará el `%GC` y la `longitud` de las secuencias de `r key_name`: ``r genes_work``.
