@@ -74,7 +74,7 @@ library(reactable)
 
 ## Procesamiento de los Archivos FASTA
 
-En el caso particular de procesar las secuencias fatas creamos una funcion que genera un dataframe vacio donde se iran guardando los elementos obtenidos a partir de una secuecnia dada. Luego, borramos el path de cada archivo para obtener el nombre de cada archivo, se obtiene el ide de cada unas de las secuencias dentro del archiv fasta, se calcula el largo de la secuencia con una funcion de la biblioteca SEQINR y se calcula el porcentje de GC con otra funcion de la misma biblioteca.. Finalmente, agregamos una fila como header y devolvmos el resultado de la funcion.
+Para procesar las secuencias FASTA, se crea una función que genera un dataframe vacío donde se almacenarán los elementos obtenidos a partir de una secuencia dada. Luego, se elimina la ruta del archivo para extraer el nombre del mismo. A continuación, se obtiene el identificador de cada una de las secuencias dentro del archivo FASTA, se calcula la longitud de la secuencia utilizando una función de la biblioteca SEQINR y, con otra función de la misma biblioteca, se calcula el porcentaje de bases GC. Finalmente, se agrega una fila de encabezado y se devuelve el resultado de la función.
 
 ```{r}
 #| label: show-documents
