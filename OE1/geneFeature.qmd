@@ -231,14 +231,14 @@ Por otro lado, llamamos la función de R `plot_violin_length` crea un gráfico d
 #   )
 
 # Function to plot the length of genomes
-plot_violin_length <- function(data, plot_title, x_label) {
+plot_violin_length <- function(data, type, plot_title, x_label) {
   set.seed(12345)
-  ggplot(data, aes(Length, file, color = file)) + # reorder(file, -Length, FUN=median)
+  p <- ggplot(data, aes(Length, file, color = file)) + # reorder(file, -Length, FUN=median)
     geom_quasirandom(groupOnX = FALSE, show.legend = FALSE, size = 1, dodge.width = 0.9, alpha = 0.4) +
-    scale_x_log10(
-      breaks = c(10^2, 10^3, 10^4, 10^5, 10^6, 10^7, 10^8, 10^9, 10^10),
-      labels = scales::trans_format("log10", scales::math_format(10^.x))
-    ) +
+    # scale_x_log10(
+    #   breaks = c(10^2, 10^3, 10^4, 10^5, 10^6, 10^7, 10^8, 10^9, 10^10),
+    #   labels = scales::trans_format("log10", scales::math_format(10^.x))
+    # ) +
     labs(
       title = plot_title,  # Title customization
       x = x_label,  # Custom x-axis label
@@ -247,11 +247,22 @@ plot_violin_length <- function(data, plot_title, x_label) {
     theme_minimal_vgrid() + 
     theme(axis.title.y = element_blank(), axis.line.y = element_blank(), axis.ticks.y = element_blank()) +
     scale_color_brewer(palette = "Dark2")
+
+    # Conditional to choose the type of scale on the x axis
+    if (type == "genome") {
+    p <- p + scale_x_log10(
+      breaks = c(10^2, 10^3, 10^4, 10^5, 10^6, 10^7, 10^8, 10^9, 10^10),
+      labels = scales::trans_format("log10", scales::math_format(10^.x))
+    )
+  }
+
+  return(p)
 }
 
 # Function plot_violin_length call
 plot_violin_length(
-  data = genomes, 
+  data = genomes,
+  "genome", 
   plot_title = "Genome size", 
   x_label = "Number of base pairs"
 )
@@ -314,7 +325,7 @@ plot_violin_gc(
 ```
 
 
-Por otro lado, llamamos a la función de R `plot_violin_length` crea un gráfico de violín de la distribución de los largos de las diferentes secuencias de ``r key_name``.
+Por otro lado, creamos otra funcion para crear graficos violin sin escala logaritmica para representar secuencias de menor tamano como son los genes. La función la llamamos como`plot_violin_length` crea un gráfico de violín de la distribución de los largos de las diferentes secuencias de ``r key_name``.
 
 
 ```{r}
@@ -325,33 +336,6 @@ Por otro lado, llamamos a la función de R `plot_violin_length` crea un gráfico
 #| layout: [[100]]
 
 palmer_colors <- c("black", "green", "blue")
-
-# Function plot_violin_gc call
-plot_violin_length(
-  data = all_results, 
-  plot_title = "Genome size", 
-  x_label = "Number of base pairs"
-)
-
-set.seed(12345)
-all_results %>%
-  ggplot(aes(Length, reorder(file, -Length, FUN=median), color = file)) +
-  #geom_jitter(shape=".") +
-  # geom_quasirandom(shape = ".", groupOnX=FALSE, show.legend = FALSE) +
-  geom_quasirandom(groupOnX=FALSE, show.legend = FALSE, size = 3, dodge.width=0.9, alpha=.4) +
-#  geom_density_ridges() +
-  # scale_x_log10(
-  #   breaks = c(10^2, 10^3, 10^4, 10^5, 10^6, 10^7, 10^8, 10^9, 10^10),
-  #   labels = scales::trans_format("log10", scales::math_format(10^.x))
-  # ) +
-  xlab("Number of base pairs") +
-  labs(
-    title = "Genome size",
-    caption = "Data source: Facultad de Ciencias, Udelar"
-  ) +
-  theme_minimal_vgrid() + 
-  theme(axis.title.y = element_blank(), axis.line.y = element_blank(),  axis.ticks.y = element_blank()) +
-  scale_color_brewer(palette="Dark2")
 
 
 
