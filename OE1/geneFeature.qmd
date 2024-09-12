@@ -283,7 +283,7 @@ Se calculará el `%GC` y la `longitud` de las secuencias de `r key_name`: ``r ge
 
 ---
 
-### Procesamiento de Archivos FASTA
+## Procesamiento de las secuencias ``r key_name``
 
 Se leen las secuencias en formato FASTA, y para cada secuencia se extraen el `ID`, la `longitud (pb)` y el contenido de `GC (%)`. Estos datos se almacenan en una `tabla all_results`. Finalmente, se muestra esta tabla con los resultados obtenidos
 
