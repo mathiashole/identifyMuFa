@@ -190,6 +190,16 @@ ggplot(genomes, aes(x = file, y = GC_Content, fill = file)) +
   theme_minimal_vgrid() + 
   theme(axis.title.y = element_blank(), axis.line.y = element_blank(),  axis.ticks.y = element_blank())
 
+```
+
+
+```{r}
+#| label: plotting-genome-length
+#| fig-cap: "Secuencias por genoma y contenido GC."
+#| echo: true
+#| warning: false
+#| layout: [[100]]
+
 # ggplot(genomes, aes(x = file, y = Length, reorder(file, -Length, FUN=median), color = file)) +
 #   # geom_violin(fill = palmer_colors[2], alpha = 0.7, width = 0.5) +
 #   geom_violin(alpha = 0.7, width = 0.5, fill = "white") +
