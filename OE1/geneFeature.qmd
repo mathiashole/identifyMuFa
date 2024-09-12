@@ -174,28 +174,27 @@ library(cowplot)
 genomes$Length <- as.numeric((format(genomes$Length, scientific = TRUE))) # Changed format
 
 
-# Function Genome GC plot
+# GC plotting function
 plot_violin_gc <- function(data, plot_title, y_label) {
   ggplot(data, aes(x = file, y = GC_Content, fill = file)) +
     geom_violin(alpha = 0.7, width = 0.5) + 
     geom_boxplot(width = 0.1, fill = "white", alpha = 0.3) +
-    scale_fill_brewer(palette = "Dark2") +  # Aplicar la paleta Dark2 de RColorBrewer
-    ylab(y_label) +  # Personalizar el ylab
+    scale_fill_brewer(palette = "Dark2") +  # Apply RColorBrewer's Dark2 Palette
+    ylab(y_label) +  # Customize the ylab
     labs(
-      title = plot_title,  # Personalizar el título
+      title = plot_title,  # Customize the title
       caption = "Data source: Facultad de Ciencias, Udelar"
     ) +
     theme_minimal_vgrid() + 
     theme(axis.line.y = element_blank(), axis.ticks.y = element_blank())
 }
 
-# GC genome plot
+# GC Genome plot
 plot_violin_gc(
   data = genomes, 
   plot_title = "Genome GC", 
   y_label = "GC Content"
 )
-
 
 ```
 
