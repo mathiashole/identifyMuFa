@@ -160,7 +160,7 @@ reactable(genomes_summary, highlight = TRUE)
 
 ### Visualización de la Longitud y Contenido de GC de los Genomas
 
-En esta sección, se generarán gráficos que representan el `contenido de GC` y la `longitud` de cada genoma. Además, se implementarán funciones específicas para cada gráfico, lo que permitirá reutilizar el código de manera eficiente en otras partes del análisis.
+En esta sección, se generarán gráficos que representan el `contenido de GC` y la `longitud` de cada genoma. Además, se implementarán funciones específicas para cada gráfico, lo que permitirá reutilizar el código de manera eficiente en otras partes del análisis. Para crear estas funciones se implementara las bibliotecas `ggridges`, `ggbeeswarm` y `cowplot`.
 
 Esta funcion de R, `plot_violin_gc`, generar un gráfico de violín que muestra la distribución del contenido de GC en distintos genomas ``r genome_name``.
 
