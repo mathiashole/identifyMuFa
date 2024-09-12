@@ -72,7 +72,7 @@ library(reactable)
 
 ```
 
-## Procesamiento de los Archivos FASTA
+## Procesamiento de los genomas
 
 Para procesar las secuencias FASTA, se crea una función que genera un dataframe vacío donde se almacenarán los elementos obtenidos a partir de una secuencia dada. Luego, se elimina la ruta del archivo para extraer el nombre del mismo. A continuación, se obtiene el identificador de cada una de las secuencias dentro del archivo FASTA, se calcula la longitud de la secuencia utilizando una función de la biblioteca SEQINR y, con otra función de la misma biblioteca, se calcula el porcentaje de bases GC. Finalmente, se agrega una fila de encabezado y se devuelve el resultado de la función.
 
