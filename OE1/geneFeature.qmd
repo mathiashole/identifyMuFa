@@ -202,7 +202,7 @@ plot_violin_gc(
 
 ```
 
-Por otro lado, Lla función de R `plot_violin_length` crea un gráfico de violín que ilustra la distribución de las longitudes genómicas de los diferentes genomas ``r genome_name``.
+Por otro lado, llamamos la función de R `plot_violin_length` crea un gráfico de violín que ilustra la distribución de las longitudes genómicas de los diferentes genomas ``r genome_name``.
 
 ```{r}
 #| label: plotting-genome-length
@@ -334,7 +334,9 @@ plot_violin_gc(
 
 ```
 
-### Distribución de la longitud de secuencias de `r key_name`
+
+Por otro lado, llamamos a la función de R `plot_violin_length` crea un gráfico de violín de la distribución de los largos de las diferentes secuencias de ``r key_name``.
+
 
 ```{r}
 #| label: plotting-length
@@ -345,19 +347,13 @@ plot_violin_gc(
 
 palmer_colors <- c("black", "green", "blue")
 
-# Crear el violin plot para Length
-ggplot(all_results, aes(x = file, y = Length)) +
-  geom_violin(fill = palmer_colors[1], alpha = 0.7, width = 0.5) +
-  geom_boxplot(width = 0.1, fill = "white", alpha = 0.3) +
-  geom_jitter(width = 0.1, alpha = 0.1, color = "black") +
-  facet_wrap(~file, ncol = num_files, scales = "free") +
-  theme_minimal() +
-  labs(#title = "Distribución de la longitud de secuencias por archivo",
-       x = "Archivo",
-       y = "Longitud")
+# Function plot_violin_gc call
+plot_violin_length(
+  data = all_results, 
+  plot_title = "Genome size", 
+  x_label = "Number of base pairs"
+)
 
-# Combinar todos los gráficos en uno solo usando grid.arrange
-# combined_plot <- grid.arrange(seq_length, seq_gc, nrow = 2)
 
 
 ```
@@ -437,7 +433,7 @@ reactable(file_sequence_counts, highlight = TRUE)
 #| warning: false
 #| layout: [[100]]
 
-violin_plot(filter_data_higher, "file", "GC_Content", num_files, 2, "Archivo", "Longitud")
+violin_plot(filter_data_higher, "file", "GC_Content", 4, 2, "Archivo", "Longitud")
 
 ```
 
@@ -450,7 +446,7 @@ violin_plot(filter_data_higher, "file", "GC_Content", num_files, 2, "Archivo", "
 #| warning: false
 #| layout: [[100]]
 
-violin_plot(filter_data_higher, "file", "Length", num_files, 1, "Archivo", "Longitud")
+violin_plot(filter_data_higher, "file", "Length", 4, 1, "Archivo", "Longitud")
 
 ```
 
