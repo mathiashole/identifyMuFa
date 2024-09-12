@@ -280,7 +280,6 @@ plot_violin_length(
 ```
 
 
-
 ---
 
 ## Procesamiento de las secuencias ``r key_name``
@@ -326,7 +325,7 @@ Llamamos a la funcion `plot_violin_gc`, dando lugar a un gráfico violín que mu
 #| layout: [[100]]
 
 
-# Function plot_violin_gc call
+Function plot_violin_gc call
 plot_violin_gc(
   data = genomes, 
   plot_title = "Genome GC", 
