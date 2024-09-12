@@ -359,13 +359,12 @@ Las secuencias de `r key_name` poseen un largo minimo de (debe ser variable) 800
 #| echo: true
 #| warning: false
 
-length_min <- mean(all_results$Length)
+# length_min <- mean(all_results$Length)
+length_min <- median(file_sequence_counts$mean_length)
 
 filter_data_higher <- filter(all_results, Length >= length_min) 
 filter_data_smaller <- filter(all_results, Length <= length_min)
 
-# filter_seq_higher <- fasta_content[sapply(fasta_content, length) >= length_min]
-# filter_seq_smaller <- fasta_content[sapply(fasta_content, length) <= length_min]
 
 ```
 
