@@ -156,6 +156,9 @@ reactable(genomes_summary, highlight = TRUE)
 
 ```
 
+### Visualización de la Longitud y Contenido de GC de los Genomas
+
+En esta sección, se generarán gráficos que representan el `contenido de GC` y la `longitud` de cada genoma. Además, se implementarán funciones específicas para cada gráfico, lo que permitirá reutilizar el código de manera eficiente en otras partes del análisis.
 
 ```{r}
 #| label: plotting-genome-gc
