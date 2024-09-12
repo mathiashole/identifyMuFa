@@ -191,7 +191,7 @@ plot_violin_gc <- function(data, plot_title, y_label) {
     theme(axis.line.y = element_blank(), axis.ticks.y = element_blank())
 }
 
-# GC Genome plot
+# Call plot_violin_gc function
 plot_violin_gc(
   data = genomes, 
   plot_title = "Genome GC", 
