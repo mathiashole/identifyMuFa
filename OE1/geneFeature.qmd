@@ -343,6 +343,8 @@ plot_violin_gc(
 #| warning: false
 #| layout: [[100]]
 
+palmer_colors <- c("black", "green", "blue")
+
 # Crear el violin plot para Length
 ggplot(all_results, aes(x = file, y = Length)) +
   geom_violin(fill = palmer_colors[1], alpha = 0.7, width = 0.5) +
