@@ -233,7 +233,7 @@ Por otro lado, llamamos la función de R `plot_violin_length` crea un gráfico d
 # Function to plot the length of genomes
 plot_violin_length <- function(data, type, plot_title, x_label) {
   set.seed(12345)
-  p <- ggplot(data, aes(Length, file, color = file)) + # reorder(file, -Length, FUN=median)
+  p <- ggplot(data, aes(Length, reorder(file, -Length, FUN = median), color = file)) + # reorder(file, -Length, FUN=median)
     geom_quasirandom(groupOnX = FALSE, show.legend = FALSE, size = 1, dodge.width = 0.9, alpha = 0.4) +
     # scale_x_log10(
     #   breaks = c(10^2, 10^3, 10^4, 10^5, 10^6, 10^7, 10^8, 10^9, 10^10),
@@ -325,8 +325,6 @@ plot_violin_gc(
 ```
 
 
-Por otro lado, creamos otra funcion para crear graficos violin sin escala logaritmica para representar secuencias de menor tamano como son los genes. La función la llamamos como`plot_violin_length` crea un gráfico de violín de la distribución de los largos de las diferentes secuencias de ``r key_name``.
-
 
 ```{r}
 #| label: plotting-length
@@ -335,9 +333,17 @@ Por otro lado, creamos otra funcion para crear graficos violin sin escala logari
 #| warning: false
 #| layout: [[100]]
 
+var_title <- paste0(key_name," size")
+
+# Function plot_violin_length call
+plot_violin_length(
+  data = all_results,
+  "gene", 
+  plot_title = var_title, 
+  x_label = "Number of base pairs"
+)
+
 palmer_colors <- c("black", "green", "blue")
-
-
 
 ```
 
