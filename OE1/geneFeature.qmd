@@ -324,7 +324,7 @@ plot_violin_gc(
 
 ```
 
-
+Además, reutilizamos la función previamente empleada para graficar la distribución del genoma, pero esta vez generamos un gráfico que muestra la distribución de las longitudes de las distintas secuencias de ``r key_name``, correspondientes a cada genoma.
 
 ```{r}
 #| label: plotting-length
