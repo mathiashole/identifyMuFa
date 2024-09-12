@@ -173,8 +173,6 @@ library(cowplot)
 
 genomes$Length <- as.numeric((format(genomes$Length, scientific = TRUE))) # Changed format
 
-# Determinar el número de columnas para el facet_wrap
-num_files <- length(unique(genomes$file))
 
 # Crear el violin plot para GC_Content
 ggplot(genomes, aes(x = file, y = GC_Content, fill = file)) +
