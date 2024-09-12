@@ -311,38 +311,12 @@ reactable(file_sequence_counts, highlight = TRUE)
 
 ```
 
-### Resumen de Información de `r key_name` en cada genoma
+### Visualización de la Longitud y Contenido de GC de ``r key_name``
 
-`Tabla resumen` agrupa las secuencias de `r key_name` por cada genoma, calculando el `número total de secuencias encontradas`, la `longitud` mínima, media y máxima, así como el contenido de `GC` mínimo, medio y máximo.
+Se generarán gráficos que representan el `contenido de GC` y la `longitud` de cada secuencia ``r genes_work`` de ``r key_name``. En esta seccion reutilizaremos parte del codigo escrito llamando a las funciones que crean los plot de `GC` y de `longitud` de las secuencias.
 
-```{r}
-#| label: summary-info
-#| echo: false
-#| warning: false
+Llamamos a la funcion `plot_violin_gc`, dando lugar a un gráfico violín que muestra la distribución del contenido de GC en distintos genomas de las secuencias ``r key_name``.
 
-# Crear una tabla con el conteo de secuencias por archivo
-file_sequence_counts <- all_results %>%
-  group_by(file) %>%
-  summarise(Total_Sequences = n(),
-            min_length = min(Length),
-            mean_length = round(mean(Length), 0),
-            max_length = max(Length),
-            min_gc = min(GC_Content),
-            mean_gc = round(mean(GC_Content), 3),
-            max_gc = max(GC_Content))
-
-# Mostrar la tabla de conteo de secuencias
-reactable(file_sequence_counts, highlight = TRUE)
-
-```
-
----
-
-## Visualización de los Datos
-
-Se crean gráficos para visualizar la `distribución del contenido de GC` (%) y la `longitud de las secuencias` (pb) de `r key_name` de cada genoma.
-
-### Distribución del contenido de GC de las secuencias de `r key_name`
 
 ```{r}
 #| label: plotting-gc
@@ -351,36 +325,13 @@ Se crean gráficos para visualizar la `distribución del contenido de GC` (%) y 
 #| warning: false
 #| layout: [[100]]
 
-# Paleta de colores de Palmer Penguins
-palmer_colors <- c("#FF5A5F", "#00A699", "#FC642D", "#400080", "#d7d732")
 
-# Determinar el número de columnas para el facet_wrap
-num_files <- length(unique(all_results$file))
-
-
-# # Crear el violin plot para GC_Content
-# ggplot(all_results, aes(x = file, y = GC_Content)) +
-#   geom_violin(fill = palmer_colors[2], alpha = 0.7, width = 0.5) +
-#   geom_boxplot(width = 0.1, fill = "white", alpha = 0.3) +
-#   geom_jitter(width = 0.1, alpha = 0.1, color = "black") +
-#   theme_minimal() +
-#   labs(#title = "Distribución del contenido de GC por archivo",
-#        x = "Archivo",
-#        y = "Contenido de GC")
-
-# Crear el violin plot para GC_Content
-ggplot(all_results, aes(x = file, y = GC_Content, fill = file)) +
-  geom_violin(alpha = 0.7, width = 0.5) + 
-  geom_boxplot(width = 0.1, fill = "white", alpha = 0.3) +
-  # geom_jitter(width = 0.1, alpha = 0.1, color = "black") +
-  scale_fill_brewer(palette = "Dark2") +  # Aplicar la paleta Dark2 de RColorBrewer
-  ylab("Number of GC content") +
-  labs(
-    title = "Genome GC",
-    caption = "Data source: Facultad de Ciencias, Udelar"
-  ) +
-  theme_minimal_vgrid() + 
-  theme(axis.title.y = element_blank(), axis.line.y = element_blank(),  axis.ticks.y = element_blank())
+# Function plot_violin_gc call
+plot_violin_gc(
+  data = genomes, 
+  plot_title = "Genome GC", 
+  y_label = "GC Content"
+)
 
 ```
 
