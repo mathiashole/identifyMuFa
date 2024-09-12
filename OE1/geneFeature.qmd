@@ -45,7 +45,7 @@ key_name <- unique(sort(key_names))
 
 ## Descripcion
 
-![](https://img.itch.zone/aW1nLzE3MTEyNjE5LmdpZg==/original/2%2BYVZg.gif){style="float:right;" fig-alt="Illustration of a detective cat. Artwork by @shigemi.itch.io." width="301"}
+![](https://img.itch.zone/aW1nLzE3MTEyNjE5LmdpZg==/original/2%2BYVZg.gif){style="float:right;" fig-alt="Illustration of a detective cat. Artwork by @https://shigemi.itch.io." width="301"}
 
 Los datos utilizados en este análisis fueron obtenidas a partir de diferentes genomas de *Trypanosoma cruzi*, disponibles en [**tritrydb**](https://tritrypdb.org/tritrypdb/app) y [**NCBI**](https://www.ncbi.nlm.nih.gov/).
 
