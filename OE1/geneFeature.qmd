@@ -284,7 +284,7 @@ plot_violin_length(
 
 ## Procesamiento de las secuencias ``r key_name``
 
-Se llama a la funcion ``r calculate_fasta_feature`` para calcular por cada secuencia ``r genes_work`` el contenido de `GC` y la `longitud (pb)`  de ``r key_name``. Finalmente, creamos una `tabla resumen`, que agrupa las secuencias por cada genoma ``r genome_name``, mostrando el  ``r key_name``, así como la `longitud` mínima, media y máxima, así como el contenido de `GC` mínimo, medio y máximo.
+Se llama a la funcion ``calculate_fasta_feature`` para calcular por cada secuencia ``r genes_work`` el contenido de `GC` y la `longitud (pb)`  de ``r key_name``. Finalmente, creamos una `tabla resumen`, que agrupa las secuencias por cada genoma ``r genome_name``, mostrando el  ``r key_name``, así como la `longitud` mínima, media y máxima, así como el contenido de `GC` mínimo, medio y máximo.
 
 
 ```{r}
@@ -325,9 +325,9 @@ Llamamos a la funcion `plot_violin_gc`, dando lugar a un gráfico violín que mu
 #| layout: [[100]]
 
 
-Function plot_violin_gc call
+# Function plot_violin_gc call
 plot_violin_gc(
-  data = genomes, 
+  data = all_results, 
   plot_title = "Genome GC", 
   y_label = "GC Content"
 )
