@@ -72,6 +72,8 @@ library(reactable)
 
 ```
 
+---
+
 ## Procesamiento de los genomas
 
 Para procesar las secuencias FASTA, se crea una función que genera un dataframe vacío donde se almacenarán los elementos obtenidos a partir de una secuencia dada. Luego, se elimina la ruta del archivo para extraer el nombre del mismo. A continuación, se obtiene el identificador de cada una de las secuencias dentro del archivo FASTA, se calcula la longitud de la secuencia utilizando una función de la biblioteca SEQINR y, con otra función de la misma biblioteca, se calcula el porcentaje de bases GC. Finalmente, se agrega una fila de encabezado y se devuelve el resultado de la función.
@@ -277,15 +279,15 @@ plot_violin_length(
 
 ```
 
-### Archivos en formato FASTA de las secuencias de `r key_name`
 
-Se calculará el `%GC` y la `longitud` de las secuencias de `r key_name`: ``r genes_work``.
 
 ---
 
 ## Procesamiento de las secuencias ``r key_name``
 
 Se leen las secuencias en formato FASTA, y para cada secuencia se extraen el `ID`, la `longitud (pb)` y el contenido de `GC (%)`. Estos datos se almacenan en una `tabla all_results`. Finalmente, se muestra esta tabla con los resultados obtenidos
+
+Se calculará el `%GC` y la `longitud` de las secuencias de `r key_name`: ``r genes_work``.
 
 ```{r}
 #| label: extract-info
