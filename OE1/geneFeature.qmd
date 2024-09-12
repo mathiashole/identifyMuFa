@@ -121,7 +121,7 @@ calculate_fasta_feature <- function(fasta_files, type){
 
 ### Características de los genomas
 
-Se llama a la función recien creada para extraer diversas características de los genomas. Estos datos son esenciales para analizar la composición genética de los genomas.
+Se llama a la función recien creada para extraer diversas características de los genomas. Estos datos son esenciales para analizar la composición genética de los genomas. A partir de estos datos creamos la primer `Tabla resumen` que agrupa los contig de cada uno de los genomas ``r genome_name``, con el `número total de secuencias encontradas`, la `longitud` mínima, media y máxima, así como el contenido de `GC` mínimo, medio y máximo.
 
 ```{r}
 #| label: extract genome feature and created summary
