@@ -435,7 +435,16 @@ reactable(file_sequence_counts, highlight = TRUE)
 #| warning: false
 #| layout: [[100]]
 
-violin_plot(filter_data_higher, "file", "GC_Content", 4, 2, "Archivo", "Longitud")
+var_filter_gc <- paste0("Filter ", key_name, " GC")
+
+# Function plot_violin_gc call
+plot_violin_gc(
+  data = filter_data_higher, 
+  plot_title = var_filter_gc, 
+  y_label = "GC Content"
+)
+
+# violin_plot(filter_data_higher, "file", "GC_Content", 4, 2, "Archivo", "Longitud")
 
 ```
 
