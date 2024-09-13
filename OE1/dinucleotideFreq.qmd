@@ -87,7 +87,7 @@ count_trinucleotides <- function(sequence) {
 }
 
 # Read the multifasta files from the folder and calculate dinucleotide or trinucleotide frequencies
-calculate_nucleotide_frequencies <- function(directory, type = "dinucleotide") {
+calculate_nucleotide_frequencies <- function(directory, type_frequency = "dinucleotide", type) {
   # fasta_files <- list.files(path = directory, pattern = "^out_.*\\.fasta$", full.names = TRUE)
   results <- data.frame()  # Initialize empty data frame for results
 
@@ -109,7 +109,7 @@ calculate_nucleotide_frequencies <- function(directory, type = "dinucleotide") {
       id <- attr(sequence, "name")
       seq <- getSequence(sequences[[i]])
       
-      if (type == "trinucleotide") {
+      if (type_frequency == "trinucleotide") {
         freqs <- count_trinucleotides(seq)
       } else {
         freqs <- count_dinucleotides(seq)
@@ -128,7 +128,7 @@ calculate_nucleotide_frequencies <- function(directory, type = "dinucleotide") {
 # directory <- "/home/usuario/Data_Rstudio/chop_genome"
 
 # Run the function and get the dinucleotide frequency table
-dinucleotide_table <- calculate_nucleotide_frequencies(directory, type = "dinucleotide")
+dinucleotide_table <- calculate_nucleotide_frequencies(directory, type_frequency = "dinucleotide", "gene")
 
 ```
 
