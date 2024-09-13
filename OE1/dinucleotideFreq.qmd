@@ -106,6 +106,7 @@ calculate_nucleotide_frequencies <- function(directory, type = "dinucleotide") {
 
     # Get dinucleotide or trinucleotide frequencies for each sequence within a file
     for (i in seq_along(sequences)) {
+      id <- attr(sequence, "name")
       seq <- getSequence(sequences[[i]])
       
       if (type == "trinucleotide") {
@@ -114,7 +115,7 @@ calculate_nucleotide_frequencies <- function(directory, type = "dinucleotide") {
         freqs <- count_dinucleotides(seq)
       }
       
-      row <- c(File = extracted_names, ID = ids[i], freqs)
+      row <- c(File = extracted_names, ID = id, freqs)
       row_df <- as.data.frame(t(row), stringsAsFactors = FALSE)
       results <- rbind(results, row_df)
     }
