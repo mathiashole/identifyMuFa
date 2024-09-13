@@ -311,6 +311,10 @@ reactable(file_sequence_counts, highlight = TRUE)
 
 Se generarán gráficos que representan el `contenido de GC` y la `longitud` de cada secuencia ``r genes_work`` de ``r key_name``. En esta seccion reutilizaremos parte del codigo escrito llamando a las funciones que crean los plot de `GC` y de `longitud` de las secuencias.
 
+::: {.panel-tabset .nav-pills}
+
+## GC
+
 Llamamos a la funcion `plot_violin_gc`, dando lugar a un gráfico violín que muestra la distribución del contenido de GC en distintos genomas de las secuencias ``r key_name``.
 
 
@@ -330,6 +334,8 @@ plot_violin_gc(
 )
 
 ```
+
+## Length
 
 Además, reutilizamos la función previamente empleada para graficar la distribución del genoma, pero esta vez generamos un gráfico que muestra la distribución de las longitudes de las distintas secuencias de ``r key_name``, correspondientes a cada genoma.
 
@@ -354,6 +360,7 @@ palmer_colors <- c("black", "green", "blue")
 
 ```
 
+:::
 
 -----
 
