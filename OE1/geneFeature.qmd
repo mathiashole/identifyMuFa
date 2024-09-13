@@ -466,6 +466,8 @@ plot_violin_length(
 
 ```
 
+:::
+
 ---
 
 ## Resumen de Información de secuencias menores al largo minimo establecido
