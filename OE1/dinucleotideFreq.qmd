@@ -44,6 +44,7 @@ prot_name <- sub(".*_:(.*):_.*", "\\1", fasta_files)
 key_names <- sub("_.*", "\\1", prot_name)
 key_name <- unique(sort(key_names))
 
+
 ```
 
 
@@ -88,8 +89,8 @@ count_trinucleotides <- function(sequence) {
 }
 
 # Read the multifasta files from the folder and calculate dinucleotide or trinucleotide frequencies
-calculate_nucleotide_frequencies <- function(directory, type_frequency = "dinucleotide", type) {
-  fasta_files <- list.files(path = directory, pattern = "^out_.*\\.fasta$", full.names = TRUE)
+calculate_nucleotide_frequencies <- function(fasta_files, type_frequency = "dinucleotide", type) {
+  # fasta_files <- list.files(path = directory, pattern = "^out_.*\\.fasta$", full.names = TRUE)
   results <- data.frame()  # Initialize empty data frame for results
 
   # Iterate over each FASTA file in the folder
@@ -97,13 +98,13 @@ calculate_nucleotide_frequencies <- function(directory, type_frequency = "dinucl
     sequences <- read.fasta(fasta_file)
     ids <- names(sequences)
     base_name <- basename(fasta_file)
-    extracted_names <- sub(".*_([^_]+)\\.fasta$", "\\1", base_name)
-    # if(type == "genome"){
-    #   extracted_names <- sub(".*_([^_]+)\\_Genome.fasta$", "\\1", base_name)
-    # } else if(type == "gene") {
-    #   extracted_names <- sub(".*_([^_]+)\\.fasta$", "\\1", base_name)
-    #   #extracted_names <- str_remove_all(extracted_names, "^.*_")  
-    # }
+    # extracted_names <- sub(".*_([^_]+)\\.fasta$", "\\1", base_name)
+    if(type == "genome"){
+      extracted_names <- sub(".*_([^_]+)\\_Genome.fasta$", "\\1", base_name)
+    } else if(type == "gene") {
+      extracted_names <- sub(".*_([^_]+)\\.fasta$", "\\1", base_name)
+      #extracted_names <- str_remove_all(extracted_names, "^.*_")  
+    }
 
     # Get dinucleotide or trinucleotide frequencies for each sequence within a file
     for (i in seq_along(sequences)) {
@@ -128,11 +129,10 @@ calculate_nucleotide_frequencies <- function(directory, type_frequency = "dinucl
 }
 
 # Define the working directory
-directory <- "/home/usuario/Data_Rstudio/chop_genome"
+# directory <- "/home/usuario/Data_Rstudio/chop_genome"
 
 # Run the function and get the dinucleotide frequency table
-# dinucleotide_table <- calculate_nucleotide_frequencies(directory, type_frequency = "dinucleotide", "gene")
-dinucleotide_table <- calculate_nucleotide_frequencies(directory, type_frequency = "dinucleotide")
+dinucleotide_table <- calculate_nucleotide_frequencies(fasta_files, type_frequency = "dinucleotide", "gene")
 
 ```
 
