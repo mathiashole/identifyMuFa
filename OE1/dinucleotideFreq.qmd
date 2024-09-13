@@ -94,7 +94,7 @@ calculate_nucleotide_frequencies <- function(directory, type = "dinucleotide") {
   # Iterate over each FASTA file in the folder
   for (fasta_file in fasta_files) {
     sequences <- read.fasta(fasta_file)
-    ids <- names(sequences)
+    # ids <- names(sequences)
     base_name <- basename(fasta_file)
     # extracted_names <- sub(".*_([^_]+)\\.fasta$", "\\1", base_name)
     if(type == "genome"){
