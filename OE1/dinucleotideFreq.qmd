@@ -44,6 +44,8 @@ prot_name <- sub(".*_:(.*):_.*", "\\1", fasta_files)
 key_names <- sub("_.*", "\\1", prot_name)
 key_name <- unique(sort(key_names))
 
+all_prot_code <- fasta_files <- list.files(path = "/home/usuario/BASH/chack_gff/prueba_frecuencia_nucleotidos", pattern = "^out_.*\\.fasta$", full.names = TRUE)
+
 
 ```
 
@@ -96,6 +98,7 @@ calculate_nucleotide_frequencies <- function(fasta_files, type_frequency = "dinu
   # Iterate over each FASTA file in the folder
   for (fasta_file in fasta_files) {
     sequences <- read.fasta(fasta_file)
+    print(sequence)
     ids <- names(sequences)
     base_name <- basename(fasta_file)
     # extracted_names <- sub(".*_([^_]+)\\.fasta$", "\\1", base_name)
@@ -133,6 +136,8 @@ calculate_nucleotide_frequencies <- function(fasta_files, type_frequency = "dinu
 
 # Run the function and get the dinucleotide frequency table
 dinucleotide_table <- calculate_nucleotide_frequencies(fasta_files, type_frequency = "dinucleotide", "gene")
+
+dinucleotide_table_all_prot_code <- calculate_nucleotide_frequencies(all_prot_code, type_frequency = "dinucleotide", "gene")
 
 ```
 
