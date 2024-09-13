@@ -118,7 +118,7 @@ calculate_nucleotide_frequencies <- function(directory, type_frequency = "dinucl
       
       # results %>%
       # add_row(file = extracted_names, ID = id, freqs)
-      row <- c(file = extracted, ID = ids[i], freqs)
+      row <- c(file = extracted_names, ID = ids[i], freqs)
       row_df <- as.data.frame(t(row), stringsAsFactors = FALSE)
       results <- rbind(results, row_df)
     }
@@ -151,7 +151,7 @@ dinucleotide_table[cols_to_convert] <- lapply(dinucleotide_table[cols_to_convert
 
 # Now apply the operations to combine frequencies
 combained_dinucleotide <- data.frame(
-  "Genome" = dinucleotide_table[,"File"],
+  "Genome" = dinucleotide_table[,"file"],
   "id" = dinucleotide_table[,"ID"],
   "aa.tt" = dinucleotide_table[,"aa"] + dinucleotide_table[,"tt"],
   "ac.gt" = dinucleotide_table[,"ac"] + dinucleotide_table[,"gt"],
