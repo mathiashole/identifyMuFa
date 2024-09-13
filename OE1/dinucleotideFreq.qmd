@@ -14,6 +14,37 @@ format:
 
 ![](https://img.itch.zone/aW1nLzE3MTEyNjE5LmdpZg==/original/2%2BYVZg.gif){style="float:right;" fig-alt="Illustration of a detective cat. Artwork by @shigemi.itch.io." width="301"}
 
+```{css}
+#| echo: false
+
+p {
+  text-align: justify
+}
+
+```
+
+```{r}
+#| label: show-genome
+#| echo: false
+#| warning: false
+
+## VARIABLES QUE DEBEN SER ARGUMENTOS ##
+# Especificar el directorio donde están los archivos
+directory <- "/home/usuario/Data_Rstudio/chop_genome"  # Cambia esto a la ruta de tu directorio
+# leer tabla de datos ()
+data_init <- read.delim("/home/usuario/Proyectos/maestria/datos_ejecucion_genomas2.tsv.csv", sep = "\t", header = FALSE)
+########################################
+
+# Obtener la lista de archivos que comienzan con 'out_' y terminan con '.fasta'
+fasta_files <- list.files(path = directory, pattern = "^out_.*\\.fasta$", full.names = TRUE)
+genome_name <- basename(data_init$V1)
+
+genes_work <- basename(fasta_files)
+prot_name <- sub(".*_:(.*):_.*", "\\1", fasta_files)
+key_names <- sub("_.*", "\\1", prot_name)
+key_name <- unique(sort(key_names))
+
+```
 
 
 ## Running Code
