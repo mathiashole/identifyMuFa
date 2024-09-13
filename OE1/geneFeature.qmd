@@ -374,7 +374,8 @@ Las secuencias de `r key_name` poseen un largo minimo de (debe ser variable) 800
 #| warning: false
 
 # length_min <- mean(all_results$Length)
-length_min <- median(file_sequence_counts$mean_length)
+# length_min <- median(file_sequence_counts$mean_length)
+length_min <- 8000
 
 filter_data_higher <- filter(all_results, Length >= length_min) 
 filter_data_smaller <- filter(all_results, Length <= length_min)
@@ -387,23 +388,6 @@ filter_data_smaller <- filter(all_results, Length <= length_min)
 
 Se crea una nueva tabla resumen a partir de las `r key_name` `que comprenden el largo minimo` agrupandos por genomas, calculando el `número total` de secuencias, la `longitud` mínima, media y máxima, así como el contenido de `GC` mínimo, medio y máximo.
 
-```{r}
-#| label: plotting-function
-#| echo: false
-#| warning: false
-
-violin_plot <- function(data, file_col, value_col, num_files, n, archivo_label, y_label) {
-  ggplot(data, aes_string(x = file_col, y = value_col)) +
-    geom_violin(fill = palmer_colors[n], alpha = 0.7, width = 0.5) +
-    geom_boxplot(width = 0.1, fill = "white", alpha = 0.3) +
-    geom_jitter(width = 0.1, alpha = 0.1, color = "black") +
-    facet_wrap(as.formula(paste("~", file_col)), ncol = num_files, scales = "free") +
-    theme_minimal() +
-    labs(x = archivo_label, y = y_label)
-}
-
-
-```
 
 ```{r}
 #| label: summary-info_higher
@@ -425,6 +409,17 @@ file_sequence_counts <- filter_data_higher %>%
 reactable(file_sequence_counts, highlight = TRUE)
 
 ```
+
+
+### Visualización de la Longitud y Contenido de GC de ``r key_name`` filtradas por un largo minimo
+
+Representan el `contenido de GC` y la `longitud` de cada secuencia de ``r key_name`` filtrada por un `largo minimo`. Se vuelve a  reutilizar parte las funciones, llamandolas para crear los plot de `GC` y de `longitud` de las secuencias.
+
+::: {.panel-tabset .nav-pills}
+
+## GC
+
+Llamamos a la funcion `plot_violin_gc`, para representar la distribución del contenido de GC en distintos genomas de las secuencias ``r key_name`` filtradas por un largo minimo.
 
 ### Distribución del contenido de GC de las secuencias de `r key_name` >= (lago minimo) debe ser variable
 
