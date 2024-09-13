@@ -125,7 +125,7 @@ calculate_nucleotide_frequencies <- function(directory, type = "dinucleotide") {
 }
 
 # Define the working directory
-directory <- "/home/usuario/Data_Rstudio/chop_genome"
+# directory <- "/home/usuario/Data_Rstudio/chop_genome"
 
 # Run the function and get the dinucleotide frequency table
 dinucleotide_table <- calculate_nucleotide_frequencies(directory, type = "dinucleotide")
