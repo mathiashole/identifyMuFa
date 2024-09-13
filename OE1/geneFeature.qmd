@@ -457,7 +457,17 @@ plot_violin_gc(
 #| warning: false
 #| layout: [[100]]
 
-violin_plot(filter_data_higher, "file", "Length", 4, 1, "Archivo", "Longitud")
+var_length_filter <- paste0( "Filter ",key_name," size")
+
+# Function plot_violin_length call
+plot_violin_length(
+  data = filter_data_higher,
+  "gene", 
+  plot_title = var_length_filter, 
+  x_label = "Number of base pairs"
+)
+
+# violin_plot(filter_data_higher, "file", "Length", 4, 1, "Archivo", "Longitud")
 
 ```
 
