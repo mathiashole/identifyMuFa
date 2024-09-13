@@ -1,5 +1,5 @@
 ---
-title: "Análisis de Secuencias"
+title: "Análisis genómico comparativo de genes DGF-1 en *Trypanosoma Cruzi*"
 author: "Mathias"
 format:
   html:
@@ -49,7 +49,7 @@ key_name <- unique(sort(key_names))
 
 Los datos utilizados en este análisis fueron obtenidas a partir de diferentes genomas de *Trypanosoma cruzi*, disponibles en [**tritrydb**](https://tritrypdb.org/tritrypdb/app) y [**NCBI**](https://www.ncbi.nlm.nih.gov/).
 
-A partir de estos genomas, se extrajeron secuencias de los genes ``r key_name``, con el objetivo de realizar análisis de contenido de `GC`, `longitud de las secuencias`, y otros aspectos relevantes para la caracterización de los genes de ``r key_name``.
+A partir de estos genomas, se extrajeron secuencias de los genes ``r key_name``, con el objetivo de realizar análisis comparativo. Inicialmente se estudió el contenido de `GC`, `longitud de las secuencias`, y otros aspectos relevantes para la caracterización de los genes de ``r key_name``.
 
 ### Genomas
 
@@ -76,7 +76,7 @@ library(reactable)
 
 ## Procesamiento de los genomas
 
-Para procesar las secuencias FASTA, se crea una función que genera un dataframe vacío donde se almacenarán los elementos obtenidos a partir de una secuencia dada. Luego, se elimina la ruta del archivo para extraer el nombre del mismo. A continuación, se obtiene el identificador de cada una de las secuencias dentro del archivo FASTA, se calcula la longitud de la secuencia utilizando una función de la biblioteca SEQINR y, con otra función de la misma biblioteca, se calcula el porcentaje de bases GC. Finalmente, se agrega una fila de encabezado y se devuelve el resultado de la función.
+Para procesar las secuencias FASTA, se crea una función que genera un dataframe vacío donde se almacenarán los elementos obtenidos a partir de una secuencia dada. Luego, se elimina la ruta del archivo para extraer el nombre del mismo. A continuación, se obtiene el identificador de cada una de las secuencias dentro del archivo FASTA, se calcula la longitud de la secuencia y el contenido de GC utilizando funciones de la biblioteca SEQINR.
 
 ```{r}
 #| label: created function
@@ -123,7 +123,7 @@ calculate_fasta_feature <- function(fasta_files, type){
 
 ### Características de los genomas
 
-Se utiliza la función recién creada para extraer diversas características de los genomas, fundamentales para analizar su composición genética. Con estos datos, generamos la primera `Tabla resumen`, que agrupa los contigs de cada genoma ``r genome_name``, mostrando el  `número total de secuencias encontradas`, así como la `longitud` mínima, media y máxima, así como el contenido de `GC` mínimo, medio y máximo.
+Se utiliza la función mencionada para extraer diversas características de los genomas. Con estos datos, generamos la primera `Tabla resumen`, que agrupa los contigs de cada genoma ``r genome_name``, mostrando el  `número total de secuencias encontradas`, así como la `longitud` mínima, media y máxima, así como el contenido de `GC` mínimo, medio y máximo.
 
 ```{r}
 #| label: extract genome feature and created summary
@@ -160,13 +160,15 @@ reactable(genomes_summary, highlight = TRUE)
 
 ### Visualización de la Longitud y Contenido de GC de los Genomas
 
-En esta sección, se generarán gráficos que representan el `contenido de GC` y la `longitud` de cada genoma. Además, se implementarán funciones específicas para cada gráfico, lo que permitirá reutilizar el código de manera eficiente en otras partes del análisis. Para crear estas funciones se implementara las bibliotecas `ggridges`, `ggbeeswarm` y `cowplot`.
+En esta sección, se generarán gráficos que representan el `contenido de GC` y la `longitud` de cada genoma. 
+Se implementan funciones específicas para cada gráfico, lo que permite reutilizar el código de manera eficiente en otras partes del análisis. 
+Para crear estas funciones se implementara las bibliotecas `ggridges`, `ggbeeswarm` y `cowplot`.
 
 ::: {.panel-tabset .nav-pills}
 
 ## GC
 
-Esta funcion de R, `plot_violin_gc`, generar un gráfico de violín que muestra la distribución del contenido de GC en distintos genomas ``r genome_name``.
+La función `plot_violin_gc` genera un gráfico de violín que muestra la distribución del contenido de GC en distintos genomas ``r genome_name``.
 
 ```{r}
 #| label: plotting-genome-gc
@@ -208,7 +210,7 @@ plot_violin_gc(
 
 ## Length
 
-Por otro lado, llamamos la función de R `plot_violin_length` crea un gráfico de violín que ilustra la distribución de las longitudes genómicas de los diferentes genomas ``r genome_name``.
+La función de R `plot_violin_length` crea un gráfico de violín que ilustra la distribución de las longitudes genómicas de los diferentes genomas ``r genome_name``.
 
 ```{r}
 #| label: plotting-genome-length
@@ -281,7 +283,8 @@ plot_violin_length(
 
 ## Procesamiento de las secuencias ``r key_name``
 
-Se llama a la funcion ``calculate_fasta_feature`` para calcular por cada secuencia ``r genes_work`` el contenido de `GC` y la `longitud (pb)`  de ``r key_name``. Finalmente, creamos una `tabla resumen`, que agrupa las secuencias por cada genoma ``r genome_name``, mostrando el  ``r key_name``, así como la `longitud` mínima, media y máxima, así como el contenido de `GC` mínimo, medio y máximo.
+La función  ``calculate_fasta_feature`` se usa para calcular para cada secuencia ``r genes_work`` el contenido de `GC` y la `longitud (pb)`  de ``r key_name``. 
+Se crea una `tabla resumen`, que agrupa las secuencias por cada genoma ``r genome_name``, mostrando el  ``r key_name``, así como la `longitud` mínima, media y máxima, así como el contenido de `GC` mínimo, medio y máximo.
 
 
 ```{r}
@@ -309,13 +312,14 @@ reactable(file_sequence_counts, highlight = TRUE)
 
 ### Visualización de la Longitud y Contenido de GC de ``r key_name``
 
-Se generarán gráficos que representan el `contenido de GC` y la `longitud` de cada secuencia ``r genes_work`` de ``r key_name``. En esta seccion reutilizaremos parte del codigo escrito llamando a las funciones que crean los plot de `GC` y de `longitud` de las secuencias.
+Se generan gráficos que representan el `contenido de GC` y la `longitud` de cada secuencia ``r genes_work`` de ``r key_name``. 
+En esta seccion reutilizaremos parte del codigo escrito llamando a las funciones que crean los plot de `GC` y de `longitud` de las secuencias.
 
 ::: {.panel-tabset .nav-pills}
 
 ## GC
 
-Llamamos a la funcion `plot_violin_gc`, dando lugar a un gráfico violín que muestra la distribución del contenido de GC en distintos genomas de las secuencias ``r key_name``.
+Se usa la funcion `plot_violin_gc`, dando lugar a un gráfico violín que muestra la distribución del contenido de GC en distintos genomas de las secuencias ``r key_name``.
 
 
 ```{r}
@@ -337,7 +341,7 @@ plot_violin_gc(
 
 ## Length
 
-Además, reutilizamos la función previamente empleada para graficar la distribución del genoma, pero esta vez generamos un gráfico que muestra la distribución de las longitudes de las distintas secuencias de ``r key_name``, correspondientes a cada genoma.
+Se usa la función previamente empleada para graficar la distribución del genoma, pero esta vez generamos un gráfico que muestra la distribución de las longitudes de las distintas secuencias de ``r key_name``, correspondientes a cada genoma.
 
 ```{r}
 #| label: plotting-length
@@ -366,7 +370,8 @@ palmer_colors <- c("black", "green", "blue")
 
 ## Filtrado de las secuencias de `r key_name` por el largo
 
-Las secuencias de `r key_name` poseen un largo minimo de (debe ser variable) 8000 pb??, siendo el largo minimo de filtrado. Las secuencias menores a este minimo se descartaran dado que no contienen a `r key_name` en su totalidad.
+Se filtran las secuencias de `r key_name` de acuerdo a un largo mínimo (8000 pb). 
+Las secuencias menores a este minimo se descartaran para este analisis inicial, y serán estudiadas para determinar si son pseudogenes.
 
 ```{r}
 #| label: filter-seq
@@ -384,10 +389,9 @@ filter_data_smaller <- filter(all_results, Length <= length_min)
 ```
 
 
-### Resumen de Información de `r key_name` en cada genoma filtrado por el largo
+### Resumen de Información de `r key_name` completas en cada genoma (filtradas por largo)
 
-Se crea una nueva tabla resumen a partir de las `r key_name` `que comprenden el largo minimo` agrupandos por genomas, calculando el `número total` de secuencias, la `longitud` mínima, media y máxima, así como el contenido de `GC` mínimo, medio y máximo.
-
+Se genera una tabla con las estadístias descriptivas de las `r key_name` completas
 
 ```{r}
 #| label: summary-info_higher
@@ -411,15 +415,15 @@ reactable(file_sequence_counts, highlight = TRUE)
 ```
 
 
-### Visualización de la Longitud y Contenido de GC de ``r key_name`` filtradas por un largo minimo
+### Visualización de la Longitud y Contenido de GC de ``r key_name`` completas
 
-Representan el `contenido de GC` y la `longitud` de cada secuencia de ``r key_name`` filtrada por un `largo minimo`. Se vuelve a  reutilizar parte las funciones, llamandolas para crear los plot de `GC` y de `longitud` de las secuencias.
+Se representan el `contenido de GC` y la `longitud` de cada secuencia de ``r key_name`` completas (filtrada por un `largo minimo`). 
 
 ::: {.panel-tabset .nav-pills}
 
 ## GC
 
-Llamamos a la funcion `plot_violin_gc`, para representar la distribución del contenido de GC en distintos genomas de las secuencias ``r key_name`` filtradas por un largo minimo.
+Se usa la funcion `plot_violin_gc`, para representar la distribución del contenido de GC en distintos genomas de las secuencias ``r key_name`` filtradas por un largo minimo.
 
 ```{r}
 #| label: plotting-GC-filter
@@ -443,7 +447,7 @@ plot_violin_gc(
 
 ## Length
 
-Además, reutilizamos la función `plot_violin_length` para representar distribución de las secuencias ``r key_name`` filtradas.
+Se usa la función `plot_violin_length` para representar distribución de las secuencias ``r key_name`` filtradas.
 
 ```{r}
 #| label: plotting-length-filter
@@ -470,9 +474,10 @@ plot_violin_length(
 
 ---
 
-## Resumen de Información de secuencias menores al largo minimo establecido
+## Resumen de Información de secuencias anotadas como ``r key_name`` menores al largo minimo establecido
 
-Se crea una nueva tabla resumen a partir de las secuencias que se descartaran por no cumplir con el minimo establecido, se agrupa las secuencias por archivo, calculando el `número total` de secuencias, la `longitud` mínima, media y máxima, así como el contenido de `GC` mínimo, medio y máximo.
+Se crea una nueva tabla resumen a partir de las secuencias que se descartaran por no cumplir con el minimo de largo establecido.
+
 
 ```{r}
 #| label: summary-info-smaller
