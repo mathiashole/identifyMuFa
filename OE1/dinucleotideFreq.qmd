@@ -150,6 +150,21 @@ trinucleotide_table_all_prot_code <- nucleotide_frequncy(all_prot_code, type_fre
 ```
 
 ```{r}
+# chack to save extract data on all protein coding
+
+# path_di_protein_code_safe_tsv <- file.path("output_directory/", paste0("genome_gc_length.tsv"))
+# path_di_protein_code_safe <- file.path("output_directory/", paste0("genome_gc_length.csv"))
+# write.csv(genomes, file = path_genome_safe, row.names = FALSE, col.names = TRUE, quote = FALSE)
+# write.table(genomes, file = path_genome_safe_tsv, row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
+
+# path_tri_protein_code_safe_tsv <- file.path("output_directory/", paste0("genome_gc_length.tsv"))
+# path_tri_protein_code_safe <- file.path("output_directory/", paste0("genome_gc_length.csv"))
+# write.csv(genomes, file = path_genome_safe, row.names = FALSE, col.names = TRUE, quote = FALSE)
+# write.table(genomes, file = path_genome_safe_tsv, row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
+
+```
+
+```{r}
 library(reactable)
 
 reactable(dinucleotide_table[,c(1, 3:18)], highlight = TRUE)
