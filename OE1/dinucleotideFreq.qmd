@@ -200,18 +200,18 @@ reactable(dinucleotide_table[,c(1, 3:18)], highlight = TRUE)
 
 # Convert dinucleotide columns to numeric
 cols_to_convert <- c("aa", "tt", "ac", "gt", "ag", "ct", "ca", "tg", "cc", "gg", "ga", "tc", "at", "cg", "gc", "ta")
-dinucleotide_al_protein_coding[cols_to_convert] <- lapply(dinucleotide_all_protein_coding[cols_to_convert], as.numeric)
+dinucleotide_all_protein_coding[cols_to_convert] <- lapply(dinucleotide_all_protein_coding[cols_to_convert], as.numeric)
 
 # Now apply the operations to combine frequencies
 combained_dinucleotide <- data.frame(
-  "Genome" = dinucleotide_all_protein_coding[,"file"],
+  "Genome" = dinucleotide_all_protein_coding[,"File"],
   "id" = dinucleotide_all_protein_coding[,"ID"],
-  "aa.tt" = dinucleotide_al_protein_coding[,"aa"] + dinucleotide_all_protein_coding[,"tt"],
-  "ac.gt" = dinucleotide_al_protein_coding[,"ac"] + dinucleotide_all_protein_coding[,"gt"],
-  "ag.ct" = dinucleotide_al_protein_coding[,"ag"] + dinucleotide_all_protein_coding[,"ct"],
-  "ca.tg" = dinucleotide_al_protein_coding[,"ca"] + dinucleotide_all_protein_coding[,"tg"],
-  "cc.gg" = dinucleotide_al_protein_coding[,"cc"] + dinucleotide_all_protein_coding[,"gg"],
-  "ga.tc" = dinucleotide_al_protein_coding[,"ga"] + dinucleotide_all_protein_coding[,"tc"],
+  "aa.tt" = dinucleotide_all_protein_coding[,"aa"] + dinucleotide_all_protein_coding[,"tt"],
+  "ac.gt" = dinucleotide_all_protein_coding[,"ac"] + dinucleotide_all_protein_coding[,"gt"],
+  "ag.ct" = dinucleotide_all_protein_coding[,"ag"] + dinucleotide_all_protein_coding[,"ct"],
+  "ca.tg" = dinucleotide_all_protein_coding[,"ca"] + dinucleotide_all_protein_coding[,"tg"],
+  "cc.gg" = dinucleotide_all_protein_coding[,"cc"] + dinucleotide_all_protein_coding[,"gg"],
+  "ga.tc" = dinucleotide_all_protein_coding[,"ga"] + dinucleotide_all_protein_coding[,"tc"],
   "at" = dinucleotide_all_protein_coding[,"at"],
   "cg" = dinucleotide_all_protein_coding[,"cg"],
   "gc" = dinucleotide_all_protein_coding[,"gc"],
@@ -221,6 +221,28 @@ combained_dinucleotide <- data.frame(
 ```
 
 ```{r}
+
+# dinucleotide_data <- combained_dinucleotide[, -c(1, 2)]  # Exclude the first columns (File and ID)
+# dinucleotide_data <- as.data.frame(lapply(dinucleotide_data, as.numeric))  # Convert to numeric
+
+# # Perform PCA
+# pca_result <- prcomp(dinucleotide_data, scale. = TRUE)
+
+# # Obtain the PCA scores (principal components for each observation)
+# pca_scores <- as.data.frame(pca_result$x)
+
+# # Add the File and ID columns to the PCA results
+# pca_scores <- cbind(dinucleotide_table[, c("file", "ID")], pca_scores)
+
+# # Show the first PCA results
+# # print(head(pca_scores))
+# autoplot(pca_result, data = dinucleotide_table, colour = 'file', loadings = TRUE,
+#          loadings.label = TRUE, loadings.colour = 'grey64', alpha = 0.4, size = 3) +
+# # labs(title = "PCA of Dinucleotide Frequencies", 
+# #      x = "Principal Component 1", 
+# #      y = "Principal Component 2") +
+# # theme(plot.title = element_text(hjust = 0.5, size = 14, face = "bold")) +
+# theme_minimal()
 
 dinucleotide_data <- combained_dinucleotide[, -c(1, 2)]  # Exclude the first columns (File and ID)
 dinucleotide_data <- as.data.frame(lapply(dinucleotide_data, as.numeric))  # Convert to numeric
@@ -232,11 +254,11 @@ pca_result <- prcomp(dinucleotide_data, scale. = TRUE)
 pca_scores <- as.data.frame(pca_result$x)
 
 # Add the File and ID columns to the PCA results
-pca_scores <- cbind(dinucleotide_table[, c("file", "ID")], pca_scores)
+pca_scores <- cbind(dinucleotide_all_protein_coding[, c("File", "ID")], pca_scores)
 
 # Show the first PCA results
 # print(head(pca_scores))
-autoplot(pca_result, data = dinucleotide_table, colour = 'file', loadings = TRUE,
+autoplot(pca_result, data = dinucleotide_all_protein_coding, colour = 'File', loadings = TRUE,
          loadings.label = TRUE, loadings.colour = 'grey64', alpha = 0.4, size = 3) +
 # labs(title = "PCA of Dinucleotide Frequencies", 
 #      x = "Principal Component 1", 
