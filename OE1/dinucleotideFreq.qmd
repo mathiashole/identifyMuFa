@@ -130,7 +130,7 @@ count_trinucleotides <- function(sequence) {
 #   return(results)
 # }
 
-nucleotide_frequncy <- function(fasta_files) {
+nucleotide_frequncy <- function(fasta_files, type_frequency = "dinucleotide", type_seq = "gene") {
   results <- data.frame()  # Initialize the empty data frame for the results
 
   # Iterate over each FASTA file in the folder
@@ -142,11 +142,22 @@ nucleotide_frequncy <- function(fasta_files) {
     base_name <- basename(fasta_file)
     # Regular expresion for extract diferents parts
     extracted_names <- sub(".*_([^_]+)\\.fasta$", "\\1", base_name)
+    # if(type_seq == "genome"){
+    #   extracted_names <- sub(".*_([^_]+)\\_Genome.fasta$", "\\1", base_name)
+    # } else if(type_seq == "gene") {
+    #   extracted_names <- sub(".*_([^_]+)\\.fasta$", "\\1", base_name)
+    #   #extracted_names <- str_remove_all(extracted_names, "^.*_")  
+    # }
     
     # Get dinucleotide or trinucleotide frequencies for each sequence within a file
     for (i in seq_along(sequences)) {
       seq <- getSequence(sequences[[i]])
-      freqs <- count_dinucleotides(seq)  # Calcula las frecuencias de dinucleótidos
+
+      if (type_frequency == "trinucleotide") {
+        freqs <- count_trinucleotides(seq)
+      } else if (type_frequency == "dinucleotide") {
+        freqs <- count_dinucleotides(seq)
+      }
       
       # Create a row with file name, ID and frequencies
       row <- c(File = extracted_names, ID = ids[i], freqs)
@@ -163,7 +174,7 @@ nucleotide_frequncy <- function(fasta_files) {
   return(results)
 }
 
-dinucleotide_table <- nucleotide_frequncy(fasta_files)
+dinucleotide_table <- nucleotide_frequncy(fasta_files, type_frequency = "trinucleotide", type_seq = "gene")
 
 # Run the function and get the dinucleotide frequency table
 dinucleotide_table <- calculate_nucleotide_frequencies(fasta_files, type_frequency = "dinucleotide")
