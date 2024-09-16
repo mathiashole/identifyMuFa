@@ -154,8 +154,8 @@ trinucleotide_table_all_prot_code <- nucleotide_frequncy(all_prot_code, type_fre
 
 # path_di_protein_code_safe_tsv <- file.path("output_directory/", paste0("dinuclotide_frequency_all_protein_coding.tsv"))
 # path_di_protein_code_safe <- file.path("output_directory/", paste0("dinuclotide_frequency_all_protein_coding.tsv"))
-# write.csv(genomes, file = path_genome_safe, row.names = FALSE, col.names = TRUE, quote = FALSE)
-# write.table(genomes, file = path_genome_safe_tsv, row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
+# write.csv(dinucleotide_table_all_prot_code, file = path_di_protein_code_safe, row.names = FALSE, col.names = TRUE, quote = FALSE)
+# write.table(dinucleotide_table_all_prot_code, file = path_di_protein_code_safe_tsv, row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
 
 # path_tri_protein_code_safe_tsv <- file.path("output_directory/", paste0("trinuclotide_frequency_all_protein_coding.tsv"))
 # path_tri_protein_code_safe <- file.path("output_directory/", paste0("trinuclotide_frequency_all_protein_coding.tsv"))
