@@ -44,7 +44,7 @@ prot_name <- sub(".*_:(.*):_.*", "\\1", fasta_files)
 key_names <- sub("_.*", "\\1", prot_name)
 key_name <- unique(sort(key_names))
 
-all_prot_code <- fasta_files <- list.files(path = "/home/usuario/BASH/chack_gff/prueba_frecuencia_nucleotidos", pattern = "^out_.*\\.fasta$", full.names = TRUE)
+all_prot_code <- list.files(path = "/home/usuario/BASH/chack_gff/prueba_frecuencia_nucleotidos", pattern = "^out_.*\\.fasta$", full.names = TRUE)
 
 
 ```
