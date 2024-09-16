@@ -130,7 +130,7 @@ count_trinucleotides <- function(sequence) {
 #   return(results)
 # }
 
-nucleotide_frequncy <- function(fasta_files, type_frequency = "dinucleotide", type_seq = "gene") {
+nucleotide_frequncy <- function(fasta_files, type_frequency = "dinucleotide") {
   results <- data.frame()  # Initialize the empty data frame for the results
 
   # Iterate over each FASTA file in the folder
