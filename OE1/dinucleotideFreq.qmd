@@ -141,11 +141,11 @@ nucleotide_frequncy <- function(fasta_files, type_frequency = "dinucleotide") {
 # Run the function and get the dinucleotide frequency table
 dinucleotide_table <- nucleotide_frequncy(fasta_files, type_frequency = "dinucleotide")
 
-dinucleotide_table_all_prot_code <- nucleotide_frequncy(all_prot_code, type_frequency = "dinucleotide")
+# dinucleotide_table_all_prot_code <- nucleotide_frequncy(all_prot_code, type_frequency = "dinucleotide")
 
 trinucleotide_table <- nucleotide_frequncy(fasta_files, type_frequency = "trinucleotide")
 
-trinucleotide_table_all_prot_code <- nucleotide_frequncy(all_prot_code, type_frequency = "trinucleotide")
+# trinucleotide_table_all_prot_code <- nucleotide_frequncy(all_prot_code, type_frequency = "trinucleotide")
 
 ```
 
