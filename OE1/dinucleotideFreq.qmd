@@ -159,6 +159,10 @@ trinucleotide_table <- nucleotide_frequncy(fasta_files, type_frequency = "trinuc
 ```
 
 ```{r}
+#| label: write and read big data
+#| echo: false
+#| warning: false
+
 # chack to save extract data on all protein coding
 
 # path_di_protein_code_safe_tsv <- file.path("output_directory", paste0("dinuclotide_frequency_all_protein_coding.tsv"))
