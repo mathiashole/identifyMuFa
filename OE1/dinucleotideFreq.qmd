@@ -24,7 +24,7 @@ p {
 ```
 
 ```{r}
-#| label: show-genome
+#| label: charged global variables
 #| echo: false
 #| warning: false
 
