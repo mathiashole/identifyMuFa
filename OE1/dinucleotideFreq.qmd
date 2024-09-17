@@ -69,7 +69,7 @@ library(tidyverse)
 
 ```
 
-You can add options to executable code like this
+Creamos una funcion que está diseñado para calcular las frecuencias de dinucleótidos y trinucleótidos en secuencias de ADN contenidas en archivos FASTA. En este se usara para calcular las frecuencias de dinucleótidos y trinucleótidos de todas las proteinas codificantes de los genomas `r genome_name` y de las secuencias codificantes de `r key_name`
 
 ```{r}
 #| label: created nucleotide frequency function
