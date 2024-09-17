@@ -222,6 +222,9 @@ combained_dinucleotide <- data.frame(
 ```
 
 ```{r}
+#| label: principal component analysis
+#| echo: true
+#| warning: false
 
 dinucleotide_data <- combained_dinucleotide[, -c(1, 2)]  # Exclude the first columns (File and ID)
 dinucleotide_data <- as.data.frame(lapply(dinucleotide_data, as.numeric))  # Convert to numeric
