@@ -55,6 +55,9 @@ all_prot_code <- list.files(path = "/home/usuario/BASH/chack_gff/prueba_frecuenc
 When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
 
 ```{r}
+#| label: load packages to nucleotide frequency
+#| echo: true
+#| warning: false
 
 # Load necessary libraries
 #library(data.table)
