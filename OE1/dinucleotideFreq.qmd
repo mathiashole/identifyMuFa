@@ -251,6 +251,9 @@ theme_minimal()
 ```
 
 ```{r}
+#| label: plot PCA
+#| echo: true
+#| warning: false
 
 highlight_ids <- dinucleotide_table$ID
 
