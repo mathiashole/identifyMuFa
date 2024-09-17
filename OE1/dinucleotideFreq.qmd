@@ -72,6 +72,9 @@ library(tidyverse)
 You can add options to executable code like this
 
 ```{r}
+#| label: created nucleotide frequency function
+#| echo: true
+#| warning: false
 
 # Function to count dinucleotides
 count_dinucleotides <- function(sequence) {
