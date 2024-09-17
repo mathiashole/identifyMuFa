@@ -195,6 +195,9 @@ reactable(dinucleotide_table[,c(1, 3:18)], highlight = TRUE)
 ```
 
 ```{r}
+#| label: eliminates complementary reverse nucleotide sets
+#| echo: true
+#| warning: false
 
 # Convert dinucleotide columns to numeric
 cols_to_convert <- c("aa", "tt", "ac", "gt", "ag", "ct", "ca", "tg", "cc", "gg", "ga", "tc", "at", "cg", "gc", "ta")
