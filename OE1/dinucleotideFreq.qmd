@@ -143,6 +143,9 @@ nucleotide_frequncy <- function(fasta_files, type_frequency = "dinucleotide") {
 ```
 
 ```{r}
+#| label: execution nucleotide frequency function
+#| echo: true
+#| warning: false
 
 # Run the function and get the dinucleotide frequency table
 dinucleotide_table <- nucleotide_frequncy(fasta_files, type_frequency = "dinucleotide")
