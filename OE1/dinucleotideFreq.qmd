@@ -178,26 +178,6 @@ reactable(dinucleotide_table[,c(1, 3:18)], highlight = TRUE)
 
 ```{r}
 
-# # Convert dinucleotide columns to numeric
-# cols_to_convert <- c("aa", "tt", "ac", "gt", "ag", "ct", "ca", "tg", "cc", "gg", "ga", "tc", "at", "cg", "gc", "ta")
-# dinucleotide_table[cols_to_convert] <- lapply(dinucleotide_table[cols_to_convert], as.numeric)
-
-# # Now apply the operations to combine frequencies
-# combained_dinucleotide <- data.frame(
-#   "Genome" = dinucleotide_table[,"file"],
-#   "id" = dinucleotide_table[,"ID"],
-#   "aa.tt" = dinucleotide_table[,"aa"] + dinucleotide_table[,"tt"],
-#   "ac.gt" = dinucleotide_table[,"ac"] + dinucleotide_table[,"gt"],
-#   "ag.ct" = dinucleotide_table[,"ag"] + dinucleotide_table[,"ct"],
-#   "ca.tg" = dinucleotide_table[,"ca"] + dinucleotide_table[,"tg"],
-#   "cc.gg" = dinucleotide_table[,"cc"] + dinucleotide_table[,"gg"],
-#   "ga.tc" = dinucleotide_table[,"ga"] + dinucleotide_table[,"tc"],
-#   "at" = dinucleotide_table[,"at"],
-#   "cg" = dinucleotide_table[,"cg"],
-#   "gc" = dinucleotide_table[,"gc"],
-#   "ta" = dinucleotide_table[,"ta"]
-# )
-
 # Convert dinucleotide columns to numeric
 cols_to_convert <- c("aa", "tt", "ac", "gt", "ag", "ct", "ca", "tg", "cc", "gg", "ga", "tc", "at", "cg", "gc", "ta")
 dinucleotide_all_protein_coding[cols_to_convert] <- lapply(dinucleotide_all_protein_coding[cols_to_convert], as.numeric)
