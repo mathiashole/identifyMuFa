@@ -186,7 +186,7 @@ reactable(dinucleotide_table[,c(1, 3:18)], highlight = TRUE)
 
 ```
 
-En esta parte, el código crea un nuevo data frame llamado `r combained_dinucleotide`, que combina las frecuencias de dinucleótidos que son complementarios en el ADN. Al combinar las frecuencias de estos inversos complementarios permite observar otros patrones de los dinucleótidos en las secuencias codificantes, siendo útil para detectar sesgos en la composición del ADN.
+En esta parte, el código crea un nuevo data frame llamado `combained_dinucleotide`, que combina las frecuencias de dinucleótidos que son complementarios en el ADN. Al combinar las frecuencias de estos inversos complementarios permite observar otros patrones de los dinucleótidos en las secuencias codificantes, siendo útil para detectar sesgos en la composición del ADN.
 
 ```{r}
 #| label: eliminates complementary reverse nucleotide sets
