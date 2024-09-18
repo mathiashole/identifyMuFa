@@ -132,6 +132,8 @@ nucleotide_frequncy <- function(fasta_files, type_frequency = "dinucleotide") {
 
 ```
 
+Se llama a la función nucleotide_frequncy() para obtener las tablas de frecuencias de dinucleótidos y trinucleótidos.
+
 ```{r}
 #| label: execution nucleotide frequency function
 #| echo: true
