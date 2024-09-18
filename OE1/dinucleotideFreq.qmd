@@ -215,6 +215,8 @@ combained_dinucleotide <- data.frame(
 
 ```
 
+análisis de componentes principales (PCA) sobre las frecuencias de dinucleótidos combinados en las secuencias codificantes de los genomas ``r genome_name``.
+
 ```{r}
 #| label: principal component analysis
 #| echo: true
