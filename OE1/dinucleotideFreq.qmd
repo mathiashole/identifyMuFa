@@ -215,7 +215,7 @@ combained_dinucleotide <- data.frame(
 
 ```
 
-análisis de componentes principales (PCA) sobre las frecuencias de dinucleótidos combinados en las secuencias codificantes de los genomas ``r genome_name``. El PCA se utiliza para reducir la dimensionalidad, en este caso de las frecuencias de dinucleótidos en secuencias codificantes de ``r genome_name``, lo que permite explorar las relaciones entre secuencias y sus patrones de composición a nivel de dinucleótidos. Aquí se utiliza la función `autoplot()` para visualizar los resultados del `PCA`. Las secuencias se colorean según los genomas ``r genome_name``, mostrando los vectores de carga (loadings) para ver qué dinucleótidos influyen más en cada componente principal.
+análisis de componentes principales (PCA) sobre las frecuencias de dinucleótidos combinados en las secuencias codificantes de los genomas ``r genome_name``. El PCA se utiliza para reducir la dimensionalidad, en este caso de las frecuencias de dinucleótidos en secuencias codificantes de los `genomas`, lo que permite explorar las relaciones entre secuencias y sus patrones de composición a nivel de dinucleótidos. Aquí se utiliza la función `autoplot()` para visualizar los resultados del `PCA`. Las secuencias se colorean según los `genomas`, mostrando los vectores de carga (loadings) para ver qué dinucleótidos influyen más en cada componente principal.
 
 ```{r}
 #| label: principal component analysis
