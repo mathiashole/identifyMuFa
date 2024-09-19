@@ -140,13 +140,13 @@ Se llama a la función nucleotide_frequncy() para obtener las tablas de frecuenc
 #| warning: false
 
 # Run the function and get the dinucleotide frequency table
-# dinucleotide_table <- nucleotide_frequncy(fasta_files, type_frequency = "dinucleotide")
+dinucleotide_table <- nucleotide_frequncy(fasta_files, type_frequency = "dinucleotide")
 
 # dinucleotide_table_all_prot_code <- nucleotide_frequncy(all_prot_code, type_frequency = "dinucleotide")
 
-# trinucleotide_table <- nucleotide_frequncy(fasta_files, type_frequency = "trinucleotide")
+trinucleotide_table <- nucleotide_frequncy(fasta_files, type_frequency = "trinucleotide")
 
-trinucleotide_table_all_prot_code <- nucleotide_frequncy(all_prot_code, type_frequency = "trinucleotide")
+# trinucleotide_table_all_prot_code <- nucleotide_frequncy(all_prot_code, type_frequency = "trinucleotide")
 
 ```
 
@@ -167,13 +167,13 @@ transform_columns <- function(df, cols) {
   return(df)  # Return the modified data frame
 }
 
-# dinucleotide_table <- transform_columns(dinucleotide_table, "ID")
+dinucleotide_table <- transform_columns(dinucleotide_table, "ID")
 
 # dinucleotide_table_all_prot_code <- transform_columns(dinucleotide_table_all_prot_code, "ID")
 
-trinucleotide_table_all_prot_code <- transform_columns(trinucleotide_table_all_prot_code, "ID")
+# trinucleotide_table_all_prot_code <- transform_columns(trinucleotide_table_all_prot_code, "ID")
 
-# trinucleotide_table <- transform_columns(trinucleotide_table, "ID")
+trinucleotide_table <- transform_columns(trinucleotide_table, "ID")
 
 ```
 
