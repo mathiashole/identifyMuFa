@@ -216,8 +216,21 @@ combained_dinucleotide <- data.frame(
 ```
 
 ```{r}
+#| label: ID string manipulation
+#| echo: true
+#| warning: false
 
 # function to string manipulation on sequence ID
+transform_columns <- function(df, cols) {
+  # Iterate over the specified columns
+  for (col in cols) {
+    # Replace '=' with '_'
+    df[[col]] <- gsub("=", "_", df[[col]])              
+    # Remove everything after ':' or ';'
+    df[[col]] <- gsub("[:;].*", "", df[[col]])          
+  }
+  return(df)  # Return the modified data frame
+}
 
 ```
 
