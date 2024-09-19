@@ -309,12 +309,6 @@ ggplot(dinucleotide_all_protein_coding, aes(x = PC1, y = PC2, color = highlight,
   theme_minimal() +
   guides(alpha = "none")
 
-
-# Plot with autoplot for PCA values
-autoplot(pca_result, data = dinucleotide_all_protein_coding, colour = 'highlight', alpha = 'alpha', loadings = TRUE, loadings.label = TRUE) +
-  labs(title = "PCA Highlighting Selected IDs with autoplot") +
-  theme_minimal()
-
 autoplot(pca_result, data = dinucleotide_all_protein_coding, colour = 'highlight', alpha = 'alpha', loadings = TRUE, loadings.label = TRUE) +
   scale_color_manual(values = color_palette) +  # Apply the generated colors
   labs(title = "PCA Highlighting Selected IDs with autoplot") +
