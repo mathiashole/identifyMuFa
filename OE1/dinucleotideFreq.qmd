@@ -273,6 +273,50 @@ theme_minimal()
 ```
 
 ```{r}
+# Crear la nueva columna 'highlight' que combina 'Highlighted' con la columna 'File'
+dinucleotide_all_protein_coding$highlight <- ifelse(
+  dinucleotide_all_protein_coding$ID %in% highlight_ids, 
+  paste0("Highlighted_", dinucleotide_all_protein_coding$File), 
+  "Other"
+)
+
+# Asignar los valores de transparencia según la columna 'highlight'
+dinucleotide_all_protein_coding$alpha <- ifelse(
+  grepl("Highlighted", dinucleotide_all_protein_coding$highlight), 0.8, 0.1
+)
+
+# Asignar las primeras dos componentes principales del PCA
+dinucleotide_all_protein_coding$PC1 <- pca_result$x[, 1]
+dinucleotide_all_protein_coding$PC2 <- pca_result$x[, 2]
+
+# Obtener los valores únicos de la columna 'highlight'
+unique_highlight_values <- unique(dinucleotide_all_protein_coding$highlight)
+
+# Crear una paleta de colores que asigna un color gris a 'Other' y colores distintos a cada 'Highlighted_<File>'
+color_palette <- c("grey", rainbow(length(unique_highlight_values) - 1))
+
+# Mapeo de colores: asignamos 'grey' a 'Other' y un color distinto a cada 'Highlighted_<File>'
+names(color_palette) <- unique_highlight_values
+
+# Graficar con ggplot, diferenciando cada 'Highlighted_<File>'
+ggplot(dinucleotide_all_protein_coding, aes(x = PC1, y = PC2, color = highlight, alpha = alpha)) +
+  geom_point(size = 3) +
+  scale_color_manual(values = color_palette) +  # Aplicar los colores generados
+  labs(title = "PCA Highlighting Selected IDs", x = "Principal Component 1", y = "Principal Component 2") +
+  theme_minimal() +
+  guides(alpha = "none")
+
+
+# Graficar con autoplot para los valores de PCA
+autoplot(pca_result, data = dinucleotide_all_protein_coding, colour = 'highlight', alpha = 'alpha', loadings = TRUE, loadings.label = TRUE) +
+  scale_color_manual(values = color_palette) +  # Aplicar los colores generados
+  labs(title = "PCA Highlighting Selected IDs with autoplot") +
+  theme_minimal()
+
+
+```
+
+```{r}
 #| label: plot PCA
 #| echo: true
 #| warning: false
