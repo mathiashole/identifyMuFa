@@ -231,6 +231,9 @@ transform_columns <- function(df, cols) {
   }
   return(df)  # Return the modified data frame
 }
+# Quick execution transformed_df <- transform_columns(df, c("col1", "col2"))
+dinucleotide_table
+dinucleotide_all_protein_coding
 
 ```
 
