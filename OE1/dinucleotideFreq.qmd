@@ -285,7 +285,7 @@ dinucleotide_all_protein_coding$highlight <- ifelse(
 
 # Assign transparency values ​​according to the 'highlight' column
 dinucleotide_all_protein_coding$alpha <- ifelse(
-  grepl("Highlighted", dinucleotide_all_protein_coding$highlight), 0.4, 0.1
+  grepl("Highlighted", dinucleotide_all_protein_coding$highlight), 0.2, 0.1
 )
 
 # Assign the first two principal components of the PCA
@@ -293,10 +293,10 @@ dinucleotide_all_protein_coding$PC1 <- pca_result$x[, 1]
 dinucleotide_all_protein_coding$PC2 <- pca_result$x[, 2]
 
 # Get the unique values ​​of the 'highlight' column
-unique_highlight_values <- unique(dinucleotide_all_protein_coding$highlight)
+unique_highlight_values <- sort(unique(dinucleotide_all_protein_coding$highlight))
 
 # Create a color palette that assigns a gray color to 'Other' and different colors to each 'Highlighted_<File>'
-color_palette <- c("grey", scales::hue_pal()(length(unique_highlight_values) - 1))
+color_palette <- c(scales::hue_pal()(length(unique_highlight_values) - 1), "grey")
 
 # Color mapping: we assign 'grey' to 'Other' and a different color to each 'Highlighted_<File>'
 names(color_palette) <- unique_highlight_values
