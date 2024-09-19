@@ -296,7 +296,7 @@ dinucleotide_all_protein_coding$PC2 <- pca_result$x[, 2]
 unique_highlight_values <- unique(dinucleotide_all_protein_coding$highlight)
 
 # Create a color palette that assigns a gray color to 'Other' and different colors to each 'Highlighted_<File>'
-color_palette <- c("grey", rainbow(length(unique_highlight_values) - 1))
+color_palette <- c("grey", scales::hue_pal()(length(unique_highlight_values) - 1))
 
 # Color mapping: we assign 'grey' to 'Other' and a different color to each 'Highlighted_<File>'
 names(color_palette) <- unique_highlight_values
