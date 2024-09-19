@@ -181,7 +181,7 @@ library(cowplot)
 
 genomes$Length <- as.numeric((format(genomes$Length, scientific = TRUE))) # Changed format
 
-
+# Inspired by http://tom-e-white.com/datavision/05-genome-size.html domain of https://github.com/tomwhite
 # GC plotting function
 plot_violin_gc <- function(data, plot_title, y_label) {
   ggplot(data, aes(x = file, y = GC_Content, fill = file)) +
