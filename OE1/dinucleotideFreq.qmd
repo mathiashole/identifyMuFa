@@ -244,24 +244,6 @@ combained_dinucleotide <- data.frame(
 
 ```
 
-```{r}
-
-# # function to string manipulation on sequence ID
-# transform_columns <- function(df, cols) {
-#   # Iterate over the specified columns
-#   for (col in cols) {
-#     # Replace '=' with '_'
-#     df[[col]] <- gsub("=", "_", df[[col]])              
-#     # Remove everything after ':' or ';'
-#     df[[col]] <- gsub("[:;].*", "", df[[col]])          
-#   }
-#   return(df)  # Return the modified data frame
-# }
-# # Quick execution transformed_df <- transform_columns(df, c("col1", "col2"))
-# dinucleotide_table <- transform_columns(dinucleotide_table, "ID")
-# dinucleotide_all_protein_coding <- transform_columns(dinucleotide_all_protein_coding, "ID")
-
-```
 
 Análisis de componentes principales (PCA) sobre las frecuencias de dinucleótidos combinados en las secuencias codificantes de los genomas ``r genome_name``. El PCA se utiliza para reducir la dimensionalidad, en este caso de las frecuencias de dinucleótidos en secuencias codificantes de los `genomas`, lo que permite explorar las relaciones entre secuencias y sus patrones de composición a nivel de dinucleótidos. Aquí se utiliza la función `autoplot()` para visualizar los resultados del `PCA`. Las secuencias se colorean según los `genomas`, mostrando los vectores de carga (loadings) para ver qué dinucleótidos influyen más en cada componente principal.
 
