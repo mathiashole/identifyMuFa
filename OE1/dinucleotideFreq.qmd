@@ -292,7 +292,7 @@ dinucleotide_all_protein_coding$alpha <- ifelse(
 dinucleotide_all_protein_coding$PC1 <- pca_result$x[, 1]
 dinucleotide_all_protein_coding$PC2 <- pca_result$x[, 2]
 
-# Get the unique values ​​of the 'highlight' column
+# Get the unique values ​​of the 'highlight' column and sort
 unique_highlight_values <- sort(unique(dinucleotide_all_protein_coding$highlight))
 
 # Create a color palette that assigns a gray color to 'Other' and different colors to each 'Highlighted_<File>'
