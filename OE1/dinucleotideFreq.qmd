@@ -238,10 +238,6 @@ pca_scores <- cbind(dinucleotide_all_protein_coding[, c("File", "ID")], pca_scor
 # print(head(pca_scores))
 autoplot(pca_result, data = dinucleotide_all_protein_coding, colour = 'File', loadings = TRUE,
          loadings.label = TRUE, loadings.colour = 'grey64', alpha = 0.4, size = 3) +
-# labs(title = "PCA of Dinucleotide Frequencies", 
-#      x = "Principal Component 1", 
-#      y = "Principal Component 2") +
-# theme(plot.title = element_text(hjust = 0.5, size = 14, face = "bold")) +
 theme_minimal()
 
 ```
