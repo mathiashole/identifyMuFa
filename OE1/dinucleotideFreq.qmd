@@ -285,7 +285,7 @@ dinucleotide_all_protein_coding$highlight <- ifelse(
 
 # Assign transparency values ​​according to the 'highlight' column
 dinucleotide_all_protein_coding$alpha <- ifelse(
-  grepl("Highlighted", dinucleotide_all_protein_coding$highlight), 0.8, 0.1
+  grepl("Highlighted", dinucleotide_all_protein_coding$highlight), 0.4, 0.1
 )
 
 # Assign the first two principal components of the PCA
@@ -311,6 +311,10 @@ ggplot(dinucleotide_all_protein_coding, aes(x = PC1, y = PC2, color = highlight,
 
 
 # Plot with autoplot for PCA values
+autoplot(pca_result, data = dinucleotide_all_protein_coding, colour = 'highlight', alpha = 'alpha', loadings = TRUE, loadings.label = TRUE) +
+  labs(title = "PCA Highlighting Selected IDs with autoplot") +
+  theme_minimal()
+
 autoplot(pca_result, data = dinucleotide_all_protein_coding, colour = 'highlight', alpha = 'alpha', loadings = TRUE, loadings.label = TRUE) +
   scale_color_manual(values = color_palette) +  # Apply the generated colors
   labs(title = "PCA Highlighting Selected IDs with autoplot") +
