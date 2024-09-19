@@ -304,7 +304,7 @@ names(color_palette) <- unique_highlight_values
 # Plot with ggplot, differentiating each 'Highlighted_<File>'
 ggplot(dinucleotide_all_protein_coding, aes(x = PC1, y = PC2, color = highlight, alpha = alpha)) +
   geom_point(size = 3) +
-  scale_color_manual(values = color_palette) +  # Aplicar los colores generados
+  scale_color_manual(values = color_palette) +  # Apply the generated colors
   labs(title = "PCA Highlighting Selected IDs", x = "Principal Component 1", y = "Principal Component 2") +
   theme_minimal() +
   guides(alpha = "none")
@@ -312,7 +312,7 @@ ggplot(dinucleotide_all_protein_coding, aes(x = PC1, y = PC2, color = highlight,
 
 # Plot with autoplot for PCA values
 autoplot(pca_result, data = dinucleotide_all_protein_coding, colour = 'highlight', alpha = 'alpha', loadings = TRUE, loadings.label = TRUE) +
-  scale_color_manual(values = color_palette) +  # Aplicar los colores generados
+  scale_color_manual(values = color_palette) +  # Apply the generated colors
   labs(title = "PCA Highlighting Selected IDs with autoplot") +
   theme_minimal()
 
