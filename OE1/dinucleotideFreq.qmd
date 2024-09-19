@@ -273,6 +273,8 @@ theme_minimal()
 ```
 
 ```{r}
+highlight_ids <- dinucleotide_table$ID
+
 # Crear la nueva columna 'highlight' que combina 'Highlighted' con la columna 'File'
 dinucleotide_all_protein_coding$highlight <- ifelse(
   dinucleotide_all_protein_coding$ID %in% highlight_ids, 
