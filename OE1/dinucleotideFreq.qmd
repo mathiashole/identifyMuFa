@@ -2,7 +2,10 @@
 title: "Nucleotide frequency"
 author: "Mathias"
 format:
-  html:
+  lumo-html:
+    github-repo: "https://www.github.com"
+    primary-color: "black"
+    self-contained: true
     theme: united
     code-fold: true
     code-link: true
