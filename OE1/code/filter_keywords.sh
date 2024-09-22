@@ -75,7 +75,7 @@ while IFS=$'\t' read -r _ file keyword1 keyword2 || [ -n "$file" ]; do
     grep "$keyword1" "$file" | grep "$keyword2" | sort | uniq > "$output_file"
 
     # Use grep to non filter the content based on keywords
-    grep "$keyword1" "$file" | grep "$keyword2" | sort | uniq > "$output_file"
+    grep "$keyword2" "$file" | grep "$keyword2" | sort | uniq > "$output_file_non_filtered"
 
     # Check if output file is not empty
     if [ -s "$output_file" ]; then
