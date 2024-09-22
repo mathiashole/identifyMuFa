@@ -135,3 +135,4 @@ execution_module(data_with_commands, output_dir)
 
 # try render quarto file
 saveRDS(data_transformed, "data_transformed.rds")
+quarto render try_args.qmd --execute-params data_file="data_transformed.rds"
