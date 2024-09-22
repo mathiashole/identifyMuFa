@@ -132,3 +132,6 @@ data_transformed <- transform_data(data)
 data_with_commands <- generate_commands(data_transformed, output_dir)
 # Execution script
 execution_module(data_with_commands, output_dir)
+
+# try render quarto file
+saveRDS(data_transformed, "data_transformed.rds")
