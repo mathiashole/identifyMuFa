@@ -119,7 +119,7 @@ if (length(args) == 0) {
 input_file <- args[1]
 output_dir <- "output_directory"  # Define your output directory
 output_dir <- create_output_dir(output_dir)
-print(output_dir)
+
 data <- read_input(input_file)
 # Apply the transformations
 # data_transformed <- transform_data(data, output_dir)
