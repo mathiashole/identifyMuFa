@@ -56,6 +56,7 @@ generate_commands <- function(data, output_dir) {
     mutate(
       filter_seq_command = str_c(FILTER_SEQ, " ", input_file, " ", output_dir),
       gscissors_command = str_c(GSCISSORS, " --fasta ", fasta_file, " --coordinates ", output_dir, "/", filtred_name_gff, " --format gff --output ", output_dir, "/", out_gscissors),
+      gscissors_rest_command = str_c(GSCISSORS, " --fasta ", fasta_file, " --coordinates ", output_dir, "/", non_filtred_name_gff, " --format gff --output ", output_dir, "/", out_rest_gscissors),
       fasta_feature_command = str_c(SEQ_A, " ", out_gscissors),
       distribution_command = str_c(DISTRIBUTION, " ", stat_fasta_feature)
     )
