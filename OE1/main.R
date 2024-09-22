@@ -41,6 +41,7 @@ transform_data <- function(data) {
     non_filtred_name_gff = str_c("non-filtered_:", keyword2, ":_", gff_basename),
     # filtred_name_gff = str_c(output_dir, "filtered_:", keyword_sum, ":_", gff_basename),
     out_gscissors = str_c("out_:", keyword_sum, ":_", no_gff_basename, ".fasta"),
+    out_rest_gscissors = str_c("out_rest:", keyword2, ":_", no_gff_basename, ".fasta"),
     # out_gscissors = str_c(output_dir, "out_:", keyword_sum, ":_", no_gff_basename, ".fasta"),
     stat_fasta_feature = str_c("stat_", keyword_sum, "_", no_gff_basename, ".tsv"),
   )
