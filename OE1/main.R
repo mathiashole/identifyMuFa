@@ -135,5 +135,5 @@ execution_module(data_with_commands, output_dir)
 
 # try render quarto file
 saveRDS(data_transformed, "data_transformed.rds")
-quarto::quarto_render("archivo.qmd", execute_params = list(data_file = "data_transformed.rds"))
+quarto::quarto_render("try_args.qmd", execute_params = list(data_file = "data_transformed.rds"))
 
