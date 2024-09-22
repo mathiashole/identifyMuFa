@@ -65,13 +65,16 @@ while IFS=$'\t' read -r _ file keyword1 keyword2 || [ -n "$file" ]; do
     output_file="$output_dir/filtered_:${keyword1}_${keyword2}:_$filename"
 
     # Generate output no filter file name in the output directory
-    output_file="$output_dir/non-filtered_:${keyword2}:_$filename"
+    output_file_non_filtered="$output_dir/non-filtered_:${keyword2}:_$filename"
 
     # Debugging output
     echo "Processing file: $file"
     echo "Keywords: $keyword1, $keyword2"
 
     # Use grep to filter the content based on keywords
+    grep "$keyword1" "$file" | grep "$keyword2" | sort | uniq > "$output_file"
+
+    # Use grep to non filter the content based on keywords
     grep "$keyword1" "$file" | grep "$keyword2" | sort | uniq > "$output_file"
 
     # Check if output file is not empty
