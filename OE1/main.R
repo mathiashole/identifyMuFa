@@ -86,6 +86,15 @@ execution_module <- function(data, output_dir) {
           cat("Error: GSCISSORS did not create the file", data$out_gscissors[i], "\n")
           next
         }
+
+        cat("Processing GSCISSORS: ", data$gscissors_rest_command[i], "\n")
+        # Check if FILTER_SEQ created the expected file
+        path_file_gs_rest <- paste0(output_dir,"/", data$out_rest_gscissors[i])
+        system(data$gscissors_rest_command[i])
+        if (!file.exists(path_file_gs_rest)) {
+          cat("Error: GSCISSORS did not create the file", data$out_rest_gscissors[i], "\n")
+          next
+        }
         # # change directory from where you get the data!! DEBUGGING
         # cat("Processing SEQ_A: ", data$fasta_feature_command[i], "\n")
         # system(data$fasta_feature_command[i])
