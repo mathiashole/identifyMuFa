@@ -83,4 +83,10 @@ while IFS=$'\t' read -r _ file keyword1 keyword2 || [ -n "$file" ]; do
     else
         echo "No data found for \"$keyword1\" and \"$keyword2\" in \"$file\""
     fi
+
+    if [ -s "$output_file_single_keyword" ]; then
+        echo "Filtered data (single keyword) saved to \"$output_file_single_keyword\""
+    else
+        echo "No data found for \"$keyword2\" in \"$file\""
+    fi
 done < "$input_file"
