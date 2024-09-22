@@ -125,6 +125,9 @@ data <- read_input(input_file)
 # data_transformed <- transform_data(data, output_dir)
 data_transformed <- transform_data(data)
 print(data_transformed)
+path_data_transformed <- file.path("output_directory/", paste0("data_transformed.tsv"))
+write.table(data_transformed, file = path_data_transformed, row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
+
 # Generate the commands
 data_with_commands <- generate_commands(data_transformed, output_dir)
 # Execution script
