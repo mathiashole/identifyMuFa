@@ -296,10 +296,10 @@ perform_pca <- function(data, file_col = "File", id_col = "ID") {
 }
 
 # Call perform_pca
-result <- perform_pca(combained_dinucleotide, file_col = "Genome", id_col = "id")
+perform_result_pca <- perform_pca(combained_dinucleotide, file_col = "Genome", id_col = "id")
 
 # show plot
-result$pca_plot
+perform_result_pca$pca_plot
 
 
 ```
