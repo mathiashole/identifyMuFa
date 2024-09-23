@@ -273,6 +273,34 @@ dinucleotide_data <- as.data.frame(lapply(dinucleotide_data, as.numeric))  # Con
 #          loadings.label = TRUE, loadings.colour = 'grey64', alpha = 0.2, size = 3) +
 # theme_minimal()
 
+# Function to perform PCA and graph (require ggplot2 and ggfortify)
+perform_pca <- function(data, file_col = "File", id_col = "ID") {
+  # Exclude 'File' and 'ID' columns from numerical analysis
+  pca_data <- data[, !(names(data) %in% c(file_col, id_col))]
+  # Convert all columns to numeric format
+  pca_data <- as.data.frame(lapply(pca_data, as.numeric))
+  # Perform the PCA
+  pca_result <- prcomp(pca_data, scale. = TRUE)
+  # Get PCA scores
+  pca_scores <- as.data.frame(pca_result$x)
+  # Add 'File' and 'ID' columns to PCA results
+  pca_scores <- cbind(data[, c(file_col, id_col)], pca_scores)
+  # Plot the PCA with autoplot
+  pca_plot <- autoplot(pca_result, data = data, colour = file_col, 
+                       loadings = TRUE, loadings.label = TRUE, loadings.colour = 'grey64', 
+                       alpha = 0.2, size = 3) +
+    theme_minimal()
+  
+  # Return the results of the PCA and the graph
+  return(list(pca_result = pca_result, pca_scores = pca_scores, pca_plot = pca_plot))
+}
+
+# Call perform_pca
+result <- perform_pca(combained_dinucleotide, file_col = "Genome", id_col = "id")
+
+# show plot
+result$pca_plot
+
 
 ```
 
