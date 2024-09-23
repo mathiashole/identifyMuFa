@@ -255,8 +255,8 @@ En este análisis, se utiliza la función `autoplot()` para visualizar los resul
 #| warning: false
 
 # created pca function
-dinucleotide_data <- combained_dinucleotide[, -c(1, 2)]  # Exclude the first columns (File and ID)
-dinucleotide_data <- as.data.frame(lapply(dinucleotide_data, as.numeric))  # Convert to numeric
+# dinucleotide_data <- combained_dinucleotide[, -c(1, 2)]  # Exclude the first columns (File and ID)
+# dinucleotide_data <- as.data.frame(lapply(dinucleotide_data, as.numeric))  # Convert to numeric
 
 # Perform PCA
 # pca_result <- prcomp(dinucleotide_data, scale. = TRUE)
@@ -314,7 +314,7 @@ dinucleotide_all_protein_coding$highlight <- ifelse(
 dinucleotide_all_protein_coding$alpha <- ifelse(
   grepl("Highlighted", dinucleotide_all_protein_coding$highlight), 0.2, 0.1
 )
-
+pca_result <- perform_result_pca$pca_result
 # Assign the first two principal components of the PCA
 dinucleotide_all_protein_coding$PC1 <- pca_result$x[, 1]
 dinucleotide_all_protein_coding$PC2 <- pca_result$x[, 2]
