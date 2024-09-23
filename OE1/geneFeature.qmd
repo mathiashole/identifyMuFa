@@ -35,7 +35,7 @@ data_transformed <- read.delim("output_directory/data_transformed.tsv", sep = "\
 
 # Obtener la lista de archivos que comienzan con 'out_' y terminan con '.fasta'
 fasta_files <- list.files(path = directory, pattern = "^out_.*\\.fasta$", full.names = TRUE)
-genome_name <- basename(data_init$V1)
+genome_name <- basename(data_transformed$fasta_file)
 
 genes_work <- basename(fasta_files)
 prot_name <- sub(".*_:(.*):_.*", "\\1", fasta_files)
