@@ -226,21 +226,26 @@ En esta parte, el código crea un nuevo data frame llamado `combained_dinucleoti
 cols_to_convert <- c("aa", "tt", "ac", "gt", "ag", "ct", "ca", "tg", "cc", "gg", "ga", "tc", "at", "cg", "gc", "ta")
 dinucleotide_all_protein_coding[cols_to_convert] <- lapply(dinucleotide_all_protein_coding[cols_to_convert], as.numeric)
 
+combine_dinucleotide_frequencies <- function(data, genome_col = "File", id_col = "ID") {
 # Now apply the operations to combine frequencies
-combained_dinucleotide <- data.frame(
-  "Genome" = dinucleotide_all_protein_coding[,"File"],
-  "id" = dinucleotide_all_protein_coding[,"ID"],
-  "aa.tt" = dinucleotide_all_protein_coding[,"aa"] + dinucleotide_all_protein_coding[,"tt"],
-  "ac.gt" = dinucleotide_all_protein_coding[,"ac"] + dinucleotide_all_protein_coding[,"gt"],
-  "ag.ct" = dinucleotide_all_protein_coding[,"ag"] + dinucleotide_all_protein_coding[,"ct"],
-  "ca.tg" = dinucleotide_all_protein_coding[,"ca"] + dinucleotide_all_protein_coding[,"tg"],
-  "cc.gg" = dinucleotide_all_protein_coding[,"cc"] + dinucleotide_all_protein_coding[,"gg"],
-  "ga.tc" = dinucleotide_all_protein_coding[,"ga"] + dinucleotide_all_protein_coding[,"tc"],
-  "at" = dinucleotide_all_protein_coding[,"at"],
-  "cg" = dinucleotide_all_protein_coding[,"cg"],
-  "gc" = dinucleotide_all_protein_coding[,"gc"],
-  "ta" = dinucleotide_all_protein_coding[,"ta"]
-)
+  combained_dinucleotide <- data.frame(
+    "Genome" = data[,"File"],
+    "id" = data[,"ID"],
+    "aa.tt" = data[,"aa"] + data[,"tt"],
+    "ac.gt" = data[,"ac"] + data[,"gt"],
+    "ag.ct" = data[,"ag"] + data[,"ct"],
+    "ca.tg" = data[,"ca"] + data[,"tg"],
+    "cc.gg" = data[,"cc"] + data[,"gg"],
+    "ga.tc" = data[,"ga"] + data[,"tc"],
+    "at" = data[,"at"],
+    "cg" = data[,"cg"],
+    "gc" = data[,"gc"],
+    "ta" = data[,"ta"]
+  )
+  return(combained_dinucleotide)
+}
+
+combained_dinucleotide <- combine_dinucleotide_frequencies(dinucleotide_all_protein_coding)
 
 ```
 
@@ -375,5 +380,23 @@ autoplot(pca_result, data = dinucleotide_all_protein_coding, colour = 'highlight
   scale_color_manual(values = c("Other" = "grey", "Highlighted" = "red")) +
   labs(title = "PCA Highlighting Selected IDs") +
   theme_minimal()
+
+```
+
+
+```{r}
+#| label: plot PCA only gene
+#| echo: true
+#| warning: false
+
+dinucleotide_table[cols_to_convert] <- lapply(dinucleotide_table[cols_to_convert], as.numeric)
+
+combained_dinucleotide_gene <- combine_dinucleotide_frequencies(dinucleotide_table)
+
+# Call perform_pca
+perform_result_pca <- perform_pca(combained_dinucleotide_gene, file_col = "Genome", id_col = "id")
+
+# show plot
+perform_result_pca$pca_plot
 
 ```
