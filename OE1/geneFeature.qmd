@@ -26,7 +26,8 @@ p {
 
 ## VARIABLES QUE DEBEN SER ARGUMENTOS ##
 # Especificar el directorio donde están los archivos
-directory <- "/home/usuario/Data_Rstudio/chop_genome"  # Cambia esto a la ruta de tu directorio
+# directory <- "/home/usuario/Data_Rstudio/chop_genome"  # Cambia esto a la ruta de tu directorio
+directory <- "output_directory/"
 # leer tabla de datos ()
 data_init <- read.delim("/home/usuario/Proyectos/maestria/datos_ejecucion_genomas2.tsv.csv", sep = "\t", header = FALSE)
 ## NEED OUTPUT DIR
@@ -34,7 +35,8 @@ data_transformed <- read.delim("output_directory/data_transformed.tsv", sep = "\
 ########################################
 
 # Obtener la lista de archivos que comienzan con 'out_' y terminan con '.fasta'
-fasta_files <- list.files(path = directory, pattern = "^out_.*\\.fasta$", full.names = TRUE)
+# fasta_files <- list.files(path = directory, pattern = "^out_.*\\.fasta$", full.names = TRUE)
+fasta_files <- paste0(directory, data_transformed$out_gscissors)
 genome_name <- basename(data_transformed$fasta_file)
 
 genes_work <- basename(fasta_files)
