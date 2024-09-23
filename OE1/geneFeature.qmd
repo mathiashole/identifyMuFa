@@ -330,11 +330,12 @@ Llamamos a la funcion `plot_violin_gc`, dando lugar a un gráfico violín que mu
 #| warning: false
 #| layout: [[100]]
 
+var_title_gc <- paste0(key_name," GC")
 
 # Function plot_violin_gc call
 plot_violin_gc(
   data = all_results, 
-  plot_title = "Genome GC", 
+  plot_title = var_title_gc, 
   y_label = "GC Content"
 )
 
