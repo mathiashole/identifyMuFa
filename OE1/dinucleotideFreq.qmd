@@ -377,6 +377,14 @@ pca_dm28c <- perform_pca(dm28c_freq, file_col = "Genome", id_col = "id")
 pca_dm28c_score <- pca_dm28c$pca_scores
 pca_dm28c_score$highlight <- ifelse(pca_dm28c_score$id %in% highlight_ids, paste0("Highlighted_", pca_dm28c_score$Genome), "Other")
 pca_dm28c_score$alpha <-ifelse(grepl("Highlighted", pca_dm28c_score$Genome), 0.2, 0.1)
+pca_dm28c_score$PC1 <- pca_dm28c$pca_result$x[, 1]
+pca_dm28c_score$PC2 <- pca_dm28c$pca_result$x[, 2]
+
+autoplot(pca_dm28c$pca_result, data = pca_dm28c_score, colour = 'highlight', alpha = 'alpha', loadings = TRUE, loadings.label = TRUE) +
+  scale_color_manual(values = color_palette) +  # Apply the generated colors
+  labs(title = "PCA Highlighting Selected IDs with autoplot") +
+  theme_minimal()
+
 
 df_list <- split(combained_dinucleotide, combained_dinucleotide$Genome)
 
