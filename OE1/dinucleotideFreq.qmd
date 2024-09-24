@@ -380,13 +380,17 @@ pca_dm28c_score$alpha <-ifelse(grepl("Highlighted", pca_dm28c_score$Genome), 0.2
 pca_dm28c_score$PC1 <- pca_dm28c$pca_result$x[, 1]
 pca_dm28c_score$PC2 <- pca_dm28c$pca_result$x[, 2]
 
-autoplot(pca_dm28c$pca_result, data = pca_dm28c_score, colour = 'highlight', alpha = 'alpha', loadings = TRUE, loadings.label = TRUE) +
+
+# Plot with ggplot, differentiating each 'Highlighted'
+ggplot(pca_dm28c_score, aes(x = PC1, y = PC2, color = highlight, alpha = alpha)) +
+  geom_point(size = 3) +
   scale_color_manual(values = color_palette) +  # Apply the generated colors
-  labs(title = "PCA Highlighting Selected IDs with autoplot") +
-  theme_minimal()
+  scale_alpha_continuous(range = c(0.1, 0.2)) +  # Ensure alpha is mapped correctly
+  labs(title = "PCA Highlighting Selected IDs", x = "Principal Component 1", y = "Principal Component 2") +
+  theme_minimal() 
 
 
-df_list <- split(combained_dinucleotide, combained_dinucleotide$Genome)
+# df_list <- split(combained_dinucleotide, combained_dinucleotide$Genome)
 
 # pca_results_list <- lapply(df_list, function(sub_df) {
 #   pca_result <- perform_pca(sub_df, file_col = "Genome", id_col = "id")
