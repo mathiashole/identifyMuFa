@@ -337,7 +337,6 @@ autoplot(pca_result, data = combained_dinucleotide_all_genomes, colour = 'highli
   theme_minimal()
 
 
-
 ```
 
 ```{r}
