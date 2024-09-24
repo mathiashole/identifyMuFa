@@ -50,7 +50,7 @@ all_prot_code <- list.files(path = "/home/usuario/BASH/chack_gff/prueba_frecuenc
 
 ## Análisis de la Frecuencia de Dinucleótidos y Trinucleótidos Mediante PCA
 
-Se llevó a cabo un análisis de la `frecuencia de dinucleótidos` y trinucleótidos en una serie de secuencias de ADN con el objetivo de identificar patrones que permitan diferenciar las secuencias de interés. Para ello, se empleó un `Análisis de Componentes Principales` (PCA), un análisis estadística ampliamente utilizado para la `reducción de la dimensionalidad` en datos de alta complejidad.
+Se llevó a cabo un análisis de la `frecuencia de dinucleótidos` y trinucleótidos en una serie de secuencias de ADN con el objetivo de identificar patrones que permitan diferenciar las secuencias de interés. Para ello, se empleó un [Análisis de Componentes Principales (PCA)](https://github.com/JoaquinAmatRodrigo/Estadistica-con-R/blob/master/PDF_format/35_Principal_Component_Analysis.pdf), un análisis estadística ampliamente utilizado para la `reducción de la dimensionalidad` en datos de alta complejidad.
 
 El `PCA` se aplicó a los datos de `frecuencia` de `dinucleótidos` y `trinucleótidos`, lo que permitió `proyectar las secuencias` en un espacio de `menor dimensión`, facilitando la visualización y comprensión de las relaciones entre ellas. Las componentes principales seleccionadas explican un porcentaje significativo de la variabilidad observada en las frecuencias, lo que sugiere que estas combinaciones de bases son representativas de las diferencias biológicas presentes en las secuencias.
 
