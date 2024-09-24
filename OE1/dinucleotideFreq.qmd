@@ -372,16 +372,6 @@ autoplot(pca_result, data = combained_dinucleotide_all_genomes, colour = 'highli
 #| echo: true
 #| warning: false
 
-# dinucleotide_table[cols_to_convert] <- lapply(dinucleotide_table[cols_to_convert], as.numeric)
-
-# combained_dinucleotide_gene <- combine_dinucleotide_frequencies(dinucleotide_table)
-
-# # Call perform_pca
-# perform_result_pca <- perform_pca(combained_dinucleotide_gene, file_col = "Genome", id_col = "id")
-
-# # show plot
-# perform_result_pca$pca_plot
-
 df_list <- split(combained_dinucleotide, combained_dinucleotide$Genome)
 
 pca_results_list <- lapply(df_list, function(sub_df) {
