@@ -306,8 +306,8 @@ combained_dinucleotide_all_genomes$highlight <- ifelse(
 )
 
 # Assign transparency values ​​according to the 'highlight' column
-combained_dinucleotide_all_genomes$alpha <- ifelse(
-  grepl("Highlighted", combained_dinucleotide_all_genomes$highlight), 0.2, 0.1
+combained_dinucleotide_all_genomes$alpha <- ifelse( 
+  grepl("Highlighted", combained_dinucleotide_all_genomes$highlight), 0.6, 0.1
 )
 pca_result <- perform_result_pca$pca_result
 # Assign the first two principal components of the PCA
@@ -322,6 +322,9 @@ color_palette <- c(scales::hue_pal()(length(unique_highlight_values) - 1), "grey
 
 # Color mapping: we assign 'grey' to 'Other' and a different color to each 'Highlighted_<File>'
 names(color_palette) <- unique_highlight_values
+
+# Add order NEED CHECK
+combained_dinucleotide_all_genomes <- combained_dinucleotide_all_genomes[order(combained_dinucleotide_all_genomes$highlight == "Other"), ]
 
 # Plot with ggplot, differentiating each 'Highlighted_<File>'
 ggplot(combained_dinucleotide_all_genomes, aes(x = PC1, y = PC2, color = highlight, alpha = alpha)) +
