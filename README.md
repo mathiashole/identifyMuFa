@@ -26,4 +26,3 @@ x
 
 ## :mega: Contact
 
-:bird: [Mathias](https://twitter.com/joaquinmangino)
