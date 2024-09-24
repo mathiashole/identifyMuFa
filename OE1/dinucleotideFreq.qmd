@@ -388,12 +388,5 @@ pca_results_list <- lapply(df_list, function(sub_df) {
   perform_pca(sub_df, file_col = "Genome", id_col = "id")
 })
 
-# lapply(pca_results_list, function(result) {
-#   # print(result$pca_plot)
-#   autoplot(result$pca_result, data = combained_dinucleotide, colour = 'highlight', alpha = 'alpha', loadings = TRUE, loadings.label = TRUE) +
-#   scale_color_manual(values = color_palette) +  # Apply the generated colors
-#   labs(title = "PCA Highlighting Selected IDs with autoplot") +
-#   theme_minimal()
-# })
 
 ```
