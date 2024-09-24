@@ -228,7 +228,7 @@ dinucleotide_all_protein_coding[cols_to_convert] <- lapply(dinucleotide_all_prot
 
 combine_dinucleotide_frequencies <- function(data, genome_col = "File", id_col = "ID") {
 # Now apply the operations to combine frequencies
-  combained_dinucleotide <- data.frame(
+  result_combained_dinucleotide <- data.frame(
     "Genome" = data[,"File"],
     "id" = data[,"ID"],
     "aa.tt" = data[,"aa"] + data[,"tt"],
@@ -242,7 +242,7 @@ combine_dinucleotide_frequencies <- function(data, genome_col = "File", id_col =
     "gc" = data[,"gc"],
     "ta" = data[,"ta"]
   )
-  return(combained_dinucleotide)
+  return(result_combained_dinucleotide)
 }
 
 combained_dinucleotide <- combine_dinucleotide_frequencies(dinucleotide_all_protein_coding)
@@ -258,25 +258,6 @@ En este análisis, se utiliza la función `autoplot()` para visualizar los resul
 #| label: principal component analysis
 #| echo: true
 #| warning: false
-
-# created pca function
-dinucleotide_data <- combained_dinucleotide[, -c(1, 2)]  # Exclude the first columns (File and ID)
-dinucleotide_data <- as.data.frame(lapply(dinucleotide_data, as.numeric))  # Convert to numeric
-
-# Perform PCA
-# pca_result <- prcomp(dinucleotide_data, scale. = TRUE)
-
-# # Obtain the PCA scores (principal components for each observation)
-# pca_scores <- as.data.frame(pca_result$x)
-
-# # Add the File and ID columns to the PCA results
-# pca_scores <- cbind(dinucleotide_all_protein_coding[, c("File", "ID")], pca_scores)
-
-# # Show the first PCA results
-# # print(head(pca_scores))
-# autoplot(pca_result, data = dinucleotide_all_protein_coding, colour = 'File', loadings = TRUE,
-#          loadings.label = TRUE, loadings.colour = 'grey64', alpha = 0.2, size = 3) +
-# theme_minimal()
 
 # Function to perform PCA and graph (require ggplot2 and ggfortify)
 perform_pca <- function(data, file_col = "File", id_col = "ID") {
@@ -389,14 +370,24 @@ autoplot(pca_result, data = dinucleotide_all_protein_coding, colour = 'highlight
 #| echo: true
 #| warning: false
 
-dinucleotide_table[cols_to_convert] <- lapply(dinucleotide_table[cols_to_convert], as.numeric)
+# dinucleotide_table[cols_to_convert] <- lapply(dinucleotide_table[cols_to_convert], as.numeric)
 
-combained_dinucleotide_gene <- combine_dinucleotide_frequencies(dinucleotide_table)
+# combained_dinucleotide_gene <- combine_dinucleotide_frequencies(dinucleotide_table)
 
-# Call perform_pca
-perform_result_pca <- perform_pca(combained_dinucleotide_gene, file_col = "Genome", id_col = "id")
+# # Call perform_pca
+# perform_result_pca <- perform_pca(combained_dinucleotide_gene, file_col = "Genome", id_col = "id")
 
-# show plot
-perform_result_pca$pca_plot
+# # show plot
+# perform_result_pca$pca_plot
+
+df_list <- split(combained_dinucleotide, combained_dinucleotide$Genome)
+
+pca_results_list <- lapply(df_list, function(sub_df) {
+  perform_pca(sub_df, file_col = "Genome", id_col = "id")
+})
+
+lapply(pca_results_list, function(result) {
+  print(result$pca_plot)
+})
 
 ```
