@@ -323,9 +323,6 @@ color_palette <- c(scales::hue_pal()(length(unique_highlight_values) - 1), "grey
 # Color mapping: we assign 'grey' to 'Other' and a different color to each 'Highlighted_<File>'
 names(color_palette) <- unique_highlight_values
 
-# Add order NEED CHECK
-combained_dinucleotide_all_genomes <- combained_dinucleotide_all_genomes[order(combained_dinucleotide_all_genomes$highlight == "Other"), ]
-
 # Plot with ggplot, differentiating each 'Highlighted_<File>'
 ggplot(combained_dinucleotide_all_genomes, aes(x = PC1, y = PC2, color = highlight, alpha = alpha)) +
   geom_point(size = 3) +
