@@ -344,25 +344,25 @@ autoplot(pca_result, data = combained_dinucleotide_all_genomes, colour = 'highli
 #| echo: true
 #| warning: false
 
-highlight_ids <- dinucleotide_table$ID
+# highlight_ids <- dinucleotide_table$ID
 
-dinucleotide_all_protein_coding$highlight <- ifelse(dinucleotide_all_protein_coding$ID %in% highlight_ids, "Highlighted", "Other")
-dinucleotide_all_protein_coding$alpha <- ifelse(dinucleotide_all_protein_coding$highlight == "Highlighted", 0.8, 0.1)
-dinucleotide_all_protein_coding$PC1 <- pca_result$x[, 1]
-dinucleotide_all_protein_coding$PC2 <- pca_result$x[, 2]
+# dinucleotide_all_protein_coding$highlight <- ifelse(dinucleotide_all_protein_coding$ID %in% highlight_ids, "Highlighted", "Other")
+# dinucleotide_all_protein_coding$alpha <- ifelse(dinucleotide_all_protein_coding$highlight == "Highlighted", 0.8, 0.1)
+# dinucleotide_all_protein_coding$PC1 <- pca_result$x[, 1]
+# dinucleotide_all_protein_coding$PC2 <- pca_result$x[, 2]
 
-ggplot(dinucleotide_all_protein_coding, aes(x = PC1, y = PC2, color = highlight, alpha = alpha)) +
-  geom_point(size = 3) +
-  scale_color_manual(values = c("Other" = "grey", "Highlighted" = "red")) +
-  labs(title = "PCA Highlighting Selected IDs", x = "Principal Component 1", y = "Principal Component 2") +
-  theme_minimal() +
-  guides(alpha = "none") 
+# ggplot(dinucleotide_all_protein_coding, aes(x = PC1, y = PC2, color = highlight, alpha = alpha)) +
+#   geom_point(size = 3) +
+#   scale_color_manual(values = c("Other" = "grey", "Highlighted" = "red")) +
+#   labs(title = "PCA Highlighting Selected IDs", x = "Principal Component 1", y = "Principal Component 2") +
+#   theme_minimal() +
+#   guides(alpha = "none") 
 
 
-autoplot(pca_result, data = dinucleotide_all_protein_coding, colour = 'highlight', alpha = 'alpha', loadings = TRUE, loadings.label = TRUE) +
-  scale_color_manual(values = c("Other" = "grey", "Highlighted" = "red")) +
-  labs(title = "PCA Highlighting Selected IDs") +
-  theme_minimal()
+# autoplot(pca_result, data = dinucleotide_all_protein_coding, colour = 'highlight', alpha = 'alpha', loadings = TRUE, loadings.label = TRUE) +
+#   scale_color_manual(values = c("Other" = "grey", "Highlighted" = "red")) +
+#   labs(title = "PCA Highlighting Selected IDs") +
+#   theme_minimal()
 
 ```
 
@@ -388,8 +388,12 @@ pca_results_list <- lapply(df_list, function(sub_df) {
   perform_pca(sub_df, file_col = "Genome", id_col = "id")
 })
 
-lapply(pca_results_list, function(result) {
-  print(result$pca_plot)
-})
+# lapply(pca_results_list, function(result) {
+#   # print(result$pca_plot)
+#   autoplot(result$pca_result, data = combained_dinucleotide, colour = 'highlight', alpha = 'alpha', loadings = TRUE, loadings.label = TRUE) +
+#   scale_color_manual(values = color_palette) +  # Apply the generated colors
+#   labs(title = "PCA Highlighting Selected IDs with autoplot") +
+#   theme_minimal()
+# })
 
 ```
