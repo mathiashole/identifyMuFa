@@ -324,7 +324,7 @@ color_palette <- c(scales::hue_pal()(length(unique_highlight_values) - 1), "grey
 names(color_palette) <- unique_highlight_values
 
 # Plot with ggplot, differentiating each 'Highlighted_<File>'
-ggplot(dinucleotide_all_protein_coding, aes(x = PC1, y = PC2, color = highlight, alpha = alpha)) +
+ggplot(combained_dinucleotide_all_genomes, aes(x = PC1, y = PC2, color = highlight, alpha = alpha)) +
   geom_point(size = 3) +
   scale_color_manual(values = color_palette) +  # Apply the generated colors
   scale_alpha_continuous(range = c(0.1, 0.2)) +  # Ensure alpha is mapped correctly
@@ -374,9 +374,9 @@ autoplot(pca_result, data = combained_dinucleotide_all_genomes, colour = 'highli
 
 df_list <- split(combained_dinucleotide, combained_dinucleotide$Genome)
 
-pca_results_list <- lapply(df_list, function(sub_df) {
-  perform_pca(sub_df, file_col = "Genome", id_col = "id")
-})
+# pca_results_list <- lapply(df_list, function(sub_df) {
+#   perform_pca(sub_df, file_col = "Genome", id_col = "id")
+# })
 
 
 ```
