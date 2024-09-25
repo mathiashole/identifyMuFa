@@ -88,7 +88,7 @@ Para procesar las secuencias FASTA, se crea una función que genera un dataframe
 
 calculate_fasta_feature <- function(fasta_files, type){
   
-  target_protein <- data.frame(file = character(), ID = character(), Length = numeric(), GC_Content = numeric(), stringsAsFactors = FALSE)
+  data <- data.frame(file = character(), ID = character(), Length = numeric(), GC_Content = numeric(), stringsAsFactors = FALSE)
 
   # Leer cada archivo FASTA y calcular las métricas
   for (fasta_file in fasta_files) {
@@ -113,12 +113,12 @@ calculate_fasta_feature <- function(fasta_files, type){
       gc_content <- round(GC(sequence), 3)
       
       # Añadir los resultados a la tabla
-      target_protein <- target_protein %>%
+      data <- data %>%
         add_row(file = extracted_names, ID = id, Length = length, GC_Content = gc_content)
     }
   }
   
-  return(target_protein)
+  return(data)
 
 }
 
