@@ -321,8 +321,6 @@ all_code_prot_summary <- all_code_prot_data %>%
 #| echo: true
 #| warning: false
 
-target_protein <- calculate_fasta_feature(fasta_files, "gene")
-target_protein <- transform_columns(target_protein, "ID")
 
 ```
 
@@ -355,7 +353,8 @@ Se llama a la funcion ``calculate_fasta_feature`` para calcular por cada secuenc
 #| echo: true
 #| warning: false
 
-# target_protein <- calculate_fasta_feature(fasta_files, "gene")
+target_protein <- calculate_fasta_feature(fasta_files, "gene")
+target_protein <- transform_columns(target_protein, "ID")
 
 # Crear una tabla con el conteo de secuencias por archivo
 file_sequence_counts <- target_protein %>%
