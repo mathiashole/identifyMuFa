@@ -453,8 +453,6 @@ plot_violin_length(
   x_label = "Number of base pairs"
 )
 
-# violin_plot(filter_data_higher, "file", "Length", 4, 1, "Archivo", "Longitud")
-
 ```
 
 :::
