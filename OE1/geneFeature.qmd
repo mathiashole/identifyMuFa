@@ -321,6 +321,7 @@ all_code_prot_summary <- all_code_prot_data %>%
 #| warning: false
 
 target_protein <- calculate_fasta_feature(fasta_files, "gene")
+target_protein <- transform_columns(target_protein, "ID")
 
 ```
 
