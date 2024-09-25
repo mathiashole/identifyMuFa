@@ -315,6 +315,7 @@ all_code_prot_summary <- all_code_prot_data %>%
 
 ```
 
+
 ```{r}
 #| label: extract feature of key_name
 #| echo: true
@@ -322,6 +323,25 @@ all_code_prot_summary <- all_code_prot_data %>%
 
 target_protein <- calculate_fasta_feature(fasta_files, "gene")
 target_protein <- transform_columns(target_protein, "ID")
+
+```
+
+```{r}
+#| label: filter all the proteins by extracting the target sequence
+#| echo: true
+#| warning: false
+
+filtered_all_code_protein <- anti_join(all_code_prot_data, target_protein, by = "ID")
+
+filter_all_code_prot_summary <- filtered_all_code_protein %>%
+  group_by(file) %>%
+  summarise(Total_Sequences = n(),
+            min_length = min(Length),
+            mean_length = round(mean(Length), 0),
+            max_length = max(Length),
+            min_gc = min(GC_Content),
+            mean_gc = round(mean(GC_Content), 3),
+            max_gc = max(GC_Content))
 
 ```
 
