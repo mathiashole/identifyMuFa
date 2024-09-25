@@ -317,14 +317,6 @@ all_code_prot_summary <- all_code_prot_data %>%
 
 
 ```{r}
-#| label: extract feature of key_name
-#| echo: true
-#| warning: false
-
-
-```
-
-```{r}
 #| label: filter all the proteins by extracting the target sequence
 #| echo: true
 #| warning: false
