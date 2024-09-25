@@ -230,25 +230,6 @@ Por otro lado, llamamos la función de R `plot_violin_length` crea un gráfico d
 #| warning: false
 #| layout: [[100]]
 
-# ggplot(genomes, aes(x = file, y = Length, reorder(file, -Length, FUN=median), color = file)) +
-#   # geom_violin(fill = palmer_colors[2], alpha = 0.7, width = 0.5) +
-#   geom_violin(alpha = 0.7, width = 0.5, fill = "white") +
-#   geom_boxplot(width = 0.1, fill = "white", alpha = 0.3) +
-#   geom_quasirandom(groupOnX=FALSE, show.legend = FALSE, size = 3, dodge.width=0.9, alpha=.4) +
-#   # geom_jitter(width = 0.1, alpha = 0.1, color = "black") +
-#   scale_y_log10(
-#     breaks = c(10^2, 10^3, 10^4, 10^5, 10^6, 10^7, 10^8, 10^9, 10^10),
-#     labels = scales::trans_format("log10", scales::math_format(10^.x))
-#   ) +
-#   theme_minimal_vgrid() + 
-#   theme(axis.title.y = element_blank(), axis.line.y = element_blank(),  axis.ticks.y = element_blank()) +
-#   scale_color_brewer(palette="Dark2") +
-#   xlab("Number of base pairs") +
-#   labs(
-#     title = "Genome size",
-#     caption = "Data source: National Center for Biotechnology Information"
-#   )
-
 # Function to plot the length of genomes
 plot_violin_length <- function(data, type, plot_title, x_label) {
   set.seed(12345)
