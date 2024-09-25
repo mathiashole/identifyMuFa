@@ -88,7 +88,7 @@ Para procesar las secuencias FASTA, se crea una función que genera un dataframe
 
 calculate_fasta_feature <- function(fasta_files, type){
   
-  all_results <- data.frame(file = character(), ID = character(), Length = numeric(), GC_Content = numeric(), stringsAsFactors = FALSE)
+  target_protein <- data.frame(file = character(), ID = character(), Length = numeric(), GC_Content = numeric(), stringsAsFactors = FALSE)
 
   # Leer cada archivo FASTA y calcular las métricas
   for (fasta_file in fasta_files) {
@@ -113,12 +113,12 @@ calculate_fasta_feature <- function(fasta_files, type){
       gc_content <- round(GC(sequence), 3)
       
       # Añadir los resultados a la tabla
-      all_results <- all_results %>%
+      target_protein <- target_protein %>%
         add_row(file = extracted_names, ID = id, Length = length, GC_Content = gc_content)
     }
   }
   
-  return(all_results)
+  return(target_protein)
 
 }
 
@@ -327,10 +327,10 @@ Se llama a la funcion ``calculate_fasta_feature`` para calcular por cada secuenc
 #| echo: true
 #| warning: false
 
-all_results <- calculate_fasta_feature(fasta_files, "gene")
+target_protein <- calculate_fasta_feature(fasta_files, "gene")
 
 # Crear una tabla con el conteo de secuencias por archivo
-file_sequence_counts <- all_results %>%
+file_sequence_counts <- target_protein %>%
   group_by(file) %>%
   summarise(Total_Sequences = n(),
             min_length = min(Length),
@@ -367,7 +367,7 @@ var_title_gc <- paste0(key_name," GC")
 
 # Function plot_violin_gc call
 plot_violin_gc(
-  data = all_results, 
+  data = target_protein, 
   plot_title = var_title_gc, 
   y_label = "GC Content"
 )
@@ -389,7 +389,7 @@ var_title <- paste0(key_name," size")
 
 # Function plot_violin_length call
 plot_violin_length(
-  data = all_results,
+  data = target_protein,
   "gene", 
   plot_title = var_title, 
   x_label = "Number of base pairs"
@@ -412,12 +412,12 @@ Las secuencias de `r key_name` poseen un largo minimo de (debe ser variable) 800
 #| echo: true
 #| warning: false
 
-# length_min <- mean(all_results$Length)
+# length_min <- mean(target_protein$Length)
 # length_min <- median(file_sequence_counts$mean_length)
 length_min <- 8000
 
-filter_data_higher <- filter(all_results, Length >= length_min) 
-filter_data_smaller <- filter(all_results, Length <= length_min)
+filter_data_higher <- filter(target_protein, Length >= length_min) 
+filter_data_smaller <- filter(target_protein, Length <= length_min)
 
 
 ```
