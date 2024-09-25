@@ -315,6 +315,15 @@ all_code_prot_summary <- all_code_prot_data %>%
 
 ```
 
+```{r}
+#| label: extract feature of key_name
+#| echo: true
+#| warning: false
+
+target_protein <- calculate_fasta_feature(fasta_files, "gene")
+
+```
+
 ## Procesamiento de las secuencias ``r key_name``
 
 Se llama a la funcion ``calculate_fasta_feature`` para calcular por cada secuencia ``r genes_work`` el contenido de `GC` y la `longitud (pb)`  de ``r key_name``. Finalmente, creamos una `tabla resumen`, que agrupa las secuencias por cada genoma ``r genome_name``, mostrando el  ``r key_name``, así como la `longitud` mínima, media y máxima, así como el contenido de `GC` mínimo, medio y máximo.
@@ -325,7 +334,7 @@ Se llama a la funcion ``calculate_fasta_feature`` para calcular por cada secuenc
 #| echo: true
 #| warning: false
 
-target_protein <- calculate_fasta_feature(fasta_files, "gene")
+# target_protein <- calculate_fasta_feature(fasta_files, "gene")
 
 # Crear una tabla con el conteo de secuencias por archivo
 file_sequence_counts <- target_protein %>%
