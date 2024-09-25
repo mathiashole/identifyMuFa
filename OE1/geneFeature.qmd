@@ -162,7 +162,7 @@ genomes_summary <- genomes %>%
 
 ```{r}
 #| label: summary genome feature and created summary
-#| echo: true
+#| echo: false
 #| warning: false
 
 
