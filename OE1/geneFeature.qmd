@@ -316,25 +316,6 @@ all_code_prot_summary <- all_code_prot_data %>%
 ```
 
 
-```{r}
-#| label: filter all the proteins by extracting the target sequence
-#| echo: true
-#| warning: false
-
-filtered_all_code_protein <- anti_join(all_code_prot_data, target_protein, by = "ID")
-
-filter_all_code_prot_summary <- filtered_all_code_protein %>%
-  group_by(file) %>%
-  summarise(Total_Sequences = n(),
-            min_length = min(Length),
-            mean_length = round(mean(Length), 0),
-            max_length = max(Length),
-            min_gc = min(GC_Content),
-            mean_gc = round(mean(GC_Content), 3),
-            max_gc = max(GC_Content))
-
-```
-
 ## Procesamiento de las secuencias ``r key_name``
 
 Se llama a la funcion ``calculate_fasta_feature`` para calcular por cada secuencia ``r genes_work`` el contenido de `GC` y la `longitud (pb)`  de ``r key_name``. Finalmente, creamos una `tabla resumen`, que agrupa las secuencias por cada genoma ``r genome_name``, mostrando el  ``r key_name``, así como la `longitud` mínima, media y máxima, así como el contenido de `GC` mínimo, medio y máximo.
