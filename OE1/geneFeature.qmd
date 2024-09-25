@@ -178,7 +178,7 @@ reactable(genomes_summary, highlight = TRUE)
 #| warning: false
 
 # Llamamos a la funcion para obtener GC y largo de cada contig, de cada genoma
-# genomes <- calculate_fasta_feature(data_init$V1, "genome")
+all_code_prot <- calculate_fasta_feature(rest_code_prot, "gene")
 
 # path_genome_safe_tsv <- file.path("output_directory/", paste0("genome_gc_length.tsv"))
 # path_genome_safe <- file.path("output_directory/", paste0("genome_gc_length.csv"))
