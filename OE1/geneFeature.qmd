@@ -206,7 +206,7 @@ reactable(genomes_summary, highlight = TRUE)
 all_code_prot_data <- read.table("output_directory/all_code_protein_gc_length.tsv", sep = "\t", header = TRUE)
 
 # Crear una tabla con el conteo de secuencias por archivo
-genomes_summary <- genomes %>%
+all_code_prot_summary <- all_code_prot_data %>%
   group_by(file) %>%
   summarise(Total_Sequences = n(),
             min_length = min(Length),
