@@ -156,6 +156,16 @@ genomes_summary <- genomes %>%
             mean_gc = round(mean(GC_Content), 3),
             max_gc = max(GC_Content))
 
+```
+
+### Tabla resumen de los genomas
+
+```{r}
+#| label: summary genome feature and created summary
+#| echo: true
+#| warning: false
+
+
 # Mostrar la tabla de conteo de secuencias
 reactable(genomes_summary, highlight = TRUE)
 
