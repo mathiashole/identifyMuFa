@@ -24,8 +24,6 @@ p {
 #| echo: false
 #| warning: false
 
-## VARIABLES QUE DEBEN SER ARGUMENTOS ##
-# Especificar el directorio donde están los archivos
 # directory <- "/home/usuario/Data_Rstudio/chop_genome"  # Cambia esto a la ruta de tu directorio
 directory <- "output_directory/"
 # leer tabla de datos ()
