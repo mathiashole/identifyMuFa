@@ -395,48 +395,5 @@ ggplot() +
   labs(title = "PCA Highlighting Selected IDs", x = "Principal Component 1", y = "Principal Component 2") +
   theme_minimal()
 
-# df_list <- split(combained_dinucleotide, combained_dinucleotide$Genome)
-
-# pca_results_list <- lapply(df_list, function(sub_df) {
-#   pca_result <- perform_pca(sub_df, file_col = "Genome", id_col = "id")
-  
-#   pca_scores <- pca_result$pca_scores
-  
-#   pca_scores$highlight <- ifelse(
-#     pca_scores$id %in% highlight_ids, 
-#     paste0("Highlighted_", pca_scores$Genome), 
-#     "Other"
-#   )
-  
-#   pca_scores$alpha <- ifelse(
-#     grepl("Highlighted", pca_scores$highlight), 0.2, 0.1
-#   )
-  
-#   pca_scores$PC1 <- pca_result$pca_result$x[, 1]
-#   pca_scores$PC2 <- pca_result$pca_result$x[, 2]
-  
-#   return(list(
-#     pca_result = pca_result,
-#     pca_scores = pca_scores
-#   ))
-# })
-
-# lapply(pca_results_list, function(result) {
-#   pca_scores <- result$pca_scores
-  
-#   unique_highlight_values <- sort(unique(pca_scores$highlight))
-  
-#   color_palette <- c(scales::hue_pal()(length(unique_highlight_values) - 1), "grey")
-#   names(color_palette) <- unique_highlight_values
-  
-#   ggplot(pca_scores, aes(x = PC1, y = PC2, color = highlight, alpha = alpha)) +
-#     geom_point(size = 3) +
-#     scale_color_manual(values = color_palette) +
-#     scale_alpha_continuous(range = c(0.1, 0.2)) +
-#     labs(title = paste("PCA for Genome:", unique(pca_scores$Genome)), 
-#          x = "Principal Component 1", 
-#          y = "Principal Component 2") +
-#     theme_minimal()
-# })
 
 ```
