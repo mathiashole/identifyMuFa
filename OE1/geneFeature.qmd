@@ -324,7 +324,7 @@ Llamamos a la funcion `plot_violin_gc`, dando lugar a un gráfico violín que mu
 
 
 ```{r}
-#| label: plotting-gc
+#| label: plotting-gc all coding protein
 #| fig-cap: "Secuencias por genoma y contenido GC."
 #| echo: true
 #| warning: false
@@ -344,7 +344,7 @@ plot_violin_gc(
 Además, reutilizamos la función previamente empleada para graficar la distribución del genoma, pero esta vez generamos un gráfico que muestra la distribución de las longitudes de todas las secuencias codificantes, correspondientes a cada genoma.
 
 ```{r}
-#| label: plotting-length
+#| label: plotting-length all coding protein
 #| fig-cap: "Secuencias por genoma y largo total de la secuencia."
 #| echo: true
 #| warning: false
