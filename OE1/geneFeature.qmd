@@ -316,6 +316,55 @@ all_code_prot_summary <- all_code_prot_data %>%
 ```
 
 
+::: {.panel-tabset .nav-pills}
+
+## GC
+
+Llamamos a la funcion `plot_violin_gc`, dando lugar a un gráfico violín que muestra la distribución del contenido de GC en distintos genomas de las secuencias.
+
+
+```{r}
+#| label: plotting-gc
+#| fig-cap: "Secuencias por genoma y contenido GC."
+#| echo: true
+#| warning: false
+#| layout: [[100]]
+
+# Function plot_violin_gc call
+plot_violin_gc(
+  data = all_code_prot_data, 
+  plot_title = "Coding sequence GC", 
+  y_label = "GC Content"
+)
+
+```
+
+## Length
+
+Además, reutilizamos la función previamente empleada para graficar la distribución del genoma, pero esta vez generamos un gráfico que muestra la distribución de las longitudes de todas las secuencias codificantes, correspondientes a cada genoma.
+
+```{r}
+#| label: plotting-length
+#| fig-cap: "Secuencias por genoma y largo total de la secuencia."
+#| echo: true
+#| warning: false
+#| layout: [[100]]
+
+# Function plot_violin_length call
+plot_violin_length(
+  data = all_code_prot_data,
+  "gene", 
+  plot_title = "coding sequence size", 
+  x_label = "Number of base pairs"
+)
+
+```
+
+:::
+
+-----
+
+
 ## Procesamiento de las secuencias ``r key_name``
 
 Se llama a la funcion ``calculate_fasta_feature`` para calcular por cada secuencia ``r genes_work`` el contenido de `GC` y la `longitud (pb)`  de ``r key_name``. Finalmente, creamos una `tabla resumen`, que agrupa las secuencias por cada genoma ``r genome_name``, mostrando el  ``r key_name``, así como la `longitud` mínima, media y máxima, así como el contenido de `GC` mínimo, medio y máximo.
