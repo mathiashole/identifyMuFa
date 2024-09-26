@@ -291,7 +291,7 @@ Se realizó un análisis de componentes principales (PCA) sobre las frecuencias 
 En este análisis, se utiliza la función `autoplot()` para visualizar los resultados del PCA. El total de las secuencias codificantes se colorean según los `genomas`, y se muestran los vectores de carga (loadings) para identificar qué dinucleótidos tienen mayor influencia en cada componente principal.
 
 ```{r}
-#| label: principal component analysis
+#| label: principal component analysis dinucleotide
 #| echo: true
 #| warning: false
 
