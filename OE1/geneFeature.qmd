@@ -353,7 +353,7 @@ Además, reutilizamos la función previamente empleada para graficar la distribu
 # Function plot_violin_length call
 plot_violin_length(
   data = all_code_prot_data,
-  "gene", 
+  "genome", 
   plot_title = "coding sequence size", 
   x_label = "Number of base pairs"
 )
