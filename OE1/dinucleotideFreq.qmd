@@ -407,6 +407,9 @@ create_pca_plot <- function(data, highlight_ids, pca_result, genome_col = "Genom
     theme_minimal()
 }
 
+create_pca_plot(combained_dinucleotide, dinucleotide_table$ID, perform_result_dinucleotide_pca$pca_result)
+
+
 ```
 
 ## Trinucleotido PCA highlighted
