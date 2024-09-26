@@ -129,7 +129,9 @@ transform_columns <- function(df, cols) {
     # Replace '=' with '_'
     df[[col]] <- gsub("=", "_", df[[col]])              
     # Remove everything after ':' or ';'
-    df[[col]] <- gsub("[:;].*", "", df[[col]])          
+    df[[col]] <- gsub("[:;].*", "", df[[col]])
+    # Remove all spaces
+    df[[col]] <- gsub(" ", "", df[[col]])          
   }
   return(df)  # Return the modified data frame
 }
