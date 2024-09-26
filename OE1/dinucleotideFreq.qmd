@@ -348,7 +348,13 @@ perform_result_trinucleotide_pca$pca_plot
 
 :::
 
+---
+
 ## plot PCA marcando ``r key_name``
+
+::: {.panel-tabset .nav-pills}
+
+## Dinucleotido PCA highlighting ``r key_name``
 
 En la siguiente figura se muestra el mismo análisis PCA, pero esta vez solo se han resaltado las secuencias de interés correspondientes a ``r key_name`` para cada uno de los `genomas`. Las secuencias restantes se presentan en color gris.
 
@@ -400,6 +406,16 @@ ggplot() +
   theme_minimal()
 
 ```
+
+## Trinucleotido PCA highlighting ``r key_name``
+
+```{r}
+
+```
+
+:::
+
+---
 
 
 ```{r}
