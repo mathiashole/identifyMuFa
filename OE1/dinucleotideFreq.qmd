@@ -366,6 +366,21 @@ create_pca_plot <- function(data, highlight_ids, pca_result, genome_col = "Genom
   # Create a copy of the input data
   data_all_genomes <- data
 
+  # Create new 'highlight' column that combines 'Highlighted' with the genome column
+  data_all_genomes$highlight <- ifelse(
+    data_all_genomes$id %in% highlight_ids, 
+    paste0("Highlighted_", data_all_genomes[[genome_col]]), 
+    "Other"
+  )
+
+  # Assign transparency values according to the 'highlight' column
+  data_all_genomes$alpha <- ifelse(
+    grepl("Highlighted", data_all_genomes$highlight), 0.6, 0.1
+  )
+  
+  # Assign the first two principal components of the PCA
+  data_all_genomes$PC1 <- pca_result$x[, 1]
+  data_all_genomes$PC2 <- pca_result$x[, 2]
   
 # Create new 'highlight' column that combines 'Highlighted' with 'File' column
 combained_dinucleotide_all_genomes <- combained_dinucleotide
