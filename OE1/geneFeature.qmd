@@ -315,6 +315,19 @@ all_code_prot_summary <- all_code_prot_data %>%
 
 ```
 
+### Tabla resumen de secuencias codificantes por genoma
+
+```{r}
+#| label: created summary all coding protein 
+#| echo: false
+#| warning: false
+
+
+# Mostrar la tabla de conteo de secuencias
+reactable(all_code_prot_summary, highlight = TRUE)
+
+```
+
 
 ::: {.panel-tabset .nav-pills}
 
