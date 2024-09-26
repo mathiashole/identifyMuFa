@@ -396,29 +396,6 @@ ggplot() +
 #| echo: true
 #| warning: false
 
-# dm28c_freq <- subset(combained_dinucleotide, Genome == "TcruziDm28c2018")
-# pca_dm28c <- perform_pca(dm28c_freq, file_col = "Genome", id_col = "id")
-# pca_dm28c_score <- pca_dm28c$pca_scores
-# pca_dm28c_score$highlight <- ifelse(pca_dm28c_score$id %in% highlight_ids, paste0("Highlighted_", pca_dm28c_score$Genome), "Other")
-# pca_dm28c_score$alpha <-ifelse(grepl("Highlighted", pca_dm28c_score$Genome), 0.2, 0.1)
-# pca_dm28c_score$PC1 <- pca_dm28c$pca_result$x[, 1]
-# pca_dm28c_score$PC2 <- pca_dm28c$pca_result$x[, 2]
-
-# # Create two subsets of the data: one for 'Highlighted' and one for 'Other'
-# highlighted_points <- subset(pca_dm28c_score, grepl("Highlighted", highlight))
-# other_points <- subset(pca_dm28c_score, highlight == "Other")
-
-# # Plot with ggplot, first the 'Other' and then the 'Highlighted'
-# ggplot() +
-#   # Layer for non-matching points in gray and with low transparency
-#   geom_point(data = other_points, aes(x = PC1, y = PC2), color = "grey", alpha = 0.1, size = 3) +
-#   # Layer for matching points with colors and greater transparency
-#   geom_point(data = highlighted_points, aes(x = PC1, y = PC2, color = highlight, alpha = alpha), size = 3) +
-#   scale_color_manual(values = color_palette) +  # Aplicar los colores generados
-#   scale_alpha_continuous(range = c(0.1, 1)) +  # Asegurar que alpha se mapea correctamente
-#   labs(title = "PCA Highlighting Selected IDs", x = "Principal Component 1", y = "Principal Component 2") +
-#   theme_minimal()
-
 # Create a vector of unique genomes from the dataset
 genomes <- unique(sort(combained_dinucleotide$Genome))
 
