@@ -362,6 +362,11 @@ En la siguiente figura se muestra el mismo análisis PCA, pero esta vez solo se 
 
 highlight_ids <- dinucleotide_table$ID
 
+create_pca_plot <- function(data, highlight_ids, pca_result, genome_col = "Genome") {
+  # Create a copy of the input data
+  data_all_genomes <- data
+
+  
 # Create new 'highlight' column that combines 'Highlighted' with 'File' column
 combained_dinucleotide_all_genomes <- combained_dinucleotide
 
@@ -404,6 +409,7 @@ ggplot() +
   scale_alpha_continuous(range = c(0.1, 0.6)) + 
   labs(title = "PCA Highlighting Selected IDs", x = "Principal Component 1", y = "Principal Component 2") +
   theme_minimal()
+
 
 ```
 
