@@ -34,7 +34,7 @@ data_init <- read.delim("/home/usuario/Proyectos/maestria/datos_ejecucion_genoma
 ########################################
 
 # Obtener la lista de archivos que comienzan con 'out_' y terminan con '.fasta'
-fasta_files <- list.files(path = directory, pattern = "^out_.*\\.fasta$", full.names = TRUE)
+fasta_files <- list.files(path = directory, pattern = "^out_:.*\\.fasta$", full.names = TRUE)
 genome_name <- basename(data_init$V1)
 
 genes_work <- basename(fasta_files)
