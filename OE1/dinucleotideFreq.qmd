@@ -286,6 +286,10 @@ combained_trinucleotide <- combine_data_frequencies(trinucleotide_all_protein_co
 ```
 
 
+::: {.panel-tabset .nav-pills}
+
+## Dinucleotide PCA
+
 Se realizó un análisis de componentes principales (PCA) sobre las frecuencias de dinucleótidos combinados en las secuencias codificantes de los genomas ``r genome_name``. El PCA permite reducir la dimensionalidad de las frecuencias de dinucleótidos en estas secuencias, facilitando la exploración de las relaciones entre secuencias y sus patrones de composición a nivel de `dinucleótidos`. 
 
 En este análisis, se utiliza la función `autoplot()` para visualizar los resultados del PCA. El total de las secuencias codificantes se colorean según los `genomas`, y se muestran los vectores de carga (loadings) para identificar qué dinucleótidos tienen mayor influencia en cada componente principal.
@@ -325,6 +329,8 @@ perform_result_dinucleotide_pca$pca_plot
 
 ```
 
+## Trinucleotide PCA
+
 Ademas, se realizó un análisis de componentes principales (PCA) sobre las frecuencias de trinucleótidos combinados en las secuencias codificantes de los genomas ``r genome_name``.
 
 ```{r}
@@ -339,6 +345,8 @@ perform_result_trinucleotide_pca <- perform_pca(combained_trinucleotide, file_co
 perform_result_trinucleotide_pca$pca_plot
 
 ```
+
+:::
 
 En la siguiente figura se muestra el mismo análisis PCA, pero esta vez solo se han resaltado las secuencias de interés correspondientes a ``r key_name`` para cada uno de los `genomas`. Las secuencias restantes se presentan en color gris.
 
