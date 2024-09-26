@@ -339,6 +339,21 @@ autoplot(pca_result, data = combained_dinucleotide_all_genomes, colour = 'highli
   labs(title = "PCA Highlighting Selected IDs with autoplot") +
   theme_minimal()
 
+# Create two subsets of the data: one for 'Highlighted' and one for 'Other'
+highlighted_points <- subset(combained_dinucleotide_all_genomes, grepl("Highlighted", highlight))
+other_points <- subset(combained_dinucleotide_all_genomes, highlight == "Other")
+
+# Plot with ggplot, first the 'Other' and then the 'Highlighted'
+ggplot() +
+  # Layer for non-matching points in gray and with low transparency
+  geom_point(data = other_points, aes(x = PC1, y = PC2), color = "grey", alpha = 0.1, size = 3) +
+  # Layer for matching points with colors and greater transparency
+  geom_point(data = highlighted_points, aes(x = PC1, y = PC2, color = highlight, alpha = alpha), size = 3) +
+  scale_color_manual(values = color_palette) +
+  # Ensure alpha is mapped correctly
+  scale_alpha_continuous(range = c(0.1, 0.6)) + 
+  labs(title = "PCA Highlighting Selected IDs", x = "Principal Component 1", y = "Principal Component 2") +
+  theme_minimal()
 
 ```
 
@@ -363,8 +378,22 @@ ggplot(pca_dm28c_score, aes(x = PC1, y = PC2, color = highlight, alpha = alpha))
   scale_color_manual(values = color_palette) +  # Apply the generated colors
   scale_alpha_continuous(range = c(0.1, 0.2)) +  # Ensure alpha is mapped correctly
   labs(title = "PCA Highlighting Selected IDs", x = "Principal Component 1", y = "Principal Component 2") +
-  theme_minimal() 
+  theme_minimal()
 
+# Create two subsets of the data: one for 'Highlighted' and one for 'Other'
+highlighted_points <- subset(pca_dm28c_score, grepl("Highlighted", highlight))
+other_points <- subset(pca_dm28c_score, highlight == "Other")
+
+# Plot with ggplot, first the 'Other' and then the 'Highlighted'
+ggplot() +
+  # Layer for non-matching points in gray and with low transparency
+  geom_point(data = other_points, aes(x = PC1, y = PC2), color = "grey", alpha = 0.1, size = 3) +
+  # Layer for matching points with colors and greater transparency
+  geom_point(data = highlighted_points, aes(x = PC1, y = PC2, color = highlight, alpha = alpha), size = 3) +
+  scale_color_manual(values = color_palette) +  # Aplicar los colores generados
+  scale_alpha_continuous(range = c(0.1, 1)) +  # Asegurar que alpha se mapea correctamente
+  labs(title = "PCA Highlighting Selected IDs", x = "Principal Component 1", y = "Principal Component 2") +
+  theme_minimal()
 
 # df_list <- split(combained_dinucleotide, combained_dinucleotide$Genome)
 
