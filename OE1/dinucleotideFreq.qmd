@@ -150,6 +150,8 @@ trinucleotide_table <- nucleotide_frequncy(fasta_files, type_frequency = "trinuc
 
 ```
 
+Además, desarrollamos una función para eliminar símbolos que podrían interferir con la ejecución del código, a la cual denominamos
+
 ```{r}
 #| label: ID string manipulation
 #| echo: true
@@ -176,6 +178,7 @@ dinucleotide_table <- transform_columns(dinucleotide_table, "ID")
 trinucleotide_table <- transform_columns(trinucleotide_table, "ID")
 
 ```
+
 
 ```{r}
 #| label: write and read big data
