@@ -407,50 +407,6 @@ create_pca_plot <- function(data, highlight_ids, pca_result, genome_col = "Genom
     theme_minimal()
 }
 
-# Create new 'highlight' column that combines 'Highlighted' with 'File' column
-combained_dinucleotide_all_genomes <- combained_dinucleotide
-
-combained_dinucleotide_all_genomes$highlight <- ifelse(
-  combained_dinucleotide_all_genomes$id %in% highlight_ids, 
-  paste0("Highlighted_", combained_dinucleotide_all_genomes$Genome), 
-  "Other"
-)
-
-# Assign transparency values ​​according to the 'highlight' column
-combained_dinucleotide_all_genomes$alpha <- ifelse( 
-  grepl("Highlighted", combained_dinucleotide_all_genomes$highlight), 0.6, 0.1
-)
-pca_result <- perform_result_dinucleotide_pca$pca_result
-# Assign the first two principal components of the PCA
-combained_dinucleotide_all_genomes$PC1 <- pca_result$x[, 1]
-combained_dinucleotide_all_genomes$PC2 <- pca_result$x[, 2]
-
-# Get the unique values ​​of the 'highlight' column and sort
-unique_highlight_values <- sort(unique(combained_dinucleotide_all_genomes$highlight))
-
-# Create a color palette that assigns a gray color to 'Other' and different colors to each 'Highlighted_<File>'
-color_palette <- c(scales::hue_pal()(length(unique_highlight_values) - 1), "grey")
-
-# Color mapping: we assign 'grey' to 'Other' and a different color to each 'Highlighted_<File>'
-names(color_palette) <- unique_highlight_values
-
-# Create two subsets of the data: one for 'Highlighted' and one for 'Other'
-highlighted_points <- subset(combained_dinucleotide_all_genomes, grepl("Highlighted", highlight))
-other_points <- subset(combained_dinucleotide_all_genomes, highlight == "Other")
-
-# Plot with ggplot, first the 'Other' and then the 'Highlighted'
-ggplot() +
-  # Layer for non-matching points in gray and with low transparency
-  geom_point(data = other_points, aes(x = PC1, y = PC2), color = "grey", alpha = 0.1, size = 3) +
-  # Layer for matching points with colors and greater transparency
-  geom_point(data = highlighted_points, aes(x = PC1, y = PC2, color = highlight, alpha = alpha), size = 3) +
-  scale_color_manual(values = color_palette) +
-  # Ensure alpha is mapped correctly
-  scale_alpha_continuous(range = c(0.1, 0.6)) + 
-  labs(title = "PCA Highlighting Selected IDs", x = "Principal Component 1", y = "Principal Component 2") +
-  theme_minimal()
-
-
 ```
 
 ## Trinucleotido PCA highlighted
