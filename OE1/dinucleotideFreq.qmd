@@ -325,6 +325,8 @@ perform_result_dinucleotide_pca$pca_plot
 
 ```
 
+Ademas, se realizó un análisis de componentes principales (PCA) sobre las frecuencias de trinucleótidos combinados en las secuencias codificantes de los genomas ``r genome_name``.
+
 ```{r}
 #| label: principal component analysis trinucleotide
 #| echo: true
