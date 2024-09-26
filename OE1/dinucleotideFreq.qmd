@@ -318,11 +318,23 @@ perform_pca <- function(data, file_col = "File", id_col = "ID") {
 }
 
 # Call perform_pca
-perform_result_pca <- perform_pca(combained_dinucleotide, file_col = "Genome", id_col = "id")
+perform_result_dinucleotide_pca <- perform_pca(combained_dinucleotide, file_col = "Genome", id_col = "id")
 
 # show plot
-perform_result_pca$pca_plot
+perform_result_dinucleotide_pca$pca_plot
 
+```
+
+```{r}
+#| label: principal component analysis trinucleotide
+#| echo: true
+#| warning: false
+
+# Call perform_pca
+perform_result_dinucleotide_pca <- perform_pca(combained_trinucleotide, file_col = "Genome", id_col = "id")
+
+# show plot
+perform_result_dinucleotide_pca$pca_plot
 
 ```
 
@@ -345,7 +357,7 @@ combained_dinucleotide_all_genomes$highlight <- ifelse(
 combained_dinucleotide_all_genomes$alpha <- ifelse( 
   grepl("Highlighted", combained_dinucleotide_all_genomes$highlight), 0.6, 0.1
 )
-pca_result <- perform_result_pca$pca_result
+pca_result <- perform_result_dinucleotide_pca$pca_result
 # Assign the first two principal components of the PCA
 combained_dinucleotide_all_genomes$PC1 <- pca_result$x[, 1]
 combained_dinucleotide_all_genomes$PC2 <- pca_result$x[, 2]
