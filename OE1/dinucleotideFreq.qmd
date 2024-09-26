@@ -359,19 +359,6 @@ color_palette <- c(scales::hue_pal()(length(unique_highlight_values) - 1), "grey
 # Color mapping: we assign 'grey' to 'Other' and a different color to each 'Highlighted_<File>'
 names(color_palette) <- unique_highlight_values
 
-# # Plot with ggplot, differentiating each 'Highlighted_<File>'
-# ggplot(combained_dinucleotide_all_genomes, aes(x = PC1, y = PC2, color = highlight, alpha = alpha)) +
-#   geom_point(size = 3) +
-#   scale_color_manual(values = color_palette) +  # Apply the generated colors
-#   scale_alpha_continuous(range = c(0.1, 0.2)) +  # Ensure alpha is mapped correctly
-#   labs(title = "PCA Highlighting Selected IDs", x = "Principal Component 1", y = "Principal Component 2") +
-#   theme_minimal() 
-
-# autoplot(pca_result, data = combained_dinucleotide_all_genomes, colour = 'highlight', alpha = 'alpha', loadings = TRUE, loadings.label = TRUE) +
-#   scale_color_manual(values = color_palette) +  # Apply the generated colors
-#   labs(title = "PCA Highlighting Selected IDs with autoplot") +
-#   theme_minimal()
-
 # Create two subsets of the data: one for 'Highlighted' and one for 'Other'
 highlighted_points <- subset(combained_dinucleotide_all_genomes, grepl("Highlighted", highlight))
 other_points <- subset(combained_dinucleotide_all_genomes, highlight == "Other")
