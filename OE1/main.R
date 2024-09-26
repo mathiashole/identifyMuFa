@@ -121,19 +121,13 @@ output_dir <- "output_directory"  # Define your output directory
 output_dir <- create_output_dir(output_dir)
 
 data <- read_input(input_file)
+
 # Apply the transformations
-# data_transformed <- transform_data(data, output_dir)
 data_transformed <- transform_data(data)
-# print(data_transformed)
-# path_data_transformed <- file.path("output_directory/", paste0("data_transformed.tsv"))
-# write.table(data_transformed, file = path_data_transformed, row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
 
 # Generate the commands
 data_with_commands <- generate_commands(data_transformed, output_dir)
 # Execution script
 execution_module(data_with_commands, output_dir)
 
-# # try render quarto file
-# saveRDS(data_transformed, "data_transformed.rds")
-# quarto::quarto_render("try_args.qmd", execute_params = list(data_file = "data_transformed.rds"))
 
