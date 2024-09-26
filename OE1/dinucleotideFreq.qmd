@@ -229,26 +229,59 @@ En esta parte, el código crea un nuevo data frame llamado `combained_dinucleoti
 cols_to_convert <- c("aa", "tt", "ac", "gt", "ag", "ct", "ca", "tg", "cc", "gg", "ga", "tc", "at", "cg", "gc", "ta")
 dinucleotide_all_protein_coding[cols_to_convert] <- lapply(dinucleotide_all_protein_coding[cols_to_convert], as.numeric)
 
-combine_dinucleotide_frequencies <- function(data, genome_col = "File", id_col = "ID") {
-# Now apply the operations to combine frequencies
-  result_combained_dinucleotide <- data.frame(
-    "Genome" = data[,"File"],
-    "id" = data[,"ID"],
-    "aa.tt" = data[,"aa"] + data[,"tt"],
-    "ac.gt" = data[,"ac"] + data[,"gt"],
-    "ag.ct" = data[,"ag"] + data[,"ct"],
-    "ca.tg" = data[,"ca"] + data[,"tg"],
-    "cc.gg" = data[,"cc"] + data[,"gg"],
-    "ga.tc" = data[,"ga"] + data[,"tc"],
-    "at" = data[,"at"],
-    "cg" = data[,"cg"],
-    "gc" = data[,"gc"],
-    "ta" = data[,"ta"]
-  )
-  return(result_combained_dinucleotide)
+# Convert trinucleotide columns to numeric
+cols_to_convert_trinucleotides <- c("aaa", "aag", "aat", "aca", "acc", "act", "aga", "agg", "agt", "ata", "atc", "att", "caa", "cag", "cat", "cca", "ccc", "cct", "cga", "cgg", "cgt", "cta", "ctc", "ctt", "gaa", "gag", "gat", "gca", "gcc", "gct", "gga", "ggc", "ggt", "gta", "gtc", "gtt", "taa", "tag", "tat", "tca", "tcc", "tct", "tga", "tgg", "tgt", "tta", "ttc", "ttt")
+trinucleotide_all_protein_coding[cols_to_convert_trinucleotides] <- lapply(trinucleotide_all_protein_coding[cols_to_convert_trinucleotides], as.numeric)
+
+
+combine_data_frequencies <- function(data, genome_col = "File", id_col = "ID", type) {
+  if (type == "di") {
+    result_combained_data <- data.frame(
+      "Genome" = data[, genome_col],
+      "id" = data[, id_col],
+      "aa.tt" = data[,"aa"] + data[,"tt"],
+      "ac.gt" = data[,"ac"] + data[,"gt"],
+      "ag.ct" = data[,"ag"] + data[,"ct"],
+      "ca.tg" = data[,"ca"] + data[,"tg"],
+      "cc.gg" = data[,"cc"] + data[,"gg"],
+      "ga.tc" = data[,"ga"] + data[,"tc"],
+      "at" = data[,"at"],
+      "cg" = data[,"cg"],
+      "gc" = data[,"gc"],
+      "ta" = data[,"ta"]
+    )
+  } else if (type == "tri") {
+    result_combained_data <- data.frame(
+      "Genome" = data[, genome_col],
+      "id" = data[, id_col],
+      "aaa.aag" = data[,"aaa"] + data[,"aag"],
+      "aac.aat" = data[,"aac"] + data[,"aat"],
+      "acc.act" = data[,"acc"] + data[,"act"],
+      "aga.agg" = data[,"aga"] + data[,"agg"],
+      "ata.atc" = data[,"ata"] + data[,"atc"],
+      "caa.cag" = data[,"caa"] + data[,"cag"],
+      "cat.cac" = data[,"cat"] + data[,"cac"],
+      "cca.ccc" = data[,"cca"] + data[,"ccc"],
+      "cga.cgg" = data[,"cga"] + data[,"cgg"],
+      "cta.ctc" = data[,"cta"] + data[,"ctc"],
+      "gaa.gag" = data[,"gaa"] + data[,"gag"],
+      "gat.gca" = data[,"gat"] + data[,"gca"],
+      "gga.ggg" = data[,"gga"] + data[,"ggg"],
+      "gta.gtc" = data[,"gta"] + data[,"gtc"],
+      "taa.tag" = data[,"taa"] + data[,"tag"],
+      "tat.tca" = data[,"tat"] + data[,"tca"],
+      "tga.tgg" = data[,"tga"] + data[,"tgg"],
+      "tta.ttc" = data[,"tta"] + data[,"ttc"]
+    )
+  } else {
+    stop("Invalid type specified. Use 'di' for dinucleotides or 'tri' for trinucleotides.")
+  }
+
+  return(result_combained_data)
 }
 
-combained_dinucleotide <- combine_dinucleotide_frequencies(dinucleotide_all_protein_coding)
+combained_dinucleotide <- combine_data_frequencies(dinucleotide_all_protein_coding, type = "di")
+combained_trinucleotide <- combine_data_frequencies(trinucleotide_all_protein_coding, type = "tri")
 
 ```
 
@@ -363,28 +396,79 @@ ggplot() +
 #| echo: true
 #| warning: false
 
-dm28c_freq <- subset(combained_dinucleotide, Genome == "TcruziDm28c2018")
-pca_dm28c <- perform_pca(dm28c_freq, file_col = "Genome", id_col = "id")
-pca_dm28c_score <- pca_dm28c$pca_scores
-pca_dm28c_score$highlight <- ifelse(pca_dm28c_score$id %in% highlight_ids, paste0("Highlighted_", pca_dm28c_score$Genome), "Other")
-pca_dm28c_score$alpha <-ifelse(grepl("Highlighted", pca_dm28c_score$Genome), 0.2, 0.1)
-pca_dm28c_score$PC1 <- pca_dm28c$pca_result$x[, 1]
-pca_dm28c_score$PC2 <- pca_dm28c$pca_result$x[, 2]
+# dm28c_freq <- subset(combained_dinucleotide, Genome == "TcruziDm28c2018")
+# pca_dm28c <- perform_pca(dm28c_freq, file_col = "Genome", id_col = "id")
+# pca_dm28c_score <- pca_dm28c$pca_scores
+# pca_dm28c_score$highlight <- ifelse(pca_dm28c_score$id %in% highlight_ids, paste0("Highlighted_", pca_dm28c_score$Genome), "Other")
+# pca_dm28c_score$alpha <-ifelse(grepl("Highlighted", pca_dm28c_score$Genome), 0.2, 0.1)
+# pca_dm28c_score$PC1 <- pca_dm28c$pca_result$x[, 1]
+# pca_dm28c_score$PC2 <- pca_dm28c$pca_result$x[, 2]
 
-# Create two subsets of the data: one for 'Highlighted' and one for 'Other'
-highlighted_points <- subset(pca_dm28c_score, grepl("Highlighted", highlight))
-other_points <- subset(pca_dm28c_score, highlight == "Other")
+# # Create two subsets of the data: one for 'Highlighted' and one for 'Other'
+# highlighted_points <- subset(pca_dm28c_score, grepl("Highlighted", highlight))
+# other_points <- subset(pca_dm28c_score, highlight == "Other")
 
-# Plot with ggplot, first the 'Other' and then the 'Highlighted'
-ggplot() +
-  # Layer for non-matching points in gray and with low transparency
-  geom_point(data = other_points, aes(x = PC1, y = PC2), color = "grey", alpha = 0.1, size = 3) +
-  # Layer for matching points with colors and greater transparency
-  geom_point(data = highlighted_points, aes(x = PC1, y = PC2, color = highlight, alpha = alpha), size = 3) +
-  scale_color_manual(values = color_palette) +  # Aplicar los colores generados
-  scale_alpha_continuous(range = c(0.1, 1)) +  # Asegurar que alpha se mapea correctamente
-  labs(title = "PCA Highlighting Selected IDs", x = "Principal Component 1", y = "Principal Component 2") +
-  theme_minimal()
+# # Plot with ggplot, first the 'Other' and then the 'Highlighted'
+# ggplot() +
+#   # Layer for non-matching points in gray and with low transparency
+#   geom_point(data = other_points, aes(x = PC1, y = PC2), color = "grey", alpha = 0.1, size = 3) +
+#   # Layer for matching points with colors and greater transparency
+#   geom_point(data = highlighted_points, aes(x = PC1, y = PC2, color = highlight, alpha = alpha), size = 3) +
+#   scale_color_manual(values = color_palette) +  # Aplicar los colores generados
+#   scale_alpha_continuous(range = c(0.1, 1)) +  # Asegurar que alpha se mapea correctamente
+#   labs(title = "PCA Highlighting Selected IDs", x = "Principal Component 1", y = "Principal Component 2") +
+#   theme_minimal()
+
+# Create a vector of unique genomes from the dataset
+genomes <- unique(sort(combained_dinucleotide$Genome))
+
+# Initialize an empty list to store PCA plots for each genome
+pca_plots <- list()
+
+# Loop through each genome
+for (genome in genomes) {
+  # Subset the data for the current genome
+  genome_data <- subset(combained_dinucleotide, Genome == genome)
+  
+  # Perform PCA on the subsetted data
+  pca_result <- perform_pca(genome_data, file_col = "Genome", id_col = "id")
+  pca_scores <- pca_result$pca_scores
+  
+  # Create a 'highlight' column for visualization
+  pca_scores$highlight <- ifelse(pca_scores$id %in% highlight_ids, 
+                                 paste0("Highlighted_", pca_scores$Genome), "Other")
+  
+  # Assign alpha values based on the highlight status
+  pca_scores$alpha <- ifelse(grepl("Highlighted", pca_scores$highlight), 0.6, 0.1)
+  
+  # Add PCA scores to the dataframe
+  pca_scores$PC1 <- pca_result$pca_result$x[, 1]
+  pca_scores$PC2 <- pca_result$pca_result$x[, 2]
+  
+  # Create subsets for highlighted and other points
+  highlighted_points <- subset(pca_scores, grepl("Highlighted", highlight))
+  other_points <- subset(pca_scores, highlight == "Other")
+  
+  # Create the PCA plot for the current genome
+  pca_plot <- ggplot() +
+    # Layer for non-highlighted points (Other) in gray with low transparency
+    geom_point(data = other_points, aes(x = PC1, y = PC2), color = "grey", alpha = 0.1, size = 3) +
+    # Layer for highlighted points with specific colors and higher transparency
+    geom_point(data = highlighted_points, aes(x = PC1, y = PC2, color = highlight, alpha = alpha), size = 3) +
+    scale_color_manual(values = color_palette) +  # Apply the color palette
+    scale_alpha_continuous(range = c(0.1, 0.6)) +  # Map alpha values
+    labs(title = paste("PCA for", genome), x = "Principal Component 1", y = "Principal Component 2") +
+    theme_minimal()
+  
+  # Store the plot in the list
+  pca_plots[[genome]] <- pca_plot
+}
+
+# Optionally, you can print or save each plot
+for (genome in genomes) {
+  print(pca_plots[[genome]])  # Print the plot for each genome
+  # ggsave(paste0("PCA_", genome, ".pdf"), plot = pca_plots[[genome]])  # Save as PDF if needed
+}
 
 
 ```
