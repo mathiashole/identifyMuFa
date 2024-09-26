@@ -359,6 +359,9 @@ perform_result_trinucleotide_pca$pca_plot
 En la siguiente figura se muestra el mismo análisis PCA, pero esta vez solo se han resaltado las secuencias de interés correspondientes a ``r key_name`` para cada uno de los `genomas`. Las secuencias restantes se presentan en color gris.
 
 ```{r}
+#| label: dinucleotide highlight PCA
+#| echo: true
+#| warning: false
 
 highlight_ids <- dinucleotide_table$ID
 
@@ -415,6 +418,12 @@ create_pca_highlight_plot(combained_dinucleotide, dinucleotide_table$ID, perform
 ## Trinucleotido PCA highlighted
 
 ```{r}
+#| label: trinucleotide highlight PCA
+#| echo: true
+#| warning: false
+
+create_pca_highlight_plot(combained_trinucleotide, trinucleotide_table$ID, perform_result_trinucleotide_pca$pca_result)
+
 
 ```
 
