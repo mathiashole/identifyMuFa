@@ -537,6 +537,16 @@ perform_tsne <- function(data, file_col = "File", id_col = "ID", perplexity = 30
   
   # Add 'File' and 'ID' columns to t-SNE results
   tsne_scores <- cbind(data[, c(file_col, id_col)], tsne_scores)
+
+  # Plot the t-SNE using ggplot2
+  tsne_plot <- ggplot(tsne_scores, aes(x = tSNE1, y = tSNE2, color = .data[[file_col]])) +
+    geom_point(size = 3, alpha = 0.7) +
+    labs(title = "t-SNE plot", x = "t-SNE 1", y = "t-SNE 2") +
+    theme_minimal() +
+    theme(legend.position = "right")
+  
+  # Return the results of the t-SNE and the plot
+  return(list(tsne_result = tsne_result, tsne_scores = tsne_scores, tsne_plot = tsne_plot))
 }
 
 
