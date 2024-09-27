@@ -202,7 +202,7 @@ trinucleotide_all_protein_coding <- read.table("output_directory/trinuclotide_fr
 
 ```
 
-```{r}
+<!-- ```{r}
 #| label: plot data table
 #| echo: true
 #| warning: false
@@ -212,7 +212,7 @@ library(reactable)
 
 reactable(dinucleotide_table[,c(1, 3:18)], highlight = TRUE)
 
-```
+``` -->
 
 En esta parte, el código crean nuevos data frame llamados `combained_dinucleotide` y `combained_trinucleotide`. Estos combinan las frecuencias de dinucleótidos y trinucleótidos complementarios en el ADN. Al unir las frecuencias de estos pares complementarios, se pueden observar patrones adicionales en las frecuencias previamente calculadas para las secuencias codificantes, lo cual es útil para detectar posibles sesgos en la composición del ADN.
 
