@@ -445,10 +445,10 @@ create_pca_highlight_plot(combained_trinucleotide, trinucleotide_table$ID, perfo
 genomes <- unique(sort(combained_dinucleotide$Genome))
 
 # Create a color palette that assigns gray to 'Other' and different colors to 'Highlighted_<Genome>'
-palette_to_genome <- c(scales::hue_pal()(length(genomes) - 1), "grey")
-    
-# Map color palette to unique highlight values
-names(palette_to_genome) <- palette_to_genome
+palette_to_genome <- c(scales::hue_pal()(length(genomes)), "grey")
+
+# Map color palette to genomes (including 'Other' for grey)
+names(palette_to_genome) <- c(paste0("Highlighted_", genomes), "Other")
 
 # Initialize an empty list to store PCA plots for each genome
 pca_plots <- list()
