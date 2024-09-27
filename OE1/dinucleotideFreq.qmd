@@ -549,5 +549,10 @@ perform_tsne <- function(data, file_col = "File", id_col = "ID", perplexity = 30
   return(list(tsne_result = tsne_result, tsne_scores = tsne_scores, tsne_plot = tsne_plot))
 }
 
+# Call perform_tsne
+perform_result_dinucleotide_tsne <- perform_tsne(combained_dinucleotide, file_col = "Genome", id_col = "id")
+
+# Show plot
+perform_result_dinucleotide_tsne$tsne_plot
 
 ```
