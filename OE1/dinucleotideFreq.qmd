@@ -403,7 +403,7 @@ create_pca_highlight_plot <- function(data, highlight_ids, pca_result, genome_co
     geom_point(data = other_points, aes(x = PC1, y = PC2), color = "grey", alpha = 0.1, size = 3) +
     # Layer for highlighted points with colors and greater transparency
     geom_point(data = highlighted_points, aes(x = PC1, y = PC2, color = highlight, alpha = alpha), size = 3) +
-    scale_color_manual(values = color_palette) +
+    scale_color_manual(values = col_palette) +
     scale_alpha_continuous(range = c(0.1, 0.6)) + 
     labs(title = "PCA Highlighting Selected IDs", x = "Principal Component 1", y = "Principal Component 2") +
     theme_minimal()
