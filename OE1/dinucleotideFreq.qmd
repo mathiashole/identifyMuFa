@@ -527,9 +527,9 @@ perform_tsne <- function(data, file_col = "File", id_col = "ID", perplexity = 30
   # Convert all columns to numeric format
   tsne_data <- as.data.frame(lapply(tsne_data, as.numeric))
   # removed duplicated row
-  duplicates <- duplicated(tsne_data)
+  duplicates <- duplicated(tsne_data) # NEED CHECK WITH BOSS
   tsne_data_clean <- tsne_data[!duplicates, ] # NEED CHECK WITH BOSS
-  combained_dinucleotide_clean <- combained_dinucleotide[!duplicates, ]
+  combained_dinucleotide_clean <- combained_dinucleotide[!duplicates, ] # NEED CHECK WITH BOSS
 
   # Perform t-SNE
   tsne_result <- Rtsne(tsne_data_clean, perplexity = perplexity, max_iter = max_iter)
