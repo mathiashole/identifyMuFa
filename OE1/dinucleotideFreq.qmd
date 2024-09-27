@@ -474,7 +474,7 @@ for (genome in genomes) {
 ## Trinucleotido PCA highlighted per genome
 
 ```{r}
-#| label: plot dinucleotide PCA per genome
+#| label: plot trinucleotide PCA per genome
 #| echo: true
 #| warning: false
 
