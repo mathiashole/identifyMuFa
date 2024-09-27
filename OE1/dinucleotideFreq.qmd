@@ -431,9 +431,14 @@ create_pca_highlight_plot(combained_trinucleotide, trinucleotide_table$ID, perfo
 
 ---
 
+## plot PCA por cada genoma marcando ``r key_name``
+
+::: {.panel-tabset .nav-pills}
+
+## Dinucleotido PCA highlighted per genome
 
 ```{r}
-#| label: plot PCA only gene
+#| label: plot dinucleotide PCA per genome
 #| echo: true
 #| warning: false
 
@@ -452,33 +457,8 @@ for (genome in genomes) {
   pca_result <- perform_pca(genome_data, file_col = "Genome", id_col = "id")
   pca_scores <- pca_result$pca_scores
   
-  # Create a 'highlight' column for visualization
-  pca_scores$highlight <- ifelse(pca_scores$id %in% highlight_ids, 
-                                 paste0("Highlighted_", pca_scores$Genome), "Other")
-  
-  # Assign alpha values based on the highlight status
-  pca_scores$alpha <- ifelse(grepl("Highlighted", pca_scores$highlight), 0.6, 0.1)
-  
-  # Add PCA scores to the dataframe
-  pca_scores$PC1 <- pca_result$pca_result$x[, 1]
-  pca_scores$PC2 <- pca_result$pca_result$x[, 2]
-  
-  # Create subsets for highlighted and other points
-  highlighted_points <- subset(pca_scores, grepl("Highlighted", highlight))
-  other_points <- subset(pca_scores, highlight == "Other")
-  
-  # Create the PCA plot for the current genome
-  pca_plot <- ggplot() +
-    # Layer for non-highlighted points (Other) in gray with low transparency
-    geom_point(data = other_points, aes(x = PC1, y = PC2), color = "grey", alpha = 0.1, size = 3) +
-    # Layer for highlighted points with specific colors and higher transparency
-    geom_point(data = highlighted_points, aes(x = PC1, y = PC2, color = highlight, alpha = alpha), size = 3) +
-    # scale_color_manual(values = color_palette) +  # Apply the color palette
-    scale_alpha_continuous(range = c(0.1, 0.6)) +  # Map alpha values
-    labs(title = paste("PCA for", genome), x = "Principal Component 1", y = "Principal Component 2") +
-    theme_minimal()
-  
-  # Store the plot in the list
+  pca_plot <- create_pca_highlight_plot(genome_data, dinucleotide_table$ID, pca_result$pca_result)
+
   pca_plots[[genome]] <- pca_plot
 }
 
@@ -490,3 +470,40 @@ for (genome in genomes) {
 
 
 ```
+
+## Trinucleotido PCA highlighted per genome
+
+```{r}
+#| label: plot dinucleotide PCA per genome
+#| echo: true
+#| warning: false
+
+# Create a vector of unique genomes from the dataset
+genomes <- unique(sort(combained_trinucleotide$Genome))
+
+# Initialize an empty list to store PCA plots for each genome
+pca_plots <- list()
+
+# Loop through each genome
+for (genome in genomes) {
+  # Subset the data for the current genome
+  genome_data <- subset(combained_trinucleotide, Genome == genome)
+  
+  # Perform PCA on the subsetted data
+  pca_result <- perform_pca(genome_data, file_col = "Genome", id_col = "id")
+  pca_scores <- pca_result$pca_scores
+  
+  pca_plot <- create_pca_highlight_plot(genome_data, trinucleotidecombained_trinucleotide_table$ID, pca_result$pca_result)
+
+  pca_plots[[genome]] <- pca_plot
+}
+
+# Optionally, you can print or save each plot
+for (genome in genomes) {
+  print(pca_plots[[genome]])  # Print the plot for each genome
+  # ggsave(paste0("PCA_", genome, ".pdf"), plot = pca_plots[[genome]])  # Save as PDF if needed
+}
+
+```
+
+:::
