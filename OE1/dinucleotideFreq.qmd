@@ -552,6 +552,18 @@ perform_tsne <- function(data, highlight_ids, file_col = "File", id_col = "ID", 
     grepl("Highlighted", tsne_scores$highlight), 0.6, 0.1
   )
 
+    # Define color palette only if it wasn't provided
+  if (is.null(col_palette)) {
+    # Get unique values of the 'highlight' column and sort them
+    unique_highlight_values <- sort(unique(tsne_scores$highlight))
+    
+    # Create a color palette that assigns gray to 'Other' and different colors to 'Highlighted_<Genome>'
+    col_palette <- c(scales::hue_pal()(length(unique_highlight_values) - 1), "grey")
+    
+    # Map color palette to unique highlight values
+    names(col_palette) <- unique_highlight_values
+  }
+
   # Plot the t-SNE using ggplot2
   tsne_plot <- ggplot(tsne_scores, aes(x = tSNE1, y = tSNE2, color = .data[[file_col]])) +
     geom_point(size = 3, alpha = 0.7) +
