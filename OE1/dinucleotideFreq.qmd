@@ -564,12 +564,20 @@ perform_tsne <- function(data, highlight_ids, file_col = "File", id_col = "ID", 
     names(col_palette) <- unique_highlight_values
   }
 
-  # Plot the t-SNE using ggplot2
-  tsne_plot <- ggplot(tsne_scores, aes(x = tSNE1, y = tSNE2, color = .data[[file_col]])) +
-    geom_point(size = 3, alpha = 0.7) +
-    labs(title = "t-SNE plot", x = "t-SNE 1", y = "t-SNE 2") +
-    theme_minimal() +
-    theme(legend.position = "right")
+  # Create subsets of the data for 'Highlighted' and 'Other'
+  highlighted_points <- subset(tsne_scores, grepl("Highlighted", highlight))
+  other_points <- subset(tsne_scores, highlight == "Other")
+  
+  # Plot with ggplot: first 'Other' and then 'Highlighted'
+  tsne_plot <- ggplot() +
+    # Layer for non-highlighted points in gray and low transparency
+    geom_point(data = other_points, aes(x = tSNE1, y = tSNE2), color = "grey", alpha = 0.1, size = 3) +
+    # Layer for highlighted points with colors and greater transparency
+    geom_point(data = highlighted_points, aes(x = tSNE1, y = tSNE2, color = highlight, alpha = alpha), size = 3) +
+    scale_color_manual(values = col_palette) +
+    scale_alpha_continuous(range = c(0.1, 0.6)) + 
+    labs(title = "t-SNE Highlighting Selected IDs", x = "t-SNE 1", y = "t-SNE 2") +
+    theme_minimal()
   
   # Return the results of the t-SNE and the plot
   return(list(tsne_result = tsne_result, tsne_scores = tsne_scores, tsne_plot = tsne_plot))
