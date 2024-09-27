@@ -26,11 +26,12 @@ p {
 #| echo: false
 #| warning: false
 
-## VARIABLES QUE DEBEN SER ARGUMENTOS ##
-# Especificar el directorio donde están los archivos
-directory <- "/home/usuario/Data_Rstudio/chop_genome"  # Cambia esto a la ruta de tu directorio
+# directory <- "/home/usuario/Data_Rstudio/chop_genome"  # Cambia esto a la ruta de tu directorio
+directory <- "output_directory/"
 # leer tabla de datos ()
-data_init <- read.delim("/home/usuario/Proyectos/maestria/datos_ejecucion_genomas2.tsv.csv", sep = "\t", header = FALSE)
+# data_init <- read.delim("/home/usuario/Proyectos/maestria/datos_ejecucion_genomas2.tsv.csv", sep = "\t", header = FALSE)
+## NEED OUTPUT DIR
+data_transformed <- read.delim("output_directory/data_transformed.tsv", sep = "\t", header = TRUE)
 ########################################
 
 # Obtener la lista de archivos que comienzan con 'out_' y terminan con '.fasta'
@@ -493,7 +494,7 @@ for (genome in genomes) {
   pca_result <- perform_pca(genome_data, file_col = "Genome", id_col = "id")
   pca_scores <- pca_result$pca_scores
   
-  pca_plot <- create_pca_highlight_plot(genome_data, trinucleotidecombained_trinucleotide_table$ID, pca_result$pca_result)
+  pca_plot <- create_pca_highlight_plot(genome_data, trinucleotide_table$ID, pca_result$pca_result)
 
   pca_plots[[genome]] <- pca_plot
 }
