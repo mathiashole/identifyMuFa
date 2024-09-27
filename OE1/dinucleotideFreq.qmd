@@ -361,7 +361,7 @@ En la siguiente figura se muestra el mismo análisis PCA, pero esta vez solo se 
 
 highlight_ids <- dinucleotide_table$ID
 
-create_pca_highlight_plot <- function(data, highlight_ids, pca_result, genome_col = "Genome") {
+create_pca_highlight_plot <- function(data, highlight_ids, pca_result, genome_col = "Genome", col_palette = "yes") {
   # Create a copy of the input data
   data_all_genomes <- data
 
@@ -381,14 +381,17 @@ create_pca_highlight_plot <- function(data, highlight_ids, pca_result, genome_co
   data_all_genomes$PC1 <- pca_result$x[, 1]
   data_all_genomes$PC2 <- pca_result$x[, 2]
 
+  # Define color palette only if it wasn't provided
+  if (is.null(col_palette)) {
     # Get the unique values of the 'highlight' column and sort them
-  unique_highlight_values <- sort(unique(data_all_genomes$highlight))
-  
-  # Create a color palette that assigns gray to 'Other' and different colors to 'Highlighted_<Genome>'
-  color_palette <- c(scales::hue_pal()(length(unique_highlight_values) - 1), "grey")
-  
-  # Map color palette to unique highlight values
-  names(color_palette) <- unique_highlight_values
+    unique_highlight_values <- sort(unique(data_all_genomes$highlight))
+    
+    # Create a color palette that assigns gray to 'Other' and different colors to 'Highlighted_<Genome>'
+    col_palette <- c(scales::hue_pal()(length(unique_highlight_values) - 1), "grey")
+    
+    # Map color palette to unique highlight values
+    names(col_palette) <- unique_highlight_values
+  }
   
   # Create subsets of the data for 'Highlighted' and 'Other'
   highlighted_points <- subset(data_all_genomes, grepl("Highlighted", highlight))
