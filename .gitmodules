@@ -1,0 +1,3 @@
+[submodule "OE1/code/Genomics_Scissors"]
+	path = OE1/code/Genomics_Scissors
+	url = https://github.com/mathiashole/Genomics_Scissors.git
