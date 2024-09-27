@@ -361,7 +361,7 @@ En la siguiente figura se muestra el mismo análisis PCA, pero esta vez solo se 
 
 highlight_ids <- dinucleotide_table$ID
 
-create_pca_highlight_plot <- function(data, highlight_ids, pca_result, genome_col = "Genome", col_palette = "yes") {
+create_pca_highlight_plot <- function(data, highlight_ids, pca_result, genome_col = "Genome", col_palette = NULL) {
   # Create a copy of the input data
   data_all_genomes <- data
 
