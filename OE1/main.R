@@ -4,7 +4,7 @@
 # call all scripts
 # FILTER_SEQ <- "/home/usuario/BASH/chack_gff/chack_gff_v1.sh"
 FILTER_SEQ <- "code/filter_keywords.sh"
-GSCISSORS <- "/home/usuario/Data_Rstudio/seqExtractor/GScissors/gscissors.pl"
+GSCISSORS <- "code/Genomics_Scissors/gscissors.pl"
 #FASTA_FEATURE <- "/home/usuario/PERL/stat_seq/stat_seq.pl"
 SEQ_A <- "/home/usuario/Data_Rstudio/chop_genome/seq_attributes/seq_attributes.R"
 DISTRIBUTION <- "/home/usuario/Data_Rstudio/statistics_of_sequence/analyze_statistics.R"
