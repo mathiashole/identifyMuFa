@@ -41,17 +41,6 @@ prot_name <- sub(".*_:(.*):_.*", "\\1", fasta_files)
 key_names <- sub("_.*", "\\1", prot_name)
 key_name <- unique(sort(key_names))
 
-fasta_files <- list.files(path = directory, pattern = "^out_:.*\\.fasta$", full.names = TRUE)
-genome_name <- basename(data_init$V1)
-
-genes_work <- basename(fasta_files)
-prot_name <- sub(".*_:(.*):_.*", "\\1", fasta_files)
-key_names <- sub("_.*", "\\1", prot_name)
-key_name <- unique(sort(key_names))
-
-rest_code_prot <- list.files(path = "/home/usuario/BASH/chack_gff/prueba_frecuencia_nucleotidos", pattern = "^out_.*\\.fasta$", full.names = TRUE)
-
-
 ```
 
 
