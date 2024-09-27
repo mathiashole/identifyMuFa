@@ -530,6 +530,13 @@ perform_tsne <- function(data, file_col = "File", id_col = "ID", perplexity = 30
   
   # Perform t-SNE
   tsne_result <- Rtsne(tsne_data, perplexity = perplexity, max_iter = max_iter)
+
+    # Extract t-SNE coordinates
+  tsne_scores <- as.data.frame(tsne_result$Y)
+  colnames(tsne_scores) <- c("tSNE1", "tSNE2")  # Rename columns for clarity
+  
+  # Add 'File' and 'ID' columns to t-SNE results
+  tsne_scores <- cbind(data[, c(file_col, id_col)], tsne_scores)
 }
 
 
