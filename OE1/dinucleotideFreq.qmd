@@ -513,13 +513,23 @@ for (genome in genomes) {
 
 :::
 
+Se realizó un análisis de `t-SNE (t-distributed Stochastic Neighbor Embedding)` sobre las frecuencias de `dinucleótidos` y `trinucleotidos` combinados en las secuencias `codificantes` de los genomas de ``r genome_name``. El t-SNE es una técnica de reducción de dimensionalidad que preserva las relaciones locales en los datos, lo que facilita la visualización de agrupamientos o patrones subyacentes en las frecuencias nucleotidicas de las secuencias.
+
+En este análisis, se utiliza la función ggplot() para visualizar los resultados del t-SNE, donde las secuencias codificantes se colorean de acuerdo con los genomas. El t-SNE permite explorar las similitudes y diferencias entre las secuencias de forma visual, destacando los patrones de composición a nivel de dinucleótidos.
 
 ```{r}
 
 
 # Function to perform t-SNE and plot
 perform_tsne <- function(data, file_col = "File", id_col = "ID", perplexity = 30, max_iter = 1000) {
-
+  # Exclude 'File' and 'ID' columns from numerical analysis
+  tsne_data <- data[, !(names(data) %in% c(file_col, id_col))]
+  
+  # Convert all columns to numeric format
+  tsne_data <- as.data.frame(lapply(tsne_data, as.numeric))
+  
+  # Perform t-SNE
+  tsne_result <- Rtsne(tsne_data, perplexity = perplexity, max_iter = max_iter)
 }
 
 
