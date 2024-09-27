@@ -542,6 +542,16 @@ perform_tsne <- function(data, highlight_ids, file_col = "File", id_col = "ID", 
   # tsne_scores <- cbind(data[, c(file_col, id_col)], tsne_scores)
   tsne_scores <- cbind(combained_dinucleotide_clean[, c("Genome", "id")], tsne_scores)
 
+    # Create new 'highlight' column that combines 'Highlighted' with the genome (or file) column
+  tsne_scores$highlight <- ifelse(
+    tsne_scores[[id_col]] %in% highlight_ids, paste0("Highlighted_", tsne_scores[[file_col]]), "Other"
+  )
+  
+  # Assign transparency values according to the 'highlight' column
+  tsne_scores$alpha <- ifelse(
+    grepl("Highlighted", tsne_scores$highlight), 0.6, 0.1
+  )
+
   # Plot the t-SNE using ggplot2
   tsne_plot <- ggplot(tsne_scores, aes(x = tSNE1, y = tSNE2, color = .data[[file_col]])) +
     geom_point(size = 3, alpha = 0.7) +
