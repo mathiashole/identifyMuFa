@@ -527,11 +527,13 @@ perform_tsne <- function(data, file_col = "File", id_col = "ID", perplexity = 30
   
   # Convert all columns to numeric format
   tsne_data <- as.data.frame(lapply(tsne_data, as.numeric))
-  
+  # removed duplicated row
+  tsne_data <- tsne_data[!duplicated(tsne_data), ] # NEED CHECK WITH BOSS
+
   # Perform t-SNE
   tsne_result <- Rtsne(tsne_data, perplexity = perplexity, max_iter = max_iter)
 
-    # Extract t-SNE coordinates
+  # Extract t-SNE coordinates
   tsne_scores <- as.data.frame(tsne_result$Y)
   colnames(tsne_scores) <- c("tSNE1", "tSNE2")  # Rename columns for clarity
   
