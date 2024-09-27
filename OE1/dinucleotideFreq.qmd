@@ -521,7 +521,7 @@ En este análisis, se utiliza la función ggplot() para visualizar los resultado
 
 
 # Function to perform t-SNE and plot
-perform_tsne <- function(data, highlight_ids, file_col = "File", id_col = "ID", perplexity = 30, max_iter = 1000, col_palette = NULL) {
+perform_tsne_highlight <- function(data, highlight_ids, file_col = "File", id_col = "ID", perplexity = 30, max_iter = 1000, col_palette = NULL) {
   # Exclude 'File' and 'ID' columns from numerical analysis
   tsne_data <- data[, !(names(data) %in% c(file_col, id_col))]
   # Convert all columns to numeric format
@@ -529,7 +529,7 @@ perform_tsne <- function(data, highlight_ids, file_col = "File", id_col = "ID", 
   # removed duplicated row
   duplicates <- duplicated(tsne_data) # NEED CHECK WITH BOSS
   tsne_data_clean <- tsne_data[!duplicates, ] # NEED CHECK WITH BOSS
-  combained_dinucleotide_clean <- combained_dinucleotide[!duplicates, ] # NEED CHECK WITH BOSS
+  combained_dinucleotide_clean <- data[!duplicates, ] # NEED CHECK WITH BOSS
 
   # Perform t-SNE
   tsne_result <- Rtsne(tsne_data_clean, perplexity = perplexity, max_iter = max_iter)
@@ -584,7 +584,7 @@ perform_tsne <- function(data, highlight_ids, file_col = "File", id_col = "ID", 
 }
 
 # Call perform_tsne
-perform_result_dinucleotide_tsne <- perform_tsne(combained_dinucleotide, file_col = "Genome", id_col = "id")
+perform_result_dinucleotide_tsne <- perform_tsne_highlight(combained_dinucleotide, highlight_ids = highlight_ids, file_col = "Genome", id_col = "id")
 
 # Show plot
 perform_result_dinucleotide_tsne$tsne_plot
