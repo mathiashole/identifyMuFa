@@ -486,6 +486,12 @@ for (genome in genomes) {
 # Create a vector of unique genomes from the dataset
 genomes <- unique(sort(combained_trinucleotide$Genome))
 
+# Create a color palette that assigns gray to 'Other' and different colors to 'Highlighted_<Genome>'
+palette_to_genome <- c(scales::hue_pal()(length(genomes)), "grey")
+
+# Map color palette to genomes (including 'Other' for grey)
+names(palette_to_genome) <- c(paste0("Highlighted_", genomes), "Other")
+
 # Initialize an empty list to store PCA plots for each genome
 pca_plots <- list()
 
@@ -498,7 +504,7 @@ for (genome in genomes) {
   pca_result <- perform_pca(genome_data, file_col = "Genome", id_col = "id")
   pca_scores <- pca_result$pca_scores
   
-  pca_plot <- create_pca_highlight_plot(genome_data, trinucleotide_table$ID, pca_result$pca_result)
+  pca_plot <- create_pca_highlight_plot(genome_data, trinucleotide_table$ID, pca_result$pca_result, col_palette = palette_to_genome)
 
   pca_plots[[genome]] <- pca_plot
 }
