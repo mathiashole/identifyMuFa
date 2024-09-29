@@ -525,7 +525,7 @@ En este análisis, se utiliza la función ggplot() para visualizar los resultado
 ## Dinucleotido t-SNE highlighted ``r key_name``
 
 ```{r}
-#| label: t-distributed Stochastic Neighbor Embedding analysis with plot
+#| label: t-distributed Stochastic Neighbor Embedding analysis with plot dinucleotides
 #| echo: true
 #| warning: false
 
@@ -604,5 +604,17 @@ perform_result_dinucleotide_tsne$tsne_plot
 
 ## Trinucleotido t-SNE highlighted ``r key_name``
 
+```{r}
+#| label: t-distributed Stochastic Neighbor Embedding analysis with plot dinucleotides
+#| echo: true
+#| warning: false
+
+# Call perform_tsne
+perform_result_trinucleotide_tsne <- perform_tsne_highlight(combained_trinucleotide, highlight_ids = highlight_ids, file_col = "Genome", id_col = "id")
+
+# Show plot
+perform_result_trinucleotide_tsne$tsne_plot
+
+```
 
 :::
