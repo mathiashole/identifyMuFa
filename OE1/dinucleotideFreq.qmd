@@ -605,7 +605,7 @@ perform_result_dinucleotide_tsne$tsne_plot
 ## Trinucleotido t-SNE highlighted ``r key_name``
 
 ```{r}
-#| label: t-distributed Stochastic Neighbor Embedding analysis with plot dinucleotides
+#| label: t-distributed Stochastic Neighbor Embedding analysis with plot trinucleotides
 #| echo: true
 #| warning: false
 
