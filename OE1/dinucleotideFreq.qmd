@@ -451,7 +451,7 @@ for (genome in genomes) {
   pca_result <- perform_pca(genome_data, file_col = "Genome", id_col = "id")
   pca_scores <- pca_result$pca_scores
   
-  pca_plot <- create_pca_highlight_plot(genome_data, dinucleotide_table$ID, pca_result$pca_result, col_palette = palette_to_genome)
+  pca_plot <- create_pca_highlight_plot(genome_data, highlight_ids, pca_result$pca_result, col_palette = palette_to_genome)
 
   pca_plots[[genome]] <- pca_plot
 }
@@ -487,7 +487,7 @@ for (genome in genomes) {
   pca_result <- perform_pca(genome_data, file_col = "Genome", id_col = "id")
   pca_scores <- pca_result$pca_scores
   
-  pca_plot <- create_pca_highlight_plot(genome_data, trinucleotide_table$ID, pca_result$pca_result, col_palette = palette_to_genome)
+  pca_plot <- create_pca_highlight_plot(genome_data, highlight_ids, pca_result$pca_result, col_palette = palette_to_genome)
 
   pca_plots[[genome]] <- pca_plot
 }
