@@ -524,6 +524,8 @@ En este análisis, se utiliza la función ggplot() para visualizar los resultado
 
 ## Dinucleotido t-SNE highlighted `r key_name`
 
+Se realizó un análisis de t-SNE sobre las frecuencias de dinucleótidos resaltando ``r key_name`` por cada genoma ``r genome_name``. El t-SNE permite reducir la dimensionalidad, preservando las relaciones locales de las frecuencias de dinucleótidos, facilitando la exploración de las relaciones entre secuencias y sus patrones de composición a nivel de `dinucleótidos`. 
+
 ```{r}
 #| label: t-distributed Stochastic Neighbor Embedding analysis with plot dinucleotides
 #| echo: true
