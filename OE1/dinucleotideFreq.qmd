@@ -398,7 +398,7 @@ create_pca_highlight_plot <- function(data, highlight_ids, pca_result, genome_co
     theme_minimal()
 }
 
-create_pca_highlight_plot(combained_dinucleotide, dinucleotide_table$ID, perform_result_dinucleotide_pca$pca_result)
+create_pca_highlight_plot(combained_dinucleotide, highlight_ids, perform_result_dinucleotide_pca$pca_result)
 
 
 ```
@@ -410,7 +410,7 @@ create_pca_highlight_plot(combained_dinucleotide, dinucleotide_table$ID, perform
 #| echo: true
 #| warning: false
 
-create_pca_highlight_plot(combained_trinucleotide, trinucleotide_table$ID, perform_result_trinucleotide_pca$pca_result)
+create_pca_highlight_plot(combained_trinucleotide, highlight_ids, perform_result_trinucleotide_pca$pca_result)
 
 
 ```
