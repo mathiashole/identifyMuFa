@@ -522,7 +522,7 @@ En este análisis, se utiliza la función ggplot() para visualizar los resultado
 
 ::: {.panel-tabset .nav-pills}
 
-## t-SNE highlighted `r key_name` per genome
+## Dinucleotido t-SNE highlighted `r key_name`
 
 Se realizó un análisis de t-SNE sobre las frecuencias de dinucleótidos resaltando ``r key_name`` por cada genoma ``r genome_name``. El t-SNE permite reducir la dimensionalidad, preservando las relaciones locales de las frecuencias de dinucleótidos, facilitando la exploración de las relaciones entre secuencias y sus patrones de composición a nivel de `dinucleótidos`. 
 
@@ -532,15 +532,186 @@ Se realizó un análisis de t-SNE sobre las frecuencias de dinucleótidos resalt
 #| warning: false
 
 
-# Call perform_tsne
-# perform_result_dinucleotide_tsne <- perform_tsne_highlight(combained_dinucleotide, highlight_ids = highlight_ids, file_col = "Genome", id_col = "id")
 
-# # Show plot
-# perform_result_dinucleotide_tsne$tsne_plot
+# Function to perform t-SNE and plot
+perform_tsne_highlight <- function(data, highlight_ids, file_col = "File", id_col = "ID", perplexity = 30, max_iter = 1000, col_palette = NULL) {
+  # Exclude 'File' and 'ID' columns from numerical analysis
+  tsne_data <- data[, !(names(data) %in% c(file_col, id_col))]
+  # Convert all columns to numeric format
+  tsne_data <- as.data.frame(lapply(tsne_data, as.numeric))
+  # removed duplicated row
+  duplicates <- duplicated(tsne_data) # NEED CHECK WITH BOSS
+  tsne_data_clean <- tsne_data[!duplicates, ] # NEED CHECK WITH BOSS
+  combained_dinucleotide_clean <- data[!duplicates, ] # NEED CHECK WITH BOSS
+
+  # Perform t-SNE
+  tsne_result <- Rtsne(tsne_data_clean, perplexity = perplexity, max_iter = max_iter)
+
+  # Extract t-SNE coordinates
+  tsne_scores <- as.data.frame(tsne_result$Y)
+  colnames(tsne_scores) <- c("tSNE1", "tSNE2")  # Rename columns for clarity
+  
+  # Add 'File' and 'ID' columns to t-SNE results
+  # tsne_scores <- cbind(data[, c(file_col, id_col)], tsne_scores)
+  tsne_scores <- cbind(combained_dinucleotide_clean[, c("Genome", "id")], tsne_scores)
+
+    # Create new 'highlight' column that combines 'Highlighted' with the genome (or file) column
+  tsne_scores$highlight <- ifelse(
+    tsne_scores[[id_col]] %in% highlight_ids, paste0("Highlighted_", tsne_scores[[file_col]]), "Other"
+  )
+  
+  # Assign transparency values according to the 'highlight' column
+  tsne_scores$alpha <- ifelse(
+    grepl("Highlighted", tsne_scores$highlight), 0.6, 0.1
+  )
+
+    # Define color palette only if it wasn't provided
+  if (is.null(col_palette)) {
+    # Get unique values of the 'highlight' column and sort them
+    unique_highlight_values <- sort(unique(tsne_scores$highlight))
+    
+    # Create a color palette that assigns gray to 'Other' and different colors to 'Highlighted_<Genome>'
+    col_palette <- c(scales::hue_pal()(length(unique_highlight_values) - 1), "grey")
+    
+    # Map color palette to unique highlight values
+    names(col_palette) <- unique_highlight_values
+  }
+
+  # Create subsets of the data for 'Highlighted' and 'Other'
+  highlighted_points <- subset(tsne_scores, grepl("Highlighted", highlight))
+  other_points <- subset(tsne_scores, highlight == "Other")
+  
+  # Plot with ggplot: first 'Other' and then 'Highlighted'
+  tsne_plot <- ggplot() +
+    # Layer for non-highlighted points in gray and low transparency
+    geom_point(data = other_points, aes(x = tSNE1, y = tSNE2), color = "grey", alpha = 0.1, size = 3) +
+    # Layer for highlighted points with colors and greater transparency
+    geom_point(data = highlighted_points, aes(x = tSNE1, y = tSNE2, color = highlight, alpha = alpha), size = 3) +
+    scale_color_manual(values = col_palette) +
+    scale_alpha_continuous(range = c(0.1, 0.6)) + 
+    labs(title = "t-SNE Highlighting Selected IDs", x = "t-SNE 1", y = "t-SNE 2") +
+    theme_minimal()
+  
+  # Return the results of the t-SNE and the plot
+  return(list(tsne_result = tsne_result, tsne_scores = tsne_scores, tsne_plot = tsne_plot))
+}
+
+# Call perform_tsne
+perform_result_dinucleotide_tsne <- perform_tsne_highlight(combained_dinucleotide, highlight_ids = highlight_ids, file_col = "Genome", id_col = "id")
+
+# Show plot
+perform_result_dinucleotide_tsne$tsne_plot
 
 ```
 
-## t-SNE highlighted `r key_name` per genome
+## Trinucleotido t-SNE highlighted `r key_name`
+
+Ademas, se realizó un análisis de t-SNE sobre las frecuencias de trinucleótidos resaltando ``r key_name`` por cada genoma ``r genome_name``. Permitiendo reducir la dimensionalidad, preservando las relaciones locales de las frecuencias de `trinucleótidos`. 
+
+```{r}
+#| label: t-distributed Stochastic Neighbor Embedding analysis with plot trinucleotides
+#| echo: true
+#| warning: false
+
+# Call perform_tsne
+perform_result_trinucleotide_tsne <- perform_tsne_highlight(combained_trinucleotide, highlight_ids = highlight_ids, file_col = "Genome", id_col = "id")
+
+# Show plot
+perform_result_trinucleotide_tsne$tsne_plot
+
+```
+
+:::
+
+---
+
+##  Análisis t-SNE de las frecuencias nucleotidicas de `secuencias codificantes` por cada `genoma`
+
+::: {.panel-tabset .nav-pills}
+
+## Dinucleotido t-SNE highlighted `r key_name`
+
+Se realizó un análisis de t-SNE sobre las frecuencias de dinucleótidos resaltando ``r key_name`` por cada genoma ``r genome_name``. El t-SNE permite reducir la dimensionalidad, preservando las relaciones locales de las frecuencias de dinucleótidos, facilitando la exploración de las relaciones entre secuencias y sus patrones de composición a nivel de `dinucleótidos`. 
+
+```{r}
+#| label: t-distributed Stochastic Neighbor Embedding analysis with plot dinucleotides per genome
+#| echo: true
+#| warning: false
+
+
+
+# Function to perform t-SNE and plot
+perform_tsne_highlight <- function(data, highlight_ids, file_col = "File", id_col = "ID", perplexity = 30, max_iter = 1000, col_palette = NULL) {
+  # Exclude 'File' and 'ID' columns from numerical analysis
+  tsne_data <- data[, !(names(data) %in% c(file_col, id_col))]
+  # Convert all columns to numeric format
+  tsne_data <- as.data.frame(lapply(tsne_data, as.numeric))
+  # removed duplicated row
+  duplicates <- duplicated(tsne_data) # NEED CHECK WITH BOSS
+  tsne_data_clean <- tsne_data[!duplicates, ] # NEED CHECK WITH BOSS
+  combained_dinucleotide_clean <- data[!duplicates, ] # NEED CHECK WITH BOSS
+
+  # Perform t-SNE
+  tsne_result <- Rtsne(tsne_data_clean, perplexity = perplexity, max_iter = max_iter)
+
+  # Extract t-SNE coordinates
+  tsne_scores <- as.data.frame(tsne_result$Y)
+  colnames(tsne_scores) <- c("tSNE1", "tSNE2")  # Rename columns for clarity
+  
+  # Add 'File' and 'ID' columns to t-SNE results
+  # tsne_scores <- cbind(data[, c(file_col, id_col)], tsne_scores)
+  tsne_scores <- cbind(combained_dinucleotide_clean[, c("Genome", "id")], tsne_scores)
+
+    # Create new 'highlight' column that combines 'Highlighted' with the genome (or file) column
+  tsne_scores$highlight <- ifelse(
+    tsne_scores[[id_col]] %in% highlight_ids, paste0("Highlighted_", tsne_scores[[file_col]]), "Other"
+  )
+  
+  # Assign transparency values according to the 'highlight' column
+  tsne_scores$alpha <- ifelse(
+    grepl("Highlighted", tsne_scores$highlight), 0.6, 0.1
+  )
+
+    # Define color palette only if it wasn't provided
+  if (is.null(col_palette)) {
+    # Get unique values of the 'highlight' column and sort them
+    unique_highlight_values <- sort(unique(tsne_scores$highlight))
+    
+    # Create a color palette that assigns gray to 'Other' and different colors to 'Highlighted_<Genome>'
+    col_palette <- c(scales::hue_pal()(length(unique_highlight_values) - 1), "grey")
+    
+    # Map color palette to unique highlight values
+    names(col_palette) <- unique_highlight_values
+  }
+
+  # Create subsets of the data for 'Highlighted' and 'Other'
+  highlighted_points <- subset(tsne_scores, grepl("Highlighted", highlight))
+  other_points <- subset(tsne_scores, highlight == "Other")
+  
+  # Plot with ggplot: first 'Other' and then 'Highlighted'
+  tsne_plot <- ggplot() +
+    # Layer for non-highlighted points in gray and low transparency
+    geom_point(data = other_points, aes(x = tSNE1, y = tSNE2), color = "grey", alpha = 0.1, size = 3) +
+    # Layer for highlighted points with colors and greater transparency
+    geom_point(data = highlighted_points, aes(x = tSNE1, y = tSNE2, color = highlight, alpha = alpha), size = 3) +
+    scale_color_manual(values = col_palette) +
+    scale_alpha_continuous(range = c(0.1, 0.6)) + 
+    labs(title = "t-SNE Highlighting Selected IDs", x = "t-SNE 1", y = "t-SNE 2") +
+    theme_minimal()
+  
+  # Return the results of the t-SNE and the plot
+  return(list(tsne_result = tsne_result, tsne_scores = tsne_scores, tsne_plot = tsne_plot))
+}
+
+# Call perform_tsne
+perform_result_dinucleotide_tsne <- perform_tsne_highlight(combained_dinucleotide, highlight_ids = highlight_ids, file_col = "Genome", id_col = "id")
+
+# Show plot
+perform_result_dinucleotide_tsne$tsne_plot
+
+```
+
+## Trinucleotido t-SNE highlighted `r key_name`
 
 Ademas, se realizó un análisis de t-SNE sobre las frecuencias de trinucleótidos resaltando ``r key_name`` por cada genoma ``r genome_name``. Permitiendo reducir la dimensionalidad, preservando las relaciones locales de las frecuencias de `trinucleótidos`. 
 
@@ -549,11 +720,11 @@ Ademas, se realizó un análisis de t-SNE sobre las frecuencias de trinucleótid
 #| echo: true
 #| warning: false
 
-# # Call perform_tsne
-# perform_result_trinucleotide_tsne <- perform_tsne_highlight(combained_trinucleotide, highlight_ids = highlight_ids, file_col = "Genome", id_col = "id")
+# Call perform_tsne
+perform_result_trinucleotide_tsne <- perform_tsne_highlight(combained_trinucleotide, highlight_ids = highlight_ids, file_col = "Genome", id_col = "id")
 
-# # Show plot
-# perform_result_trinucleotide_tsne$tsne_plot
+# Show plot
+perform_result_trinucleotide_tsne$tsne_plot
 
 ```
 
