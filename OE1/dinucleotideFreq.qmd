@@ -638,6 +638,32 @@ Se realizó un análisis de t-SNE sobre las frecuencias de dinucleótidos resalt
 #| echo: true
 #| warning: false
 
+# Call Map color palette to genomes (including 'Other' for grey)
+# palette_to_genome
+
+# Initialize an empty list to store tsne plots for each genome
+tsne_perform_dinucloetide_genome <- list()
+
+# Loop through each genome and call genome to PCA
+for (genome in genomes) {
+  # Subset the data for the current genome
+  genome_data <- subset(combained_dinucleotide, Genome == genome)
+  
+  # # Perform PCA on the subsetted data
+  # pca_result <- perform_pca(genome_data, file_col = "Genome", id_col = "id")
+  # pca_scores <- pca_result$pca_scores
+  
+  # pca_plot <- create_pca_highlight_plot(genome_data, dinucleotide_table$ID, pca_result$pca_result, col_palette = palette_to_genome)
+
+  # pca_plots[[genome]] <- pca_plot
+}
+
+# # Optionally, you can print or save each plot
+# for (genome in genomes) {
+#   print(pca_plots[[genome]])  # Print the plot for each genome
+#   # ggsave(paste0("PCA_", genome, ".pdf"), plot = pca_plots[[genome]])  # Save as PDF if needed
+# }
+
 # # Call perform_tsne
 # perform_result_dinucleotide_tsne <- perform_tsne_highlight(combained_dinucleotide, highlight_ids = highlight_ids, file_col = "Genome", id_col = "id")
 
