@@ -669,22 +669,22 @@ Ademas, se realizó un análisis de t-SNE sobre las frecuencias de trinucleótid
 #| warning: false
 
 # Initialize an empty list to store tsne plots for each genome
-tsne_list_dinucloetide <- list()
+tsne_list_trinucleotide <- list()
 
 # Loop through each genome and call genome to PCA
 for (genome in genomes) {
   # Subset the data for the current genome
-  genome_data <- subset(combained_dinucleotide, Genome == genome)
+  genome_data <- subset(combained_trinucleotide, Genome == genome)
   
   # Perform tsne on the subsetted data
   tsne_list_process <- perform_tsne_highlight(genome_data, highlight_ids = highlight_ids, file_col = "Genome", id_col = "id", col_palette = palette_to_genome) # genome_data, dinucleotide_table$ID, pca_result$pca_result, col_palette = palette_to_genome
 
-  tsne_list_dinucloetide[[genome]] <- tsne_list_process
+  tsne_list_trinucleotide[[genome]] <- tsne_list_process
 }
 
-for (genome in names(tsne_list_dinucloetide)) {
+for (genome in names(tsne_list_trinucleotide)) {
   # get plot of a list
-  tsne_plot <- tsne_list_dinucloetide[[genome]]$tsne_plot
+  tsne_plot <- tsne_list_trinucleotide[[genome]]$tsne_plot
 
   print(tsne_plot) # Show plots
   # filename <- paste0("tsne_plot_", genome, ".png") # Save as PDF if needed
