@@ -668,11 +668,32 @@ Ademas, se realizó un análisis de t-SNE sobre las frecuencias de trinucleótid
 #| echo: true
 #| warning: false
 
-# # Call perform_tsne
-# perform_result_trinucleotide_tsne <- perform_tsne_highlight(combained_trinucleotide, highlight_ids = highlight_ids, file_col = "Genome", id_col = "id")
+# Initialize an empty list to store tsne plots for each genome
+tsne_list_dinucloetide <- list()
 
-# # Show plot
-# perform_result_trinucleotide_tsne$tsne_plot
+# Loop through each genome and call genome to PCA
+for (genome in genomes) {
+  # Subset the data for the current genome
+  genome_data <- subset(combained_dinucleotide, Genome == genome)
+  
+  # Perform tsne on the subsetted data
+  tsne_list_process <- perform_tsne_highlight(genome_data, highlight_ids = highlight_ids, file_col = "Genome", id_col = "id", col_palette = palette_to_genome) # genome_data, dinucleotide_table$ID, pca_result$pca_result, col_palette = palette_to_genome
+
+  tsne_list_dinucloetide[[genome]] <- tsne_list_process
+}
+
+for (genome in names(tsne_list_dinucloetide)) {
+  # get plot of a list
+  tsne_plot <- tsne_list_dinucloetide[[genome]]$tsne_plot
+
+  print(tsne_plot) # Show plots
+  # filename <- paste0("tsne_plot_", genome, ".png") # Save as PDF if needed
+  # ggsave(filename = filename, plot = tsne_plot, width = 8, height = 6, dpi = 300)
+}
+
+# library(gridExtra)
+# plots <- lapply(tsne_list_dinucloetide, function(x) x$tsne_plot) # Get all plot of a list
+# do.call(grid.arrange, c(plots, ncol = 2)) # Show all plot in one image
 
 ```
 
