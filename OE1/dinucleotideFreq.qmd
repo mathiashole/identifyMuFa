@@ -653,6 +653,10 @@ for (genome in names(tsne_list_dinucloetide)) {
   # ggsave(filename = filename, plot = tsne_plot, width = 8, height = 6, dpi = 300)
 }
 
+# library(gridExtra)
+# plots <- lapply(tsne_list_dinucloetide, function(x) x$tsne_plot) # Get all plot of a list
+# do.call(grid.arrange, c(plots, ncol = 2)) # Show all plot in one image
+
 ```
 
 ## t-SNE highlighted `r key_name` per genome
