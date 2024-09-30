@@ -606,6 +606,8 @@ perform_result_dinucleotide_tsne$tsne_plot
 
 ## Trinucleotido t-SNE highlighted `r key_name`
 
+Ademas, se realizó un análisis de t-SNE sobre las frecuencias de trinucleótidos resaltando ``r key_name`` por cada genoma ``r genome_name``. Permitiendo reducir la dimensionalidad, preservando las relaciones locales de las frecuencias de `trinucleótidos`. 
+
 ```{r}
 #| label: t-distributed Stochastic Neighbor Embedding analysis with plot trinucleotides
 #| echo: true
