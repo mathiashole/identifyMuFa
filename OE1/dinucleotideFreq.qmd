@@ -236,7 +236,7 @@ combine_data_frequencies <- function(data, genome_col = "File", id_col = "ID", t
       "ta" = data[,"ta"]
     )
   } else if (type == "tri") {
-    result_combained_data <- data.frame(
+    result_combained_data <- data.frame( # This part need change
       "Genome" = data[, genome_col],
       "id" = data[, id_col],
       "aaa.aag" = data[,"aaa"] + data[,"aag"],
