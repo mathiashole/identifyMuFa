@@ -236,28 +236,42 @@ combine_data_frequencies <- function(data, genome_col = "File", id_col = "ID", t
       "ta" = data[,"ta"]
     )
   } else if (type == "tri") {
-    result_combained_data <- data.frame( # This part need change
-      "Genome" = data[, genome_col],
-      "id" = data[, id_col],
-      "aaa.aag" = data[,"aaa"] + data[,"aag"],
-      "aac.aat" = data[,"aac"] + data[,"aat"],
-      "acc.act" = data[,"acc"] + data[,"act"],
-      "aga.agg" = data[,"aga"] + data[,"agg"],
-      "ata.atc" = data[,"ata"] + data[,"atc"],
-      "caa.cag" = data[,"caa"] + data[,"cag"],
-      "cat.cac" = data[,"cat"] + data[,"cac"],
-      "cca.ccc" = data[,"cca"] + data[,"ccc"],
-      "cga.cgg" = data[,"cga"] + data[,"cgg"],
-      "cta.ctc" = data[,"cta"] + data[,"ctc"],
-      "gaa.gag" = data[,"gaa"] + data[,"gag"],
-      "gat.gca" = data[,"gat"] + data[,"gca"],
-      "gga.ggg" = data[,"gga"] + data[,"ggg"],
-      "gta.gtc" = data[,"gta"] + data[,"gtc"],
-      "taa.tag" = data[,"taa"] + data[,"tag"],
-      "tat.tca" = data[,"tat"] + data[,"tca"],
-      "tga.tgg" = data[,"tga"] + data[,"tgg"],
-      "tta.ttc" = data[,"tta"] + data[,"ttc"]
-    )
+    result_combained_data <- data.frame(
+  "Genome" = data[, genome_col],
+  "id" = data[, id_col],
+  "aaa.ttt" = data[,"aaa"] + data[,"ttt"],
+  "aag.ctt" = data[,"aag"] + data[,"ctt"],
+  "aac.gtt" = data[,"aac"] + data[,"gtt"],
+  "aat.att" = data[,"aat"] + data[,"att"],
+  "acc.ggt" = data[,"acc"] + data[,"ggt"],
+  "act.agt" = data[,"act"] + data[,"agt"],
+  "aga.tct" = data[,"aga"] + data[,"tct"],
+  "agg.cct" = data[,"agg"] + data[,"cct"],
+  "ata.tat" = data[,"ata"] + data[,"tat"],
+  "atc.gat" = data[,"atc"] + data[,"gat"],
+  "caa.ttg" = data[,"caa"] + data[,"ttg"],
+  "cag.ctg" = data[,"cag"] + data[,"ctg"],
+  "cat.atg" = data[,"cat"] + data[,"atg"],
+  "cac.gtg" = data[,"cac"] + data[,"gtg"],
+  "cca.tgg" = data[,"cca"] + data[,"tgg"],
+  "ccc.ggg" = data[,"ccc"] + data[,"ggg"],
+  "cga.tcg" = data[,"cga"] + data[,"tcg"],
+  "cta.tag" = data[,"cta"] + data[,"tag"],
+  "gaa.ttc" = data[,"gaa"] + data[,"ttc"],
+  "gag.ctc" = data[,"gag"] + data[,"ctc"],
+  "gat.atc" = data[,"gat"] + data[,"atc"],
+  "gca.tgc" = data[,"gca"] + data[,"tgc"],
+  "gga.tcc" = data[,"gga"] + data[,"tcc"],
+  "ggg.ccc" = data[,"ggg"] + data[,"ccc"],
+  "gta.tac" = data[,"gta"] + data[,"tac"],
+  "gtc.gac" = data[,"gtc"] + data[,"gac"],
+  "taa.tta" = data[,"taa"] + data[,"tta"],
+  "tag.cta" = data[,"tag"] + data[,"cta"],
+  "tat.ata" = data[,"tat"] + data[,"ata"],
+  "tca.tga" = data[,"tca"] + data[,"tga"],
+  "tga.tca" = data[,"tga"] + data[,"tca"],
+  "tta.aag" = data[,"tta"] + data[,"aag"]
+)
   } else {
     stop("Invalid type specified. Use 'di' for dinucleotides or 'tri' for trinucleotides.")
   }
