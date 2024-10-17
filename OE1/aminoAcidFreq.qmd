@@ -117,7 +117,7 @@ all_frequencies <- bind_rows(freRel_list)
 #| label: create_boxplots_per_file
 #| echo: true
 
-# Crear box plots por archivo usando facet_wrap
+# Crear box plots por cada genoma usando facet_wrap
 ggplot(all_frequencies, aes(x = AminoAcid, y = Freq, fill = AminoAcid)) +
   geom_boxplot() +
   theme_minimal() +
@@ -125,6 +125,6 @@ ggplot(all_frequencies, aes(x = AminoAcid, y = Freq, fill = AminoAcid)) +
        x = "Aminoácido",
        y = "Frecuencia Relativa (%)") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  facet_wrap(~ File, scales = "fixed")  # Un gráfico por archivo
-
+  facet_wrap(~ File, scales = "fixed") 
+  
 ```
