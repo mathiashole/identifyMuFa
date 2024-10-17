@@ -62,5 +62,38 @@ freRel_list <- lapply(fasta_list, function(fasta) {
 ```
 
 ```{r}
+#| label: calculate_frequency
+#| echo: true
+
+# Calcular la frecuencia relativa de aminoácidos para cada archivo
+freRel_list <- lapply(fasta_list, function(fasta) {
+  # Aplicar la función a cada secuencia dentro del archivo FASTA
+  data <- lapply(fasta, function(seq) {
+    freq <- round(100 * table(seq) / getLength(seq), 2)  # Frecuencia relativa
+    as.data.frame(freq) %>% mutate(AminoAcid = rownames(.))  # Formatear a dataframe
+  })
+  
+  # Combinar los resultados de todas las secuencias
+  bind_rows(data, .id = "Sequence")  # Agregar identificador de secuencia
+})
+
+# Unir todos los resultados en un solo dataframe para facilitar el gráfico
+all_frequencies <- bind_rows(freRel_list, .id = "File")  # Identificar el archivo de origen
+
+```
+
+```{r}
+#| label: create_boxplots_per_file
+#| echo: true
+
+# Crear box plots por archivo usando facet_wrap
+ggplot(all_frequencies, aes(x = AminoAcid, y = Freq, fill = AminoAcid)) +
+  geom_boxplot() +
+  theme_minimal() +
+  labs(title = "Frecuencia de Aminoácidos por Archivo",
+       x = "Aminoácido",
+       y = "Frecuencia Relativa (%)") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  facet_wrap(~ File, scales = "free_y")  # Un gráfico por archivo
 
 ```
