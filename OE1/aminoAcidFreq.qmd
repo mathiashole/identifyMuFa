@@ -69,9 +69,26 @@ freRel_list <- lapply(fasta_list, function(fasta) {
 # Definir un vector de nombres de aminoácidos
 amino_acids <- c("A", "R", "N", "D", "C", "E", "Q", "G", "H", "I", "L", "K", "M", "F", "P", "S", "T", "W", "Y", "V")
 
-# Calcular la frecuencia relativa de aminoácidos para cada archivo
-freRel_list <- lapply(fasta_list, function(fasta) {
-  # Aplicar la función a cada secuencia dentro del archivo FASTA
+# # Calcular la frecuencia relativa de aminoácidos para cada archivo
+# freRel_list <- lapply(fasta_list, function(fasta) {
+#   # Aplicar la función a cada secuencia dentro del archivo FASTA
+#   data <- lapply(fasta, function(seq) {
+#     freq <- round(100 * table(seq) / getLength(seq), 2)  # Frecuencia relativa
+#     freq_df <- as.data.frame(freq) %>% 
+#       mutate(AminoAcid = rownames(.))  # Formatear a dataframe
+    
+#     # Reemplazar números por letras de aminoácidos
+#     freq_df$AminoAcid <- amino_acids[as.numeric(freq_df$AminoAcid)]
+    
+#     return(freq_df)
+#   })
+  
+#   # Combinar los resultados de todas las secuencias
+#   bind_rows(data, .id = "Sequence")  # Agregar identificador de secuencia
+# })
+
+freRel_list <- lapply(names(fasta_list), function(file_name) {
+  fasta <- fasta_list[[file_name]]  # Acceder a las secuencias del archivo
   data <- lapply(fasta, function(seq) {
     freq <- round(100 * table(seq) / getLength(seq), 2)  # Frecuencia relativa
     freq_df <- as.data.frame(freq) %>% 
@@ -84,11 +101,14 @@ freRel_list <- lapply(fasta_list, function(fasta) {
   })
   
   # Combinar los resultados de todas las secuencias
-  bind_rows(data, .id = "Sequence")  # Agregar identificador de secuencia
+  bind_rows(data, .id = "Sequence") %>% 
+    mutate(File = file_name)  # Agregar el nombre del archivo
 })
 
+
 # Unir todos los resultados en un solo dataframe para facilitar el gráfico
-all_frequencies <- bind_rows(freRel_list, .id = "File")  # Identificar el archivo de origen
+#all_frequencies <- bind_rows(freRel_list, .id = "File")
+all_frequencies <- bind_rows(freRel_list)
 
 
 ```
@@ -101,10 +121,10 @@ all_frequencies <- bind_rows(freRel_list, .id = "File")  # Identificar el archiv
 ggplot(all_frequencies, aes(x = AminoAcid, y = Freq, fill = AminoAcid)) +
   geom_boxplot() +
   theme_minimal() +
-  labs(title = "Frecuencia de Aminoácidos por Archivo",
+  labs(title = "Frecuencia de Aminoácidos por ",
        x = "Aminoácido",
        y = "Frecuencia Relativa (%)") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  facet_wrap(~ File, scales = "free_y")  # Un gráfico por archivo
+  facet_wrap(~ File, scales = "fixed")  # Un gráfico por archivo
 
 ```
