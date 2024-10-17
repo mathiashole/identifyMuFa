@@ -55,8 +55,12 @@ library(tidyverse)
 ```{r}
 freRel_list <- lapply(fasta_list, function(fasta) {
   sapply(fasta, function(seq) {
-    round(100 * table(seq) / getLength(seq), 2)
+    round(100*table(seq) / getLength(seq), 2)
   })
 })
+
+```
+
+```{r}
 
 ```
