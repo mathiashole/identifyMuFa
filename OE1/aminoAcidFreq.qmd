@@ -1,0 +1,66 @@
+---
+title: "Amino acid frequency"
+author: "Mathias"
+format:
+  html:
+    theme: united
+    code-fold: true
+    code-link: true
+    number-sections: true
+    highlight-style: github
+---
+
+![](https://img.itch.zone/aW1nLzE3MTEyNjE5LmdpZg==/original/2%2BYVZg.gif){style="float:right;" fig-alt="Illustration of a detective cat. Artwork by @shigemi.itch.io." width="301"}
+
+```{css}
+#| echo: false
+
+p {
+  text-align: justify
+}
+
+```
+
+```{r}
+#| label: charged global variables
+#| echo: false
+#| warning: false
+
+directory <- "signalP"
+# Read data frame
+# data_transformed <- read.delim("output_directory/data_transformed.tsv", sep = "\t", header = TRUE)
+########################################
+
+# Obtener la lista de archivos que comienzan con 'out_' y terminan con '.fasta'
+
+files <- list.files(directory, pattern = "\\AA_empty.fasta$", full.names = TRUE)
+
+fasta_list <- lapply(files, read.fasta)
+
+str(fasta_list)
+```
+
+
+```{r}
+#| label: load packages to frequency
+#| echo: true
+#| warning: false
+
+# Load necessary libraries
+#library(data.table)
+library(seqinr)
+library(ggplot2)
+library(ggfortify)
+library(Rtsne)
+library(tidyverse)
+
+```
+
+```{r}
+freRel_list <- lapply(fasta_list, function(fasta) {
+  sapply(fasta, function(seq) {
+    round(100 * table(seq) / getLength(seq), 2)
+  })
+})
+
+```
