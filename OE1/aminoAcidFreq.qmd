@@ -121,7 +121,7 @@ all_frequencies <- bind_rows(freRel_list)
 ggplot(all_frequencies, aes(x = AminoAcid, y = Freq, fill = AminoAcid)) +
   geom_boxplot() +
   theme_minimal() +
-  labs(title = "Frecuencia de Aminoácidos por ",
+  labs(title = "Frecuencia de Aminoácidos por genoma",
        x = "Aminoácido",
        y = "Frecuencia Relativa (%)") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
