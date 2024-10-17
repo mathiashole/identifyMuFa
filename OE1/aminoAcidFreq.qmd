@@ -27,9 +27,6 @@ p {
 #| warning: false
 
 directory <- "signalP"
-# Read data frame
-# data_transformed <- read.delim("output_directory/data_transformed.tsv", sep = "\t", header = TRUE)
-########################################
 
 # Obtener la lista de archivos que comienzan con 'out_' y terminan con '.fasta'
 
@@ -37,7 +34,6 @@ files <- list.files(directory, pattern = "\\AA_empty.fasta$", full.names = TRUE)
 
 fasta_list <- lapply(files, read.fasta)
 
-str(fasta_list)
 ```
 
 
