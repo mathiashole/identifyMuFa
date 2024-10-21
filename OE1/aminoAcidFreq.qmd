@@ -51,6 +51,13 @@ library(ggfortify)
 library(Rtsne)
 library(tidyverse)
 
+##
+
+library(Biostrings)
+library(dplyr)
+library(purrr)
+library(tidyr)
+
 ```
 
 ```{r}
@@ -91,8 +98,6 @@ freRel_list <- lapply(names(fasta_list), function(file_name) {
 
 # Unir todos los resultados en un solo dataframe para facilitar el plot
 all_frequencies <- bind_rows(freRel_list)
-
-
 ```
 
 ```{r}
@@ -108,5 +113,70 @@ ggplot(all_frequencies, aes(x = AminoAcid, y = Freq, fill = AminoAcid)) +
        y = "Frecuencia Relativa (%)") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
   facet_wrap(~ File, scales = "fixed") 
+
+```
+
+```{r}
+#| label: other 
+#| echo: true
+
+amino_acids <- c("A", "R", "N", "D", "C", "E", "Q", "G", "H", "I", 
+                 "L", "K", "M", "F", "P", "S", "T", "W", "Y", "V")
+
+# Grupos de aminoácidos (opcional, según lo necesites luego)
+amino_acid_groups <- list(
+  Aliphatic = c("A", "G", "V", "L", "I"),
+  Aromatic = c("F", "W", "Y"),
+  Sulphur = c("C", "M"),
+  Basic = c("K", "R", "H"),
+  Acidic = c("B", "D", "E", "N", "Q", "Z"),
+  Aliphatic_hydroxyl = c("S", "T"),
+  tRNA_synthetase_class_I = c("Z", "E", "Q", "R", "C", "M", "V", "I", "L", "Y", "W"),
+  tRNA_synthetase_class_II = c("B", "G", "A", "P", "S", "T", "H", "D", "N", "K", "F")
+)
+
+# Función para calcular frecuencias de aminoácidos
+calculate_amino_acid_frequencies <- function(file) {
+  fasta <- readAAStringSet(file)  # Leer el archivo multifasta
+  results <- lapply(names(fasta), function(seq_id) {
+    seq <- as.character(fasta[[seq_id]])  # Convertir secuencia a texto
+    aa_counts <- table(strsplit(seq, "")[[1]])  # Contar aminoácidos
+    total_aa <- sum(aa_counts)  # Total de aminoácidos
+
+    # Crear un dataframe de frecuencias por aminoácido
+    freq_df <- data.frame(AminoAcid = names(aa_counts), 
+                          Frequency = as.vector(aa_counts) / total_aa)
+
+    # Pivotar el dataframe para tener aminoácidos como columnas
+    freq_wide <- freq_df %>%
+      pivot_wider(names_from = AminoAcid, values_from = Frequency, 
+                  values_fill = list(Frequency = 0))  # Llenar NA con 0
+
+    # Agregar columnas con el nombre del archivo y el ID de secuencia
+    freq_wide <- freq_wide %>%
+      mutate(File = basename(file), Sequence_ID = seq_id) %>%
+      relocate(File, Sequence_ID)  # Asegurar el orden de las columnas
+
+    return(freq_wide)
+  })
+
+  # Combinar resultados para todas las secuencias en un archivo
+  bind_rows(results)
+}
+
+# Directorio con archivos multifasta
+input_directory <- "/home/usuario/Data_Rstudio/masBioinfo/OE1/signalP/"
+fasta_files <- list.files(input_directory, pattern = "\\AA_empty.fasta$", full.names = TRUE)
+
+# Procesar todos los archivos
+all_frequencies <- lapply(fasta_files, calculate_amino_acid_frequencies)
+
+# Combinar resultados de todos los archivos en un solo dataframe
+# combined_freqs <- bind_rows(all_frequencies)
+combined_freqs <- bind_rows(all_frequencies) %>%
+  replace(is.na(.), 0)  # Reemplazar NA por 0
+
+# Verificar intersección entre aminoácidos y grupos
+lapply(amino_acid_groups, function(group) intersect(names(combined_freqs), group))
 
 ```
