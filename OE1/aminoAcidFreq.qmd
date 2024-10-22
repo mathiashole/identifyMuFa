@@ -241,5 +241,6 @@ ggplot(long_data, aes(x = AminoAcidGroup, y = Freq, fill = AminoAcidGroup)) +
   labs(title = "Frecuencia de Grupos de Aminoácidos por Genoma",
        x = "Grupo de Aminoácido",
        y = "Frecuencia Relativa (%)") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))+
+  facet_wrap(~ Genome, scales = "fixed")
 ```
