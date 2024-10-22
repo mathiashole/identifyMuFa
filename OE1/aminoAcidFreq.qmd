@@ -207,8 +207,8 @@ ggplot(long_freqs, aes(x = AminoAcid, y = Freq, fill = AminoAcid)) +
 
 classification_aminoacids <- function(data, genome_col = "File", id_col = "Sequence_ID", type) {
     result_combained_data <- data.frame(
-      "Genome" = data[, genome_col],
-      "id" = data[, id_col],
+      "Genome" = data[[ genome_col]],
+      "id" = data[[ id_col]],
       "Aliphatic G,A,V,L,I" = data[,"G"] + data[,"A"] + data[,"V"] + data[,"L"] + data[,"I"],
       "Aromatic F,W,Y" = data[,"F"] + data[,"W"] + data[,"Y"],
       "Sulphur C,M" = data[,"C"] + data[,"M"],
