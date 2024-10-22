@@ -211,12 +211,12 @@ classification_aminoacids <- function(data, genome_col = "File", id_col = "Seque
       "id" = data[[ id_col]],
       "Aliphatic_G,A,V,L,I" = rowSums(data[, c("G", "A", "V", "L", "I")]),
       "Aromatic_F,W,Y" = rowSums(data[, c("F", "W", "Y")]),
-      "Sulphur C,M" = rowSums(data[, c("C", "M")]),
-      "Basic K,R,H" = rowSums(data[, c("K", "R", "H")]),
-      "Acidic B,D,E,N,Q,Z" = rowSums(data[, c("D", "E", "N", "Q")]),
-      "Aliphatic hydroxyl S,T" = rowSums(data[, c("S", "T")]),
+      "Sulphur_C,M" = rowSums(data[, c("C", "M")]),
+      "Basic_K,R,H" = rowSums(data[, c("K", "R", "H")]),
+      "Acidic_B,D,E,N,Q,Z" = rowSums(data[, c("D", "E", "N", "Q")]),
+      "AliphaticHydroxyl_S,T" = rowSums(data[, c("S", "T")]),
       "tRNAsynthetaseClassI_Z,E,Q,R,C,M,V,I,L,Y,W" = rowSums(data[, c("E", "Q", "R", "C", "M", "V", "I", "L", "Y", "W")]),
-      "tRNA synthetase class II B,G,A,P,S,T,H,D,N,K,F" = rowSums(data[, c("G", "A", "P", "S", "T", "H", "D", "N", "K", "F")])
+      "tRNAsynthetaseClassII_B,G,A,P,S,T,H,D,N,K,F" = rowSums(data[, c("G", "A", "P", "S", "T", "H", "D", "N", "K", "F")])
     ) # fix data[,"B"], data[,"Z"]
 }
 
