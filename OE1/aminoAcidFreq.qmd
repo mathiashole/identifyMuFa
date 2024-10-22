@@ -223,3 +223,23 @@ classification_aminoacids <- function(data, genome_col = "File", id_col = "Seque
 classfied_amino_acids <- classification_aminoacids(combined_freqs)
 
 ```
+
+```{r}
+#| label: plot amino acids group
+#| echo: true
+
+long_data <- classfied_amino_acids %>%
+  pivot_longer(
+    cols = -c(Genome, id),  # Excluir columnas que no se quieren transformar
+    names_to = "AminoAcidGroup",
+    values_to = "Freq"
+  )
+
+ggplot(long_data, aes(x = AminoAcidGroup, y = Freq, fill = AminoAcidGroup)) +
+  geom_boxplot() +
+  theme_minimal() +
+  labs(title = "Frecuencia de Grupos de Aminoácidos por Genoma",
+       x = "Grupo de Aminoácido",
+       y = "Frecuencia Relativa (%)") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
