@@ -81,9 +81,7 @@ freRel_list <- lapply(fasta_list, function(fasta) {
 #| echo: true
 
 # Definir un vector de nombres de aminoácidos
-# amino_acids <- c("A", "R", "N", "D", "C", "E", "Q", "G", "H", "I", "L", "K", "M", "F", "P", "S", "T", "W", "Y", "V")
 amino_acids <- c("A", "R", "N", "D", "B", "C", "Q", "E", "Z", "G", "H", "I", "L", "K", "M", "F", "P", "S", "T", "W", "Y", "V")
-# amino_acids <- c("A", "B", "C", "D", "E", "F", "G", "H", "I", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "V", "W", "X", "Y", "Z")
 
 
 
@@ -131,7 +129,6 @@ ggplot(all_frequencies, aes(x = AminoAcid, y = Freq, fill = AminoAcid)) +
 #| echo: true
 
 amino_acids <- c("A", "R", "N", "D", "B", "C", "Q", "E", "Z", "G", "H", "I", "L", "K", "M", "F", "P", "S", "T", "W", "Y", "V")
-#"I", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "V", "W", "X", "Y", "Z")
 
 # Grupos de aminoácidos (opcional, según lo necesites luego)
 amino_acid_groups <- list(
@@ -185,9 +182,6 @@ all_frequencies <- lapply(fasta_files, calculate_amino_acid_frequencies)
 # combined_freqs <- bind_rows(all_frequencies)
 combined_freqs <- bind_rows(all_frequencies) %>%
   replace(is.na(.), 0)  # Reemplazar NA por 0
-
-# # Verificar intersección entre aminoácidos y grupos
-# lapply(amino_acid_groups, function(group) intersect(names(combined_freqs), group))
 
 ```
 
