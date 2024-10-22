@@ -200,3 +200,26 @@ ggplot(long_freqs, aes(x = AminoAcid, y = Freq, fill = AminoAcid)) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
   facet_wrap(~ File, scales = "fixed")
 ```
+
+```{r}
+#| label: classification amino acids 
+#| echo: true
+
+classification_aminoacids <- function(data, genome_col = "File", id_col = "Sequence_ID", type) {
+    result_combained_data <- data.frame(
+      "Genome" = data[, genome_col],
+      "id" = data[, id_col],
+      "Aliphatic G,A,V,L,I" = data[,"G"] + data[,"A"] + data[,"V"] + data[,"L"] + data[,"I"],
+      "Aromatic F,W,Y" = data[,"F"] + data[,"W"] + data[,"Y"],
+      "Sulphur C,M" = data[,"C"] + data[,"M"],
+      "Basic K,R,H" = data[,"K"] + data[,"R"] + data[,"H"],
+      "Acidic B,D,E,N,Q,Z" = data[,"D"] + data[,"E"] + data[,"N"] + data[,"Q"],
+      "Aliphatic hydroxyl S,T" = data[,"S"] + data[,"T"],
+      "tRNA synthetase class I Z,E,Q,R,C,M,V,I,L,Y,W" = data[,"E"] + data[,"Q"] + data[,"R"] + data[,"C"] + data[,"M"] + data[,"V"] + data[,"I"] + data[,"L"] + data[,"Y"] + data[,"W"],
+      "tRNA synthetase class II B,G,A,P,S,T,H,D,N,K,F" = data[,"G"] + data[,"A"] + data[,"P"] + data[,"S"] + data[,"T"] + data[,"H"] + data[,"D"] + data[,"N"] + data[,"K"] + data[,"F"]
+    ) # fix data[,"B"], data[,"Z"]
+}
+
+classfied_amino_acids <- classification_aminoacids(combined_freqs)
+
+```
