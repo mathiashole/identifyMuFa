@@ -74,7 +74,10 @@ freRel_list <- lapply(fasta_list, function(fasta) {
 #| echo: true
 
 # Definir un vector de nombres de aminoácidos
-amino_acids <- c("A", "R", "N", "D", "C", "E", "Q", "G", "H", "I", "L", "K", "M", "F", "P", "S", "T", "W", "Y", "V")
+# amino_acids <- c("A", "R", "N", "D", "C", "E", "Q", "G", "H", "I", "L", "K", "M", "F", "P", "S", "T", "W", "Y", "V")
+amino_acids <- c("A", "R", "N", "D", "B", "C", "Q", "E", "Z", "G", "H", "I", "L", "K", "M", "F", "P", "S", "T", "W", "Y", "V")
+# amino_acids <- c("A", "B", "C", "D", "E", "F", "G", "H", "I", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "V", "W", "X", "Y", "Z")
+
 
 
 freRel_list <- lapply(names(fasta_list), function(file_name) {
@@ -120,8 +123,7 @@ ggplot(all_frequencies, aes(x = AminoAcid, y = Freq, fill = AminoAcid)) +
 #| label: other 
 #| echo: true
 
-amino_acids <- c("A", "R", "N", "D", "C", "E", "Q", "G", "H", "I", 
-                 "L", "K", "M", "F", "P", "S", "T", "W", "Y", "V")
+amino_acids <- c("A", "R", "N", "D", "B", "C", "Q", "E", "Z", "G", "H", "I", "L", "K", "M", "F", "P", "S", "T", "W", "Y", "V")"I", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "V", "W", "X", "Y", "Z")
 
 # Grupos de aminoácidos (opcional, según lo necesites luego)
 amino_acid_groups <- list(
@@ -176,7 +178,25 @@ all_frequencies <- lapply(fasta_files, calculate_amino_acid_frequencies)
 combined_freqs <- bind_rows(all_frequencies) %>%
   replace(is.na(.), 0)  # Reemplazar NA por 0
 
-# Verificar intersección entre aminoácidos y grupos
-lapply(amino_acid_groups, function(group) intersect(names(combined_freqs), group))
+# # Verificar intersección entre aminoácidos y grupos
+# lapply(amino_acid_groups, function(group) intersect(names(combined_freqs), group))
 
+```
+
+```{r}
+long_freqs <- combined_freqs %>%
+  pivot_longer(cols = A:Y,  # Especifica las columnas de aminoácidos
+               names_to = "AminoAcid",  # Nombre de la nueva columna para los nombres de los aminoácidos
+               values_to = "Freq") %>%  # Nombre de la nueva columna para las frecuencias
+  mutate(Freq = Freq * 100)  # Convertir frecuencias a porcentaje
+
+# Crear el gráfico de caja
+ggplot(long_freqs, aes(x = AminoAcid, y = Freq, fill = AminoAcid)) +
+  geom_boxplot() +
+  theme_minimal() +
+  labs(title = "Frecuencia de Aminoácidos por Genoma",
+       x = "Aminoácido",
+       y = "Frecuencia Relativa (%)") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  facet_wrap(~ File, scales = "fixed")
 ```
