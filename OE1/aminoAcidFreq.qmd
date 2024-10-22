@@ -147,7 +147,7 @@ amino_acid_groups <- list(
 
 # Función para calcular frecuencias de aminoácidos
 calculate_amino_acid_frequencies <- function(file) {
-  fasta <- readAAStringSet(file)  # Leer el archivo multifasta
+  fasta <- read.fasta(file)  # Leer el archivo multifasta
   results <- lapply(names(fasta), function(seq_id) {
     seq <- as.character(fasta[[seq_id]])  # Convertir secuencia a texto
     aa_counts <- table(strsplit(seq, "")[[1]])  # Contar aminoácidos
