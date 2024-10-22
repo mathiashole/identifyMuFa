@@ -142,13 +142,46 @@ amino_acid_groups <- list(
   tRNA_synthetase_class_II = c("B", "G", "A", "P", "S", "T", "H", "D", "N", "K", "F")
 )
 
-# Función para calcular frecuencias de aminoácidos
+# # Función para calcular frecuencias de aminoácidos
+# calculate_amino_acid_frequencies <- function(file) {
+#   fasta <- readDNAStringSet(file)  # Leer el archivo multifasta
+#   results <- lapply(names(fasta), function(seq_id) {
+#     seq <- as.character(fasta[[seq_id]])  # Convertir secuencia a texto
+#     aa_counts <- table(strsplit(seq, "")[[1]])  # Contar aminoácidos
+#     total_aa <- sum(aa_counts)  # Total de aminoácidos
+
+#     # Crear un dataframe de frecuencias por aminoácido
+#     freq_df <- data.frame(AminoAcid = names(aa_counts), 
+#                           Frequency = as.vector(aa_counts) / total_aa)
+
+#     # Pivotar el dataframe para tener aminoácidos como columnas
+#     freq_wide <- freq_df %>%
+#       pivot_wider(names_from = AminoAcid, values_from = Frequency, 
+#                   values_fill = list(Frequency = 0))  # Llenar NA con 0
+
+#     # Agregar columnas con el nombre del archivo y el ID de secuencia
+#     freq_wide <- freq_wide %>%
+#       mutate(File = basename(file), Sequence_ID = seq_id) %>%
+#       relocate(File, Sequence_ID)  # Asegurar el orden de las columnas
+
+#     return(freq_wide)
+#   })
+
+#   # Combinar resultados para todas las secuencias en un archivo
+#   bind_rows(results)
+# }
+
 calculate_amino_acid_frequencies <- function(file) {
-  fasta <- readDNAStringSet(file)  # Leer el archivo multifasta
+  fasta <- read.fasta(file, seqtype = "AA")  # Leer archivo multifasta de aminoácidos
+
+  amino_acids <- c("A", "R", "N", "D", "B", "C", "Q", "E", "Z", "G", "H", "I", "L", "K", "M", "F", "P", "S", "T", "W", "Y", "V")
+
+  # Procesar cada secuencia en el archivo
   results <- lapply(names(fasta), function(seq_id) {
-    seq <- as.character(fasta[[seq_id]])  # Convertir secuencia a texto
-    aa_counts <- table(strsplit(seq, "")[[1]])  # Contar aminoácidos
-    total_aa <- sum(aa_counts)  # Total de aminoácidos
+    seq <- toupper(getSequence(fasta[[seq_id]], as.string = TRUE)[[1]])  # Convertir a texto y mayúsculas
+    aa_counts <- table(factor(strsplit(seq, "")[[1]], levels = amino_acids))  # Contar aminoácidos con niveles
+
+    total_aa <- sum(aa_counts)  # Total de aminoácidos en la secuencia
 
     # Crear un dataframe de frecuencias por aminoácido
     freq_df <- data.frame(AminoAcid = names(aa_counts), 
@@ -157,9 +190,9 @@ calculate_amino_acid_frequencies <- function(file) {
     # Pivotar el dataframe para tener aminoácidos como columnas
     freq_wide <- freq_df %>%
       pivot_wider(names_from = AminoAcid, values_from = Frequency, 
-                  values_fill = list(Frequency = 0))  # Llenar NA con 0
+                  values_fill = list(Frequency = 0))  # Llenar valores faltantes con 0
 
-    # Agregar columnas con el nombre del archivo y el ID de secuencia
+    # Agregar columnas con el nombre del archivo y el ID de la secuencia
     freq_wide <- freq_wide %>%
       mutate(File = basename(file), Sequence_ID = seq_id) %>%
       relocate(File, Sequence_ID)  # Asegurar el orden de las columnas
@@ -167,7 +200,7 @@ calculate_amino_acid_frequencies <- function(file) {
     return(freq_wide)
   })
 
-  # Combinar resultados para todas las secuencias en un archivo
+  # Combinar resultados de todas las secuencias en un archivo
   bind_rows(results)
 }
 
@@ -237,10 +270,10 @@ classification_aminoacids <- function(data, genome_col = "File", id_col = "Seque
       "Aromatic_F,W,Y" = rowSums(data[, c("F", "W", "Y")]),
       "Sulphur_C,M" = rowSums(data[, c("C", "M")]),
       "Basic_K,R,H" = rowSums(data[, c("K", "R", "H")]),
-      "Acidic_B,D,E,N,Q,Z" = rowSums(data[, c("D", "E", "N", "Q")]),
+      "Acidic_B,D,E,N,Q,Z" = rowSums(data[, c("B", "D", "E", "N", "Q", "Z")]),
       "AliphaticHydroxyl_S,T" = rowSums(data[, c("S", "T")]),
-      "tRNAsynthetaseClassI_Z,E,Q,R,C,M,V,I,L,Y,W" = rowSums(data[, c("E", "Q", "R", "C", "M", "V", "I", "L", "Y", "W")]),
-      "tRNAsynthetaseClassII_B,G,A,P,S,T,H,D,N,K,F" = rowSums(data[, c("G", "A", "P", "S", "T", "H", "D", "N", "K", "F")])
+      "tRNAsynthetaseClassI_Z,E,Q,R,C,M,V,I,L,Y,W" = rowSums(data[, c("Z", "E", "Q", "R", "C", "M", "V", "I", "L", "Y", "W")]),
+      "tRNAsynthetaseClassII_B,G,A,P,S,T,H,D,N,K,F" = rowSums(data[, c("B", "G", "A", "P", "S", "T", "H", "D", "N", "K", "F")])
     ) # fix data[,"B"], data[,"Z"]
 }
 
