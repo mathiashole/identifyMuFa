@@ -53,6 +53,13 @@ library(tidyverse)
 
 ##
 
+library(gridExtra)
+library(ggridges)
+library(ggbeeswarm)
+library(cowplot)
+
+##
+
 library(Biostrings)
 library(dplyr)
 library(purrr)
@@ -123,7 +130,8 @@ ggplot(all_frequencies, aes(x = AminoAcid, y = Freq, fill = AminoAcid)) +
 #| label: other 
 #| echo: true
 
-amino_acids <- c("A", "R", "N", "D", "B", "C", "Q", "E", "Z", "G", "H", "I", "L", "K", "M", "F", "P", "S", "T", "W", "Y", "V")"I", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "V", "W", "X", "Y", "Z")
+amino_acids <- c("A", "R", "N", "D", "B", "C", "Q", "E", "Z", "G", "H", "I", "L", "K", "M", "F", "P", "S", "T", "W", "Y", "V")
+#"I", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "V", "W", "X", "Y", "Z")
 
 # Grupos de aminoácidos (opcional, según lo necesites luego)
 amino_acid_groups <- list(
@@ -199,6 +207,28 @@ ggplot(long_freqs, aes(x = AminoAcid, y = Freq, fill = AminoAcid)) +
        y = "Frecuencia Relativa (%)") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
   facet_wrap(~ File, scales = "fixed")
+
+# frequency AA plotting function
+plot_violin_gc <- function(data, plot_title, y_label) {
+  ggplot(data, aes(x = AminoAcid, y = Freq, fill = AminoAcid)) +
+    geom_violin(alpha = 0.7, width = 0.5) + 
+    geom_boxplot(width = 0.1, fill = "white", alpha = 0.3) +
+    # scale_fill_brewer(palette = "Dark2") +  # Apply RColorBrewer's Dark2 Palette
+    ylab(y_label) +  # Customize the ylab
+    labs(
+      title = plot_title,  # Customize the title
+      caption = "Data source: Facultad de Ciencias, Udelar"
+    ) +
+    theme_minimal_vgrid() + 
+    theme(axis.line.y = element_blank(), axis.ticks.y = element_blank())
+}
+
+# Function plot_violin_gc call
+plot_violin_gc(
+  data = long_freqs, 
+  plot_title = "Genome GC", 
+  y_label = "GC Content"
+)
 ```
 
 ```{r}
