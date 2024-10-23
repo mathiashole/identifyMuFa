@@ -67,6 +67,40 @@ fasta_list <- lapply(setNames(files, basename(files)), read.fasta)
 ```
 
 ```{r}
+#| label: charged amino acid table usage
+#| echo: false
+#| warning: false
+
+# Crear el dataframe con la tabla de aminoácidos
+amino_acids <- data.frame(
+  Amino_Acid = c("Alanine", "Arginine", "Asparagine", "Aspartic acid", 
+                 "Cysteine", "Glutamine", "Glutamic acid", "Glycine", 
+                 "Histidine", "Isoleucine", "Leucine", "Lysine", 
+                 "Methionine", "Phenylalanine", "Proline", "Serine", 
+                 "Threonine", "Tryptophan", "Tyrosine", "Valine"),
+  Three_Letter_Abbreviation = c("Ala", "Arg", "Asn", "Asp", "Cys", "Gln", 
+                                "Glu", "Gly", "His", "Ile", "Leu", "Lys", 
+                                "Met", "Phe", "Pro", "Ser", "Thr", "Trp", 
+                                "Tyr", "Val"),
+  One_Letter_Symbol = c("A", "R", "N", "D", "C", "Q", "E", "G", "H", 
+                        "I", "L", "K", "M", "F", "P", "S", "T", "W", 
+                        "Y", "V"),
+  Molecular_Weight = c(89, 174, 132, 133, 121, 146, 147, 75, 155, 131, 
+                       131, 146, 149, 165, 115, 105, 119, 204, 181, 117)
+)
+
+ggplot(amino_acids, aes(x = reorder(Amino_Acid, Molecular_Weight), 
+                        y = Molecular_Weight, fill = Molecular_Weight)) +
+  geom_bar(stat = "identity") +
+  coord_flip() +
+  scale_fill_gradient(low = "lightblue", high = "darkblue") +
+  labs(title = "Peso Molecular de Aminoácidos",
+       x = "Aminoácido",
+       y = "Peso Molecular (Da)") +
+  theme_minimal()
+```
+
+```{r}
 #| label: other 
 #| echo: true
 
