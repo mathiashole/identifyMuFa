@@ -137,6 +137,8 @@ dinucleotide_all_protein_coding <- read.table("output_directory/amino_acids_freq
 ```
 
 ```{r}
+#| label: main function to calculated amino acid frequencies 
+#| echo: true
 
 calculate_amino_acid_frequencies <- function(file) {
   fasta <- read.fasta(file, seqtype = "AA")  # Leer archivo multifasta de aminoácidos
