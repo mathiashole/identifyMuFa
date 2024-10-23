@@ -142,7 +142,6 @@ calculate_amino_acid_frequencies <- function(file) {
   # Procesar cada secuencia en el archivo
   results <- lapply(names(fasta), function(seq_id) {
     seq <- toupper(getSequence(fasta[[seq_id]], as.string = TRUE)[[1]])  # Convertir a texto y mayúsculas
-    seq <- gsub("[^ARNDCEQGHILKMFPSTWYV]", "", seq)  # Filtrar caracteres no válidos
     aa_counts <- table(factor(strsplit(seq, "")[[1]], levels = amino_acids))  # Contar aminoácidos con niveles
 
     total_aa <- sum(aa_counts)  # Total de aminoácidos en la secuencia
