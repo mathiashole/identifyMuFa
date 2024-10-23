@@ -30,7 +30,6 @@ directory_second <- "signalP"
 directory <- "output_directory/"
 # Read data frame
 data_transformed <- read.delim("output_directory/data_transformed.tsv", sep = "\t", header = TRUE)
-########################################
 
 # Obtener la lista de archivos que comienzan con 'out_' y terminan con '.fasta'
 fasta_files <- paste0(directory, data_transformed$out_gscissors)
