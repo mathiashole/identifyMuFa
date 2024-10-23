@@ -73,7 +73,7 @@ fasta_list <- lapply(setNames(files, basename(files)), read.fasta)
 calculate_amino_acid_frequencies <- function(file) {
   fasta <- read.fasta(file, seqtype = "AA")  # Leer archivo multifasta de aminoácidos
 
-  amino_acids <- c("A", "R", "N", "D", "B", "C", "Q", "E", "Z", "G", "H", "I", "L", "K", "M", "F", "P", "S", "T", "W", "X", "Y", "V")
+  amino_acids <- c("A", "R", "N", "D", "C", "Q", "E", "G", "H", "I", "L", "K", "M", "F", "P", "S", "T", "W", "Y", "V")
 
   # Procesar cada secuencia en el archivo
   results <- lapply(names(fasta), function(seq_id) {
