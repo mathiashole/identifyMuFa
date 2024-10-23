@@ -80,14 +80,14 @@ library(tidyr)
 #| echo: false
 #| warning: false
 
-directory <- "signalP"
+# directory <- "signalP"
 
-# Obtener la lista de archivos que comienzan con 'out_' y terminan con '.fasta'
+# # Obtener la lista de archivos que comienzan con 'out_' y terminan con '.fasta'
 
-files <- list.files(directory, pattern = "\\AA_empty.fasta$", full.names = TRUE)
+# files <- list.files(directory, pattern = "\\AA_empty.fasta$", full.names = TRUE)
 
-#fasta_list <- lapply(files, read.fasta)
-fasta_list <- lapply(setNames(files, basename(files)), read.fasta)
+# #fasta_list <- lapply(files, read.fasta)
+# fasta_list <- lapply(setNames(files, basename(files)), read.fasta)
 
 ```
 
@@ -157,6 +157,14 @@ calculate_amino_acid_frequencies <- function(file) {
   bind_rows(results)
 }
 
+# Procesar todos los archivos
+all_frequencies_coding_prot <- lapply(rest_code_prot, calculate_amino_acid_frequencies)
+
+# Combinar resultados de todos los archivos en un solo dataframe
+# combined_freqs <- bind_rows(all_frequencies_target)
+combined_freqs_coding_prot <- bind_rows(all_frequencies_coding_prot) %>%
+  replace(is.na(.), 0)  # Reemplazar NA por 0
+
 ```
 
 ## DGF-1 amino acid frequency
@@ -165,17 +173,14 @@ calculate_amino_acid_frequencies <- function(file) {
 #| label: other 
 #| echo: true
 
-
-# Directorio con archivos multifasta
-input_directory <- "/home/usuario/Data_Rstudio/masBioinfo/OE1/signalP/"
-fasta_files <- list.files(input_directory, pattern = "\\AA_empty.fasta$", full.names = TRUE)
+fasta_files <- list.files(directory_second, pattern = "\\AA_empty.fasta$", full.names = TRUE)
 
 # Procesar todos los archivos
-all_frequencies <- lapply(fasta_files, calculate_amino_acid_frequencies)
+all_frequencies_target <- lapply(fasta_files, calculate_amino_acid_frequencies)
 
 # Combinar resultados de todos los archivos en un solo dataframe
-# combined_freqs <- bind_rows(all_frequencies)
-combined_freqs <- bind_rows(all_frequencies) %>%
+# combined_freqs <- bind_rows(all_frequencies_target)
+combined_freqs <- bind_rows(all_frequencies_target) %>%
   replace(is.na(.), 0)  # Reemplazar NA por 0
 
 ```
