@@ -292,20 +292,24 @@ ggplot(long_data, aes(x = AminoAcidGroup, y = Freq, fill = AminoAcidGroup)) +
   facet_wrap(~ Genome, scales = "fixed")
 
 plot_violin_group <- function(data, plot_title, y_label) {
-  ggplot(data, aes(x = AminoAcidGroup, y = Freq)) +
-    geom_violin(alpha = 0.7, width = 0.5, fill = "skyblue") + 
-    geom_boxplot(width = 0.1, fill = "white", alpha = 0.3) +
-    scale_fill_brewer(palette = "Dark2") +  # Paleta opcional
+  ggplot(data, aes(x = AminoAcidGroup, y = Freq, fill = AminoAcidGroup)) +
+    geom_violin(alpha = 0.7, width = 0.5) + 
+    geom_boxplot(width = 0.1, fill = "white", alpha = 0.3, outlier.shape = NA) +
+    scale_fill_brewer(palette = "Dark2") +  # Colores automáticos según grupo
     ylab(y_label) + 
     labs(
       title = plot_title, 
       caption = "Data source: Facultad de Ciencias, Udelar"
     ) +
     theme_minimal() + 
-    theme(axis.line.y = element_blank(), axis.ticks.y = element_blank())
+    theme(
+      axis.line.y = element_blank(), 
+      axis.ticks.y = element_blank()#,
+#      legend.position = "none"
+    )
 }
 
-# Function plot_violin_gc call
+# Function plot_violin_group call
 plot_violin_group(
   data = long_data, 
   plot_title = "Frequency of grouped amino acids", 
