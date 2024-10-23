@@ -75,21 +75,6 @@ library(tidyr)
 
 ```
 
-```{r}
-#| label: charged global variables
-#| echo: false
-#| warning: false
-
-# directory <- "signalP"
-
-# # Obtener la lista de archivos que comienzan con 'out_' y terminan con '.fasta'
-
-# files <- list.files(directory, pattern = "\\AA_empty.fasta$", full.names = TRUE)
-
-# #fasta_list <- lapply(files, read.fasta)
-# fasta_list <- lapply(setNames(files, basename(files)), read.fasta)
-
-```
 
 ```{r}
 #| label: charged amino acid table usage
