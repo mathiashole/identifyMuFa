@@ -128,20 +128,6 @@ ggplot(all_frequencies, aes(x = AminoAcid, y = Freq, fill = AminoAcid)) +
 #| label: other 
 #| echo: true
 
-amino_acids <- c("A", "R", "N", "D", "B", "C", "Q", "E", "Z", "G", "H", "I", "L", "K", "M", "F", "P", "S", "T", "W", "Y", "V")
-
-# Grupos de aminoácidos (opcional, según lo necesites luego)
-amino_acid_groups <- list(
-  Aliphatic = c("A", "G", "V", "L", "I"),
-  Aromatic = c("F", "W", "Y"),
-  Sulphur = c("C", "M"),
-  Basic = c("K", "R", "H"),
-  Acidic = c("B", "D", "E", "N", "Q", "Z"),
-  Aliphatic_hydroxyl = c("S", "T"),
-  tRNA_synthetase_class_I = c("Z", "E", "Q", "R", "C", "M", "V", "I", "L", "Y", "W"),
-  tRNA_synthetase_class_II = c("B", "G", "A", "P", "S", "T", "H", "D", "N", "K", "F")
-)
-
 calculate_amino_acid_frequencies <- function(file) {
   fasta <- read.fasta(file, seqtype = "AA")  # Leer archivo multifasta de aminoácidos
 
