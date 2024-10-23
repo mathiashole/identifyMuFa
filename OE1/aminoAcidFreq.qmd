@@ -250,6 +250,20 @@ plot_bar_gc <- function(data, plot_title, y_label) {
     )
 }
 
+unique_files <- unique(summary_data_coding_prot$File)
+
+for (file_name in unique_files) {
+  data_subset <- filter(summary_data_coding_prot, File == file_name)
+  
+  print(plot_bar_gc(
+    data_subset, 
+    plot_title = paste("Amino acid frequency -", file_name), 
+    y_label = "Amino acid content"
+  ))
+  
+  # readline(prompt = "Presiona Enter para ver el siguiente gráfico...")
+}
+
 ```
 
 
@@ -257,17 +271,17 @@ plot_bar_gc <- function(data, plot_title, y_label) {
 
 ```{r}
 #| label: other 
-#| echo: true
+#| echo: false
 
-# fasta_files <- list.files(directory_second, pattern = "\\AA_empty.fasta$", full.names = TRUE)
+# # fasta_files <- list.files(directory_second, pattern = "\\AA_empty.fasta$", full.names = TRUE)
 
-# Procesar todos los archivos
-all_frequencies_target <- lapply(fasta_files, calculate_amino_acid_frequencies)
+# # Procesar todos los archivos
+# all_frequencies_target <- lapply(fasta_files, calculate_amino_acid_frequencies)
 
-# Combinar resultados de todos los archivos en un solo dataframe
-# combined_freqs <- bind_rows(all_frequencies_target)
-combined_freqs <- bind_rows(all_frequencies_target) %>%
-  replace(is.na(.), 0)  # Reemplazar NA por 0
+# # Combinar resultados de todos los archivos en un solo dataframe
+# # combined_freqs <- bind_rows(all_frequencies_target)
+# combined_freqs <- bind_rows(all_frequencies_target) %>%
+#   replace(is.na(.), 0)  # Reemplazar NA por 0
 
 ```
 
@@ -320,10 +334,10 @@ combined_freqs <- bind_rows(all_frequencies_target) %>%
 #   # readline(prompt = "Presiona Enter para ver el siguiente gráfico...")
 # }
 
-unique_files <- unique(summary_data$File)
+# unique_files <- unique(summary_data$File)
 
 for (file_name in unique_files) {
-  data_subset <- filter(summary_data, File == file_name)
+  data_subset <- filter(summary_data_target, File == file_name)
   
   print(plot_bar_gc(
     data_subset, 
@@ -334,6 +348,8 @@ for (file_name in unique_files) {
   # readline(prompt = "Presiona Enter para ver el siguiente gráfico...")
 }
 ```
+
+:::
 
 ```{r}
 #| label: classification amino acids 
