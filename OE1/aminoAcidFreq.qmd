@@ -161,7 +161,6 @@ calculate_amino_acid_frequencies <- function(file) {
 all_frequencies_coding_prot <- lapply(rest_code_prot, calculate_amino_acid_frequencies)
 
 # Combinar resultados de todos los archivos en un solo dataframe
-# combined_freqs <- bind_rows(all_frequencies_target)
 combined_freqs_coding_prot <- bind_rows(all_frequencies_coding_prot) %>%
   replace(is.na(.), 0)  # Reemplazar NA por 0
 
