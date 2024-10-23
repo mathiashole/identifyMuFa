@@ -269,7 +269,7 @@ plot_bar_gc <- function(data, plot_title, y_label) {
         ymin = mean_freq - sd_freq,
         ymax = mean_freq + sd_freq
       ),
-      width = 0.4, colour = "orange", alpha = 0.9, size = 1.3
+      width = 0.4, colour = "orange", alpha = 0.6, size = 0.9
     ) +
     geom_text(aes(label = round(mean_freq, 2)), vjust = -0.5, size = 3) +
     ylab(y_label) + 
