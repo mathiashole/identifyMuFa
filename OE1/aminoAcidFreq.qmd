@@ -249,17 +249,40 @@ summary_data <- long_freqs %>%
     .groups = "drop"
   )
 
-plot_violin_gc <- function(data, plot_title, y_label) {
-  ggplot(data, aes(x = AminoAcid, y = Freq, fill = AminoAcid)) +
-    geom_bar(stat = "identity", alpha = 0.7, width = 0.5) +
-    # scale_fill_brewer(palette = "Dark2") +  # Apply RColorBrewer's Dark2 Palette
-    ylab(y_label) +  # Customize the ylab
+# plot_violin_gc <- function(data, plot_title, y_label) {
+#   ggplot(data, aes(x = AminoAcid, y = Freq, fill = AminoAcid)) +
+#     geom_bar(stat = "identity", alpha = 0.7, width = 0.5) +
+#     # scale_fill_brewer(palette = "Dark2") +  # Apply RColorBrewer's Dark2 Palette
+#     ylab(y_label) +  # Customize the ylab
+#     labs(
+#       title = plot_title,  # Customize the title
+#       caption = "Data source: Facultad de Ciencias, Udelar"
+#     ) +
+#     theme_minimal_vgrid() + 
+#     theme(axis.line.y = element_blank(), axis.ticks.y = element_blank())
+# }
+plot_bar_gc <- function(data, plot_title, y_label) {
+  ggplot(data, aes(x = AminoAcid, y = mean_freq, fill = AminoAcid)) +
+    geom_bar(stat = "identity", alpha = 0.7, width = 0.5) + 
+    geom_errorbar(
+      aes(
+        ymin = mean_freq - sd_freq,
+        ymax = mean_freq + sd_freq
+      ),
+      width = 0.4, colour = "orange", alpha = 0.9, size = 1.3
+    ) +
+    geom_text(aes(label = round(mean_freq, 2)), vjust = -0.5, size = 3) +
+    ylab(y_label) + 
     labs(
-      title = plot_title,  # Customize the title
+      title = plot_title,  
       caption = "Data source: Facultad de Ciencias, Udelar"
     ) +
-    theme_minimal_vgrid() + 
-    theme(axis.line.y = element_blank(), axis.ticks.y = element_blank())
+    theme_minimal() + 
+    theme(
+      axis.line.y = element_blank(), 
+      axis.ticks.y = element_blank(),
+      axis.text.x = element_text(angle = 45, hjust = 1)
+    )
 }
 
 # # Function plot_violin_gc call
@@ -269,18 +292,32 @@ plot_violin_gc <- function(data, plot_title, y_label) {
 #   y_label = "Amino acid content"
 # )
 
-unique_files <- unique(long_freqs$File)  # Obtener nombres únicos de archivo
+# unique_files <- unique(long_freqs$File)  # Obtener nombres únicos de archivo
+
+# for (file_name in unique_files) {
+#   # Filtrar datos por cada archivo
+#   data_subset <- filter(long_freqs, File == file_name)
+  
+#   # Mostrar el gráfico correspondiente al archivo
+#   print(plot_violin_gc(data_subset, 
+#                        plot_title = paste("Amino acid frequency -", file_name), 
+#                        y_label = "Amino acid content"))
+  
+#   # Pausar para que se vea cada gráfico antes de continuar
+#   # readline(prompt = "Presiona Enter para ver el siguiente gráfico...")
+# }
+
+unique_files <- unique(summary_data$File)
 
 for (file_name in unique_files) {
-  # Filtrar datos por cada archivo
-  data_subset <- filter(long_freqs, File == file_name)
+  data_subset <- filter(summary_data, File == file_name)
   
-  # Mostrar el gráfico correspondiente al archivo
-  print(plot_violin_gc(data_subset, 
-                       plot_title = paste("Amino acid frequency -", file_name), 
-                       y_label = "Amino acid content"))
+  print(plot_bar_gc(
+    data_subset, 
+    plot_title = paste("Amino acid frequency -", file_name), 
+    y_label = "Amino acid content"
+  ))
   
-  # Pausar para que se vea cada gráfico antes de continuar
   # readline(prompt = "Presiona Enter para ver el siguiente gráfico...")
 }
 ```
