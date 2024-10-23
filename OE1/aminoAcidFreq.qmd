@@ -123,6 +123,10 @@ print(format(amino_acids_table, justify = "centre"), row.names = FALSE)
 ## Amino acid frequency of coding frequency
 
 ```{r}
+#| label: writed and charged big table
+#| echo: false
+#| warning: false
+
 path_amino_protein_code_safe_tsv <- file.path("output_directory", paste0("amino_acids_frequency_all_protein_coding.tsv"))
 path_amino_protein_code_safe <- file.path("output_directory", paste0("amino_acids_frequency_all_protein_coding.csv"))
 write.csv(combined_freqs_coding_prot, file = path_tri_protein_code_safe, row.names = FALSE, col.names = TRUE, quote = FALSE)
