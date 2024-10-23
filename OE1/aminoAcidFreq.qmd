@@ -93,9 +93,11 @@ print(format(amino_acids_table, justify = "centre"), row.names = FALSE)
 
 ```
 
+::: {.panel-tabset .nav-pills}
+
+## Amino acid frequency of coding frequency
+
 ```{r}
-#| label: other 
-#| echo: true
 
 calculate_amino_acid_frequencies <- function(file) {
   fasta <- read.fasta(file, seqtype = "AA")  # Leer archivo multifasta de aminoácidos
@@ -129,6 +131,15 @@ calculate_amino_acid_frequencies <- function(file) {
   # Combinar resultados de todas las secuencias en un archivo
   bind_rows(results)
 }
+
+```
+
+## DGF-1 amino acid frequency
+
+```{r}
+#| label: other 
+#| echo: true
+
 
 # Directorio con archivos multifasta
 input_directory <- "/home/usuario/Data_Rstudio/masBioinfo/OE1/signalP/"
@@ -295,7 +306,7 @@ plot_violin_group <- function(data, plot_title, y_label) {
   ggplot(data, aes(x = AminoAcidGroup, y = Freq, fill = AminoAcidGroup)) +
     geom_violin(alpha = 0.7, width = 0.5) + 
     geom_boxplot(width = 0.1, fill = "white", alpha = 0.3, outlier.shape = NA) +
-    scale_fill_brewer(palette = "Dark2") +  # Colores automáticos según grupo
+    scale_fill_brewer(palette = "Dark2") + 
     ylab(y_label) + 
     labs(
       title = plot_title, 
