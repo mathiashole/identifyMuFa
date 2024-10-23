@@ -319,7 +319,7 @@ for (file_name in unique_files) {
 #   # readline(prompt = "Presiona Enter para ver el siguiente gráfico...")
 # }
 
-# unique_files <- unique(summary_data$File)
+unique_files <- unique(summary_data_target$File)
 
 for (file_name in unique_files) {
   data_subset <- filter(summary_data_target, File == file_name)
