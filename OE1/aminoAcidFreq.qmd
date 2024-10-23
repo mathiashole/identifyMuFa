@@ -33,6 +33,7 @@ library(ggplot2)
 library(ggfortify)
 library(Rtsne)
 library(tidyverse)
+library(reactable)
 
 ##
 
@@ -89,7 +90,15 @@ amino_acids <- data.frame(
                        131, 146, 149, 165, 115, 105, 119, 204, 181, 117)
 )
 
-
+reactable(
+  iris[1:5, ],
+  sortable = FALSE,
+  showSortable = TRUE,
+  columns = list(
+    Petal.Width = colDef(sortable = TRUE),
+    Petal.Length = colDef(sortable = TRUE)
+  )
+)
 ```
 
 ```{r}
