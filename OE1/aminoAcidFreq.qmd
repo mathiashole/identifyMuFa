@@ -73,7 +73,7 @@ fasta_list <- lapply(setNames(files, basename(files)), read.fasta)
 #| warning: false
 
 # Crear el dataframe con la tabla de aminoácidos
-amino_acids <- data.frame(
+amino_acids_table <- data.frame(
   Amino_Acid = c("Alanine", "Arginine", "Asparagine", "Aspartic acid", 
                  "Cysteine", "Glutamine", "Glutamic acid", "Glycine", 
                  "Histidine", "Isoleucine", "Leucine", "Lysine", 
@@ -91,12 +91,11 @@ amino_acids <- data.frame(
 )
 
 reactable(
-  iris[1:5, ],
+  amino_acids_table,
   sortable = FALSE,
   showSortable = TRUE,
   columns = list(
-    Petal.Width = colDef(sortable = TRUE),
-    Petal.Length = colDef(sortable = TRUE)
+    Molecular_Weight = colDef(sortable = TRUE)
   )
 )
 ```
