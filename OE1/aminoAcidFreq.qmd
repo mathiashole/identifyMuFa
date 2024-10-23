@@ -222,71 +222,10 @@ summary_data_target <- long_freqs_target %>%
 
 ## Amino acid frequency of coding frequency
 
-
-
-
-
-## ``r key_name`` amino acid frequency
-
 ```{r}
-#| label: other 
+#| label: Created function to barplot amino acids frequency 
 #| echo: true
 
-# fasta_files <- list.files(directory_second, pattern = "\\AA_empty.fasta$", full.names = TRUE)
-
-# Procesar todos los archivos
-all_frequencies_target <- lapply(fasta_files, calculate_amino_acid_frequencies)
-
-# Combinar resultados de todos los archivos en un solo dataframe
-# combined_freqs <- bind_rows(all_frequencies_target)
-combined_freqs <- bind_rows(all_frequencies_target) %>%
-  replace(is.na(.), 0)  # Reemplazar NA por 0
-
-```
-
-```{r}
-long_freqs <- combined_freqs %>%
-  pivot_longer(cols = A:Y,  # Especifica las columnas de aminoácidos
-               names_to = "AminoAcid",  # Nombre de la nueva columna para los nombres de los aminoácidos
-               values_to = "Freq") %>%  # Nombre de la nueva columna para las frecuencias
-  mutate(Freq = Freq * 100)  # Convertir frecuencias a porcentaje
-
-
-# frequency AA plotting function
-# plot_violin_gc <- function(data, plot_title, y_label) {
-#   ggplot(data, aes(x = AminoAcid, y = Freq, fill = AminoAcid)) +
-#     geom_violin(alpha = 0.7, width = 0.5) + 
-#     geom_boxplot(width = 0.1, fill = "white", alpha = 0.3) +
-#     # scale_fill_brewer(palette = "Dark2") +  # Apply RColorBrewer's Dark2 Palette
-#     ylab(y_label) +  # Customize the ylab
-#     labs(
-#       title = plot_title,  # Customize the title
-#       caption = "Data source: Facultad de Ciencias, Udelar"
-#     ) +
-#     theme_minimal_vgrid() + 
-#     theme(axis.line.y = element_blank(), axis.ticks.y = element_blank())
-# }
-
-summary_data <- long_freqs %>%
-  group_by(File, AminoAcid) %>%
-  summarise(
-    mean_freq = mean(Freq),
-    sd_freq = sd(Freq),
-    .groups = "drop"
-  )
-
-# plot_violin_gc <- function(data, plot_title, y_label) {
-#   ggplot(data, aes(x = AminoAcid, y = Freq, fill = AminoAcid)) +
-#     geom_bar(stat = "identity", alpha = 0.7, width = 0.5) +
-#     # scale_fill_brewer(palette = "Dark2") +  # Apply RColorBrewer's Dark2 Palette
-#     ylab(y_label) +  # Customize the ylab
-#     labs(
-#       title = plot_title,  # Customize the title
-#       caption = "Data source: Facultad de Ciencias, Udelar"
-#     ) +
-#     theme_minimal_vgrid() + 
-#     theme(axis.line.y = element_blank(), axis.ticks.y = element_blank())
-# }
 plot_bar_gc <- function(data, plot_title, y_label) {
   ggplot(data, aes(x = AminoAcid, y = mean_freq, fill = AminoAcid)) +
     geom_bar(stat = "identity", alpha = 0.7, width = 0.5) + 
@@ -310,6 +249,54 @@ plot_bar_gc <- function(data, plot_title, y_label) {
       axis.text.x = element_text(angle = 45, hjust = 1)
     )
 }
+
+```
+
+
+## ``r key_name`` amino acid frequency
+
+```{r}
+#| label: other 
+#| echo: true
+
+# fasta_files <- list.files(directory_second, pattern = "\\AA_empty.fasta$", full.names = TRUE)
+
+# Procesar todos los archivos
+all_frequencies_target <- lapply(fasta_files, calculate_amino_acid_frequencies)
+
+# Combinar resultados de todos los archivos en un solo dataframe
+# combined_freqs <- bind_rows(all_frequencies_target)
+combined_freqs <- bind_rows(all_frequencies_target) %>%
+  replace(is.na(.), 0)  # Reemplazar NA por 0
+
+```
+
+```{r}
+
+
+# plot_bar_gc <- function(data, plot_title, y_label) {
+#   ggplot(data, aes(x = AminoAcid, y = mean_freq, fill = AminoAcid)) +
+#     geom_bar(stat = "identity", alpha = 0.7, width = 0.5) + 
+#     geom_errorbar(
+#       aes(
+#         ymin = mean_freq - sd_freq,
+#         ymax = mean_freq + sd_freq
+#       ),
+#       width = 0.4, colour = "orange", alpha = 0.6, size = 0.9
+#     ) +
+#     geom_text(aes(label = round(mean_freq, 2)), vjust = -0.5, size = 3) +
+#     ylab(y_label) + 
+#     labs(
+#       title = plot_title,  
+#       caption = "Data source: Facultad de Ciencias, Udelar"
+#     ) +
+#     theme_minimal() + 
+#     theme(
+#       axis.line.y = element_blank(), 
+#       axis.ticks.y = element_blank(),
+#       axis.text.x = element_text(angle = 45, hjust = 1)
+#     )
+# }
 
 # # Function plot_violin_gc call
 # plot_violin_gc(
