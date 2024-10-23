@@ -355,7 +355,7 @@ classification_aminoacids <- function(data, genome_col = "File", id_col = "Seque
     )
 }
 
-classfied_amino_acids <- classification_aminoacids(combined_freqs)
+classfied_amino_acids <- classification_aminoacids(combined_freqs_target)
 
 ```
 
