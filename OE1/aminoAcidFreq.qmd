@@ -94,6 +94,8 @@ amino_acids_table %>%
   kbl() %>%
   kable_styling()
 
+print(format(amino_acids_table, justify = "centre"), row.names = FALSE)
+
 ```
 
 ```{r}
