@@ -174,7 +174,7 @@ amino_acid_groups <- list(
 calculate_amino_acid_frequencies <- function(file) {
   fasta <- read.fasta(file, seqtype = "AA")  # Leer archivo multifasta de aminoácidos
 
-  amino_acids <- c("A", "R", "N", "D", "B", "C", "Q", "E", "Z", "G", "H", "I", "L", "K", "M", "F", "P", "S", "T", "W", "Y", "V")
+  amino_acids <- c("A", "R", "N", "D", "B", "C", "Q", "E", "Z", "G", "H", "I", "L", "K", "M", "F", "P", "S", "T", "W", "X", "Y", "V")
 
   # Procesar cada secuencia en el archivo
   results <- lapply(names(fasta), function(seq_id) {
@@ -225,15 +225,6 @@ long_freqs <- combined_freqs %>%
                values_to = "Freq") %>%  # Nombre de la nueva columna para las frecuencias
   mutate(Freq = Freq * 100)  # Convertir frecuencias a porcentaje
 
-# Crear el gráfico de caja
-ggplot(long_freqs, aes(x = AminoAcid, y = Freq, fill = AminoAcid)) +
-  geom_boxplot() +
-  theme_minimal() +
-  labs(title = "Frecuencia de Aminoácidos por Genoma",
-       x = "Aminoácido",
-       y = "Frecuencia Relativa (%)") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  facet_wrap(~ File, scales = "fixed")
 
 # frequency AA plotting function
 plot_violin_gc <- function(data, plot_title, y_label) {
@@ -253,8 +244,8 @@ plot_violin_gc <- function(data, plot_title, y_label) {
 # Function plot_violin_gc call
 plot_violin_gc(
   data = long_freqs, 
-  plot_title = "Genome GC", 
-  y_label = "GC Content"
+  plot_title = "Amino acid frequency", 
+  y_label = "Amino acid content"
 )
 ```
 
