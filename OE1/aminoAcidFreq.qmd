@@ -26,6 +26,7 @@ p {
 #| echo: false
 #| warning: false
 
+directory_second <- "signalP"
 directory <- "output_directory/"
 # Read data frame
 data_transformed <- read.delim("output_directory/data_transformed.tsv", sep = "\t", header = TRUE)
@@ -40,6 +41,9 @@ genes_work <- basename(fasta_files)
 prot_name <- sub(".*_:(.*):_.*", "\\1", fasta_files)
 key_names <- sub("_.*", "\\1", prot_name)
 key_name <- unique(sort(key_names))
+
+fasta_files <- list.files(directory_second, pattern = "\\AA_empty.fasta$", full.names = TRUE)
+
 
 ```
 
