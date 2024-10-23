@@ -89,15 +89,7 @@ amino_acids <- data.frame(
                        131, 146, 149, 165, 115, 105, 119, 204, 181, 117)
 )
 
-ggplot(amino_acids, aes(x = reorder(Amino_Acid, Molecular_Weight), 
-                        y = Molecular_Weight, fill = Molecular_Weight)) +
-  geom_bar(stat = "identity") +
-  coord_flip() +
-  scale_fill_gradient(low = "lightblue", high = "darkblue") +
-  labs(title = "Peso Molecular de Aminoácidos",
-       x = "Aminoácido",
-       y = "Peso Molecular (Da)") +
-  theme_minimal()
+
 ```
 
 ```{r}
