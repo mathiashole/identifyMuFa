@@ -241,6 +241,14 @@ long_freqs <- combined_freqs %>%
 #     theme(axis.line.y = element_blank(), axis.ticks.y = element_blank())
 # }
 
+summary_data <- long_freqs %>%
+  group_by(File, AminoAcid) %>%
+  summarise(
+    mean_freq = mean(Freq),
+    sd_freq = sd(Freq),
+    .groups = "drop"
+  )
+
 plot_violin_gc <- function(data, plot_title, y_label) {
   ggplot(data, aes(x = AminoAcid, y = Freq, fill = AminoAcid)) +
     geom_bar(stat = "identity", alpha = 0.7, width = 0.5) +
