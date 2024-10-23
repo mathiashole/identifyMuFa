@@ -227,10 +227,23 @@ long_freqs <- combined_freqs %>%
 
 
 # frequency AA plotting function
+# plot_violin_gc <- function(data, plot_title, y_label) {
+#   ggplot(data, aes(x = AminoAcid, y = Freq, fill = AminoAcid)) +
+#     geom_violin(alpha = 0.7, width = 0.5) + 
+#     geom_boxplot(width = 0.1, fill = "white", alpha = 0.3) +
+#     # scale_fill_brewer(palette = "Dark2") +  # Apply RColorBrewer's Dark2 Palette
+#     ylab(y_label) +  # Customize the ylab
+#     labs(
+#       title = plot_title,  # Customize the title
+#       caption = "Data source: Facultad de Ciencias, Udelar"
+#     ) +
+#     theme_minimal_vgrid() + 
+#     theme(axis.line.y = element_blank(), axis.ticks.y = element_blank())
+# }
+
 plot_violin_gc <- function(data, plot_title, y_label) {
   ggplot(data, aes(x = AminoAcid, y = Freq, fill = AminoAcid)) +
-    geom_violin(alpha = 0.7, width = 0.5) + 
-    geom_boxplot(width = 0.1, fill = "white", alpha = 0.3) +
+    geom_bar(stat = "identity", alpha = 0.7, width = 0.5) +
     # scale_fill_brewer(palette = "Dark2") +  # Apply RColorBrewer's Dark2 Palette
     ylab(y_label) +  # Customize the ylab
     labs(
@@ -241,12 +254,27 @@ plot_violin_gc <- function(data, plot_title, y_label) {
     theme(axis.line.y = element_blank(), axis.ticks.y = element_blank())
 }
 
-# Function plot_violin_gc call
-plot_violin_gc(
-  data = long_freqs, 
-  plot_title = "Amino acid frequency", 
-  y_label = "Amino acid content"
-)
+# # Function plot_violin_gc call
+# plot_violin_gc(
+#   data = long_freqs, 
+#   plot_title = "Amino acid frequency", 
+#   y_label = "Amino acid content"
+# )
+
+unique_files <- unique(long_freqs$File)  # Obtener nombres únicos de archivo
+
+for (file_name in unique_files) {
+  # Filtrar datos por cada archivo
+  data_subset <- filter(long_freqs, File == file_name)
+  
+  # Mostrar el gráfico correspondiente al archivo
+  print(plot_violin_gc(data_subset, 
+                       plot_title = paste("Amino acid frequency -", file_name), 
+                       y_label = "Amino acid content"))
+  
+  # Pausar para que se vea cada gráfico antes de continuar
+  # readline(prompt = "Presiona Enter para ver el siguiente gráfico...")
+}
 ```
 
 ```{r}
