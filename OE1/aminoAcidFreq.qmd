@@ -66,49 +66,6 @@ fasta_list <- lapply(setNames(files, basename(files)), read.fasta)
 
 ```
 
-
-```{r}
-freRel_list <- lapply(fasta_list, function(fasta) {
-  sapply(fasta, function(seq) {
-    round(100*table(seq) / getLength(seq), 2)
-  })
-})
-
-```
-
-```{r}
-#| label: calculate_frequency
-#| echo: true
-
-# Definir un vector de nombres de aminoácidos
-amino_acids <- c("A", "R", "N", "D", "B", "C", "Q", "E", "Z", "G", "H", "I", "L", "K", "M", "F", "P", "S", "T", "W", "Y", "V")
-
-
-
-freRel_list <- lapply(names(fasta_list), function(file_name) {
-  fasta <- fasta_list[[file_name]]  # Acceder a las secuencias del archivo
-  data <- lapply(fasta, function(seq) {
-    freq <- round(100 * table(seq) / getLength(seq), 2)  # Frecuencia relativa
-    freq_df <- as.data.frame(freq) %>% 
-      mutate(AminoAcid = rownames(.))  # Formatear a dataframe
-    
-    # Reemplazar números por letras de aminoácidos
-    freq_df$AminoAcid <- amino_acids[as.numeric(freq_df$AminoAcid)]
-    
-    return(freq_df)
-  })
-  
-  # Combinar los resultados de todas las secuencias
-  bind_rows(data, .id = "Sequence") %>% 
-    mutate(File = file_name)  # Agregar el nombre del archivo
-})
-
-
-# Unir todos los resultados en un solo dataframe para facilitar el plot
-all_frequencies <- bind_rows(freRel_list)
-```
-
-
 ```{r}
 #| label: other 
 #| echo: true
