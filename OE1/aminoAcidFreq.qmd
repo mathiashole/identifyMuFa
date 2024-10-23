@@ -338,7 +338,7 @@ classification_aminoacids <- function(data, genome_col = "File", id_col = "Seque
       "AliphaticHydroxyl_S,T" = rowSums(data[, c("S", "T")]),
       "tRNAsynthetaseClassI_Z,E,Q,R,C,M,V,I,L,Y,W" = rowSums(data[, c("Z", "E", "Q", "R", "C", "M", "V", "I", "L", "Y", "W")]),
       "tRNAsynthetaseClassII_B,G,A,P,S,T,H,D,N,K,F" = rowSums(data[, c("B", "G", "A", "P", "S", "T", "H", "D", "N", "K", "F")])
-    ) # fix data[,"B"], data[,"Z"]
+    )
 }
 
 classfied_amino_acids <- classification_aminoacids(combined_freqs)
