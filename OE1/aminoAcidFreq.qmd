@@ -33,7 +33,6 @@ library(ggplot2)
 library(ggfortify)
 library(Rtsne)
 library(tidyverse)
-library(reactable)
 
 ##
 
@@ -90,14 +89,7 @@ amino_acids_table <- data.frame(
                        131, 146, 149, 165, 115, 105, 119, 204, 181, 117)
 )
 
-reactable(
-  amino_acids_table,
-  sortable = FALSE,
-  showSortable = TRUE,
-  columns = list(
-    Molecular_Weight = colDef(sortable = TRUE)
-  )
-)
+
 ```
 
 ```{r}
