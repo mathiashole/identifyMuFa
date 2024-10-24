@@ -370,7 +370,8 @@ plot_violin_group <- function(data, plot_title, y_label) {
     theme_minimal() + 
     theme(
       axis.line.y = element_blank(), 
-      axis.ticks.y = element_blank()#,
+      axis.ticks.y = element_blank(),
+      axis.text.x = element_text(angle = 45, hjust = 1)#,
 #      legend.position = "none"
     )
 }
