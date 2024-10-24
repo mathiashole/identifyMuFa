@@ -360,7 +360,7 @@ for (file_name in unique_files) {
 #| label: plot amino acids group of target
 #| echo: true
 
-long_data_coding_prot <- classfied_amino_acids_coding_prot %>%
+long_data_target <- classfied_amino_acids_target %>%
   pivot_longer(
     cols = -c(Genome, id),  # Excluir columnas que no se quieren transformar
     names_to = "AminoAcidGroup",
@@ -374,10 +374,10 @@ long_data_coding_prot <- classfied_amino_acids_coding_prot %>%
 #   y_label = "Amino acid content"
 # )
 
-unique_files <- unique(long_data_coding_prot$Genome)
+unique_files <- unique(long_data_target$Genome)
 
 for (file_name in unique_files) {
-  data_subset <- filter(long_data_coding_prot, Genome == file_name)
+  data_subset <- filter(long_data_target, Genome == file_name)
   
   print(plot_violin_group(
     data_subset, 
