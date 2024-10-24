@@ -255,22 +255,6 @@ for (file_name in unique_files) {
 ## ``r key_name`` amino acid frequency
 
 ```{r}
-#| label: other 
-#| echo: false
-
-# # fasta_files <- list.files(directory_second, pattern = "\\AA_empty.fasta$", full.names = TRUE)
-
-# # Procesar todos los archivos
-# all_frequencies_target <- lapply(fasta_files, calculate_amino_acid_frequencies)
-
-# # Combinar resultados de todos los archivos en un solo dataframe
-# # combined_freqs <- bind_rows(all_frequencies_target)
-# combined_freqs <- bind_rows(all_frequencies_target) %>%
-#   replace(is.na(.), 0)  # Reemplazar NA por 0
-
-```
-
-```{r}
 
 
 # plot_bar_gc <- function(data, plot_title, y_label) {
