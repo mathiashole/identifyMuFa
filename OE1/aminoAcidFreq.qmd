@@ -310,17 +310,18 @@ tRNA_Class <- c(
   rep("Class II", 10)
 )
 
+amino_acid_data <- data.frame(Category, Amino_Acid, tRNA_Class)
+
 amino_acid_data$Value <- sample(1:10, nrow(amino_acid_data), replace = TRUE)
 
-print(amino_acid_data)
-# treemap(
-#   amino_acid_data,
-#   index = c("Category", "tRNA_Class", "Amino_Acid"),  # Jerarquía con tercer nivel
-#   vSize = "Value",  # Tamaño según los valores aleatorios
-#   type = "index",  # Visualización jerárquica
-#   palette = "Set3",  # Paleta de colores
-#   title = "Treemap de Aminoácidos con Clases de tRNA"
-# )
+treemap(
+  amino_acid_data,
+  index = c("Category", "tRNA_Class", "Amino_Acid"),  # Jerarquía con tercer nivel
+  vSize = "Value",  # Tamaño según los valores aleatorios
+  type = "index",  # Visualización jerárquica
+  palette = "Set3",  # Paleta de colores
+  title = "Treemap de Aminoácidos con Clases de tRNA"
+)
 
 ```
 
