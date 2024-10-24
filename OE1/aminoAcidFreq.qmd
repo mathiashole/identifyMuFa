@@ -276,7 +276,7 @@ for (file_name in unique_files) {
 
 ```{r}
 #| label: table classification amino acids 
-#| echo: true
+#| echo: false
 
 library(treemap)
 
