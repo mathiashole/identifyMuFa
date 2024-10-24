@@ -162,6 +162,7 @@ calculate_amino_acid_frequencies <- function(file) {
 # # Combinar resultados de todos los archivos en un solo dataframe
 # combined_freqs_coding_prot <- bind_rows(all_frequencies_coding_prot) %>%
 #   replace(is.na(.), 0)  # Reemplazar NA por 0
+combined_freqs_coding_prot$File <- gsub(".*_([A-Za-z0-9]+)_rest_AA\\.fasta", "\\1", combined_freqs_coding_prot$File)
 
 long_freqs_coding_prot <- combined_freqs_coding_prot %>%
   pivot_longer(cols = c(3:22),  # Especifica las columnas de aminoácidos
