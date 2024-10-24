@@ -333,14 +333,14 @@ classification_aminoacids <- function(data, genome_col = "File", id_col = "Seque
     result_combained_data <- data.frame(
       "Genome" = data[[ genome_col]],
       "id" = data[[ id_col]],
-      "Aliphatic_G,A,V,L,I" = rowSums(data[, c("G", "A", "V", "L", "I")]),
-      "Aromatic_F,W,Y" = rowSums(data[, c("F", "W", "Y")]),
-      "Sulphur_C,M" = rowSums(data[, c("C", "M")]),
-      "Basic_K,R,H" = rowSums(data[, c("K", "R", "H")]),
-      "Acidic_D,E,N,Q" = rowSums(data[, c("D", "E", "N", "Q")]),
-      "AliphaticHydroxyl_S,T" = rowSums(data[, c("S", "T")]),
-      "tRNAsynthetaseClassI_E,Q,R,C,M,V,I,L,Y,W" = rowSums(data[, c("E", "Q", "R", "C", "M", "V", "I", "L", "Y", "W")]),
-      "tRNAsynthetaseClassII_G,A,P,S,T,H,D,N,K,F" = rowSums(data[, c("G", "A", "P", "S", "T", "H", "D", "N", "K", "F")])
+      "Aliphatic" = rowSums(data[, c("G", "A", "V", "L", "I")]),
+      "Aromatic" = rowSums(data[, c("F", "W", "Y")]),
+      "Sulphur" = rowSums(data[, c("C", "M")]),
+      "Basic" = rowSums(data[, c("K", "R", "H")]),
+      "Acidic" = rowSums(data[, c("D", "E", "N", "Q")]),
+      "AliphaticHydroxyl" = rowSums(data[, c("S", "T")]),
+      "tRNAsynthetaseClassI" = rowSums(data[, c("E", "Q", "R", "C", "M", "V", "I", "L", "Y", "W")]),
+      "tRNAsynthetaseClassII" = rowSums(data[, c("G", "A", "P", "S", "T", "H", "D", "N", "K", "F")])
     )
 }
 
