@@ -252,7 +252,7 @@ for (file_name in unique_files) {
 ```
 
 
-## ``r key_name`` amino acid frequency
+## `r key_name` amino acid frequency
 
 ```{r}
 
