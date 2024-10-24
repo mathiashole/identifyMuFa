@@ -297,6 +297,10 @@ classfied_amino_acids <- classification_aminoacids(combined_freqs_target)
 
 ```
 
+::: {.panel-tabset .nav-pills}
+
+## Frequency of amino acid groups of the coding sequences.
+
 ```{r}
 #| label: plot amino acids group
 #| echo: true
@@ -343,3 +347,11 @@ plot_violin_group(
 )
 
 ```
+
+## Frequency of amino acid groups of `r key_name`
+
+```{r}
+
+```
+
+:::
