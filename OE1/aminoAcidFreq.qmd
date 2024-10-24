@@ -374,10 +374,10 @@ long_data_target <- classfied_amino_acids_targt %>%
 #   y_label = "Amino acid content"
 # )
 
-unique_files <- unique(classfied_amino_acids_targt$Genome)
+unique_files <- unique(long_data_target$Genome)
 
 for (file_name in unique_files) {
-  data_subset <- filter(classfied_amino_acids_targt, Genome == file_name)
+  data_subset <- filter(long_data_target, Genome == file_name)
   
   print(plot_violin_group(
     data_subset, 
