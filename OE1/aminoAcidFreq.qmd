@@ -331,21 +331,26 @@ long_data_coding_prot <- classfied_amino_acids_coding_prot %>%
     values_to = "Freq"
   )
 
-# ggplot(long_data, aes(x = AminoAcidGroup, y = Freq, fill = AminoAcidGroup)) +
-#   geom_boxplot() +
-#   theme_minimal() +
-#   labs(title = "Frecuencia de Grupos de Aminoácidos por Genoma",
-#        x = "Grupo de Aminoácido",
-#        y = "Frecuencia Relativa (%)") +
-#   theme(axis.text.x = element_text(angle = 45, hjust = 1))+
-#   facet_wrap(~ Genome, scales = "fixed")
-
 # Function plot_violin_group call
-plot_violin_group(
-  data = long_data_coding_prot, 
-  plot_title = "Frequency of grouped amino acids", 
-  y_label = "Amino acid content"
-)
+# plot_violin_group(
+#   data = long_data_coding_prot, 
+#   plot_title = "Frequency of grouped amino acids", 
+#   y_label = "Amino acid content"
+# )
+
+unique_files <- unique(long_data_coding_prot$Genome)
+
+for (file_name in unique_files) {
+  data_subset <- filter(long_data_coding_prot, Genome == file_name)
+  
+  print(plot_violin_group(
+    data_subset, 
+    plot_title = paste("Frequency of grouped amino acids -", file_name), 
+    y_label = "Amino acid content"
+  ))
+  
+  # readline(prompt = "Presiona Enter para ver el siguiente gráfico...")
+}
 
 ```
 
