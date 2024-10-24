@@ -257,52 +257,6 @@ for (file_name in unique_files) {
 ```{r}
 
 
-# plot_bar_gc <- function(data, plot_title, y_label) {
-#   ggplot(data, aes(x = AminoAcid, y = mean_freq, fill = AminoAcid)) +
-#     geom_bar(stat = "identity", alpha = 0.7, width = 0.5) + 
-#     geom_errorbar(
-#       aes(
-#         ymin = mean_freq - sd_freq,
-#         ymax = mean_freq + sd_freq
-#       ),
-#       width = 0.4, colour = "orange", alpha = 0.6, size = 0.9
-#     ) +
-#     geom_text(aes(label = round(mean_freq, 2)), vjust = -0.5, size = 3) +
-#     ylab(y_label) + 
-#     labs(
-#       title = plot_title,  
-#       caption = "Data source: Facultad de Ciencias, Udelar"
-#     ) +
-#     theme_minimal() + 
-#     theme(
-#       axis.line.y = element_blank(), 
-#       axis.ticks.y = element_blank(),
-#       axis.text.x = element_text(angle = 45, hjust = 1)
-#     )
-# }
-
-# # Function plot_violin_gc call
-# plot_violin_gc(
-#   data = long_freqs, 
-#   plot_title = "Amino acid frequency", 
-#   y_label = "Amino acid content"
-# )
-
-# unique_files <- unique(long_freqs$File)  # Obtener nombres únicos de archivo
-
-# for (file_name in unique_files) {
-#   # Filtrar datos por cada archivo
-#   data_subset <- filter(long_freqs, File == file_name)
-  
-#   # Mostrar el gráfico correspondiente al archivo
-#   print(plot_violin_gc(data_subset, 
-#                        plot_title = paste("Amino acid frequency -", file_name), 
-#                        y_label = "Amino acid content"))
-  
-#   # Pausar para que se vea cada gráfico antes de continuar
-#   # readline(prompt = "Presiona Enter para ver el siguiente gráfico...")
-# }
-
 unique_files <- unique(summary_data_target$File)
 
 for (file_name in unique_files) {
