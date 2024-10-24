@@ -275,6 +275,42 @@ for (file_name in unique_files) {
 :::
 
 ```{r}
+#| label: table classification amino acids 
+#| echo: true
+
+# Crear una lista con aminoácidos por categoría
+amino_acids <- list(
+  Aliphatic = c("Gly(G)", "Ala(A)", "Val(V)", "Leu(L)", "Ile(I)"),
+  Aromatic = c("Phe(F)", "Trp(W)", "Tyr(Y)"),
+  Sulphur = c("Cys(C)", "Met(M)"),
+  Basic = c("Lys(K)", "Arg(R)", "His(H)"),
+  Acidic = c("Asp(D)", "Glu(E)", "Asn(N)", "Gln(Q)"),
+  Aliphatic_Hydroxyl = c("Ser(S)", "Thr(T)"),
+  Class_I_tRNA_Synthetase = c("Glu(E)", "Gln(Q)", "Arg(R)", "Cys(C)", 
+                              "Met(M)", "Val(V)", "Ile(I)", "Leu(L)", 
+                              "Tyr(Y)", "Trp(W)"),
+  Class_II_tRNA_Synthetase = c("Gly(G)", "Ala(A)", "Pro(P)", "Ser(S)", 
+                               "Thr(T)", "His(H)", "Asp(D)", "Asn(N)", 
+                               "Lys(K)", "Phe(F)")
+)
+
+# Convertir la lista en un data frame (expandido por filas)
+amino_acid_df <- data.frame(
+  Aliphatic = I(amino_acids$Aliphatic),
+  Aromatic = I(amino_acids$Aromatic),
+  Sulphur = I(amino_acids$Sulphur),
+  Basic = I(amino_acids$Basic),
+  Acidic = I(amino_acids$Acidic),
+  Aliphatic_Hydroxyl = I(amino_acids$Aliphatic_Hydroxyl),
+  Class_I_tRNA_Synthetase = I(amino_acids$Class_I_tRNA_Synthetase),
+  Class_II_tRNA_Synthetase = I(amino_acids$Class_II_tRNA_Synthetase)
+)
+
+# Mostrar la tabla
+print(amino_acid_df)
+```
+
+```{r}
 #| label: classification amino acids 
 #| echo: true
 
