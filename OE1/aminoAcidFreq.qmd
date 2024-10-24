@@ -186,6 +186,8 @@ all_frequencies_target <- lapply(fasta_files, calculate_amino_acid_frequencies)
 combined_freqs_target <- bind_rows(all_frequencies_target) %>%
   replace(is.na(.), 0)  # Reemplazar NA por 0
 
+combined_freqs_target$File <- gsub(".*_([A-Za-z0-9]+)_AA_empty\\.fasta", "\\1", combined_freqs_target$File)
+
 long_freqs_target <- combined_freqs_target %>%
   pivot_longer(cols = A:Y,  # Especifica las columnas de aminoácidos
                names_to = "AminoAcid",  # Nombre de la nueva columna para los nombres de los aminoácidos
