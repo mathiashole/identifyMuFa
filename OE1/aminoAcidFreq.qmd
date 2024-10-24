@@ -278,36 +278,49 @@ for (file_name in unique_files) {
 #| label: table classification amino acids 
 #| echo: true
 
-# Crear una lista con aminoácidos por categoría
-amino_acids <- list(
-  Aliphatic = c("Gly(G)", "Ala(A)", "Val(V)", "Leu(L)", "Ile(I)"),
-  Aromatic = c("Phe(F)", "Trp(W)", "Tyr(Y)"),
-  Sulphur = c("Cys(C)", "Met(M)"),
-  Basic = c("Lys(K)", "Arg(R)", "His(H)"),
-  Acidic = c("Asp(D)", "Glu(E)", "Asn(N)", "Gln(Q)"),
-  Aliphatic_Hydroxyl = c("Ser(S)", "Thr(T)"),
-  Class_I_tRNA_Synthetase = c("Glu(E)", "Gln(Q)", "Arg(R)", "Cys(C)", 
-                              "Met(M)", "Val(V)", "Ile(I)", "Leu(L)", 
-                              "Tyr(Y)", "Trp(W)"),
-  Class_II_tRNA_Synthetase = c("Gly(G)", "Ala(A)", "Pro(P)", "Ser(S)", 
-                               "Thr(T)", "His(H)", "Asp(D)", "Asn(N)", 
-                               "Lys(K)", "Phe(F)")
+library(treemap)
+
+Category <- c(
+  rep("Aliphatic", 5), rep("Aromatic", 3), 
+  rep("Sulphur", 2), rep("Basic", 3), 
+  rep("Acidic", 4), rep("Aliphatic Hydroxyl", 2), 
+  rep("Class I tRNA Synthetase", 10), 
+  rep("Class II tRNA Synthetase", 10)
 )
 
-# Convertir la lista en un data frame (expandido por filas)
-amino_acid_df <- data.frame(
-  Aliphatic = I(amino_acids$Aliphatic),
-  Aromatic = I(amino_acids$Aromatic),
-  Sulphur = I(amino_acids$Sulphur),
-  Basic = I(amino_acids$Basic),
-  Acidic = I(amino_acids$Acidic),
-  Aliphatic_Hydroxyl = I(amino_acids$Aliphatic_Hydroxyl),
-  Class_I_tRNA_Synthetase = I(amino_acids$Class_I_tRNA_Synthetase),
-  Class_II_tRNA_Synthetase = I(amino_acids$Class_II_tRNA_Synthetase)
+Amino_Acid <- c(
+  "Gly(G)", "Ala(A)", "Val(V)", "Leu(L)", "Ile(I)",  # Aliphatic
+  "Phe(F)", "Trp(W)", "Tyr(Y)",                      # Aromatic
+  "Cys(C)", "Met(M)",                                # Sulphur
+  "Lys(K)", "Arg(R)", "His(H)",                      # Basic
+  "Asp(D)", "Glu(E)", "Asn(N)", "Gln(Q)",            # Acidic
+  "Ser(S)", "Thr(T)",                                # Aliphatic Hydroxyl
+  "Glu(E)", "Gln(Q)", "Arg(R)", "Cys(C)",            # Class I
+  "Met(M)", "Val(V)", "Ile(I)", "Leu(L)", 
+  "Tyr(Y)", "Trp(W)",                               
+  "Gly(G)", "Ala(A)", "Pro(P)", "Ser(S)",            # Class II
+  "Thr(T)", "His(H)", "Asp(D)", "Asn(N)", 
+  "Lys(K)", "Phe(F)"
 )
 
-# Mostrar la tabla
-print(amino_acid_df)
+# Nueva columna: Clase de tRNA (donde no aplica, dejamos NA)
+tRNA_Class <- c(
+  rep(NA, 19),  # No aplica para las primeras 19 categorías
+  rep("Class I", 10), 
+  rep("Class II", 10)
+)
+
+amino_acid_data$Value <- sample(1:10, nrow(amino_acid_data), replace = TRUE)
+
+treemap(
+  amino_acid_data,
+  index = c("Category", "tRNA_Class", "Amino_Acid"),  # Jerarquía con tercer nivel
+  vSize = "Value",  # Tamaño según los valores aleatorios
+  type = "index",  # Visualización jerárquica
+  palette = "Set3",  # Paleta de colores
+  title = "Treemap de Aminoácidos con Clases de tRNA"
+)
+
 ```
 
 ```{r}
