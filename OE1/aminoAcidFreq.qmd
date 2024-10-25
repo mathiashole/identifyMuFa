@@ -307,6 +307,7 @@ plot_barplot_contrast <- function(data, plot_title, y_label) {
 }
 
 summary_data_target$supp <- rep(key_name, length(summary_data_target$File))
+summary_data_coding_prot$supp <- rep("rest", length(summary_data_coding_prot$File))
 
 unique_files <- unique(summary_data_coding_prot$File)
 
