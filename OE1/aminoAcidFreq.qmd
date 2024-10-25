@@ -282,7 +282,7 @@ for (file_name in unique_files) {
 #| label: Created function to barplot contrast 
 #| echo: true
 
-plot_bar_gc <- function(data, plot_title, y_label) {
+plot_barplot_contrast <- function(data, plot_title, y_label) {
   ggplot(data, aes(x = AminoAcid, y = mean_freq, fill = AminoAcid)) +
     geom_bar(stat = "identity", alpha = 0.7, width = 0.5) + 
     geom_errorbar(
