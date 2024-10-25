@@ -311,10 +311,10 @@ summary_data_coding_prot$supp <- rep("rest", length(summary_data_coding_prot$Fil
 
 target_coding_seq <- bind_rows(summary_data_target, summary_data_coding_prot)
 
-unique_files <- unique(taget_coding_seq$File)
+unique_files <- unique(target_coding_seq$File)
 
 for (file_name in unique_files) {
-  data_subset <- filter(summary_data_coding_prot, File == file_name)
+  data_subset <- filter(target_coding_seq, File == file_name)
   
   print(plot_barplot_contrast(
     data_subset, 
