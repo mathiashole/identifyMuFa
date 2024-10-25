@@ -306,6 +306,8 @@ plot_barplot_contrast <- function(data, plot_title, y_label) {
     )
 }
 
+summary_data_target$supp <- rep(key_name, length(summary_data_target$File))
+
 unique_files <- unique(summary_data_coding_prot$File)
 
 for (file_name in unique_files) {
@@ -320,8 +322,8 @@ for (file_name in unique_files) {
   # readline(prompt = "Presiona Enter para ver el siguiente gráfico...")
 }
 
-```
 
+```
 
 
 ```{r}
