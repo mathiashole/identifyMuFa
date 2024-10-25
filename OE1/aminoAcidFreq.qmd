@@ -284,7 +284,7 @@ for (file_name in unique_files) {
 
 plot_barplot_contrast <- function(data, plot_title, y_label) {
   ggplot(data, aes(x = AminoAcid, y = mean_freq, fill = supp)) +
-    geom_bar(stat = "identity", alpha = 0.7, width = 0.5) + 
+    geom_bar(stat = "identity", alpha = 0.7, width = 0.5, position=position_dodge()) + 
     geom_errorbar(
       aes(
         ymin = mean_freq - sd_freq,
@@ -324,8 +324,6 @@ for (file_name in unique_files) {
   
   # readline(prompt = "Presiona Enter para ver el siguiente gráfico...")
 }
-
-ggplot(taget_coding_seq)
 
 ```
 
