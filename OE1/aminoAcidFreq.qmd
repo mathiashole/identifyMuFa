@@ -325,6 +325,68 @@ for (file_name in unique_files) {
   # readline(prompt = "Presiona Enter para ver el siguiente gráfico...")
 }
 
+
+plot_barplot_contrast <- function(data, plot_title, y_label) {
+  dodge <- position_dodge(width = 0.5)  # Definimos un dodge para ambas capas
+  
+  ggplot(data, aes(x = AminoAcid, y = mean_freq, fill = supp)) +
+    geom_bar(
+      stat = "identity", 
+      alpha = 0.7, 
+      width = 0.5, 
+      position = dodge
+    ) + 
+    geom_errorbar(
+      aes(
+        ymin = mean_freq - sd_freq,
+        ymax = mean_freq + sd_freq
+      ),
+      width = 0.25, 
+      colour = "orange", 
+      alpha = 0.8, 
+      size = 0.9,
+      position = dodge  # Aplicamos el mismo dodge para alinear las barras de error
+    ) +
+    geom_text(
+      aes(label = round(mean_freq, 2)), 
+      vjust = -0.5, 
+      size = 3, 
+      position = dodge  # Alineamos también las etiquetas
+    ) +
+    ylab(y_label) + 
+    labs(
+      title = plot_title,  
+      caption = "Data source: Facultad de Ciencias, Udelar"
+    ) +
+    theme_minimal() + 
+    theme(
+      axis.line.y = element_blank(), 
+      axis.ticks.y = element_blank(),
+      axis.text.x = element_text(angle = 45, hjust = 1)
+    )
+}
+
+# Ejemplo de uso con tus datos
+summary_data_target$supp <- rep(key_name, length(summary_data_target$File))
+summary_data_coding_prot$supp <- rep("rest", length(summary_data_coding_prot$File))
+
+target_coding_seq <- bind_rows(summary_data_target, summary_data_coding_prot)
+
+unique_files <- unique(target_coding_seq$File)
+
+for (file_name in unique_files) {
+  data_subset <- filter(target_coding_seq, File == file_name)
+  
+  print(plot_barplot_contrast(
+    data_subset, 
+    plot_title = paste("Amino acid frequency -", file_name), 
+    y_label = "Amino acid content"
+  ))
+  
+  # readline(prompt = "Press Enter to see the next plot...")
+}
+
+
 ```
 
 
