@@ -283,30 +283,6 @@ for (file_name in unique_files) {
 #| echo: true
 
 plot_barplot_contrast <- function(data, plot_title, y_label) {
-  ggplot(data, aes(x = AminoAcid, y = mean_freq, fill = supp)) +
-    geom_bar(stat = "identity", alpha = 0.7, width = 0.5, position=position_dodge()) + 
-    geom_errorbar(
-      aes(
-        ymin = mean_freq - sd_freq,
-        ymax = mean_freq + sd_freq
-      ),
-      width = 0.4, colour = "orange", alpha = 0.6, size = 0.9
-    ) +
-    geom_text(aes(label = round(mean_freq, 2)), vjust = -0.5, size = 3) +
-    ylab(y_label) + 
-    labs(
-      title = plot_title,  
-      caption = "Data source: Facultad de Ciencias, Udelar"
-    ) +
-    theme_minimal() + 
-    theme(
-      axis.line.y = element_blank(), 
-      axis.ticks.y = element_blank(),
-      axis.text.x = element_text(angle = 45, hjust = 1)
-    )
-}
-
-plot_barplot_contrast <- function(data, plot_title, y_label) {
   dodge <- position_dodge(width = 0.5)  # Definimos un dodge para ambas capas
   
   ggplot(data, aes(x = AminoAcid, y = mean_freq, fill = supp)) +
