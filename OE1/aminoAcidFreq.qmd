@@ -300,7 +300,7 @@ plot_barplot_contrast <- function(data, plot_title, y_label) {
       width = 0.25, 
       colour = "orange", 
       alpha = 0.8, 
-      size = 0.9,
+      size = 0.7,
       position = dodge  # Aplicamos el mismo dodge para alinear las barras de error
     ) +
     geom_text(
