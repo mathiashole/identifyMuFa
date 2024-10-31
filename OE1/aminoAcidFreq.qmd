@@ -523,15 +523,9 @@ plot_violin_contrast <- function(data, plot_title, y_label) {
   dodge <- position_dodge(width = 0.8)  # define the dodge to separate the groups
 
   ggplot(data, aes(x = AminoAcidGroup, y = Freq, fill = supp)) +
-    geom_violin(alpha = 0.7, width = 0.5, position = dodge) + 
-    geom_boxplot(
-      width = 0.1, 
-      fill = "white", 
-      alpha = 0.3, 
-      outlier.shape = NA, 
-      position = dodge  # Apply dodge option
-    ) +
-    scale_fill_brewer(palette = "Dark2") + 
+    geom_violin(alpha = 0.7, width = 0.5, position = dodge) +
+    # geom_boxplot(width = 0.1, fill = "white", alpha = 0.3, outlier.shape = NA, position = dodge) +
+    # scale_fill_brewer(palette = "Dark2") + 
     ylab(y_label) + 
     labs(
       title = plot_title, 
