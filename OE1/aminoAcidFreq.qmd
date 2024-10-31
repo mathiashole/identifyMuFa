@@ -520,7 +520,7 @@ for (file_name in unique_files) {
 ```{r}
 
 plot_violin_contrast <- function(data, plot_title, y_label) {
-  dodge <- position_dodge(width = 0.8)  # Definimos el dodge para separar los grupos
+  dodge <- position_dodge(width = 0.8)  # define the dodge to separate the groups
 
   ggplot(data, aes(x = AminoAcidGroup, y = Freq, fill = supp)) +
     geom_violin(alpha = 0.7, width = 0.5, position = dodge) + 
@@ -529,7 +529,7 @@ plot_violin_contrast <- function(data, plot_title, y_label) {
       fill = "white", 
       alpha = 0.3, 
       outlier.shape = NA, 
-      position = dodge  # Aplicamos el dodge también al boxplot para alinear con los violines
+      position = dodge  # Apply dodge option
     ) +
     scale_fill_brewer(palette = "Dark2") + 
     ylab(y_label) + 
