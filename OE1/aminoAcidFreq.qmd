@@ -563,6 +563,24 @@ for (file_name in unique_files) {
 #| label: Created function to barplot contrast group
 #| echo: true
 
+summary_data_class_target <- long_data_target %>%
+  group_by(Genome, AminoAcidGroup) %>%
+  summarise(
+    mean_freq = mean(Freq),
+    sd_freq = sd(Freq),
+    # supp = supp,
+    .groups = "drop"
+)
+
+summary_data_class_coding_prot <- long_data_coding_prot %>%
+  group_by(Genome, AminoAcidGroup) %>%
+  summarise(
+    mean_freq = mean(Freq),
+    sd_freq = sd(Freq),
+    # supp = supp,
+    .groups = "drop"
+)
+
 plot_barplot_contrast <- function(data, plot_title, y_label) {
   dodge <- position_dodge(width = 0.5)  # Definimos un dodge para ambas capas
   
