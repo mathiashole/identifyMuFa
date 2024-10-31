@@ -448,6 +448,7 @@ plot_violin_group <- function(data, plot_title, y_label) {
     )
 }
 
+
 long_data_coding_prot <- classfied_amino_acids_coding_prot %>%
   pivot_longer(
     cols = -c(Genome, id),  # Excluir columnas que no se quieren transformar
@@ -515,3 +516,34 @@ for (file_name in unique_files) {
 ```
 
 :::
+
+```{r}
+
+plot_violin_contrast <- function(data, plot_title, y_label) {
+  dodge <- position_dodge(width = 0.8)  # Definimos el dodge para separar los grupos
+
+  ggplot(data, aes(x = AminoAcidGroup, y = Freq, fill = supp)) +
+    geom_violin(alpha = 0.7, width = 0.5, position = dodge) + 
+    geom_boxplot(
+      width = 0.1, 
+      fill = "white", 
+      alpha = 0.3, 
+      outlier.shape = NA, 
+      position = dodge  # Aplicamos el dodge también al boxplot para alinear con los violines
+    ) +
+    scale_fill_brewer(palette = "Dark2") + 
+    ylab(y_label) + 
+    labs(
+      title = plot_title, 
+      caption = "Data source: Facultad de Ciencias, Udelar"
+    ) +
+    theme_minimal() + 
+    theme(
+      axis.line.y = element_blank(), 
+      axis.ticks.y = element_blank(),
+      axis.text.x = element_text(angle = 45, hjust = 1)
+    )
+}
+
+
+```
