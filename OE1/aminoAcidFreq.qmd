@@ -586,10 +586,10 @@ summary_data_class_coding_prot$supp <- rep("rest", length(summary_data_class_cod
 
 target_coding_seq_group <- bind_rows(summary_data_class_target, summary_data_class_coding_prot)
 
-unique_files <- unique(target_coding_seq$File)
+unique_files <- unique(target_coding_seq_group$Genome)
 
 for (file_name in unique_files) {
-  data_subset <- filter(target_coding_seq, File == file_name)
+  data_subset <- filter(target_coding_seq, Genome == file_name)
   
   print(plot_barplot_contrast(
     data_subset, 
