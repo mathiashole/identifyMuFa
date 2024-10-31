@@ -584,7 +584,7 @@ summary_data_class_coding_prot <- long_data_coding_prot %>%
 summary_data_class_target$supp <- rep(key_name, length(summary_data_class_target$Genome))
 summary_data_class_coding_prot$supp <- rep("rest", length(summary_data_class_coding_prot$Genome))
 
-target_coding_seq <- bind_rows(summary_data_target, summary_data_coding_prot)
+target_coding_seq_group <- bind_rows(summary_data_class_target, summary_data_class_coding_prot)
 
 unique_files <- unique(target_coding_seq$File)
 
