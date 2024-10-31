@@ -581,49 +581,8 @@ summary_data_class_coding_prot <- long_data_coding_prot %>%
     .groups = "drop"
 )
 
-plot_barplot_contrast <- function(data, plot_title, y_label) {
-  dodge <- position_dodge(width = 0.5)  # Definimos un dodge para ambas capas
-  
-  ggplot(data, aes(x = AminoAcid, y = mean_freq, fill = supp)) +
-    geom_bar(
-      stat = "identity", 
-      alpha = 0.7, 
-      width = 0.5, 
-      position = dodge
-    ) + 
-    geom_errorbar(
-      aes(
-        ymin = mean_freq - sd_freq,
-        ymax = mean_freq + sd_freq
-      ),
-      width = 0.25, 
-      colour = "orange", 
-      alpha = 0.8, 
-      size = 0.7,
-      position = dodge  # Aplicamos el mismo dodge para alinear las barras de error
-    ) +
-    # scale_fill_manual(values = c("rest" = "#E15759", key_name = "#5fd4b1")) +
-    geom_text(
-      aes(label = round(mean_freq, 2)), 
-      vjust = -0.5, 
-      size = 3, 
-      position = dodge  # Alineamos también las etiquetas
-    ) +
-    ylab(y_label) + 
-    labs(
-      title = plot_title,  
-      caption = "Data source: Facultad de Ciencias, Udelar"
-    ) +
-    theme_minimal() + 
-    theme(
-      axis.line.y = element_blank(), 
-      axis.ticks.y = element_blank(),
-      axis.text.x = element_text(angle = 45, hjust = 1)
-    )
-}
-
-summary_data_target$supp <- rep(key_name, length(summary_data_target$File))
-summary_data_coding_prot$supp <- rep("rest", length(summary_data_coding_prot$File))
+summary_data_class_target$supp <- rep(key_name, length(summary_data_class_target$Genome))
+summary_data_class_coding_prot$supp <- rep("rest", length(summary_data_class_coding_prot$Genome))
 
 target_coding_seq <- bind_rows(summary_data_target, summary_data_coding_prot)
 
