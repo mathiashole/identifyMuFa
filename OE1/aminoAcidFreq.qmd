@@ -282,7 +282,7 @@ for (file_name in unique_files) {
 #| label: Created function to barplot contrast 
 #| echo: true
 
-plot_barplot_contrast <- function(data, plot_title, y_label) {
+plot_barplot_contrast <- function(data, AminoAcid, plot_title, y_label) {
   dodge <- position_dodge(width = 0.5)  # Definimos un dodge para ambas capas
   
   ggplot(data, aes(x = AminoAcid, y = mean_freq, fill = supp)) +
@@ -334,7 +334,8 @@ for (file_name in unique_files) {
   data_subset <- filter(target_coding_seq, File == file_name)
   
   print(plot_barplot_contrast(
-    data_subset, 
+    data_subset,
+    AminoAcid, 
     plot_title = paste("Amino acid frequency -", file_name), 
     y_label = "Amino acid content"
   ))
@@ -589,10 +590,11 @@ target_coding_seq_group <- bind_rows(summary_data_class_target, summary_data_cla
 unique_files <- unique(target_coding_seq_group$Genome)
 
 for (file_name in unique_files) {
-  data_subset <- filter(target_coding_seq, Genome == file_name)
+  data_subset <- filter(target_coding_seq_group, Genome == file_name)
   
   print(plot_barplot_contrast(
-    data_subset, 
+    data_subset,
+    AminoAcidGroup, 
     plot_title = paste("Amino acid frequency -", file_name), 
     y_label = "Amino acid content"
   ))
