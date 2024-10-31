@@ -303,7 +303,7 @@ plot_barplot_contrast <- function(data, plot_title, y_label) {
       size = 0.7,
       position = dodge  # Aplicamos el mismo dodge para alinear las barras de error
     ) +
-    scale_fill_brewer(palette = "Dark2") + 
+    scale_fill_manual(values = c("rest" = "#E15759", key_name = "#5fd4b1")) +
     geom_text(
       aes(label = round(mean_freq, 2)), 
       vjust = -0.5, 
