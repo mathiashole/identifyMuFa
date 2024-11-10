@@ -117,10 +117,10 @@ output_dir <- "output_directory"  # Define your output directory
 output_dir <- create_output_dir(output_dir)
 
 data <- read_input(input_file)
-print(data)
+
 # Apply the transformations
 data_transformed <- transform_data(data)
-
+print(data_transformed)
 # Generate the commands
 data_with_commands <- generate_commands(data_transformed, output_dir)
 # Execution script
