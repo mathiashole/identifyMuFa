@@ -117,7 +117,7 @@ output_dir <- "output_directory"  # Define your output directory
 output_dir <- create_output_dir(output_dir)
 
 data <- read_input(input_file)
-
+print(data)
 # Apply the transformations
 data_transformed <- transform_data(data)
 
