@@ -120,7 +120,8 @@ data <- read_input(input_file)
 
 # Apply the transformations
 data_transformed <- transform_data(data)
-print(data_transformed)
+path_data_transformed <- file.path(output_dir, paste0("data_transformed.tsv"))
+write.table(data_transformed, file = path_genome_safe_tsv, row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
 # Generate the commands
 data_with_commands <- generate_commands(data_transformed, output_dir)
 # Execution script
