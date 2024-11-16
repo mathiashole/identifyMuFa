@@ -606,3 +606,43 @@ file_sequence_counts <- filter_data_smaller %>%
 reactable(file_sequence_counts, highlight = TRUE)
 
 ```
+
+
+<!-- ```{r}
+
+filter_sequences_by_length <- function(fasta_files, min_length) {
+  for (fasta_file in fasta_files) {
+    # Leer el archivo FASTA
+    sequences <- read.fasta(fasta_file, seqtype = "DNA", as.string = TRUE)
+    
+    # Filtrar secuencias con longitud mayor al mínimo
+    filtered_seqs <- sequences[
+      sapply(sequences, function(seq) {
+        if (is.character(seq)) nchar(seq) else length(seq)
+      }) >= min_length
+    ]
+    
+    # Generar el nombre del archivo de salida
+    output_file <- sub("\\.fasta$", paste0("_length", min_length, ".fasta"), fasta_file)
+    
+    # Guardar las secuencias filtradas si hay alguna
+    if (length(filtered_seqs) > 0) {
+      write.fasta(
+        sequences = filtered_seqs,
+        names = names(filtered_seqs),
+        file.out = output_file
+      )
+      cat("Filtered sequences saved to:", output_file, "\n")
+    } else {
+      cat("No sequences longer than", min_length, "found in", fasta_file, "\n")
+    }
+  }
+}
+# Input: List of FASTA files and minimum sequence length
+input_files <- fasta_files  # Replace with your file names
+min_length <- 8000  # Set the desired minimum length
+
+# Call the function
+filter_sequences_by_length(input_files, min_length)
+
+``` -->
