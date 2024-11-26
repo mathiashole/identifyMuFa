@@ -137,11 +137,12 @@ Se llama a la función nucleotide_frequncy() para obtener las tablas de frecuenc
 
 # Run the function and get the dinucleotide frequency table
 dinucleotide_table <- nucleotide_frequncy(fasta_files, type_frequency = "dinucleotide")
+#dinucleotide_table <- nucleotide_frequncy(fasta_files[1], type_frequency = "dinucleotide")
 
 # dinucleotide_table_rest_code_prot <- nucleotide_frequncy(rest_code_prot, type_frequency = "dinucleotide")
 
 trinucleotide_table <- nucleotide_frequncy(fasta_files, type_frequency = "trinucleotide")
-
+# trinucleotide_table <- nucleotide_frequncy(fasta_files[1], type_frequency = "trinucleotide")
 # trinucleotide_table_rest_code_prot <- nucleotide_frequncy(rest_code_prot, type_frequency = "trinucleotide")
 
 ```
@@ -192,16 +193,16 @@ trinucleotide_table <- transform_columns(trinucleotide_table, "ID")
 #             sep = "\t", row.names = FALSE, quote = FALSE)
 
 # Leer en formato TSV
-dinucleotide_all_protein_coding <- read.table("output_directory/dinucleotide_frequency_all_protein_coding.tsv", 
+dinucleotide_all_protein_coding <- read.table("output_directory/dinucleotide_frequency_all_protein_coding_Dm28c.tsv", 
                                               sep = "\t", header = TRUE, stringsAsFactors = FALSE)
 
-trinucleotide_all_protein_coding <- read.table("output_directory/trinucleotide_frequency_all_protein_coding.tsv", 
+trinucleotide_all_protein_coding <- read.table("output_directory/trinucleotide_frequency_all_protein_coding_Dm28c.tsv", 
                                                sep = "\t", header = TRUE, stringsAsFactors = FALSE)
 
 
-# Remover filas con NA usando na.omit()
-dinucleotide_all_protein_coding <- na.omit(dinucleotide_all_protein_coding)
-trinucleotide_all_protein_coding <- na.omit(trinucleotide_all_protein_coding)
+# # Remover filas con NA usando na.omit()
+# dinucleotide_all_protein_coding <- na.omit(dinucleotide_all_protein_coding)
+# trinucleotide_all_protein_coding <- na.omit(trinucleotide_all_protein_coding)
 
 
 ```
@@ -286,6 +287,16 @@ combine_data_frequencies <- function(data, genome_col = "File", id_col = "ID", t
 combained_dinucleotide <- combine_data_frequencies(dinucleotide_all_protein_coding, type = "di")
 combained_trinucleotide <- combine_data_frequencies(trinucleotide_all_protein_coding, type = "tri")
 
+id_vector <- combained_dinucleotide$id
+id_vector1 <- combained_trinucleotide$id
+
+# Transform the ID: remove everything after ";" and replace "=" with "_"
+id_vector_cleaned <- gsub(";.*", "", gsub("=", "_", id_vector))
+id_vector_cleaned1 <- gsub(";.*", "", gsub("=", "_", id_vector1))
+# Asignar el vector limpio de vuelta al dataframe
+combained_dinucleotide$id <- id_vector_cleaned
+combained_trinucleotide$id <- id_vector_cleaned1
+
 ```
 
 
@@ -303,31 +314,90 @@ En este análisis, se utiliza la función `autoplot()` para visualizar los resul
 #| warning: false
 
 # Function to perform PCA and graph (require ggplot2 and ggfortify)
+# perform_pca <- function(data, file_col = "File", id_col = "ID") {
+#   # Exclude 'File' and 'ID' columns from numerical analysis
+#   pca_data <- data[, !(names(data) %in% c(file_col, id_col))]
+#   # Convert all columns to numeric format
+#   pca_data <- as.data.frame(lapply(pca_data, as.numeric))
+#   # Perform the PCA
+#   pca_result <- prcomp(pca_data, scale. = TRUE)
+#   # Get PCA scores
+#   pca_scores <- as.data.frame(pca_result$x)
+#   # Add 'File' and 'ID' columns to PCA results
+#   pca_scores <- cbind(data[, c(file_col, id_col)], pca_scores)
+#   # Plot the PCA with autoplot
+#   pca_plot <- autoplot(pca_result, data = data, colour = file_col, 
+#                        loadings = TRUE, loadings.label = TRUE, loadings.colour = 'grey64', 
+#                        alpha = 0.2, size = 3) +
+#     theme_minimal()
+  
+#   # Return the results of the PCA and the graph
+#   return(list(pca_result = pca_result, pca_scores = pca_scores, pca_plot = pca_plot))
+# }
+
+# # Call perform_pca
+# perform_result_dinucleotide_pca <- perform_pca(combained_dinucleotide[-nrow(combained_dinucleotide), ], file_col = "Genome", id_col = "id")
+
+# # show plot
+# perform_result_dinucleotide_pca$pca_plot
+
 perform_pca <- function(data, file_col = "File", id_col = "ID") {
-  # Exclude 'File' and 'ID' columns from numerical analysis
+  # Validate input data
+  if (!file_col %in% names(data)) {
+    stop(paste("Column", file_col, "not found in data"))
+  }
+  if (!id_col %in% names(data)) {
+    stop(paste("Column", id_col, "not found in data"))
+  }
+  
+  # Exclude 'file_col' and 'id_col' columns from numerical analysis
   pca_data <- data[, !(names(data) %in% c(file_col, id_col))]
-  # Convert all columns to numeric format
-  pca_data <- as.data.frame(lapply(pca_data, as.numeric))
+  
+  # Convert all columns to numeric, handling non-numeric values and NAs
+  pca_data <- as.data.frame(lapply(pca_data, function(x) {
+    x <- as.numeric(as.character(x))
+    ifelse(is.na(x), 0, x)  # Replace NA with 0 (or adjust based on your preference)
+  }))
+  
+  # Ensure no rows were dropped due to conversion issues
+  if (nrow(pca_data) != nrow(data)) {
+    stop("Mismatch between input data rows and processed PCA data rows")
+  }
+  
   # Perform the PCA
   pca_result <- prcomp(pca_data, scale. = TRUE)
+  
   # Get PCA scores
   pca_scores <- as.data.frame(pca_result$x)
-  # Add 'File' and 'ID' columns to PCA results
+  
+  # Add 'file_col' and 'id_col' columns to PCA results
   pca_scores <- cbind(data[, c(file_col, id_col)], pca_scores)
-  # Plot the PCA with autoplot
-  pca_plot <- autoplot(pca_result, data = data, colour = file_col, 
-                       loadings = TRUE, loadings.label = TRUE, loadings.colour = 'grey64', 
-                       alpha = 0.2, size = 3) +
+  
+  # Plot the PCA using autoplot
+  pca_plot <- autoplot(
+    pca_result, 
+    data = data, 
+    colour = file_col, 
+    loadings = TRUE, 
+    loadings.label = TRUE, 
+    loadings.colour = 'grey64', 
+    alpha = 0.2, 
+    size = 3
+  ) +
     theme_minimal()
   
   # Return the results of the PCA and the graph
   return(list(pca_result = pca_result, pca_scores = pca_scores, pca_plot = pca_plot))
 }
 
-# Call perform_pca
-perform_result_dinucleotide_pca <- perform_pca(combained_dinucleotide[-nrow(combained_dinucleotide), ], file_col = "Genome", id_col = "id")
+# Call the updated perform_pca function
+perform_result_dinucleotide_pca <- perform_pca(
+  data = combained_dinucleotide, 
+  file_col = "Genome", 
+  id_col = "id"
+)
 
-# show plot
+# Show the PCA plot
 perform_result_dinucleotide_pca$pca_plot
 
 ```
@@ -342,8 +412,12 @@ Ademas, se realizó un análisis de componentes principales (PCA) sobre las frec
 #| warning: false
 
 # Call perform_pca
-perform_result_trinucleotide_pca <- perform_pca(combained_trinucleotide[-nrow(combained_trinucleotide), ], file_col = "Genome", id_col = "id")
-
+# perform_result_trinucleotide_pca <- perform_pca(combained_trinucleotide[-nrow(combained_trinucleotide), ], file_col = "Genome", id_col = "id")
+perform_result_trinucleotide_pca <- perform_pca(
+  data = combained_dinucleotide, 
+  file_col = "Genome", 
+  id_col = "id"
+)
 # show plot
 perform_result_trinucleotide_pca$pca_plot
 
@@ -371,6 +445,7 @@ highlight_ids <- dinucleotide_table$ID
 create_pca_highlight_plot <- function(data, highlight_ids, pca_result, genome_col = "Genome", col_palette = NULL) {
   # Create a copy of the input data
   data_all_genomes <- data
+  
 
   # Create new 'highlight' column that combines 'Highlighted' with the genome column
   data_all_genomes$highlight <- ifelse(
@@ -384,6 +459,8 @@ create_pca_highlight_plot <- function(data, highlight_ids, pca_result, genome_co
     grepl("Highlighted", data_all_genomes$highlight), 0.6, 0.1
   )
   
+  # data_all_genomes <- data_all_genomes[-nrow(data_all_genomes), ]
+
   # Assign the first two principal components of the PCA
   data_all_genomes$PC1 <- pca_result$x[, 1]
   data_all_genomes$PC2 <- pca_result$x[, 2]
@@ -395,6 +472,7 @@ create_pca_highlight_plot <- function(data, highlight_ids, pca_result, genome_co
     
     # Create a color palette that assigns gray to 'Other' and different colors to 'Highlighted_<Genome>'
     col_palette <- c(scales::hue_pal()(length(unique_highlight_values) - 1), "grey")
+    # col_palette <- c("#00c496", "grey")
     
     # Map color palette to unique highlight values
     names(col_palette) <- unique_highlight_values
@@ -407,9 +485,9 @@ create_pca_highlight_plot <- function(data, highlight_ids, pca_result, genome_co
     # Plot with ggplot: first 'Other' and then 'Highlighted'
   ggplot() +
     # Layer for non-highlighted points in gray and low transparency
-    geom_point(data = other_points, aes(x = PC1, y = PC2), color = "grey", alpha = 0.1, size = 3) +
+    geom_point(data = other_points, aes(x = PC1, y = PC2), color = "grey", alpha = 0.1, size = 1) +
     # Layer for highlighted points with colors and greater transparency
-    geom_point(data = highlighted_points, aes(x = PC1, y = PC2, color = highlight, alpha = alpha), size = 3) +
+    geom_point(data = highlighted_points, aes(x = PC1, y = PC2, color = highlight, alpha = alpha), size = 1) +
     scale_color_manual(values = col_palette) +
     scale_alpha_continuous(range = c(0.1, 0.6)) + 
     labs(title = "PCA Highlighting Selected IDs", x = "Principal Component 1", y = "Principal Component 2") +
