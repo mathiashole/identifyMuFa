@@ -11,21 +11,21 @@ df <- blast_data %>%
     V16 = pmax(V9, V10)  # Takes the largest value between V9 and V10
   )
 
-# Ordenar por V2 (group_by) y dentro de cada grupo por V15 y V16
+# Sort by V2 (group_by) and within each group by V15 and V16
 df <- df %>%
   group_by(V2) %>%
   arrange(V15, V16, .by_group = TRUE) %>%
   ungroup()
 
-# Elimina todas las filas duplicadas basadas en las columnas V2 y V15
+# Remove all duplicate rows based on columns V2 and V15
 df_unique <- df %>% 
   distinct(V2, V15, .keep_all = TRUE)
 
-# Elimina todas las filas duplicadas basadas en las columnas V2 y V16
+# Remove all duplicate rows based on columns V2 and V16
 df_unique <- df_unique %>% 
   distinct(V2, V16, .keep_all = TRUE)
 
-# Función para eliminar solapamientos y conservar el que maximiza la diferencia V16 - V15
+# Function to eliminate overlaps and preserve the one that maximizes the difference V16 - V15
 filter_non_overlapping_with_max_diff <- function(df) {
   # Dividir el dataframe por grupos en la columna V2
   df_groups <- split(df, df$V2)
