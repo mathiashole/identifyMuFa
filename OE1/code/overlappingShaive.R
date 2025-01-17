@@ -76,6 +76,19 @@ df_no_overlaps <- filter_non_overlapping_with_max_diff(df)
 # Mostrar el resultado
 df_no_overlaps
 
+# Leer el archivo GFF
+gff_data <- read.delim("archivo.gff", header = FALSE, sep = "\t", fill = TRUE)
+
+# Extraer las posiciones de inicio y fin del GFF
+gff_positions <- gff_data %>% select(V4, V5) %>% rename(start = V4, end = V5)
+
+# Filtrar df_no_overlaps para eliminar posiciones solapantes con el GFF
+df_filtered <- df_no_overlaps %>%
+  filter(!(
+    (V15 >= gff_positions$start & V15 <= gff_positions$end) |
+    (V16 >= gff_positions$start & V16 <= gff_positions$end)
+  ))
+
 ### igualdad de longitud vamos por el de mayor identidad 
 
 filter_non_overlapping_with_max_diff <- function(df) {
