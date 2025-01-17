@@ -2,10 +2,10 @@
 
 library(dplyr)
 
-args <- commandArgs(trailingOnly = TRUE)
-blast_file <- args[1]
+# args <- commandArgs(trailingOnly = TRUE)
+# blast_file <- args[1]
 
-blast_data <- read.delim(blast_file, header = FALSE, sep = "\t", fill = TRUE)
+# blast_data <- read.delim(blast_file, header = FALSE, sep = "\t", fill = TRUE)
 
 blast_data <- read.delim("blastn_TriTrypDB-68_TcruziDm28c2018_Genome.txt", header = FALSE, sep = "\t", fill = TRUE)
 
