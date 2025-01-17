@@ -1,4 +1,4 @@
-## FOR PARTS
+#!/usr/bin/env Rscript
 
 library(dplyr)
 
