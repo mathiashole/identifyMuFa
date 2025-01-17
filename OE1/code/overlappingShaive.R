@@ -2,6 +2,11 @@
 
 library(dplyr)
 
+args <- commandArgs(trailingOnly = TRUE)
+blast_file <- args[1]
+
+blast_data <- read.delim(blast_file, header = FALSE, sep = "\t", fill = TRUE)
+
 blast_data <- read.delim("blastn_TriTrypDB-68_TcruziDm28c2018_Genome.txt", header = FALSE, sep = "\t", fill = TRUE)
 
 # Rearrange columns V9 and V10 into V15 and V16 based on condition
