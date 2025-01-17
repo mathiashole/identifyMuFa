@@ -33,7 +33,7 @@ filter_non_overlapping_with_max_diff <- function(df) {
   # Initialize the final result
   result <- data.frame()
   
-  # Iterar sobre los grupos
+  # Iterate over groups
   for (group in df_groups) {
     # Ordenar el grupo por las posiciones de inicio (V15) y fin (V16)
     group <- group[order(group$V15, group$V16), ]
@@ -80,7 +80,7 @@ filter_non_overlapping_with_max_diff <- function(df) {
   # Initialize the final result
   result <- data.frame()
   
-  # Iterar sobre los grupos
+  # Iterate over groups
   for (group in df_groups) {
     # Ordenar el grupo por las posiciones de inicio (V15) y fin (V16)
     group <- group[order(group$V15, group$V16), ]
@@ -134,7 +134,7 @@ filter_non_overlapping_with_extremes <- function(df) {
   # Initialize the final result
   result <- data.frame()
   
-  # Iterar sobre los grupos
+  # Iterate over groups
   for (group in df_groups) {
     # Ordenar el grupo por las posiciones de inicio (V15)
     group <- group[order(group$V15), ]
