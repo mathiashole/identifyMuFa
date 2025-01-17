@@ -27,7 +27,7 @@ df_unique <- df_unique %>%
 
 # Function to eliminate overlaps and preserve the one that maximizes the difference V16 - V15
 filter_non_overlapping_with_max_diff <- function(df) {
-  # Dividir el dataframe por grupos en la columna V2
+  # Split the dataframe by groups in column V2
   df_groups <- split(df, df$V2)
   
   # Inicializar el resultado final
@@ -74,7 +74,7 @@ df_no_overlaps
 ### igualdad de longitud vamos por el de mayor identidad 
 
 filter_non_overlapping_with_max_diff <- function(df) {
-  # Dividir el dataframe por grupos en la columna V2
+  # Split the dataframe by groups in column V2
   df_groups <- split(df, df$V2)
   
   # Inicializar el resultado final
@@ -128,7 +128,7 @@ df_no_overlaps
 ### extremos
 
 filter_non_overlapping_with_extremes <- function(df) {
-  # Dividir el dataframe por grupos en la columna V2
+  # Split the dataframe by groups in column V2
   df_groups <- split(df, df$V2)
   
   # Inicializar el resultado final
