@@ -4,11 +4,11 @@ library(dplyr)
 
 blast_data <- read.delim("blastn_TriTrypDB-68_TcruziDm28c2018_Genome.txt", header = FALSE, sep = "\t", fill = TRUE)
 
-# Reorganizar las columnas V9 y V10 en V15 y V16 según la condición
+# Rearrange columns V9 and V10 into V15 and V16 based on condition
 df <- blast_data %>%
   mutate(
-    V15 = pmin(V9, V10), # Toma el valor menor entre V9 y V10
-    V16 = pmax(V9, V10)  # Toma el valor mayor entre V9 y V10
+    V15 = pmin(V9, V10), # Takes the smallest value between V9 and V10
+    V16 = pmax(V9, V10)  # Takes the largest value between V9 and V10
   )
 
 # Ordenar por V2 (group_by) y dentro de cada grupo por V15 y V16
