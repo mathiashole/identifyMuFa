@@ -30,7 +30,7 @@ filter_non_overlapping_with_max_diff <- function(df) {
   # Split the dataframe by groups in column V2
   df_groups <- split(df, df$V2)
   
-  # Inicializar el resultado final
+  # Initialize the final result
   result <- data.frame()
   
   # Iterar sobre los grupos
@@ -77,7 +77,7 @@ filter_non_overlapping_with_max_diff <- function(df) {
   # Split the dataframe by groups in column V2
   df_groups <- split(df, df$V2)
   
-  # Inicializar el resultado final
+  # Initialize the final result
   result <- data.frame()
   
   # Iterar sobre los grupos
@@ -131,7 +131,7 @@ filter_non_overlapping_with_extremes <- function(df) {
   # Split the dataframe by groups in column V2
   df_groups <- split(df, df$V2)
   
-  # Inicializar el resultado final
+  # Initialize the final result
   result <- data.frame()
   
   # Iterar sobre los grupos
