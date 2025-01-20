@@ -77,8 +77,8 @@ df_no_overlaps <- filter_non_overlapping_with_max_diff(df)
 # Mostrar el resultado
 df_no_overlaps
 
-# Leer el archivo GFF
-gff_data <- read.delim("archivo.gff", header = FALSE, sep = "\t")
+# Load GFF file
+gff_data <- read_tsv("gff_file", comment = "#", col_names = FALSE)
 
 # Filtrar df_no_overlaps basado en el GFF
 df_filtered <- df_no_overlaps %>%
