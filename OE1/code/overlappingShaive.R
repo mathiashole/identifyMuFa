@@ -1,5 +1,6 @@
 #!/usr/bin/env Rscript
 
+library(readr)
 library(dplyr)
 
 # args <- commandArgs(trailingOnly = TRUE)
@@ -78,7 +79,7 @@ df_no_overlaps <- filter_non_overlapping_with_max_diff(df)
 df_no_overlaps
 
 # Load GFF file
-gff_data <- read_tsv("gff_file", comment = "#", col_names = FALSE)
+gff_data <- read_tsv("/home/mathias/process_data/identifyMuFa/OE1/output_directory/filtered:DGF-1_protein_coding_gene:_TriTrypDB-68_TcruziDm28c2018.gff", comment = "#", col_names = FALSE)
 
 # Filtrar df_no_overlaps basado en el GFF
 df_filtered <- df_no_overlaps %>%
