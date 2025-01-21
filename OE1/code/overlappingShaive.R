@@ -79,17 +79,8 @@ df_no_overlaps <- filter_non_overlapping_with_max_diff(df)
 df_no_overlaps
 
 # Load GFF file
-gff_data <- read_tsv("/home/mathias/process_data/identifyMuFa/OE1/output_directory/filtered:DGF-1_protein_coding_gene:_TriTrypDB-68_TcruziDm28c2018.gff", comment = "#", col_names = FALSE)
-
-# Filtrar df_no_overlaps basado en el GFF
-df_filtered <- df_no_overlaps %>%
-  filter(!(
-    (V1 %in% gff_data$V1) &
-    ((V15 >= gff_data$V4 & V15 <= gff_data$V5) |
-     (V16 >= gff_data$V4 & V16 <= gff_data$V5) |
-     (V15 <= gff_data$V4 & V16 >= gff_data$V5))
-  ))
-
+# gff_data <- read_tsv("/home/mathias/process_data/identifyMuFa/OE1/output_directory/filtered_:DGF-1_protein_coding_gene:_TriTrypDB-68_TcruziDm28c2018.gff", comment = "#", col_names = FALSE)
+gff_data <- read.delim("/home/mathias/process_data/identifyMuFa/OE1/output_directory/filtered_:DGF-1_protein_coding_gene:_TriTrypDB-68_TcruziDm28c2018.gff", comment.char = "#", header = FALSE, sep = "\t")
 
 ### igualdad de longitud vamos por el de mayor identidad 
 
