@@ -76,7 +76,7 @@ filter_non_overlapping_with_max_diff <- function(df) {
 df_no_overlaps <- filter_non_overlapping_with_max_diff(df)
 
 # Mostrar el resultado
-df_no_overlaps
+df_no_overlaps # 1163245 1173588 vs 1163272 1174042
 
 # Load GFF file
 # gff_data <- read_tsv("/home/mathias/process_data/identifyMuFa/OE1/output_directory/filtered_:DGF-1_protein_coding_gene:_TriTrypDB-68_TcruziDm28c2018.gff", comment = "#", col_names = FALSE)
@@ -85,7 +85,7 @@ gff_data <- read.delim("/home/mathias/process_data/identifyMuFa/OE1/output_direc
 # partial_df <- df_no_overlaps[,c(2,9,10,15,16)]
 # partial_gff <- gff_data[, c(1, 4, 5)]
 
-# # Duplicar las columnas 4 y 5 y añadirlas al dataframe
+# # # Duplicar las columnas 4 y 5 y añadirlas al dataframe
 # partial_gff <- cbind(partial_gff, gff_data[, c(4, 5)])
 
 # # Renombrar las columnas seleccionadas y duplicadas del GFF para que coincidan con las del BLAST
@@ -94,7 +94,6 @@ gff_data <- read.delim("/home/mathias/process_data/identifyMuFa/OE1/output_direc
 # # Combinar los datos del BLAST con los datos del GFF
 # combined_data <- bind_rows(partial_df, partial_gff)
 
-# df_no_overlaps_again <- filter_non_overlapping_with_max_diff(combined_data)
 
 ### igualdad de longitud vamos por el de mayor identidad 
 
