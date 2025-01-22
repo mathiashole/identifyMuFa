@@ -82,7 +82,25 @@ df_no_overlaps # 1163245 1173588 vs 1163272 1174042
 # gff_data <- read_tsv("/home/mathias/process_data/identifyMuFa/OE1/output_directory/filtered_:DGF-1_protein_coding_gene:_TriTrypDB-68_TcruziDm28c2018.gff", comment = "#", col_names = FALSE)
 gff_data <- read.delim("/home/mathias/process_data/identifyMuFa/OE1/output_directory/filtered_:DGF-1_protein_coding_gene:_TriTrypDB-68_TcruziDm28c2018.gff", comment.char = "#", header = FALSE, sep = "\t")
 
+remove_overlaps_with_gff <- function(dataframe, gff) {
+  # Filtrar las filas del dataframe comparando con los datos del GFF
+  filtered_data <- dataframe[!apply(dataframe, 1, function(row) {
+    # Buscar en el GFF donde V1 coincide con V2 del dataframe
+    matches <- gff[gff$V1 == row["V2"], ]
+    
+    # Verificar si hay solapamiento con los intervalos
+    any(apply(matches, 1, function(match_row) {
+      # Comparar si hay solapamiento
+      overlap <- (as.numeric(row["V15"]) <= as.numeric(match_row["V5"]) &&
+                  as.numeric(row["V16"]) >= as.numeric(match_row["V4"]))
+      return(overlap)
+    }))
+  }), ]
+  
+  return(filtered_data)
+}
 
+filtered_data <- remove_overlaps_with_gff(df_no_overlaps, gff_data)
 
 ### igualdad de longitud vamos por el de mayor identidad 
 
