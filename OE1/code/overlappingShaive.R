@@ -24,13 +24,13 @@ df <- df %>%
   arrange(V15, V16, .by_group = TRUE) %>%
   ungroup()
 
-# Remove all duplicate rows based on columns V2 and V15
-df_unique <- df %>% 
-  distinct(V2, V15, .keep_all = TRUE)
+# # Remove all duplicate rows based on columns V2 and V15
+# df_unique <- df %>% 
+#   distinct(V2, V15, .keep_all = TRUE)
 
-# Remove all duplicate rows based on columns V2 and V16
-df_unique <- df_unique %>% 
-  distinct(V2, V16, .keep_all = TRUE)
+# # Remove all duplicate rows based on columns V2 and V16
+# df_unique <- df_unique %>% 
+#   distinct(V2, V16, .keep_all = TRUE)
 
 # Function to eliminate overlaps and preserve the one that maximizes the difference V16 - V15
 filter_non_overlapping_with_max_diff <- function(df) {
