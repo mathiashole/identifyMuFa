@@ -1,5 +1,32 @@
 #!/usr/bin/env Rscript
 
+# Get command-line arguments
+args <- commandArgs(trailingOnly = TRUE)
+
+# init variable values
+blast_file <- NULL
+gff_file <- NULL
+
+# Parse arguments manually
+for (i in seq_along(args)) {
+  if (args[i] == "--blast_file" || args[i] == "-b") {
+    blast_file <- args[i + 1]
+  } else if (args[i] == "--gff_file" || args[i] == "-g") {
+    gff_file <- args[(i + 1):length(args)]
+    break
+  }
+}
+
+# Validate arguments
+if (!file.exists(blast_file)) {
+  stop("The provided BLAST file does not exist.")
+}
+
+# Validate arguments
+if (!file.exists(gff_file)) {
+  stop("The provided GFF file does not exist.")
+}
+
 library(readr)
 library(dplyr)
 
