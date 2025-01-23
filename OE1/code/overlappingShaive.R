@@ -30,10 +30,6 @@
 library(readr)
 library(dplyr)
 
-# args <- commandArgs(trailingOnly = TRUE)
-# blast_file <- args[1]
-# gff_file <- args[2]
-
 # blast_data <- read.delim(blast_file, header = FALSE, sep = "\t", fill = TRUE)
 
 blast_data <- read.delim("/home/mathias/study/maestria/scoville_data/blast_results/blastn_TriTrypDB-68_TcruziDm28c2018_Genome.txt", header = FALSE, sep = "\t", fill = TRUE)
