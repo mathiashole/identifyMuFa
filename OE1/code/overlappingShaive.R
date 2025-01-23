@@ -14,17 +14,15 @@
 #   } else if (args[i] == "--gff_file" || args[i] == "-g") {
 #     gff_file <- args[(i + 1):length(args)]
 #     break
+# args <- commandArgs(trailingOnly = TRUE)
+# blast_file <- args[1]
+# gff_file <- args[2]
 #   }
 # }
 
 # # Validate arguments
 # if (!file.exists(blast_file)) {
 #   stop("The provided BLAST file does not exist.")
-# }
-
-# # Validate arguments
-# if (!file.exists(gff_file)) {
-#   stop("The provided GFF file does not exist.")
 # }
 
 library(readr)
