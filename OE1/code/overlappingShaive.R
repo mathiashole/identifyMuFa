@@ -115,56 +115,56 @@ remove_overlaps_with_gff <- function(dataframe, gff) {
 
 filtered_data <- remove_overlaps_with_gff(df_no_overlaps, gff_data)
 
-### igualdad de longitud vamos por el de mayor identidad 
+# ### igualdad de longitud vamos por el de mayor identidad 
 
-filter_non_overlapping_with_max_diff <- function(df) {
-  # Split the dataframe by groups in column V2
-  df_groups <- split(df, df$V2)
+# filter_non_overlapping_with_max_diff <- function(df) {
+#   # Split the dataframe by groups in column V2
+#   df_groups <- split(df, df$V2)
   
-  # Initialize the final result
-  result <- data.frame()
+#   # Initialize the final result
+#   result <- data.frame()
   
-  # Iterate over groups
-  for (group in df_groups) {
-    # Ordenar el grupo por las posiciones de inicio (V15) y fin (V16)
-    group <- group[order(group$V15, group$V16), ]
+#   # Iterate over groups
+#   for (group in df_groups) {
+#     # Ordenar el grupo por las posiciones de inicio (V15) y fin (V16)
+#     group <- group[order(group$V15, group$V16), ]
     
-    # Inicializar el primer grupo sin solapamientos
-    non_overlapping_group <- group[1, , drop = FALSE]
+#     # Inicializar el primer grupo sin solapamientos
+#     non_overlapping_group <- group[1, , drop = FALSE]
     
-    # Revisar las filas restantes dentro del grupo
-    for (i in 2:nrow(group)) {
-      last_row <- non_overlapping_group[nrow(non_overlapping_group), ]
-      current_row <- group[i, ]
+#     # Revisar las filas restantes dentro del grupo
+#     for (i in 2:nrow(group)) {
+#       last_row <- non_overlapping_group[nrow(non_overlapping_group), ]
+#       current_row <- group[i, ]
       
-      # Si no hay solapamiento, añadir el alineamiento al grupo sin solapamientos
-      if (current_row$V15 > last_row$V16) {
-        non_overlapping_group <- bind_rows(non_overlapping_group, current_row)
-      } else {
-        # Si hay solapamiento, comparar la diferencia entre V16 y V15
-        if ((current_row$V16 - current_row$V15) > (last_row$V16 - last_row$V15)) {
-          # Si el alineamiento actual tiene una mayor diferencia, reemplazar la fila anterior
-          non_overlapping_group <- non_overlapping_group[-nrow(non_overlapping_group), ]
-          non_overlapping_group <- bind_rows(non_overlapping_group, current_row)
-        } else if ((current_row$V16 - current_row$V15) == (last_row$V16 - last_row$V15)) {
-          # Si la diferencia es igual, seleccionar el de mayor porcentaje de identidad (V3)
-          if (current_row$V3 > last_row$V3) {
-            non_overlapping_group <- non_overlapping_group[-nrow(non_overlapping_group), ]
-            non_overlapping_group <- bind_rows(non_overlapping_group, current_row)
-          }
-        }
-      }
-    }
+#       # Si no hay solapamiento, añadir el alineamiento al grupo sin solapamientos
+#       if (current_row$V15 > last_row$V16) {
+#         non_overlapping_group <- bind_rows(non_overlapping_group, current_row)
+#       } else {
+#         # Si hay solapamiento, comparar la diferencia entre V16 y V15
+#         if ((current_row$V16 - current_row$V15) > (last_row$V16 - last_row$V15)) {
+#           # Si el alineamiento actual tiene una mayor diferencia, reemplazar la fila anterior
+#           non_overlapping_group <- non_overlapping_group[-nrow(non_overlapping_group), ]
+#           non_overlapping_group <- bind_rows(non_overlapping_group, current_row)
+#         } else if ((current_row$V16 - current_row$V15) == (last_row$V16 - last_row$V15)) {
+#           # Si la diferencia es igual, seleccionar el de mayor porcentaje de identidad (V3)
+#           if (current_row$V3 > last_row$V3) {
+#             non_overlapping_group <- non_overlapping_group[-nrow(non_overlapping_group), ]
+#             non_overlapping_group <- bind_rows(non_overlapping_group, current_row)
+#           }
+#         }
+#       }
+#     }
     
-    # Añadir el grupo procesado al resultado final
-    result <- bind_rows(result, non_overlapping_group)
-  }
+#     # Añadir el grupo procesado al resultado final
+#     result <- bind_rows(result, non_overlapping_group)
+#   }
   
-  return(result)
-}
+#   return(result)
+# }
 
-# Llamar a la función para filtrar los solapamientos
-df_no_overlaps <- filter_non_overlapping_with_max_diff(df)
+# # Llamar a la función para filtrar los solapamientos
+# df_no_overlaps <- filter_non_overlapping_with_max_diff(df)
 
-# Mostrar el resultado
-df_no_overlaps
+# # Mostrar el resultado
+# df_no_overlaps
