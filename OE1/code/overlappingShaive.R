@@ -55,7 +55,7 @@ filter_non_overlapping_with_max_diff <- function(df) {
   
   # Iterate over groups
   for (group in df_groups) {
-    # Ordenar el grupo por las posiciones de inicio (V15) y fin (V16)
+    # Sort the group by start (V15) and end (V16) positions
     group <- group[order(group$V15, group$V16), ]
     
     # Inicializar el primer grupo sin solapamientos
