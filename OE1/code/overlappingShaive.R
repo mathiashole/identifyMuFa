@@ -92,7 +92,6 @@ df_no_overlaps <- filter_non_overlapping_with_max_diff(df)
 df_no_overlaps # 1163245 1173588 vs 1163272 1174042
 
 # Load GFF file
-# gff_data <- read_tsv("/home/mathias/process_data/identifyMuFa/OE1/output_directory/filtered_:DGF-1_protein_coding_gene:_TriTrypDB-68_TcruziDm28c2018.gff", comment = "#", col_names = FALSE)
 gff_data <- read.delim("/home/mathias/process_data/identifyMuFa/OE1/output_directory/filtered_:DGF-1_protein_coding_gene:_TriTrypDB-68_TcruziDm28c2018.gff", comment.char = "#", header = FALSE, sep = "\t")
 
 remove_overlaps_with_gff <- function(dataframe, gff) {
