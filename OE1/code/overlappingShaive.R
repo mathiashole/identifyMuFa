@@ -58,10 +58,10 @@ filter_non_overlapping_with_max_diff <- function(df) {
     # Sort the group by start (V15) and end (V16) positions
     group <- group[order(group$V15, group$V16), ]
     
-    # Inicializar el primer grupo sin solapamientos
+    # Initialize the first group without overlaps
     non_overlapping_group <- group[1, , drop = FALSE]
     
-    # Revisar las filas restantes dentro del grupo
+    # Check the remaining rows within the group
     for (i in 2:nrow(group)) {
       last_row <- non_overlapping_group[nrow(non_overlapping_group), ]
       current_row <- group[i, ]
