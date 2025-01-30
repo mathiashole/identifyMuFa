@@ -66,19 +66,19 @@ filter_non_overlapping_with_max_diff <- function(df) {
       last_row <- non_overlapping_group[nrow(non_overlapping_group), ]
       current_row <- group[i, ]
       
-      # Si no hay solapamiento, añadir el alineamiento al grupo sin solapamientos
+      # If there is no overlap, add the alignment to the group without overlaps
       if (current_row$V15 > last_row$V16) {
         non_overlapping_group <- bind_rows(non_overlapping_group, current_row)
       } else {
-        # Si hay solapamiento, comparar la diferencia entre V16 y V15
+        # If there is overlap, compare the difference between V16 and V15
         if ((current_row$V16 - current_row$V15) > (last_row$V16 - last_row$V15)) {
-          # Si el alineamiento actual es más largo, reemplazar la fila anterior
+          # If the current alignment is longer, replace the previous row
           non_overlapping_group[nrow(non_overlapping_group), ] <- current_row
         }
       }
     }
     
-    # Añadir el grupo procesado al resultado final
+    # Add the processed group to the final result
     result <- bind_rows(result, non_overlapping_group)
   }
   
