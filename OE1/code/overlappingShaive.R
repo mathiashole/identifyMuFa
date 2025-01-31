@@ -89,10 +89,10 @@ filter_non_overlapping_with_max_diff <- function(df) {
   return(result)
 }
 
-# Llamar a la función para filtrar los solapamientos
+# Call the function to filter the overlaps
 df_no_overlaps <- filter_non_overlapping_with_max_diff(df)
 
-# Mostrar el resultado
+# Show the result
 df_no_overlaps # 1163245 1173588 vs 1163272 1174042
 
 # Load GFF file
