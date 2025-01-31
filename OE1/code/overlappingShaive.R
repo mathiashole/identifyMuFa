@@ -59,51 +59,7 @@ df <- df %>%
   arrange(V15, V16, .by_group = TRUE) %>%
   ungroup()
 
-# Function to eliminate overlaps and preserve the one that maximizes the difference V16 - V15
-filter_non_overlapping_with_max_diff <- function(df) {
-  # Split the dataframe by groups in column V2
-  df_groups <- split(df, df$V2)
-  
-  # Initialize the final result
-  result <- data.frame()
-  
-  # Iterate over groups
-  for (group in df_groups) {
-    # Sort the group by start (V15) and end (V16) positions
-    group <- group[order(group$V15, group$V16), ]
-    
-    # Initialize the first group without overlaps
-    non_overlapping_group <- group[1, , drop = FALSE]
-    
-    # Check the remaining rows within the group
-    for (i in 2:nrow(group)) {
-      last_row <- non_overlapping_group[nrow(non_overlapping_group), ]
-      current_row <- group[i, ]
-      
-      # If there is no overlap, add the alignment to the group without overlaps
-      if (current_row$V15 > last_row$V16) {
-        non_overlapping_group <- bind_rows(non_overlapping_group, current_row)
-      } else {
-        # If there is overlap, compare the difference between V16 and V15
-        if ((current_row$V16 - current_row$V15) > (last_row$V16 - last_row$V15)) {
-          # If the current alignment is longer, replace the previous row
-          non_overlapping_group[nrow(non_overlapping_group), ] <- current_row
-        }
-      }
-    }
-    
-    # Add the processed group to the final result
-    result <- bind_rows(result, non_overlapping_group)
-  }
-  
-  return(result)
-}
 
-# Call the function to filter the overlaps
-df_no_overlaps <- filter_non_overlapping_with_max_diff(df)
-
-# Show the result
-df_no_overlaps # 1163245 1173588 vs 1163272 1174042
 
 # Load GFF file
 gff_data <- read.delim("/home/mathias/process_data/identifyMuFa/OE1/output_directory/filtered_:DGF-1_protein_coding_gene:_TriTrypDB-68_TcruziDm28c2018.gff", comment.char = "#", header = FALSE, sep = "\t")
@@ -247,3 +203,52 @@ if (!is.null(table_format)) {
 
 # # Mostrar el resultado
 # df_no_overlaps
+
+
+## origianl best dif
+
+# # Function to eliminate overlaps and preserve the one that maximizes the difference V16 - V15
+# filter_non_overlapping_with_max_diff <- function(df) {
+#   # Split the dataframe by groups in column V2
+#   df_groups <- split(df, df$V2)
+  
+#   # Initialize the final result
+#   result <- data.frame()
+  
+#   # Iterate over groups
+#   for (group in df_groups) {
+#     # Sort the group by start (V15) and end (V16) positions
+#     group <- group[order(group$V15, group$V16), ]
+    
+#     # Initialize the first group without overlaps
+#     non_overlapping_group <- group[1, , drop = FALSE]
+    
+#     # Check the remaining rows within the group
+#     for (i in 2:nrow(group)) {
+#       last_row <- non_overlapping_group[nrow(non_overlapping_group), ]
+#       current_row <- group[i, ]
+      
+#       # If there is no overlap, add the alignment to the group without overlaps
+#       if (current_row$V15 > last_row$V16) {
+#         non_overlapping_group <- bind_rows(non_overlapping_group, current_row)
+#       } else {
+#         # If there is overlap, compare the difference between V16 and V15
+#         if ((current_row$V16 - current_row$V15) > (last_row$V16 - last_row$V15)) {
+#           # If the current alignment is longer, replace the previous row
+#           non_overlapping_group[nrow(non_overlapping_group), ] <- current_row
+#         }
+#       }
+#     }
+    
+#     # Add the processed group to the final result
+#     result <- bind_rows(result, non_overlapping_group)
+#   }
+  
+#   return(result)
+# }
+
+# # Call the function to filter the overlaps
+# df_no_overlaps <- filter_non_overlapping_with_max_diff(df)
+
+# # Show the result
+# df_no_overlaps # 1163245 1173588 vs 1163272 1174042
