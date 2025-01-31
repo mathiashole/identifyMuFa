@@ -6,6 +6,7 @@
 # # init variable values
 # blast_file <- NULL
 # gff_file <- NULL
+table_format <- NULL
 
 # # Parse arguments manually
 # for (i in seq_along(args)) {
@@ -14,7 +15,7 @@
 #   } else if (args[i] == "--gff_file" || args[i] == "-g") {
 #     gff_file <- args[(i + 1):length(args)]
 #   } else if (args[i] == "--table" || args[i] == "-tab") {
-#   table_format <- args[i + 1]
+#     table_format <- args[i + 1]
 #     break
 #   }
 # }
