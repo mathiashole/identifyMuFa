@@ -6,7 +6,7 @@
 # # init variable values
 # blast_file <- NULL
 # gff_file <- NULL
-table_format <- NULL
+# table_format <- NULL
 
 # # Parse arguments manually
 # for (i in seq_along(args)) {
