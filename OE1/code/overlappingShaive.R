@@ -7,6 +7,7 @@
 # blast_file <- NULL
 # gff_file <- NULL
 # table_format <- NULL
+# inter_seq <- 0
 
 # # Parse arguments manually
 # for (i in seq_along(args)) {
@@ -14,6 +15,8 @@
 #     blast_file <- args[i + 1]
 #   } else if (args[i] == "--gff_file" || args[i] == "-g") {
 #     gff_file <- args[(i + 1):length(args)]
+# } else if (args[i] == "--inter" || args[i] == "-i") {
+#     number <- as.integer(args[i + 1])
 #   } else if (args[i] == "--table" || args[i] == "-tab") {
 #     table_format <- args[i + 1]
 #     break
@@ -221,7 +224,7 @@ if (!is.null(table_format)) {
 #       current_row <- group[i, ]
       
 #       # Si hay solapamiento, actualizar los extremos
-#       if (current_row$V15 <= last_row$V16) {
+#       if (current_row$V15 <= last_row$V16 + 100) {
 #         last_row$V15 <- min(last_row$V15, current_row$V15)
 #         last_row$V16 <- max(last_row$V16, current_row$V16)
 #         non_overlapping_group[nrow(non_overlapping_group), ] <- last_row
