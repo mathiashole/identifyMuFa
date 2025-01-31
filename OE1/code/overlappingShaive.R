@@ -119,8 +119,11 @@ remove_overlaps_with_gff <- function(dataframe, gff) {
   return(filtered_data)
 }
 
-filtered_data <- remove_overlaps_with_gff(df_no_overlaps, gff_data)
+if (!is.null(gff_file)) {
 
+  filtered_data <- remove_overlaps_with_gff(df_no_overlaps, gff_data)
+
+}
 # ### igualdad de longitud vamos por el de mayor identidad 
 
 # filter_non_overlapping_with_max_diff <- function(df) {
