@@ -99,6 +99,15 @@ execution_module <- function(data, output_dir) {
         # system(data$distribution_command[i])
 
         # cat("Successfully processed", data$fasta_file[i], "and keywords:", data$keyword1[i], data$keyword2[i], "\n")
+
+        ##################################################################################################
+        # Next steps
+        # Blast script
+        # parsing blast script to obtein gene and pseudogene. Check arguments of gff
+        # call gscissors
+        # then think 
+        ##################################################################################################
+
       }
 }
 
