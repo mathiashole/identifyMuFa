@@ -225,7 +225,7 @@ if (!is.null(table_format)) {
 #       current_row <- group[i, ]
       
 #       # Si hay solapamiento, actualizar los extremos
-#       if (current_row$V15 <= last_row$V16 + 100) {
+#       if (current_row$V15 <= last_row$V16 + inter_seq) {
 #         last_row$V15 <- min(last_row$V15, current_row$V15)
 #         last_row$V16 <- max(last_row$V16, current_row$V16)
 #         non_overlapping_group[nrow(non_overlapping_group), ] <- last_row
