@@ -13,7 +13,12 @@
 #     blast_file <- args[i + 1]
 #   } else if (args[i] == "--gff_file" || args[i] == "-g") {
 #     gff_file <- args[(i + 1):length(args)]
+#   } else if (args[i] == "--table" || args[i] == "-tab") {
+#   table_format <- args[i + 1]
 #     break
+#   }
+# }
+
 # args <- commandArgs(trailingOnly = TRUE)
 # blast_file <- args[1]
 # gff_file <- args[2]
