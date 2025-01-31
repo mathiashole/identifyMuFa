@@ -124,6 +124,20 @@ if (!is.null(gff_file)) {
   filtered_data <- remove_overlaps_with_gff(df_no_overlaps, gff_data)
 
 }
+
+if (!is.null(table_format)) {
+  if (table_format == "csv") {
+    write_csv(chrom_limits, "limits.csv", col_names = FALSE)
+    write_csv(filtered_data, "filtered_data.csv", col_names = FALSE)
+  } else if (table_format == "tsv") {
+    write_tsv(chrom_limits, "limits.tsv", col_names = FALSE)
+    write_tsv(filtered_data, "filtered_data.tsv", col_names = FALSE)
+  } else {
+    stop("Unsupported table format specified.")
+  }
+  cat("Tables saved in", table_format, "format without column names.\n")
+}
+
 # ### igualdad de longitud vamos por el de mayor identidad 
 
 # filter_non_overlapping_with_max_diff <- function(df) {
