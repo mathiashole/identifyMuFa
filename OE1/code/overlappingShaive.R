@@ -31,6 +31,10 @@ library(dplyr)
 # blast_data <- read.delim(blast_file, header = FALSE, sep = "\t", fill = TRUE)
 
 blast_data <- read.delim("/home/mathias/study/maestria/scoville_data/blast_results/blastn_TriTrypDB-68_TcruziDm28c2018_Genome.txt", header = FALSE, sep = "\t", fill = TRUE)
+blast_data <- read.delim("/home/mathias/study/maestria/scoville_data/blast_results/blastn_TriTrypDB-68_TcruziBrazilA4_Genome.txt", header = FALSE, sep = "\t", fill = TRUE)
+blast_data <- read.delim("/home/mathias/study/maestria/scoville_data/blast_results/blastn_TriTrypDB-68_TcruziYC6_Genome.txt", header = FALSE, sep = "\t", fill = TRUE)
+blast_data <- read.delim("/home/mathias/study/maestria/scoville_data/blast_results/blastn_TcDm25_TcruziTcDm25H1_Genome.txt", header = FALSE, sep = "\t", fill = TRUE)
+
 
 # Rearrange columns V9 and V10 into V15 and V16 based on condition
 df <- blast_data %>%
