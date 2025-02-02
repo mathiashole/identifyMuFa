@@ -56,8 +56,9 @@ df <- blast_data %>%
 
 # Sort by V2 (group_by) and within each group by V15 and V16
 df <- df %>%
-  group_by(V2) %>%
-  arrange(V15, V16, .by_group = TRUE) %>%
+  # group_by(V2) %>%
+  group_by(V2, V17) %>% # Group by V2 and then by V17
+  arrange(V15, V16, .by_group = TRUE) %>% # Sort within each subgroup
   ungroup()
 
 filter_non_overlapping_with_extremes <- function(df) {
