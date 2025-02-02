@@ -50,7 +50,8 @@ blast_data <- read.delim("/home/mathias/study/maestria/scoville_data/blast_resul
 df <- blast_data %>%
   mutate(
     V15 = pmin(V9, V10), # Takes the smallest value between V9 and V10
-    V16 = pmax(V9, V10)  # Takes the largest value between V9 and V10
+    V16 = pmax(V9, V10),  # Takes the largest value between V9 and V10
+    V17 = ifelse(V9 == V15, "+", "-")  # "+" if V9 is the minimum, "-" if V9 is the maximum
   )
 
 # Sort by V2 (group_by) and within each group by V15 and V16
