@@ -62,8 +62,10 @@ df <- df %>%
   ungroup()
 
 filter_non_overlapping_with_extremes <- function(df) {
-  # Dividir el dataframe por grupos en la columna V2
-  df_groups <- split(df, df$V2)
+  # # Dividir el dataframe por grupos en la columna V2
+  # df_groups <- split(df, df$V2)
+  # Dividir el dataframe por grupos en las columnas V2 y V17
+  df_groups <- split(df, interaction(df$V2, df$V17, drop = TRUE))
   
   # Inicializar el resultado final
   result <- data.frame()
@@ -201,53 +203,6 @@ if (!is.null(table_format)) {
 
 # # Mostrar el resultado
 # df_no_overlaps
-
-#### extremos
-
-# filter_non_overlapping_with_extremes <- function(df) {
-#   # Dividir el dataframe por grupos en la columna V2
-#   df_groups <- split(df, df$V2)
-  
-#   # Inicializar el resultado final
-#   result <- data.frame()
-  
-#   # Iterar sobre los grupos
-#   for (group in df_groups) {
-#     # Ordenar el grupo por las posiciones de inicio (V15)
-#     group <- group[order(group$V15), ]
-    
-#     # Inicializar el primer grupo sin solapamientos
-#     non_overlapping_group <- group[1, , drop = FALSE]
-    
-#     # Revisar las filas restantes dentro del grupo
-#     for (i in 2:nrow(group)) {
-#       last_row <- non_overlapping_group[nrow(non_overlapping_group), ]
-#       current_row <- group[i, ]
-      
-#       # Si hay solapamiento, actualizar los extremos
-#       if (current_row$V15 <= last_row$V16 + inter_seq) {
-#         last_row$V15 <- min(last_row$V15, current_row$V15)
-#         last_row$V16 <- max(last_row$V16, current_row$V16)
-#         non_overlapping_group[nrow(non_overlapping_group), ] <- last_row
-#       } else {
-#         # Si no hay solapamiento, añadir el alineamiento al grupo sin solapamientos
-#         non_overlapping_group <- bind_rows(non_overlapping_group, current_row)
-#       }
-#     }
-    
-#     # Añadir el grupo procesado al resultado final
-#     result <- bind_rows(result, non_overlapping_group)
-#   }
-  
-#   return(result)
-# }
-
-# # Llamar a la función para filtrar los solapamientos
-# df_no_overlaps <- filter_non_overlapping_with_extremes(df)
-
-# # Mostrar el resultado
-# df_no_overlaps
-
 
 ## origianl best dif
 
