@@ -65,7 +65,7 @@ filter_non_overlapping_with_extremes <- function(df) {
   # # Dividir el dataframe por grupos en la columna V2
   # df_groups <- split(df, df$V2)
   # Dividir el dataframe por grupos en las columnas V2 y V17
-  df_groups <- split(df, interaction(df$V2, df$V17, drop = TRUE))
+  df_groups <- split(df, interaction(df$V2, df$V17, drop = TRUE)) # df_no_overlaps[,c(2,9,10,15,16, 17)]
   
   # Inicializar el resultado final
   result <- data.frame()
