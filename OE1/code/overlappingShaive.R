@@ -29,10 +29,14 @@ for (i in seq_along(args)) {
 #   }
 # }
 
-# # Validate arguments
-# if (!file.exists(blast_file)) {
-#   stop("The provided BLAST file does not exist.")
-# }
+# Validate arguments
+if (!file.exists(blast_file)) {
+  stop("The provided BLAST file does not exist.")
+}
+
+if (is.null(table_format)) {
+  table_format <- "tsv"
+}
 
 library(readr)
 library(dplyr)
