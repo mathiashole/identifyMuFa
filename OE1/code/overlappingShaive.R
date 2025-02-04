@@ -35,11 +35,11 @@ library(readr)
 library(dplyr)
 
 # blast_data <- read.delim(blast_file, header = FALSE, sep = "\t", fill = TRUE)
-inter_seq <- 100
-blast_data <- read.delim("/home/mathias/study/maestria/scoville_data/blast_results/blastn_TriTrypDB-68_TcruziDm28c2018_Genome.txt", header = FALSE, sep = "\t", fill = TRUE)
-blast_data <- read.delim("/home/mathias/study/maestria/scoville_data/blast_results/blastn_TriTrypDB-68_TcruziBrazilA4_Genome.txt", header = FALSE, sep = "\t", fill = TRUE)
-blast_data <- read.delim("/home/mathias/study/maestria/scoville_data/blast_results/blastn_TriTrypDB-68_TcruziYC6_Genome.txt", header = FALSE, sep = "\t", fill = TRUE)
-blast_data <- read.delim("/home/mathias/study/maestria/scoville_data/blast_results/blastn_TcDm25_TcruziTcDm25H1_Genome.txt", header = FALSE, sep = "\t", fill = TRUE)
+# inter_seq <- 100
+# blast_data <- read.delim("/home/mathias/study/maestria/scoville_data/blast_results/blastn_TriTrypDB-68_TcruziDm28c2018_Genome.txt", header = FALSE, sep = "\t", fill = TRUE)
+# blast_data <- read.delim("/home/mathias/study/maestria/scoville_data/blast_results/blastn_TriTrypDB-68_TcruziBrazilA4_Genome.txt", header = FALSE, sep = "\t", fill = TRUE)
+# blast_data <- read.delim("/home/mathias/study/maestria/scoville_data/blast_results/blastn_TriTrypDB-68_TcruziYC6_Genome.txt", header = FALSE, sep = "\t", fill = TRUE)
+# blast_data <- read.delim("/home/mathias/study/maestria/scoville_data/blast_results/blastn_TcDm25_TcruziTcDm25H1_Genome.txt", header = FALSE, sep = "\t", fill = TRUE)
 
 
 # Rearrange columns V9 and V10 into V15 and V16 based on condition
@@ -47,7 +47,7 @@ df <- blast_data %>%
   mutate(
     V15 = pmin(V9, V10), # Takes the smallest value between V9 and V10
     V16 = pmax(V9, V10),  # Takes the largest value between V9 and V10
-    V17 = ifelse(V9 == V15, "+", "-")  # "+" if V9 is the minimum, "-" if V9 is the maximum
+    V17 = ifelse(V9 <= V10, "+", "-")  # "+" if V9 is the minimum, "-" if V9 is the maximum
   )
 
 # Sort by V2 (group_by) and within each group by V15 and V16
@@ -104,10 +104,10 @@ df_no_overlaps <- filter_non_overlapping_with_extremes(df)
 df_no_overlaps
 
 # Load GFF file
-gff_data <- read.delim("/home/mathias/process_data/identifyMuFa/OE1/output_directory/filtered_:DGF-1_protein_coding_gene:_TriTrypDB-68_TcruziDm28c2018.gff", comment.char = "#", header = FALSE, sep = "\t")
-gff_data <- read.delim("/home/mathias/process_data/identifyMuFa/OE1/output_directory/filtered_:DGF-1_protein_coding_gene:_TriTrypDB-68_TcruziBrazilA4.gff", comment.char = "#", header = FALSE, sep = "\t")
-gff_data <- read.delim("/home/mathias/process_data/identifyMuFa/OE1/output_directory/filtered_:DGF-1_protein_coding_gene:_TriTrypDB-68_TcruziYC6.gff", comment.char = "#", header = FALSE, sep = "\t")
-gff_data <- read.delim("/home/mathias/process_data/identifyMuFa/OE1/output_directory/filtered_:DGF-1_polypeptide:_TcDm25_TcruziTcDm25H1.gff", comment.char = "#", header = FALSE, sep = "\t")
+# gff_data <- read.delim("/home/mathias/process_data/identifyMuFa/OE1/output_directory/filtered_:DGF-1_protein_coding_gene:_TriTrypDB-68_TcruziDm28c2018.gff", comment.char = "#", header = FALSE, sep = "\t")
+# gff_data <- read.delim("/home/mathias/process_data/identifyMuFa/OE1/output_directory/filtered_:DGF-1_protein_coding_gene:_TriTrypDB-68_TcruziBrazilA4.gff", comment.char = "#", header = FALSE, sep = "\t")
+# gff_data <- read.delim("/home/mathias/process_data/identifyMuFa/OE1/output_directory/filtered_:DGF-1_protein_coding_gene:_TriTrypDB-68_TcruziYC6.gff", comment.char = "#", header = FALSE, sep = "\t")
+# gff_data <- read.delim("/home/mathias/process_data/identifyMuFa/OE1/output_directory/filtered_:DGF-1_polypeptide:_TcDm25_TcruziTcDm25H1.gff", comment.char = "#", header = FALSE, sep = "\t")
 
 remove_overlaps_with_gff <- function(dataframe, gff) {
   # Filtrar las filas del dataframe comparando con los datos del GFF
@@ -135,11 +135,11 @@ if (!is.null(gff_file)) {
 
 if (!is.null(table_format)) {
   if (table_format == "csv") {
-    write_csv(df_no_overlaps, "all_multigenic family_data.csv", col_names = FALSE)
-    write_csv(filtered_data, "filtered_multigenic family_data.csv", col_names = FALSE)
+    write_csv(df_no_overlaps, "all_multigenic_family_data.csv", col_names = FALSE)
+    write_csv(filtered_data, "filtered_multigenic_family_data.csv", col_names = FALSE)
   } else if (table_format == "tsv") {
-    write_tsv(df_no_overlaps, "all_multigenic family_data.tsv", col_names = FALSE)
-    write_tsv(filtered_data, "filtered_multigenic family_data..tsv", col_names = FALSE)
+    write_tsv(df_no_overlaps, "all_multigenic_family_data.tsv", col_names = FALSE)
+    write_tsv(filtered_data, "filtered_multigenic_family_data..tsv", col_names = FALSE)
   } else {
     stop("Unsupported table format specified.")
   }
