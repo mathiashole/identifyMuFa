@@ -14,12 +14,11 @@ for (i in seq_along(args)) {
   if (args[i] == "--blast_file" || args[i] == "-b") {
     blast_file <- args[i + 1]
   } else if (args[i] == "--gff_file" || args[i] == "-g") {
-    gff_file <- args[(i + 1):length(args)]
-} else if (args[i] == "--inter" || args[i] == "-i") {
+    gff_file <- args[i + 1]
+  } else if (args[i] == "--inter" || args[i] == "-i") {
     inter_seq <- as.integer(args[i + 1])
   } else if (args[i] == "--table" || args[i] == "-tab") {
     table_format <- args[i + 1]
-    break
   }
 }
 
