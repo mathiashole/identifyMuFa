@@ -4,6 +4,7 @@
 # call all scripts
 FILTER_SEQ <- "code/filter_keywords.sh"
 GSCISSORS <- "code/Genomics_Scissors/gscissors.pl"
+OVERLAPPINGSHAIVE <- "code/overlappingShaive.R"
 # SEQ_A <- "/home/usuario/Data_Rstudio/chop_genome/seq_attributes/seq_attributes.R"
 # DISTRIBUTION <- "/home/usuario/Data_Rstudio/statistics_of_sequence/analyze_statistics.R"
 #SEQ_A <- "/home/usuario/Data_Rstudio/statistics_of_sequence/render_quarto.R"
