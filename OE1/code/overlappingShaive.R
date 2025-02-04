@@ -22,13 +22,6 @@ for (i in seq_along(args)) {
   }
 }
 
-
-# args <- commandArgs(trailingOnly = TRUE)
-# blast_file <- args[1]
-# gff_file <- args[2]
-#   }
-# }
-
 # Validate arguments
 if (!file.exists(blast_file)) {
   stop("The provided BLAST file does not exist.")
