@@ -131,9 +131,9 @@ remove_overlaps_with_gff <- function(dataframe, gff) {
 }
 
 if (!is.null(gff_file)) {
-
   filtered_data <- remove_overlaps_with_gff(df_no_overlaps, gff_data)
-
+} else {
+  filtered_data <- df_no_overlaps  # Si no hay GFF, mantener los datos sin cambios
 }
 
 if (!is.null(table_format)) {
