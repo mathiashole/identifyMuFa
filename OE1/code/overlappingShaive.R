@@ -1,28 +1,28 @@
 #!/usr/bin/env Rscript
 
-# # Get command-line arguments
-# args <- commandArgs(trailingOnly = TRUE)
+# Get command-line arguments
+args <- commandArgs(trailingOnly = TRUE)
 
-# # init variable values
-# blast_file <- NULL
-# gff_file <- NULL
-# table_format <- NULL
-# inter_seq <- 0
+# init variable values
+blast_file <- NULL
+gff_file <- NULL
+table_format <- NULL
+inter_seq <- 0
 
-# # Parse arguments manually
-# for (i in seq_along(args)) {
-#   if (args[i] == "--blast_file" || args[i] == "-b") {
-#     blast_file <- args[i + 1]
-#   } else if (args[i] == "--gff_file" || args[i] == "-g") {
-#     gff_file <- args[(i + 1):length(args)]
-# } else if (args[i] == "--inter" || args[i] == "-i") {
-#     number <- as.integer(args[i + 1])
-#   } else if (args[i] == "--table" || args[i] == "-tab") {
-#     table_format <- args[i + 1]
-#     break
-#   }
-# }
-#
+# Parse arguments manually
+for (i in seq_along(args)) {
+  if (args[i] == "--blast_file" || args[i] == "-b") {
+    blast_file <- args[i + 1]
+  } else if (args[i] == "--gff_file" || args[i] == "-g") {
+    gff_file <- args[(i + 1):length(args)]
+} else if (args[i] == "--inter" || args[i] == "-i") {
+    inter_seq <- as.integer(args[i + 1])
+  } else if (args[i] == "--table" || args[i] == "-tab") {
+    table_format <- args[i + 1]
+    break
+  }
+}
+
 
 # args <- commandArgs(trailingOnly = TRUE)
 # blast_file <- args[1]
