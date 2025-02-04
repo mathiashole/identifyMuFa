@@ -139,11 +139,11 @@ if (!is.null(gff_file)) {
 
 if (!is.null(table_format)) {
   if (table_format == "csv") {
-    write_csv(df_no_overlaps, "limits.csv", col_names = FALSE)
-    write_csv(filtered_data, "filtered_data.csv", col_names = FALSE)
+    write_csv(df_no_overlaps, "all_multigenic family_data.csv", col_names = FALSE)
+    write_csv(filtered_data, "filtered_multigenic family_data.csv", col_names = FALSE)
   } else if (table_format == "tsv") {
-    write_tsv(df_no_overlaps, "limits.tsv", col_names = FALSE)
-    write_tsv(filtered_data, "filtered_data.tsv", col_names = FALSE)
+    write_tsv(df_no_overlaps, "all_multigenic family_data.tsv", col_names = FALSE)
+    write_tsv(filtered_data, "filtered_multigenic family_data..tsv", col_names = FALSE)
   } else {
     stop("Unsupported table format specified.")
   }
