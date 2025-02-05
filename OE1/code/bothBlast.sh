@@ -9,7 +9,7 @@ fi
 # Variables
 query_fasta="$1"
 output_dir="$2"
-genomes="${@:2}"
+genomes="${@:3}"
 # output_dir="blast_results"
 amino_output="${query_fasta%.fasta}_amino.fasta"
 
