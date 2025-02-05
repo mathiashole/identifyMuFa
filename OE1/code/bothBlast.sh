@@ -8,8 +8,9 @@ fi
 
 # Variables
 query_fasta="$1"
+output_dir="$2"
 genomes="${@:2}"
-output_dir="blast_results"
+# output_dir="blast_results"
 amino_output="${query_fasta%.fasta}_amino.fasta"
 
 # Crear el directorio de salida si no existe
