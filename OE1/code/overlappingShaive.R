@@ -34,7 +34,8 @@ if (is.null(table_format)) {
 library(readr)
 library(dplyr)
 
-# blast_data <- read.delim(blast_file, header = FALSE, sep = "\t", fill = TRUE)
+blast_data <- read.delim(blast_file, header = FALSE, sep = "\t", fill = TRUE)
+
 # inter_seq <- 100
 # blast_data <- read.delim("/home/mathias/study/maestria/scoville_data/blast_results/blastn_TriTrypDB-68_TcruziDm28c2018_Genome.txt", header = FALSE, sep = "\t", fill = TRUE)
 # blast_data <- read.delim("/home/mathias/study/maestria/scoville_data/blast_results/blastn_TriTrypDB-68_TcruziBrazilA4_Genome.txt", header = FALSE, sep = "\t", fill = TRUE)
