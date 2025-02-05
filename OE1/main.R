@@ -35,13 +35,16 @@ transform_data <- function(data) {
   # Perform metadata transformations
   data <- mutate(data,
     gff_basename = basename(gff_file),
+    fasta_basename = basename(fasta_file),
     no_gff_basename = str_remove(gff_basename, ".{4}$"),
+    no_fasta_basename = str_remove(fasta_basename, ".{6}$"),
     keyword_sum = paste(keyword1, keyword2, sep = "_"),
     filtred_name_gff = str_c("filtered_:", keyword_sum, ":_", gff_basename),
     non_filtred_name_gff = str_c("non-filtered_:", keyword2, ":_", gff_basename),
     out_gscissors = str_c("out_:", keyword_sum, ":_", no_gff_basename, ".fasta"),
     out_rest_gscissors = str_c("out_rest:", keyword2, ":_", no_gff_basename, ".fasta"),
     stat_fasta_feature = str_c("stat_", keyword_sum, "_", no_gff_basename, ".tsv"),
+    blastn_result = str_c("blastn_", keyword_sum, "_", no_gff_basename, ".tsv")
   )
   
   # Returns the transformed DataFrame
