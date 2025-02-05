@@ -136,6 +136,11 @@ if (!is.null(gff_file)) {
   filtered_data <- df_no_overlaps  # If there is no GFF, keep the data unchanged
 }
 
+# We extract the base name of the blast_file file without the extension
+blast_base <- tools::file_path_sans_ext(basename(blast_file))
+# Remove the "blastn_" prefix if present
+blast_base <- sub("^blastn_", "", blast_base)
+
 if (!is.null(table_format)) {
   if (table_format == "csv") {
     write_csv(df_no_overlaps, "all_multigenic_family_data.csv", col_names = FALSE)
