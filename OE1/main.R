@@ -58,7 +58,9 @@ generate_commands <- function(data, output_dir) {
     mutate(
       filter_seq_command = str_c(FILTER_SEQ, " ", input_file, " ", output_dir),
       gscissors_command = str_c(GSCISSORS, " --fasta ", fasta_file, " --coordinates ", output_dir, "/", filtred_name_gff, " --format gff --output ", output_dir, "/", out_gscissors),
-      gscissors_rest_command = str_c(GSCISSORS, " --fasta ", fasta_file, " --coordinates ", output_dir, "/", non_filtred_name_gff, " --format gff --output ", output_dir, "/", out_rest_gscissors)#,
+      gscissors_rest_command = str_c(GSCISSORS, " --fasta ", fasta_file, " --coordinates ", output_dir, "/", non_filtred_name_gff, " --format gff --output ", output_dir, "/", out_rest_gscissors),#,
+      bothblast_command = str_c(BOTHBLAST, " ", out_gscissors, " ", fasta_file),
+      overlappingshaive_command = str_c(OVERLAPPINGSHAIVE, " --blast_file ", blastn_result, " --gff_file ", gff_file, " --inter ", 100)
       # fasta_feature_command = str_c(SEQ_A, " ", out_gscissors),
       # distribution_command = str_c(DISTRIBUTION, " ", stat_fasta_feature)
     )
