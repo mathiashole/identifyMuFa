@@ -44,7 +44,8 @@ transform_data <- function(data) {
     out_gscissors = str_c("out_:", keyword_sum, ":_", no_gff_basename, ".fasta"),
     out_rest_gscissors = str_c("out_rest:", keyword2, ":_", no_gff_basename, ".fasta"),
     stat_fasta_feature = str_c("stat_", keyword_sum, "_", no_gff_basename, ".tsv"),
-    blastn_result = str_c("blastn_", keyword_sum, "_", no_gff_basename, ".tsv")
+    blastn_result = str_c("blastn_", no_fasta_basename, ".txt"),
+    tblastn_result = str_c("tblastn_", no_fasta_basename, ".txt")
   )
   
   # Returns the transformed DataFrame
