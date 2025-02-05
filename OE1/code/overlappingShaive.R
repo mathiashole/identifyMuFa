@@ -19,6 +19,8 @@ for (i in seq_along(args)) {
     inter_seq <- as.integer(args[i + 1])
   } else if (args[i] == "--table" || args[i] == "-tab") {
     table_format <- args[i + 1]
+  } else if (args[i] == "--output_dir" || args[i] == "-o") {
+    output_dir <- args[i + 1]  # Get the output directory
   }
 }
 
