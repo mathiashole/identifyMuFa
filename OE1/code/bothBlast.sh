@@ -2,7 +2,7 @@
 
 # Verificación de argumentos
 if [ "$#" -lt 2 ]; then
-    echo "Usage: $0 <query_fasta> <genome_fasta1> [<genome_fasta2> ...]"
+    echo "Usage: $0 <query_fasta> <output_dir> <genome_fasta1> [<genome_fasta2> ...]"
     exit 1
 fi
 
