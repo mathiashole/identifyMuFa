@@ -151,7 +151,7 @@ if (!is.null(table_format)) {
   } else {
     stop("Unsupported table format specified.")
   }
-  cat("Tables saved in", table_format, "format without column names.\n")
+  cat("Tables saved in", table_format, "format without column names in", output_dir, "\n")
 }
 
 # ### igualdad de longitud vamos por el de mayor identidad 
