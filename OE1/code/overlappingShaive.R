@@ -106,6 +106,9 @@ df_no_overlaps <- filter_non_overlapping_with_extremes(df)
 # Mostrar el resultado
 df_no_overlaps
 
+df_no_overlaps <- df_no_overlaps %>%
+  mutate(V18 = row_number()) # add number
+
 no_overlaps_output <- df_no_overlaps %>%
   mutate(
     V1 = V2,
