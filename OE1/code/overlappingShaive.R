@@ -143,8 +143,8 @@ blast_base <- sub("^blastn_", "", blast_base)
 
 if (!is.null(table_format)) {
   if (table_format == "csv") {
-    write_csv(df_no_overlaps, "all_multigenic_family_data.csv", col_names = FALSE)
-    write_csv(filtered_data, "filtered_multigenic_family_data.csv", col_names = FALSE)
+    write_csv(df_no_overlaps, file.path(output_dir, paste0("all_multigenic_family_", blast_base, ".csv")), col_names = FALSE)
+    write_csv(filtered_data, file.path(output_dir, paste0("filtered_multigenic_family_", blast_base, ".csv")), col_names = FALSE)
   } else if (table_format == "tsv") {
     write_tsv(df_no_overlaps, "all_multigenic_family_data.tsv", col_names = FALSE)
     write_tsv(filtered_data, "filtered_multigenic_family_data..tsv", col_names = FALSE)
