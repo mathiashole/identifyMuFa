@@ -104,6 +104,21 @@ filter_non_overlapping_with_extremes <- function(df) {
   return(result)
 }
 
+# filter_non_overlapping_with_extremes <- function(df) {
+#   df %>%
+#     group_by(V2, V17) %>%
+#     arrange(V15, .by_group = TRUE) %>%
+#     mutate(
+#       group_id = cumsum(V15 > lag(V16 + inter_seq, default = first(V15)))
+#     ) %>%
+#     group_by(V2, V17, group_id) %>%
+#     summarise(
+#       V15 = min(V15),
+#       V16 = max(V16),
+#       .groups = "drop"
+#     )
+# }
+
 # Llamar a la función para filtrar los solapamientos
 df_no_overlaps <- filter_non_overlapping_with_extremes(df)
 
