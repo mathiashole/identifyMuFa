@@ -59,7 +59,7 @@ generate_commands <- function(data, output_dir) {
       filter_seq_command = str_c(FILTER_SEQ, " ", input_file, " ", output_dir),
       gscissors_command = str_c(GSCISSORS, " --fasta ", fasta_file, " --coordinates ", output_dir, "/", filtred_name_gff, " --format gff --output ", output_dir, "/", out_gscissors),
       gscissors_rest_command = str_c(GSCISSORS, " --fasta ", fasta_file, " --coordinates ", output_dir, "/", non_filtred_name_gff, " --format gff --output ", output_dir, "/", out_rest_gscissors),#,
-      bothblast_command = str_c(BOTHBLAST, " ", out_gscissors, " ", fasta_file),
+      bothblast_command = str_c(BOTHBLAST, " ", out_gscissors, " ", output_dir, " ", fasta_file),
       overlappingshaive_command = str_c(OVERLAPPINGSHAIVE, " --blast_file ", blastn_result, " --gff_file ", gff_file, " --inter ", 100)
       # fasta_feature_command = str_c(SEQ_A, " ", out_gscissors),
       # distribution_command = str_c(DISTRIBUTION, " ", stat_fasta_feature)
@@ -99,6 +99,16 @@ execution_module <- function(data, output_dir) {
           cat("Error: GSCISSORS did not create the file", data$out_rest_gscissors[i], "\n")
           next
         }
+
+        cat("Processing BOTHBLAST: ", data$bothblast_command[i], "\n")
+        system(data$bothblast_command[i])
+        # Check if BOTHBLAST created the expected file
+        path_file_bb <- paste0(output_dir,"/", data$blastn_resultf[i])
+        if (!file.exists(path_file_bb)) {
+          cat("Error: BOTHBLAST did not create the file", data$blastn_resultf[i], "\n")
+          next
+        }
+
         # # change directory from where you get the data!! DEBUGGING
         # cat("Processing SEQ_A: ", data$fasta_feature_command[i], "\n")
         # system(data$fasta_feature_command[i])
