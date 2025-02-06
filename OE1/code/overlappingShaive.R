@@ -145,6 +145,15 @@ if (!is.null(gff_file)) {
   filtered_data <- df_no_overlaps  # If there is no GFF, keep the data unchanged
 }
 
+filtered_data_output <- filtered_data %>%
+  mutate(
+    V1 = V2,
+    V2 = if_else(V17 == "-", V16, V15),
+    V3 = if_else(V17 == "-", V15, V16),
+    V4 = str_c(V1, "_", row_number(), "_", V2, "_", V3)
+  ) %>%
+  select(V1, V2, V3, V4)
+
 # We extract the base name of the blast_file file without the extension
 blast_base <- tools::file_path_sans_ext(basename(blast_file))
 # Remove the "blastn_" prefix if present
