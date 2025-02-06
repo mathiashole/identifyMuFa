@@ -17,7 +17,7 @@ for (i in seq_along(args)) {
     gff_file <- args[i + 1]
   } else if (args[i] == "--inter" || args[i] == "-i") {
     inter_seq <- as.integer(args[i + 1])
-  } else if (args[i] == "--table" || args[i] == "-tab") {
+  } else if (args[i] == "--tab" || args[i] == "-t") {
     table_format <- args[i + 1]
   } else if (args[i] == "--output_dir" || args[i] == "-o") {
     output_dir <- args[i + 1]  # Get the output directory
