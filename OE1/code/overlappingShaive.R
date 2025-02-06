@@ -106,6 +106,14 @@ df_no_overlaps <- filter_non_overlapping_with_extremes(df)
 # Mostrar el resultado
 df_no_overlaps
 
+df_adjusted <- df_no_overlaps %>%
+  mutate(
+    V1 = V2,
+    V2 = if_else(V17 == "-", V16, V15),
+    V3 = if_else(V17 == "-", V15, V16)
+  ) %>%
+  select(V1, V2, V3)
+
 # Load GFF file
 # gff_data <- read.delim("/home/mathias/process_data/identifyMuFa/OE1/output_directory/filtered_:DGF-1_protein_coding_gene:_TriTrypDB-68_TcruziDm28c2018.gff", comment.char = "#", header = FALSE, sep = "\t")
 # gff_data <- read.delim("/home/mathias/process_data/identifyMuFa/OE1/output_directory/filtered_:DGF-1_protein_coding_gene:_TriTrypDB-68_TcruziBrazilA4.gff", comment.char = "#", header = FALSE, sep = "\t")
