@@ -45,7 +45,9 @@ transform_data <- function(data) {
     out_rest_gscissors = str_c("out_rest:", keyword2, ":_", no_gff_basename, ".fasta"),
     stat_fasta_feature = str_c("stat_", keyword_sum, "_", no_gff_basename, ".tsv"),
     blastn_result = str_c("blastn_", no_fasta_basename, ".txt"),
-    tblastn_result = str_c("tblastn_", no_fasta_basename, ".txt")
+    tblastn_result = str_c("tblastn_", no_fasta_basename, ".txt"),
+    overlappingshaive_result = str_c("all_multigenic_family_", no_fasta_basename, ".tsv"),
+    overlappingshaive_result_filtered = str_c("filtered_multigenic_family_", no_fasta_basename, ".tsv")
   )
   
   # Returns the transformed DataFrame
@@ -103,9 +105,18 @@ execution_module <- function(data, output_dir) {
         cat("Processing BOTHBLAST: ", data$bothblast_command[i], "\n")
         system(data$bothblast_command[i])
         # Check if BOTHBLAST created the expected file
-        path_file_bb <- paste0(output_dir,"/", data$blastn_resultf[i])
+        path_file_bb <- paste0(output_dir,"/", data$blastn_result[i])
         if (!file.exists(path_file_bb)) {
-          cat("Error: BOTHBLAST did not create the file", data$blastn_resultf[i], "\n")
+          cat("Error: BOTHBLAST did not create the file", data$blastn_result[i], "\n")
+          next
+        }
+
+        cat("Processing OVERLAPPINGSHAIVE: ", data$overlappingshaive_command[i], "\n")
+        system(data$overlappingshaive_command[i])
+        # Check if OVERLAPPINGSHAIVE created the expect file
+        path_file_os <- paste0(output_dir,"/", data$overlappingshaive_result[i])
+        if (!file.exists(path_file_os)) {
+          cat("Error: OVERLAPPINGSHAIVE did not create the file", data$overlappingshaive_result[i], "\n")
           next
         }
 
