@@ -135,7 +135,8 @@ no_overlaps_output <- df_no_overlaps %>%
     V1 = V2,
     V2 = if_else(V17 == "-", V16, V15),
     V3 = if_else(V17 == "-", V15, V16),
-    V4 = str_c(V1, "_", V18, "_", V2, "_", V3)
+    # V4 = str_c(V1, "_", V18, "_", V2, "_", V3)
+    V4 = paste(V1, V18, V2, V3, sep = "_")
   ) %>%
   select(V1, V2, V3, V4)
 
@@ -176,7 +177,8 @@ filtered_data_output <- filtered_data %>%
     V1 = V2,
     V2 = if_else(V17 == "-", V16, V15),
     V3 = if_else(V17 == "-", V15, V16),
-    V4 = str_c(V1, "_", V18, "_", V2, "_", V3)
+    # V4 = str_c(V1, "_", V18, "_", V2, "_", V3)
+    V4 = paste(V1, V18, V2, V3, sep = "_")
   ) %>%
   select(V1, V2, V3, V4)
 
