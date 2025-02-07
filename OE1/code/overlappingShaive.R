@@ -145,7 +145,7 @@ no_overlaps_output <- df_no_overlaps %>%
 # gff_data <- read.delim("/home/mathias/process_data/identifyMuFa/OE1/output_directory/filtered_:DGF-1_protein_coding_gene:_TriTrypDB-68_TcruziYC6.gff", comment.char = "#", header = FALSE, sep = "\t")
 # gff_data <- read.delim("/home/mathias/process_data/identifyMuFa/OE1/output_directory/filtered_:DGF-1_polypeptide:_TcDm25_TcruziTcDm25H1.gff", comment.char = "#", header = FALSE, sep = "\t")
 
-gff_data <- read.delim(blast_file, comment.char = "#", header = FALSE, sep = "\t")
+gff_data <- read.delim(gff_file, comment.char = "#", header = FALSE, sep = "\t")
 
 remove_overlaps_with_gff <- function(dataframe, gff) {
   # Filtrar las filas del dataframe comparando con los datos del GFF
