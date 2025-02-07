@@ -7,6 +7,7 @@ args <- commandArgs(trailingOnly = TRUE)
 blast_file <- NULL
 gff_file <- NULL
 table_format <- NULL
+output_dir <- NULL
 inter_seq <- 0
 
 # Parse arguments manually
@@ -39,6 +40,7 @@ if (is.null(output_dir)) {
 
 library(readr)
 library(dplyr)
+library(tidyverse) ###
 
 blast_data <- read.delim(blast_file, header = FALSE, sep = "\t", fill = TRUE)
 
@@ -122,8 +124,8 @@ filter_non_overlapping_with_extremes <- function(df) {
 # Llamar a la función para filtrar los solapamientos
 df_no_overlaps <- filter_non_overlapping_with_extremes(df)
 
-# Mostrar el resultado
-df_no_overlaps
+# # Mostrar el resultado
+# df_no_overlaps
 
 df_no_overlaps <- df_no_overlaps %>%
   mutate(V18 = row_number()) # add number
@@ -142,6 +144,8 @@ no_overlaps_output <- df_no_overlaps %>%
 # gff_data <- read.delim("/home/mathias/process_data/identifyMuFa/OE1/output_directory/filtered_:DGF-1_protein_coding_gene:_TriTrypDB-68_TcruziBrazilA4.gff", comment.char = "#", header = FALSE, sep = "\t")
 # gff_data <- read.delim("/home/mathias/process_data/identifyMuFa/OE1/output_directory/filtered_:DGF-1_protein_coding_gene:_TriTrypDB-68_TcruziYC6.gff", comment.char = "#", header = FALSE, sep = "\t")
 # gff_data <- read.delim("/home/mathias/process_data/identifyMuFa/OE1/output_directory/filtered_:DGF-1_polypeptide:_TcDm25_TcruziTcDm25H1.gff", comment.char = "#", header = FALSE, sep = "\t")
+
+gff_data <- read.delim(blast_file, comment.char = "#", header = FALSE, sep = "\t")
 
 remove_overlaps_with_gff <- function(dataframe, gff) {
   # Filtrar las filas del dataframe comparando con los datos del GFF
