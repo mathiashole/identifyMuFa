@@ -187,11 +187,11 @@ blast_base <- sub("^blastn_", "", blast_base)
 
 if (!is.null(table_format)) {
   if (table_format == "csv") {
-    write_csv(df_no_overlaps, file.path(output_dir, paste0("all_multigenic_family_", blast_base, ".csv")), col_names = FALSE)
-    write_csv(filtered_data, file.path(output_dir, paste0("filtered_multigenic_family_", blast_base, ".csv")), col_names = FALSE)
+    write_csv(no_overlaps_output, file.path(output_dir, paste0("all_multigenic_family_", blast_base, ".csv")), col_names = FALSE)
+    write_csv(filtered_data_output, file.path(output_dir, paste0("filtered_multigenic_family_", blast_base, ".csv")), col_names = FALSE)
   } else if (table_format == "tsv") {
-    write_tsv(df_no_overlaps, file.path(output_dir, paste0("all_multigenic_family_", blast_base, ".tsv")), col_names = FALSE)
-    write_tsv(filtered_data, file.path(output_dir, paste0("filtered_multigenic_family_", blast_base, ".tsv")), col_names = FALSE)
+    write_tsv(no_overlaps_output, file.path(output_dir, paste0("all_multigenic_family_", blast_base, ".tsv")), col_names = FALSE)
+    write_tsv(filtered_data_output, file.path(output_dir, paste0("filtered_multigenic_family_", blast_base, ".tsv")), col_names = FALSE)
   } else {
     stop("Unsupported table format specified.")
   }
