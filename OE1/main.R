@@ -11,7 +11,7 @@ BOTHBLAST <- "code/bothBlast.sh"
 #SEQ_A <- "/home/usuario/Data_Rstudio/statistics_of_sequence/render_quarto.R"
 
 # Load necessary libraries
-library(tidyverse)
+# library(tidyverse)
 
 # Create output directory if it does not exist
 create_output_dir <- function(output_dir) {
