@@ -94,7 +94,7 @@ transform_data <- function(data) {
 
 # Function to generate commands
 generate_commands <- function(data, output_dir) {
-  data$filter_seq_command <- paste(FILTER_SEQ, data$input_file, output_dir)
+  data$filter_seq_command <- paste(FILTER_SEQ, input_file, output_dir)
   data$gscissors_command <- paste(GSCISSORS, "--fasta", data$fasta_file, "--coordinates", 
                                   file.path(output_dir, data$filtred_name_gff), "--format gff --output", 
                                   file.path(output_dir, data$out_gscissors))
