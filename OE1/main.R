@@ -26,49 +26,86 @@ create_output_dir <- function(output_dir) {
 
 # Function to read input file and set column names
 read_input <- function(input_file) {
-  data <- read_tsv(input_file, col_names = FALSE)
-  # data <- read.delim(input_file, header = FALSE, stringsAsFactors = FALSE)
+  # data <- read_tsv(input_file, col_names = FALSE)
+  data <- read.delim(input_file, header = FALSE, stringsAsFactors = FALSE)
   colnames(data) <- c("fasta_file", "gff_file", "keyword1", "keyword2")
   return(data)
 }
 
-transform_data <- function(data) {
-  # Perform metadata transformations
-  data <- mutate(data,
-    gff_basename = basename(gff_file),
-    fasta_basename = basename(fasta_file),
-    no_gff_basename = str_remove(gff_basename, ".{4}$"),
-    no_fasta_basename = str_remove(fasta_basename, ".{6}$"),
-    keyword_sum = paste(keyword1, keyword2, sep = "_"),
-    filtred_name_gff = str_c("filtered_:", keyword_sum, ":_", gff_basename),
-    non_filtred_name_gff = str_c("non-filtered_:", keyword2, ":_", gff_basename),
-    out_gscissors = str_c("out_:", keyword_sum, ":_", no_gff_basename, ".fasta"),
-    out_rest_gscissors = str_c("out_rest:", keyword2, ":_", no_gff_basename, ".fasta"),
-    stat_fasta_feature = str_c("stat_", keyword_sum, "_", no_gff_basename, ".tsv"),
-    blastn_result = str_c("blastn_", no_fasta_basename, ".txt"),
-    tblastn_result = str_c("tblastn_", no_fasta_basename, ".txt"),
-    overlappingshaive_result = str_c("all_multigenic_family_", no_fasta_basename, ".tsv"),
-    overlappingshaive_result_filtered = str_c("filtered_multigenic_family_", no_fasta_basename, ".tsv")
-  )
+# transform_data <- function(data) {
+#   # Perform metadata transformations
+#   data <- mutate(data,
+#     gff_basename = basename(gff_file),
+#     fasta_basename = basename(fasta_file),
+#     no_gff_basename = str_remove(gff_basename, ".{4}$"),
+#     no_fasta_basename = str_remove(fasta_basename, ".{6}$"),
+#     keyword_sum = paste(keyword1, keyword2, sep = "_"),
+#     filtred_name_gff = str_c("filtered_:", keyword_sum, ":_", gff_basename),
+#     non_filtred_name_gff = str_c("non-filtered_:", keyword2, ":_", gff_basename),
+#     out_gscissors = str_c("out_:", keyword_sum, ":_", no_gff_basename, ".fasta"),
+#     out_rest_gscissors = str_c("out_rest:", keyword2, ":_", no_gff_basename, ".fasta"),
+#     stat_fasta_feature = str_c("stat_", keyword_sum, "_", no_gff_basename, ".tsv"),
+#     blastn_result = str_c("blastn_", no_fasta_basename, ".txt"),
+#     tblastn_result = str_c("tblastn_", no_fasta_basename, ".txt"),
+#     overlappingshaive_result = str_c("all_multigenic_family_", no_fasta_basename, ".tsv"),
+#     overlappingshaive_result_filtered = str_c("filtered_multigenic_family_", no_fasta_basename, ".tsv")
+#   )
   
-  # Returns the transformed DataFrame
+#   # Returns the transformed DataFrame
+#   return(data)
+# }
+
+# generate_commands <- function(data, output_dir) {
+#   # we use rowwise to apply the function to each row individually
+#   data <- rowwise(data) %>%
+#     mutate(
+#       filter_seq_command = str_c(FILTER_SEQ, " ", input_file, " ", output_dir),
+#       gscissors_command = str_c(GSCISSORS, " --fasta ", fasta_file, " --coordinates ", output_dir, "/", filtred_name_gff, " --format gff --output ", output_dir, "/", out_gscissors),
+#       gscissors_rest_command = str_c(GSCISSORS, " --fasta ", fasta_file, " --coordinates ", output_dir, "/", non_filtred_name_gff, " --format gff --output ", output_dir, "/", out_rest_gscissors),#,
+#       bothblast_command = str_c(BOTHBLAST, " ", out_gscissors, " ", output_dir, " ", fasta_file),
+#       overlappingshaive_command = str_c("Rscript ", OVERLAPPINGSHAIVE, " --blast_file ", blastn_result, " --gff_file ", gff_file, " --output_dir ", output_dir, " --inter ", 100)
+#       # fasta_feature_command = str_c(SEQ_A, " ", out_gscissors),
+#       # distribution_command = str_c(DISTRIBUTION, " ", stat_fasta_feature)
+#     )
+  
+#   # Return DataFrame with generated commands
+#   return(data)
+# }
+
+# Function to transform data
+transform_data <- function(data) {
+  data$gff_basename <- basename(data$gff_file)
+  data$fasta_basename <- basename(data$fasta_file)
+  data$no_gff_basename <- sub(".{4}$", "", data$gff_basename)
+  data$no_fasta_basename <- sub(".{6}$", "", data$fasta_basename)
+  data$keyword_sum <- paste(data$keyword1, data$keyword2, sep = "_")
+  
+  data$filtred_name_gff <- paste0("filtered_:", data$keyword_sum, ":_", data$gff_basename)
+  data$non_filtred_name_gff <- paste0("non-filtered_:", data$keyword2, ":_", data$gff_basename)
+  data$out_gscissors <- paste0("out_:", data$keyword_sum, ":_", data$no_gff_basename, ".fasta")
+  data$out_rest_gscissors <- paste0("out_rest:", data$keyword2, ":_", data$no_gff_basename, ".fasta")
+  data$blastn_result <- paste0("blastn_", data$no_fasta_basename, ".txt")
+  data$tblastn_result <- paste0("tblastn_", data$no_fasta_basename, ".txt")
+  data$overlappingshaive_result <- paste0("all_multigenic_family_", data$no_fasta_basename, ".tsv")
+  data$overlappingshaive_result_filtered <- paste0("filtered_multigenic_family_", data$no_fasta_basename, ".tsv")
+  
   return(data)
 }
 
+# Function to generate commands
 generate_commands <- function(data, output_dir) {
-  # we use rowwise to apply the function to each row individually
-  data <- rowwise(data) %>%
-    mutate(
-      filter_seq_command = str_c(FILTER_SEQ, " ", input_file, " ", output_dir),
-      gscissors_command = str_c(GSCISSORS, " --fasta ", fasta_file, " --coordinates ", output_dir, "/", filtred_name_gff, " --format gff --output ", output_dir, "/", out_gscissors),
-      gscissors_rest_command = str_c(GSCISSORS, " --fasta ", fasta_file, " --coordinates ", output_dir, "/", non_filtred_name_gff, " --format gff --output ", output_dir, "/", out_rest_gscissors),#,
-      bothblast_command = str_c(BOTHBLAST, " ", out_gscissors, " ", output_dir, " ", fasta_file),
-      overlappingshaive_command = str_c("Rscript ", OVERLAPPINGSHAIVE, " --blast_file ", blastn_result, " --gff_file ", gff_file, " --output_dir ", output_dir, " --inter ", 100)
-      # fasta_feature_command = str_c(SEQ_A, " ", out_gscissors),
-      # distribution_command = str_c(DISTRIBUTION, " ", stat_fasta_feature)
-    )
+  data$filter_seq_command <- paste(FILTER_SEQ, data$input_file, output_dir)
+  data$gscissors_command <- paste(GSCISSORS, "--fasta", data$fasta_file, "--coordinates", 
+                                  file.path(output_dir, data$filtred_name_gff), "--format gff --output", 
+                                  file.path(output_dir, data$out_gscissors))
   
-  # Return DataFrame with generated commands
+  data$gscissors_rest_command <- paste(GSCISSORS, "--fasta", data$fasta_file, "--coordinates", 
+                                       file.path(output_dir, data$non_filtred_name_gff), "--format gff --output", 
+                                       file.path(output_dir, data$out_rest_gscissors))
+  
+  data$bothblast_command <- paste(BOTHBLAST, data$out_gscissors, output_dir, data$fasta_file)
+  data$overlappingshaive_command <- paste("Rscript", OVERLAPPINGSHAIVE, "--blast_file", data$blastn_result, 
+                                          "--gff_file", data$gff_file, "--output_dir", output_dir, "--inter", 100)
   return(data)
 }
 
