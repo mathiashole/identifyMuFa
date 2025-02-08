@@ -40,7 +40,7 @@ if (is.null(output_dir)) {
 
 library(readr)
 library(dplyr)
-library(tidyverse) ###
+# library(tidyverse) ###
 
 blast_data <- read.delim(blast_file, header = FALSE, sep = "\t", fill = TRUE)
 
