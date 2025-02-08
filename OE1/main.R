@@ -104,7 +104,7 @@ generate_commands <- function(data, output_dir) {
                                        file.path(output_dir, data$out_rest_gscissors))
   
   data$bothblast_command <- paste(BOTHBLAST, file.path(output_dir, data$out_gscissors), file.path(output_dir, "blast_result"), data$fasta_file)
-  data$overlappingshaive_command <- paste("Rscript", OVERLAPPINGSHAIVE, "--blast_file", data$blastn_result, 
+  data$overlappingshaive_command <- paste("Rscript", OVERLAPPINGSHAIVE, "--blast_file", data$blastn_result, ## debug blast result
                                           "--gff_file", data$gff_file, "--output_dir", output_dir, "--inter", 100)
   return(data)
 }
@@ -143,18 +143,18 @@ execution_module <- function(data, output_dir) {
         cat("Processing BOTHBLAST: ", data$bothblast_command[i], "\n")
         system(data$bothblast_command[i])
         # Check if BOTHBLAST created the expected file
-        path_file_bb <- paste0(output_dir,"/", data$blastn_result[i])
+        path_file_bb <- paste0(output_dir,"/", data$blastn_result[i]) ## debug directory
         if (!file.exists(path_file_bb)) {
-          cat("Error: BOTHBLAST did not create the file", data$blastn_result[i], "\n")
+          cat("Error: BOTHBLAST did not create the file", data$blastn_result[i], "\n") ## debug directory
           next
         }
 
         cat("Processing OVERLAPPINGSHAIVE: ", data$overlappingshaive_command[i], "\n")
         system(data$overlappingshaive_command[i])
         # Check if OVERLAPPINGSHAIVE created the expect file
-        path_file_os <- paste0(output_dir,"/", data$overlappingshaive_result[i])
+        path_file_os <- paste0(output_dir,"/", data$overlappingshaive_result[i]) ## debug directory
         if (!file.exists(path_file_os)) {
-          cat("Error: OVERLAPPINGSHAIVE did not create the file", data$overlappingshaive_result[i], "\n")
+          cat("Error: OVERLAPPINGSHAIVE did not create the file", data$overlappingshaive_result[i], "\n") ## debug directory
           next
         }
 
