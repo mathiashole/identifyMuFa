@@ -105,7 +105,7 @@ generate_commands <- function(data, output_dir) {
   
   data$bothblast_command <- paste(BOTHBLAST, file.path(output_dir, data$out_gscissors), file.path(output_dir, "blast_result"), data$fasta_file)
   data$overlappingshaive_command <- paste("Rscript", OVERLAPPINGSHAIVE, "--blast_file", data$blastn_result, ## debug blast result
-                                          "--gff_file", data$gff_file, "--output_dir", output_dir, "--inter", 100)
+                                          "--gff_file", data$gff_file, "--output_dir", output_dir, "--inter", 100) ## debug need filtered gff
   return(data)
 }
 
