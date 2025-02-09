@@ -49,7 +49,7 @@ blast_data <- read.delim(blast_file, header = FALSE, sep = "\t", fill = TRUE)
 # blast_data <- read.delim("/home/mathias/study/maestria/scoville_data/blast_results/blastn_TriTrypDB-68_TcruziBrazilA4_Genome.txt", header = FALSE, sep = "\t", fill = TRUE)
 # blast_data <- read.delim("/home/mathias/study/maestria/scoville_data/blast_results/blastn_TriTrypDB-68_TcruziYC6_Genome.txt", header = FALSE, sep = "\t", fill = TRUE)
 # blast_data <- read.delim("/home/mathias/study/maestria/scoville_data/blast_results/blastn_TcDm25_TcruziTcDm25H1_Genome.txt", header = FALSE, sep = "\t", fill = TRUE)
-
+blast_data <- read.delim("/home/mathias/study/maestria/scoville_data/blastn_TcDm25_TcruziTcDm25H1_Genome.txt", header = FALSE, sep = "\t", fill = TRUE)
 
 # Rearrange columns V9 and V10 into V15 and V16 based on condition
 df <- blast_data %>%
@@ -88,6 +88,9 @@ filter_non_overlapping_with_extremes <- function(df) {
       last_row <- non_overlapping_group[nrow(non_overlapping_group), ]
       current_row <- group[i, ]
       
+      print(paste("current_row$V15:", current_row$V15))
+      print(paste("last_row$V16:", last_row$V16))
+
       # Si hay solapamiento, actualizar los extremos
       if (current_row$V15 <= last_row$V16 + inter_seq) {
         last_row$V15 <- min(last_row$V15, current_row$V15)
