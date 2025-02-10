@@ -87,10 +87,7 @@ filter_non_overlapping_with_extremes <- function(df) {
     for (i in 2:nrow(group)) {
       last_row <- non_overlapping_group[nrow(non_overlapping_group), ]
       current_row <- group[i, ]
-      
-      print(paste("current_row$V15:", current_row$V15))
-      print(paste("last_row$V16:", last_row$V16))
-
+      # print(paste(last_row$V2, " ", current_row$V15, "  ",last_row$V16))
       # Si hay solapamiento, actualizar los extremos
       if (current_row$V15 <= last_row$V16 + inter_seq) {
         last_row$V15 <- min(last_row$V15, current_row$V15)
