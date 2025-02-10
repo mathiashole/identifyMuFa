@@ -81,15 +81,31 @@ filter_non_overlapping_with_extremes <- function(df) {
     # group <- group[order(group$V15), ]
     group <- group[order(group$V15), , drop = FALSE]
     
+    # if group there are one row add and contineous
+    if (nrow(group) < 2) {
+      result <- bind_rows(result, group)
+      next
+    }
+
     # Inicializar el primer grupo sin solapamientos
     non_overlapping_group <- group[1, , drop = FALSE]
-    print(nrow(group))
-    print(unique(group$V2))
+    # print(paste("Procesando grupo:", unique(group$V2), "con", nrow(group), "filas"))
+
     # Revisar las filas restantes dentro del grupo
     for (i in 2:nrow(group)) {
-      last_row <- non_overlapping_group[nrow(non_overlapping_group), ]
-      current_row <- group[i, ]
-      print(paste( current_row$V2, " ",current_row$V15, " ", current_row$V16, "  LAST ROW:", last_row$V2, "  ",last_row$V15, "  ", last_row$V16))
+      # last_row <- non_overlapping_group[nrow(non_overlapping_group), ]
+      # current_row <- group[i, ]
+      last_row <- non_overlapping_group[nrow(non_overlapping_group), , drop = FALSE]
+      current_row <- group[i, , drop = FALSE]
+
+      # print(paste("CURRENT ROW:", current_row$V2, current_row$V15, current_row$V16, 
+      #             " LAST ROW:", last_row$V2, last_row$V15, last_row$V16))
+      
+      if (any(is.na(current_row))) {
+        print("🚨 NA detected in current_row, skipped.")
+        next
+      }
+      # print(paste( current_row$V2, " ",current_row$V15, " ", current_row$V16, "  LAST ROW:", last_row$V2, "  ",last_row$V15, "  ", last_row$V16))
       # Si hay solapamiento, actualizar los extremos
       if (current_row$V15 <= last_row$V16 + inter_seq) {
         last_row$V15 <- min(last_row$V15, current_row$V15)
