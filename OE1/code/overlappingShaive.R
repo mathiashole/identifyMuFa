@@ -135,9 +135,6 @@ filter_non_overlapping_with_extremes <- function(df) {
 # Llamar a la función para filtrar los solapamientos
 df_no_overlaps <- filter_non_overlapping_with_extremes(df)
 
-# # Mostrar el resultado
-# df_no_overlaps
-
 df_no_overlaps <- df_no_overlaps %>%
   mutate(V18 = row_number()) # add number
 
