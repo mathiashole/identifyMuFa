@@ -1,0 +1,47 @@
+#!/usr/bin/env Rscript
+
+# Load required library
+suppressPackageStartupMessages(library(dplyr))
+
+# Get command-line arguments
+args <- commandArgs(trailingOnly = TRUE)
+
+if (length(args) < 2) {
+  stop("Usage: Rscript split_by_difference.R <input_file> <threshold>")
+}
+
+input_file <- args[1]
+threshold <- as.numeric(args[2])
+
+if (!file.exists(input_file)) {
+  stop("Error: Input file does not exist.")
+}
+
+# Read the dataframe (assuming tab-separated, change if needed)
+df <- read.table(input_file, header = FALSE, sep = "\t")
+
+# Check if the dataframe has exactly 4 columns
+if (ncol(df) != 4) {
+  stop("Error: The input file must have exactly 4 columns.")
+}
+
+# Compute absolute difference between column 2 and 3
+df <- df %>% mutate(diff_abs = abs(V2 - V3))
+
+# Split based on the threshold
+df_high <- df %>% filter(diff_abs >= threshold) %>% select(-diff_abs)
+df_low <- df %>% filter(diff_abs < threshold) %>% select(-diff_abs)
+
+# Get the directory and filename
+output_dir <- dirname(input_file)
+base_name <- tools::file_path_sans_ext(basename(input_file))
+
+# Define output filenames
+output_high <- file.path(output_dir, paste0(base_name, "_high.tsv"))
+output_low <- file.path(output_dir, paste0(base_name, "_low.tsv"))
+
+# Save the resulting dataframes
+write.table(df_high, output_high, sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE)
+write.table(df_low, output_low, sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE)
+
+cat("Files saved:\n", output_high, "\n", output_low, "\n")
