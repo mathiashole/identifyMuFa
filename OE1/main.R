@@ -48,6 +48,8 @@ transform_data <- function(data) {
   data$tblastn_result <- paste0("tblastn_", data$no_fasta_basename, ".txt")
   data$overlappingshaive_result <- paste0("all_multigenic_family_", data$no_fasta_basename, ".tsv")
   data$overlappingshaive_result_filtered <- paste0("filtered_multigenic_family_", data$no_fasta_basename, ".tsv")
+    data$overlap_result_gene <- paste0("gene_all_multigenic_family_dataframe_", data$no_fasta_basename, ".tsv")
+  data$overlap_result_pseudogene <- paste0("pseudogene_all_multigenic_family_dataframe_", data$no_fasta_basename, ".tsv")
   data$overlap_result_gene <- paste0("gene_all_multigenic_family_", data$no_fasta_basename, ".fasta")
   data$overlap_result_pseudogene <- paste0("pseudogene_all_multigenic_family_", data$no_fasta_basename, ".fasta")
   
