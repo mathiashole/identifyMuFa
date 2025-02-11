@@ -112,7 +112,7 @@ execution_module <- function(data, output_dir) {
         cat("Processing OVERLAPPINGSHAIVE: ", data$overlappingshaive_command[i], "\n")
         system(data$overlappingshaive_command[i])
         # Check if OVERLAPPINGSHAIVE created the expect file
-        path_file_os <- paste0(output_dir,"/", data$overlappingshaive_result[i]) ## debug directory
+        path_file_os <- file.path(output_dir, data$overlappingshaive_result[i])
         if (!file.exists(path_file_os)) {
           cat("Error: OVERLAPPINGSHAIVE did not create the file", data$overlappingshaive_result[i], "\n") ## debug directory
           next
