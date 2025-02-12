@@ -83,7 +83,6 @@ generate_commands <- function(data, output_dir) {
                                        file.path(output_dir, data$overlap_result_pseudogene))
 
 
-
   return(data)
 }
 
