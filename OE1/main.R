@@ -136,6 +136,15 @@ execution_module <- function(data, output_dir) {
           next
         }
 
+        cat("Processing SPDIFFSIZE: ", data$spdiffsize_command[i], "\n")
+        system(data$spdiffsize_command[i])
+        # Check if SPDIFFSIZE created the expect file
+        path_file_sp <- file.path(output_dir, data$overlap_result_gene_df[i])
+        if (!file.exists(path_file_sp)) {
+          cat("Error: OVERLAPPINGSHAIVE did not create the file", file.path(output_dir, data$overlap_result_gene_df[i]), "and", file.path(output_dir, data$overlap_result_pseudogene_df[i]), "\n")
+          next
+        }   
+
         # # change directory from where you get the data!! DEBUGGING
         # cat("Processing SEQ_A: ", data$fasta_feature_command[i], "\n")
         # system(data$fasta_feature_command[i])
