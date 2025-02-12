@@ -7,7 +7,7 @@ suppressPackageStartupMessages(library(dplyr))
 args <- commandArgs(trailingOnly = TRUE)
 
 if (length(args) < 2) {
-  stop("Usage: Rscript split_by_difference.R <input_file> <threshold>")
+  stop("Usage: Rscript spDiffSize.R <input_file> <threshold>")
 }
 
 input_file <- args[1]
