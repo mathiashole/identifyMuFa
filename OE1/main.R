@@ -79,7 +79,7 @@ generate_commands <- function(data, output_dir) {
                                   file.path(output_dir, data$overlap_result_gene))
 
   data$gscissors_pseudogene_command <- paste(GSCISSORS, "--fasta", data$fasta_file, "--coordinates",
-                                       file.path(output_dir, data$overlap_result_pseudogene_df), "--format gff --output",
+                                       file.path(output_dir, data$overlap_result_pseudogene_df), "--format", "txt", "--output",
                                        file.path(output_dir, data$overlap_result_pseudogene))
 
 
