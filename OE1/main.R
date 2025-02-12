@@ -74,6 +74,12 @@ generate_commands <- function(data, output_dir) {
   
   data$spdiffsize_command <- paste("Rscript", SPDIFFSIZE, file.path(output_dir, data$overlappingshaive_result), 8000)
 
+  data$gscissors_gene_command <- paste(GSCISSORS, "--fasta", data$fasta_file, "--coordinates",
+                                  file.path(output_dir, data$overlap_result_gene_df), "--format txt --output",
+                                  file.path(output_dir, data$overlap_result_gene))
+
+
+
   return(data)
 }
 
