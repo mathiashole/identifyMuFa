@@ -166,9 +166,7 @@ execution_module <- function(data, output_dir) {
 
         ##################################################################################################
         # Next steps
-        # Blast script
-        # parsing blast script to obtein gene and pseudogene. Check arguments of gff
-        # call gscissors
+        # parsing translated sequence to obtein gene and pseudogene.
         # then think 
         ##################################################################################################
 
