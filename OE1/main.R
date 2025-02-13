@@ -24,7 +24,7 @@ read_input <- function(input_file) {
   data <- read.delim(input_file, header = FALSE, stringsAsFactors = FALSE)
   colnames(data) <- c("fasta_file", "gff_file", "keyword1", "keyword2")
   return(data)
-}
+} # if you put only genome and sequence to search g and ps, this script need another execution option
 
 # Function to transform data in feature file name
 transform_data <- function(data) {
@@ -154,7 +154,7 @@ execution_module <- function(data, output_dir) {
           cat("Error: GSCISSORS did not create the file", data$overlap_result_pseudogene[i], "\n")
           next
         }
-        
+
         ##################################################################################################
         # Next steps
         # parsing translated sequence to obtein gene and pseudogene.
