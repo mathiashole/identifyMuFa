@@ -50,6 +50,23 @@ transform_data <- function(data) {
   return(data)
 }
 
+# Function to transform data in feature file name with any gff
+transform_data_non_gff <- function(data) {
+  data$fasta_basename <- basename(data$fasta_file)
+  data$no_fasta_basename <- sub(".{6}$", "", data$fasta_basename)
+  
+  data$blastn_result <- paste0("blastn_", data$no_fasta_basename, ".txt")
+  data$tblastn_result <- paste0("tblastn_", data$no_fasta_basename, ".txt")
+  data$overlappingshaive_result <- paste0("all_multigenic_family_", data$no_fasta_basename, ".tsv")
+  data$overlappingshaive_result_filtered <- paste0("filtered_multigenic_family_", data$no_fasta_basename, ".tsv")
+  data$overlap_result_gene_df <- paste0("gene_all_multigenic_family_", data$no_fasta_basename, ".tsv")
+  data$overlap_result_pseudogene_df <- paste0("pseudogene_all_multigenic_family_", data$no_fasta_basename, ".tsv")
+  data$overlap_result_gene <- paste0("gene_all_multigenic_family_", data$no_fasta_basename, ".fasta")
+  data$overlap_result_pseudogene <- paste0("pseudogene_all_multigenic_family_", data$no_fasta_basename, ".fasta")
+  
+  return(data)
+}
+
 # Function to generate commands
 generate_commands <- function(data, output_dir) {
   data$filter_seq_command <- paste(FILTER_SEQ, input_file, output_dir)
