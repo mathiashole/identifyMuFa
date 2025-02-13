@@ -154,16 +154,7 @@ execution_module <- function(data, output_dir) {
           cat("Error: GSCISSORS did not create the file", data$overlap_result_pseudogene[i], "\n")
           next
         }
-
-        # # change directory from where you get the data!! DEBUGGING
-        # cat("Processing SEQ_A: ", data$fasta_feature_command[i], "\n")
-        # system(data$fasta_feature_command[i])
-        # # change directory from where you get the data!! DEBUGGING
-        # cat("Processing DISTRIBUTION: ", data$distribution_command[i], "\n")
-        # system(data$distribution_command[i])
-
-        # cat("Successfully processed", data$fasta_file[i], "and keywords:", data$keyword1[i], data$keyword2[i], "\n")
-
+        
         ##################################################################################################
         # Next steps
         # parsing translated sequence to obtein gene and pseudogene.
