@@ -7,9 +7,6 @@ GSCISSORS <- "code/Genomics_Scissors/gscissors.pl"
 OVERLAPPINGSHAIVE <- "code/overlappingShaive.R"
 BOTHBLAST <- "code/bothBlast.sh"
 SPDIFFSIZE <- "code/spDiffSize.R"
-# SEQ_A <- "/home/usuario/Data_Rstudio/chop_genome/seq_attributes/seq_attributes.R"
-# DISTRIBUTION <- "/home/usuario/Data_Rstudio/statistics_of_sequence/analyze_statistics.R"
-#SEQ_A <- "/home/usuario/Data_Rstudio/statistics_of_sequence/render_quarto.R"
 
 # Load necessary libraries
 # library(tidyverse)
