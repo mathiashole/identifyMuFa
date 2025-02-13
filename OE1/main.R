@@ -26,7 +26,7 @@ read_input <- function(input_file) {
   return(data)
 }
 
-# Function to transform data
+# Function to transform data in feature file name
 transform_data <- function(data) {
   data$gff_basename <- basename(data$gff_file)
   data$fasta_basename <- basename(data$fasta_file)
