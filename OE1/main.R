@@ -26,7 +26,7 @@ read_input <- function(input_file) {
   return(data)
 } # if you put only genome and sequence to search g and ps, this script need another execution option
 
-# Function to transform data in feature file name
+# Function to transform data in feature file name with gff
 transform_data <- function(data) {
   data$gff_basename <- basename(data$gff_file)
   data$fasta_basename <- basename(data$fasta_file)
