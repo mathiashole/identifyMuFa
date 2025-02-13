@@ -144,6 +144,15 @@ execution_module <- function(data, output_dir) {
           next
         }   
 
+        cat("Processing GSCISSORS: ", data$gscissors_gene_command[i], "\n")
+        # Check if FILTER_SEQ created the expected file
+        path_file_gsG <- file.path(output_dir, data$overlap_result_gene[i])
+        system(data$gscissors_gene_command[i])
+        if (!file.exists(path_file_gsG)) {
+          cat("Error: GSCISSORS did not create the file", data$overlap_result_gene[i], "\n")
+          next
+        }
+
         # # change directory from where you get the data!! DEBUGGING
         # cat("Processing SEQ_A: ", data$fasta_feature_command[i], "\n")
         # system(data$fasta_feature_command[i])
