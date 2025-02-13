@@ -69,7 +69,7 @@ transform_data_without_gff <- function(data) {
   return(data)
 }
 
-# Function to generate commands
+# Function to generate commands with gff data
 generate_commands <- function(data, output_dir) {
   data$filter_seq_command <- paste(FILTER_SEQ, input_file, output_dir)
   data$gscissors_command <- paste(GSCISSORS, "--fasta", data$fasta_file, "--coordinates", 
