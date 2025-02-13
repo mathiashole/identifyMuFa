@@ -53,7 +53,9 @@ transform_data <- function(data) {
 # Function to transform data in feature file name with any gff
 transform_data_non_gff <- function(data) {
   data$fasta_basename <- basename(data$fasta_file)
+  data$sequence_basename <- basename(data$sequence_file)
   data$no_fasta_basename <- sub(".{6}$", "", data$fasta_basename)
+  data$no_fasta_seq <- sub(".{6}$", "", data$sequence_basename)
   
   data$blastn_result <- paste0("blastn_", data$no_fasta_basename, ".txt")
   data$tblastn_result <- paste0("tblastn_", data$no_fasta_basename, ".txt")
