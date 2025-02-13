@@ -8,7 +8,7 @@ blast_file <- NULL
 gff_file <- NULL
 table_format <- NULL
 output_dir <- NULL
-inter_seq <- 0
+inter_seq <- 0 # meand - sd of diference current_row$V15 - last_row$V16 or sd
 
 # Parse arguments manually
 for (i in seq_along(args)) {
