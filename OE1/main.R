@@ -63,8 +63,8 @@ transform_data_non_gff <- function(data) {
   data$overlappingshaive_result_filtered <- paste0("filtered_multigenic_family_", data$no_fasta_basename, "_", data$no_fasta_seq, ".tsv")
   data$overlap_result_gene_df <- paste0("gene_all_multigenic_family_", data$no_fasta_basename, "_", data$no_fasta_seq, ".tsv")
   data$overlap_result_pseudogene_df <- paste0("pseudogene_all_multigenic_family_", data$no_fasta_basename, "_", data$no_fasta_seq, ".tsv")
-  data$overlap_result_gene <- paste0("gene_all_multigenic_family_", data$no_fasta_basename, ".fasta")
-  data$overlap_result_pseudogene <- paste0("pseudogene_all_multigenic_family_", data$no_fasta_basename, ".fasta")
+  data$overlap_result_gene <- paste0("gene_all_multigenic_family_", data$no_fasta_basename, "_", data$no_fasta_seq, ".fasta")
+  data$overlap_result_pseudogene <- paste0("pseudogene_all_multigenic_family_", data$no_fasta_basename, "_", data$no_fasta_seq, ".fasta")
   
   return(data)
 }
