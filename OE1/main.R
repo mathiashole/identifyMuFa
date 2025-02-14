@@ -31,6 +31,8 @@ read_input <- function(input_file) {
     colnames(data) <- c("fasta_file", "gff_file", "keyword1", "keyword2")
   } else if (num_cols == 2) {
     colnames(data) <- c("fasta_file", "sequence_file")
+  } else {
+    stop("Unexpected number of columns in input file.")
   }
 
   colnames(data) <- c("fasta_file", "gff_file", "keyword1", "keyword2")
