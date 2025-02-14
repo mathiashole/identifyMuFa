@@ -22,6 +22,12 @@ create_output_dir <- function(output_dir) {
 read_input <- function(input_file) {
   # data <- read_tsv(input_file, col_names = FALSE)
   data <- read.delim(input_file, header = FALSE, stringsAsFactors = FALSE)
+
+  # Determine the number of columns
+  num_cols <- ncol(data)
+
+  
+
   colnames(data) <- c("fasta_file", "gff_file", "keyword1", "keyword2")
   return(data)
 } # if you put only genome and sequence to search g and ps, this script need another execution option
