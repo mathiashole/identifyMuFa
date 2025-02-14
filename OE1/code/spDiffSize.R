@@ -38,16 +38,18 @@ if (!xor(!is.null(tsv_file), !is.null(gff_file))) {
 #   stop("Error: Input file does not exist.")
 # }
 
-# Read the dataframe (assuming tab-separated, change if needed)
-df <- read.table(input_file, header = FALSE, sep = "\t")
+# # Read the dataframe (assuming tab-separated, change if needed)
+# df <- read.table(input_file, header = FALSE, sep = "\t")
 
-# Check if the dataframe has exactly 4 columns
-if (ncol(df) != 4) {
-  stop("Error: The input file must have exactly 4 columns.")
-}
+# # Check if the dataframe has exactly 4 columns
+# if (ncol(df) != 4) {
+#   stop("Error: The input file must have exactly 4 columns.")
+# }
 
 # Compute absolute difference between column 2 and 3
-df <- df %>% mutate(diff_abs = abs(V2 - V3))
+# df <- df %>% mutate(diff_abs = abs(V2 - V3))
+df <- df %>%
+  mutate(diff_abs = abs(start - end))
 
 # Set threshold automatically if not provided
 if (is.null(threshold)) {
