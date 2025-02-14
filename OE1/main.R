@@ -26,7 +26,10 @@ read_input <- function(input_file) {
   # Determine the number of columns
   num_cols <- ncol(data)
 
-  
+  # Assign names based on the number of columns
+  if (num_cols == 4) {
+    colnames(data) <- c("fasta_file", "gff_file", "keyword1", "keyword2")
+  }
 
   colnames(data) <- c("fasta_file", "gff_file", "keyword1", "keyword2")
   return(data)
