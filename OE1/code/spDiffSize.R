@@ -49,6 +49,12 @@ if (ncol(df) != 4) {
 # Compute absolute difference between column 2 and 3
 df <- df %>% mutate(diff_abs = abs(V2 - V3))
 
+# Set threshold automatically if not provided
+if (is.null(threshold)) {
+  threshold <- mean(df$diff_abs, na.rm = TRUE)
+  message("No length threshold provided. Using mean difference: ", round(threshold, 2))
+}
+
 # Split based on the threshold
 df_high <- df %>% filter(diff_abs >= threshold) %>% select(-diff_abs)
 df_low <- df %>% filter(diff_abs < threshold) %>% select(-diff_abs)
