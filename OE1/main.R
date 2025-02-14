@@ -218,6 +218,15 @@ dir.create(file.path(output_dir, "blast_result"), showWarnings = FALSE, recursiv
 
 data <- read_input(input_file)
 
+if (ncol(data) == 2) {
+    print("without gff")
+} else if (ncol(data) == 4) {
+    "with gff"
+} else {
+    stop("Unexpected number of columns in input file.")
+}
+
+
 # Apply the transformations
 data_transformed <- transform_data(data)
 # path_data_transformed <- file.path(output_dir, paste0("data_transformed.tsv"))
