@@ -35,7 +35,6 @@ read_input <- function(input_file) {
     stop("Unexpected number of columns in input file.")
   }
 
-  colnames(data) <- c("fasta_file", "gff_file", "keyword1", "keyword2")
   return(data)
 } # if you put only genome and sequence to search g and ps, this script need another execution option
 
