@@ -62,24 +62,24 @@ transform_data <- function(data) {
   return(data)
 }
 
-# Function to transform data in feature file name with any gff
-transform_data_without_gff <- function(data) {
-  data$fasta_basename <- basename(data$fasta_file)
-  data$sequence_basename <- basename(data$sequence_file)
-  data$no_fasta_basename <- sub(".{6}$", "", data$fasta_basename)
-  data$no_fasta_seq <- sub(".{6}$", "", data$sequence_basename)
+# # Function to transform data in feature file name with any gff
+# transform_data_without_gff <- function(data) {
+#   data$fasta_basename <- basename(data$fasta_file)
+#   data$sequence_basename <- basename(data$sequence_file)
+#   data$no_fasta_basename <- sub(".{6}$", "", data$fasta_basename)
+#   data$no_fasta_seq <- sub(".{6}$", "", data$sequence_basename)
   
-  data$blastn_result <- paste0("blastn_", data$no_fasta_basename, "_", data$no_fasta_seq, ".txt")
-  data$tblastn_result <- paste0("tblastn_", data$no_fasta_basename, "_", data$no_fasta_seq, ".txt")
-  data$overlappingshaive_result <- paste0("all_multigenic_family_", data$no_fasta_basename, "_", data$no_fasta_seq, ".tsv")
-  data$overlappingshaive_result_filtered <- paste0("filtered_multigenic_family_", data$no_fasta_basename, "_", data$no_fasta_seq, ".tsv")
-  data$overlap_result_gene_df <- paste0("gene_all_multigenic_family_", data$no_fasta_basename, "_", data$no_fasta_seq, ".tsv")
-  data$overlap_result_pseudogene_df <- paste0("pseudogene_all_multigenic_family_", data$no_fasta_basename, "_", data$no_fasta_seq, ".tsv")
-  data$overlap_result_gene <- paste0("gene_all_multigenic_family_", data$no_fasta_basename, "_", data$no_fasta_seq, ".fasta")
-  data$overlap_result_pseudogene <- paste0("pseudogene_all_multigenic_family_", data$no_fasta_basename, "_", data$no_fasta_seq, ".fasta")
+#   data$blastn_result <- paste0("blastn_", data$no_fasta_basename, "_", data$no_fasta_seq, ".txt")
+#   data$tblastn_result <- paste0("tblastn_", data$no_fasta_basename, "_", data$no_fasta_seq, ".txt")
+#   data$overlappingshaive_result <- paste0("all_multigenic_family_", data$no_fasta_basename, "_", data$no_fasta_seq, ".tsv")
+#   data$overlappingshaive_result_filtered <- paste0("filtered_multigenic_family_", data$no_fasta_basename, "_", data$no_fasta_seq, ".tsv")
+#   data$overlap_result_gene_df <- paste0("gene_all_multigenic_family_", data$no_fasta_basename, "_", data$no_fasta_seq, ".tsv")
+#   data$overlap_result_pseudogene_df <- paste0("pseudogene_all_multigenic_family_", data$no_fasta_basename, "_", data$no_fasta_seq, ".tsv")
+#   data$overlap_result_gene <- paste0("gene_all_multigenic_family_", data$no_fasta_basename, "_", data$no_fasta_seq, ".fasta")
+#   data$overlap_result_pseudogene <- paste0("pseudogene_all_multigenic_family_", data$no_fasta_basename, "_", data$no_fasta_seq, ".fasta")
   
-  return(data)
-}
+#   return(data)
+# }
 
 # Function to generate commands with gff data
 generate_commands <- function(data, output_dir) {
