@@ -1,5 +1,24 @@
 #!/usr/bin/env Rscript
 
+# Get command-line arguments
+args <- commandArgs(trailingOnly = TRUE)
+
+# init variable values
+tsv_file <- NULL
+gff_file <- NULL
+min_length <- 0
+
+# Parse arguments manually
+for (i in seq_along(args)) {
+  if (args[i] == "--tsv" || args[i] == "-t") {
+    tsv_file <- args[i + 1]
+  } else if (args[i] == "--gff" || args[i] == "-g") {
+    gff_file <- args[i + 1]
+  } else if (args[i] == "--length" || args[i] == "-l") {
+    min_length <- as.integer(args[i + 1])
+  }
+}
+
 # Load required library
 suppressPackageStartupMessages(library(dplyr))
 
