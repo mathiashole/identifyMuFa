@@ -52,8 +52,13 @@ if (!is.null(tsv_file)) {
 
   if (ncol(df) < 3 || ncol(df) > 4) stop("Error: TSV must have 3 or 4 columns.")
 
-  df <- df %>% mutate(start = as.numeric(V2), end = as.numeric(V3),
-                      name = ifelse(ncol(df) == 4, V4, paste0("seq_", row_number())))
+  df <- df %>% mutate(start = as.numeric(V2), end = as.numeric(V3))
+
+  # Only assign 'name' if there is a 4th column
+  if (ncol(df) == 4) {
+    df <- df %>% mutate(name = V4)
+  }
+
 }
 
 
