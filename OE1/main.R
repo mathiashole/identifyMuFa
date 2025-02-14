@@ -98,6 +98,10 @@ generate_commands <- function(data, output_dir) {
   return(data)
 }
 
+generate_commands_without_gff <- function(data, output_dir){
+  
+}
+
 # Function to process each set of arguments
 execution_module <- function(data, output_dir) {
       for (i in 1:nrow(data)) {
