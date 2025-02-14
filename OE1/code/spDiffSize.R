@@ -27,16 +27,16 @@ if (!xor(!is.null(tsv_file), !is.null(gff_file))) {
   stop("Error: You must specify either --tsv or --gff, but not both.")
 }
 
-if (length(args) < 2) {
-  stop("Usage: Rscript spDiffSize.R <input_file> <threshold>")
-}
+# if (length(args) < 2) {
+#   stop("Usage: Rscript spDiffSize.R <input_file> <threshold>")
+# }
 
-input_file <- args[1]
-threshold <- as.numeric(args[2])
+# input_file <- args[1]
+# threshold <- as.numeric(args[2])
 
-if (!file.exists(input_file)) {
-  stop("Error: Input file does not exist.")
-}
+# if (!file.exists(input_file)) {
+#   stop("Error: Input file does not exist.")
+# }
 
 # Read the dataframe (assuming tab-separated, change if needed)
 df <- read.table(input_file, header = FALSE, sep = "\t")
