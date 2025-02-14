@@ -45,6 +45,17 @@ if (!xor(!is.null(tsv_file), !is.null(gff_file))) {
 # if (ncol(df) != 4) {
 #   stop("Error: The input file must have exactly 4 columns.")
 # }
+if (!is.null(tsv_file)) {
+  input_file <- tsv_file
+  message("Processing TSV file: ", input_file)
+  df <- read.table(input_file, header = FALSE, sep = "\t", quote = "")
+
+  if (ncol(df) < 3 || ncol(df) > 4) stop("Error: TSV must have 3 or 4 columns.")
+
+  df <- df %>% mutate(start = as.numeric(V2), end = as.numeric(V3),
+                      name = ifelse(ncol(df) == 4, V4, paste0("seq_", row_number())))
+}
+
 
 # Compute absolute difference between column 2 and 3
 # df <- df %>% mutate(diff_abs = abs(V2 - V3))
