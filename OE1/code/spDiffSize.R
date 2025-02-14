@@ -22,8 +22,10 @@ for (i in seq_along(args)) {
 # Load required library
 suppressPackageStartupMessages(library(dplyr))
 
-# Get command-line arguments
-args <- commandArgs(trailingOnly = TRUE)
+# Validate arguments
+if (!xor(!is.null(tsv_file), !is.null(gff_file))) {
+  stop("Error: You must specify either --tsv or --gff, but not both.")
+}
 
 if (length(args) < 2) {
   stop("Usage: Rscript spDiffSize.R <input_file> <threshold>")
