@@ -1,5 +1,8 @@
 #!/usr/bin/env Rscript
 
+# Load required library
+suppressPackageStartupMessages(library(dplyr))
+
 # Get command-line arguments
 args <- commandArgs(trailingOnly = TRUE)
 
@@ -18,9 +21,6 @@ for (i in seq_along(args)) {
     min_length <- as.integer(args[i + 1])
   }
 }
-
-# Load required library
-suppressPackageStartupMessages(library(dplyr))
 
 # Validate arguments
 if (!xor(!is.null(tsv_file), !is.null(gff_file))) {
