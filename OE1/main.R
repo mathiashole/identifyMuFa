@@ -99,7 +99,9 @@ generate_commands <- function(data, output_dir) {
 }
 
 generate_commands_without_gff <- function(data, output_dir){
-  
+
+
+  return(data)
 }
 
 # Function to process each set of arguments
