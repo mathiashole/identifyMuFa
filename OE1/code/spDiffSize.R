@@ -72,10 +72,6 @@ df_low <- df %>% filter(diff_abs < threshold) %>% select(-diff_abs)
 output_dir <- dirname(input_file)
 base_name <- tools::file_path_sans_ext(basename(input_file))
 
-# Define output filenames
-output_high <- file.path(output_dir, paste0("gene_", base_name, ".tsv"))
-output_low <- file.path(output_dir, paste0("pseudogene_", base_name, ".tsv"))
-
 # Save the resulting dataframes
 # write.table(df_high, output_high, sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE)
 # write.table(df_low, output_low, sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE)
