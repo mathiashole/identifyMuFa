@@ -48,6 +48,8 @@ transform_data <- function(data) {
   
   data$filtred_name_gff <- paste0("filtered_", data$keyword_sum, "_", data$gff_basename)
   data$non_filtred_name_gff <- paste0("non-filtered_", data$keyword2, "_", data$gff_basename)
+  # data$sp_high_filtred_name_gff <- paste0("high_equal_", data$keyword_sum, "_", data$no_gff_basename, ".tsv")
+  # data$sp_low_filtred_name_gff <- paste0("low_", data$keyword_sum, "_", data$no_gff_basename, ".tsv")
   data$out_gscissors <- paste0("out_", data$keyword_sum, "_", data$no_gff_basename, ".fasta")
   data$out_rest_gscissors <- paste0("out_rest", data$keyword2, "_", data$no_gff_basename, ".fasta")
   data$blastn_result <- paste0("blastn_", data$no_fasta_basename, ".txt")
