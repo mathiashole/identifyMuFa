@@ -89,6 +89,9 @@ generate_commands <- function(data, output_dir) {
   
   # data$spdiffsize_command <- paste("Rscript", SPDIFFSIZE, "--gff", data$filtred_name_gff, "--length", 8000) ## 8000 need variable of args
 
+  # data$gscissors_command <- paste(GSCISSORS, "--fasta", data$fasta_file, "--coordinates", 
+  #                                 file.path(output_dir, data$sp_high_filtred_name_gff), "--format gff --output", 
+  #                                 file.path(output_dir, data$out_gscissors))
   data$gscissors_command <- paste(GSCISSORS, "--fasta", data$fasta_file, "--coordinates", 
                                   file.path(output_dir, data$filtred_name_gff), "--format gff --output", 
                                   file.path(output_dir, data$out_gscissors))
