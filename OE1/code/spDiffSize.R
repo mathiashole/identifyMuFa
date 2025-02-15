@@ -88,13 +88,13 @@ base_name <- tools::file_path_sans_ext(basename(input_file))
 # Save the resulting dataframes
 # Define output filenames based on file type
 if (file_type == "tsv") {
-  output_high <- file.path(output_dir, paste0("gene_", base_name, ".tsv"))
-  output_low <- file.path(output_dir, paste0("pseudogene_", base_name, ".tsv"))
+  output_high <- file.path(output_dir, paste0("high_equal_", base_name, ".tsv"))
+  output_low <- file.path(output_dir, paste0("low_", base_name, ".tsv"))
   # write.table(df_high, output_high, sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE)
   # write.table(df_low, output_low, sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE)
 } else if (file_type == "gff") {
-  output_high <- file.path(output_dir, paste0("gene_", base_name, ".gff"))
-  output_low <- file.path(output_dir, paste0("pseudogene_", base_name, ".gff"))
+  output_high <- file.path(output_dir, paste0("high_equal_", base_name, ".gff"))
+  output_low <- file.path(output_dir, paste0("low_", base_name, ".gff"))
   # write.table(df_high, output_high, sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE)
   # write.table(df_low, output_low, sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE)
 }
