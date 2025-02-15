@@ -51,7 +51,6 @@ if (!is.null(tsv_file)) {
   df <- df %>% mutate(start = as.numeric(V4), end = as.numeric(V5))
 }
 
-
 # Compute absolute difference between column 2 and 3
 # df <- df %>% mutate(diff_abs = abs(V2 - V3))
 df <- df %>%
