@@ -70,6 +70,17 @@ df_low <- df %>% filter(diff_abs < threshold) %>% select(-diff_abs)
 # df_high <- df %>% filter(diff_abs >= threshold) %>% select(V1, start, end)
 # df_low <- df %>% filter(diff_abs < threshold) %>% select(V1, start, end)
 
+# Restore column order for TSV output
+if (file_type == "tsv") {
+  if (ncol(df) == 4) {
+    df_high <- df_high %>% select(V1, start, end, name)
+    df_low <- df_low %>% select(V1, start, end, name)
+  } else {
+    df_high <- df_high %>% select(V1, start, end)
+    df_low <- df_low %>% select(V1, start, end)
+  }
+}
+
 # Get the directory and filename
 output_dir <- dirname(input_file)
 base_name <- tools::file_path_sans_ext(basename(input_file))
@@ -79,13 +90,16 @@ base_name <- tools::file_path_sans_ext(basename(input_file))
 if (file_type == "tsv") {
   output_high <- file.path(output_dir, paste0("gene_", base_name, ".tsv"))
   output_low <- file.path(output_dir, paste0("pseudogene_", base_name, ".tsv"))
-  write.table(df_high, output_high, sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE)
-  write.table(df_low, output_low, sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE)
+  # write.table(df_high, output_high, sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE)
+  # write.table(df_low, output_low, sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE)
 } else if (file_type == "gff") {
   output_high <- file.path(output_dir, paste0("gene_", base_name, ".gff"))
   output_low <- file.path(output_dir, paste0("pseudogene_", base_name, ".gff"))
-  write.table(df_high, output_high, sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE)
-  write.table(df_low, output_low, sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE)
+  # write.table(df_high, output_high, sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE)
+  # write.table(df_low, output_low, sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE)
 }
+
+write.table(df_high, output_high, sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE)
+write.table(df_low, output_low, sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE)
 
 cat("Files saved:\n", output_high, "\n", output_low, "\n")
