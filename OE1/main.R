@@ -135,6 +135,15 @@ execution_module <- function(data, output_dir) {
           next
         }
 
+        # cat("Processing SPDIFFSIZE: ", data$spdiffsize_command[i], "\n")
+        # system(data$spdiffsize_command[i])
+        # # Check if SPDIFFSIZE created the expect file
+        # path_file_sp <- file.path(output_dir, data$sp_high_filtred_name_gff[i])
+        # if (!file.exists(path_file_sp)) {
+        #   cat("Error: SPDIFFSIZE did not create the file", file.path(output_dir, data$sp_high_filtred_name_gff[i]), "and", file.path(output_dir, data$sp_low_filtred_name_gff[i]), "\n")
+        #   next
+        # }   
+
         # change directory from where you get the data!! DEBUGGING
         cat("Processing GSCISSORS: ", data$gscissors_command[i], "\n")
         # Check if FILTER_SEQ created the expected file
