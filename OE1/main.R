@@ -87,6 +87,8 @@ transform_data <- function(data) {
 generate_commands <- function(data, output_dir) {
   data$filter_seq_command <- paste(FILTER_SEQ, input_file, output_dir)
   
+  # data$spdiffsize_command <- paste("Rscript", SPDIFFSIZE, "--gff", data$filtred_name_gff, "--length", 8000) ## 8000 need variable of args
+
   data$gscissors_command <- paste(GSCISSORS, "--fasta", data$fasta_file, "--coordinates", 
                                   file.path(output_dir, data$filtred_name_gff), "--format gff --output", 
                                   file.path(output_dir, data$out_gscissors))
