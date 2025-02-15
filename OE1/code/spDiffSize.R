@@ -63,10 +63,10 @@ if (is.null(threshold)) {
 }
 
 # Split based on the threshold
-# df_high <- df %>% filter(diff_abs >= threshold) %>% select(-diff_abs)
-# df_low <- df %>% filter(diff_abs < threshold) %>% select(-diff_abs)
-df_high <- df %>% filter(diff_abs >= threshold) %>% select(V1, start, end)
-df_low <- df %>% filter(diff_abs < threshold) %>% select(V1, start, end)
+df_high <- df %>% filter(diff_abs >= threshold) %>% select(-diff_abs)
+df_low <- df %>% filter(diff_abs < threshold) %>% select(-diff_abs)
+# df_high <- df %>% filter(diff_abs >= threshold) %>% select(V1, start, end)
+# df_low <- df %>% filter(diff_abs < threshold) %>% select(V1, start, end)
 
 # Get the directory and filename
 output_dir <- dirname(input_file)
