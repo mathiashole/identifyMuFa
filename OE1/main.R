@@ -87,7 +87,7 @@ transform_data <- function(data) {
 generate_commands <- function(data, output_dir) {
   data$filter_seq_command <- paste(FILTER_SEQ, input_file, output_dir)
   
-  # data$spdiffsize_command <- paste("Rscript", SPDIFFSIZE, "--gff", data$filtred_name_gff, "--length", 8000) ## 8000 need variable of args
+  # data$spdiffsize_command_first <- paste("Rscript", SPDIFFSIZE, "--gff", data$filtred_name_gff, "--length", 8000) ## 8000 need variable of args
 
   # data$gscissors_command <- paste(GSCISSORS, "--fasta", data$fasta_file, "--coordinates", 
   #                                 file.path(output_dir, data$sp_high_filtred_name_gff), "--format gff --output", 
@@ -136,7 +136,7 @@ execution_module <- function(data, output_dir) {
         }
 
         # cat("Processing SPDIFFSIZE: ", data$spdiffsize_command[i], "\n")
-        # system(data$spdiffsize_command[i])
+        # system(data$spdiffsize_command_first[i])
         # # Check if SPDIFFSIZE created the expect file
         # path_file_sp <- file.path(output_dir, data$sp_high_filtred_name_gff[i])
         # if (!file.exists(path_file_sp)) {
