@@ -43,6 +43,7 @@ if (!is.null(tsv_file)) {
   }
 
 } else if (!is.null(gff_file)) {  # Read GFF file
+  file_type <- "gff"
   input_file <- gff_file
   message("Processing GFF file: ", input_file)
   df <- read.delim(input_file, comment.char = "#", header = FALSE, sep = "\t") # read.table(input_file, header = FALSE, sep = "\t", quote = "", comment.char = "#")
