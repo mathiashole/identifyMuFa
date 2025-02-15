@@ -28,6 +28,7 @@ if (!xor(!is.null(tsv_file), !is.null(gff_file))) {
 }
 
 if (!is.null(tsv_file)) {
+  file_type <- "tsv"
   input_file <- tsv_file
   message("Processing TSV file: ", input_file)
   df <- read.table(input_file, header = FALSE, sep = "\t", quote = "")
