@@ -32,10 +32,8 @@ read_input <- function(input_file) {
   if (num_cols == 5){
     colnames(data) <- c("fasta_file", "gff_file", "keyword1", "keyword2", "length")
   } else if (num_cols == 4) {
-  # if (num_cols == 5 || num_cols == 4) {
     colnames(data) <- c("fasta_file", "gff_file", "keyword1", "keyword2")
   } else if (num_cols == 3) {
-  # } else if (num_cols == 3 || num_cols == 2) {
     colnames(data) <- c("fasta_file", "sequence_file", "length")
   } else if (num_cols ==2){
     colnames(data) <- c("fasta_file", "sequence_file")
@@ -44,7 +42,7 @@ read_input <- function(input_file) {
   }
 
   return(data)
-} # if you put only genome and sequence to search g and ps, this script need another execution option
+}
 
 # Function to transform data in feature file name with gff
 transform_data <- function(data) {
