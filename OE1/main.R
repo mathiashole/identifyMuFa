@@ -46,11 +46,13 @@ read_input <- function(input_file) {
 
 # Function to transform data in feature file name with gff
 transform_data <- function(data) {
+  # DATA FORMATING
   data$gff_basename <- basename(data$gff_file)
   data$fasta_basename <- basename(data$fasta_file)
   data$no_gff_basename <- sub(".{4}$", "", data$gff_basename)
   data$no_fasta_basename <- sub(".{6}$", "", data$fasta_basename)
   data$keyword_sum <- paste(data$keyword1, data$keyword2, sep = "_")
+  # FINISH DATA FORMATING
   
   data$filtred_name_gff <- paste0("filtered_", data$keyword_sum, "_", data$gff_basename)
   data$non_filtred_name_gff <- paste0("non-filtered_", data$keyword2, "_", data$gff_basename)
