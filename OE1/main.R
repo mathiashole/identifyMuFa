@@ -93,11 +93,15 @@ transform_data <- function(data) {
 generate_commands <- function(data, output_dir) {
   data$filter_seq_command <- paste(FILTER_SEQ, input_file, output_dir)
   
-  # data$spdiffsize_command_first <- paste("Rscript", SPDIFFSIZE, "--gff", data$filtred_name_gff, "--length", data$length)
+  if ("length" %in% colnames(data)) {
+    data$spdiffsize_command_first <- paste("Rscript", SPDIFFSIZE, "--gff", data$filtred_name_gff, "--length", data$length)
+  } else {
+    data$spdiffsize_command_first <- paste("Rscript", SPDIFFSIZE, "--gff", data$filtred_name_gff)
+  }
 
-  # data$gscissors_command <- paste(GSCISSORS, "--fasta", data$fasta_file, "--coordinates", 
-  #                                 file.path(output_dir, data$sp_high_filtred_name_gff), "--format gff --output", 
-  #                                 file.path(output_dir, data$out_gscissors))
+  data$gscissors_command <- paste(GSCISSORS, "--fasta", data$fasta_file, "--coordinates", 
+                                  file.path(output_dir, data$sp_high_filtred_name_gff), "--format gff --output", 
+                                  file.path(output_dir, data$out_gscissors))
   data$gscissors_command <- paste(GSCISSORS, "--fasta", data$fasta_file, "--coordinates", 
                                   file.path(output_dir, data$filtred_name_gff), "--format gff --output", 
                                   file.path(output_dir, data$out_gscissors))
