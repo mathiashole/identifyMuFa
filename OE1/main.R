@@ -30,8 +30,10 @@ read_input <- function(input_file) {
 
   # Assign names based on the number of columns
   if (num_cols == 4) { # if (num_cols == 5 || num_cols == 4) {
+  # if (num_cols == 5 || num_cols == 4) {
     colnames(data) <- c("fasta_file", "gff_file", "keyword1", "keyword2")
   } else if (num_cols == 2) { # } else if (num_cols == 3 || num_cols == 2) {
+  # } else if (num_cols == 3 || num_cols == 2) {
     colnames(data) <- c("fasta_file", "sequence_file")
   } else {
     stop("Unexpected number of columns in input file.")
