@@ -118,7 +118,7 @@ generate_commands <- function(data, output_dir) {
                                           "--gff_file", file.path(output_dir, data$filtred_name_gff), "--output_dir", output_dir, "--inter", 100) ## THIS INTER OPTION NEED ESTIMATED IN PROGRAM
   
   # data$spdiffsize_command <- paste("Rscript", SPDIFFSIZE, file.path(output_dir, data$overlappingshaive_result), 8000)
-    if ("length" %in% colnames(data)) {
+  if ("length" %in% colnames(data)) {
     data$spdiffsize_command_mf <- paste("Rscript", SPDIFFSIZE, "--gff", file.path(output_dir, data$overlappingshaive_result), "--length", data$length)
   } else {
     data$spdiffsize_command_mf <- paste("Rscript", SPDIFFSIZE, "--gff", file.path(output_dir, data$overlappingshaive_result))
