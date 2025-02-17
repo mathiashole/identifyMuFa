@@ -238,13 +238,13 @@ dir.create(file.path(output_dir, "blast_result"), showWarnings = FALSE, recursiv
 
 data <- read_input(input_file)
 
-if (ncol(data) == 2) {
-    print("without gff")
-} else if (ncol(data) == 4) {
-    "with gff"
-} else {
-    stop("Unexpected number of columns in input file.")
-}
+# if (num_cols == 3 || num_cols == 2) {
+#   print("without gff")
+# } else if (num_cols == 5 || num_cols == 4) {
+#   "with gff"
+# } else {
+#   stop("Unexpected number of columns in input file.")
+# }
 
 
 # Apply the transformations
