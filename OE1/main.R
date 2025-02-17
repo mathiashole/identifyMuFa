@@ -25,8 +25,8 @@ read_input <- function(input_file) {
   data <- read.delim(input_file, header = FALSE, stringsAsFactors = FALSE, fill = TRUE)
 
   # Determine the number of columns
-  num_cols <- ncol(data)
-  # num_cols <- max(colSums(data != "" & !is.na(data))) 
+  # num_cols <- ncol(data)
+  num_cols <- max(colSums(data != "" & !is.na(data))) 
 
   # Assign names based on the number of columns
   if (num_cols == 5){
