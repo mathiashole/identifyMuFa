@@ -54,8 +54,8 @@ transform_data <- function(data) {
   data$keyword_sum <- paste(data$keyword1, data$keyword2, sep = "_")
   # FINISH DATA FORMATING
   
-  data$filtred_name_gff <- paste0("filtered_", data$keyword_sum, "_", data$gff_basename)
-  data$non_filtred_name_gff <- paste0("non-filtered_", data$keyword2, "_", data$gff_basename)
+  data$filtred_name_gff <- paste0("filtered_", data$keyword_sum, "_", data$gff_basename) # filtered result of keywords
+  data$non_filtred_name_gff <- paste0("non-filtered_", data$keyword2, "_", data$gff_basename) # rest of no filtered result of keywords
   data$sp_high_filtred_name_gff <- paste0("high_equal_", data$keyword_sum, "_", data$gff_basename)
   data$sp_low_filtred_name_gff <- paste0("low_", data$keyword_sum, "_", data$gff_basename)
   data$out_gscissors <- paste0("out_", data$keyword_sum, "_", data$no_gff_basename, ".fasta")
