@@ -124,13 +124,13 @@ generate_commands <- function(data, output_dir) {
     data$spdiffsize_command_mf <- paste("Rscript", SPDIFFSIZE, "--gff", file.path(output_dir, data$overlappingshaive_result))
   }
 
-  data$gscissors_gene_command <- paste(GSCISSORS, "--fasta", data$fasta_file, "--coordinates",
-                                  file.path(output_dir, data$overlap_result_gene_df), "--format", "txt", "--output",
-                                  file.path(output_dir, data$overlap_result_gene))
+  data$gscissors_high_command <- paste(GSCISSORS, "--fasta", data$fasta_file, "--coordinates",
+                                  file.path(output_dir, data$overlap_result_high_equal_df), "--format", "txt", "--output",
+                                  file.path(output_dir, data$overlap_result_high_equal))
 
-  data$gscissors_pseudogene_command <- paste(GSCISSORS, "--fasta", data$fasta_file, "--coordinates",
-                                       file.path(output_dir, data$overlap_result_pseudogene_df), "--format", "txt", "--output",
-                                       file.path(output_dir, data$overlap_result_pseudogene))
+  data$gscissors_low_command <- paste(GSCISSORS, "--fasta", data$fasta_file, "--coordinates",
+                                       file.path(output_dir, data$overlap_result_low_df), "--format", "txt", "--output",
+                                       file.path(output_dir, data$overlap_result_low))
 
 
   return(data)
