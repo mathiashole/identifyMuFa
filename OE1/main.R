@@ -108,7 +108,7 @@ generate_commands <- function(data, output_dir) {
   #                                 file.path(output_dir, data$out_gscissors))
   data$gscissors_rest_command <- paste(GSCISSORS, "--fasta", data$fasta_file, "--coordinates", 
                                        file.path(output_dir, data$non_filtred_name_gff), "--format gff --output", 
-                                       file.path(output_dir, data$out_rest_gscissors))
+                                       file.path(output_dir, data$out_rest_gscissors)) ###### Rest of sequence not searched ####
   
   data$bothblast_command <- paste(BOTHBLAST, file.path(output_dir, data$out_gscissors), file.path(output_dir, "blast_result"), data$fasta_file)
   data$overlappingshaive_command <- paste("Rscript", OVERLAPPINGSHAIVE, "--blast_file", file.path(output_dir, "blast_result", data$blastn_result), 
