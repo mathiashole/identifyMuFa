@@ -101,7 +101,10 @@ generate_commands <- function(data, output_dir) {
 
   data$gscissors_command <- paste(GSCISSORS, "--fasta", data$fasta_file, "--coordinates", 
                                   file.path(output_dir, data$sp_high_filtred_name_gff), "--format gff --output", 
-                                  file.path(output_dir, data$out_gscissors))
+                                  file.path(output_dir, data$out_gscissors)) ##### HIGH adn EQUAL #####
+  # data$gscissors_command <- paste(GSCISSORS, "--fasta", data$fasta_file, "--coordinates", 
+  #                                 file.path(output_dir, data$sp_high_filtred_name_gff), "--format gff --output", 
+  #                                 file.path(output_dir, data$out_gscissors)) ##### LOW #####
 
   # data$gscissors_command <- paste(GSCISSORS, "--fasta", data$fasta_file, "--coordinates", 
   #                                 file.path(output_dir, data$filtred_name_gff), "--format gff --output", 
