@@ -62,10 +62,10 @@ while IFS=$'\t' read -r _ file keyword1 keyword2 || [ -n "$file" ]; do
     filename=$(basename "$file")
 
     # Generate output file name in the output directory
-    output_file="$output_dir/filtered_:${keyword1}_${keyword2}:_$filename"
+    output_file="$output_dir/filtered_${keyword1}_${keyword2}_$filename"
 
     # Generate output no filter file name in the output directory
-    output_file_single_keyword="$output_dir/non-filtered_:${keyword2}:_$filename"
+    output_file_single_keyword="$output_dir/non-filtered_${keyword2}_$filename"
 
     # Debugging output
     echo "Processing file: $file"
