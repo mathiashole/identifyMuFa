@@ -64,8 +64,8 @@ transform_data <- function(data) {
   data$tblastn_result <- paste0("tblastn_", data$no_fasta_basename, ".txt") # result first PBLASTN
   data$overlappingshaive_result <- paste0("all_multigenic_family_", data$no_fasta_basename, ".tsv") # results filtered overlap sequence
   data$overlappingshaive_result_filtered <- paste0("filtered_multigenic_family_", data$no_fasta_basename, ".tsv") # Results filtered overlap and old sequence
-  data$overlap_result_high_equal_df <- paste0("high_equal_all_multigenic_family_", data$no_fasta_basename, ".tsv")
-  data$overlap_result_low_df <- paste0("low_all_multigenic_family_", data$no_fasta_basename, ".tsv")
+  data$overlap_result_high_equal_df <- paste0("high_equal_all_multigenic_family_", data$no_fasta_basename, ".tsv") # Split result of overlap > or = to minimal length
+  data$overlap_result_low_df <- paste0("low_all_multigenic_family_", data$no_fasta_basename, ".tsv") # Split result of overlap < to minimal length
   data$overlap_result_high_equal <- paste0("high_equal_all_multigenic_family_", data$no_fasta_basename, ".fasta")
   data$overlap_result_low <- paste0("low_all_multigenic_family_", data$no_fasta_basename, ".fasta")
   
