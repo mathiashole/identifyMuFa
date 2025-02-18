@@ -222,10 +222,10 @@ execution_module <- function(data, output_dir) {
 
         cat("Processing GSCISSORS: ", data$gscissors_pseudogene_command[i], "\n")
         # Check if FILTER_SEQ created the expected file
-        path_file_gsP <- file.path(output_dir, data$overlap_result_pseudogene[i])
+        path_file_gsP <- file.path(output_dir, data$overlap_result_low[i])
         system(data$gscissors_pseudogene_command[i])
         if (!file.exists(path_file_gsP)) {
-          cat("Error: GSCISSORS did not create the file", data$overlap_result_pseudogene[i], "\n")
+          cat("Error: GSCISSORS did not create the file", data$overlap_result_low[i], "\n")
           next
         }
 
