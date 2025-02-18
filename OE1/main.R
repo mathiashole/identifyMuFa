@@ -58,7 +58,7 @@ transform_data <- function(data) {
   data$non_filtred_name_gff <- paste0("non-filtered_", data$keyword2, "_", data$gff_basename) # rest of no filtered result of keywords
   data$sp_high_filtred_name_gff <- paste0("high_equal_", data$keyword_sum, "_", data$gff_basename) # filtered > or = to minimal length
   data$sp_low_filtred_name_gff <- paste0("low_", data$keyword_sum, "_", data$gff_basename) # filtered < to minimal length
-  data$out_gscissors <- paste0("out_", data$keyword_sum, "_", data$no_gff_basename, ".fasta") # extract filtered >= minimal length sequence
+  data$out_gscissors_high <- paste0("out_high", data$keyword_sum, "_", data$no_gff_basename, ".fasta") # extract filtered >= minimal length sequence
   data$out_rest_gscissors <- paste0("out_rest", data$keyword2, "_", data$no_gff_basename, ".fasta") # extract rest of no filtered sequence
   data$blastn_result <- paste0("blastn_", data$no_fasta_basename, ".txt") # result first BLASTN
   data$tblastn_result <- paste0("tblastn_", data$no_fasta_basename, ".txt") # result first PBLASTN
@@ -103,19 +103,19 @@ generate_commands <- function(data, output_dir) {
 
   data$gscissors_command <- paste(GSCISSORS, "--fasta", data$fasta_file, "--coordinates", 
                                   file.path(output_dir, data$sp_high_filtred_name_gff), "--format gff --output", 
-                                  file.path(output_dir, data$out_gscissors)) ##### HIGH and EQUAL #####
+                                  file.path(output_dir, data$out_gscissors_high)) ##### HIGH and EQUAL #####
   # data$gscissors_command <- paste(GSCISSORS, "--fasta", data$fasta_file, "--coordinates", 
   #                                 file.path(output_dir, data$sp_low_filtred_name_gff), "--format gff --output", 
-  #                                 file.path(output_dir, data$out_gscissors)) ##### LOW #####
+  #                                 file.path(output_dir, data$out_gscissors_high)) ##### LOW #####
 
   # data$gscissors_command <- paste(GSCISSORS, "--fasta", data$fasta_file, "--coordinates", 
   #                                 file.path(output_dir, data$filtred_name_gff), "--format gff --output", 
-  #                                 file.path(output_dir, data$out_gscissors))
+  #                                 file.path(output_dir, data$out_gscissors_high))
   data$gscissors_rest_command <- paste(GSCISSORS, "--fasta", data$fasta_file, "--coordinates", 
                                        file.path(output_dir, data$non_filtred_name_gff), "--format gff --output", 
                                        file.path(output_dir, data$out_rest_gscissors)) ###### Rest of sequence not searched ####
   
-  data$bothblast_command <- paste(BOTHBLAST, file.path(output_dir, data$out_gscissors), file.path(output_dir, "blast_result"), data$fasta_file)
+  data$bothblast_command <- paste(BOTHBLAST, file.path(output_dir, data$out_gscissors_high), file.path(output_dir, "blast_result"), data$fasta_file)
   data$overlappingshaive_command <- paste("Rscript", OVERLAPPINGSHAIVE, "--blast_file", file.path(output_dir, "blast_result", data$blastn_result), 
                                           "--gff_file", file.path(output_dir, data$filtred_name_gff), "--output_dir", output_dir, "--inter", 100) ## THIS INTER OPTION NEED ESTIMATED IN PROGRAM
   
@@ -168,10 +168,10 @@ execution_module <- function(data, output_dir) {
         # change directory from where you get the data!! DEBUGGING
         cat("Processing GSCISSORS: ", data$gscissors_command[i], "\n")
         # Check if FILTER_SEQ created the expected file
-        path_file_gs <- paste0(output_dir,"/", data$out_gscissors[i])
+        path_file_gs <- paste0(output_dir,"/", data$out_gscissors_high[i])
         system(data$gscissors_command[i])
         if (!file.exists(path_file_gs)) {
-          cat("Error: GSCISSORS did not create the file", data$out_gscissors[i], "\n")
+          cat("Error: GSCISSORS did not create the file", data$out_gscissors_high[i], "\n")
           next
         }
 
