@@ -96,9 +96,9 @@ generate_commands <- function(data, output_dir) {
   data$filter_seq_command <- paste(FILTER_SEQ, input_file, output_dir)
   
   if ("length" %in% colnames(data)) {
-    data$spdiffsize_command_first <- paste("Rscript", SPDIFFSIZE, "--gff", data$filtred_name_gff, "--length", data$length)
+    data$spdiffsize_command_first <- paste("Rscript", SPDIFFSIZE, "--gff", file.path(output_dir, data$filtred_name_gff), "--length", data$length)
   } else {
-    data$spdiffsize_command_first <- paste("Rscript", SPDIFFSIZE, "--gff", data$filtred_name_gff)
+    data$spdiffsize_command_first <- paste("Rscript", SPDIFFSIZE, "--gff", file.path(output_dir, data$filtred_name_gff))
   }
 
   data$gscissors_command <- paste(GSCISSORS, "--fasta", data$fasta_file, "--coordinates", 
