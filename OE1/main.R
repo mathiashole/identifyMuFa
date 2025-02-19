@@ -202,8 +202,8 @@ execution_module <- function(data, output_dir) {
           next
         }
 
-        cat("Processing SPDIFFSIZE: ", data$spdiffsize_command[i], "\n")
-        system(data$spdiffsize_command[i])
+        cat("Processing SPDIFFSIZE: ", data$spdiffsize_command_mf[i], "\n")
+        system(data$spdiffsize_command_mf[i])
         # Check if SPDIFFSIZE created the expect file
         path_file_sp_extract <- file.path(output_dir, data$overlap_result_high_equal_df[i])
         if (!file.exists(path_file_sp_extract)) {
