@@ -211,7 +211,7 @@ execution_module <- function(data, output_dir) {
           next
         }
 
-        cat("Processing GSCISSORS: ", data$data$gscissors_high_command[i], "\n")
+        cat("Processing GSCISSORS: ", data$gscissors_high_command[i], "\n")
         # Check if FILTER_SEQ created the expected file
         path_file_gsG <- file.path(output_dir, data$overlap_result_high_equal[i])
         system(data$data$gscissors_high_command[i])
