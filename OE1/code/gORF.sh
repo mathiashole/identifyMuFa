@@ -7,8 +7,11 @@ if ! command -v getorf &> /dev/null; then
 fi
 
 # Function to calculate the average sequence length
+# calculate_avg_length() {
+#     awk '/^>/ {if (seqlen) {sum+=seqlen; count++} seqlen=0; next} {seqlen+=length($0)} END {if (count>0) print int(sum/count); else print 0}' "$1"
+# }
 calculate_avg_length() {
-    awk '/^>/ {if (seqlen) {sum+=seqlen; count++} seqlen=0; next} {seqlen+=length($0)} END {if (count>0) print int(sum/count); else print 0}' "$1"
+    awk '/^>/ {if (seqlen) {sum+=seqlen; count++} seqlen=0; next} {seqlen+=length($0)} END {sum+=seqlen; count++; print int(sum/count)}' "$1"
 }
 
 
