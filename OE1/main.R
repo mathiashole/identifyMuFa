@@ -6,6 +6,7 @@ GSCISSORS <- "code/Genomics_Scissors/gscissors.pl"
 OVERLAPPINGSHAIVE <- "code/overlappingShaive.R"
 BOTHBLAST <- "code/bothBlast.sh"
 SPDIFFSIZE <- "code/spDiffSize.R"
+GORF <- "code/gORF.sh"
 
 # Create output directory if it does not exist
 create_output_dir <- function(output_dir) {
