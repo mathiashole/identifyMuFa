@@ -69,7 +69,8 @@ transform_data <- function(data) {
   data$overlap_result_low_df <- paste0("low_all_multigenic_family_", data$no_fasta_basename, ".tsv") # Split result of no overlap < to minimal length
   data$overlap_result_high_equal <- paste0("high_equal_all_multigenic_family_", data$no_fasta_basename, ".fasta") # extracted sequence > or = to minimal length
   data$overlap_result_low <- paste0("low_all_multigenic_family_", data$no_fasta_basename, ".fasta") # Extracted sequence < to minimal length
-  
+  data$gorf_result_file <- paste0("getorf_", data$overlap_result_high_equal)
+
   return(data)
 }
 
