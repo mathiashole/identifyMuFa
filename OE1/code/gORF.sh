@@ -57,7 +57,7 @@ BASENAME=$(basename "$INPUT_FASTA")
 OUTPUT_FILE="$OUTPUT_DIR/getorf_${MINSIZE}_${BASENAME}"
 
 # Run getorf
-getorf -sequence "$INPUT_FASTA" -outseq "$OUTPUT_FILE" -minsize "$MINSIZE"
+# getorf -sequence "$INPUT_FASTA" -outseq "$OUTPUT_FILE" -minsize "$MINSIZE"
 
 # Check if getorf succeeded
 if [[ $? -eq 0 ]]; then
