@@ -136,6 +136,11 @@ generate_commands <- function(data, output_dir) {
                                        file.path(output_dir, data$overlap_result_low_df), "--format", "txt", "--output",
                                        file.path(output_dir, data$overlap_result_low))
 
+  if ("length" %in% colnames(data)) {
+    data$gorf_command <- paste("Rscript",, "--tsv", file.path(output_dir, data$overlappingshaive_result), "--length", data$length)
+  } else {
+    data$gorf_command <- paste("Rscript", SPDIFFSIZE, "--tsv", file.path(output_dir, data$overlappingshaive_result))
+  }
 
   return(data)
 }
