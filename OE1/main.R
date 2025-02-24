@@ -236,8 +236,8 @@ execution_module <- function(data, output_dir) {
           next
         }
 
-        cat("Processing GORF: ", data$spdiffsize_command_mf[i], "\n")
-        system(data$spdiffsize_command_mf[i])
+        cat("Processing GORF: ", data$gorf_command[i], "\n")
+        system(data$gorf_command[i])
         # Check if SPDIFFSIZE created the expect file
         path_file_sp_extract <- file.path(output_dir, data$overlap_result_high_equal_df[i])
         if (!file.exists(path_file_sp_extract)) {
