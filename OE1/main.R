@@ -236,6 +236,15 @@ execution_module <- function(data, output_dir) {
           next
         }
 
+        cat("Processing GORF: ", data$spdiffsize_command_mf[i], "\n")
+        system(data$spdiffsize_command_mf[i])
+        # Check if SPDIFFSIZE created the expect file
+        path_file_sp_extract <- file.path(output_dir, data$overlap_result_high_equal_df[i])
+        if (!file.exists(path_file_sp_extract)) {
+          cat("Error: SPDIFFSIZE did not create the file", file.path(output_dir, data$overlap_result_high_equal_df[i]), "and", file.path(output_dir, data$overlap_result_low_df[i]), "\n")
+          next
+        }
+
         ##################################################################################################
         # Next steps
         # parsing translated sequence to obtein gene and pseudogene.
