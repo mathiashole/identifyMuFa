@@ -240,7 +240,7 @@ execution_module <- function(data, output_dir) {
         system(data$gorf_command[i])
         # Check if SPDIFFSIZE created the expect file
         path_file_gorf <- file.path(output_dir, data$gorf_result_file[i])
-        if (!file.exists(path_file_sp_extract)) {
+        if (!file.exists(path_file_orf)) {
           cat("Error: SPDIFFSIZE did not create the file", file.path(output_dir, data$overlap_result_high_equal_df[i]), "and", file.path(output_dir, data$overlap_result_low_df[i]), "\n")
           next
         }
