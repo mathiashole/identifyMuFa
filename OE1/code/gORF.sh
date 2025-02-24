@@ -57,6 +57,7 @@ BASENAME=$(basename "$INPUT_FASTA")
 # OUTPUT_FILE="$OUTPUT_DIR/getorf_${MINSIZE}_${BASENAME}"
 # OUTPUT_FILE="$OUTPUT_DIR/getorf_${adjusted_minsize}_${BASENAME}"
 OUTPUT_FILE="$OUTPUT_DIR/getorf_${BASENAME}"
+FILTERED_OUTPUT_FILE="$OUTPUT_DIR/getorf_filtered_${BASENAME}"
 
 # Run getorf
 # getorf -sequence "$INPUT_FASTA" -outseq "$OUTPUT_FILE" -minsize "$MINSIZE"
