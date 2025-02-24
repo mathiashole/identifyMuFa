@@ -139,7 +139,7 @@ generate_commands <- function(data, output_dir) {
   if ("length" %in% colnames(data)) {
     data$gorf_command <- paste("Rscript", GORF, file.path(output_dir, data$overlap_result_high_equal), output_dir, data$length)
   } else {
-    data$gorf_command <- paste("Rscript", SPDIFFSIZE, "--tsv", file.path(output_dir, data$overlappingshaive_result))
+    data$gorf_command <- paste("Rscript", GORF, file.path(output_dir, data$overlap_result_high_equal), output_dir)
   }
 
   return(data)
