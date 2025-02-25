@@ -86,3 +86,6 @@ if [[ ! -x "$FILTER_SCRIPT" ]]; then
     echo "Error: $FILTER_SCRIPT does not exist or does not have execute permissions." >&2
     exit 1
 fi
+
+# Run filterFa.sh with the correct arguments
+"$FILTER_SCRIPT" "$OUTPUT_FILE" "$OUTPUT_DIR" "$adjusted_minsize"
