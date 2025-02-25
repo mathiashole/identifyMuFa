@@ -78,11 +78,3 @@ fi
 
 echo "getorf completed successfully. Output saved to: $OUTPUT_FILE"
 
-# Filter sequences by length
-awk -v minsize="$adjusted_minsize" '
-    /^>/ {header=$0; next}
-    {seq=$0}
-    length(seq) >= minsize {print header; print seq}
-' "$OUTPUT_FILE" > "$FILTERED_OUTPUT_FILE"
-
-echo "Filtered sequences saved to: $FILTERED_OUTPUT_FILE"
