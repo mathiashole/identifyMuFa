@@ -78,3 +78,5 @@ fi
 
 echo "getorf completed successfully. Output saved to: $OUTPUT_FILE"
 
+# Path to filtered script GLOBAL VARIABLE
+FILTER_SCRIPT="./filterFa.sh"
