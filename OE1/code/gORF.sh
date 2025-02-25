@@ -89,3 +89,13 @@ fi
 
 # Run filterFa.sh with the correct arguments
 "$FILTER_SCRIPT" "$OUTPUT_FILE" "$OUTPUT_DIR" "$adjusted_minsize"
+
+
+#Check if filterFa.sh ran successfully
+
+if [[ $? -ne 0 ]]; then
+    echo "Error: Execution of $FILTER_SCRIPT failed." >&2
+    exit 1
+fi
+
+echo "Filtering completed successfully."
