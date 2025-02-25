@@ -80,3 +80,9 @@ echo "getorf completed successfully. Output saved to: $OUTPUT_FILE"
 
 # Path to filtered script GLOBAL VARIABLE
 FILTER_SCRIPT="./filterFa.sh"
+
+# # Check if filterFa.sh is exist and execute
+if [[ ! -x "$FILTER_SCRIPT" ]]; then
+    echo "Error: $FILTER_SCRIPT does not exist or does not have execute permissions." >&2
+    exit 1
+fi
