@@ -45,7 +45,9 @@ cat "$input_file"
 echo "-------------------------"
 
 # Read each line from input file and process
-while IFS=$'\t' read -r _ file keyword1 keyword2 || [ -n "$file" ]; do
+#while IFS=$'\t' read -r _ file keyword1 keyword2 || [ -n "$file" ]; do
+while IFS=$'\t' read -r _ file keyword1 keyword2 _; do
+
     # Remove extra double quotes from file path
     file="${file//\"/}"
 
