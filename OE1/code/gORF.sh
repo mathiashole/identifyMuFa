@@ -48,7 +48,7 @@ if [[ -z "$MINSIZE" ]]; then
     echo "Using calculated minsize: $MINSIZE"
 fi
 
-adjusted_minsize=$(( minsize * 90 / 100 ))
+adjusted_minsize=$(( MINSIZE * 90 / 100 ))
 
 # Get the input filename without path
 BASENAME=$(basename "$INPUT_FASTA")
