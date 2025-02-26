@@ -78,24 +78,24 @@ fi
 
 echo "getorf completed successfully. Output saved to: $OUTPUT_FILE"
 
-# Path to filtered script GLOBAL VARIABLE
-FILTER_SCRIPT="./filterFa.sh"
+# # Path to filtered script GLOBAL VARIABLE
+# FILTER_SCRIPT="./filterFa.sh"
 
-# # Check if filterFa.sh is exist and execute
-if [[ ! -x "$FILTER_SCRIPT" ]]; then
-    echo "Error: $FILTER_SCRIPT does not exist or does not have execute permissions." >&2
-    exit 1
-fi
+# # # Check if filterFa.sh is exist and execute
+# if [[ ! -x "$FILTER_SCRIPT" ]]; then
+#     echo "Error: $FILTER_SCRIPT does not exist or does not have execute permissions." >&2
+#     exit 1
+# fi
 
-# Run filterFa.sh with the correct arguments
-"$FILTER_SCRIPT" "$OUTPUT_FILE" "$OUTPUT_DIR" "$adjusted_minsize"
+# # Run filterFa.sh with the correct arguments
+# "$FILTER_SCRIPT" "$OUTPUT_FILE" "$OUTPUT_DIR" "$adjusted_minsize"
 
 
-#Check if filterFa.sh ran successfully
+# #Check if filterFa.sh ran successfully
 
-if [[ $? -ne 0 ]]; then
-    echo "Error: Execution of $FILTER_SCRIPT failed." >&2
-    exit 1
-fi
+# if [[ $? -ne 0 ]]; then
+#     echo "Error: Execution of $FILTER_SCRIPT failed." >&2
+#     exit 1
+# fi
 
-echo "Filtering completed successfully."
+# echo "Filtering completed successfully."
