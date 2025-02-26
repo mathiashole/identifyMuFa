@@ -64,9 +64,9 @@ FILTERED_OUTPUT_FILE="$OUTPUT_DIR/getorf_filtered_${BASENAME}"
 getorf -sequence "$INPUT_FASTA" -outseq "$OUTPUT_FILE" -minsize "$adjusted_minsize"
 
 # Check if getorf succeeded
-# if [[ $? -eq 0 ]]; then
-#     echo "getorf completed successfully. Output saved to: $OUTPUT_FILE"
-# else
-#     echo "Error: getorf failed." >&2
-#     exit 1
-# fi
+if [[ $? -eq 0 ]]; then
+    echo "getorf completed successfully. Output saved to: $OUTPUT_FILE"
+else
+    echo "Error: getorf failed." >&2
+    exit 1
+fi
