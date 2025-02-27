@@ -228,8 +228,7 @@ execution_module <- function(data, output_dir) {
 
         ##################################################################################################
         # Next steps
-        # parsing translated sequence to obtein gene and pseudogene.
-        # then think 
+        # think 
         ##################################################################################################
 
       }
