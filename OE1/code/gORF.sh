@@ -58,10 +58,12 @@ BASENAME=$(basename "$INPUT_FASTA")
 # OUTPUT_FILE="$OUTPUT_DIR/getorf_${adjusted_minsize}_${BASENAME}"
 OUTPUT_FILE="$OUTPUT_DIR/getorf_${BASENAME}"
 FILTERED_OUTPUT_FILE="$OUTPUT_DIR/getorf_filtered_${BASENAME}"
+OUTPUT_FILE_TRANSEQ="$OUTPUT_DIR/getorf_aminoacid_${BASENAME}"
 
 # Run getorf
 getorf -sequence "$INPUT_FASTA" -outseq "$OUTPUT_FILE" -minsize "$MINSIZE"
 # getorf -sequence "$INPUT_FASTA" -outseq "$OUTPUT_FILE" -minsize "$adjusted_minsize"
+
 
 # Check if getorf succeeded
 if [[ $? -eq 0 ]]; then
