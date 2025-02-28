@@ -65,7 +65,7 @@ OUTPUT_FILE_TRANSEQ="$OUTPUT_DIR/getorf_aminoacid_${BASENAME}"
 getorf -sequence "$INPUT_FASTA" -outseq "$OUTPUT_FILE" -minsize "$MINSIZE" -find 3
 # getorf -sequence "$INPUT_FASTA" -outseq "$OUTPUT_FILE" -minsize "$adjusted_minsize"
 
-getorf -sequence "$INPUT_FASTA" -outseq "$OUTPUT_FILE" -minsize "$MINSIZE"
+getorf -sequence "$INPUT_FASTA" -outseq "$OUTPUT_FILE" -minsize "$AMINOACID_MINSIZE" -find 1
 
 
 # Check if getorf succeeded
