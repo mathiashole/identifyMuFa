@@ -49,6 +49,7 @@ if [[ -z "$MINSIZE" ]]; then
 fi
 
 adjusted_minsize=$(( MINSIZE * 90 / 100 ))
+AMINOACID_MINSIZE=$(( MINSIZE / 3 ))
 
 # Get the input filename without path
 BASENAME=$(basename "$INPUT_FASTA")
