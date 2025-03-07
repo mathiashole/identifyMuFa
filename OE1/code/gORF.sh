@@ -60,6 +60,7 @@ BASENAME=$(basename "$INPUT_FASTA")
 OUTPUT_FILE="$OUTPUT_DIR/getorf_${BASENAME}"
 FILTERED_OUTPUT_FILE="$OUTPUT_DIR/getorf_filtered_${BASENAME}"
 OUTPUT_FILE_TRANSEQ="$OUTPUT_DIR/getorf_aminoacid_${BASENAME}"
+OUTPUT_FILTERED_FILE_TRANSEQ="$OUTPUT_DIR/getorf_aminoacid_${BASENAME}"
 
 # Run getorf nucleotide
 getorf -sequence "$INPUT_FASTA" -outseq "$OUTPUT_FILE" -minsize "$MINSIZE" -find 3
