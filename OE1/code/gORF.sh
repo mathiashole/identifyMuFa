@@ -48,7 +48,7 @@ if [[ -z "$MINSIZE" ]]; then
     echo "Using calculated minsize: $MINSIZE"
 fi
 
-adjusted_minsize=$(( MINSIZE * 90 / 100 ))
+adjusted_minsize=$(( MINSIZE * 95 / 100 ))
 # AMINOACID_MINSIZE=$(( MINSIZE / 3 ))
 
 # Get the input filename without path
@@ -63,7 +63,7 @@ OUTPUT_FILE_TRANSEQ="$OUTPUT_DIR/getorf_aminoacid_${BASENAME}"
 
 # Run getorf nucleotide
 getorf -sequence "$INPUT_FASTA" -outseq "$OUTPUT_FILE" -minsize "$MINSIZE" -find 3
-getorf -sequence "$INPUT_FASTA" -outseq "$FILTERED_OUTPUT_FILE" -minsize "$second_adjusted_minsize" -maxsize "$MINSIZE" -find 3
+getorf -sequence "$INPUT_FASTA" -outseq "$FILTERED_OUTPUT_FILE" -minsize "$adjusted_minsize" -maxsize "$MINSIZE" -find 3
 
 getorf -sequence "$INPUT_FASTA" -outseq "$OUTPUT_FILE_TRANSEQ" -minsize "$MINSIZE" -find 1
 
