@@ -48,7 +48,7 @@ if [[ -z "$MINSIZE" ]]; then
     echo "Using calculated minsize: $MINSIZE"
 fi
 
-adjusted_minsize=$(( MINSIZE * 95 / 100 ))
+adjusted_minsize=$(( MINSIZE * 5 / 100 ))
 # AMINOACID_MINSIZE=$(( MINSIZE / 3 ))
 
 # Get the input filename without path
