@@ -1,19 +1,5 @@
 #!/bin/bash
 
-# HELP function
-usage() {
-    echo "Usage: $0 -t <blast_type>... -q <query_fasta> -o <output_dir> -qp|-qn -sp|-sn <genome_fasta1> [<genome_fasta2> ...]"
-    echo "  -t  Type of BLAST search (can be multiple): blastn, tblastn, blastp, etc."
-    echo "  -q  Query FASTA file"
-    echo "  -o  Output directory"
-    echo "  -qp Query is a protein"
-    echo "  -qn Query is a nucleotide"
-    echo "  -sp Subject (genome) is a protein"
-    echo "  -sn Subject (genome) is a nucleotide"
-    exit 1
-}
-
-
 # Verificación de argumentos
 if [ "$#" -lt 2 ]; then
     echo "Usage: $0 <query_fasta> <output_dir> <genome_fasta1> [<genome_fasta2> ...]"
