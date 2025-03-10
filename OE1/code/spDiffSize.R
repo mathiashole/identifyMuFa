@@ -77,9 +77,12 @@ df_low <- df %>% filter(diff_abs < threshold) %>% select(-diff_abs)
 
 # Restore column order for TSV output
 if (file_type == "tsv") {
-  if (ncol(df) == 4) {
-    df_high <- df_high %>% select(V1, start, end, name)
-    df_low <- df_low %>% select(V1, start, end, name)
+  # if (ncol(df) == 4) {
+  #   df_high <- df_high %>% select(V1, start, end, name)
+  #   df_low <- df_low %>% select(V1, start, end, name)
+  if (ncol(df) == 5) {
+    df_high <- df_high %>% select(V1, start, end, V4, name)
+    df_low <- df_low %>% select(V1, start, end, V4, name)
   } else {
     df_high <- df_high %>% select(V1, start, end)
     df_low <- df_low %>% select(V1, start, end)
