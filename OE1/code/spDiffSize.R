@@ -39,8 +39,12 @@ if (!is.null(tsv_file)) {
   df <- df %>% mutate(start = as.numeric(V2), end = as.numeric(V3))
 
   # Only assign 'name' if there is a 4th column
-  if (ncol(df) == 4) {
-    df <- df %>% mutate(name = V4)
+  # if (ncol(df) == 4) {
+  #   df <- df %>% mutate(name = V4)
+  # }
+
+  if (ncol(df) == 5) {
+    df <- df %>% mutate(name = V5)
   }
 
 } else if (!is.null(gff_file)) {  # Read GFF file
