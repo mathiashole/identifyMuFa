@@ -33,7 +33,8 @@ if (!is.null(tsv_file)) {
   message("Processing TSV file: ", input_file)
   df <- read.table(input_file, header = FALSE, sep = "\t", quote = "")
 
-  if (ncol(df) < 3 || ncol(df) > 4) stop("Error: TSV must have 3 or 4 columns.")
+  # if (ncol(df) < 3 || ncol(df) > 4) stop("Error: TSV must have 3 or 4 columns.")
+  if (ncol(df) < 3 || ncol(df) > 5) stop("Error: TSV must have 3 or 5 columns.")
 
   df <- df %>% mutate(start = as.numeric(V2), end = as.numeric(V3))
 
