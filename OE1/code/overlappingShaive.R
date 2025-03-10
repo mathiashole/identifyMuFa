@@ -146,7 +146,7 @@ no_overlaps_output <- df_no_overlaps %>%
     # V4 = str_c(V1, "_", V18, "_", V2, "_", V3)
     V5 = paste(V18, V2, V3, sep = "_")
   ) %>%
-  select(V1, V2, V3, V4)
+  select(V1, V2, V3, V4, V5)
 
 # Load GFF file
 # gff_data <- read.delim("/home/mathias/process_data/identifyMuFa/OE1/output_directory/filtered_:DGF-1_protein_coding_gene:_TriTrypDB-68_TcruziDm28c2018.gff", comment.char = "#", header = FALSE, sep = "\t")
