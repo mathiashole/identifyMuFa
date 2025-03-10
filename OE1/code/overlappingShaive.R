@@ -189,7 +189,7 @@ filtered_data_output <- filtered_data %>%
     # V4 = str_c(V1, "_", V18, "_", V2, "_", V3)
     V5 = paste(V18, V2, V3, sep = "_")
   ) %>%
-  select(V1, V2, V3, V4)
+  select(V1, V2, V3, V4, V5)
 
 # We extract the base name of the blast_file file without the extension
 blast_base <- tools::file_path_sans_ext(basename(blast_file))
