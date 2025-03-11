@@ -37,7 +37,7 @@ if (!is.null(tsv_file)) {
   num_cols <- ncol(df)
 
   # # Validate number of columns
-  if (num_cols < 3 || num_cols > 5){
+  if (num_cols < 3 || num_cols > 5) {
      stop("Error: TSV must have 3 or 5 columns.")
   }
 
