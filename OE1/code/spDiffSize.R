@@ -48,9 +48,9 @@ if (!is.null(tsv_file)) {
   #   df <- df %>% mutate(name = V4)
   # }
 
-  if (ncol(df) == 5) {
-    df <- df %>% mutate(name = V5)
-  }
+  # if (ncol(df) == 5) {
+  #   df <- df %>% mutate(name = V5)
+  # }
 
 } else if (!is.null(gff_file)) {  # Read GFF file
   file_type <- "gff"
@@ -61,6 +61,7 @@ if (!is.null(tsv_file)) {
   if (ncol(df) < 9) stop("Error: GFF must have at least 9 columns.")
 
   df <- df %>% mutate(start = as.numeric(V4), end = as.numeric(V5))
+  num_cols <- ncol(df)  # Save original column count
 }
 
 # Compute absolute difference between column 2 and 3
