@@ -71,6 +71,8 @@ sed -i -E 's/_1(\s*\[)/\1/' "$FILTERED_OUTPUT_FILE"
 
 # Run getorf aminoacid
 getorf -sequence "$INPUT_FASTA" -outseq "$OUTPUT_FILE_TRANSEQ" -minsize "$MINSIZE" -find 1
+sed -i -E 's/_1(\s*\[)/\1/' "$OUTPUT_FILE_TRAN
+
 getorf -sequence "$INPUT_FASTA" -outseq "$OUTPUT_FILTERED_FILE_TRANSEQ" -minsize "$adjusted_minsize" -maxsize "$MINSIZE" -find 1
 
 # Check if getorf succeeded
