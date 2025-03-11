@@ -64,6 +64,8 @@ OUTPUT_FILTERED_FILE_TRANSEQ="$OUTPUT_DIR/getorf_filtered_aminoacid_${BASENAME}"
 
 # Run getorf nucleotide
 getorf -sequence "$INPUT_FASTA" -outseq "$OUTPUT_FILE" -minsize "$MINSIZE" -find 3
+sed -i -E 's/_1(\s*\[)/\1/' "$OUTPUT_FILE"
+
 getorf -sequence "$INPUT_FASTA" -outseq "$FILTERED_OUTPUT_FILE" -minsize "$adjusted_minsize" -maxsize "$MINSIZE" -find 3
 
 # Run getorf aminoacid
