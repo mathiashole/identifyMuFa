@@ -27,6 +27,10 @@ if [[ -z "$BLAST_FILE" ]]; then
     exit 1
 fi
 
+# Get the path and base name of the file
+INPUT_DIR=$(dirname "$BLAST_FILE")
+INPUT_NAME=$(basename "$BLAST_FILE")
+
 # Filter the BLAST table using awk
 awk -v id_min="$IDENTITY_MIN" -v len_min="$LENGTH_MIN" -v evalue_max="$EVALUE_MAX" -v cols="$COLUMNS" -v unique_cols="$UNIQUE_COLUMNS" '
 BEGIN { FS=OFS="\t" }
