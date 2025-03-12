@@ -8,7 +8,7 @@ if (length(args) < 2) {
   stop("Usage: Rscript script.R <input_file> <filter_file>")
 }
 
-# Leer archivos TSV
+# Read TSV files
 input_file <- args[1]
 filter_file <- args[2]
 
