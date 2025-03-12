@@ -63,4 +63,4 @@ BEGIN { FS=OFS="\t" }
             printf "\n";
         }
     }
-}' "$BLAST_FILE"
+}' "$BLAST_FILE" > "$OUTPUT_FILE"
