@@ -31,6 +31,9 @@ fi
 INPUT_DIR=$(dirname "$BLAST_FILE")
 INPUT_NAME=$(basename "$BLAST_FILE")
 
+# Construct the output file name
+OUTPUT_FILE="$INPUT_DIR/bRefiner_$INPUT_NAME"
+
 # Filter the BLAST table using awk
 awk -v id_min="$IDENTITY_MIN" -v len_min="$LENGTH_MIN" -v evalue_max="$EVALUE_MAX" -v cols="$COLUMNS" -v unique_cols="$UNIQUE_COLUMNS" '
 BEGIN { FS=OFS="\t" }
