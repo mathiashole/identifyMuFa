@@ -3,7 +3,7 @@
 # Default values
 IDENTITY_MIN=0
 LENGTH_MIN=0
-EVALUE_MAX=1  # Por defecto, 1 (acepta todos los valores)
+EVALUE_MAX=1  # Default 1 (accepts all values)
 COLUMNS=""
 UNIQUE_COLUMNS=""
 
