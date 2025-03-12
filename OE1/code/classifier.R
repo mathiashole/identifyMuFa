@@ -26,6 +26,6 @@ data_out <- data[,1:5]
 # Save the modified file
 output_file <- gsub("\\.tsv$", "_classified.tsv", input_file)
 
-write.table(data, output_file, sep = "\t", quote = FALSE, row.names = FALSE, col.names = FALSE)
+write.table(data_out, output_file, sep = "\t", quote = FALSE, row.names = FALSE, col.names = FALSE)
 
 cat("Output saved to:", output_file, "\n")
