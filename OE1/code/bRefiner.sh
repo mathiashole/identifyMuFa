@@ -64,3 +64,6 @@ BEGIN { FS=OFS="\t" }
         }
     }
 }' "$BLAST_FILE" > "$OUTPUT_FILE"
+
+
+echo "Blast Refiner results saved to: $OUTPUT_FILE"
