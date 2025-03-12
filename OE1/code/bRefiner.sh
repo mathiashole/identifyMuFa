@@ -41,7 +41,7 @@ BEGIN { FS=OFS="\t" }
                 key = key $unique_arr[i] "_";
             }
             if (seen[key]++) {
-                next;  # Si ya apareció, lo ignoramos
+                next;  # If it already appeared, we ignore it.
             }
         }
 
