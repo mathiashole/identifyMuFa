@@ -45,7 +45,7 @@ BEGIN { FS=OFS="\t" }
             }
         }
 
-        # Si no se especifican columnas, imprimir toda la fila
+        # If no columns are specified, print the entire row
         if (cols == "") {
             print $0;
         } else {
