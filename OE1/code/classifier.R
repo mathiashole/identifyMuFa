@@ -18,7 +18,7 @@ filter_data <- read.table(filter_file, header = FALSE, sep = "\t", stringsAsFact
 data <- data %>%
   mutate(V6 = paste0(V1, "_", V5))
 
-# Modificar la columna 5 según coincidencias
+# Modify column 5 according to matches
 data$V5 <- ifelse(data$V6 %in% filter_data$V1, paste0(data$V5, "_GEN"), paste0(data$V5, "_PSEUDOGENE"))
 
 data_out <- data[,1:5]
