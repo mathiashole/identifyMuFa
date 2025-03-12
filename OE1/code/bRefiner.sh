@@ -33,7 +33,7 @@ BEGIN { FS=OFS="\t" }
 {
     if (($3 >= id_min || id_min == 0) && ($4 >= len_min || len_min == 0) && ($11 <= evalue_max || evalue_max == 1)) {
         
-        # Si se especifican columnas únicas, verificar duplicados
+        # If unique columns are specified, check for duplicates
         if (unique_cols != "") {
             split(unique_cols, unique_arr, ",");
             key = "";
