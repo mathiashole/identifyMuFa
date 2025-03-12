@@ -2,7 +2,7 @@
 
 suppressWarnings(suppressMessages(library(dplyr)))
 
-# Capturar argumentos de línea de comandos
+# Capture command line arguments
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args) < 2) {
   stop("Usage: Rscript script.R <input_file> <filter_file>")
