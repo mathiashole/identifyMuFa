@@ -8,9 +8,6 @@ if (length(args) < 2) {
   stop("Usage: Rscript script.R <input_file> <filter_file>")
 }
 
-input_file <- "/home/mathias/study/maestria/scoville_data/filtered_multigenic_family_TriTrypDB-68_TcruziDm28c2018_Genome.tsv"
-filter_file <- "/home/mathias/study/maestria/scoville_data/bRefiner_TcruziDm28c2018_Genome.tsv"
-
 # Leer archivos TSV
 input_file <- args[1]
 filter_file <- args[2]
