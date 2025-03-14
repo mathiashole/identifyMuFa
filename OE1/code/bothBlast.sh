@@ -16,7 +16,7 @@ amino_output="${query_fasta%.fasta}_amino.fasta"
 # Create the output directory if it does not exist
 mkdir -p "$output_dir"
 
-# 1. Creación de la base de datos BLAST para cada genoma
+# 1. Creating the BLAST database for each genome
 echo "Creating BLAST databases for genomes..."
 for genome in $genomes; do
     genome_name=$(basename "$genome" .fasta)
