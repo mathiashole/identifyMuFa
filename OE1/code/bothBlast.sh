@@ -24,7 +24,7 @@ for genome in $genomes; do
     echo "Database created for $genome"
 done
 
-# 2. Búsqueda de nucleótidos contra bases de datos de genomas (blastn)
+# 2. Nucleotide search against genome databases (blastn)
 echo "Running blastn for nucleotide search..."
 for genome in $genomes; do
     genome_name=$(basename "$genome" .fasta)
