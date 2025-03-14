@@ -13,7 +13,7 @@ genomes="${@:3}"
 # output_dir="blast_results"
 amino_output="${query_fasta%.fasta}_amino.fasta"
 
-# Crear el directorio de salida si no existe
+# Create the output directory if it does not exist
 mkdir -p "$output_dir"
 
 # 1. Creación de la base de datos BLAST para cada genoma
