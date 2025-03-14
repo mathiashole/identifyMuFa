@@ -49,7 +49,7 @@ done
 #     fi
 # done
 
-# 3. Conversión de secuencias a aminoácidos (transeq)
+# 3. Converting sequences to amino acids (transeq)
 echo "Converting nucleotide sequences to amino acids with transeq..."
 transeq -clean -sequence "$query_fasta" -outseq "$amino_output"
 echo "Amino acid sequences saved to $amino_output"
