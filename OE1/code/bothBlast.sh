@@ -54,7 +54,7 @@ echo "Converting nucleotide sequences to amino acids with transeq..."
 transeq -clean -sequence "$query_fasta" -outseq "$amino_output"
 echo "Amino acid sequences saved to $amino_output"
 
-# 4. Búsqueda de aminoácidos contra bases de datos de genomas (tblastn)
+# 4. Amino acid search against genome databases (tblastn)
 echo "Running tblastn for amino acid search..."
 for genome in $genomes; do
     genome_name=$(basename "$genome" .fasta)
