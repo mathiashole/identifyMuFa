@@ -1,0 +1,111 @@
+#!/bin/bash
+
+# Function to display usage
+usage() {
+    echo "Usage:"
+    echo "  - BLAST search: $0 -type <blast_type> -qp|-qn <query_fasta> -o <output_dir> -sp|-sn <genome_fasta1> [<genome_fasta2> ...]"
+    echo "  - Translate only: $0 -transeq <fasta_file1> [<fasta_file2> ...]"
+    exit 1
+}
+
+# Default values
+translate_only=false
+blast_search=false
+genomes=()
+query_file=""
+output_dir=""
+blast_type=""
+query_type=""
+subject_type=""
+
+# Parse arguments
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        -transeq)
+            translate_only=true
+            shift
+            while [[ $# -gt 0 && ! "$1" =~ ^- ]]; do
+                genomes+=("$1")
+                shift
+            done
+            ;;
+        -type) blast_type="$2"; blast_search=true; shift 2;;
+        -qp) query_type="protein"; query_file="$2"; shift 2;;
+        -qn) query_type="nucleotide"; query_file="$2"; shift 2;;
+        -sp) subject_type="protein"; genomes+=("$2"); shift 2;;
+        -sn) subject_type="nucleotide"; genomes+=("$2"); shift 2;;
+        -o) output_dir="$2"; shift 2;;
+        *) usage;;
+    esac
+done
+
+echo "Query file: $query_file"
+echo "Genomes: ${genomes[@]}"
+echo "Output directory: $output_dir"
+
+# If translate only mode, execute transeq
+if [[ "$translate_only" == true ]]; then
+    if [[ ${#genomes[@]} -eq 0 ]]; then
+        echo "Error: No FASTA files provided for translation."
+        exit 1
+    fi
+
+    for fasta in "${genomes[@]}"; do
+        if [[ ! -f "$fasta" ]]; then
+            echo "Error: File '$fasta' not found!"
+            continue
+        fi
+        output_translated="${fasta%.fasta}_translated.fasta"
+        echo "Translating $fasta to $output_translated..."
+        transeq -clean -sequence "$fasta" -outseq "$output_translated"
+    done
+    echo "Translation completed."
+    exit 0
+fi
+
+# If BLAST search mode, validate parameters
+if [[ "$blast_search" == true ]]; then
+    if [[ -z "$output_dir" || -z "$blast_type" || -z "$query_file" || -z "$query_type" || -z "$subject_type" || ${#genomes[@]} -eq 0 ]]; then
+        usage
+    fi
+
+    mkdir -p "$output_dir"
+
+    # Run BLAST for each genome
+    for genome in "${genomes[@]}"; do
+        if [[ ! -f "$genome" ]]; then
+            echo "Error: File '$genome' not found!"
+            continue
+        fi
+
+        output_blast="${output_dir}/$(basename "$genome")_blast_results.txt"
+
+        echo "Running BLAST ($blast_type) on $genome..."
+        
+        case "$blast_type" in
+            blastn)
+                blastn -query "$query_file" -subject "$genome" -out "$output_blast" -outfmt 6
+                ;;
+            blastp)
+                blastp -query "$query_file" -subject "$genome" -out "$output_blast" -outfmt 6
+                ;;
+            tblastn)
+                tblastn -query "$query_file" -subject "$genome" -out "$output_blast" -outfmt 6
+                ;;
+            blastx)
+                blastx -query "$query_file" -subject "$genome" -out "$output_blast" -outfmt 6
+                ;;
+            *)
+                echo "Error: Unsupported BLAST type '$blast_type'."
+                exit 1
+                ;;
+        esac
+
+        echo "BLAST completed for $genome. Results saved to $output_blast"
+    done
+    exit 0
+fi
+
+# If neither mode was triggered, show usage
+usage
+
