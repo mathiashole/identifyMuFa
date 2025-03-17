@@ -78,7 +78,8 @@ if [[ "$blast_search" == true ]]; then
             continue
         fi
 
-        output_blast="${output_dir}/$(basename "$genome")_blast_results.txt"
+        # output_blast="${output_dir}/$(basename "$genome")_blast_results.txt"
+        output_blast="${output_dir}/${blast_type}_$(basename "$genome").txt"
 
         echo "Running BLAST ($blast_type) on $genome..."
         
