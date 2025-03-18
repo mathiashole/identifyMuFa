@@ -107,9 +107,9 @@ if [[ "$blast_search" == true ]]; then
             echo "Creating BLAST database for $genome in $output_dir..."
 
             if [[ "$subject_type" == "nucleotide" ]]; then
-                makeblastdb -in "$genome" -dbtype nucl
+                makeblastdb -in "$genome" -dbtype nucl -out "$db_prefix"
             else
-                makeblastdb -in "$genome" -dbtype prot
+                makeblastdb -in "$genome" -dbtype prot -out "$db_prefix"
             fi
         fi
 
