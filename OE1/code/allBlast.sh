@@ -17,6 +17,7 @@ output_dir=""
 blast_type=""
 query_type=""
 subject_type=""
+evalue="1e-5"
 
 # Parse arguments
 while [[ $# -gt 0 ]]; do
