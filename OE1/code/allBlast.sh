@@ -103,8 +103,9 @@ if [[ "$blast_search" == true ]]; then
         # Ensure subject is in BLAST database format
         db_prefix="${output_dir}/$(basename "$genome")"
 
-        if [[ ! -f "${genome}.nhr" && ! -f "${genome}.phr" ]]; then
-            echo "Creating BLAST database for $genome..."
+        if [[ ! -f "${db_prefix}.nhr" && ! -f "${db_prefix}.phr" ]]; then
+            echo "Creating BLAST database for $genome in $output_dir..."
+
             if [[ "$subject_type" == "nucleotide" ]]; then
                 makeblastdb -in "$genome" -dbtype nucl
             else
