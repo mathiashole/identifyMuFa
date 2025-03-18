@@ -117,16 +117,16 @@ if [[ "$blast_search" == true ]]; then
         
         case "$blast_type" in
             blastn)
-                blastn -query "$query_file" -subject "$genome" -out "$output_blast" -outfmt 6
+                blastn -query "$query_file" -subject "$genome" -out "$output_blast" -outfmt '6 std qlen slen'
                 ;;
             blastp)
-                blastp -query "$query_file" -subject "$genome" -out "$output_blast" -outfmt 6
+                blastp -query "$query_file" -subject "$genome" -out "$output_blast" -outfmt '6 std qlen slen'
                 ;;
             tblastn)
-                tblastn -query "$query_file" -subject "$genome" -out "$output_blast" -outfmt 6
+                tblastn -query "$query_file" -subject "$genome" -out "$output_blast" -outfmt '6 std qlen slen'
                 ;;
             blastx)
-                blastx -query "$query_file" -subject "$genome" -out "$output_blast" -outfmt 6
+                blastx -query "$query_file" -subject "$genome" -out "$output_blast" -outfmt '6 std qlen slen'
                 ;;
             *)
                 echo "Error: Unsupported BLAST type '$blast_type'."
