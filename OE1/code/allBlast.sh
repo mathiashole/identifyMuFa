@@ -85,7 +85,8 @@ if [[ "$blast_search" == true ]]; then
 
     # Translate query if needed
     if [[ "$query_type" == "nucleotide" && "$blast_type" =~ ^(blastp|tblastn|blastx)$ ]]; then
-        query_file=$(translate_sequence "$query_file")
+        # query_file=$(translate_sequence "$query_file")
+        query_file=$(translate_sequence "$query_file" | tail -n 1)
         query_type="protein"
     fi # THIS MODULE IS VERY IMPORTANT
 
