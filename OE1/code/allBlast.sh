@@ -81,6 +81,12 @@ if [[ "$blast_search" == true ]]; then
 
     mkdir -p "$output_dir"
 
+    # Translate query if needed
+    if [[ "$query_type" == "nucleotide" && "$blast_type" =~ ^(blastp|tblastn|blastx)$ ]]; then
+        query_file=$(translate_sequence "$query_file")
+        query_type="protein"
+    fi # THIS MODULE IS VERY IMPORTANT
+
     # Run BLAST for each genome
     for genome in "${genomes[@]}"; do
         if [[ ! -f "$genome" ]]; then
