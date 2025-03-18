@@ -94,6 +94,12 @@ if [[ "$blast_search" == true ]]; then
             continue
         fi
 
+        # Translate subject if needed
+        if [[ "$subject_type" == "nucleotide" && "$blast_type" =~ ^(blastp|tblastn)$ ]]; then
+            genome=$(translate_sequence "$genome")
+            subject_type="protein"
+        fi # THIS MODULE IS VERY IMPORTANT
+
         # output_blast="${output_dir}/$(basename "$genome")_blast_results.txt"
         output_blast="${output_dir}/${blast_type}_$(basename "$genome").txt"
 
