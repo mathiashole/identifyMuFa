@@ -43,6 +43,15 @@ echo "Query file: $query_file"
 echo "Genomes: ${genomes[@]}"
 echo "Output directory: $output_dir"
 
+# Function to translate a sequence file
+translate_sequence() {
+    local input_file="$1"
+    local output_file="${input_file%.fasta}_translated.fasta"
+    echo "Translating $input_file to $output_file..."
+    transeq -clean -sequence "$input_file" -outseq "$output_file"
+    echo "$output_file"
+}
+
 # If translate only mode, execute transeq
 if [[ "$translate_only" == true ]]; then
     if [[ ${#genomes[@]} -eq 0 ]]; then
