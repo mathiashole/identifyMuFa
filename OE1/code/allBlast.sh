@@ -54,26 +54,26 @@ translate_sequence() {
     echo "$output_file"
 }
 
-# # If translate only mode, execute transeq
-# if [[ "$translate_only" == true ]]; then
-#     if [[ ${#genomes[@]} -eq 0 ]]; then
-#         echo "Error: No FASTA files provided for translation."
-#         exit 1
-#     fi
+# If translate only mode, execute transeq
+if [[ "$translate_only" == true ]]; then
+    if [[ ${#genomes[@]} -eq 0 ]]; then
+        echo "Error: No FASTA files provided for translation."
+        exit 1
+    fi
 
-#     for fasta in "${genomes[@]}"; do
-#         if [[ ! -f "$fasta" ]]; then
-#             echo "Error: File '$fasta' not found!"
-#             continue
-#         fi
-#         translate_sequence "$fasta"
-#         # output_translated="${fasta%.fasta}_translated.fasta"
-#         # echo "Translating $fasta to $output_translated..."
-#         # transeq -clean -sequence "$fasta" -outseq "$output_translated"
-#     done
-#     echo "Translation completed."
-#     exit 0
-# fi
+    for fasta in "${genomes[@]}"; do
+        if [[ ! -f "$fasta" ]]; then
+            echo "Error: File '$fasta' not found!"
+            continue
+        fi
+        translate_sequence "$fasta"
+        # output_translated="${fasta%.fasta}_translated.fasta"
+        # echo "Translating $fasta to $output_translated..."
+        # transeq -clean -sequence "$fasta" -outseq "$output_translated"
+    done
+    echo "Translation completed."
+    exit 0
+fi
 
 # If BLAST search mode, validate parameters
 if [[ "$blast_search" == true ]]; then
