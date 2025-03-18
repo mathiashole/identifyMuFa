@@ -64,9 +64,10 @@ if [[ "$translate_only" == true ]]; then
             echo "Error: File '$fasta' not found!"
             continue
         fi
-        output_translated="${fasta%.fasta}_translated.fasta"
-        echo "Translating $fasta to $output_translated..."
-        transeq -clean -sequence "$fasta" -outseq "$output_translated"
+        translate_sequence "$fasta"
+        # output_translated="${fasta%.fasta}_translated.fasta"
+        # echo "Translating $fasta to $output_translated..."
+        # transeq -clean -sequence "$fasta" -outseq "$output_translated"
     done
     echo "Translation completed."
     exit 0
