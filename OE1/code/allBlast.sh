@@ -36,6 +36,7 @@ while [[ $# -gt 0 ]]; do
         -sp) subject_type="protein"; genomes+=("$2"); shift 2;;
         -sn) subject_type="nucleotide"; genomes+=("$2"); shift 2;;
         -o) output_dir="$2"; shift 2;;
+        -e) evalue="$2"; shift 2;;
         *) usage;;
     esac
 done
