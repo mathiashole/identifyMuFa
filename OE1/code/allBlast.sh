@@ -101,6 +101,8 @@ if [[ "$blast_search" == true ]]; then
         fi # THIS MODULE IS VERY IMPORTANT
 
         # Ensure subject is in BLAST database format
+        db_prefix="${output_dir}/$(basename "$genome")"
+
         if [[ ! -f "${genome}.nhr" && ! -f "${genome}.phr" ]]; then
             echo "Creating BLAST database for $genome..."
             if [[ "$subject_type" == "nucleotide" ]]; then
