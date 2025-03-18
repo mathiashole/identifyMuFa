@@ -100,6 +100,16 @@ if [[ "$blast_search" == true ]]; then
             subject_type="protein"
         fi # THIS MODULE IS VERY IMPORTANT
 
+        # Ensure subject is in BLAST database format
+        if [[ ! -f "${genome}.nhr" && ! -f "${genome}.phr" ]]; then
+            echo "Creating BLAST database for $genome..."
+            if [[ "$subject_type" == "nucleotide" ]]; then
+                makeblastdb -in "$genome" -dbtype nucl
+            else
+                makeblastdb -in "$genome" -dbtype prot
+            fi
+        fi
+
         # output_blast="${output_dir}/$(basename "$genome")_blast_results.txt"
         output_blast="${output_dir}/${blast_type}_$(basename "$genome").txt"
 
