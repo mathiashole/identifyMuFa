@@ -99,7 +99,7 @@ if [[ "$blast_search" == true ]]; then
 
         # Translate subject if needed
         if [[ "$subject_type" == "nucleotide" && "$blast_type" =~ ^(blastp|tblastn)$ ]]; then
-            genome=$(translate_sequence "$genome")
+            genome=$(translate_sequence "$genome" | tail -n 1)
             subject_type="protein"
         fi # THIS MODULE IS VERY IMPORTANT
 
