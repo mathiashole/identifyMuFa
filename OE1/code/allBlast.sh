@@ -66,9 +66,7 @@ if [[ "$translate_only" == true ]]; then
             continue
         fi
         translate_sequence "$fasta"
-        # output_translated="${fasta%.fasta}_translated.fasta"
-        # echo "Translating $fasta to $output_translated..."
-        # transeq -clean -sequence "$fasta" -outseq "$output_translated"
+        
     done
     echo "Translation completed."
     exit 0
