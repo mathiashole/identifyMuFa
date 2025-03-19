@@ -148,6 +148,8 @@ generate_commands <- function(data, output_dir) {
   }
 
   # data$allblast_blastp_command <- paste(ALLBLAST, "-type", "blastp", "-qp", file.path(output_dir, data$out_gscissors_high_translated), "-sp", data$gorf_result_file, "-o", file.path(output_dir, "blast_result"))
+  bRefiner.sh -file blastp_multigenic_family_TriTrypDB-68_TcruziYC6.tsv -i 80 -l 2666 -col 1 -unique 1
+
 
   return(data)
 }
