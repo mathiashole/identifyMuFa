@@ -63,7 +63,7 @@ transform_data <- function(data) {
   data$out_gscissors_high <- paste0("out_high_", data$keyword_sum, "_", data$no_gff_basename, ".fasta") # extract filtered >= minimal length sequence
   data$out_rest_gscissors <- paste0("out_rest_", data$keyword2, "_", data$no_gff_basename, ".fasta") # extract rest of no filtered sequence
   data$blastn_result <- paste0("blastn_", data$no_fasta_basename, ".txt") # result first BLASTN
-  data$tblastn_result <- paste0("tblastn_", data$no_fasta_basename, ".txt") # result first PBLASTN
+  # data$tblastn_result <- paste0("tblastn_", data$no_fasta_basename, ".txt") # result first PBLASTN
   data$overlappingshaive_result <- paste0("all_multigenic_family_", data$no_fasta_basename, ".tsv") # results filtered no overlap sequence
   data$overlappingshaive_result_filtered <- paste0("filtered_multigenic_family_", data$no_fasta_basename, ".tsv") # Results filtered no overlap and old sequence
   data$overlap_result_high_equal_df <- paste0("high_equal_filtered_multigenic_family_", data$no_fasta_basename, ".tsv") # Split result of no overlap > or = to minimal length
