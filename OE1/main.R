@@ -291,10 +291,10 @@ execution_module <- function(data, output_dir) {
 
         cat("Processing BREFINER: ", data$bRefiner_command[i], "\n")
         system(data$bRefiner_command[i])
-        # Check if FILTER_SEQ created the expected file
-        path_file_brefiner <- paste0(output_dir,"/", data$filtred_name_gff[i])
+        # Check if BREFINER created the expected file
+        path_file_brefiner <- paste0(output_dir,"/", data$brefiner_blastp[i])
         if (!file.exists(path_file_fq)) {
-          cat("Error: FILTER_SEQ did not create the file", data$filtred_name_gff[i], "\n")
+          cat("Error: FILTER_SEQ did not create the file", data$brefiner_blastp[i], "\n")
           next
         }
 
