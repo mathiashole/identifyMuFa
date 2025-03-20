@@ -9,6 +9,7 @@ SPDIFFSIZE <- "code/spDiffSize.R"
 GORF <- "code/gORF.sh"
 ALLBLAST <- "code/allBlast.sh"
 BREFINER <- "code/bRefiner.sh"
+CLASSIFIER <- "code/classifier.sh"
 
 # Create output directory if it does not exist
 create_output_dir <- function(output_dir) {
