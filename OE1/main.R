@@ -281,9 +281,9 @@ execution_module <- function(data, output_dir) {
         # cat("Processing ALLBLAST: ", data$allblast_blastp_command[i], "\n")
         # system(data$allblast_blastp_command[i])
         # # Check if ALLBLAST created the expected file
-        # path_file_bb <- file.path(output_dir, "blast_result", data$blastn_result[i])
+        # path_file_bb <- file.path(output_dir, "blast_result", data$data$blastp_result[i])
         # if (!file.exists(path_file_bb)) {
-        #   cat("Error: ALLBLAST did not create the file", file.path(output_dir, "blast_result", data$blastn_result[i]), "\n")
+        #   cat("Error: ALLBLAST did not create the file", file.path(output_dir, "blast_result", data$data$blastp_result[i]), "\n")
         #   next
         # }
 
