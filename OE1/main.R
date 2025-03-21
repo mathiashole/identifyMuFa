@@ -76,6 +76,7 @@ transform_data <- function(data) {
   data$gorf_result_file <- paste0("getorf_protein_", data$overlap_result_high_equal)
   data$blastp_result <- paste0("blastp_out_high_", data$keyword_sum, "_", data$no_gff_basename, ".txt")
   data$brefiner_blastp <- paste0("bRefiner_blastp_out_high_", data$keyword_sum, "_", data$no_gff_basename, ".txt")
+  data$overlappingshaive_result <- paste0("all_multigenic_family_", data$no_fasta_basename, "_classified.tsv")
 
   return(data)
 }
@@ -301,8 +302,8 @@ execution_module <- function(data, output_dir) {
         # cat("Processing CLASSIFIER: ", data$classifier_command[i], "\n")
         # system(data$classifier_command[i])
         # # Check if CLASSIFIER created the expected file
-        # path_file_brefiner <- paste0(output_dir,"/", data$brefiner_blastp[i])
-        # if (!file.exists(path_file_fq)) {
+        # path_file_calssifier <- paste0(output_dir,"/", data$brefiner_blastp[i])
+        # if (!file.exists(path_file_calssifier)) {
         #   cat("Error: CLASSIFIER did not create the file", data$brefiner_blastp[i], "\n")
         #   next
         # }
