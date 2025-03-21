@@ -153,7 +153,7 @@ generate_commands <- function(data, output_dir) {
     data$gorf_command <- paste("Rscript", GORF, file.path(output_dir, data$overlap_result_high_equal), output_dir)
   }
 
-  # data$allblast_blastp_command <- paste(ALLBLAST, "-type", "blastp", "-qp", file.path(output_dir, data$out_gscissors_high_translated), "-sp", data$gorf_result_file, "-o", file.path(output_dir, "blast_result"))
+  # data$allblast_blastp_command <- paste(ALLBLAST, "-type", "blastp", "-qp", file.path(output_dir, data$out_gscissors_high_translated), "-sp", file.path(output_dir, data$gorf_result_file), "-o", file.path(output_dir, "blast_result"))
   
   # data$bRefiner_command <- paste(BREFINER , "-file", file.path(output_dir, "blast_result", blastp_file), "-i", 80, "-l", data$length / 3, "-col", 1, "-unique", 1)
 
