@@ -76,7 +76,7 @@ transform_data <- function(data) {
   data$gorf_result_file <- paste0("getorf_protein_", data$overlap_result_high_equal)
   data$blastp_result <- paste0("blastp_out_high_", data$keyword_sum, "_", data$no_gff_basename, ".txt")
   data$brefiner_blastp <- paste0("bRefiner_blastp_out_high_", data$keyword_sum, "_", data$no_gff_basename, ".txt")
-  data$overlappingshaive_result <- paste0("all_multigenic_family_", data$no_fasta_basename, "_classified.tsv")
+  data$calssifier_result <- paste0("all_multigenic_family_", data$no_fasta_basename, "_classified.tsv")
 
   return(data)
 }
