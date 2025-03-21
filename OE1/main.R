@@ -157,7 +157,7 @@ generate_commands <- function(data, output_dir) {
   
   # data$bRefiner_command <- paste(BREFINER , "-file", file.path(output_dir, "blast_result", blastp_file), "-i", 80, "-l", data$length / 3, "-col", 1, "-unique", 1)
 
-  # data$classifier_command <- paste("Rscript", CLASSIFIER, data$overlappingshaive_result_filtered, data$brefiner_blastp)
+  # data$classifier_command <- paste("Rscript", CLASSIFIER, data$overlappingshaive_result_filtered, file.path(output_dir, "blast_result", data$brefiner_blastp))
 
   return(data)
 }
