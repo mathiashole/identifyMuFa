@@ -298,6 +298,15 @@ execution_module <- function(data, output_dir) {
         #   next
         # }
 
+        # cat("Processing CLASSIFIER: ", data$classifier_command[i], "\n")
+        # system(data$classifier_command[i])
+        # # Check if BREFINER created the expected file
+        # path_file_brefiner <- paste0(output_dir,"/", data$brefiner_blastp[i])
+        # if (!file.exists(path_file_fq)) {
+        #   cat("Error: BREFINER did not create the file", data$brefiner_blastp[i], "\n")
+        #   next
+        # }
+
         ##################################################################################################
         # Next steps
         # think 
