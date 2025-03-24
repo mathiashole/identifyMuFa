@@ -82,8 +82,6 @@ df_low <- df %>% filter(diff_abs < threshold) %>% select(-diff_abs)
 # df_low <- df %>% filter(diff_abs < threshold) %>% select(V1, start, end)
 
 # Restore original column order and number of columns
-# df_high <- df_high %>% select(1:num_cols)
-# df_low <- df_low %>% select(1:num_cols)
 df_high <- df_high %>% select(all_of(1:num_cols))
 df_low <- df_low %>% select(all_of(1:num_cols))
 
