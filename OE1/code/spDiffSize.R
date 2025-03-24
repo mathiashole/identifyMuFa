@@ -78,8 +78,6 @@ if (is.null(threshold)) {
 # Split based on the threshold
 df_high <- df %>% filter(diff_abs >= threshold) %>% select(-diff_abs)
 df_low <- df %>% filter(diff_abs < threshold) %>% select(-diff_abs)
-# df_high <- df %>% filter(diff_abs >= threshold) %>% select(V1, start, end)
-# df_low <- df %>% filter(diff_abs < threshold) %>% select(V1, start, end)
 
 # Restore original column order and number of columns
 df_high <- df_high %>% select(all_of(1:num_cols))
