@@ -106,7 +106,7 @@ generate_commands <- function(data, output_dir) {
   data$filter_seq_command <- paste(FILTER_SEQ, input_file, output_dir)
   
   if (!"length" %in% colnames(data)) {
-    data$length <- paste(MEANSEQ, "--gff", file.path(output_dir, data$filtred_name_gff))
+    data$length_command <- paste(MEANSEQ, "--gff", file.path(output_dir, data$filtred_name_gff))
   }
 
   if ("length" %in% colnames(data)) {
@@ -190,6 +190,9 @@ execution_module <- function(data, output_dir) {
           cat("Error: FILTER_SEQ did not create the file", data$filtred_name_gff[i], "\n")
           next
         }
+
+        cat("Processing MEANSEQ: ", data$length[i], "\n")
+        system(data$length[i])
 
         cat("Processing SPDIFFSIZE: ", data$spdiffsize_command[i], "\n")
         system(data$spdiffsize_command_first[i])
