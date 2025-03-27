@@ -104,6 +104,10 @@ transform_data <- function(data) {
 generate_commands <- function(data, output_dir) {
   data$filter_seq_command <- paste(FILTER_SEQ, input_file, output_dir)
   
+  if (!"length" %in% colnames(data)) {
+    data$length <- paste()
+  }
+
   if ("length" %in% colnames(data)) {
     data$spdiffsize_command_first <- paste("Rscript", SPDIFFSIZE, "--gff", file.path(output_dir, data$filtred_name_gff), "--length", data$length)
   } else {
