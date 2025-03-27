@@ -11,6 +11,8 @@ calculate_avg_length_gff() {
     awk '$1 !~ /^#/ {sum += ($5 - $4 + 1); count++} END {if (count > 0) print int(sum/count); else print "0"}' "$1"
 }
 
+
+# Check if the correct number of arguments is provided
 if [[ $# -ne 2 ]]; then
     echo "Usage: $0 --gff <file.gff> | --fasta <file.fasta>"
     exit 1
