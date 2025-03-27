@@ -1,5 +1,7 @@
 #!/bin/bash
 
+
+# Function to calculate the average sequence length from a FASTA file
 calculate_avg_length_fasta() {
     awk '/^>/ {if (seqlen) {sum+=seqlen; count++} seqlen=0; next} {seqlen+=length($0)} END {sum+=seqlen; count++; print int(sum/count)}' "$1"
 }
