@@ -17,6 +17,7 @@ if [[ $# -ne 2 ]]; then
     exit 1
 fi
 
+# Process command-line options
 case "$1" in
     --gff)
         calculate_avg_length_gff "$2"
