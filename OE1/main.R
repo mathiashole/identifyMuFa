@@ -154,9 +154,9 @@ generate_commands <- function(data, output_dir) {
                                        file.path(output_dir, data$overlap_result_low))
 
   if ("length" %in% colnames(data)) {
-    data$gorf_command <- paste("Rscript", GORF, file.path(output_dir, data$overlap_result_high_equal), output_dir, data$length)
+    data$gorf_command <- paste(GORF, file.path(output_dir, data$overlap_result_high_equal), output_dir, data$length)
   } else {
-    data$gorf_command <- paste("Rscript", GORF, file.path(output_dir, data$overlap_result_high_equal), output_dir)
+    data$gorf_command <- paste(GORF, file.path(output_dir, data$overlap_result_high_equal), output_dir)
   }
 
   data$allblast_blastp_command <- paste(ALLBLAST, "-type", "blastp", "-qp", file.path(output_dir, data$out_gscissors_high_translated), "-sp", file.path(output_dir, data$gorf_result_file), "-o", file.path(output_dir, "blast_result"))
