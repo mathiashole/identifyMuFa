@@ -191,8 +191,8 @@ execution_module <- function(data, output_dir) {
           next
         }
 
-        cat("Processing MEANSEQ: ", data$length_command[i], "\n")
-        data$length[i] <- as.numeric(system(data$length_command[i], intern = TRUE))
+        # cat("Processing MEANSEQ: ", data$length_command[i], "\n")
+        # data$length[i] <- as.numeric(system(data$length_command[i], intern = TRUE))
 
         cat("Processing SPDIFFSIZE: ", data$spdiffsize_command[i], "\n")
         system(data$spdiffsize_command_first[i])
