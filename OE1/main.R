@@ -129,11 +129,11 @@ generate_commands <- function(data, output_dir) {
                                        file.path(output_dir, data$non_filtred_name_gff), "--format gff --output", 
                                        file.path(output_dir, data$out_rest_gscissors)) ###### Rest of sequence not searched ####
   
-  data$bothblast_command <- paste(BOTHBLAST, file.path(output_dir, data$out_gscissors_high), file.path(output_dir, "blast_result"), data$fasta_file)
+  # data$bothblast_command <- paste(BOTHBLAST, file.path(output_dir, data$out_gscissors_high), file.path(output_dir, "blast_result"), data$fasta_file)
   
-  # data$allblast_first_command <- paste(ALLBLAST, "-type", "blastn", "-qn", file.path(output_dir, data$out_gscissors_high), "-sn", data$fasta_file, "-o", file.path(output_dir, "blast_result")) ## CHECK blast sequence
+  data$allblast_first_command <- paste(ALLBLAST, "-type", "blastn", "-qn", file.path(output_dir, data$out_gscissors_high), "-sn", data$fasta_file, "-o", file.path(output_dir, "blast_result")) ## CHECK blast sequence
   
-  # data$allblast_first_transeq_command <- paste(ALLBLAST, "-transeq", "-qn", file.path(output_dir, data$out_gscissors_high))
+  data$allblast_first_transeq_command <- paste(ALLBLAST, "-transeq", "-qn", file.path(output_dir, data$out_gscissors_high))
   
   data$overlappingshaive_command <- paste("Rscript", OVERLAPPINGSHAIVE, "--blast_file", file.path(output_dir, "blast_result", data$blastn_result), 
                                           "--gff_file", file.path(output_dir, data$sp_high_filtred_name_gff), "--output_dir", output_dir, "--inter", 100) ## THIS INTER OPTION NEED ESTIMATED IN PROGRAM
@@ -159,16 +159,16 @@ generate_commands <- function(data, output_dir) {
     data$gorf_command <- paste("Rscript", GORF, file.path(output_dir, data$overlap_result_high_equal), output_dir)
   }
 
-  # data$allblast_blastp_command <- paste(ALLBLAST, "-type", "blastp", "-qp", file.path(output_dir, data$out_gscissors_high_translated), "-sp", file.path(output_dir, data$gorf_result_file), "-o", file.path(output_dir, "blast_result"))
+  data$allblast_blastp_command <- paste(ALLBLAST, "-type", "blastp", "-qp", file.path(output_dir, data$out_gscissors_high_translated), "-sp", file.path(output_dir, data$gorf_result_file), "-o", file.path(output_dir, "blast_result"))
   
   # if ("length"%in% colnames(data)) {
   #   # data$bRefiner_command <- paste(BREFINER , "-file", file.path(output_dir, "blast_result", blastp_file), "-i", 80, "-l", data$length / 3, "-col", 1, "-unique", 1)
   # } else {
 
   # }
-  # data$bRefiner_command <- paste(BREFINER , "-file", file.path(output_dir, "blast_result", blastp_file), "-i", 80, "-l", data$length / 3, "-col", 1, "-unique", 1) ## Need mean calculated option
+  data$bRefiner_command <- paste(BREFINER , "-file", file.path(output_dir, "blast_result", blastp_file), "-i", 80, "-l", data$length / 3, "-col", 1, "-unique", 1) ## Need mean calculated option
 
-  # data$classifier_command <- paste("Rscript", CLASSIFIER, file.path(output_dir, data$overlappingshaive_result_filtered), file.path(output_dir, "blast_result", data$brefiner_blastp))
+  data$classifier_command <- paste("Rscript", CLASSIFIER, file.path(output_dir, data$overlappingshaive_result_filtered), file.path(output_dir, "blast_result", data$brefiner_blastp))
 
   return(data)
 }
