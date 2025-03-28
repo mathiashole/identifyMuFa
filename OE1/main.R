@@ -76,7 +76,8 @@ transform_data <- function(data) {
   data$overlap_result_low <- paste0("low_filtered_multigenic_family_", data$no_fasta_basename, ".fasta") # Extracted sequence < to minimal length
   data$gorf_result_file <- paste0("getorf_protein_", data$overlap_result_high_equal)
   # data$blastp_result <- paste0("blastp_out_high_", data$keyword_sum, "_", data$no_gff_basename, ".txt")
-  data$blastp_result <- paste0("blastp_", data$gorf_result_file)
+  # data$blastp_result <- paste0("blastp_", data$gorf_result_file)
+  data$blastp_result <- paste0("blastp_getorf_protein_high_equal_filtered_multigenic_family_", data$no_fasta_basename, ".txt")
   data$brefiner_blastp <- paste0("bRefiner_blastp_out_high_", data$keyword_sum, "_", data$no_gff_basename, ".txt")
   data$calssifier_result <- paste0("all_multigenic_family_", data$no_fasta_basename, "_classified.tsv")
 
