@@ -295,33 +295,34 @@ execution_module <- function(data, output_dir) {
           next
         }
 
-        # cat("Processing ALLBLAST: ", data$allblast_blastp_command[i], "\n")
-        # system(data$allblast_blastp_command[i])
-        # # Check if ALLBLAST created the expected file
-        # path_file_blastp <- file.path(output_dir, "blast_result", data$data$blastp_result[i])
-        # if (!file.exists(path_file_blastp)) {
-        #   cat("Error: ALLBLAST did not create the file", file.path(output_dir, "blast_result", data$data$blastp_result[i]), "\n")
-        #   next
-        # }
+### new version
+        cat("Processing ALLBLAST: ", data$allblast_blastp_command[i], "\n")
+        system(data$allblast_blastp_command[i])
+        # Check if ALLBLAST created the expected file
+        path_file_blastp <- file.path(output_dir, "blast_result", data$data$blastp_result[i])
+        if (!file.exists(path_file_blastp)) {
+          cat("Error: ALLBLAST did not create the file", file.path(output_dir, "blast_result", data$data$blastp_result[i]), "\n")
+          next
+        }
 
-        # cat("Processing BREFINER: ", data$bRefiner_command[i], "\n")
-        # system(data$bRefiner_command[i])
-        # # Check if BREFINER created the expected file
-        # path_file_brefiner <- paste0(output_dir,"/", data$brefiner_blastp[i])
-        # if (!file.exists(path_file_fq)) {
-        #   cat("Error: BREFINER did not create the file", data$brefiner_blastp[i], "\n")
-        #   next
-        # }
+        cat("Processing BREFINER: ", data$bRefiner_command[i], "\n")
+        system(data$bRefiner_command[i])
+        # Check if BREFINER created the expected file
+        path_file_brefiner <- paste0(output_dir,"/", data$brefiner_blastp[i])
+        if (!file.exists(path_file_fq)) {
+          cat("Error: BREFINER did not create the file", data$brefiner_blastp[i], "\n")
+          next
+        }
 
-        # cat("Processing CLASSIFIER: ", data$classifier_command[i], "\n")
-        # system(data$classifier_command[i])
-        # # Check if CLASSIFIER created the expected file
-        # path_file_calssifier <- paste0(output_dir,"/", data$calssifier_result[i])
-        # if (!file.exists(path_file_calssifier)) {
-        #   cat("Error: CLASSIFIER did not create the file", data$calssifier_result[i], "\n")
-        #   next
-        # }
-
+        cat("Processing CLASSIFIER: ", data$classifier_command[i], "\n")
+        system(data$classifier_command[i])
+        # Check if CLASSIFIER created the expected file
+        path_file_calssifier <- paste0(output_dir,"/", data$calssifier_result[i])
+        if (!file.exists(path_file_calssifier)) {
+          cat("Error: CLASSIFIER did not create the file", data$calssifier_result[i], "\n")
+          next
+        }
+### until here
         ##################################################################################################
         # Next steps
         # think 
