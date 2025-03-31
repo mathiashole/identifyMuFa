@@ -9,7 +9,7 @@ SPDIFFSIZE <- "code/spDiffSize.R"
 GORF <- "code/gORF.sh"
 ALLBLAST <- "code/allBlast.sh"
 BREFINER <- "code/bRefiner.sh"
-CLASSIFIER <- "code/classifier.sh"
+CLASSIFIER <- "code/classifier.R"
 # MEANSEQ <- "code/meanSeq.sh"
 
 # Create output directory if it does not exist
