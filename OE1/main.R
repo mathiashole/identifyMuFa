@@ -179,7 +179,7 @@ generate_commands <- function(data, output_dir) {
 
 generate_commands_without_gff <- function(data, output_dir){
 
-  data$allblast_first_command <- paste(ALLBLAST, "-type", "blastn", "-qn", file.path(output_dir, data$out_gscissors_high), "-sn", data$fasta_file, "-o", file.path(output_dir, "blast_result")) ## CHECK blast sequence
+  data$allblast_first_command <- paste(ALLBLAST, "-type", "blastn", "-qn", file.path(output_dir, data$sequence_file), "-sn", data$fasta_file, "-o", file.path(output_dir, "blast_result")) ## CHECK blast sequence
   
   data$allblast_first_transeq_command <- paste(ALLBLAST, "-transeq", file.path(output_dir, data$out_gscissors_high))
   
