@@ -287,7 +287,7 @@ execution_module <- function(data, output_dir) {
         # Check if OVERLAPPINGSHAIVE created the expect file
         path_file_os <- file.path(output_dir, data$overlappingshaive_result[i])
         if (!file.exists(path_file_os)) {
-          cat("Error: OVERLAPPINGSHAIVE did not create the file", file.path(output_dir, data$overlappingshaive_result[i]), "\n") ## debug directory
+          cat("Error: OVERLAPPINGSHAIVE did not create the file", file.path(output_dir, data$overlappingshaive_result[i]), "\n")
           next
         }
 
@@ -384,7 +384,7 @@ execution_module_without_gff <- function(data, output_dir) {
         # Check if OVERLAPPINGSHAIVE created the expect file
         path_file_os <- file.path(output_dir, data$overlappingshaive_result[i])
         if (!file.exists(path_file_os)) {
-          cat("Error: OVERLAPPINGSHAIVE did not create the file", file.path(output_dir, data$overlappingshaive_result[i]), "\n") ## debug directory
+          cat("Error: OVERLAPPINGSHAIVE did not create the file", file.path(output_dir, data$overlappingshaive_result[i]), "\n")
           next
         }
 
