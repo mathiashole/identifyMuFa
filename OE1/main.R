@@ -360,46 +360,6 @@ execution_module <- function(data, output_dir) {
 
 execution_module_without_gff <- function(data, output_dir) {
       for (i in 1:nrow(data)) {
-        cat("Processing FILTER_SEQ: ", data$filter_seq_command[i], "\n")
-        system(data$filter_seq_command[i])
-        # Check if FILTER_SEQ created the expected file
-        path_file_fq <- paste0(output_dir,"/", data$filtred_name_gff[i])
-        if (!file.exists(path_file_fq)) {
-          cat("Error: FILTER_SEQ did not create the file", data$filtred_name_gff[i], "\n")
-          next
-        }
-
-        # cat("Processing MEANSEQ: ", data$length_command[i], "\n")
-        # data$length[i] <- as.numeric(system(data$length_command[i], intern = TRUE))
-
-        cat("Processing SPDIFFSIZE: ", data$spdiffsize_command[i], "\n")
-        system(data$spdiffsize_command_first[i])
-        # Check if SPDIFFSIZE created the expect file
-        path_file_sp <- file.path(output_dir, data$sp_high_filtred_name_gff[i])
-        if (!file.exists(path_file_sp)) {
-          cat("Error: SPDIFFSIZE did not create the file", file.path(output_dir, data$sp_high_filtred_name_gff[i]), "and", file.path(output_dir, data$sp_low_filtred_name_gff[i]), "\n")
-          next
-        }   
-
-        # change directory from where you get the data!! DEBUGGING
-        cat("Processing GSCISSORS: ", data$gscissors_command[i], "\n")
-        # Check if FILTER_SEQ created the expected file
-        path_file_gsH <- paste0(output_dir,"/", data$out_gscissors_high[i])
-        system(data$gscissors_command[i])
-        if (!file.exists(path_file_gsH)) {
-          cat("Error: GSCISSORS did not create the file", data$out_gscissors_high[i], "\n")
-          next
-        }
-
-        cat("Processing GSCISSORS: ", data$gscissors_rest_command[i], "\n")
-        # Check if FILTER_SEQ created the expected file
-        path_file_gs_rest <- paste0(output_dir,"/", data$out_rest_gscissors[i])
-        system(data$gscissors_rest_command[i])
-        if (!file.exists(path_file_gs_rest)) {
-          cat("Error: GSCISSORS did not create the file", data$out_rest_gscissors[i], "\n")
-          next
-        }
-
 ### new version
         cat("Processing ALLBLAST: ", data$allblast_first_command[i], "\n")
         system(data$allblast_first_command[i])
