@@ -349,7 +349,7 @@ execution_module <- function(data, output_dir) {
         cat("Processing CLASSIFIER: ", data$classifier_command[i], "\n")
         system(data$classifier_command[i])
         # Check if CLASSIFIER created the expected file
-        path_file_calssifier <- paste0(output_dir,"/", data$calssifier_result[i])
+        path_file_calssifier <- file.path(output_dir, data$calssifier_result[i])
         # if (!file.exists(path_file_calssifier)) {
         #   cat("Error: CLASSIFIER did not create the file", data$calssifier_result[i], "\n")
         #   next
