@@ -92,7 +92,7 @@ transform_data_without_gff <- function(data) {
   data$no_fasta_seq <- sub(".{6}$", "", data$sequence_basename)
 
   data$blastn_result <- paste0("blastn_", data$no_fasta_basename, "_", data$no_fasta_seq, ".txt")
-  data$tblastn_result <- paste0("tblastn_", data$no_fasta_basename, "_", data$no_fasta_seq, ".txt")
+
   data$overlappingshaive_result <- paste0("all_multigenic_family_", data$no_fasta_basename, "_", data$no_fasta_seq, ".tsv")
   data$overlappingshaive_result_filtered <- paste0("filtered_multigenic_family_", data$no_fasta_basename, "_", data$no_fasta_seq, ".tsv")
   data$overlap_result_high_equal_df <- paste0("high_equal_all_multigenic_family_", data$no_fasta_basename, "_", data$no_fasta_seq, ".tsv")
