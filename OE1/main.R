@@ -354,11 +354,6 @@ execution_module <- function(data, output_dir) {
         #   cat("Error: CLASSIFIER did not create the file", data$calssifier_result[i], "\n")
         #   next
         # }
-### until here
-        ##################################################################################################
-        # Next steps
-        # think 
-        ##################################################################################################
 
       }
 }
