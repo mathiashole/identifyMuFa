@@ -476,11 +476,11 @@ if (num_cols == 3 || num_cols == 2) {
   output_dir <- create_output_dir(output_dir)
   dir.create(file.path(output_dir, "blast_result"), showWarnings = FALSE, recursive = TRUE)
   # Apply the transformations
-  data_transformed <- transform_data_without_gff(data)
+  data_transformed_without_gff <- transform_data_without_gff(data)
   # path_data_transformed <- file.path(output_dir, paste0("data_transformed.tsv"))
   # write.table(data_transformed, file = path_data_transformed, row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
   # Generate the commands
-  data_with_commands <- generate_commands(data_transformed, output_dir)
+  data_with_commands <- generate_commands(data_transformed_without_gff, output_dir)
   # Execution script
   execution_module(data_with_commands, output_dir)
 
