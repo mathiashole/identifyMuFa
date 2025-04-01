@@ -373,9 +373,9 @@ execution_module_without_gff <- function(data, output_dir) {
         cat("Processing ALLBLAST: ", data$allblast_first_transeq_command[i], "\n")
         system(data$allblast_first_transeq_command[i])
         # Check if ALLBLAST created the expected file
-        path_file_first_translated <- file.path(output_dir, data$out_gscissors_high_translated[i])
+        path_file_first_translated <- file.path(output_dir, data$sequence_transeq[i])
         if (!file.exists(path_file_first_translated)) {
-          cat("Error: ALLBLAST did not create the file", file.path(output_dir, data$out_gscissors_high_translated[i]), "\n")
+          cat("Error: ALLBLAST did not create the file", file.path(output_dir, data$sequence_transeq[i]), "\n")
           next
         }
 ### until here
