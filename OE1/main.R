@@ -263,7 +263,6 @@ execution_module <- function(data, output_dir) {
           next
         }
 
-### new version
         cat("Processing ALLBLAST: ", data$allblast_first_command[i], "\n")
         system(data$allblast_first_command[i])
         # Check if ALLBLAST created the expected file
@@ -327,7 +326,6 @@ execution_module <- function(data, output_dir) {
           next
         }
 
-### new version
         cat("Processing ALLBLAST: ", data$allblast_blastp_command[i], "\n")
         system(data$allblast_blastp_command[i])
         # Check if ALLBLAST created the expected file
@@ -360,7 +358,6 @@ execution_module <- function(data, output_dir) {
 
 execution_module_without_gff <- function(data, output_dir) {
       for (i in 1:nrow(data)) {
-### new version
         cat("Processing ALLBLAST: ", data$allblast_first_command[i], "\n")
         system(data$allblast_first_command[i])
         # Check if ALLBLAST created the expected file
@@ -424,7 +421,6 @@ execution_module_without_gff <- function(data, output_dir) {
           next
         }
 
-### new version
         cat("Processing ALLBLAST: ", data$allblast_blastp_command[i], "\n")
         system(data$allblast_blastp_command[i])
         # Check if ALLBLAST created the expected file
