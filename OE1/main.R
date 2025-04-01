@@ -482,7 +482,7 @@ if (num_cols == 3 || num_cols == 2) {
   # Generate the commands
   data_with_commands_without_gff <- generate_commands_without_gff(data_transformed_without_gff, output_dir)
   # Execution script
-  execution_module(data_with_commands_without_gff, output_dir)
+  execution_module_without_gff(data_with_commands_without_gff, output_dir)
 
 } else if (num_cols == 5 || num_cols == 4) {
   
