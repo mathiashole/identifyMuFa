@@ -77,7 +77,7 @@ transform_data <- function(data) {
   data$gorf_result_file <- paste0("getorf_protein_", data$overlap_result_high_equal)
   # data$blastp_result <- paste0("blastp_out_high_", data$keyword_sum, "_", data$no_gff_basename, ".txt")
   # data$blastp_result <- paste0("blastp_", data$gorf_result_file)
-  data$blastp_result <- paste0("blastp_getorf_protein_high_equal_filtered_multigenic_family_", data$no_fasta_basename, ".txt") ## NEED FIX .fasta.txt its very bad option
+  data$blastp_result <- paste0("blastp_getorf_protein_high_equal_filtered_multigenic_family_", data$no_fasta_basename, ".txt")
   data$brefiner_blastp <- paste0("bRefiner_blastp_getorf_protein_high_equal_filtered_multigenic_family_", data$no_fasta_basename, ".txt")
   data$calssifier_result <- paste0("all_multigenic_family_", data$no_fasta_basename, "_classified.tsv")
 
