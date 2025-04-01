@@ -99,6 +99,7 @@ transform_data_without_gff <- function(data) {
   data$overlap_result_low_df <- paste0("low_all_multigenic_family_", data$no_fasta_basename, "_", data$no_fasta_seq, ".tsv")
   data$overlap_result_high_equal <- paste0("high_equal_all_multigenic_family_", data$no_fasta_basename, "_", data$no_fasta_seq, ".fasta")
   data$overlap_result_low <- paste0("low_all_multigenic_family_", data$no_fasta_basename, "_", data$no_fasta_seq, ".fasta")
+  data$gorf_result_file <- paste0("getorf_protein_", data$overlap_result_high_equal)
 
   return(data)
 }
