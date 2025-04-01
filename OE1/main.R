@@ -480,9 +480,9 @@ if (num_cols == 3 || num_cols == 2) {
   # path_data_transformed <- file.path(output_dir, paste0("data_transformed.tsv"))
   # write.table(data_transformed, file = path_data_transformed, row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
   # Generate the commands
-  data_with_commands <- generate_commands(data_transformed_without_gff, output_dir)
+  data_with_commands_without_gff <- generate_commands_without_gff(data_transformed_without_gff, output_dir)
   # Execution script
-  execution_module(data_with_commands, output_dir)
+  execution_module(data_with_commands_without_gff, output_dir)
 
 } else if (num_cols == 5 || num_cols == 4) {
   
