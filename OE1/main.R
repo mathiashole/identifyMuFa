@@ -463,19 +463,32 @@ if (length(args) == 0) {
 #####################
 
 input_file <- args[1]
-output_dir <- "output_directory"  # Define your output directory
-output_dir <- create_output_dir(output_dir)
-dir.create(file.path(output_dir, "blast_result"), showWarnings = FALSE, recursive = TRUE)
+# output_dir <- "output_directory"  # Define your output directory
+# output_dir <- create_output_dir(output_dir)
+# dir.create(file.path(output_dir, "blast_result"), showWarnings = FALSE, recursive = TRUE)
 
 data <- read_input(input_file)
 
-# if (num_cols == 3 || num_cols == 2) {
-#   print("without gff")
-# } else if (num_cols == 5 || num_cols == 4) {
-#   "with gff"
-# } else {
-#   stop("Unexpected number of columns in input file.")
-# }
+if (num_cols == 3 || num_cols == 2) {
+  print("without gff")
+} else if (num_cols == 5 || num_cols == 4) {
+  
+  print("with gff")
+  output_dir <- "output_directory"  # Define your output directory
+  output_dir <- create_output_dir(output_dir)
+  dir.create(file.path(output_dir, "blast_result"), showWarnings = FALSE, recursive = TRUE)
+  # Apply the transformations
+  data_transformed <- transform_data(data)
+  # path_data_transformed <- file.path(output_dir, paste0("data_transformed.tsv"))
+  # write.table(data_transformed, file = path_data_transformed, row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
+  # Generate the commands
+  data_with_commands <- generate_commands(data_transformed, output_dir)
+  # Execution script
+  execution_module(data_with_commands, output_dir)
+
+} else {
+  stop("Unexpected number of columns in input file.")
+}
 
 
 # Apply the transformations
