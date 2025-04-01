@@ -344,7 +344,7 @@ execution_module <- function(data, output_dir) {
         system(data$bRefiner_command[i])
         # Check if BREFINER created the expected file
         path_file_brefiner <- file.path(output_dir, "blast_result", data$brefiner_blastp[i])
-        if (!file.exists(path_file_fq)) {
+        if (!file.exists(path_file_brefiner)) {
           cat("Error: BREFINER did not create the file", file.path(output_dir, "blast_result", data$brefiner_blastp[i]), "\n")
           next
         }
