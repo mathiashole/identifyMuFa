@@ -84,7 +84,7 @@ transform_data <- function(data) {
   return(data)
 }
 
-# # Function to transform data in feature file name with any gff
+# Function to transform data in feature file name with any gff
 transform_data_without_gff <- function(data) {
   data$fasta_basename <- basename(data$fasta_file)
   data$sequence_basename <- basename(data$sequence_file)
