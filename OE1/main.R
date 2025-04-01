@@ -280,7 +280,7 @@ execution_module <- function(data, output_dir) {
           cat("Error: ALLBLAST did not create the file", file.path(output_dir, data$out_gscissors_high_translated[i]), "\n")
           next
         }
-### until here
+
         cat("Processing OVERLAPPINGSHAIVE: ", data$overlappingshaive_command[i], "\n")
         system(data$overlappingshaive_command[i])
         # Check if OVERLAPPINGSHAIVE created the expect file
@@ -375,7 +375,7 @@ execution_module_without_gff <- function(data, output_dir) {
           cat("Error: ALLBLAST did not create the file", file.path(output_dir, data$sequence_transeq[i]), "\n")
           next
         }
-### until here
+
         cat("Processing OVERLAPPINGSHAIVE: ", data$overlappingshaive_command[i], "\n")
         system(data$overlappingshaive_command[i])
         # Check if OVERLAPPINGSHAIVE created the expect file
