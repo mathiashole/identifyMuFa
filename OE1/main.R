@@ -135,8 +135,6 @@ generate_commands <- function(data, output_dir) {
                                        file.path(output_dir, data$non_filtred_name_gff), "--format gff --output", 
                                        file.path(output_dir, data$out_rest_gscissors)) ###### Rest of sequence not searched ####
   
-  # data$bothblast_command <- paste(BOTHBLAST, file.path(output_dir, data$out_gscissors_high), file.path(output_dir, "blast_result"), data$fasta_file)
-  
   data$allblast_first_command <- paste(ALLBLAST, "-type", "blastn", "-qn", file.path(output_dir, data$out_gscissors_high), "-sn", data$fasta_file, "-o", file.path(output_dir, "blast_result")) ## CHECK blast sequence
   
   data$allblast_first_transeq_command <- paste(ALLBLAST, "-transeq", file.path(output_dir, data$out_gscissors_high))
