@@ -224,15 +224,6 @@ execution_module <- function(data, output_dir) {
           next
         }
 
-        # cat("Processing BOTHBLAST: ", data$bothblast_command[i], "\n")
-        # system(data$bothblast_command[i])
-        # # Check if BOTHBLAST created the expected file
-        # path_file_bb <- file.path(output_dir, "blast_result", data$blastn_result[i])
-        # if (!file.exists(path_file_bb)) {
-        #   cat("Error: BOTHBLAST did not create the file", file.path(output_dir, "blast_result", data$blastn_result[i]), "\n")
-        #   next
-        # }
-
 ### new version
         cat("Processing ALLBLAST: ", data$allblast_first_command[i], "\n")
         system(data$allblast_first_command[i])
