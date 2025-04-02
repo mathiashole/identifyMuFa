@@ -167,6 +167,9 @@ if (!is.null(gff_file)) {
 }
 
 remove_overlaps_with_gff <- function(dataframe, gff) {
+  if (is.null(gff)) {
+    return(dataframe)  # Retorna los datos sin filtrar si no hay GFF
+  }
   # Filtrar las filas del dataframe comparando con los datos del GFF
   filtered_data <- dataframe[!apply(dataframe, 1, function(row) {
     # Buscar en el GFF donde V1 coincide con V2 del dataframe
