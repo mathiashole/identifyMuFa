@@ -1,7 +1,8 @@
 #!/usr/bin/env Rscript
 
 # call function of modules
-source("code/modules.R")
+source("code/moduleGff.R")
+source("code/module.R")
 
 # call all scripts
 FILTER_SEQ <- "code/filter_keywords.sh"
