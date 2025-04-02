@@ -46,9 +46,19 @@ echo "Genomes: ${genomes[@]}"
 echo "Output directory: $output_dir"
 
 # Function to translate a sequence file
+# translate_sequence() {
+#     local input_file="$1"
+#     local output_file="${input_file%.fasta}_translated.fasta"
+#     transeq -clean -sequence "$input_file" -outseq "$output_file"
+#     echo "$output_file"
+# }
 translate_sequence() {
     local input_file="$1"
-    local output_file="${input_file%.fasta}_translated.fasta"
+    local output_dir="${2:-$(dirname "$input_file")}"
+    local base_name=$(basename "$input_file")
+    local output_file="${output_dir}/${base_name%.fasta}_translated.fasta"
+    
+    mkdir -p "$output_dir"
     transeq -clean -sequence "$input_file" -outseq "$output_file"
     echo "$output_file"
 }
