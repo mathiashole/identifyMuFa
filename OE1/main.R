@@ -218,7 +218,7 @@ generate_commands_without_gff <- function(data, output_dir){
   # }
   data$bRefiner_command <- paste(BREFINER , "-file", file.path(output_dir, "blast_result", data$blastp_result), "-i", 80, "-l", data$length / 3, "-col", 2, "-unique", 1) ## Need mean calculated option
 
-  data$classifier_command <- paste("Rscript", CLASSIFIER, file.path(output_dir, data$overlappingshaive_result_filtered), file.path(output_dir, "blast_result", data$brefiner_blastp))
+  data$classifier_command <- paste("Rscript", CLASSIFIER, file.path(output_dir, data$overlappingshaive_result), file.path(output_dir, "blast_result", data$brefiner_blastp))
 
   return(data)
 }
