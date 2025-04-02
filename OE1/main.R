@@ -2,7 +2,7 @@
 
 # call function of modules
 source("code/moduleGff.R")
-source("code/module.R")
+source("code/moduleEmptyGff.R")
 
 # call all scripts
 FILTER_SEQ <- "code/filter_keywords.sh"
