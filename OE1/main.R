@@ -46,8 +46,8 @@ read_input <- function(input_file) {
     stop("Unexpected number of columns in input file.")
   }
 
-  return(list(data = data, num_cols = num_cols))
-  #return(data)
+  # return(list(data = data, num_cols = num_cols))
+  return(data)
 }
 
 # Function to transform data in feature file name with gff
