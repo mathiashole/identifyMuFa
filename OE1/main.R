@@ -1,5 +1,8 @@
 #!/usr/bin/env Rscript
 
+# call function of modules
+source("modules.R")
+
 # call all scripts
 FILTER_SEQ <- "code/filter_keywords.sh"
 GSCISSORS <- "code/Genomics_Scissors/gscissors.pl"
