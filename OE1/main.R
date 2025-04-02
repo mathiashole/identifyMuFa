@@ -469,6 +469,7 @@ input_file <- args[1]
 # dir.create(file.path(output_dir, "blast_result"), showWarnings = FALSE, recursive = TRUE)
 
 data <- read_input(input_file)
+num_cols <- ncol(data)
 
 if (num_cols == 3 || num_cols == 2) {
   
