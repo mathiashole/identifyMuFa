@@ -183,7 +183,8 @@ generate_commands_without_gff <- function(data, output_dir){
   # data$allblast_first_command <- paste(ALLBLAST, "-type", "blastn", "-qn", file.path(output_dir, data$sequence_file), "-sn", data$fasta_file, "-o", file.path(output_dir, "blast_result")) ## CHECK blast sequence
   data$allblast_first_command <- paste(ALLBLAST, "-type", "blastn", "-qn", data$sequence_file, "-sn", data$fasta_file, "-o", file.path(output_dir, "blast_result")) ## CHECK blast sequence
   
-  data$allblast_first_transeq_command <- paste(ALLBLAST, "-transeq", file.path(output_dir, data$sequence_file))
+  # data$allblast_first_transeq_command <- paste(ALLBLAST, "-transeq", file.path(output_dir, data$sequence_file))
+  data$allblast_first_transeq_command <- paste(ALLBLAST, "-transeq", data$sequence_file)
   
   data$overlappingshaive_command <- paste("Rscript", OVERLAPPINGSHAIVE, "--blast_file", file.path(output_dir, "blast_result", data$blastn_result), 
                                           "--gff_file", file.path(output_dir, data$sp_high_filtred_name_gff), "--output_dir", output_dir, "--inter", 100) ## THIS INTER OPTION NEED ESTIMATED IN PROGRAM
