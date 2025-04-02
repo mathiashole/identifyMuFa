@@ -64,6 +64,23 @@ translate_sequence() {
 }
 
 # If translate only mode, execute transeq
+# if [[ "$translate_only" == true ]]; then
+#     if [[ ${#genomes[@]} -eq 0 ]]; then
+#         echo "Error: No FASTA files provided for translation."
+#         exit 1
+#     fi
+
+#     for fasta in "${genomes[@]}"; do
+#         if [[ ! -f "$fasta" ]]; then
+#             echo "Error: File '$fasta' not found!"
+#             continue
+#         fi
+#         translate_sequence "$fasta"
+        
+#     done
+#     echo "Translation completed."
+#     exit 0
+# fi
 if [[ "$translate_only" == true ]]; then
     if [[ ${#genomes[@]} -eq 0 ]]; then
         echo "Error: No FASTA files provided for translation."
@@ -75,10 +92,9 @@ if [[ "$translate_only" == true ]]; then
             echo "Error: File '$fasta' not found!"
             continue
         fi
-        translate_sequence "$fasta"
-        
+        translate_sequence "$fasta" "$output_dir"  # $output_dir
     done
-    echo "Translation completed."
+    echo "Translation completed. Output saved to: ${output_dir:-$(dirname "$fasta")}"
     exit 0
 fi
 
