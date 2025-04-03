@@ -22,7 +22,7 @@ transform_data_without_gff <- function(data) {
   return(data)
 }
 
-# Function to generate commands with gff data
+# Function to generate commands without gff data
 generate_commands_without_gff <- function(data, output_dir){
 
   # data$allblast_first_command <- paste(ALLBLAST, "-type", "blastn", "-qn", file.path(output_dir, data$sequence_file), "-sn", data$fasta_file, "-o", file.path(output_dir, "blast_result")) ## CHECK blast sequence
