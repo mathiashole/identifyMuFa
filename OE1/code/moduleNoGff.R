@@ -1,37 +1,3 @@
-# Function to transform data in feature file name with gff
-transform_data <- function(data) {
-  # DATA FORMATING
-  data$gff_basename <- basename(data$gff_file)
-  data$fasta_basename <- basename(data$fasta_file)
-  data$no_gff_basename <- sub(".{4}$", "", data$gff_basename)
-  data$no_fasta_basename <- sub(".{6}$", "", data$fasta_basename)
-  data$keyword_sum <- paste(data$keyword1, data$keyword2, sep = "_")
-  # FINISH DATA FORMATING
-  
-  data$filtred_name_gff <- paste0("filtered_", data$keyword_sum, "_", data$gff_basename) # filtered result of keywords
-  data$non_filtred_name_gff <- paste0("non-filtered_", data$keyword2, "_", data$gff_basename) # rest of no filtered result of keywords
-  data$sp_high_filtred_name_gff <- paste0("high_equal_filtered_", data$keyword_sum, "_", data$gff_basename) # filtered > or = to minimal length
-  data$sp_low_filtred_name_gff <- paste0("low_filtered_", data$keyword_sum, "_", data$gff_basename) # filtered < to minimal length
-  data$out_gscissors_high <- paste0("out_high_", data$keyword_sum, "_", data$no_gff_basename, ".fasta") # extract filtered >= minimal length sequence
-  data$out_rest_gscissors <- paste0("out_rest_", data$keyword2, "_", data$no_gff_basename, ".fasta") # extract rest of no filtered sequence
-  data$blastn_result <- paste0("blastn_", data$no_fasta_basename, ".txt") # result first BLASTN
-  data$out_gscissors_high_translated <- paste0("out_high_", data$keyword_sum, "_", data$no_gff_basename, "_translated.fasta")
-  # data$tblastn_result <- paste0("tblastn_", data$no_fasta_basename, ".txt") # result first PBLASTN
-  data$overlappingshaive_result <- paste0("all_multigenic_family_", data$no_fasta_basename, ".tsv") # results filtered no overlap sequence
-  data$overlappingshaive_result_filtered <- paste0("filtered_multigenic_family_", data$no_fasta_basename, ".tsv") # Results filtered no overlap and old sequence
-  data$overlap_result_high_equal_df <- paste0("high_equal_filtered_multigenic_family_", data$no_fasta_basename, ".tsv") # Split result of no overlap > or = to minimal length
-  data$overlap_result_low_df <- paste0("low_filtered_multigenic_family_", data$no_fasta_basename, ".tsv") # Split result of no overlap < to minimal length
-  data$overlap_result_high_equal <- paste0("high_equal_filtered_multigenic_family_", data$no_fasta_basename, ".fasta") # extracted sequence > or = to minimal length
-  data$overlap_result_low <- paste0("low_filtered_multigenic_family_", data$no_fasta_basename, ".fasta") # Extracted sequence < to minimal length
-  data$gorf_result_file <- paste0("getorf_protein_", data$overlap_result_high_equal)
-  # data$blastp_result <- paste0("blastp_out_high_", data$keyword_sum, "_", data$no_gff_basename, ".txt")
-  # data$blastp_result <- paste0("blastp_", data$gorf_result_file)
-  data$blastp_result <- paste0("blastp_getorf_protein_high_equal_filtered_multigenic_family_", data$no_fasta_basename, ".txt")
-  data$brefiner_blastp <- paste0("bRefiner_blastp_getorf_protein_high_equal_filtered_multigenic_family_", data$no_fasta_basename, ".txt")
-  data$calssifier_result <- paste0("all_multigenic_family_", data$no_fasta_basename, "_classified.tsv")
-
-  return(data)
-}
 
 # Function to transform data in feature file name with any gff
 transform_data_without_gff <- function(data) {
