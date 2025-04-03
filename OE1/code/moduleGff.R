@@ -33,29 +33,6 @@ transform_data <- function(data) {
   return(data)
 }
 
-# Function to transform data in feature file name with any gff
-transform_data_without_gff <- function(data) {
-  data$fasta_basename <- basename(data$fasta_file)
-  data$sequence_basename <- basename(data$sequence_file)
-  data$no_fasta_basename <- sub(".{6}$", "", data$fasta_basename)
-  data$no_fasta_seq <- sub(".{6}$", "", data$sequence_basename)
-
-  data$blastn_result <- paste0("blastn_", data$no_fasta_basename, ".txt")
-  data$sequence_transeq <- paste0(data$no_fasta_seq, "_translated.fasta")
-  data$overlappingshaive_result <- paste0("all_multigenic_family_", data$no_fasta_basename, ".tsv")
-  data$overlappingshaive_result_filtered <- paste0("filtered_multigenic_family_", data$no_fasta_basename, ".tsv")
-  data$overlap_result_high_equal_df <- paste0("high_equal_all_multigenic_family_", data$no_fasta_basename, ".tsv")
-  data$overlap_result_low_df <- paste0("low_all_multigenic_family_", data$no_fasta_basename, ".tsv")
-  data$overlap_result_high_equal <- paste0("high_equal_all_multigenic_family_", data$no_fasta_basename, ".fasta")
-  data$overlap_result_low <- paste0("low_all_multigenic_family_", data$no_fasta_basename, ".fasta")
-  data$gorf_result_file <- paste0("getorf_protein_", data$overlap_result_high_equal)
-  data$blastp_result <- paste0("blastp_getorf_protein_high_equal_all_multigenic_family_", data$no_fasta_basename, ".txt")
-  data$brefiner_blastp <- paste0("bRefiner_", data$blastp_result)
-  data$calssifier_result <- paste0("all_multigenic_family_", data$no_fasta_basename, "_classified.tsv")
-
-  return(data)
-}
-
 # Function to generate commands with gff data
 generate_commands <- function(data, output_dir) {
   data$filter_seq_command <- paste(FILTER_SEQ, input_file, output_dir)
