@@ -3,6 +3,7 @@
 # call function of modules
 source("code/moduleGff.R")
 source("code/moduleNoGff.R")
+source("code/moduleHybrid.R")
 
 # call all scripts
 FILTER_SEQ <- "code/filter_keywords.sh"
