@@ -75,6 +75,8 @@ num_cols <- ncol(data)
 
 if (num_cols == 3 || num_cols == 2) {
   
+  source("code/moduleNoGff.R")
+
   print("without gff")
   output_dir <- "output_directory_withoutgff"  # Define your output directory
   output_dir <- create_output_dir(output_dir)
@@ -90,6 +92,8 @@ if (num_cols == 3 || num_cols == 2) {
 
 } else if (num_cols == 5 || num_cols == 4) {
   
+  source("code/moduleGff.R")
+
   print("with gff")
   output_dir <- "output_directory"  # Define your output directory
   output_dir <- create_output_dir(output_dir)
