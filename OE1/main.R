@@ -39,7 +39,9 @@ read_input <- function(input_file) {
   # num_cols <- max(colSums(data != "" & !is.na(data))) 
 
   # Assign names based on the number of columns
-  if (num_cols == 5){
+  if (num_cols == 6){
+    colnames(data) <- c("fasta_file", "gff_file", "sequence_file", "keyword1", "keyword2", "length")
+  } else if (num_cols == 5){
     colnames(data) <- c("fasta_file", "gff_file", "keyword1", "keyword2", "length")
   } else if (num_cols == 4) {
     colnames(data) <- c("fasta_file", "gff_file", "keyword1", "keyword2")
