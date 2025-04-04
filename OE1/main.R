@@ -113,7 +113,7 @@ if (num_cols == 3 || num_cols == 2) {
   
   source("code/moduleHybrid.R")
 
-  print("with gff")
+  print("Hybrid")
   output_dir <- "output_directory"  # Define your output directory
   output_dir <- create_output_dir(output_dir)
   dir.create(file.path(output_dir, "blast_result"), showWarnings = FALSE, recursive = TRUE)
