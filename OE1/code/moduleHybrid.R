@@ -6,6 +6,7 @@ transform_data_hybrid <- function(data) {
   data$sequence_basename <- basename(data$sequence_file)
   data$no_gff_basename <- sub(".{4}$", "", data$gff_basename)
   data$no_fasta_basename <- sub(".{6}$", "", data$fasta_basename)
+  data$no_fasta_seq <- sub(".{6}$", "", data$sequence_basename)
   data$keyword_sum <- paste(data$keyword1, data$keyword2, sep = "_")
   # FINISH DATA FORMATING
   
