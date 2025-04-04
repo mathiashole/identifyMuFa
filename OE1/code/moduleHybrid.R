@@ -35,35 +35,11 @@ transform_data_hybrid <- function(data) {
 
 # Function to generate commands with gff data
 generate_commands_hybrid <- function(data, output_dir) {
-  data$filter_seq_command <- paste(FILTER_SEQ, input_file, output_dir)
+  # data$allblast_first_command <- paste(ALLBLAST, "-type", "blastn", "-qn", file.path(output_dir, data$sequence_file), "-sn", data$fasta_file, "-o", file.path(output_dir, "blast_result")) ## CHECK blast sequence
+  data$allblast_first_command <- paste(ALLBLAST, "-type", "blastn", "-qn", data$sequence_file, "-sn", data$fasta_file, "-o", file.path(output_dir, "blast_result")) ## CHECK blast sequence
   
-  # if (!"length" %in% colnames(data)) {
-  #   data$length_command <- paste(MEANSEQ, "--gff", file.path(output_dir, data$filtred_name_gff))
-  # }
-
-  if ("length" %in% colnames(data)) {
-    data$spdiffsize_command_first <- paste("Rscript", SPDIFFSIZE, "--gff", file.path(output_dir, data$filtred_name_gff), "--length", data$length)
-  } else {
-    data$spdiffsize_command_first <- paste("Rscript", SPDIFFSIZE, "--gff", file.path(output_dir, data$filtred_name_gff))
-  }
-
-  data$gscissors_command <- paste(GSCISSORS, "--fasta", data$fasta_file, "--coordinates", 
-                                  file.path(output_dir, data$sp_high_filtred_name_gff), "--format gff --output", 
-                                  file.path(output_dir, data$out_gscissors_high)) ##### HIGH and EQUAL #####
-  # data$gscissors_command <- paste(GSCISSORS, "--fasta", data$fasta_file, "--coordinates", 
-  #                                 file.path(output_dir, data$sp_low_filtred_name_gff), "--format gff --output", 
-  #                                 file.path(output_dir, data$out_gscissors_high)) ##### LOW #####
-
-  # data$gscissors_command <- paste(GSCISSORS, "--fasta", data$fasta_file, "--coordinates", 
-  #                                 file.path(output_dir, data$filtred_name_gff), "--format gff --output", 
-  #                                 file.path(output_dir, data$out_gscissors_high))
-  data$gscissors_rest_command <- paste(GSCISSORS, "--fasta", data$fasta_file, "--coordinates", 
-                                       file.path(output_dir, data$non_filtred_name_gff), "--format gff --output", 
-                                       file.path(output_dir, data$out_rest_gscissors)) ###### Rest of sequence not searched ####
-  
-  data$allblast_first_command <- paste(ALLBLAST, "-type", "blastn", "-qn", file.path(output_dir, data$out_gscissors_high), "-sn", data$fasta_file, "-o", file.path(output_dir, "blast_result")) ## CHECK blast sequence
-  
-  data$allblast_first_transeq_command <- paste(ALLBLAST, "-transeq", file.path(output_dir, data$out_gscissors_high))
+  # data$allblast_first_transeq_command <- paste(ALLBLAST, "-transeq", file.path(output_dir, data$sequence_file))
+  data$allblast_first_transeq_command <- paste(ALLBLAST, "-transeq", data$sequence_file, "-o", output_dir)
   
   data$overlappingshaive_command <- paste("Rscript", OVERLAPPINGSHAIVE, "--blast_file", file.path(output_dir, "blast_result", data$blastn_result), 
                                           "--gff_file", file.path(output_dir, data$sp_high_filtred_name_gff), "--output_dir", output_dir, "--inter", 100) ## THIS INTER OPTION NEED ESTIMATED IN PROGRAM
