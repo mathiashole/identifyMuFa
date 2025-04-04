@@ -34,7 +34,7 @@ transform_data_hybrid <- function(data) {
 }
 
 # Function to generate commands with gff data
-generate_commands <- function(data, output_dir) {
+generate_commands_hybrid <- function(data, output_dir) {
   data$filter_seq_command <- paste(FILTER_SEQ, input_file, output_dir)
   
   # if (!"length" %in% colnames(data)) {
