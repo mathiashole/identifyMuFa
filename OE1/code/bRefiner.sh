@@ -21,9 +21,10 @@ while [[ "$#" -gt 0 ]]; do
     shift
 done
 
-# Check if file is provided
-if [[ -z "$BLAST_FILE" ]]; then
-    echo "Error: No BLAST file provided. Use -file <filename>"
+# Check required arguments
+if [[ -z "$BLAST_FILE" ]] || [[ -z "$LENGTH_MIN" ]]; then
+    echo "Error: Missing required arguments."
+    echo "Usage: $0 -file <filename> -l <length_min> [-e <evalue_max>] [-col <column_to_print>] [-i <identity_min>] [-uniq]"
     exit 1
 fi
 
