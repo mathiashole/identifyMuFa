@@ -1,5 +1,5 @@
 # Function to transform data in feature file name with gff
-transform_data <- function(data) {
+transform_data_hybrid <- function(data) {
   # DATA FORMATING
   data$gff_basename <- basename(data$gff_file)
   data$fasta_basename <- basename(data$fasta_file)
