@@ -88,7 +88,7 @@ generate_commands_hybrid <- function(data, output_dir) {
 }
 
 # Function to process each set of arguments
-execution_module <- function(data, output_dir) {
+execution_module_hybrid <- function(data, output_dir) {
       for (i in 1:nrow(data)) {
         cat("Processing FILTER_SEQ: ", data$filter_seq_command[i], "\n")
         system(data$filter_seq_command[i])
