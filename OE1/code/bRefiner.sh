@@ -13,9 +13,9 @@ while [[ "$#" -gt 0 ]]; do
         -file) BLAST_FILE="$2"; shift ;;
         -i) IDENTITY_MIN="$2"; shift ;;
         -l) LENGTH_MIN="$2"; shift ;;
-        -e) EVALUE_MAX="$2"; shift ;;
-        -col) COLUMNS="$2"; shift ;;
-        -unique) UNIQUE_COLUMNS="$2"; shift ;;
+        -e) EVALUE_MAX="$2"; shift ;;  # Add evalue filter
+        -col) COLUMN_TO_PRINT="$2"; shift ;;
+        -uniq) UNIQ_SORT=true ;;  # Apply sorting and unique filtering
         *) echo "Unknown parameter: $1"; exit 1 ;;
     esac
     shift
