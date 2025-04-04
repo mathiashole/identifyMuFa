@@ -4,8 +4,8 @@
 IDENTITY_MIN=0
 LENGTH_MIN=0
 EVALUE_MAX=1  # Default 1 (accepts all values)
-COLUMNS=""
-UNIQUE_COLUMNS=""
+UNIQ_SORT=false  # By default, do NOT apply sort | uniq
+COLUMN_TO_PRINT="ALL"  # Default: print all columns
 
 # Parse arguments
 while [[ "$#" -gt 0 ]]; do
