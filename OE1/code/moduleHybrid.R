@@ -37,6 +37,15 @@ transform_data_hybrid <- function(data) {
 
 # Function to generate commands with gff data
 generate_commands_hybrid <- function(data, output_dir) {
+  
+  data$filter_seq_command <- paste(FILTER_SEQ, input_file, output_dir)
+
+  if ("length" %in% colnames(data)) {
+    data$spdiffsize_command_first <- paste("Rscript", SPDIFFSIZE, "--gff", file.path(output_dir, data$filtred_name_gff), "--length", data$length)
+  } else {
+    data$spdiffsize_command_first <- paste("Rscript", SPDIFFSIZE, "--gff", file.path(output_dir, data$filtred_name_gff))
+  }
+
   # data$allblast_first_command <- paste(ALLBLAST, "-type", "blastn", "-qn", file.path(output_dir, data$sequence_file), "-sn", data$fasta_file, "-o", file.path(output_dir, "blast_result")) ## CHECK blast sequence
   data$allblast_first_command <- paste(ALLBLAST, "-type", "blastn", "-qn", data$sequence_file, "-sn", data$fasta_file, "-o", file.path(output_dir, "blast_result")) ## CHECK blast sequence
   
