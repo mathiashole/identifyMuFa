@@ -45,6 +45,10 @@ generate_commands_hybrid <- function(data, output_dir) {
     data$spdiffsize_command_first <- paste("Rscript", SPDIFFSIZE, "--gff", file.path(output_dir, data$filtred_name_gff))
   }
 
+  data$gscissors_command <- paste(GSCISSORS, "--fasta", data$fasta_file, "--coordinates", 
+                                file.path(output_dir, data$sp_high_filtred_name_gff), "--format gff --output", 
+                                file.path(output_dir, data$out_gscissors_high))
+
   data$allblast_first_command <- paste(ALLBLAST, "-type", "blastn", "-qn", data$sequence_file, "-sn", data$fasta_file, "-o", file.path(output_dir, "blast_result"))
   
   data$allblast_first_transeq_command <- paste(ALLBLAST, "-transeq", data$sequence_file, "-o", output_dir)
