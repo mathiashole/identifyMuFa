@@ -1,11 +1,10 @@
 #!/usr/bin/env Rscript
 
-# call function of modules
-# source("code/moduleGff.R")
-# source("code/moduleNoGff.R")
-# source("code/moduleHybrid.R")
+# -------------------------------------------
+# EXTERNAL MODULES
+# -------------------------------------------
 
-# call all scripts
+# External scripts called during the flow
 FILTER_SEQ <- "code/filter_keywords.sh"
 GSCISSORS <- "code/Genomics_Scissors/gscissors.pl"
 OVERLAPPINGSHAIVE <- "code/overlappingShaive.R"
