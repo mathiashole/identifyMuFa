@@ -16,6 +16,10 @@ BREFINER          <- "code/bRefiner.sh"
 CLASSIFIER        <- "code/classifier.R"
 # MEANSEQ        <- "code/meanSeq.sh"
 
+# -------------------------------------------
+# AUXILIARY FUNCTIONS
+# -------------------------------------------
+
 # Create output directory if it does not exist
 create_output_dir <- function(output_dir) {
   execution_path <- getwd()
