@@ -5,16 +5,6 @@
 # -------------------------------------------
 
 # External scripts called during the flow
-FILTER_SEQ <- "code/filter_keywords.sh"
-GSCISSORS <- "code/Genomics_Scissors/gscissors.pl"
-OVERLAPPINGSHAIVE <- "code/overlappingShaive.R"
-BOTHBLAST <- "code/bothBlast.sh"
-SPDIFFSIZE <- "code/spDiffSize.R"
-GORF <- "code/gORF.sh"
-ALLBLAST <- "code/allBlast.sh"
-BREFINER <- "code/bRefiner.sh"
-CLASSIFIER <- "code/classifier.R"
-# MEANSEQ <- "code/meanSeq.sh"
 # FILTER_SEQ        <- "code/filter_keywords.sh"
 # GSCISSORS         <- "code/Genomics_Scissors/gscissors.pl"
 # OVERLAPPINGSHAIVE <- "code/overlappingShaive.R"
