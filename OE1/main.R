@@ -31,6 +31,10 @@ create_output_dir <- function(output_dir) {
   return(output_dir)
 }
 
+read_input <- function(input_file) {
+  read.delim(input_file, header = FALSE, stringsAsFactors = FALSE, fill = TRUE)
+}
+
 # Function to read input file and set column names
 read_input <- function(input_file) {
   # data <- read_tsv(input_file, col_names = FALSE)
