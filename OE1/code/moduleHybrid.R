@@ -29,7 +29,7 @@ transform_data_hybrid <- function(data) {
   # data$blastp_result <- paste0("blastp_", data$gorf_result_file)
   data$blastp_result <- paste0("blastp_getorf_protein_high_equal_filtered_multigenic_family_", data$no_fasta_basename, ".txt")
   data$brefiner_blastp <- paste0("bRefiner_blastp_getorf_protein_high_equal_filtered_multigenic_family_", data$no_fasta_basename, ".txt")
-  data$calssifier_result <- paste0("all_multigenic_family_", data$no_fasta_basename, "_classified.tsv")
+  data$calssifier_result <- paste0("filtered_multigenic_family_", data$no_fasta_basename, "_classified.tsv")
 
   return(data)
 }
