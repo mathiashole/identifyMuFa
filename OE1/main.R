@@ -70,9 +70,9 @@ if (length(args) == 0) {
   stop("Usage: process_sequences.R <file_with_arguments.tsv>")
 }
 
-#####################
-# Execution section #
-#####################
+# -------------------------------------------
+# MAIN EXECUTION
+# -------------------------------------------
 
 input_file <- args[1]
 # output_dir <- "output_directory"  # Define your output directory
