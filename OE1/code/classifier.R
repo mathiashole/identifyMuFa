@@ -29,6 +29,7 @@ data_pseudogene_out <- data_out %>% filter(grepl("_PSEUDOGENE$", V5))
 
 # Save the modified file
 # output_file <- gsub("\\.tsv$", "_classified.tsv", input_file)
+output_base <- gsub("\\.tsv$", "", input_file)
 
 write.table(data_out, output_file, sep = "\t", quote = FALSE, row.names = FALSE, col.names = FALSE)
 
