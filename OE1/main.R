@@ -46,23 +46,23 @@ read_input <- function(input_file) {
   # num_cols <- max(colSums(data != "" & !is.na(data))) 
 
   # Assign names based on the number of columns
-  if (num_cols == 6){
-    colnames(data) <- c("fasta_file", "gff_file", "keyword1", "keyword2", "length", "sequence_file")
-  } else if (num_cols == 5){
-    colnames(data) <- c("fasta_file", "gff_file", "keyword1", "keyword2", "length")
-  } else if (num_cols == 4) {
-    colnames(data) <- c("fasta_file", "gff_file", "keyword1", "keyword2")
-  } else if (num_cols == 3) {
-    colnames(data) <- c("fasta_file", "sequence_file", "length")
-  } else if (num_cols ==2) {
-    colnames(data) <- c("fasta_file", "sequence_file")
-  } else {
-    stop("Unexpected number of columns in input file.")
-  }
+#   if (num_cols == 6){
+#     colnames(data) <- c("fasta_file", "gff_file", "keyword1", "keyword2", "length", "sequence_file")
+#   } else if (num_cols == 5){
+#     colnames(data) <- c("fasta_file", "gff_file", "keyword1", "keyword2", "length")
+#   } else if (num_cols == 4) {
+#     colnames(data) <- c("fasta_file", "gff_file", "keyword1", "keyword2")
+#   } else if (num_cols == 3) {
+#     colnames(data) <- c("fasta_file", "sequence_file", "length")
+#   } else if (num_cols ==2) {
+#     colnames(data) <- c("fasta_file", "sequence_file")
+#   } else {
+#     stop("Unexpected number of columns in input file.")
+#   }
 
-  # return(list(data = data, num_cols = num_cols))
-  return(data)
-}
+#   # return(list(data = data, num_cols = num_cols))
+#   return(data)
+# }
 
 # Check the number of arguments
 args <- commandArgs(trailingOnly = TRUE)
