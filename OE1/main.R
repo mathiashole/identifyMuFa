@@ -116,11 +116,11 @@ for (i in seq_along(args)) {
 
 # Check the number of arguments and validation
 if (is.null(mode) || !(mode %in% c("hybrid", "gff", "no_gff"))) {
-  stop("Debe especificar el modo con --mode hybrid | gff | no_gff")
+  stop("You must specify the mode with --mode hybrid | gff | no_gff")
 }
 
 if (is.null(input_arg)) {
-  stop("Debe proveer los datos como archivo o como línea tabulada entre comillas.")
+  stop("You must provide the data as a file or as a tabulated line between quotes.")
 }
 # args <- commandArgs(trailingOnly = TRUE)
 # if (length(args) == 0) {
