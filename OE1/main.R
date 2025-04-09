@@ -64,6 +64,38 @@ read_input <- function(input_file) {
 #   return(data)
 # }
 
+assign_column_names <- function(data, mode) {
+  n <- ncol(data)
+
+  if (mode == "hybrid") {
+    if (n == 6) {
+      colnames(data) <- c("fasta_file", "gff_file", "keyword1", "keyword2", "length", "sequence_file")
+    } else if (n == 5) {
+      colnames(data) <- c("fasta_file", "gff_file", "keyword1", "keyword2", "sequence_file")
+    } else {
+      stop("Unexpected format in HYBRID mode")
+    }
+  } else if (mode == "gff") {
+    if (n == 5) {
+      colnames(data) <- c("fasta_file", "gff_file", "keyword1", "keyword2", "length")
+    } else if (n == 4) {
+      colnames(data) <- c("fasta_file", "gff_file", "keyword1", "keyword2")
+    } else {
+      stop("Unexpected format in GFF mode")
+    }
+  } else if (mode == "no_gff") {
+    if (n == 3) {
+      colnames(data) <- c("fasta_file", "sequence_file", "length")
+    } else if (n == 2) {
+      colnames(data) <- c("fasta_file", "sequence_file")
+    } else {
+      stop("Unexpected format in NO_GFF mode")
+    }
+  }
+
+  return(data)
+}
+
 # Check the number of arguments
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args) == 0) {
