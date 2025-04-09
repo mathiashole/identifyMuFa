@@ -36,16 +36,16 @@ read_input <- function(input_file) {
 }
 
 # Function to read input file and set column names
-read_input <- function(input_file) {
-  # data <- read_tsv(input_file, col_names = FALSE)
-  # data <- read.delim(input_file, header = FALSE, stringsAsFactors = FALSE)
-  data <- read.delim(input_file, header = FALSE, stringsAsFactors = FALSE, fill = TRUE)
+# read_input <- function(input_file) {
+#   # data <- read_tsv(input_file, col_names = FALSE)
+#   # data <- read.delim(input_file, header = FALSE, stringsAsFactors = FALSE)
+#   data <- read.delim(input_file, header = FALSE, stringsAsFactors = FALSE, fill = TRUE)
 
-  # Determine the number of columns
-  num_cols <- ncol(data)
-  # num_cols <- max(colSums(data != "" & !is.na(data))) 
+#   # Determine the number of columns
+#   num_cols <- ncol(data)
+#   # num_cols <- max(colSums(data != "" & !is.na(data))) 
 
-  # Assign names based on the number of columns
+#   # Assign names based on the number of columns
 #   if (num_cols == 6){
 #     colnames(data) <- c("fasta_file", "gff_file", "keyword1", "keyword2", "length", "sequence_file")
 #   } else if (num_cols == 5){
