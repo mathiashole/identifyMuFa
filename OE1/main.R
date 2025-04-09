@@ -146,6 +146,10 @@ source_file <- switch(mode,
   "no_gff" = "code/moduleNoGff.R"
 )
 
+source(source_file)
+output_dir <- create_output_dir(output_dir)
+dir.create(file.path(output_dir, "blast_result"), showWarnings = FALSE, recursive = TRUE)
+
 
 # input_file <- args[1]
 # # output_dir <- "output_directory"  # Define your output directory
