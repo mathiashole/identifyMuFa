@@ -105,6 +105,14 @@ args <- commandArgs(trailingOnly = TRUE)
 input_arg <- NULL
 mode <- NULL
 
+for (i in seq_along(args)) {
+  if (args[i] == "--mode" || args[i] == "-m") {
+    mode <- args[i + 1]
+  } else if (!startsWith(args[i], "--") && is.null(input_arg)) {
+    input_arg <- args[i]
+  }
+}
+
 # Check the number of arguments
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args) == 0) {
