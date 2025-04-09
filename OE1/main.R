@@ -100,6 +100,11 @@ assign_column_names <- function(data, mode) {
 # MANUAL ARGUMENT PARSE
 # -------------------------------------------
 
+args <- commandArgs(trailingOnly = TRUE)
+
+input_arg <- NULL
+mode <- NULL
+
 # Check the number of arguments
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args) == 0) {
