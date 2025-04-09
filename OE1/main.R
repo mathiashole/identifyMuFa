@@ -115,10 +115,10 @@ for (i in seq_along(args)) {
 }
 
 # Check the number of arguments
-args <- commandArgs(trailingOnly = TRUE)
-if (length(args) == 0) {
-  stop("Usage: process_sequences.R <file_with_arguments.tsv>")
-}
+# args <- commandArgs(trailingOnly = TRUE)
+# if (length(args) == 0) {
+#   stop("Usage: process_sequences.R <file_with_arguments.tsv>")
+# }
 
 # -------------------------------------------
 # MAIN EXECUTION
