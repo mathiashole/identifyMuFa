@@ -131,6 +131,22 @@ if (is.null(input_arg)) {
 # MAIN EXECUTION
 # -------------------------------------------
 
+data_raw <- read_input(input_arg)
+data <- assign_column_names(data_raw, mode)
+
+output_dir <- switch(mode,
+  "hybrid" = "output_directory_hybrid",
+  "gff" = "output_directory",
+  "no_gff" = "output_directory_withoutgff"
+)
+
+source_file <- switch(mode,
+  "hybrid" = "code/moduleHybrid.R",
+  "gff" = "code/moduleGff.R",
+  "no_gff" = "code/moduleNoGff.R"
+)
+
+
 input_file <- args[1]
 # output_dir <- "output_directory"  # Define your output directory
 # output_dir <- create_output_dir(output_dir)
