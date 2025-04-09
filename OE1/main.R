@@ -151,6 +151,25 @@ output_dir <- create_output_dir(output_dir)
 dir.create(file.path(output_dir, "blast_result"), showWarnings = FALSE, recursive = TRUE)
 
 
+if (mode == "hybrid") {
+  message("Modo: HYBRID")
+  transformed <- transform_data_hybrid(data)
+  commands <- generate_commands_hybrid(transformed, output_dir)
+  execution_module_hybrid(commands, output_dir)
+
+} else if (mode == "gff") {
+  message("Modo: GFF")
+  transformed <- transform_data(data)
+  commands <- generate_commands(transformed, output_dir)
+  execution_module(commands, output_dir)
+
+} else if (mode == "no_gff") {
+  message("Modo: NO GFF")
+  transformed <- transform_data_without_gff(data)
+  commands <- generate_commands_without_gff(transformed, output_dir)
+  execution_module_without_gff(commands, output_dir)
+}
+
 # input_file <- args[1]
 # # output_dir <- "output_directory"  # Define your output directory
 # # output_dir <- create_output_dir(output_dir)
