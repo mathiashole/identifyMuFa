@@ -36,7 +36,7 @@ write.table(data_out, paste0(output_base, "_classified.tsv"), sep = "\t", quote 
 write.table(data_gen_out, paste0(output_base, "_GEN.tsv"), sep = "\t", quote = FALSE, row.names = FALSE, col.names = FALSE)
 write.table(data_pseudogene_out, paste0(output_base, "_PSEUDOGENE.tsv"), sep = "\t", quote = FALSE, row.names = FALSE, col.names = FALSE)
 
-cat("Output saved to:", output_file, "\n")
+cat("Output saved to:", output_base, "\n")
 cat("- All data:", paste0(output_base, "_classified.tsv"), "\n")
 cat("- GEN only:", paste0(output_base, "_GEN.tsv"), "\n")
 cat("- PSEUDOGENE only:", paste0(output_base, "_PSEUDOGENE.tsv"), "\n")
