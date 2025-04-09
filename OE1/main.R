@@ -115,6 +115,13 @@ for (i in seq_along(args)) {
 }
 
 # Check the number of arguments and validation
+if (is.null(mode) || !(mode %in% c("hybrid", "gff", "no_gff"))) {
+  stop("Debe especificar el modo con --mode hybrid | gff | no_gff")
+}
+
+if (is.null(input_arg)) {
+  stop("Debe proveer los datos como archivo o como línea tabulada entre comillas.")
+}
 # args <- commandArgs(trailingOnly = TRUE)
 # if (length(args) == 0) {
 #   stop("Usage: process_sequences.R <file_with_arguments.tsv>")
