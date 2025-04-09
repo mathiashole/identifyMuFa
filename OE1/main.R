@@ -147,65 +147,65 @@ source_file <- switch(mode,
 )
 
 
-input_file <- args[1]
-# output_dir <- "output_directory"  # Define your output directory
-# output_dir <- create_output_dir(output_dir)
-# dir.create(file.path(output_dir, "blast_result"), showWarnings = FALSE, recursive = TRUE)
+# input_file <- args[1]
+# # output_dir <- "output_directory"  # Define your output directory
+# # output_dir <- create_output_dir(output_dir)
+# # dir.create(file.path(output_dir, "blast_result"), showWarnings = FALSE, recursive = TRUE)
 
-data <- read_input(input_file)
-num_cols <- ncol(data)
+# data <- read_input(input_file)
+# num_cols <- ncol(data)
 
-if (num_cols == 3 || num_cols == 2) {
+# if (num_cols == 3 || num_cols == 2) {
   
-  source("code/moduleNoGff.R")
+#   source("code/moduleNoGff.R")
 
-  print("without gff")
-  output_dir <- "output_directory_withoutgff"  # Define your output directory
-  output_dir <- create_output_dir(output_dir)
-  dir.create(file.path(output_dir, "blast_result"), showWarnings = FALSE, recursive = TRUE)
-  # Apply the transformations
-  data_transformed_without_gff <- transform_data_without_gff(data)
-  # path_data_transformed <- file.path(output_dir, paste0("data_transformed.tsv"))
-  # write.table(data_transformed, file = path_data_transformed, row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
-  # Generate the commands
-  data_with_commands_without_gff <- generate_commands_without_gff(data_transformed_without_gff, output_dir)
-  # Execution script
-  execution_module_without_gff(data_with_commands_without_gff, output_dir)
+#   print("without gff")
+#   output_dir <- "output_directory_withoutgff"  # Define your output directory
+#   output_dir <- create_output_dir(output_dir)
+#   dir.create(file.path(output_dir, "blast_result"), showWarnings = FALSE, recursive = TRUE)
+#   # Apply the transformations
+#   data_transformed_without_gff <- transform_data_without_gff(data)
+#   # path_data_transformed <- file.path(output_dir, paste0("data_transformed.tsv"))
+#   # write.table(data_transformed, file = path_data_transformed, row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
+#   # Generate the commands
+#   data_with_commands_without_gff <- generate_commands_without_gff(data_transformed_without_gff, output_dir)
+#   # Execution script
+#   execution_module_without_gff(data_with_commands_without_gff, output_dir)
 
-} else if (num_cols == 5 || num_cols == 4) {
+# } else if (num_cols == 5 || num_cols == 4) {
   
-  source("code/moduleGff.R")
+#   source("code/moduleGff.R")
 
-  print("with gff")
-  output_dir <- "output_directory"  # Define your output directory
-  output_dir <- create_output_dir(output_dir)
-  dir.create(file.path(output_dir, "blast_result"), showWarnings = FALSE, recursive = TRUE)
-  # Apply the transformations
-  data_transformed <- transform_data(data)
-  # path_data_transformed <- file.path(output_dir, paste0("data_transformed.tsv"))
-  # write.table(data_transformed, file = path_data_transformed, row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
-  # Generate the commands
-  data_with_commands <- generate_commands(data_transformed, output_dir)
-  # Execution script
-  execution_module(data_with_commands, output_dir)
+#   print("with gff")
+#   output_dir <- "output_directory"  # Define your output directory
+#   output_dir <- create_output_dir(output_dir)
+#   dir.create(file.path(output_dir, "blast_result"), showWarnings = FALSE, recursive = TRUE)
+#   # Apply the transformations
+#   data_transformed <- transform_data(data)
+#   # path_data_transformed <- file.path(output_dir, paste0("data_transformed.tsv"))
+#   # write.table(data_transformed, file = path_data_transformed, row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
+#   # Generate the commands
+#   data_with_commands <- generate_commands(data_transformed, output_dir)
+#   # Execution script
+#   execution_module(data_with_commands, output_dir)
 
-} else if (num_cols == 6) {
+# } else if (num_cols == 6) {
   
-  source("code/moduleHybrid.R")
+#   source("code/moduleHybrid.R")
 
-  print("Hybrid")
-  output_dir <- "output_directory_hybrid"  # Define your output directory
-  output_dir <- create_output_dir(output_dir)
-  dir.create(file.path(output_dir, "blast_result"), showWarnings = FALSE, recursive = TRUE)
-  # Apply the transformations
-  data_transformed <- transform_data_hybrid(data)
-  # path_data_transformed <- file.path(output_dir, paste0("data_transformed.tsv"))
-  # write.table(data_transformed, file = path_data_transformed, row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
-  # Generate the commands
-  data_with_commands <- generate_commands_hybrid(data_transformed, output_dir)
-  # Execution script
-  execution_module_hybrid(data_with_commands, output_dir)
+#   print("Hybrid")
+#   output_dir <- "output_directory_hybrid"  # Define your output directory
+#   output_dir <- create_output_dir(output_dir)
+#   dir.create(file.path(output_dir, "blast_result"), showWarnings = FALSE, recursive = TRUE)
+#   # Apply the transformations
+#   data_transformed <- transform_data_hybrid(data)
+#   # path_data_transformed <- file.path(output_dir, paste0("data_transformed.tsv"))
+#   # write.table(data_transformed, file = path_data_transformed, row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
+#   # Generate the commands
+#   data_with_commands <- generate_commands_hybrid(data_transformed, output_dir)
+#   # Execution script
+#   execution_module_hybrid(data_with_commands, output_dir)
 
-} else {
-  stop("Unexpected number of columns in input file.")
-}
+# } else {
+#   stop("Unexpected number of columns in input file.")
+# }
