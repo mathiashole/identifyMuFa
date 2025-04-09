@@ -96,6 +96,10 @@ assign_column_names <- function(data, mode) {
   return(data)
 }
 
+# -------------------------------------------
+# PARSEO DE ARGUMENTOS MANUAL
+# -------------------------------------------
+
 # Check the number of arguments
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args) == 0) {
