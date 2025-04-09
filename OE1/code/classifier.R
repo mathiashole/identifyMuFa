@@ -23,6 +23,10 @@ data$V5 <- ifelse(data$V6 %in% filter_data$V1, paste0(data$V5, "_GEN"), paste0(d
 
 data_out <- data[,1:5]
 
+# Split into GEN and PSEUDOGENE
+data_gen_out <- data_out %>% filter(grepl("_GEN$", V5))
+data_pseudogene_out <- data_out %>% filter(grepl("_PSEUDOGENE$", V5))
+
 # Save the modified file
 output_file <- gsub("\\.tsv$", "_classified.tsv", input_file)
 
