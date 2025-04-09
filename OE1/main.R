@@ -97,7 +97,7 @@ assign_column_names <- function(data, mode) {
 }
 
 # -------------------------------------------
-# PARSEO DE ARGUMENTOS MANUAL
+# MANUAL ARGUMENT PARSE
 # -------------------------------------------
 
 # Check the number of arguments
