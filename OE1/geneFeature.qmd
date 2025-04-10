@@ -50,6 +50,8 @@ key_name <- unique(sort(key_names))
 
 ![](https://img.itch.zone/aW1nLzE3MTEyNjE5LmdpZg==/original/2%2BYVZg.gif){style="float:right;" fig-alt="Illustration of a detective cat. Artwork by @https://shigemi.itch.io." width="301"}
 
+Trypanosoma cruzi, el parásito causante de la enfermedad de Chagas, posee una familia de genes llamada DGF-1 que juega un papel clave en su biología. En este estudio, realizamos un análisis comparativo de estos genes en distintos genomas para entender su diversidad y posibles funciones.
+
 Los datos utilizados en este análisis fueron obtenidas a partir de diferentes genomas de *Trypanosoma cruzi*, disponibles en [**tritrydb**](https://tritrypdb.org/tritrypdb/app) y [**NCBI**](https://www.ncbi.nlm.nih.gov/).
 
 A partir de estos genomas, se extrajeron secuencias de los genes ``r key_name``, con el objetivo de realizar análisis comparativo. Inicialmente se estudió el contenido de `GC`, `longitud de las secuencias`, y otros aspectos relevantes para la caracterización de los genes de ``r key_name``.
