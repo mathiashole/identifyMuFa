@@ -29,7 +29,7 @@ directory <- "output_directory/"
 # leer tabla de datos ()
 #data_init <- read.delim("/home/usuario/Proyectos/maestria/datos_ejecucion_genomas2.tsv.csv", sep = "\t", header = FALSE)
 ## NEED OUTPUT DIR
-data_transformed <- read.delim("output_directory/execution_args_9900.tsv", sep = "\t", header = TRUE)
+data_transformed <- read.delim("output_directory/execution_args_9900.tsv", sep = "\t", header = FALSE)
 ########################################
 
 # Obtener la lista de archivos que comienzan con 'out_' y terminan con '.fasta'
