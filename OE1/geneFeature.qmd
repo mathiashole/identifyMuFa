@@ -33,7 +33,7 @@ data_transformed <- read.delim("output_directory/execution_args_9900.tsv", sep =
 ########################################
 
 # Obtener la lista de archivos que comienzan con 'out_' y terminan con '.fasta'
-# fasta_files <- list.files(path = directory, pattern = "^out_.*\\.fasta$", full.names = TRUE)
+fasta_files <- list.files(path = directory, pattern = "^out_.*\\.fasta$", full.names = TRUE)
 fasta_files <- paste0(directory, data_transformed$out_gscissors)
 genome_name <- basename(data_transformed$fasta_file)
 rest_code_prot <- paste0(directory, data_transformed$out_rest_gscissors)
