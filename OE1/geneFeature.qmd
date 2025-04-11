@@ -24,6 +24,14 @@ p {
 #| echo: false
 #| warning: false
 
+mode <- "gff"
+
+source_file <- switch(mode,
+  "hybrid" = "code/moduleHybrid.R",
+  "gff" = "code/moduleGff.R",
+  "no_gff" = "code/moduleNoGff.R"
+)
+
 # directory <- "/home/usuario/Data_Rstudio/chop_genome"  # Cambia esto a la ruta de tu directorio
 directory <- "output_directory/"
 # leer tabla de datos ()
