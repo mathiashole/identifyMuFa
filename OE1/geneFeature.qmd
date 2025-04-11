@@ -85,13 +85,7 @@ source_file <- switch(mode,
   "no_gff" = "/Users/joaco/OneDrive/Documentos/github/identifyMuFa/OE1/code/moduleNoGff.R"
 )
 
-# output_dir <- "/home/usuario/Data_Rstudio/chop_genome"  # Cambia esto a la ruta de tu directorio
-# output_dir <- "output_directory/"
-# leer tabla de datos ()
-#data_init <- read.delim("/home/usuario/Proyectos/maestria/datos_ejecucion_genomas2.tsv.csv", sep = "\t", header = FALSE)
-## NEED OUTPUT DIR
 source(source_file)
-data <- read.delim(file.path(output_dir, "execution_args_9900.tsv"), sep = "\t", header = FALSE)
 
 if (mode == "hybrid") {
   message("Modo: HYBRID")
