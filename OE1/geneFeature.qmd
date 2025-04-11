@@ -69,6 +69,9 @@ assign_column_names <- function(data, mode) {
 
 mode <- "gff"
 
+data_raw <- read_input(input_arg)
+data <- assign_column_names(data_raw, mode)
+
 output_dir <- switch(mode,
   "hybrid" = "output_directory_hybrid",
   "gff" = "output_directory",
