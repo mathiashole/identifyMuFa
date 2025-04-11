@@ -33,9 +33,9 @@ output_dir <- switch(mode,
 )
 
 source_file <- switch(mode,
-  "hybrid" = "code/moduleHybrid.R",
-  "gff" = "code/moduleGff.R",
-  "no_gff" = "code/moduleNoGff.R"
+  "hybrid" = "/Users/joaco/OneDrive/Documentos/github/identifyMuFa/OE1/code/moduleHybrid.R",
+  "gff" = "/Users/joaco/OneDrive/Documentos/github/identifyMuFa/OE1/code/moduleGff.R",
+  "no_gff" = "/Users/joaco/OneDrive/Documentos/github/identifyMuFa/OE1/code/moduleNoGff.R"
 )
 
 # output_dir <- "/home/usuario/Data_Rstudio/chop_genome"  # Cambia esto a la ruta de tu directorio
