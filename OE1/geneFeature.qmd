@@ -49,15 +49,12 @@ data <- read.delim(file.path(output_dir, "execution_args_9900.tsv"), sep = "\t",
 if (mode == "hybrid") {
   message("Modo: HYBRID")
   transformed <- transform_data_hybrid(data)
-
 } else if (mode == "gff") {
   message("Modo: GFF")
   transformed <- transform_data(data)
-
 } else if (mode == "no_gff") {
   message("Modo: NO GFF")
   transformed <- transform_data_without_gff(data)
-
 }
 
 
