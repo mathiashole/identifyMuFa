@@ -68,6 +68,7 @@ assign_column_names <- function(data, mode) {
 #| warning: false
 
 mode <- "gff"
+input_arg <- file.path(output_dir, "execution_args_9900.tsv")
 
 data_raw <- read_input(input_arg)
 data <- assign_column_names(data_raw, mode)
