@@ -45,6 +45,22 @@ source_file <- switch(mode,
 ## NEED OUTPUT DIR
 source(source_file)
 data <- read.delim(file.path(output_dir, "execution_args_9900.tsv"), sep = "\t", header = FALSE)
+
+if (mode == "hybrid") {
+  message("Modo: HYBRID")
+  transformed <- transform_data_hybrid(data)
+
+} else if (mode == "gff") {
+  message("Modo: GFF")
+  transformed <- transform_data(data)
+
+} else if (mode == "no_gff") {
+  message("Modo: NO GFF")
+  transformed <- transform_data_without_gff(data)
+
+}
+
+
 ########################################
 
 # Obtener la lista de archivos que comienzan con 'out_' y terminan con '.fasta'
