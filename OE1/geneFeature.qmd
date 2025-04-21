@@ -220,7 +220,7 @@ Se utiliza ALGO la función mencionada para extraer diversas características de
 #| warning: false
 
 # Llamamos a la funcion para obtener GC y largo de cada contig, de cada genoma
-# genomes <- calculate_fasta_feature(data_transformed$fasta_file, "genome")
+# genomes <- calculate_fasta_feature(file.path("../../../study/maestria/genomic_data", transformed$fasta_basename), "genome")
 
 # genomes <- transform_columns(genomes, "ID")
 
