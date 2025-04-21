@@ -76,6 +76,8 @@ source_file <- switch(mode,
   "no_gff" = "code/moduleNoGff.R"
 )
 
+source(source_file)
+
 data_raw <- read_input(input_arg)
 data <- assign_column_names(data_raw, mode)
 
@@ -84,9 +86,6 @@ output_dir <- switch(mode,
   "gff" = "output_directory",
   "no_gff" = "output_directory_withoutgff"
 )
-
-
-source(source_file)
 
 if (mode == "hybrid") {
   message("Modo: HYBRID")
