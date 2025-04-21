@@ -370,7 +370,7 @@ Se llama a la funcion ``calculate_fasta_feature`` para calcular en el total de `
 #| warning: false
 
 # Llamamos a la funcion para obtener GC y largo de cada contig, de cada genoma
-# all_code_prot <- calculate_fasta_feature(rest_code_prot, "gene")
+# all_code_prot <- calculate_fasta_feature(file.path(output_dir ,transformed$out_rest_gscissors), "gene")
 
 # all_code_prot <- transform_columns(all_code_prot, "ID")
 
