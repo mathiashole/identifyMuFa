@@ -470,7 +470,7 @@ Se crea una `tabla resumen`, que agrupa las secuencias por cada genoma ``r genom
 #| echo: true
 #| warning: false
 
-target_protein <- calculate_fasta_feature(file.path(output_dir, transformed$out_gscissors_high), "gene")
+target_protein <- calculate_fasta_feature(file.path(output_dir, transformed$out_gscissors_all), "gene")
 target_protein <- transform_columns(target_protein, "ID")
 
 # Crear una tabla con el conteo de secuencias por archivo
