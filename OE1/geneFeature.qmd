@@ -666,6 +666,9 @@ Se crea una nueva tabla resumen a partir de las secuencias que se descartaran po
 #| echo: false
 #| warning: false
 
+target_protein_low <- calculate_fasta_feature(file.path(output_dir, transformed$out_gscissors_low), "gene")
+target_protein_low <- transform_columns(target_protein_low, "ID")
+
 # Crear una tabla con el conteo de secuencias por archivo
 file_sequence_counts <- filter_data_smaller %>%
   group_by(file) %>%
