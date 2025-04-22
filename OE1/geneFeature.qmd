@@ -98,7 +98,7 @@ if (mode == "hybrid") {
   transformed <- transform_data_without_gff(data)
 }
 
-
+key_name <- unique(sort(transformed$keyword1))
 ########################################
 
 # Obtener la lista de archivos que comienzan con 'out_' y terminan con '.fasta'
