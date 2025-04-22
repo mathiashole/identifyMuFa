@@ -57,9 +57,10 @@ generate_commands <- function(data, output_dir) {
                                   file.path(output_dir, data$sp_low_filtred_name_gff), "--format gff --output", 
                                   file.path(output_dir, data$out_gscissors_high)) ##### LOW #####
 
-  # data$gscissors_command <- paste(GSCISSORS, "--fasta", data$fasta_file, "--coordinates", 
-  #                                 file.path(output_dir, data$filtred_name_gff), "--format gff --output", 
-  #                                 file.path(output_dir, data$out_gscissors_high))
+  data$gscissors_command_all <- paste(GSCISSORS, "--fasta", data$fasta_file, "--coordinates", 
+                                  file.path(output_dir, data$filtred_name_gff), "--format gff --output", 
+                                  file.path(output_dir, data$out_gscissors_all))
+
   data$gscissors_rest_command <- paste(GSCISSORS, "--fasta", data$fasta_file, "--coordinates", 
                                        file.path(output_dir, data$non_filtred_name_gff), "--format gff --output", 
                                        file.path(output_dir, data$out_rest_gscissors)) ###### Rest of sequence not searched ####
