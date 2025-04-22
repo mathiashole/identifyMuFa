@@ -578,8 +578,9 @@ Se genera una tabla con las estadístias descriptivas de las `r key_name` comple
 #| echo: false
 #| warning: false
 
+## NEED DEBUG HIGH and LOW
 # Crear una tabla con el conteo de secuencias por archivo
-file_sequence_counts <- filter_data_higher %>%
+file_sequence_counts <- target_protein %>%
   group_by(file) %>%
   summarise(Total_Sequences = n(),
             min_length = min(Length),
