@@ -560,10 +560,10 @@ Las secuencias menores a este minimo se descartaran para este analisis inicial, 
 
 # length_min <- mean(target_protein$Length)
 # length_min <- median(file_sequence_counts$mean_length)
-length_min <- 8000
+# length_min <- 8000
 
-filter_data_higher <- filter(target_protein, Length >= length_min) 
-filter_data_smaller <- filter(target_protein, Length <= length_min)
+# filter_data_higher <- filter(target_protein, Length >= length_min) 
+# filter_data_smaller <- filter(target_protein, Length <= length_min)
 
 
 ```
