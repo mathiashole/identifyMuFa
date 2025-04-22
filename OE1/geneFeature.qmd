@@ -578,6 +578,9 @@ Se genera una tabla con las estadístias descriptivas de las `r key_name` comple
 #| echo: false
 #| warning: false
 
+target_protein_high <- calculate_fasta_feature(file.path(output_dir, transformed$out_gscissors_high), "gene")
+target_protein_high <- transform_columns(target_protein_high, "ID")
+
 ## NEED DEBUG HIGH and LOW
 # Crear una tabla con el conteo de secuencias por archivo
 file_sequence_counts <- target_protein %>%
