@@ -49,7 +49,7 @@ generate_commands <- function(data, output_dir) {
     data$spdiffsize_command_first <- paste("Rscript", SPDIFFSIZE, "--gff", file.path(output_dir, data$filtred_name_gff))
   }
 
-  data$gscissors_command <- paste(GSCISSORS, "--fasta", data$fasta_file, "--coordinates", 
+  data$gscissors_command_high <- paste(GSCISSORS, "--fasta", data$fasta_file, "--coordinates", 
                                   file.path(output_dir, data$sp_high_filtred_name_gff), "--format gff --output", 
                                   file.path(output_dir, data$out_gscissors_high)) ##### HIGH and EQUAL #####
   
@@ -132,10 +132,10 @@ execution_module <- function(data, output_dir) {
         }   
 
         # change directory from where you get the data!! DEBUGGING
-        cat("Processing GSCISSORS: ", data$gscissors_command[i], "\n")
+        cat("Processing GSCISSORS: ", data$gscissors_command_high[i], "\n")
         # Check if FILTER_SEQ created the expected file
         path_file_gsH <- paste0(output_dir,"/", data$out_gscissors_high[i])
-        system(data$gscissors_command[i])
+        system(data$gscissors_command_high[i])
         if (!file.exists(path_file_gsH)) {
           cat("Error: GSCISSORS did not create the file", data$out_gscissors_high[i], "\n")
           next
