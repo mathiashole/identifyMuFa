@@ -670,7 +670,7 @@ target_protein_low <- calculate_fasta_feature(file.path(output_dir, transformed$
 target_protein_low <- transform_columns(target_protein_low, "ID")
 
 # Crear una tabla con el conteo de secuencias por archivo
-file_sequence_counts <- filter_data_smaller %>%
+file_sequence_counts <- target_protein_low %>%
   group_by(file) %>%
   summarise(Total_Sequences = n(),
             min_length = min(Length),
