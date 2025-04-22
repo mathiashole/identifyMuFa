@@ -617,7 +617,7 @@ var_filter_gc <- paste0("Filter ", key_name, " GC")
 
 # Function plot_violin_gc call
 plot_violin_gc(
-  data = filter_data_higher, 
+  data = target_protein, 
   plot_title = var_filter_gc, 
   y_label = "GC Content"
 )
