@@ -37,7 +37,7 @@ transform_data <- function(data) {
 
 # Function to generate commands with gff data
 generate_commands <- function(data, output_dir) {
-  data$filter_seq_command <- paste(FILTER_SEQ, input_file, output_dir)
+  data$filter_seq_command <- paste(FILTER_SEQ, data, output_dir)
   
   # if (!"length" %in% colnames(data)) {
   #   data$length_command <- paste(MEANSEQ, "--gff", file.path(output_dir, data$filtred_name_gff))
