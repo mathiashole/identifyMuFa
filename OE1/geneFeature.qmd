@@ -583,7 +583,7 @@ target_protein_high <- transform_columns(target_protein_high, "ID")
 
 ## NEED DEBUG HIGH and LOW
 # Crear una tabla con el conteo de secuencias por archivo
-file_sequence_counts <- target_protein %>%
+file_sequence_counts <- target_protein_high %>%
   group_by(file) %>%
   summarise(Total_Sequences = n(),
             min_length = min(Length),
