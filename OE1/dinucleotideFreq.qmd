@@ -69,6 +69,40 @@ assign_column_names <- function(data, mode) {
 #| echo: false
 #| warning: false
 
+mode <- "gff"
+#input_arg <- file.path(output_dir, "execution_args_9900.tsv")
+
+source_file <- switch(mode,
+  "hybrid" = "code/moduleHybrid.R",
+  "gff" = "code/moduleGff.R",
+  "no_gff" = "code/moduleNoGff.R"
+)
+
+source(source_file)
+
+data_raw <- read_input(input_arg)
+data <- assign_column_names(data_raw, mode)
+
+output_dir <- switch(mode,
+  "hybrid" = "output_directory_hybrid",
+  "gff" = "output_directory",
+  "no_gff" = "output_directory_withoutgff"
+)
+
+if (mode == "hybrid") {
+  message("Modo: HYBRID")
+  transformed <- transform_data_hybrid(data)
+} else if (mode == "gff") {
+  message("Modo: GFF")
+  transformed <- transform_data(data)
+} else if (mode == "no_gff") {
+  message("Modo: NO GFF")
+  transformed <- transform_data_without_gff(data)
+}
+
+key_name <- unique(sort(transformed$keyword1))
+
+
 directory <- "output_directory/"
 # Read data frame
 data_transformed <- read.delim("output_directory/data_transformed.tsv", sep = "\t", header = TRUE)
