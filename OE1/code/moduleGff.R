@@ -25,9 +25,10 @@ transform_data <- function(data) {
   data$overlap_result_low_df <- paste0("low_filtered_multigenic_family_", data$no_fasta_basename, ".tsv") # Split result of no overlap < to minimal length
   data$overlap_result_high_equal <- paste0("high_equal_filtered_multigenic_family_", data$no_fasta_basename, ".fasta") # extracted sequence > or = to minimal length
   data$overlap_result_low <- paste0("low_filtered_multigenic_family_", data$no_fasta_basename, ".fasta") # Extracted sequence < to minimal length
-  data$gorf_result_file <- paste0("getorf_protein_", data$overlap_result_high_equal)
+  data$gorf_result_file_prot <- paste0("getorf_protein_", data$overlap_result_high_equal)
+  data$gorf_result_file_prot <- paste0("getorf_protein_", data$overlap_result_high_equal)
   # data$blastp_result <- paste0("blastp_out_high_", data$keyword_sum, "_", data$no_gff_basename, ".txt")
-  # data$blastp_result <- paste0("blastp_", data$gorf_result_file)
+  # data$blastp_result <- paste0("blastp_", data$gorf_result_file_prot)
   data$blastp_result <- paste0("blastp_getorf_protein_high_equal_filtered_multigenic_family_", data$no_fasta_basename, ".txt")
   data$brefiner_blastp <- paste0("bRefiner_blastp_getorf_protein_high_equal_filtered_multigenic_family_", data$no_fasta_basename, ".txt")
   data$calssifier_result <- paste0("filtered_multigenic_family_", data$no_fasta_basename, "_classified.tsv")
@@ -95,7 +96,7 @@ generate_commands <- function(data, output_dir) {
     data$gorf_command <- paste(GORF, file.path(output_dir, data$overlap_result_high_equal), output_dir)
   }
 
-  data$allblast_blastp_command <- paste(ALLBLAST, "-type", "blastp", "-qp", file.path(output_dir, data$out_gscissors_high_translated), "-sp", file.path(output_dir, data$gorf_result_file), "-o", file.path(output_dir, "blast_result"))
+  data$allblast_blastp_command <- paste(ALLBLAST, "-type", "blastp", "-qp", file.path(output_dir, data$out_gscissors_high_translated), "-sp", file.path(output_dir, data$gorf_result_file_prot), "-o", file.path(output_dir, "blast_result"))
   
   # if ("length"%in% colnames(data)) {
   #   # data$bRefiner_command <- paste(BREFINER , "-file", file.path(output_dir, "blast_result", data$blastp_result), "-i", 80, "-l", data$length / 3, "-col", 1, "-uniq")
@@ -106,7 +107,7 @@ generate_commands <- function(data, output_dir) {
 
   data$classifier_command <- paste("Rscript", CLASSIFIER, file.path(output_dir, data$overlappingshaive_result_filtered), file.path(output_dir, "blast_result", data$brefiner_blastp))
 
-  data$gs_new_gen_prot_command <- paste(GSCISSORS, "--fasta", file.path(output_dir, data$gorf_result_file), "--coordinates",
+  data$gs_new_gen_prot_command <- paste(GSCISSORS, "--fasta", file.path(output_dir, data$gorf_result_file_prot), "--coordinates",
                                   file.path(output_dir, "blast_result", data$brefiner_blastp), "--format", "id", "--output",
                                   file.path(output_dir, data$new_gen_protein))
 
@@ -231,9 +232,9 @@ execution_module <- function(data, output_dir) {
         cat("Processing GORF: ", data$gorf_command[i], "\n")
         system(data$gorf_command[i])
         # Check if SPDIFFSIZE created the expect file
-        path_file_gorf <- file.path(output_dir, data$gorf_result_file[i])
+        path_file_gorf <- file.path(output_dir, data$gorf_result_file_prot[i])
         if (!file.exists(path_file_gorf)) {
-          cat("Error: GORF did not create the file", file.path(output_dir, data$gorf_result_file[i]), "\n")
+          cat("Error: GORF did not create the file", file.path(output_dir, data$gorf_result_file_prot[i]), "\n")
           next
         }
 
