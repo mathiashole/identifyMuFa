@@ -278,12 +278,12 @@ execution_module <- function(data, output_dir) {
           next
         }
 
-        cat("Processing GSCISSORS: ", data$gscissors_low_command[i], "\n")
+        cat("Processing GSCISSORS: ", data$gs_new_gen_prot_command, "\n")
         # Check if FILTER_SEQ created the expected file
-        path_file_gsP <- file.path(output_dir, data$overlap_result_low[i])
-        system(data$gscissors_low_command[i])
-        if (!file.exists(path_file_gsP)) {
-          cat("Error: GSCISSORS did not create the file", data$overlap_result_low[i], "\n")
+        path_file_gs_new_gen_prot <- file.path(output_dir, data$new_gen_protein[i])
+        system(data$gs_new_gen_prot_command)
+        if (!file.exists(path_file_gs_new_gen_prot)) {
+          cat("Error: GSCISSORS did not create the file", data$new_gen_protein[i], "\n")
           next
         }
 
