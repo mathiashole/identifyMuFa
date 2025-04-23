@@ -107,8 +107,8 @@ generate_commands <- function(data, output_dir) {
   data$classifier_command <- paste("Rscript", CLASSIFIER, file.path(output_dir, data$overlappingshaive_result_filtered), file.path(output_dir, "blast_result", data$brefiner_blastp))
 
   data$gs_new_gen_prot_command <- paste(GSCISSORS, "--fasta", file.path(output_dir, data$gorf_result_file), "--coordinates",
-                                  file.path(output_dir, data$overlap_result_high_equal_df), "--format", "txt", "--output",
-                                  file.path(output_dir, data$overlap_result_high_equal))
+                                  file.path(output_dir, "blast_result", data$brefiner_blastp), "--format", "id", "--output",
+                                  file.path(output_dir, data$new_gen_protein))
 
   return(data)
 }
