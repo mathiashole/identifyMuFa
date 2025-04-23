@@ -1,0 +1,873 @@
+---
+title: "Nucleotide frequency"
+author: "Mathias"
+format:
+  html:
+    theme: united
+    code-fold: true
+    code-link: true
+    number-sections: true
+    highlight-style: github
+---
+
+![](https://img.itch.zone/aW1nLzE3MTEyNjE5LmdpZg==/original/2%2BYVZg.gif){style="float:right;" fig-alt="Illustration of a detective cat. Artwork by @shigemi.itch.io." width="301"}
+
+```{css}
+#| echo: false
+
+p {
+  text-align: justify
+}
+
+```
+
+```{r}
+#| label: auxiliary function
+#| echo: false
+#| warning: false
+
+read_input <- function(input_file) {
+  read.delim(input_file, header = FALSE, stringsAsFactors = FALSE, fill = TRUE)
+}
+
+assign_column_names <- function(data, mode) {
+  n <- ncol(data)
+
+  if (mode == "hybrid") {
+    if (n == 6) {
+      colnames(data) <- c("fasta_file", "gff_file", "keyword1", "keyword2", "length", "sequence_file")
+    } else if (n == 5) {
+      colnames(data) <- c("fasta_file", "gff_file", "keyword1", "keyword2", "sequence_file")
+    } else {
+      stop("Unexpected format in HYBRID mode")
+    }
+  } else if (mode == "gff") {
+    if (n == 5) {
+      colnames(data) <- c("fasta_file", "gff_file", "keyword1", "keyword2", "length")
+    } else if (n == 4) {
+      colnames(data) <- c("fasta_file", "gff_file", "keyword1", "keyword2")
+    } else {
+      stop("Unexpected format in GFF mode")
+    }
+  } else if (mode == "no_gff") {
+    if (n == 3) {
+      colnames(data) <- c("fasta_file", "sequence_file", "length")
+    } else if (n == 2) {
+      colnames(data) <- c("fasta_file", "sequence_file")
+    } else {
+      stop("Unexpected format in NO_GFF mode")
+    }
+  }
+
+  return(data)
+}
+
+```
+
+```{r}
+#| label: charged global variables
+#| echo: false
+#| warning: false
+
+mode <- "gff"
+#input_arg <- file.path(output_dir, "execution_args_9900.tsv")
+
+source_file <- switch(mode,
+  "hybrid" = "code/moduleHybrid.R",
+  "gff" = "code/moduleGff.R",
+  "no_gff" = "code/moduleNoGff.R"
+)
+
+source(source_file)
+
+data_raw <- read_input(input_arg)
+data <- assign_column_names(data_raw, mode)
+
+output_dir <- switch(mode,
+  "hybrid" = "output_directory_hybrid",
+  "gff" = "output_directory",
+  "no_gff" = "output_directory_withoutgff"
+)
+
+if (mode == "hybrid") {
+  message("Modo: HYBRID")
+  transformed <- transform_data_hybrid(data)
+} else if (mode == "gff") {
+  message("Modo: GFF")
+  transformed <- transform_data(data)
+} else if (mode == "no_gff") {
+  message("Modo: NO GFF")
+  transformed <- transform_data_without_gff(data)
+}
+
+key_name <- unique(sort(transformed$keyword1))
+########################################
+
+directory <- "output_directory/"
+# Read data frame
+data_transformed <- read.delim("output_directory/data_transformed.tsv", sep = "\t", header = TRUE)
+########################################
+
+# Obtener la lista de archivos que comienzan con 'out_' y terminan con '.fasta'
+fasta_files <- paste0(directory, data_transformed$out_gscissors)
+genome_name <- basename(data_transformed$fasta_file)
+rest_code_prot <- paste0(directory, data_transformed$out_rest_gscissors)
+
+genes_work <- basename(fasta_files)
+prot_name <- sub(".*_:(.*):_.*", "\\1", fasta_files)
+key_names <- sub("_.*", "\\1", prot_name)
+key_name <- unique(sort(key_names))
+
+```
+
+
+## Análisis de la Frecuencia de Dinucleótidos y Trinucleótidos Mediante PCA
+
+Se llevó a cabo un análisis de la `frecuencia de dinucleótidos` y trinucleótidos en una serie de secuencias de ADN con el objetivo de identificar patrones que permitan diferenciar las secuencias de interés. Para ello, se empleó un [Análisis de Componentes Principales (PCA)](https://github.com/JoaquinAmatRodrigo/Estadistica-con-R/blob/master/PDF_format/35_Principal_Component_Analysis.pdf), un análisis estadística ampliamente utilizado para la `reducción de la dimensionalidad` en datos de alta complejidad.
+
+El `PCA` se aplicó a los datos de `frecuencia` de `dinucleótidos` y `trinucleótidos`, lo que permitió `proyectar las secuencias` en un espacio de `menor dimensión`, facilitando la visualización y comprensión de las relaciones entre ellas. Las componentes principales seleccionadas explican un porcentaje significativo de la variabilidad observada en las frecuencias, lo que sugiere que estas combinaciones de bases son representativas de las diferencias biológicas presentes en las secuencias.
+
+```{r}
+#| label: load packages to nucleotide frequency
+#| echo: true
+#| warning: false
+
+# Load necessary libraries
+#library(data.table)
+library(seqinr)
+library(ggplot2)
+library(ggfortify)
+library(Rtsne)
+library(tidyverse)
+
+```
+
+Creamos una funcion que está diseñado para calcular las frecuencias de dinucleótidos y trinucleótidos en secuencias de ADN contenidas en archivos FASTA. En este se usara para calcular las frecuencias de dinucleótidos y trinucleótidos de todas las proteinas codificantes de los genomas `r genome_name` y de las secuencias codificantes de `r key_name` en estos genomas.
+
+```{r}
+#| label: created nucleotide frequency function
+#| echo: true
+#| warning: false
+
+# Function to count dinucleotides
+count_dinucleotides <- function(sequence) {
+  # Count dinucleotides
+  counts <- seqinr::count(sequence, 2)
+  # Calculate frequencies
+  freqs <- counts / sum(counts)
+  freqs <- round(freqs, 3)
+  return(freqs)
+}
+
+# Function to count dinucleotides
+count_trinucleotides <- function(sequence) {
+  # Count dinucleotides
+  counts <- seqinr::count(sequence, 3)
+  # Calculate frequencies
+  freqs <- counts / sum(counts)
+  freqs <- round(freqs, 3)
+  return(freqs)
+}
+
+nucleotide_frequncy <- function(fasta_files, type_frequency = "dinucleotide") {
+  results <- data.frame()  # Initialize the empty data frame for the results
+
+  # Iterate over each FASTA file in the folder
+  for (fasta_file in fasta_files) {
+    sequences <- read.fasta(fasta_file)
+    ids <- names(sequences)
+    
+    # Base name of file
+    base_name <- basename(fasta_file)
+    # Regular expresion for extract diferents parts
+    extracted_names <- sub(".*_([^_]+)\\.fasta$", "\\1", base_name)
+    
+    # Get dinucleotide or trinucleotide frequencies for each sequence within a file
+    for (i in seq_along(sequences)) {
+      seq <- getSequence(sequences[[i]])
+
+      if (type_frequency == "trinucleotide") {
+        freqs <- count_trinucleotides(seq)
+      } else if (type_frequency == "dinucleotide") {
+        freqs <- count_dinucleotides(seq)
+      }
+      
+      # Create a row with file name, ID and frequencies
+      row <- c(File = extracted_names, ID = ids[i], freqs)
+      # row <- data.frame(File = extracted_names, ID = ids[i], t(freqs), stringsAsFactors = FALSE)
+
+      results <- results %>% bind_rows(row)
+    }
+  }
+
+  return(results)
+}
+
+```
+
+Se llama a la función nucleotide_frequncy() para obtener las tablas de frecuencias de dinucleótidos y trinucleótidos.
+
+```{r}
+#| label: execution nucleotide frequency function
+#| echo: true
+#| warning: false
+
+# Run the function and get the dinucleotide frequency table
+dinucleotide_table <- nucleotide_frequncy(file.path("../../../study/maestria/genomic_data", transformed$fasta_basename), type_frequency = "dinucleotide")
+#dinucleotide_table <- nucleotide_frequncy(fasta_files[1], type_frequency = "dinucleotide")
+
+# dinucleotide_table_rest_code_prot <- nucleotide_frequncy(rest_code_prot, type_frequency = "dinucleotide")
+
+trinucleotide_table <- nucleotide_frequncy(fasta_files, type_frequency = "trinucleotide")
+# trinucleotide_table <- nucleotide_frequncy(fasta_files[1], type_frequency = "trinucleotide")
+# trinucleotide_table_rest_code_prot <- nucleotide_frequncy(rest_code_prot, type_frequency = "trinucleotide")
+
+```
+
+Además, desarrollamos una función para eliminar símbolos que podrían interferir con la ejecución del código, a la cual denominamos
+
+```{r}
+#| label: ID string manipulation
+#| echo: true
+#| warning: false
+
+# function to string manipulation on sequence ID
+transform_columns <- function(df, cols) {
+  # Iterate over the specified columns
+  for (col in cols) {
+    # Replace '=' with '_'
+    df[[col]] <- gsub("=", "_", df[[col]])              
+    # Remove everything after ':' or ';'
+    df[[col]] <- gsub("[:;].*", "", df[[col]])          
+  }
+  return(df)  # Return the modified data frame
+}
+
+dinucleotide_table <- transform_columns(dinucleotide_table, "ID")
+
+# dinucleotide_table_rest_code_prot <- transform_columns(dinucleotide_table_rest_code_prot, "ID")
+
+# trinucleotide_table_rest_code_prot <- transform_columns(trinucleotide_table_rest_code_prot, "ID")
+
+trinucleotide_table <- transform_columns(trinucleotide_table, "ID")
+
+```
+
+
+```{r}
+#| label: write and read big data
+#| echo: false
+#| warning: false
+
+# chack to save extract data on all protein coding
+
+# write.table(dinucleotide_table_rest_code_prot, 
+#             file = "output_directory/dinucleotide_frequency_all_protein_coding.tsv", 
+#             sep = "\t", row.names = FALSE, quote = FALSE)
+
+# write.table(trinucleotide_table_rest_code_prot, 
+#             file = "output_directory/trinucleotide_frequency_all_protein_coding.tsv", 
+#             sep = "\t", row.names = FALSE, quote = FALSE)
+
+# Leer en formato TSV
+dinucleotide_all_protein_coding <- read.table("output_directory/dinucleotide_frequency_all_protein_coding_Dm28c.tsv", 
+                                              sep = "\t", header = TRUE, stringsAsFactors = FALSE)
+
+trinucleotide_all_protein_coding <- read.table("output_directory/trinucleotide_frequency_all_protein_coding_Dm28c.tsv", 
+                                               sep = "\t", header = TRUE, stringsAsFactors = FALSE)
+
+
+# # Remover filas con NA usando na.omit()
+# dinucleotide_all_protein_coding <- na.omit(dinucleotide_all_protein_coding)
+# trinucleotide_all_protein_coding <- na.omit(trinucleotide_all_protein_coding)
+
+
+```
+
+
+En esta parte, el código crean nuevos data frame llamados `combained_dinucleotide` y `combained_trinucleotide`. Estos combinan las frecuencias de dinucleótidos y trinucleótidos complementarios en el ADN. Al unir las frecuencias de estos pares complementarios, se pueden observar patrones adicionales en las frecuencias previamente calculadas para las secuencias codificantes, lo cual es útil para detectar posibles sesgos en la composición del ADN.
+
+```{r}
+#| label: eliminates complementary reverse nucleotide sets
+#| echo: true
+#| warning: false
+
+# Convert dinucleotide columns to numeric
+cols_to_convert <- c("aa", "tt", "ac", "gt", "ag", "ct", "ca", "tg", "cc", "gg", "ga", "tc", "at", "cg", "gc", "ta")
+dinucleotide_all_protein_coding[cols_to_convert] <- lapply(dinucleotide_all_protein_coding[cols_to_convert], as.numeric)
+
+# Convert trinucleotide columns to numeric
+cols_to_convert_trinucleotides <- c("aaa", "aag", "aat", "aca", "acc", "act", "aga", "agg", "agt", "ata", "atc", "att", "caa", "cag", "cat", "cca", "ccc", "cct", "cga", "cgg", "cgt", "cta", "ctc", "ctt", "gaa", "gag", "gat", "gca", "gcc", "gct", "gga", "ggc", "ggt", "gta", "gtc", "gtt", "taa", "tag", "tat", "tca", "tcc", "tct", "tga", "tgg", "tgt", "tta", "ttc", "ttt")
+trinucleotide_all_protein_coding[cols_to_convert_trinucleotides] <- lapply(trinucleotide_all_protein_coding[cols_to_convert_trinucleotides], as.numeric)
+
+
+combine_data_frequencies <- function(data, genome_col = "File", id_col = "ID", type) {
+  if (type == "di") {
+    result_combained_data <- data.frame(
+      "Genome" = data[, genome_col],
+      "id" = data[, id_col],
+      "aa.tt" = data[,"aa"] + data[,"tt"],
+      "ac.gt" = data[,"ac"] + data[,"gt"],
+      "ag.ct" = data[,"ag"] + data[,"ct"],
+      "ca.tg" = data[,"ca"] + data[,"tg"],
+      "cc.gg" = data[,"cc"] + data[,"gg"],
+      "ga.tc" = data[,"ga"] + data[,"tc"],
+      "at" = data[,"at"],
+      "cg" = data[,"cg"],
+      "gc" = data[,"gc"],
+      "ta" = data[,"ta"]
+    )
+  } else if (type == "tri") {
+    result_combained_data <- data.frame(
+  "Genome" = data[, genome_col],
+  "id" = data[, id_col],
+  "aaa.ttt" = data[,"aaa"] + data[,"ttt"],
+  "aag.ctt" = data[,"aag"] + data[,"ctt"],
+  "aac.gtt" = data[,"aac"] + data[,"gtt"],
+  "aat.att" = data[,"aat"] + data[,"att"],
+  "acc.ggt" = data[,"acc"] + data[,"ggt"],
+  "act.agt" = data[,"act"] + data[,"agt"],
+  "aga.tct" = data[,"aga"] + data[,"tct"],
+  "agg.cct" = data[,"agg"] + data[,"cct"],
+  "ata.tat" = data[,"ata"] + data[,"tat"],
+  "atc.gat" = data[,"atc"] + data[,"gat"],
+  "caa.ttg" = data[,"caa"] + data[,"ttg"],
+  "cag.ctg" = data[,"cag"] + data[,"ctg"],
+  "cat.atg" = data[,"cat"] + data[,"atg"],
+  "cac.gtg" = data[,"cac"] + data[,"gtg"],
+  "cca.tgg" = data[,"cca"] + data[,"tgg"],
+  "ccc.ggg" = data[,"ccc"] + data[,"ggg"],
+  "cga.tcg" = data[,"cga"] + data[,"tcg"],
+  "cta.tag" = data[,"cta"] + data[,"tag"],
+  "gaa.ttc" = data[,"gaa"] + data[,"ttc"],
+  "gag.ctc" = data[,"gag"] + data[,"ctc"],
+  "gat.atc" = data[,"gat"] + data[,"atc"],
+  "gca.tgc" = data[,"gca"] + data[,"tgc"],
+  "gga.tcc" = data[,"gga"] + data[,"tcc"],
+  "ggg.ccc" = data[,"ggg"] + data[,"ccc"],
+  "gta.tac" = data[,"gta"] + data[,"tac"],
+  "gtc.gac" = data[,"gtc"] + data[,"gac"],
+  "taa.tta" = data[,"taa"] + data[,"tta"],
+  "tag.cta" = data[,"tag"] + data[,"cta"],
+  "tat.ata" = data[,"tat"] + data[,"ata"],
+  "tca.tga" = data[,"tca"] + data[,"tga"],
+  "tga.tca" = data[,"tga"] + data[,"tca"],
+  "tta.aag" = data[,"tta"] + data[,"aag"]
+)
+  } else {
+    stop("Invalid type specified. Use 'di' for dinucleotides or 'tri' for trinucleotides.")
+  }
+
+  return(result_combained_data)
+}
+
+combained_dinucleotide <- combine_data_frequencies(dinucleotide_all_protein_coding, type = "di")
+combained_trinucleotide <- combine_data_frequencies(trinucleotide_all_protein_coding, type = "tri")
+
+id_vector <- combained_dinucleotide$id
+id_vector1 <- combained_trinucleotide$id
+
+# Transform the ID: remove everything after ";" and replace "=" with "_"
+id_vector_cleaned <- gsub(";.*", "", gsub("=", "_", id_vector))
+id_vector_cleaned1 <- gsub(";.*", "", gsub("=", "_", id_vector1))
+# Asignar el vector limpio de vuelta al dataframe
+combained_dinucleotide$id <- id_vector_cleaned
+combained_trinucleotide$id <- id_vector_cleaned1
+
+```
+
+
+::: {.panel-tabset .nav-pills}
+
+## Dinucleotide PCA
+
+Se realizó un análisis de componentes principales (PCA) sobre las frecuencias de dinucleótidos combinados en las secuencias codificantes de los genomas ``r genome_name``. El PCA permite reducir la dimensionalidad de las frecuencias de dinucleótidos en estas secuencias, facilitando la exploración de las relaciones entre secuencias y sus patrones de composición a nivel de `dinucleótidos`. 
+
+En este análisis, se utiliza la función `autoplot()` para visualizar los resultados del PCA. El total de las secuencias codificantes se colorean según los `genomas`, y se muestran los vectores de carga (loadings) para identificar qué dinucleótidos tienen mayor influencia en cada componente principal.
+
+```{r}
+#| label: principal component analysis dinucleotide
+#| echo: true
+#| warning: false
+
+# Function to perform PCA and graph (require ggplot2 and ggfortify)
+# perform_pca <- function(data, file_col = "File", id_col = "ID") {
+#   # Exclude 'File' and 'ID' columns from numerical analysis
+#   pca_data <- data[, !(names(data) %in% c(file_col, id_col))]
+#   # Convert all columns to numeric format
+#   pca_data <- as.data.frame(lapply(pca_data, as.numeric))
+#   # Perform the PCA
+#   pca_result <- prcomp(pca_data, scale. = TRUE)
+#   # Get PCA scores
+#   pca_scores <- as.data.frame(pca_result$x)
+#   # Add 'File' and 'ID' columns to PCA results
+#   pca_scores <- cbind(data[, c(file_col, id_col)], pca_scores)
+#   # Plot the PCA with autoplot
+#   pca_plot <- autoplot(pca_result, data = data, colour = file_col, 
+#                        loadings = TRUE, loadings.label = TRUE, loadings.colour = 'grey64', 
+#                        alpha = 0.2, size = 3) +
+#     theme_minimal()
+  
+#   # Return the results of the PCA and the graph
+#   return(list(pca_result = pca_result, pca_scores = pca_scores, pca_plot = pca_plot))
+# }
+
+# # Call perform_pca
+# perform_result_dinucleotide_pca <- perform_pca(combained_dinucleotide[-nrow(combained_dinucleotide), ], file_col = "Genome", id_col = "id")
+
+# # show plot
+# perform_result_dinucleotide_pca$pca_plot
+
+perform_pca <- function(data, file_col = "File", id_col = "ID") {
+  # Validate input data
+  if (!file_col %in% names(data)) {
+    stop(paste("Column", file_col, "not found in data"))
+  }
+  if (!id_col %in% names(data)) {
+    stop(paste("Column", id_col, "not found in data"))
+  }
+  
+  # Exclude 'file_col' and 'id_col' columns from numerical analysis
+  pca_data <- data[, !(names(data) %in% c(file_col, id_col))]
+  
+  # Convert all columns to numeric, handling non-numeric values and NAs
+  pca_data <- as.data.frame(lapply(pca_data, function(x) {
+    x <- as.numeric(as.character(x))
+    ifelse(is.na(x), 0, x)  # Replace NA with 0 (or adjust based on your preference)
+  }))
+  
+  # Ensure no rows were dropped due to conversion issues
+  if (nrow(pca_data) != nrow(data)) {
+    stop("Mismatch between input data rows and processed PCA data rows")
+  }
+  
+  # Perform the PCA
+  pca_result <- prcomp(pca_data, scale. = TRUE)
+  
+  # Get PCA scores
+  pca_scores <- as.data.frame(pca_result$x)
+  
+  # Add 'file_col' and 'id_col' columns to PCA results
+  pca_scores <- cbind(data[, c(file_col, id_col)], pca_scores)
+  
+  # Plot the PCA using autoplot
+  pca_plot <- autoplot(
+    pca_result, 
+    data = data, 
+    colour = file_col, 
+    loadings = TRUE, 
+    loadings.label = TRUE, 
+    loadings.colour = 'grey64', 
+    alpha = 0.2, 
+    size = 3
+  ) +
+    theme_minimal()
+  
+  # Return the results of the PCA and the graph
+  return(list(pca_result = pca_result, pca_scores = pca_scores, pca_plot = pca_plot))
+}
+
+# Call the updated perform_pca function
+perform_result_dinucleotide_pca <- perform_pca(
+  data = combained_dinucleotide, 
+  file_col = "Genome", 
+  id_col = "id"
+)
+
+# Show the PCA plot
+perform_result_dinucleotide_pca$pca_plot
+
+```
+
+## Trinucleotide PCA
+
+Ademas, se realizó un análisis de componentes principales (PCA) sobre las frecuencias de trinucleótidos combinados en las secuencias codificantes de los genomas ``r genome_name``.
+
+```{r}
+#| label: principal component analysis trinucleotide
+#| echo: true
+#| warning: false
+
+# Call perform_pca
+# perform_result_trinucleotide_pca <- perform_pca(combained_trinucleotide[-nrow(combained_trinucleotide), ], file_col = "Genome", id_col = "id")
+perform_result_trinucleotide_pca <- perform_pca(
+  data = combained_dinucleotide, 
+  file_col = "Genome", 
+  id_col = "id"
+)
+# show plot
+perform_result_trinucleotide_pca$pca_plot
+
+```
+
+:::
+
+---
+
+## plot PCA marcando ``r key_name``
+
+::: {.panel-tabset .nav-pills}
+
+## Dinucleotido PCA highlighted
+
+En la siguiente figura se muestra el mismo análisis PCA, pero esta vez solo se han resaltado las secuencias de interés correspondientes a ``r key_name`` para cada uno de los `genomas`. Las secuencias restantes se presentan en color gris.
+
+```{r}
+#| label: dinucleotide highlight PCA
+#| echo: true
+#| warning: false
+
+highlight_ids <- dinucleotide_table$ID
+
+create_pca_highlight_plot <- function(data, highlight_ids, pca_result, genome_col = "Genome", col_palette = NULL) {
+  # Create a copy of the input data
+  data_all_genomes <- data
+  
+
+  # Create new 'highlight' column that combines 'Highlighted' with the genome column
+  data_all_genomes$highlight <- ifelse(
+    data_all_genomes$id %in% highlight_ids, 
+    paste0("Highlighted_", data_all_genomes[[genome_col]]), 
+    "Other"
+  )
+
+  # Assign transparency values according to the 'highlight' column
+  data_all_genomes$alpha <- ifelse(
+    grepl("Highlighted", data_all_genomes$highlight), 0.6, 0.1
+  )
+  
+  # data_all_genomes <- data_all_genomes[-nrow(data_all_genomes), ]
+
+  # Assign the first two principal components of the PCA
+  data_all_genomes$PC1 <- pca_result$x[, 1]
+  data_all_genomes$PC2 <- pca_result$x[, 2]
+
+  # Define color palette only if it wasn't provided
+  if (is.null(col_palette)) {
+    # Get the unique values of the 'highlight' column and sort them
+    unique_highlight_values <- sort(unique(data_all_genomes$highlight))
+    
+    # Create a color palette that assigns gray to 'Other' and different colors to 'Highlighted_<Genome>'
+    col_palette <- c(scales::hue_pal()(length(unique_highlight_values) - 1), "grey")
+    # col_palette <- c("#00c496", "grey")
+    
+    # Map color palette to unique highlight values
+    names(col_palette) <- unique_highlight_values
+  }
+  
+  # Create subsets of the data for 'Highlighted' and 'Other'
+  highlighted_points <- subset(data_all_genomes, grepl("Highlighted", highlight))
+  other_points <- subset(data_all_genomes, highlight == "Other")
+
+    # Plot with ggplot: first 'Other' and then 'Highlighted'
+  ggplot() +
+    # Layer for non-highlighted points in gray and low transparency
+    geom_point(data = other_points, aes(x = PC1, y = PC2), color = "grey", alpha = 0.1, size = 0.8) +
+    # Layer for highlighted points with colors and greater transparency
+    geom_point(data = highlighted_points, aes(x = PC1, y = PC2, color = highlight, alpha = alpha), size = 0.8) +
+    scale_color_manual(values = col_palette) +
+    scale_alpha_continuous(range = c(0.1, 0.6)) + 
+    labs(title = "PCA Highlighting Selected IDs", x = "Principal Component 1", y = "Principal Component 2") +
+    theme_minimal()
+}
+
+create_pca_highlight_plot(combained_dinucleotide, highlight_ids, perform_result_dinucleotide_pca$pca_result)
+
+
+```
+
+## Trinucleotido PCA highlighted
+
+```{r}
+#| label: trinucleotide highlight PCA
+#| echo: true
+#| warning: false
+
+create_pca_highlight_plot(combained_trinucleotide, highlight_ids, perform_result_trinucleotide_pca$pca_result)
+
+
+```
+
+:::
+
+---
+
+## plot PCA por cada genoma marcando ``r key_name``
+
+::: {.panel-tabset .nav-pills}
+
+## Dinucleotido PCA highlighted per genome
+
+```{r}
+#| label: plot dinucleotide PCA per genome
+#| echo: true
+#| warning: false
+
+# Create a vector of unique genomes from the dataset
+genomes <- unique(sort(combained_dinucleotide$Genome))
+
+# Create a color palette that assigns gray to 'Other' and different colors to 'Highlighted_<Genome>'
+palette_to_genome <- c(scales::hue_pal()(length(genomes)), "grey")
+
+# Map color palette to genomes (including 'Other' for grey)
+names(palette_to_genome) <- c(paste0("Highlighted_", genomes), "Other")
+
+# Initialize an empty list to store PCA plots for each genome
+pca_plots <- list()
+
+# Loop through each genome
+for (genome in genomes) {
+  # Subset the data for the current genome
+  genome_data <- subset(combained_dinucleotide, Genome == genome)
+  
+  # Perform PCA on the subsetted data
+  pca_result <- perform_pca(genome_data, file_col = "Genome", id_col = "id")
+  pca_scores <- pca_result$pca_scores
+  
+  pca_plot <- create_pca_highlight_plot(genome_data, highlight_ids, pca_result$pca_result, col_palette = palette_to_genome)
+
+  pca_plots[[genome]] <- pca_plot
+}
+
+# Optionally, you can print or save each plot
+for (genome in genomes) {
+  print(pca_plots[[genome]])  # Print the plot for each genome
+  # ggsave(paste0("PCA_", genome, ".pdf"), plot = pca_plots[[genome]])  # Save as PDF if needed
+}
+
+
+```
+
+## Trinucleotido PCA highlighted per genome
+
+```{r}
+#| label: plot trinucleotide PCA per genome
+#| echo: true
+#| warning: false
+
+# Create a vector of unique genomes from the dataset
+genomes <- unique(sort(combained_trinucleotide$Genome))
+
+# Initialize an empty list to store PCA plots for each genome
+pca_plots <- list()
+
+# Loop through each genome
+for (genome in genomes) {
+  # Subset the data for the current genome
+  genome_data <- subset(combained_trinucleotide, Genome == genome)
+  
+  # Perform PCA on the subsetted data
+  pca_result <- perform_pca(genome_data, file_col = "Genome", id_col = "id")
+  pca_scores <- pca_result$pca_scores
+  
+  pca_plot <- create_pca_highlight_plot(genome_data, highlight_ids, pca_result$pca_result, col_palette = palette_to_genome)
+
+  pca_plots[[genome]] <- pca_plot
+}
+
+# Optionally, you can print or save each plot
+for (genome in genomes) {
+  print(pca_plots[[genome]])  # Print the plot for each genome
+  # ggsave(paste0("PCA_", genome, ".pdf"), plot = pca_plots[[genome]])  # Save as PDF if needed
+}
+
+```
+
+:::
+
+## Análisis t-SNE de las Frecuencias de Dinucleótidos y Trinucleótidos
+
+Se realizó un análisis de [t-distributed Stochastic Neighbor Embedding (t-SNE)](https://github.com/JoaquinAmatRodrigo/Estadistica-con-R/blob/master/PDF_format/35_Principal_Component_Analysis.pdf) sobre las frecuencias de `dinucleótidos` y `trinucleotidos` combinados en las secuencias `codificantes` de los genomas de ``r genome_name``. El t-SNE es una técnica de reducción de dimensionalidad que preserva las relaciones locales en los datos, lo que facilita la visualización de agrupamientos o patrones subyacentes en las frecuencias nucleotidicas de las secuencias.
+
+En este análisis, se utiliza la función ggplot() para visualizar los resultados del t-SNE, donde las secuencias codificantes se colorean de acuerdo con los genomas. El t-SNE permite explorar las similitudes y diferencias entre las secuencias de forma visual, destacando los patrones de composición a nivel de dinucleótidos.
+
+
+::: {.panel-tabset .nav-pills}
+
+## Dinucleotido t-SNE highlighted `r key_name`
+
+Se realizó un análisis de t-SNE sobre las frecuencias de dinucleótidos resaltando ``r key_name`` por cada genoma ``r genome_name``. El t-SNE permite reducir la dimensionalidad, preservando las relaciones locales de las frecuencias de dinucleótidos, facilitando la exploración de las relaciones entre secuencias y sus patrones de composición a nivel de `dinucleótidos`. 
+
+```{r}
+#| label: t-distributed Stochastic Neighbor Embedding analysis with plot dinucleotides
+#| echo: true
+#| warning: false
+
+
+
+# Function to perform t-SNE and plot
+perform_tsne_highlight <- function(data, highlight_ids, file_col = "File", id_col = "ID", perplexity = 30, max_iter = 1000, col_palette = NULL) {
+  # Exclude 'File' and 'ID' columns from numerical analysis
+  tsne_data <- data[, !(names(data) %in% c(file_col, id_col))]
+  # Convert all columns to numeric format
+  tsne_data <- as.data.frame(lapply(tsne_data, as.numeric))
+  # removed duplicated row
+  duplicates <- duplicated(tsne_data) # NEED CHECK WITH BOSS
+  tsne_data_clean <- tsne_data[!duplicates, ] # NEED CHECK WITH BOSS
+  combained_dinucleotide_clean <- data[!duplicates, ] # NEED CHECK WITH BOSS
+
+  # Perform t-SNE
+  tsne_result <- Rtsne(tsne_data_clean, perplexity = perplexity, max_iter = max_iter)
+
+  # Extract t-SNE coordinates
+  tsne_scores <- as.data.frame(tsne_result$Y)
+  colnames(tsne_scores) <- c("tSNE1", "tSNE2")  # Rename columns for clarity
+  
+  # Add 'File' and 'ID' columns to t-SNE results
+  # tsne_scores <- cbind(data[, c(file_col, id_col)], tsne_scores)
+  tsne_scores <- cbind(combained_dinucleotide_clean[, c("Genome", "id")], tsne_scores)
+
+    # Create new 'highlight' column that combines 'Highlighted' with the genome (or file) column
+  tsne_scores$highlight <- ifelse(
+    tsne_scores[[id_col]] %in% highlight_ids, paste0("Highlighted_", tsne_scores[[file_col]]), "Other"
+  )
+  
+  # Assign transparency values according to the 'highlight' column
+  tsne_scores$alpha <- ifelse(
+    grepl("Highlighted", tsne_scores$highlight), 0.6, 0.1
+  )
+
+    # Define color palette only if it wasn't provided
+  if (is.null(col_palette)) {
+    # Get unique values of the 'highlight' column and sort them
+    unique_highlight_values <- sort(unique(tsne_scores$highlight))
+    
+    # Create a color palette that assigns gray to 'Other' and different colors to 'Highlighted_<Genome>'
+    col_palette <- c(scales::hue_pal()(length(unique_highlight_values) - 1), "grey")
+    
+    # Map color palette to unique highlight values
+    names(col_palette) <- unique_highlight_values
+  }
+
+  # Create subsets of the data for 'Highlighted' and 'Other'
+  highlighted_points <- subset(tsne_scores, grepl("Highlighted", highlight))
+  other_points <- subset(tsne_scores, highlight == "Other")
+  
+  # Plot with ggplot: first 'Other' and then 'Highlighted'
+  tsne_plot <- ggplot() +
+    # Layer for non-highlighted points in gray and low transparency
+    geom_point(data = other_points, aes(x = tSNE1, y = tSNE2), color = "grey", alpha = 0.1, size = 3) +
+    # Layer for highlighted points with colors and greater transparency
+    geom_point(data = highlighted_points, aes(x = tSNE1, y = tSNE2, color = highlight, alpha = alpha), size = 3) +
+    scale_color_manual(values = col_palette) +
+    scale_alpha_continuous(range = c(0.1, 0.6)) + 
+    labs(title = "t-SNE Highlighting Selected IDs", x = "t-SNE 1", y = "t-SNE 2") +
+    theme_minimal()
+  
+  # Return the results of the t-SNE and the plot
+  return(list(tsne_result = tsne_result, tsne_scores = tsne_scores, tsne_plot = tsne_plot))
+}
+
+# Call perform_tsne
+perform_result_dinucleotide_tsne <- perform_tsne_highlight(combained_dinucleotide, highlight_ids = highlight_ids, file_col = "Genome", id_col = "id")
+
+# Show plot
+perform_result_dinucleotide_tsne$tsne_plot
+
+```
+
+## Trinucleotido t-SNE highlighted `r key_name`
+
+Ademas, se realizó un análisis de t-SNE sobre las frecuencias de trinucleótidos resaltando ``r key_name`` por cada genoma ``r genome_name``. Permitiendo reducir la dimensionalidad, preservando las relaciones locales de las frecuencias de `trinucleótidos`. 
+
+```{r}
+#| label: t-distributed Stochastic Neighbor Embedding analysis with plot trinucleotides
+#| echo: true
+#| warning: false
+
+# Call perform_tsne
+perform_result_trinucleotide_tsne <- perform_tsne_highlight(combained_trinucleotide, highlight_ids = highlight_ids, file_col = "Genome", id_col = "id")
+
+# Show plot
+perform_result_trinucleotide_tsne$tsne_plot
+
+```
+
+:::
+
+---
+
+##  Análisis t-SNE de las frecuencias nucleotidicas de `secuencias codificantes` por cada `genoma`
+
+::: {.panel-tabset .nav-pills}
+
+## t-SNE highlighted `r key_name` per genome
+
+Se realizó un análisis de t-SNE sobre las frecuencias de dinucleótidos resaltando ``r key_name`` por cada genoma ``r genome_name``. El t-SNE permite reducir la dimensionalidad, preservando las relaciones locales de las frecuencias de dinucleótidos, facilitando la exploración de las relaciones entre secuencias y sus patrones de composición a nivel de `dinucleótidos`. 
+
+```{r}
+#| label: t-distributed Stochastic Neighbor Embedding analysis with plot dinucleotides per genome
+#| echo: true
+#| warning: false
+
+# Call Map color palette to genomes (including 'Other' for grey)
+# palette_to_genome
+
+# Initialize an empty list to store tsne plots for each genome
+tsne_list_dinucloetide <- list()
+
+# Loop through each genome and call genome to PCA
+for (genome in genomes) {
+  # Subset the data for the current genome
+  genome_data <- subset(combained_dinucleotide, Genome == genome)
+  
+  # Perform tsne on the subsetted data
+  tsne_list_process <- perform_tsne_highlight(genome_data, highlight_ids = highlight_ids, file_col = "Genome", id_col = "id", col_palette = palette_to_genome) # genome_data, dinucleotide_table$ID, pca_result$pca_result, col_palette = palette_to_genome
+
+  tsne_list_dinucloetide[[genome]] <- tsne_list_process
+}
+
+for (genome in names(tsne_list_dinucloetide)) {
+  # get plot of a list
+  tsne_plot <- tsne_list_dinucloetide[[genome]]$tsne_plot
+
+  print(tsne_plot) # Show plots
+  # filename <- paste0("tsne_plot_", genome, ".png") # Save as PDF if needed
+  # ggsave(filename = filename, plot = tsne_plot, width = 8, height = 6, dpi = 300)
+}
+
+# library(gridExtra)
+# plots <- lapply(tsne_list_dinucloetide, function(x) x$tsne_plot) # Get all plot of a list
+# do.call(grid.arrange, c(plots, ncol = 2)) # Show all plot in one image
+
+```
+
+## t-SNE highlighted `r key_name` per genome
+
+Ademas, se realizó un análisis de t-SNE sobre las frecuencias de trinucleótidos resaltando ``r key_name`` por cada genoma ``r genome_name``. Permitiendo reducir la dimensionalidad, preservando las relaciones locales de las frecuencias de `trinucleótidos`. 
+
+```{r}
+#| label: t-distributed Stochastic Neighbor Embedding analysis with plot trinucleotides per genome
+#| echo: true
+#| warning: false
+
+# Initialize an empty list to store tsne plots for each genome
+tsne_list_trinucleotide <- list()
+
+# Loop through each genome and call genome to PCA
+for (genome in genomes) {
+  # Subset the data for the current genome
+  genome_data <- subset(combained_trinucleotide, Genome == genome)
+  
+  # Perform tsne on the subsetted data
+  tsne_list_process <- perform_tsne_highlight(genome_data, highlight_ids = highlight_ids, file_col = "Genome", id_col = "id", col_palette = palette_to_genome) # genome_data, dinucleotide_table$ID, pca_result$pca_result, col_palette = palette_to_genome
+
+  tsne_list_trinucleotide[[genome]] <- tsne_list_process
+}
+
+for (genome in names(tsne_list_trinucleotide)) {
+  # get plot of a list
+  tsne_plot <- tsne_list_trinucleotide[[genome]]$tsne_plot
+
+  print(tsne_plot) # Show plots
+  # filename <- paste0("tsne_plot_", genome, ".png") # Save as PDF if needed
+  # ggsave(filename = filename, plot = tsne_plot, width = 8, height = 6, dpi = 300)
+}
+
+# library(gridExtra)
+# plots <- lapply(tsne_list_dinucloetide, function(x) x$tsne_plot) # Get all plot of a list
+# do.call(grid.arrange, c(plots, ncol = 2)) # Show all plot in one image
+
+```
+
+:::

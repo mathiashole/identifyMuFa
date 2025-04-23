@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.32">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="Mathias">
+<title>Nucleotide frequency</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="dinucleotideFreq_files/libs/clipboard/clipboard.min.js"></script>
+<script src="dinucleotideFreq_files/libs/quarto-html/quarto.js"></script>
+<script src="dinucleotideFreq_files/libs/quarto-html/popper.min.js"></script>
+<script src="dinucleotideFreq_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="dinucleotideFreq_files/libs/quarto-html/anchor.min.js"></script>
+<link href="dinucleotideFreq_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="dinucleotideFreq_files/libs/quarto-html/quarto-syntax-highlighting-fc6d358c97f25a8ea829b86655043430.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="dinucleotideFreq_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="dinucleotideFreq_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="dinucleotideFreq_files/libs/bootstrap/bootstrap-48972e06b888b3abdceb77e41c660eb4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+</head>
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title">Nucleotide frequency</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Mathias </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header><p><img src="https://img.itch.zone/aW1nLzE3MTEyNjE5LmdpZg==/original/2%2BYVZg.gif" class="img-fluid" style="float:right;" alt="Illustration of a detective cat. Artwork by @shigemi.itch.io." width="301"></p>
+<div class="cell">
+<style type="text/css">
+p {
+  text-align: justify
+}
+
+</style>
+</div>
+<section id="análisis-de-la-frecuencia-de-dinucleótidos-y-trinucleótidos-mediante-pca" class="level2" data-number="1"><h2 data-number="1" class="anchored" data-anchor-id="análisis-de-la-frecuencia-de-dinucleótidos-y-trinucleótidos-mediante-pca">
+<span class="header-section-number">1</span> Análisis de la Frecuencia de Dinucleótidos y Trinucleótidos Mediante PCA</h2>
+<p>Se llevó a cabo un análisis de la <code>frecuencia de dinucleótidos</code> y trinucleótidos en una serie de secuencias de ADN con el objetivo de identificar patrones que permitan diferenciar las secuencias de interés. Para ello, se empleó un <a href="https://github.com/JoaquinAmatRodrigo/Estadistica-con-R/blob/master/PDF_format/35_Principal_Component_Analysis.pdf">Análisis de Componentes Principales (PCA)</a>, un análisis estadística ampliamente utilizado para la <code>reducción de la dimensionalidad</code> en datos de alta complejidad.</p>
+<p>El <code>PCA</code> se aplicó a los datos de <code>frecuencia</code> de <code>dinucleótidos</code> y <code>trinucleótidos</code>, lo que permitió <code>proyectar las secuencias</code> en un espacio de <code>menor dimensión</code>, facilitando la visualización y comprensión de las relaciones entre ellas. Las componentes principales seleccionadas explican un porcentaje significativo de la variabilidad observada en las frecuencias, lo que sugiere que estas combinaciones de bases son representativas de las diferencias biológicas presentes en las secuencias.</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Load necessary libraries</span></span>
+<span><span class="co">#library(data.table)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://seqinr.r-forge.r-project.org/">seqinr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/sinhrks/ggfortify">ggfortify</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jkrijthe/Rtsne">Rtsne</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Creamos una funcion que está diseñado para calcular las frecuencias de dinucleótidos y trinucleótidos en secuencias de ADN contenidas en archivos FASTA. En este se usara para calcular las frecuencias de dinucleótidos y trinucleótidos de todas las proteinas codificantes de los genomas TriTrypDB-68_TcruziDm28c2018_Genome.fasta, TriTrypDB-68_TcruziBrazilA4_Genome.fasta, TriTrypDB-68_TcruziYC6_Genome.fasta, TcDm25_TcruziTcDm25H1_Genome.fasta y de las secuencias codificantes de DGF-1 en estos genomas.</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Function to count dinucleotides</span></span>
+<span><span class="va">count_dinucleotides</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">sequence</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># Count dinucleotides</span></span>
+<span>  <span class="va">counts</span> <span class="op">&lt;-</span> <span class="fu">seqinr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/seqinr/man/count.html">count</a></span><span class="op">(</span><span class="va">sequence</span>, <span class="fl">2</span><span class="op">)</span></span>
+<span>  <span class="co"># Calculate frequencies</span></span>
+<span>  <span class="va">freqs</span> <span class="op">&lt;-</span> <span class="va">counts</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">counts</span><span class="op">)</span></span>
+<span>  <span class="va">freqs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">freqs</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">freqs</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Function to count dinucleotides</span></span>
+<span><span class="va">count_trinucleotides</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">sequence</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># Count dinucleotides</span></span>
+<span>  <span class="va">counts</span> <span class="op">&lt;-</span> <span class="fu">seqinr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/seqinr/man/count.html">count</a></span><span class="op">(</span><span class="va">sequence</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span>  <span class="co"># Calculate frequencies</span></span>
+<span>  <span class="va">freqs</span> <span class="op">&lt;-</span> <span class="va">counts</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">counts</span><span class="op">)</span></span>
+<span>  <span class="va">freqs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">freqs</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">freqs</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">nucleotide_frequncy</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">fasta_files</span>, <span class="va">type_frequency</span> <span class="op">=</span> <span class="st">"dinucleotide"</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span>  <span class="co"># Initialize the empty data frame for the results</span></span>
+<span></span>
+<span>  <span class="co"># Iterate over each FASTA file in the folder</span></span>
+<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">fasta_file</span> <span class="kw">in</span> <span class="va">fasta_files</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">sequences</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/seqinr/man/read.fasta.html">read.fasta</a></span><span class="op">(</span><span class="va">fasta_file</span><span class="op">)</span></span>
+<span>    <span class="va">ids</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">sequences</span><span class="op">)</span></span>
+<span>    </span>
+<span>    <span class="co"># Base name of file</span></span>
+<span>    <span class="va">base_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/basename.html">basename</a></span><span class="op">(</span><span class="va">fasta_file</span><span class="op">)</span></span>
+<span>    <span class="co"># Regular expresion for extract diferents parts</span></span>
+<span>    <span class="va">extracted_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">sub</a></span><span class="op">(</span><span class="st">".*_([^_]+)\\.fasta$"</span>, <span class="st">"\\1"</span>, <span class="va">base_name</span><span class="op">)</span></span>
+<span>    </span>
+<span>    <span class="co"># Get dinucleotide or trinucleotide frequencies for each sequence within a file</span></span>
+<span>    <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span><span class="op">(</span><span class="va">sequences</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>      <span class="va">seq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/seqinr/man/getSequence.html">getSequence</a></span><span class="op">(</span><span class="va">sequences</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
+<span></span>
+<span>      <span class="kw">if</span> <span class="op">(</span><span class="va">type_frequency</span> <span class="op">==</span> <span class="st">"trinucleotide"</span><span class="op">)</span> <span class="op">{</span></span>
+<span>        <span class="va">freqs</span> <span class="op">&lt;-</span> <span class="fu">count_trinucleotides</span><span class="op">(</span><span class="va">seq</span><span class="op">)</span></span>
+<span>      <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">type_frequency</span> <span class="op">==</span> <span class="st">"dinucleotide"</span><span class="op">)</span> <span class="op">{</span></span>
+<span>        <span class="va">freqs</span> <span class="op">&lt;-</span> <span class="fu">count_dinucleotides</span><span class="op">(</span><span class="va">seq</span><span class="op">)</span></span>
+<span>      <span class="op">}</span></span>
+<span>      </span>
+<span>      <span class="co"># Create a row with file name, ID and frequencies</span></span>
+<span>      <span class="va">row</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>File <span class="op">=</span> <span class="va">extracted_names</span>, ID <span class="op">=</span> <span class="va">ids</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="va">freqs</span><span class="op">)</span></span>
+<span>      <span class="co"># row &lt;- data.frame(File = extracted_names, ID = ids[i], t(freqs), stringsAsFactors = FALSE)</span></span>
+<span></span>
+<span>      <span class="va">results</span> <span class="op">&lt;-</span> <span class="va">results</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows</a></span><span class="op">(</span><span class="va">row</span><span class="op">)</span></span>
+<span>    <span class="op">}</span></span>
+<span>  <span class="op">}</span></span>
+<span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Se llama a la función nucleotide_frequncy() para obtener las tablas de frecuencias de dinucleótidos y trinucleótidos.</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Run the function and get the dinucleotide frequency table</span></span>
+<span><span class="va">dinucleotide_table</span> <span class="op">&lt;-</span> <span class="fu">nucleotide_frequncy</span><span class="op">(</span><span class="va">fasta_files</span>, type_frequency <span class="op">=</span> <span class="st">"dinucleotide"</span><span class="op">)</span></span>
+<span><span class="co">#dinucleotide_table &lt;- nucleotide_frequncy(fasta_files[1], type_frequency = "dinucleotide")</span></span>
+<span></span>
+<span><span class="co"># dinucleotide_table_rest_code_prot &lt;- nucleotide_frequncy(rest_code_prot, type_frequency = "dinucleotide")</span></span>
+<span></span>
+<span><span class="va">trinucleotide_table</span> <span class="op">&lt;-</span> <span class="fu">nucleotide_frequncy</span><span class="op">(</span><span class="va">fasta_files</span>, type_frequency <span class="op">=</span> <span class="st">"trinucleotide"</span><span class="op">)</span></span>
+<span><span class="co"># trinucleotide_table &lt;- nucleotide_frequncy(fasta_files[1], type_frequency = "trinucleotide")</span></span>
+<span><span class="co"># trinucleotide_table_rest_code_prot &lt;- nucleotide_frequncy(rest_code_prot, type_frequency = "trinucleotide")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Además, desarrollamos una función para eliminar símbolos que podrían interferir con la ejecución del código, a la cual denominamos</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># function to string manipulation on sequence ID</span></span>
+<span><span class="va">transform_columns</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">df</span>, <span class="va">cols</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># Iterate over the specified columns</span></span>
+<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">col</span> <span class="kw">in</span> <span class="va">cols</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="co"># Replace '=' with '_'</span></span>
+<span>    <span class="va">df</span><span class="op">[[</span><span class="va">col</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"="</span>, <span class="st">"_"</span>, <span class="va">df</span><span class="op">[[</span><span class="va">col</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>              </span>
+<span>    <span class="co"># Remove everything after ':' or ';'</span></span>
+<span>    <span class="va">df</span><span class="op">[[</span><span class="va">col</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"[:;].*"</span>, <span class="st">""</span>, <span class="va">df</span><span class="op">[[</span><span class="va">col</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>          </span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>  <span class="co"># Return the modified data frame</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">dinucleotide_table</span> <span class="op">&lt;-</span> <span class="fu">transform_columns</span><span class="op">(</span><span class="va">dinucleotide_table</span>, <span class="st">"ID"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># dinucleotide_table_rest_code_prot &lt;- transform_columns(dinucleotide_table_rest_code_prot, "ID")</span></span>
+<span></span>
+<span><span class="co"># trinucleotide_table_rest_code_prot &lt;- transform_columns(trinucleotide_table_rest_code_prot, "ID")</span></span>
+<span></span>
+<span><span class="va">trinucleotide_table</span> <span class="op">&lt;-</span> <span class="fu">transform_columns</span><span class="op">(</span><span class="va">trinucleotide_table</span>, <span class="st">"ID"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>En esta parte, el código crean nuevos data frame llamados <code>combained_dinucleotide</code> y <code>combained_trinucleotide</code>. Estos combinan las frecuencias de dinucleótidos y trinucleótidos complementarios en el ADN. Al unir las frecuencias de estos pares complementarios, se pueden observar patrones adicionales en las frecuencias previamente calculadas para las secuencias codificantes, lo cual es útil para detectar posibles sesgos en la composición del ADN.</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Convert dinucleotide columns to numeric</span></span>
+<span><span class="va">cols_to_convert</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"aa"</span>, <span class="st">"tt"</span>, <span class="st">"ac"</span>, <span class="st">"gt"</span>, <span class="st">"ag"</span>, <span class="st">"ct"</span>, <span class="st">"ca"</span>, <span class="st">"tg"</span>, <span class="st">"cc"</span>, <span class="st">"gg"</span>, <span class="st">"ga"</span>, <span class="st">"tc"</span>, <span class="st">"at"</span>, <span class="st">"cg"</span>, <span class="st">"gc"</span>, <span class="st">"ta"</span><span class="op">)</span></span>
+<span><span class="va">dinucleotide_all_protein_coding</span><span class="op">[</span><span class="va">cols_to_convert</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">dinucleotide_all_protein_coding</span><span class="op">[</span><span class="va">cols_to_convert</span><span class="op">]</span>, <span class="va">as.numeric</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Convert trinucleotide columns to numeric</span></span>
+<span><span class="va">cols_to_convert_trinucleotides</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"aaa"</span>, <span class="st">"aag"</span>, <span class="st">"aat"</span>, <span class="st">"aca"</span>, <span class="st">"acc"</span>, <span class="st">"act"</span>, <span class="st">"aga"</span>, <span class="st">"agg"</span>, <span class="st">"agt"</span>, <span class="st">"ata"</span>, <span class="st">"atc"</span>, <span class="st">"att"</span>, <span class="st">"caa"</span>, <span class="st">"cag"</span>, <span class="st">"cat"</span>, <span class="st">"cca"</span>, <span class="st">"ccc"</span>, <span class="st">"cct"</span>, <span class="st">"cga"</span>, <span class="st">"cgg"</span>, <span class="st">"cgt"</span>, <span class="st">"cta"</span>, <span class="st">"ctc"</span>, <span class="st">"ctt"</span>, <span class="st">"gaa"</span>, <span class="st">"gag"</span>, <span class="st">"gat"</span>, <span class="st">"gca"</span>, <span class="st">"gcc"</span>, <span class="st">"gct"</span>, <span class="st">"gga"</span>, <span class="st">"ggc"</span>, <span class="st">"ggt"</span>, <span class="st">"gta"</span>, <span class="st">"gtc"</span>, <span class="st">"gtt"</span>, <span class="st">"taa"</span>, <span class="st">"tag"</span>, <span class="st">"tat"</span>, <span class="st">"tca"</span>, <span class="st">"tcc"</span>, <span class="st">"tct"</span>, <span class="st">"tga"</span>, <span class="st">"tgg"</span>, <span class="st">"tgt"</span>, <span class="st">"tta"</span>, <span class="st">"ttc"</span>, <span class="st">"ttt"</span><span class="op">)</span></span>
+<span><span class="va">trinucleotide_all_protein_coding</span><span class="op">[</span><span class="va">cols_to_convert_trinucleotides</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">trinucleotide_all_protein_coding</span><span class="op">[</span><span class="va">cols_to_convert_trinucleotides</span><span class="op">]</span>, <span class="va">as.numeric</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="va">combine_data_frequencies</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">genome_col</span> <span class="op">=</span> <span class="st">"File"</span>, <span class="va">id_col</span> <span class="op">=</span> <span class="st">"ID"</span>, <span class="va">type</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">type</span> <span class="op">==</span> <span class="st">"di"</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">result_combained_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>      <span class="st">"Genome"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>, <span class="va">genome_col</span><span class="op">]</span>,</span>
+<span>      <span class="st">"id"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>, <span class="va">id_col</span><span class="op">]</span>,</span>
+<span>      <span class="st">"aa.tt"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"aa"</span><span class="op">]</span> <span class="op">+</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"tt"</span><span class="op">]</span>,</span>
+<span>      <span class="st">"ac.gt"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"ac"</span><span class="op">]</span> <span class="op">+</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"gt"</span><span class="op">]</span>,</span>
+<span>      <span class="st">"ag.ct"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"ag"</span><span class="op">]</span> <span class="op">+</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"ct"</span><span class="op">]</span>,</span>
+<span>      <span class="st">"ca.tg"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"ca"</span><span class="op">]</span> <span class="op">+</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"tg"</span><span class="op">]</span>,</span>
+<span>      <span class="st">"cc.gg"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"cc"</span><span class="op">]</span> <span class="op">+</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"gg"</span><span class="op">]</span>,</span>
+<span>      <span class="st">"ga.tc"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"ga"</span><span class="op">]</span> <span class="op">+</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"tc"</span><span class="op">]</span>,</span>
+<span>      <span class="st">"at"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"at"</span><span class="op">]</span>,</span>
+<span>      <span class="st">"cg"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"cg"</span><span class="op">]</span>,</span>
+<span>      <span class="st">"gc"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"gc"</span><span class="op">]</span>,</span>
+<span>      <span class="st">"ta"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"ta"</span><span class="op">]</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">type</span> <span class="op">==</span> <span class="st">"tri"</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">result_combained_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>  <span class="st">"Genome"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>, <span class="va">genome_col</span><span class="op">]</span>,</span>
+<span>  <span class="st">"id"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>, <span class="va">id_col</span><span class="op">]</span>,</span>
+<span>  <span class="st">"aaa.ttt"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"aaa"</span><span class="op">]</span> <span class="op">+</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"ttt"</span><span class="op">]</span>,</span>
+<span>  <span class="st">"aag.ctt"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"aag"</span><span class="op">]</span> <span class="op">+</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"ctt"</span><span class="op">]</span>,</span>
+<span>  <span class="st">"aac.gtt"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"aac"</span><span class="op">]</span> <span class="op">+</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"gtt"</span><span class="op">]</span>,</span>
+<span>  <span class="st">"aat.att"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"aat"</span><span class="op">]</span> <span class="op">+</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"att"</span><span class="op">]</span>,</span>
+<span>  <span class="st">"acc.ggt"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"acc"</span><span class="op">]</span> <span class="op">+</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"ggt"</span><span class="op">]</span>,</span>
+<span>  <span class="st">"act.agt"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"act"</span><span class="op">]</span> <span class="op">+</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"agt"</span><span class="op">]</span>,</span>
+<span>  <span class="st">"aga.tct"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"aga"</span><span class="op">]</span> <span class="op">+</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"tct"</span><span class="op">]</span>,</span>
+<span>  <span class="st">"agg.cct"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"agg"</span><span class="op">]</span> <span class="op">+</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"cct"</span><span class="op">]</span>,</span>
+<span>  <span class="st">"ata.tat"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"ata"</span><span class="op">]</span> <span class="op">+</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"tat"</span><span class="op">]</span>,</span>
+<span>  <span class="st">"atc.gat"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"atc"</span><span class="op">]</span> <span class="op">+</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"gat"</span><span class="op">]</span>,</span>
+<span>  <span class="st">"caa.ttg"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"caa"</span><span class="op">]</span> <span class="op">+</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"ttg"</span><span class="op">]</span>,</span>
+<span>  <span class="st">"cag.ctg"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"cag"</span><span class="op">]</span> <span class="op">+</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"ctg"</span><span class="op">]</span>,</span>
+<span>  <span class="st">"cat.atg"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"cat"</span><span class="op">]</span> <span class="op">+</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"atg"</span><span class="op">]</span>,</span>
+<span>  <span class="st">"cac.gtg"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"cac"</span><span class="op">]</span> <span class="op">+</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"gtg"</span><span class="op">]</span>,</span>
+<span>  <span class="st">"cca.tgg"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"cca"</span><span class="op">]</span> <span class="op">+</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"tgg"</span><span class="op">]</span>,</span>
+<span>  <span class="st">"ccc.ggg"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"ccc"</span><span class="op">]</span> <span class="op">+</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"ggg"</span><span class="op">]</span>,</span>
+<span>  <span class="st">"cga.tcg"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"cga"</span><span class="op">]</span> <span class="op">+</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"tcg"</span><span class="op">]</span>,</span>
+<span>  <span class="st">"cta.tag"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"cta"</span><span class="op">]</span> <span class="op">+</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"tag"</span><span class="op">]</span>,</span>
+<span>  <span class="st">"gaa.ttc"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"gaa"</span><span class="op">]</span> <span class="op">+</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"ttc"</span><span class="op">]</span>,</span>
+<span>  <span class="st">"gag.ctc"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"gag"</span><span class="op">]</span> <span class="op">+</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"ctc"</span><span class="op">]</span>,</span>
+<span>  <span class="st">"gat.atc"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"gat"</span><span class="op">]</span> <span class="op">+</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"atc"</span><span class="op">]</span>,</span>
+<span>  <span class="st">"gca.tgc"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"gca"</span><span class="op">]</span> <span class="op">+</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"tgc"</span><span class="op">]</span>,</span>
+<span>  <span class="st">"gga.tcc"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"gga"</span><span class="op">]</span> <span class="op">+</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"tcc"</span><span class="op">]</span>,</span>
+<span>  <span class="st">"ggg.ccc"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"ggg"</span><span class="op">]</span> <span class="op">+</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"ccc"</span><span class="op">]</span>,</span>
+<span>  <span class="st">"gta.tac"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"gta"</span><span class="op">]</span> <span class="op">+</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"tac"</span><span class="op">]</span>,</span>
+<span>  <span class="st">"gtc.gac"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"gtc"</span><span class="op">]</span> <span class="op">+</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"gac"</span><span class="op">]</span>,</span>
+<span>  <span class="st">"taa.tta"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"taa"</span><span class="op">]</span> <span class="op">+</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"tta"</span><span class="op">]</span>,</span>
+<span>  <span class="st">"tag.cta"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"tag"</span><span class="op">]</span> <span class="op">+</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"cta"</span><span class="op">]</span>,</span>
+<span>  <span class="st">"tat.ata"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"tat"</span><span class="op">]</span> <span class="op">+</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"ata"</span><span class="op">]</span>,</span>
+<span>  <span class="st">"tca.tga"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"tca"</span><span class="op">]</span> <span class="op">+</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"tga"</span><span class="op">]</span>,</span>
+<span>  <span class="st">"tga.tca"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"tga"</span><span class="op">]</span> <span class="op">+</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"tca"</span><span class="op">]</span>,</span>
+<span>  <span class="st">"tta.aag"</span> <span class="op">=</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"tta"</span><span class="op">]</span> <span class="op">+</span> <span class="va">data</span><span class="op">[</span>,<span class="st">"aag"</span><span class="op">]</span></span>
+<span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span><span class="op">(</span><span class="st">"Invalid type specified. Use 'di' for dinucleotides or 'tri' for trinucleotides."</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">result_combained_data</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">combained_dinucleotide</span> <span class="op">&lt;-</span> <span class="fu">combine_data_frequencies</span><span class="op">(</span><span class="va">dinucleotide_all_protein_coding</span>, type <span class="op">=</span> <span class="st">"di"</span><span class="op">)</span></span>
+<span><span class="va">combained_trinucleotide</span> <span class="op">&lt;-</span> <span class="fu">combine_data_frequencies</span><span class="op">(</span><span class="va">trinucleotide_all_protein_coding</span>, type <span class="op">=</span> <span class="st">"tri"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">id_vector</span> <span class="op">&lt;-</span> <span class="va">combained_dinucleotide</span><span class="op">$</span><span class="va">id</span></span>
+<span><span class="va">id_vector1</span> <span class="op">&lt;-</span> <span class="va">combained_trinucleotide</span><span class="op">$</span><span class="va">id</span></span>
+<span></span>
+<span><span class="co"># Transform the ID: remove everything after ";" and replace "=" with "_"</span></span>
+<span><span class="va">id_vector_cleaned</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">";.*"</span>, <span class="st">""</span>, <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"="</span>, <span class="st">"_"</span>, <span class="va">id_vector</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">id_vector_cleaned1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">";.*"</span>, <span class="st">""</span>, <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"="</span>, <span class="st">"_"</span>, <span class="va">id_vector1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># Asignar el vector limpio de vuelta al dataframe</span></span>
+<span><span class="va">combained_dinucleotide</span><span class="op">$</span><span class="va">id</span> <span class="op">&lt;-</span> <span class="va">id_vector_cleaned</span></span>
+<span><span class="va">combained_trinucleotide</span><span class="op">$</span><span class="va">id</span> <span class="op">&lt;-</span> <span class="va">id_vector_cleaned1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset nav-pills">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Dinucleotide PCA</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Trinucleotide PCA</a></li>
+</ul>
+<div class="tab-content nav-pills">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p>Se realizó un análisis de componentes principales (PCA) sobre las frecuencias de dinucleótidos combinados en las secuencias codificantes de los genomas <code>TriTrypDB-68_TcruziDm28c2018_Genome.fasta, TriTrypDB-68_TcruziBrazilA4_Genome.fasta, TriTrypDB-68_TcruziYC6_Genome.fasta, TcDm25_TcruziTcDm25H1_Genome.fasta</code>. El PCA permite reducir la dimensionalidad de las frecuencias de dinucleótidos en estas secuencias, facilitando la exploración de las relaciones entre secuencias y sus patrones de composición a nivel de <code>dinucleótidos</code>.</p>
+<p>En este análisis, se utiliza la función <code><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot()</a></code> para visualizar los resultados del PCA. El total de las secuencias codificantes se colorean según los <code>genomas</code>, y se muestran los vectores de carga (loadings) para identificar qué dinucleótidos tienen mayor influencia en cada componente principal.</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Function to perform PCA and graph (require ggplot2 and ggfortify)</span></span>
+<span><span class="co"># perform_pca &lt;- function(data, file_col = "File", id_col = "ID") {</span></span>
+<span><span class="co">#   # Exclude 'File' and 'ID' columns from numerical analysis</span></span>
+<span><span class="co">#   pca_data &lt;- data[, !(names(data) %in% c(file_col, id_col))]</span></span>
+<span><span class="co">#   # Convert all columns to numeric format</span></span>
+<span><span class="co">#   pca_data &lt;- as.data.frame(lapply(pca_data, as.numeric))</span></span>
+<span><span class="co">#   # Perform the PCA</span></span>
+<span><span class="co">#   pca_result &lt;- prcomp(pca_data, scale. = TRUE)</span></span>
+<span><span class="co">#   # Get PCA scores</span></span>
+<span><span class="co">#   pca_scores &lt;- as.data.frame(pca_result$x)</span></span>
+<span><span class="co">#   # Add 'File' and 'ID' columns to PCA results</span></span>
+<span><span class="co">#   pca_scores &lt;- cbind(data[, c(file_col, id_col)], pca_scores)</span></span>
+<span><span class="co">#   # Plot the PCA with autoplot</span></span>
+<span><span class="co">#   pca_plot &lt;- autoplot(pca_result, data = data, colour = file_col, </span></span>
+<span><span class="co">#                        loadings = TRUE, loadings.label = TRUE, loadings.colour = 'grey64', </span></span>
+<span><span class="co">#                        alpha = 0.2, size = 3) +</span></span>
+<span><span class="co">#     theme_minimal()</span></span>
+<span>  </span>
+<span><span class="co">#   # Return the results of the PCA and the graph</span></span>
+<span><span class="co">#   return(list(pca_result = pca_result, pca_scores = pca_scores, pca_plot = pca_plot))</span></span>
+<span><span class="co"># }</span></span>
+<span></span>
+<span><span class="co"># # Call perform_pca</span></span>
+<span><span class="co"># perform_result_dinucleotide_pca &lt;- perform_pca(combained_dinucleotide[-nrow(combained_dinucleotide), ], file_col = "Genome", id_col = "id")</span></span>
+<span></span>
+<span><span class="co"># # show plot</span></span>
+<span><span class="co"># perform_result_dinucleotide_pca$pca_plot</span></span>
+<span></span>
+<span><span class="va">perform_pca</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">file_col</span> <span class="op">=</span> <span class="st">"File"</span>, <span class="va">id_col</span> <span class="op">=</span> <span class="st">"ID"</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># Validate input data</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="va">file_col</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Column"</span>, <span class="va">file_col</span>, <span class="st">"not found in data"</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="va">id_col</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Column"</span>, <span class="va">id_col</span>, <span class="st">"not found in data"</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span>  </span>
+<span>  <span class="co"># Exclude 'file_col' and 'id_col' columns from numerical analysis</span></span>
+<span>  <span class="va">pca_data</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[</span>, <span class="op">!</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">file_col</span>, <span class="va">id_col</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span>
+<span>  </span>
+<span>  <span class="co"># Convert all columns to numeric, handling non-numeric values and NAs</span></span>
+<span>  <span class="va">pca_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">pca_data</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="fl">0</span>, <span class="va">x</span><span class="op">)</span>  <span class="co"># Replace NA with 0 (or adjust based on your preference)</span></span>
+<span>  <span class="op">}</span><span class="op">)</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># Ensure no rows were dropped due to conversion issues</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">pca_data</span><span class="op">)</span> <span class="op">!=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span><span class="op">(</span><span class="st">"Mismatch between input data rows and processed PCA data rows"</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span>  </span>
+<span>  <span class="co"># Perform the PCA</span></span>
+<span>  <span class="va">pca_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">pca_data</span>, scale. <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># Get PCA scores</span></span>
+<span>  <span class="va">pca_scores</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">pca_result</span><span class="op">$</span><span class="va">x</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># Add 'file_col' and 'id_col' columns to PCA results</span></span>
+<span>  <span class="va">pca_scores</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">file_col</span>, <span class="va">id_col</span><span class="op">)</span><span class="op">]</span>, <span class="va">pca_scores</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># Plot the PCA using autoplot</span></span>
+<span>  <span class="va">pca_plot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span></span>
+<span>    <span class="va">pca_result</span>, </span>
+<span>    data <span class="op">=</span> <span class="va">data</span>, </span>
+<span>    colour <span class="op">=</span> <span class="va">file_col</span>, </span>
+<span>    loadings <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>    loadings.label <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>    loadings.colour <span class="op">=</span> <span class="st">'grey64'</span>, </span>
+<span>    alpha <span class="op">=</span> <span class="fl">0.2</span>, </span>
+<span>    size <span class="op">=</span> <span class="fl">3</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># Return the results of the PCA and the graph</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>pca_result <span class="op">=</span> <span class="va">pca_result</span>, pca_scores <span class="op">=</span> <span class="va">pca_scores</span>, pca_plot <span class="op">=</span> <span class="va">pca_plot</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Call the updated perform_pca function</span></span>
+<span><span class="va">perform_result_dinucleotide_pca</span> <span class="op">&lt;-</span> <span class="fu">perform_pca</span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">combained_dinucleotide</span>, </span>
+<span>  file_col <span class="op">=</span> <span class="st">"Genome"</span>, </span>
+<span>  id_col <span class="op">=</span> <span class="st">"id"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Show the PCA plot</span></span>
+<span><span class="va">perform_result_dinucleotide_pca</span><span class="op">$</span><span class="va">pca_plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="dinucleotideFreq_files/figure-html/principal%20component%20analysis%20dinucleotide-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p>Ademas, se realizó un análisis de componentes principales (PCA) sobre las frecuencias de trinucleótidos combinados en las secuencias codificantes de los genomas <code>TriTrypDB-68_TcruziDm28c2018_Genome.fasta, TriTrypDB-68_TcruziBrazilA4_Genome.fasta, TriTrypDB-68_TcruziYC6_Genome.fasta, TcDm25_TcruziTcDm25H1_Genome.fasta</code>.</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Call perform_pca</span></span>
+<span><span class="co"># perform_result_trinucleotide_pca &lt;- perform_pca(combained_trinucleotide[-nrow(combained_trinucleotide), ], file_col = "Genome", id_col = "id")</span></span>
+<span><span class="va">perform_result_trinucleotide_pca</span> <span class="op">&lt;-</span> <span class="fu">perform_pca</span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">combained_dinucleotide</span>, </span>
+<span>  file_col <span class="op">=</span> <span class="st">"Genome"</span>, </span>
+<span>  id_col <span class="op">=</span> <span class="st">"id"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co"># show plot</span></span>
+<span><span class="va">perform_result_trinucleotide_pca</span><span class="op">$</span><span class="va">pca_plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="dinucleotideFreq_files/figure-html/principal%20component%20analysis%20trinucleotide-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr></section><section id="plot-pca-marcando-dgf-1" class="level2" data-number="2"><h2 data-number="2" class="anchored" data-anchor-id="plot-pca-marcando-dgf-1">
+<span class="header-section-number">2</span> plot PCA marcando <code>DGF-1</code>
+</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset nav-pills">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Dinucleotido PCA highlighted</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Trinucleotido PCA highlighted</a></li>
+</ul>
+<div class="tab-content nav-pills">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<p>En la siguiente figura se muestra el mismo análisis PCA, pero esta vez solo se han resaltado las secuencias de interés correspondientes a <code>DGF-1</code> para cada uno de los <code>genomas</code>. Las secuencias restantes se presentan en color gris.</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">highlight_ids</span> <span class="op">&lt;-</span> <span class="va">dinucleotide_table</span><span class="op">$</span><span class="va">ID</span></span>
+<span></span>
+<span><span class="va">create_pca_highlight_plot</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">highlight_ids</span>, <span class="va">pca_result</span>, <span class="va">genome_col</span> <span class="op">=</span> <span class="st">"Genome"</span>, <span class="va">col_palette</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># Create a copy of the input data</span></span>
+<span>  <span class="va">data_all_genomes</span> <span class="op">&lt;-</span> <span class="va">data</span></span>
+<span>  </span>
+<span></span>
+<span>  <span class="co"># Create new 'highlight' column that combines 'Highlighted' with the genome column</span></span>
+<span>  <span class="va">data_all_genomes</span><span class="op">$</span><span class="va">highlight</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span></span>
+<span>    <span class="va">data_all_genomes</span><span class="op">$</span><span class="va">id</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">highlight_ids</span>, </span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"Highlighted_"</span>, <span class="va">data_all_genomes</span><span class="op">[[</span><span class="va">genome_col</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>, </span>
+<span>    <span class="st">"Other"</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># Assign transparency values according to the 'highlight' column</span></span>
+<span>  <span class="va">data_all_genomes</span><span class="op">$</span><span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">"Highlighted"</span>, <span class="va">data_all_genomes</span><span class="op">$</span><span class="va">highlight</span><span class="op">)</span>, <span class="fl">0.6</span>, <span class="fl">0.1</span></span>
+<span>  <span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># data_all_genomes &lt;- data_all_genomes[-nrow(data_all_genomes), ]</span></span>
+<span></span>
+<span>  <span class="co"># Assign the first two principal components of the PCA</span></span>
+<span>  <span class="va">data_all_genomes</span><span class="op">$</span><span class="va">PC1</span> <span class="op">&lt;-</span> <span class="va">pca_result</span><span class="op">$</span><span class="va">x</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span></span>
+<span>  <span class="va">data_all_genomes</span><span class="op">$</span><span class="va">PC2</span> <span class="op">&lt;-</span> <span class="va">pca_result</span><span class="op">$</span><span class="va">x</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span></span>
+<span></span>
+<span>  <span class="co"># Define color palette only if it wasn't provided</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">col_palette</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="co"># Get the unique values of the 'highlight' column and sort them</span></span>
+<span>    <span class="va">unique_highlight_values</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">data_all_genomes</span><span class="op">$</span><span class="va">highlight</span><span class="op">)</span><span class="op">)</span></span>
+<span>    </span>
+<span>    <span class="co"># Create a color palette that assigns gray to 'Other' and different colors to 'Highlighted_&lt;Genome&gt;'</span></span>
+<span>    <span class="va">col_palette</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/pal_hue.html">hue_pal</a></span><span class="op">(</span><span class="op">)</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">unique_highlight_values</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span>, <span class="st">"grey"</span><span class="op">)</span></span>
+<span>    <span class="co"># col_palette &lt;- c("#00c496", "grey")</span></span>
+<span>    </span>
+<span>    <span class="co"># Map color palette to unique highlight values</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">col_palette</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">unique_highlight_values</span></span>
+<span>  <span class="op">}</span></span>
+<span>  </span>
+<span>  <span class="co"># Create subsets of the data for 'Highlighted' and 'Other'</span></span>
+<span>  <span class="va">highlighted_points</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">data_all_genomes</span>, <span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">"Highlighted"</span>, <span class="va">highlight</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">other_points</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">data_all_genomes</span>, <span class="va">highlight</span> <span class="op">==</span> <span class="st">"Other"</span><span class="op">)</span></span>
+<span></span>
+<span>    <span class="co"># Plot with ggplot: first 'Other' and then 'Highlighted'</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="co"># Layer for non-highlighted points in gray and low transparency</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">other_points</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">PC1</span>, y <span class="op">=</span> <span class="va">PC2</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"grey"</span>, alpha <span class="op">=</span> <span class="fl">0.1</span>, size <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="co"># Layer for highlighted points with colors and greater transparency</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">highlighted_points</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">PC1</span>, y <span class="op">=</span> <span class="va">PC2</span>, color <span class="op">=</span> <span class="va">highlight</span>, alpha <span class="op">=</span> <span class="va">alpha</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">col_palette</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_alpha.html">scale_alpha_continuous</a></span><span class="op">(</span>range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.6</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"PCA Highlighting Selected IDs"</span>, x <span class="op">=</span> <span class="st">"Principal Component 1"</span>, y <span class="op">=</span> <span class="st">"Principal Component 2"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="fu">create_pca_highlight_plot</span><span class="op">(</span><span class="va">combained_dinucleotide</span>, <span class="va">highlight_ids</span>, <span class="va">perform_result_dinucleotide_pca</span><span class="op">$</span><span class="va">pca_result</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="dinucleotideFreq_files/figure-html/dinucleotide%20highlight%20PCA-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">create_pca_highlight_plot</span><span class="op">(</span><span class="va">combained_trinucleotide</span>, <span class="va">highlight_ids</span>, <span class="va">perform_result_trinucleotide_pca</span><span class="op">$</span><span class="va">pca_result</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="dinucleotideFreq_files/figure-html/trinucleotide%20highlight%20PCA-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr></section><section id="plot-pca-por-cada-genoma-marcando-dgf-1" class="level2" data-number="3"><h2 data-number="3" class="anchored" data-anchor-id="plot-pca-por-cada-genoma-marcando-dgf-1">
+<span class="header-section-number">3</span> plot PCA por cada genoma marcando <code>DGF-1</code>
+</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset nav-pills">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">Dinucleotido PCA highlighted per genome</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">Trinucleotido PCA highlighted per genome</a></li>
+</ul>
+<div class="tab-content nav-pills">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Create a vector of unique genomes from the dataset</span></span>
+<span><span class="va">genomes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">combained_dinucleotide</span><span class="op">$</span><span class="va">Genome</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create a color palette that assigns gray to 'Other' and different colors to 'Highlighted_&lt;Genome&gt;'</span></span>
+<span><span class="va">palette_to_genome</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/pal_hue.html">hue_pal</a></span><span class="op">(</span><span class="op">)</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">genomes</span><span class="op">)</span><span class="op">)</span>, <span class="st">"grey"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Map color palette to genomes (including 'Other' for grey)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">palette_to_genome</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"Highlighted_"</span>, <span class="va">genomes</span><span class="op">)</span>, <span class="st">"Other"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Initialize an empty list to store PCA plots for each genome</span></span>
+<span><span class="va">pca_plots</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Loop through each genome</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">genome</span> <span class="kw">in</span> <span class="va">genomes</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># Subset the data for the current genome</span></span>
+<span>  <span class="va">genome_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">combained_dinucleotide</span>, <span class="va">Genome</span> <span class="op">==</span> <span class="va">genome</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># Perform PCA on the subsetted data</span></span>
+<span>  <span class="va">pca_result</span> <span class="op">&lt;-</span> <span class="fu">perform_pca</span><span class="op">(</span><span class="va">genome_data</span>, file_col <span class="op">=</span> <span class="st">"Genome"</span>, id_col <span class="op">=</span> <span class="st">"id"</span><span class="op">)</span></span>
+<span>  <span class="va">pca_scores</span> <span class="op">&lt;-</span> <span class="va">pca_result</span><span class="op">$</span><span class="va">pca_scores</span></span>
+<span>  </span>
+<span>  <span class="va">pca_plot</span> <span class="op">&lt;-</span> <span class="fu">create_pca_highlight_plot</span><span class="op">(</span><span class="va">genome_data</span>, <span class="va">highlight_ids</span>, <span class="va">pca_result</span><span class="op">$</span><span class="va">pca_result</span>, col_palette <span class="op">=</span> <span class="va">palette_to_genome</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="va">pca_plots</span><span class="op">[[</span><span class="va">genome</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">pca_plot</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Optionally, you can print or save each plot</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">genome</span> <span class="kw">in</span> <span class="va">genomes</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">pca_plots</span><span class="op">[[</span><span class="va">genome</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>  <span class="co"># Print the plot for each genome</span></span>
+<span>  <span class="co"># ggsave(paste0("PCA_", genome, ".pdf"), plot = pca_plots[[genome]])  # Save as PDF if needed</span></span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="dinucleotideFreq_files/figure-html/plot%20dinucleotide%20PCA%20per%20genome-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Create a vector of unique genomes from the dataset</span></span>
+<span><span class="va">genomes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">combained_trinucleotide</span><span class="op">$</span><span class="va">Genome</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Initialize an empty list to store PCA plots for each genome</span></span>
+<span><span class="va">pca_plots</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Loop through each genome</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">genome</span> <span class="kw">in</span> <span class="va">genomes</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># Subset the data for the current genome</span></span>
+<span>  <span class="va">genome_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">combained_trinucleotide</span>, <span class="va">Genome</span> <span class="op">==</span> <span class="va">genome</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># Perform PCA on the subsetted data</span></span>
+<span>  <span class="va">pca_result</span> <span class="op">&lt;-</span> <span class="fu">perform_pca</span><span class="op">(</span><span class="va">genome_data</span>, file_col <span class="op">=</span> <span class="st">"Genome"</span>, id_col <span class="op">=</span> <span class="st">"id"</span><span class="op">)</span></span>
+<span>  <span class="va">pca_scores</span> <span class="op">&lt;-</span> <span class="va">pca_result</span><span class="op">$</span><span class="va">pca_scores</span></span>
+<span>  </span>
+<span>  <span class="va">pca_plot</span> <span class="op">&lt;-</span> <span class="fu">create_pca_highlight_plot</span><span class="op">(</span><span class="va">genome_data</span>, <span class="va">highlight_ids</span>, <span class="va">pca_result</span><span class="op">$</span><span class="va">pca_result</span>, col_palette <span class="op">=</span> <span class="va">palette_to_genome</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="va">pca_plots</span><span class="op">[[</span><span class="va">genome</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">pca_plot</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Optionally, you can print or save each plot</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">genome</span> <span class="kw">in</span> <span class="va">genomes</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">pca_plots</span><span class="op">[[</span><span class="va">genome</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>  <span class="co"># Print the plot for each genome</span></span>
+<span>  <span class="co"># ggsave(paste0("PCA_", genome, ".pdf"), plot = pca_plots[[genome]])  # Save as PDF if needed</span></span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="dinucleotideFreq_files/figure-html/plot%20trinucleotide%20PCA%20per%20genome-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="análisis-t-sne-de-las-frecuencias-de-dinucleótidos-y-trinucleótidos" class="level2" data-number="4"><h2 data-number="4" class="anchored" data-anchor-id="análisis-t-sne-de-las-frecuencias-de-dinucleótidos-y-trinucleótidos">
+<span class="header-section-number">4</span> Análisis t-SNE de las Frecuencias de Dinucleótidos y Trinucleótidos</h2>
+<p>Se realizó un análisis de <a href="https://github.com/JoaquinAmatRodrigo/Estadistica-con-R/blob/master/PDF_format/35_Principal_Component_Analysis.pdf">t-distributed Stochastic Neighbor Embedding (t-SNE)</a> sobre las frecuencias de <code>dinucleótidos</code> y <code>trinucleotidos</code> combinados en las secuencias <code>codificantes</code> de los genomas de <code>TriTrypDB-68_TcruziDm28c2018_Genome.fasta, TriTrypDB-68_TcruziBrazilA4_Genome.fasta, TriTrypDB-68_TcruziYC6_Genome.fasta, TcDm25_TcruziTcDm25H1_Genome.fasta</code>. El t-SNE es una técnica de reducción de dimensionalidad que preserva las relaciones locales en los datos, lo que facilita la visualización de agrupamientos o patrones subyacentes en las frecuencias nucleotidicas de las secuencias.</p>
+<p>En este análisis, se utiliza la función ggplot() para visualizar los resultados del t-SNE, donde las secuencias codificantes se colorean de acuerdo con los genomas. El t-SNE permite explorar las similitudes y diferencias entre las secuencias de forma visual, destacando los patrones de composición a nivel de dinucleótidos.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset nav-pills">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href="">Dinucleotido t-SNE highlighted DGF-1</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false" href="">Trinucleotido t-SNE highlighted DGF-1</a></li>
+</ul>
+<div class="tab-content nav-pills">
+<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
+<p>Se realizó un análisis de t-SNE sobre las frecuencias de dinucleótidos resaltando <code>DGF-1</code> por cada genoma <code>TriTrypDB-68_TcruziDm28c2018_Genome.fasta, TriTrypDB-68_TcruziBrazilA4_Genome.fasta, TriTrypDB-68_TcruziYC6_Genome.fasta, TcDm25_TcruziTcDm25H1_Genome.fasta</code>. El t-SNE permite reducir la dimensionalidad, preservando las relaciones locales de las frecuencias de dinucleótidos, facilitando la exploración de las relaciones entre secuencias y sus patrones de composición a nivel de <code>dinucleótidos</code>.</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Function to perform t-SNE and plot</span></span>
+<span><span class="va">perform_tsne_highlight</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">highlight_ids</span>, <span class="va">file_col</span> <span class="op">=</span> <span class="st">"File"</span>, <span class="va">id_col</span> <span class="op">=</span> <span class="st">"ID"</span>, <span class="va">perplexity</span> <span class="op">=</span> <span class="fl">30</span>, <span class="va">max_iter</span> <span class="op">=</span> <span class="fl">1000</span>, <span class="va">col_palette</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># Exclude 'File' and 'ID' columns from numerical analysis</span></span>
+<span>  <span class="va">tsne_data</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[</span>, <span class="op">!</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">file_col</span>, <span class="va">id_col</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span>
+<span>  <span class="co"># Convert all columns to numeric format</span></span>
+<span>  <span class="va">tsne_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">tsne_data</span>, <span class="va">as.numeric</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="co"># removed duplicated row</span></span>
+<span>  <span class="va">duplicates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/duplicated.html">duplicated</a></span><span class="op">(</span><span class="va">tsne_data</span><span class="op">)</span> <span class="co"># NEED CHECK WITH BOSS</span></span>
+<span>  <span class="va">tsne_data_clean</span> <span class="op">&lt;-</span> <span class="va">tsne_data</span><span class="op">[</span><span class="op">!</span><span class="va">duplicates</span>, <span class="op">]</span> <span class="co"># NEED CHECK WITH BOSS</span></span>
+<span>  <span class="va">combained_dinucleotide_clean</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[</span><span class="op">!</span><span class="va">duplicates</span>, <span class="op">]</span> <span class="co"># NEED CHECK WITH BOSS</span></span>
+<span></span>
+<span>  <span class="co"># Perform t-SNE</span></span>
+<span>  <span class="va">tsne_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Rtsne/man/Rtsne.html">Rtsne</a></span><span class="op">(</span><span class="va">tsne_data_clean</span>, perplexity <span class="op">=</span> <span class="va">perplexity</span>, max_iter <span class="op">=</span> <span class="va">max_iter</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># Extract t-SNE coordinates</span></span>
+<span>  <span class="va">tsne_scores</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">tsne_result</span><span class="op">$</span><span class="va">Y</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">tsne_scores</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"tSNE1"</span>, <span class="st">"tSNE2"</span><span class="op">)</span>  <span class="co"># Rename columns for clarity</span></span>
+<span>  </span>
+<span>  <span class="co"># Add 'File' and 'ID' columns to t-SNE results</span></span>
+<span>  <span class="co"># tsne_scores &lt;- cbind(data[, c(file_col, id_col)], tsne_scores)</span></span>
+<span>  <span class="va">tsne_scores</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">combained_dinucleotide_clean</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Genome"</span>, <span class="st">"id"</span><span class="op">)</span><span class="op">]</span>, <span class="va">tsne_scores</span><span class="op">)</span></span>
+<span></span>
+<span>    <span class="co"># Create new 'highlight' column that combines 'Highlighted' with the genome (or file) column</span></span>
+<span>  <span class="va">tsne_scores</span><span class="op">$</span><span class="va">highlight</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span></span>
+<span>    <span class="va">tsne_scores</span><span class="op">[[</span><span class="va">id_col</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">highlight_ids</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"Highlighted_"</span>, <span class="va">tsne_scores</span><span class="op">[[</span><span class="va">file_col</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>, <span class="st">"Other"</span></span>
+<span>  <span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># Assign transparency values according to the 'highlight' column</span></span>
+<span>  <span class="va">tsne_scores</span><span class="op">$</span><span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">"Highlighted"</span>, <span class="va">tsne_scores</span><span class="op">$</span><span class="va">highlight</span><span class="op">)</span>, <span class="fl">0.6</span>, <span class="fl">0.1</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span>    <span class="co"># Define color palette only if it wasn't provided</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">col_palette</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="co"># Get unique values of the 'highlight' column and sort them</span></span>
+<span>    <span class="va">unique_highlight_values</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">tsne_scores</span><span class="op">$</span><span class="va">highlight</span><span class="op">)</span><span class="op">)</span></span>
+<span>    </span>
+<span>    <span class="co"># Create a color palette that assigns gray to 'Other' and different colors to 'Highlighted_&lt;Genome&gt;'</span></span>
+<span>    <span class="va">col_palette</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/pal_hue.html">hue_pal</a></span><span class="op">(</span><span class="op">)</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">unique_highlight_values</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span>, <span class="st">"grey"</span><span class="op">)</span></span>
+<span>    </span>
+<span>    <span class="co"># Map color palette to unique highlight values</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">col_palette</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">unique_highlight_values</span></span>
+<span>  <span class="op">}</span></span>
+<span></span>
+<span>  <span class="co"># Create subsets of the data for 'Highlighted' and 'Other'</span></span>
+<span>  <span class="va">highlighted_points</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">tsne_scores</span>, <span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">"Highlighted"</span>, <span class="va">highlight</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">other_points</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">tsne_scores</span>, <span class="va">highlight</span> <span class="op">==</span> <span class="st">"Other"</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># Plot with ggplot: first 'Other' and then 'Highlighted'</span></span>
+<span>  <span class="va">tsne_plot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="co"># Layer for non-highlighted points in gray and low transparency</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">other_points</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">tSNE1</span>, y <span class="op">=</span> <span class="va">tSNE2</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"grey"</span>, alpha <span class="op">=</span> <span class="fl">0.1</span>, size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="co"># Layer for highlighted points with colors and greater transparency</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">highlighted_points</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">tSNE1</span>, y <span class="op">=</span> <span class="va">tSNE2</span>, color <span class="op">=</span> <span class="va">highlight</span>, alpha <span class="op">=</span> <span class="va">alpha</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">col_palette</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_alpha.html">scale_alpha_continuous</a></span><span class="op">(</span>range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.6</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"t-SNE Highlighting Selected IDs"</span>, x <span class="op">=</span> <span class="st">"t-SNE 1"</span>, y <span class="op">=</span> <span class="st">"t-SNE 2"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># Return the results of the t-SNE and the plot</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>tsne_result <span class="op">=</span> <span class="va">tsne_result</span>, tsne_scores <span class="op">=</span> <span class="va">tsne_scores</span>, tsne_plot <span class="op">=</span> <span class="va">tsne_plot</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Call perform_tsne</span></span>
+<span><span class="va">perform_result_dinucleotide_tsne</span> <span class="op">&lt;-</span> <span class="fu">perform_tsne_highlight</span><span class="op">(</span><span class="va">combained_dinucleotide</span>, highlight_ids <span class="op">=</span> <span class="va">highlight_ids</span>, file_col <span class="op">=</span> <span class="st">"Genome"</span>, id_col <span class="op">=</span> <span class="st">"id"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Show plot</span></span>
+<span><span class="va">perform_result_dinucleotide_tsne</span><span class="op">$</span><span class="va">tsne_plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="dinucleotideFreq_files/figure-html/t-distributed%20Stochastic%20Neighbor%20Embedding%20analysis%20with%20plot%20dinucleotides-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
+<p>Ademas, se realizó un análisis de t-SNE sobre las frecuencias de trinucleótidos resaltando <code>DGF-1</code> por cada genoma <code>TriTrypDB-68_TcruziDm28c2018_Genome.fasta, TriTrypDB-68_TcruziBrazilA4_Genome.fasta, TriTrypDB-68_TcruziYC6_Genome.fasta, TcDm25_TcruziTcDm25H1_Genome.fasta</code>. Permitiendo reducir la dimensionalidad, preservando las relaciones locales de las frecuencias de <code>trinucleótidos</code>.</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Call perform_tsne</span></span>
+<span><span class="va">perform_result_trinucleotide_tsne</span> <span class="op">&lt;-</span> <span class="fu">perform_tsne_highlight</span><span class="op">(</span><span class="va">combained_trinucleotide</span>, highlight_ids <span class="op">=</span> <span class="va">highlight_ids</span>, file_col <span class="op">=</span> <span class="st">"Genome"</span>, id_col <span class="op">=</span> <span class="st">"id"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Show plot</span></span>
+<span><span class="va">perform_result_trinucleotide_tsne</span><span class="op">$</span><span class="va">tsne_plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="dinucleotideFreq_files/figure-html/t-distributed%20Stochastic%20Neighbor%20Embedding%20analysis%20with%20plot%20trinucleotides-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr></section><section id="análisis-t-sne-de-las-frecuencias-nucleotidicas-de-secuencias-codificantes-por-cada-genoma" class="level2" data-number="5"><h2 data-number="5" class="anchored" data-anchor-id="análisis-t-sne-de-las-frecuencias-nucleotidicas-de-secuencias-codificantes-por-cada-genoma">
+<span class="header-section-number">5</span> Análisis t-SNE de las frecuencias nucleotidicas de <code>secuencias codificantes</code> por cada <code>genoma</code>
+</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset nav-pills">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true" href="">t-SNE highlighted DGF-1 per genome</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false" href="">t-SNE highlighted DGF-1 per genome</a></li>
+</ul>
+<div class="tab-content nav-pills">
+<div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
+<p>Se realizó un análisis de t-SNE sobre las frecuencias de dinucleótidos resaltando <code>DGF-1</code> por cada genoma <code>TriTrypDB-68_TcruziDm28c2018_Genome.fasta, TriTrypDB-68_TcruziBrazilA4_Genome.fasta, TriTrypDB-68_TcruziYC6_Genome.fasta, TcDm25_TcruziTcDm25H1_Genome.fasta</code>. El t-SNE permite reducir la dimensionalidad, preservando las relaciones locales de las frecuencias de dinucleótidos, facilitando la exploración de las relaciones entre secuencias y sus patrones de composición a nivel de <code>dinucleótidos</code>.</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Call Map color palette to genomes (including 'Other' for grey)</span></span>
+<span><span class="co"># palette_to_genome</span></span>
+<span></span>
+<span><span class="co"># Initialize an empty list to store tsne plots for each genome</span></span>
+<span><span class="va">tsne_list_dinucloetide</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Loop through each genome and call genome to PCA</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">genome</span> <span class="kw">in</span> <span class="va">genomes</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># Subset the data for the current genome</span></span>
+<span>  <span class="va">genome_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">combained_dinucleotide</span>, <span class="va">Genome</span> <span class="op">==</span> <span class="va">genome</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># Perform tsne on the subsetted data</span></span>
+<span>  <span class="va">tsne_list_process</span> <span class="op">&lt;-</span> <span class="fu">perform_tsne_highlight</span><span class="op">(</span><span class="va">genome_data</span>, highlight_ids <span class="op">=</span> <span class="va">highlight_ids</span>, file_col <span class="op">=</span> <span class="st">"Genome"</span>, id_col <span class="op">=</span> <span class="st">"id"</span>, col_palette <span class="op">=</span> <span class="va">palette_to_genome</span><span class="op">)</span> <span class="co"># genome_data, dinucleotide_table$ID, pca_result$pca_result, col_palette = palette_to_genome</span></span>
+<span></span>
+<span>  <span class="va">tsne_list_dinucloetide</span><span class="op">[[</span><span class="va">genome</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">tsne_list_process</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">genome</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">tsne_list_dinucloetide</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># get plot of a list</span></span>
+<span>  <span class="va">tsne_plot</span> <span class="op">&lt;-</span> <span class="va">tsne_list_dinucloetide</span><span class="op">[[</span><span class="va">genome</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">tsne_plot</span></span>
+<span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">tsne_plot</span><span class="op">)</span> <span class="co"># Show plots</span></span>
+<span>  <span class="co"># filename &lt;- paste0("tsne_plot_", genome, ".png") # Save as PDF if needed</span></span>
+<span>  <span class="co"># ggsave(filename = filename, plot = tsne_plot, width = 8, height = 6, dpi = 300)</span></span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="dinucleotideFreq_files/figure-html/t-distributed%20Stochastic%20Neighbor%20Embedding%20analysis%20with%20plot%20dinucleotides%20per%20genome-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># library(gridExtra)</span></span>
+<span><span class="co"># plots &lt;- lapply(tsne_list_dinucloetide, function(x) x$tsne_plot) # Get all plot of a list</span></span>
+<span><span class="co"># do.call(grid.arrange, c(plots, ncol = 2)) # Show all plot in one image</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</div>
+<div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
+<p>Ademas, se realizó un análisis de t-SNE sobre las frecuencias de trinucleótidos resaltando <code>DGF-1</code> por cada genoma <code>TriTrypDB-68_TcruziDm28c2018_Genome.fasta, TriTrypDB-68_TcruziBrazilA4_Genome.fasta, TriTrypDB-68_TcruziYC6_Genome.fasta, TcDm25_TcruziTcDm25H1_Genome.fasta</code>. Permitiendo reducir la dimensionalidad, preservando las relaciones locales de las frecuencias de <code>trinucleótidos</code>.</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Initialize an empty list to store tsne plots for each genome</span></span>
+<span><span class="va">tsne_list_trinucleotide</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Loop through each genome and call genome to PCA</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">genome</span> <span class="kw">in</span> <span class="va">genomes</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># Subset the data for the current genome</span></span>
+<span>  <span class="va">genome_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">combained_trinucleotide</span>, <span class="va">Genome</span> <span class="op">==</span> <span class="va">genome</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># Perform tsne on the subsetted data</span></span>
+<span>  <span class="va">tsne_list_process</span> <span class="op">&lt;-</span> <span class="fu">perform_tsne_highlight</span><span class="op">(</span><span class="va">genome_data</span>, highlight_ids <span class="op">=</span> <span class="va">highlight_ids</span>, file_col <span class="op">=</span> <span class="st">"Genome"</span>, id_col <span class="op">=</span> <span class="st">"id"</span>, col_palette <span class="op">=</span> <span class="va">palette_to_genome</span><span class="op">)</span> <span class="co"># genome_data, dinucleotide_table$ID, pca_result$pca_result, col_palette = palette_to_genome</span></span>
+<span></span>
+<span>  <span class="va">tsne_list_trinucleotide</span><span class="op">[[</span><span class="va">genome</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">tsne_list_process</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">genome</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">tsne_list_trinucleotide</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># get plot of a list</span></span>
+<span>  <span class="va">tsne_plot</span> <span class="op">&lt;-</span> <span class="va">tsne_list_trinucleotide</span><span class="op">[[</span><span class="va">genome</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">tsne_plot</span></span>
+<span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">tsne_plot</span><span class="op">)</span> <span class="co"># Show plots</span></span>
+<span>  <span class="co"># filename &lt;- paste0("tsne_plot_", genome, ".png") # Save as PDF if needed</span></span>
+<span>  <span class="co"># ggsave(filename = filename, plot = tsne_plot, width = 8, height = 6, dpi = 300)</span></span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="dinucleotideFreq_files/figure-html/t-distributed%20Stochastic%20Neighbor%20Embedding%20analysis%20with%20plot%20trinucleotides%20per%20genome-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># library(gridExtra)</span></span>
+<span><span class="co"># plots &lt;- lapply(tsne_list_dinucloetide, function(x) x$tsne_plot) # Get all plot of a list</span></span>
+<span><span class="co"># do.call(grid.arrange, c(plots, ncol = 2)) # Show all plot in one image</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</div>
+</div>
+</div>
+</section></main><!-- /main column --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

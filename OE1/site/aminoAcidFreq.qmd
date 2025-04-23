@@ -1,0 +1,779 @@
+---
+title: "Amino acid frequency"
+author: "Mathias"
+format:
+  html:
+    theme: united
+    code-fold: true
+    code-link: true
+    number-sections: true
+    highlight-style: github
+---
+
+![](https://img.itch.zone/aW1nLzE3MTEyNjE5LmdpZg==/original/2%2BYVZg.gif){style="float:right;" fig-alt="Illustration of a detective cat. Artwork by @shigemi.itch.io." width="301"}
+
+```{css}
+#| echo: false
+
+p {
+  text-align: justify
+}
+
+```
+
+```{r}
+#| label: auxiliary function
+#| echo: false
+#| warning: false
+
+read_input <- function(input_file) {
+  read.delim(input_file, header = FALSE, stringsAsFactors = FALSE, fill = TRUE)
+}
+
+assign_column_names <- function(data, mode) {
+  n <- ncol(data)
+
+  if (mode == "hybrid") {
+    if (n == 6) {
+      colnames(data) <- c("fasta_file", "gff_file", "keyword1", "keyword2", "length", "sequence_file")
+    } else if (n == 5) {
+      colnames(data) <- c("fasta_file", "gff_file", "keyword1", "keyword2", "sequence_file")
+    } else {
+      stop("Unexpected format in HYBRID mode")
+    }
+  } else if (mode == "gff") {
+    if (n == 5) {
+      colnames(data) <- c("fasta_file", "gff_file", "keyword1", "keyword2", "length")
+    } else if (n == 4) {
+      colnames(data) <- c("fasta_file", "gff_file", "keyword1", "keyword2")
+    } else {
+      stop("Unexpected format in GFF mode")
+    }
+  } else if (mode == "no_gff") {
+    if (n == 3) {
+      colnames(data) <- c("fasta_file", "sequence_file", "length")
+    } else if (n == 2) {
+      colnames(data) <- c("fasta_file", "sequence_file")
+    } else {
+      stop("Unexpected format in NO_GFF mode")
+    }
+  }
+
+  return(data)
+}
+
+```
+
+```{r}
+#| label: charged global variables
+#| echo: false
+#| warning: false
+
+mode <- "gff"
+#input_arg <- file.path(output_dir, "execution_args_9900.tsv")
+
+source_file <- switch(mode,
+  "hybrid" = "code/moduleHybrid.R",
+  "gff" = "code/moduleGff.R",
+  "no_gff" = "code/moduleNoGff.R"
+)
+
+source(source_file)
+
+data_raw <- read_input(input_arg)
+data <- assign_column_names(data_raw, mode)
+
+output_dir <- switch(mode,
+  "hybrid" = "output_directory_hybrid",
+  "gff" = "output_directory",
+  "no_gff" = "output_directory_withoutgff"
+)
+
+if (mode == "hybrid") {
+  message("Modo: HYBRID")
+  transformed <- transform_data_hybrid(data)
+} else if (mode == "gff") {
+  message("Modo: GFF")
+  transformed <- transform_data(data)
+} else if (mode == "no_gff") {
+  message("Modo: NO GFF")
+  transformed <- transform_data_without_gff(data)
+}
+
+key_name <- unique(sort(transformed$keyword1))
+########################################
+
+directory_second <- "signalP"
+directory <- "output_directory/"
+# Read data frame
+data_transformed <- read.delim("output_directory/data_transformed.tsv", sep = "\t", header = TRUE)
+
+# Obtener la lista de archivos que comienzan con 'out_' y terminan con '.fasta'
+fasta_files <- paste0(directory, data_transformed$out_gscissors)
+genome_name <- basename(data_transformed$fasta_file)
+# rest_code_prot <- paste0(directory, data_transformed$out_rest_gscissors)
+
+genes_work <- basename(fasta_files)
+prot_name <- sub(".*_:(.*):_.*", "\\1", fasta_files)
+key_names <- sub("_.*", "\\1", prot_name)
+key_name <- unique(sort(key_names))
+
+fasta_files <- list.files(directory, pattern = "\\AA_empty.fasta$", full.names = TRUE)
+rest_code_prot <- list.files(directory, pattern = "\\_rest_AA.fasta$", full.names = TRUE)
+
+```
+
+```{r}
+#| label: load packages to frequency
+#| echo: true
+#| warning: false
+
+# Load necessary libraries
+#library(data.table)
+library(seqinr)
+library(ggplot2)
+library(ggfortify)
+library(Rtsne)
+library(tidyverse)
+
+##
+
+library(gridExtra)
+library(ggridges)
+library(ggbeeswarm)
+library(cowplot)
+
+##
+
+library(Biostrings)
+library(dplyr)
+library(purrr)
+library(tidyr)
+
+```
+
+
+```{r}
+#| label: charged amino acid table usage
+#| echo: false
+#| warning: false
+
+# Crear el dataframe con la tabla de aminoácidos
+amino_acids_table <- data.frame(
+  Amino_Acid = c("Alanine", "Arginine", "Asparagine", "Aspartic acid", 
+                 "Cysteine", "Glutamine", "Glutamic acid", "Glycine", 
+                 "Histidine", "Isoleucine", "Leucine", "Lysine", 
+                 "Methionine", "Phenylalanine", "Proline", "Serine", 
+                 "Threonine", "Tryptophan", "Tyrosine", "Valine"),
+  Three_Letter_Abbreviation = c("Ala", "Arg", "Asn", "Asp", "Cys", "Gln", 
+                                "Glu", "Gly", "His", "Ile", "Leu", "Lys", 
+                                "Met", "Phe", "Pro", "Ser", "Thr", "Trp", 
+                                "Tyr", "Val"),
+  One_Letter_Symbol = c("A", "R", "N", "D", "C", "Q", "E", "G", "H", 
+                        "I", "L", "K", "M", "F", "P", "S", "T", "W", 
+                        "Y", "V"),
+  Molecular_Weight = c(89, 174, 132, 133, 121, 146, 147, 75, 155, 131, 
+                       131, 146, 149, 165, 115, 105, 119, 204, 181, 117)
+)
+
+print(format(amino_acids_table, justify = "centre"), row.names = FALSE)
+
+```
+
+```{r}
+#| label: writed and charged big table
+#| echo: false
+#| warning: false
+
+# path_amino_protein_code_safe_tsv <- file.path("output_directory", paste0("amino_acids_frequency_all_protein_coding.tsv"))
+# path_amino_protein_code_safe <- file.path("output_directory", paste0("amino_acids_frequency_all_protein_coding.csv"))
+#write.csv(combined_freqs_coding_prot, file = path_amino_protein_code_safe, row.names = FALSE, col.names = TRUE, quote = FALSE)
+# write.table(combined_freqs_coding_prot, file = path_amino_protein_code_safe_tsv, row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
+
+# Load the table generated by the second script
+#combined_freqs_coding_prot <- read.table("output_directory/amino_acids_frequency_all_protein_coding.tsv", sep = "\t", header = TRUE)
+combined_freqs_coding_prot <- read.csv("output_directory/amino_acids_frequency_all_protein_coding.csv", sep = ",", header = TRUE)
+
+```
+
+```{r}
+#| label: main function to calculated amino acid frequencies 
+#| echo: true
+
+calculate_amino_acid_frequencies <- function(file) {
+  fasta <- read.fasta(file, seqtype = "AA")  # Leer archivo multifasta de aminoácidos
+
+  amino_acids <- c("A", "R", "N", "D", "C", "Q", "E", "G", "H", "I", "L", "K", "M", "F", "P", "S", "T", "W", "Y", "V")
+
+  # Procesar cada secuencia en el archivo
+  results <- lapply(names(fasta), function(seq_id) {
+    seq <- toupper(getSequence(fasta[[seq_id]], as.string = TRUE)[[1]])  # Convertir a texto y mayúsculas
+    aa_counts <- table(factor(strsplit(seq, "")[[1]], levels = amino_acids))  # Contar aminoácidos con niveles
+
+    total_aa <- sum(aa_counts)  # Total de aminoácidos en la secuencia
+
+    # Crear un dataframe de frecuencias por aminoácido
+    freq_df <- data.frame(AminoAcid = names(aa_counts), 
+                          Frequency = as.vector(aa_counts) / total_aa)
+
+    # Pivotar el dataframe para tener aminoácidos como columnas
+    freq_wide <- freq_df %>%
+      pivot_wider(names_from = AminoAcid, values_from = Frequency, 
+                  values_fill = list(Frequency = 0))  # Llenar valores faltantes con 0
+
+    # Agregar columnas con el nombre del archivo y el ID de la secuencia
+    freq_wide <- freq_wide %>%
+      mutate(File = basename(file), Sequence_ID = seq_id) %>%
+      relocate(File, Sequence_ID)  # Asegurar el orden de las columnas
+
+    return(freq_wide)
+  })
+
+  # Combinar resultados de todas las secuencias en un archivo
+  bind_rows(results)
+}
+
+# # Procesar todos los archivos
+# all_frequencies_coding_prot <- lapply(rest_code_prot, calculate_amino_acid_frequencies)
+
+# # Combinar resultados de todos los archivos en un solo dataframe
+# combined_freqs_coding_prot <- bind_rows(all_frequencies_coding_prot) %>%
+#   replace(is.na(.), 0)  # Reemplazar NA por 0
+combined_freqs_coding_prot$File <- gsub(".*_([A-Za-z0-9]+)_rest_AA\\.fasta", "\\1", combined_freqs_coding_prot$File)
+
+long_freqs_coding_prot <- combined_freqs_coding_prot %>%
+  pivot_longer(cols = c(3:22),  # Especifica las columnas de aminoácidos
+               names_to = "AminoAcid",  # Nombre de la nueva columna para los nombres de los aminoácidos
+               values_to = "Freq") %>%  # Nombre de la nueva columna para las frecuencias
+  mutate(Freq = Freq * 100)  # Convertir frecuencias a porcentaje
+
+summary_data_coding_prot <- long_freqs_coding_prot %>%
+  group_by(File, AminoAcid) %>%
+  summarise(
+    mean_freq = mean(Freq),
+    sd_freq = sd(Freq),
+    .groups = "drop"
+)
+
+# Procesar todos los archivos target
+all_frequencies_target <- lapply(fasta_files, calculate_amino_acid_frequencies)
+
+# Combinar resultados de todos los archivos en un solo dataframe
+# combined_freqs <- bind_rows(all_frequencies_target)
+combined_freqs_target <- bind_rows(all_frequencies_target) %>%
+  replace(is.na(.), 0)  # Reemplazar NA por 0
+
+combined_freqs_target$File <- gsub(".*_([A-Za-z0-9]+)_AA_empty\\.fasta", "\\1", combined_freqs_target$File)
+
+long_freqs_target <- combined_freqs_target %>%
+  pivot_longer(cols = A:Y,  # Especifica las columnas de aminoácidos
+               names_to = "AminoAcid",  # Nombre de la nueva columna para los nombres de los aminoácidos
+               values_to = "Freq") %>%  # Nombre de la nueva columna para las frecuencias
+  mutate(Freq = Freq * 100)  # Convertir frecuencias a porcentaje
+
+summary_data_target <- long_freqs_target %>%
+  group_by(File, AminoAcid) %>%
+  summarise(
+    mean_freq = mean(Freq),
+    sd_freq = sd(Freq),
+    .groups = "drop"
+  )
+
+
+
+```
+
+::: {.panel-tabset .nav-pills}
+
+## Amino acid frequency of coding frequency
+
+```{r}
+#| label: Created function to barplot amino acids frequency 
+#| echo: true
+
+plot_bar_gc <- function(data, plot_title, y_label) {
+  ggplot(data, aes(x = AminoAcid, y = mean_freq, fill = AminoAcid)) +
+    geom_bar(stat = "identity", alpha = 0.7, width = 0.5) + 
+    geom_errorbar(
+      aes(
+        ymin = mean_freq - sd_freq,
+        ymax = mean_freq + sd_freq
+      ),
+      width = 0.4, colour = "orange", alpha = 0.6, size = 0.9
+    ) +
+    geom_text(aes(label = round(mean_freq, 2)), vjust = -0.5, size = 3) +
+    ylab(y_label) + 
+    labs(
+      title = plot_title,  
+      caption = "Data source: Facultad de Ciencias, Udelar"
+    ) +
+    theme_minimal() + 
+    theme(
+      axis.line.y = element_blank(), 
+      axis.ticks.y = element_blank(),
+      axis.text.x = element_text(angle = 45, hjust = 1)
+    )
+}
+
+unique_files <- unique(summary_data_coding_prot$File)
+
+for (file_name in unique_files) {
+  data_subset <- filter(summary_data_coding_prot, File == file_name)
+  
+  print(plot_bar_gc(
+    data_subset, 
+    plot_title = paste("Amino acid frequency -", file_name), 
+    y_label = "Amino acid content"
+  ))
+  
+  # readline(prompt = "Presiona Enter para ver el siguiente gráfico...")
+}
+
+```
+
+
+## `r key_name` amino acid frequency
+
+```{r}
+
+
+unique_files <- unique(summary_data_target$File)
+
+for (file_name in unique_files) {
+  data_subset <- filter(summary_data_target, File == file_name)
+  
+  print(plot_bar_gc(
+    data_subset, 
+    plot_title = paste("Amino acid frequency -", file_name), 
+    y_label = "Amino acid content"
+  ))
+  
+  # readline(prompt = "Presiona Enter para ver el siguiente gráfico...")
+}
+```
+
+:::
+
+
+```{r}
+#| label: Created function to barplot contrast 
+#| echo: true
+
+# plot_barplot_contrast <- function(data, plot_title, y_label) {
+#   dodge <- position_dodge(width = 0.5)  # Definimos un dodge para ambas capas
+  
+#   ggplot(data, aes(x = AminoAcid, y = mean_freq, fill = supp)) +
+#     geom_bar(
+#       stat = "identity", 
+#       alpha = 0.7, 
+#       width = 0.5, 
+#       position = dodge
+#     ) + 
+#     # geom_errorbar(
+#     #   aes(
+#     #     ymin = mean_freq - sd_freq,
+#     #     ymax = mean_freq + sd_freq
+#     #   ),
+#     #   width = 0.25, 
+#     #   colour = "orange", 
+#     #   alpha = 0.8, 
+#     #   size = 0.7,
+#     #   position = dodge  # Aplicamos el mismo dodge para alinear las barras de error
+#     # ) +
+#     # scale_fill_manual(values = c("rest" = "#E15759", key_name = "#5fd4b1")) +
+#     # geom_text(
+#     #   aes(label = round(mean_freq, 2)), 
+#     #   vjust = -0.5, 
+#     #   size = 3, 
+#     #   position = dodge  # Alineamos también las etiquetas
+#     # ) +
+#     ylab(y_label) + 
+#     labs(
+#       title = plot_title,  
+#       caption = "Data source: Facultad de Ciencias, Udelar"
+#     ) +
+#     theme_minimal() + 
+#     theme(
+#       axis.line.y = element_blank(), 
+#       axis.ticks.y = element_blank(),
+#       axis.text.x = element_text(angle = 45, hjust = 1)
+#     )
+# }
+
+# summary_data_target$supp <- rep(key_name, length(summary_data_target$File))
+# summary_data_coding_prot$supp <- rep("Other", length(summary_data_coding_prot$File))
+
+# target_coding_seq <- bind_rows(summary_data_target, summary_data_coding_prot)
+
+# unique_files <- unique(target_coding_seq$File)
+
+# for (file_name in unique_files) {
+#   data_subset <- filter(target_coding_seq, File == file_name)
+  
+#   print(plot_barplot_contrast(
+#     data_subset, 
+#     plot_title = paste("Amino acid frequency -", file_name), 
+#     y_label = "Amino acid content"
+#   ))
+  
+#   # readline(prompt = "Press Enter to see the next plot...")
+# }
+
+plot_barplot_contrast <- function(data, plot_title, y_label) {
+  dodge <- position_dodge(width = 0.5)  # Define dodge for bar alignment
+  
+  ggplot(data, aes(x = AminoAcid, y = mean_freq, fill = supp)) +
+    geom_bar(
+      stat = "identity", 
+      alpha = 0.7, 
+      width = 0.5, 
+      position = dodge
+    ) +
+    ylab(y_label) + 
+    labs(
+      title = plot_title,  
+      caption = "Data source: Facultad de Ciencias, Udelar"
+    ) +
+    theme_minimal() + 
+    theme(
+      axis.line.y = element_blank(), 
+      axis.ticks.y = element_blank(),
+      axis.text.x = element_text(angle = 45, hjust = 1)
+    )
+}
+
+# Map one-letter codes to three-letter codes before plotting
+amino_acids_one_letter <- c("A", "R", "N", "D", "C", "Q", "E", "G", "H", "I", 
+                            "L", "K", "M", "F", "P", "S", "T", "W", "Y", "V")
+amino_acids_three_letter <- c(
+  "Ala", "Arg", "Asn", "Asp", "Cys", 
+  "Gln", "Glu", "Gly", "His", "Ile", 
+  "Leu", "Lys", "Met", "Phe", "Pro", 
+  "Ser", "Thr", "Trp", "Tyr", "Val"
+)
+
+summary_data_target$supp <- rep(key_name, length(summary_data_target$File))
+summary_data_coding_prot$supp <- rep("Other", length(summary_data_coding_prot$File))
+
+
+target_coding_seq <- bind_rows(summary_data_target, summary_data_coding_prot)
+
+target_coding_seq$AminoAcid <- factor(
+  target_coding_seq$AminoAcid, 
+  levels = amino_acids_one_letter, 
+  labels = amino_acids_three_letter
+)
+
+unique_files <- unique(target_coding_seq$File)
+
+for (file_name in unique_files) {
+  data_subset <- filter(target_coding_seq, File == file_name)
+  
+  print(plot_barplot_contrast(
+    data_subset, 
+    plot_title = paste("Amino acid frequency -", file_name), 
+    y_label = "Amino acid content"
+  ))
+}
+
+
+```
+
+
+```{r}
+#| label: table classification amino acids 
+#| echo: false
+
+library(treemap)
+
+Category <- c(
+  rep("Aliphatic", 5), rep("Aromatic", 3), 
+  rep("Sulphur", 2), rep("Basic", 3), 
+  rep("Acidic", 4), rep("Aliphatic Hydroxyl", 2), 
+  rep("Class I tRNA Synthetase", 10), 
+  rep("Class II tRNA Synthetase", 10)
+)
+
+Amino_Acid <- c(
+  "Gly(G)", "Ala(A)", "Val(V)", "Leu(L)", "Ile(I)",  # Aliphatic
+  "Phe(F)", "Trp(W)", "Tyr(Y)",                      # Aromatic
+  "Cys(C)", "Met(M)",                                # Sulphur
+  "Lys(K)", "Arg(R)", "His(H)",                      # Basic
+  "Asp(D)", "Glu(E)", "Asn(N)", "Gln(Q)",            # Acidic
+  "Ser(S)", "Thr(T)",                                # Aliphatic Hydroxyl
+  "Glu(E)", "Gln(Q)", "Arg(R)", "Cys(C)",            # Class I
+  "Met(M)", "Val(V)", "Ile(I)", "Leu(L)", 
+  "Tyr(Y)", "Trp(W)",                               
+  "Gly(G)", "Ala(A)", "Pro(P)", "Ser(S)",            # Class II
+  "Thr(T)", "His(H)", "Asp(D)", "Asn(N)", 
+  "Lys(K)", "Phe(F)"
+)
+
+# Nueva columna: Clase de tRNA (donde no aplica, dejamos NA)
+tRNA_Class <- c(
+  rep(NA, 19),  # No aplica para las primeras 19 categorías
+  rep("Class I", 10), 
+  rep("Class II", 10)
+)
+
+amino_acid_data <- data.frame(Category, Amino_Acid, tRNA_Class)
+
+amino_acid_data$Value <- sample(1:10, nrow(amino_acid_data), replace = TRUE)
+
+treemap(
+  amino_acid_data,
+  index = c("Category", "tRNA_Class", "Amino_Acid"),  # Jerarquía con tercer nivel
+  vSize = "Value",  # Tamaño según los valores aleatorios
+  type = "index",  # Visualización jerárquica
+  palette = "Set3",  # Paleta de colores
+  title = "Treemap de Aminoácidos con Clases de tRNA"
+)
+
+```
+
+```{r}
+#| label: classification amino acids 
+#| echo: true
+
+classification_aminoacids <- function(data, genome_col = "File", id_col = "Sequence_ID", type) {
+    result_combained_data <- data.frame(
+      "Genome" = data[[ genome_col]],
+      "id" = data[[ id_col]],
+      "Aliphatic" = rowSums(data[, c("G", "A", "V", "L", "I")]),
+      "Aromatic" = rowSums(data[, c("F", "W", "Y")]),
+      "Sulphur" = rowSums(data[, c("C", "M")]),
+      "Basic" = rowSums(data[, c("K", "R", "H")]),
+      "Acidic" = rowSums(data[, c("D", "E", "N", "Q")]),
+      "AliphaticHydroxyl" = rowSums(data[, c("S", "T")]),
+      "tRNAsynthetaseClassI" = rowSums(data[, c("E", "Q", "R", "C", "M", "V", "I", "L", "Y", "W")]),
+      "tRNAsynthetaseClassII" = rowSums(data[, c("G", "A", "P", "S", "T", "H", "D", "N", "K", "F")])
+    )
+}
+
+classfied_amino_acids_targt <- classification_aminoacids(combined_freqs_target)
+classfied_amino_acids_coding_prot <- classification_aminoacids(combined_freqs_coding_prot)
+
+```
+
+::: {.panel-tabset .nav-pills}
+
+## Frequency of amino acid groups of the coding sequences.
+
+```{r}
+#| label: plot amino acids groups of the coding sequence 
+#| echo: true
+
+plot_violin_group <- function(data, plot_title, y_label) {
+  ggplot(data, aes(x = AminoAcidGroup, y = Freq, fill = AminoAcidGroup)) +
+    geom_violin(alpha = 0.7, width = 0.5) + 
+    geom_boxplot(width = 0.1, fill = "white", alpha = 0.3, outlier.shape = NA) +
+    scale_fill_brewer(palette = "Dark2") + 
+    ylab(y_label) + 
+    labs(
+      title = plot_title, 
+      caption = "Data source: Facultad de Ciencias, Udelar"
+    ) +
+    theme_minimal() + 
+    theme(
+      axis.line.y = element_blank(), 
+      axis.ticks.y = element_blank(),
+      axis.text.x = element_text(angle = 45, hjust = 1)#,
+#      legend.position = "none"
+    )
+}
+
+
+long_data_coding_prot <- classfied_amino_acids_coding_prot %>%
+  pivot_longer(
+    cols = -c(Genome, id),  # Excluir columnas que no se quieren transformar
+    names_to = "AminoAcidGroup",
+    values_to = "Freq"
+  )
+
+# Function plot_violin_group call
+# plot_violin_group(
+#   data = long_data_coding_prot, 
+#   plot_title = "Frequency of grouped amino acids", 
+#   y_label = "Amino acid content"
+# )
+
+unique_files <- unique(long_data_coding_prot$Genome)
+
+for (file_name in unique_files) {
+  data_subset <- filter(long_data_coding_prot, Genome == file_name)
+  
+  print(plot_violin_group(
+    data_subset, 
+    plot_title = paste("Frequency of grouped amino acids -", file_name), 
+    y_label = "Amino acid content"
+  ))
+  
+  # readline(prompt = "Presiona Enter para ver el siguiente gráfico...")
+}
+
+```
+
+## Frequency of amino acid groups of `r key_name`
+
+```{r}
+#| label: plot amino acids group of target
+#| echo: true
+
+long_data_target <- classfied_amino_acids_targt %>%
+  pivot_longer(
+    cols = -c(Genome, id),  # Excluir columnas que no se quieren transformar
+    names_to = "AminoAcidGroup",
+    values_to = "Freq"
+  )
+
+# Function plot_violin_group call
+# plot_violin_group(
+#   data = long_data_coding_prot, 
+#   plot_title = "Frequency of grouped amino acids", 
+#   y_label = "Amino acid content"
+# )
+
+unique_files <- unique(long_data_target$Genome)
+
+for (file_name in unique_files) {
+  data_subset <- filter(long_data_target, Genome == file_name)
+  
+  print(plot_violin_group(
+    data_subset, 
+    plot_title = paste("Frequency of grouped amino acids -", file_name), 
+    y_label = "Amino acid content"
+  ))
+  
+  # readline(prompt = "Presiona Enter para ver el siguiente gráfico...")
+}
+
+```
+
+:::
+
+```{r}
+
+plot_violin_contrast <- function(data, plot_title, y_label) {
+  dodge <- position_dodge(width = 0.8)  # define the dodge to separate the groups
+
+  ggplot(data, aes(x = AminoAcidGroup, y = Freq, fill = supp)) +
+    geom_violin(alpha = 0.7, width = 0.5, position = dodge) +
+    # geom_boxplot(width = 0.1, fill = "white", alpha = 0.3, outlier.shape = NA, position = dodge) +
+    # scale_fill_brewer(palette = "Dark2") + 
+    ylab(y_label) + 
+    labs(
+      title = plot_title, 
+      caption = "Data source: Facultad de Ciencias, Udelar"
+    ) +
+    theme_minimal() + 
+    theme(
+      axis.line.y = element_blank(), 
+      axis.ticks.y = element_blank(),
+      axis.text.x = element_text(angle = 45, hjust = 1)
+    )
+}
+
+long_data_target$supp <- rep(key_name, length(long_data_target$Genome))
+long_data_coding_prot$supp <- rep("rest", length(long_data_coding_prot$Genome))
+
+target_coding_seq_class <- bind_rows(long_data_target , long_data_coding_prot)
+
+unique_files <- unique(target_coding_seq_class$Genome)
+
+for (file_name in unique_files) {
+  data_subset <- filter(target_coding_seq_class, Genome == file_name)
+  
+  print(plot_violin_contrast(
+    data_subset, 
+    plot_title = paste("Frequency of grouped amino acids -", file_name), 
+    y_label = "Amino acid content"
+  ))
+  
+  # readline(prompt = "Presiona Enter para ver el siguiente gráfico...")
+}
+```
+
+```{r}
+#| label: Created function to barplot contrast group
+#| echo: true
+
+summary_data_class_target <- long_data_target %>%
+  group_by(Genome, AminoAcidGroup) %>%
+  summarise(
+    mean_freq = mean(Freq),
+    sd_freq = sd(Freq),
+    # supp = supp,
+    .groups = "drop"
+)
+
+summary_data_class_coding_prot <- long_data_coding_prot %>%
+  group_by(Genome, AminoAcidGroup) %>%
+  summarise(
+    mean_freq = mean(Freq),
+    sd_freq = sd(Freq),
+    # supp = supp,
+    .groups = "drop"
+)
+
+plot_barplot_contrast_group <- function(data, plot_title, y_label) {
+  dodge <- position_dodge(width = 0.5)  # Definimos un dodge para ambas capas
+  
+  ggplot(data, aes(x = AminoAcidGroup, y = mean_freq, fill = supp)) +
+    geom_bar(
+      stat = "identity", 
+      alpha = 0.7, 
+      width = 0.5, 
+      position = dodge
+    ) + 
+    geom_errorbar(
+      aes(
+        ymin = mean_freq - sd_freq,
+        ymax = mean_freq + sd_freq
+      ),
+      width = 0.25, 
+      colour = "orange", 
+      alpha = 0.8, 
+      size = 0.7,
+      position = dodge  # Aplicamos el mismo dodge para alinear las barras de error
+    ) +
+    # scale_fill_manual(values = c("rest" = "#E15759", key_name = "#5fd4b1")) +
+    geom_text(
+      aes(label = round(mean_freq, 2)), 
+      vjust = -0.5, 
+      size = 3, 
+      position = dodge  # Alineamos también las etiquetas
+    ) +
+    ylab(y_label) + 
+    labs(
+      title = plot_title,  
+      caption = "Data source: Facultad de Ciencias, Udelar"
+    ) +
+    theme_minimal() + 
+    theme(
+      axis.line.y = element_blank(), 
+      axis.ticks.y = element_blank(),
+      axis.text.x = element_text(angle = 45, hjust = 1)
+    )
+}
+
+summary_data_class_target$supp <- rep(key_name, length(summary_data_class_target$Genome))
+summary_data_class_coding_prot$supp <- rep("rest", length(summary_data_class_coding_prot$Genome))
+
+target_coding_seq_group <- bind_rows(summary_data_class_target, summary_data_class_coding_prot)
+
+unique_files <- unique(target_coding_seq_group$Genome)
+
+for (file_name in unique_files) {
+  data_subset <- filter(target_coding_seq_group, Genome == file_name)
+  
+  print(plot_barplot_contrast_group(
+    data_subset,
+    plot_title = paste("Amino acid frequency -", file_name), 
+    y_label = "Amino acid content"
+  ))
+  
+  # readline(prompt = "Press Enter to see the next plot...")
+}
+
+
+```
