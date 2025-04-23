@@ -107,6 +107,10 @@ generate_commands <- function(data, output_dir) {
 
   data$classifier_command <- paste("Rscript", CLASSIFIER, file.path(output_dir, data$overlappingshaive_result_filtered), file.path(output_dir, "blast_result", data$brefiner_blastp))
 
+  data$gs_new_gen_command <- paste(GSCISSORS, "--fasta", file.path(output_dir, data$gorf_result_file_nucl), "--coordinates",
+                                  file.path(output_dir, "blast_result", data$brefiner_blastp), "--format", "id", "--output",
+                                  file.path(output_dir, data$new_gen))
+
   data$gs_new_gen_prot_command <- paste(GSCISSORS, "--fasta", file.path(output_dir, data$gorf_result_file_prot), "--coordinates",
                                   file.path(output_dir, "blast_result", data$brefiner_blastp), "--format", "id", "--output",
                                   file.path(output_dir, data$new_gen_protein))
@@ -262,6 +266,24 @@ execution_module <- function(data, output_dir) {
         path_file_calssifier <- file.path(output_dir, data$calssifier_result[i])
         if (!file.exists(path_file_calssifier)) {
           cat("Error: CLASSIFIER did not create the file", data$calssifier_result[i], "\n")
+          next
+        }
+
+        cat("Processing GSCISSORS: ", data$gscissors_high_command[i], "\n")
+        # Check if FILTER_SEQ created the expected file
+        path_file_gsG <- file.path(output_dir, data$overlap_result_high_equal[i])
+        system(data$gscissors_high_command[i])
+        if (!file.exists(path_file_gsG)) {
+          cat("Error: GSCISSORS did not create the file", data$overlap_result_high_equal[i], "\n")
+          next
+        }
+
+        cat("Processing GSCISSORS: ", data$gscissors_low_command[i], "\n")
+        # Check if FILTER_SEQ created the expected file
+        path_file_gsP <- file.path(output_dir, data$overlap_result_low[i])
+        system(data$gscissors_low_command[i])
+        if (!file.exists(path_file_gsP)) {
+          cat("Error: GSCISSORS did not create the file", data$overlap_result_low[i], "\n")
           next
         }
 
