@@ -270,10 +270,10 @@ trinucleotide_table <- transform_columns(trinucleotide_table, "ID")
 #             sep = "\t", row.names = FALSE, quote = FALSE)
 
 # Leer en formato TSV
-dinucleotide_all_protein_coding <- read.table("output_directory/dinucleotide_frequency_all_protein_coding.tsv", 
+dinucleotide_all_protein_coding <- read.table("../output_directory/dinucleotide_frequency_all_protein_coding.tsv", 
                                               sep = "\t", header = TRUE, stringsAsFactors = FALSE)
 
-trinucleotide_all_protein_coding <- read.table("output_directory/trinucleotide_frequency_all_protein_coding.tsv", 
+trinucleotide_all_protein_coding <- read.table("../output_directory/trinucleotide_frequency_all_protein_coding.tsv", 
                                                sep = "\t", header = TRUE, stringsAsFactors = FALSE)
 
 
