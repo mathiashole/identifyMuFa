@@ -16,6 +16,7 @@ transform_data <- function(data) {
   data$out_gscissors_low <- paste0("out_low_", data$keyword_sum, "_", data$no_gff_basename, ".fasta") # extract filtered < minimal length sequence
   data$out_gscissors_all <- paste0("out_all_", data$keyword_sum, "_", data$no_gff_basename, ".fasta") # All sequences
   data$out_rest_gscissors <- paste0("out_rest_", data$keyword2, "_", data$no_gff_basename, ".fasta") # extract rest of no filtered sequence
+  data$out_rest_gscissors_prot <- paste0("out_rest_", data$keyword2, "_", data$no_gff_basename, "_translated.fasta") # extract rest of no filtered sequence
   data$blastn_result <- paste0("blastn_", data$no_fasta_basename, ".txt") # result first BLASTN
   data$out_gscissors_high_translated <- paste0("out_high_", data$keyword_sum, "_", data$no_gff_basename, "_translated.fasta")
   # data$tblastn_result <- paste0("tblastn_", data$no_fasta_basename, ".txt") # result first PBLASTN
