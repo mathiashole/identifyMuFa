@@ -71,9 +71,9 @@ mode <- "gff"
 input_arg <- file.path("/home/mathias/study/maestria/scoville_data/execution_args_9900.tsv")
 
 source_file <- switch(mode,
-  "hybrid" = "code/moduleHybrid.R",
-  "gff" = "code/moduleGff.R",
-  "no_gff" = "code/moduleNoGff.R"
+  "hybrid" = "../code/moduleHybrid.R",
+  "gff" = "../code/moduleGff.R",
+  "no_gff" = "../code/moduleNoGff.R"
 )
 
 source(source_file)
@@ -82,9 +82,9 @@ data_raw <- read_input(input_arg)
 data <- assign_column_names(data_raw, mode)
 
 output_dir <- switch(mode,
-  "hybrid" = "output_directory_hybrid",
-  "gff" = "output_directory",
-  "no_gff" = "output_directory_withoutgff"
+  "hybrid" = "../output_directory_hybrid",
+  "gff" = "../output_directory",
+  "no_gff" = "../output_directory_withoutgff"
 )
 
 if (mode == "hybrid") {
