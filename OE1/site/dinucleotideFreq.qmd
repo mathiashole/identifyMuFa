@@ -70,12 +70,12 @@ assign_column_names <- function(data, mode) {
 #| warning: false
 
 mode <- "gff"
-#input_arg <- file.path(output_dir, "execution_args_9900.tsv")
+input_arg <- file.path("/home/mathias/study/maestria/scoville_data/execution_args_9900.tsv")
 
 source_file <- switch(mode,
-  "hybrid" = "code/moduleHybrid.R",
-  "gff" = "code/moduleGff.R",
-  "no_gff" = "code/moduleNoGff.R"
+  "hybrid" = "../code/moduleHybrid.R",
+  "gff" = "../code/moduleGff.R",
+  "no_gff" = "../code/moduleNoGff.R"
 )
 
 source(source_file)
@@ -84,9 +84,9 @@ data_raw <- read_input(input_arg)
 data <- assign_column_names(data_raw, mode)
 
 output_dir <- switch(mode,
-  "hybrid" = "output_directory_hybrid",
-  "gff" = "output_directory",
-  "no_gff" = "output_directory_withoutgff"
+  "hybrid" = "../output_directory_hybrid",
+  "gff" = "../output_directory",
+  "no_gff" = "../output_directory_withoutgff"
 )
 
 if (mode == "hybrid") {
@@ -103,20 +103,20 @@ if (mode == "hybrid") {
 key_name <- unique(sort(transformed$keyword1))
 ########################################
 
-directory <- "output_directory/"
-# Read data frame
-data_transformed <- read.delim("output_directory/data_transformed.tsv", sep = "\t", header = TRUE)
-########################################
+# directory <- "output_directory/"
+# # Read data frame
+# data_transformed <- read.delim("output_directory/data_transformed.tsv", sep = "\t", header = TRUE)
+# ########################################
 
-# Obtener la lista de archivos que comienzan con 'out_' y terminan con '.fasta'
-fasta_files <- paste0(directory, data_transformed$out_gscissors)
-genome_name <- basename(data_transformed$fasta_file)
-rest_code_prot <- paste0(directory, data_transformed$out_rest_gscissors)
+# # Obtener la lista de archivos que comienzan con 'out_' y terminan con '.fasta'
+# fasta_files <- paste0(directory, data_transformed$out_gscissors)
+# genome_name <- basename(data_transformed$fasta_file)
+# rest_code_prot <- paste0(directory, data_transformed$out_rest_gscissors)
 
-genes_work <- basename(fasta_files)
-prot_name <- sub(".*_:(.*):_.*", "\\1", fasta_files)
-key_names <- sub("_.*", "\\1", prot_name)
-key_name <- unique(sort(key_names))
+# genes_work <- basename(fasta_files)
+# prot_name <- sub(".*_:(.*):_.*", "\\1", fasta_files)
+# key_names <- sub("_.*", "\\1", prot_name)
+# key_name <- unique(sort(key_names))
 
 ```
 
