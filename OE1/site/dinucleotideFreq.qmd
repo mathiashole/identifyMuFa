@@ -517,6 +517,8 @@ En la siguiente figura se muestra el mismo análisis PCA, pero esta vez solo se 
 #| echo: true
 #| warning: false
 
+## NEED DEBUG CELL
+
 highlight_ids <- dinucleotide_table$ID
 
 create_pca_highlight_plot <- function(data, highlight_ids, pca_result, genome_col = "Genome", col_palette = NULL) {
