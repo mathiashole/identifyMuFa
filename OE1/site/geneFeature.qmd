@@ -107,7 +107,6 @@ key_name <- unique(sort(transformed$keyword1))
 genome_name <- basename(transformed$fasta_file)
 # rest_code_prot <- paste0(directory, data_transformed$out_rest_gscissors)
 
-# genes_work <- basename(fasta_files)
 # prot_name <- sub(".*_:(.*):_.*", "\\1", fasta_files)
 # key_names <- sub("_.*", "\\1", prot_name)
 # key_name <- unique(sort(key_names))
@@ -461,7 +460,7 @@ plot_violin_length(
 
 ## Procesamiento de las secuencias ``r key_name``
 
-La función  ``calculate_fasta_feature`` se usa para calcular para cada secuencia ``r genes_work`` el contenido de `GC` y la `longitud (pb)`  de ``r key_name``. 
+La función  ``calculate_fasta_feature`` se usa para calcular para cada secuencia el contenido de `GC` y la `longitud (pb)`  de ``r key_name``. 
 Se crea una `tabla resumen`, que agrupa las secuencias por cada genoma ``r genome_name``, mostrando el  ``r key_name``, así como la `longitud` mínima, media y máxima, así como el contenido de `GC` mínimo, medio y máximo.
 
 
@@ -491,7 +490,7 @@ reactable(file_sequence_counts, highlight = TRUE)
 
 ### Visualización de la Longitud y Contenido de GC de ``r key_name``
 
-Se generan gráficos que representan el `contenido de GC` y la `longitud` de cada secuencia ``r genes_work`` de ``r key_name``. 
+Se generan gráficos que representan el `contenido de GC` y la `longitud` de cada secuencia de ``r key_name``. 
 En esta seccion reutilizaremos parte del codigo escrito llamando a las funciones que crean los plot de `GC` y de `longitud` de las secuencias.
 
 ::: {.panel-tabset .nav-pills}
