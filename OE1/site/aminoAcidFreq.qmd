@@ -110,7 +110,7 @@ key_name <- unique(sort(transformed$keyword1))
 
 # # Obtener la lista de archivos que comienzan con 'out_' y terminan con '.fasta'
 # fasta_files <- paste0(directory, data_transformed$out_gscissors)
-genome_name <- basename(data_transformed$fasta_file)
+genome_name <- basename(transformed$fasta_file)
 # # rest_code_prot <- paste0(directory, data_transformed$out_rest_gscissors)
 
 # genes_work <- basename(fasta_files)
