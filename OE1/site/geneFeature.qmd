@@ -68,7 +68,7 @@ assign_column_names <- function(data, mode) {
 #| warning: false
 
 mode <- "gff"
-# input_arg <- "home/mathias/study/maestria/scoville_data/execution_args_9900.tsv"
+# input_arg <- file.path("/home/mathias/study/maestria/scoville_data/execution_args_9900.tsv")
 
 source_file <- switch(mode,
   "hybrid" = "code/moduleHybrid.R",
