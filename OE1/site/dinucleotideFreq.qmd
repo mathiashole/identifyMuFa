@@ -213,12 +213,12 @@ Se llama a la función nucleotide_frequncy() para obtener las tablas de frecuenc
 #| warning: false
 
 # Run the function and get the dinucleotide frequency table
-dinucleotide_table <- nucleotide_frequncy(file.path("../../../study/maestria/genomic_data", transformed$fasta_basename), type_frequency = "dinucleotide")
+dinucleotide_table <- nucleotide_frequncy(file.path("../../../study/maestria/genomic_data", transformed$out_gscissors_all), type_frequency = "dinucleotide")
 #dinucleotide_table <- nucleotide_frequncy(fasta_files[1], type_frequency = "dinucleotide")
 
 # dinucleotide_table_rest_code_prot <- nucleotide_frequncy(file.path("output_directory/" ,transformed$out_rest_gscissors), type_frequency = "dinucleotide")
 
-trinucleotide_table <- nucleotide_frequncy(file.path("../../../study/maestria/genomic_data", transformed$fasta_basename), type_frequency = "trinucleotide")
+trinucleotide_table <- nucleotide_frequncy(file.path("../../../study/maestria/genomic_data", transforme$out_gscissors_all), type_frequency = "trinucleotide")
 # trinucleotide_table <- nucleotide_frequncy(fasta_files[1], type_frequency = "trinucleotide")
 # trinucleotide_table_rest_code_prot <- nucleotide_frequncy(file.path("output_directory/" ,transformed$out_rest_gscissors), type_frequency = "trinucleotide")
 
