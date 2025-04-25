@@ -105,7 +105,7 @@ generate_commands <- function(data, output_dir) {
   # } else {
 
   # }
-  data$bRefiner_command <- paste(BREFINER , "-file", file.path(output_dir, "blast_result", data$blastp_result), "-i", 80, "-l", data$length / 3, "-col", 2, "-uniq") ## Need mean calculated option
+  data$bRefiner_command <- paste(BREFINER , "-file", file.path(output_dir, "blast_result", data$blastp_result), "-i", 80, "-l", data$length / 3 * 0.8, "-col", 2, "-uniq") ## Need mean calculated option
 
   data$classifier_command <- paste("Rscript", CLASSIFIER, file.path(output_dir, data$overlappingshaive_result_filtered), file.path(output_dir, "blast_result", data$brefiner_blastp))
 
