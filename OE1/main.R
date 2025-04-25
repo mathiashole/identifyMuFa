@@ -98,6 +98,7 @@ if (is.null(input_arg)) {
 # MAIN EXECUTION
 # -------------------------------------------
 
+input_file <- input_arg
 data_raw <- read_input(input_arg)
 data <- assign_column_names(data_raw, mode)
 
