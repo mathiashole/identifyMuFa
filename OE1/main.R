@@ -81,7 +81,7 @@ for (i in seq_along(args)) {
   if (args[i] == "--mode" || args[i] == "-m") {
     mode <- args[i + 1]
   } else if (!startsWith(args[i], "--") && is.null(input_arg)) {
-    input_arg <- args[i]
+    input_arg <- args[i + 1]
   }
 }
 
