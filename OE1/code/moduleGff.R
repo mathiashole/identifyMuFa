@@ -280,10 +280,10 @@ execution_module <- function(data, output_dir) {
           next
         }
 
-        cat("Processing GSCISSORS: ", data$gs_new_gen_prot_command, "\n")
+        cat("Processing GSCISSORS: ", data$gs_new_gen_prot_command[i], "\n")
         # Check if FILTER_SEQ created the expected file
         path_file_gs_new_gen_prot <- file.path(output_dir, data$new_gen_protein[i])
-        system(data$gs_new_gen_prot_command)
+        system(data$gs_new_gen_prot_command[i])
         if (!file.exists(path_file_gs_new_gen_prot)) {
           cat("Error: GSCISSORS did not create the file", file.path(output_dir, data$new_gen_protein[i]), "\n")
           next
