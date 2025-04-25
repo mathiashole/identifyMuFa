@@ -276,7 +276,7 @@ execution_module <- function(data, output_dir) {
         path_file_gs_new_gen <- file.path(output_dir, data$new_gen[i])
         system(data$gs_new_gen_command[i])
         if (!file.exists(path_file_gs_new_gen)) {
-          cat("Error: GSCISSORS did not create the file", data$new_gen[i], "\n")
+          cat("Error: GSCISSORS did not create the file", file.path(output_dir, data$new_gen[i]), "\n")
           next
         }
 
