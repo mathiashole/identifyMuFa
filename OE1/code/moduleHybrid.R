@@ -25,6 +25,8 @@ transform_data_hybrid <- function(data) {
   data$overlap_result_high_equal <- paste0("high_equal_filtered_multigenic_family_", data$no_fasta_basename, ".fasta") # extracted sequence > or = to minimal length
   data$overlap_result_low <- paste0("low_filtered_multigenic_family_", data$no_fasta_basename, ".fasta") # Extracted sequence < to minimal length
   # data$gorf_result_file <- paste0("getorf_protein_", data$overlap_result_high_equal)
+  data$gorf_result_file_prot <- paste0("getorf_protein_", data$overlap_result_high_equal)
+  data$gorf_result_file_nucl <- paste0("getorf_", data$overlap_result_high_equal)
   # data$blastp_result <- paste0("blastp_out_high_", data$keyword_sum, "_", data$no_gff_basename, ".txt")
   # data$blastp_result <- paste0("blastp_", data$gorf_result_file)
   data$blastp_result <- paste0("blastp_getorf_protein_high_equal_filtered_multigenic_family_", data$no_fasta_basename, ".txt")
