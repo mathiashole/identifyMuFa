@@ -67,6 +67,14 @@ generate_commands_without_gff <- function(data, output_dir){
 
   data$classifier_command <- paste("Rscript", CLASSIFIER, file.path(output_dir, data$overlappingshaive_result), file.path(output_dir, "blast_result", data$brefiner_blastp))
 
+  data$gs_new_gen_command <- paste(GSCISSORS, "--fasta", file.path(output_dir, data$gorf_result_file_nucl), "--coordinates",
+                                  file.path(output_dir, "blast_result", data$brefiner_blastp), "--format", "id", "--output",
+                                  file.path(output_dir, data$new_gen))
+
+  data$gs_new_gen_prot_command <- paste(GSCISSORS, "--fasta", file.path(output_dir, data$gorf_result_file_prot), "--coordinates",
+                                  file.path(output_dir, "blast_result", data$brefiner_blastp), "--format", "id", "--output",
+                                  file.path(output_dir, data$new_gen_protein))
+
   return(data)
 }
 
