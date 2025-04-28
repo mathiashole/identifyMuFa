@@ -15,6 +15,8 @@ transform_data_without_gff <- function(data) {
   data$overlap_result_high_equal <- paste0("high_equal_all_multigenic_family_", data$no_fasta_basename, ".fasta")
   data$overlap_result_low <- paste0("low_all_multigenic_family_", data$no_fasta_basename, ".fasta")
   # data$gorf_result_file <- paste0("getorf_protein_", data$overlap_result_high_equal)
+  data$gorf_result_file_prot <- paste0("getorf_protein_", data$overlap_result_high_equal)
+  data$gorf_result_file_nucl <- paste0("getorf_", data$overlap_result_high_equal)
   data$blastp_result <- paste0("blastp_getorf_protein_high_equal_all_multigenic_family_", data$no_fasta_basename, ".txt")
   data$brefiner_blastp <- paste0("bRefiner_", data$blastp_result)
   data$calssifier_result <- paste0("all_multigenic_family_", data$no_fasta_basename, "_classified.tsv")
