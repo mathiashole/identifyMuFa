@@ -30,7 +30,7 @@ done
 # Validation
 if [[ -z "$TYPE" || -z "$OUTPUT" || ${#FILES[@]} -eq 0 ]]; then
     echo "Error: Faltan argumentos requeridos."
-    echo "Uso: $0 -type <genome|gene> -out <ruta_salida.tsv> -fasta <file1.fasta> [file2.fasta ...]"
+    echo "Uso: $0 -type <genome|gene> -out <output_file.tsv> -fasta <file1.fasta> [file2.fasta ...]"
     exit 1
 fi
 
