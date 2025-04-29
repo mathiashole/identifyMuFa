@@ -17,7 +17,7 @@ while [[ "$#" -gt 0 ]]; do
         -out) OUTPUT="$2"; shift ;;
         -fasta) shift; while [[ "$#" -gt 0 && "$1" != -* ]]; do FILES+=("$1"); shift; done ;;
         -h|--help)
-            echo "Uso: $0 -type <genome|gene> -out <ruta_salida.tsv> -fasta <file1.fasta> [file2.fasta ...]"
+            echo "Uso: $0 -type <genome|gene> -out <output_file.tsv> -fasta <file1.fasta> [file2.fasta ...]"
             exit 0
             ;;
         *)
