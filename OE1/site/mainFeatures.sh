@@ -67,7 +67,6 @@ for fasta in "${FILES[@]}"; do
         GC_RAW=$(echo "$line" | awk '{print $3}' | tr -d '%')
 
         # Calcular GC en decimal (dividir por 100 y redondear a 3 decimales)
-        #GC=$(awk "BEGIN {printf \"%.3f\", $GC_RAW/100}")
         GC=$(awk "BEGIN {printf \"%.3f\", $GC_RAW/100}")
 
         # Parse ID
