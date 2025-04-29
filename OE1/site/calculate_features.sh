@@ -47,7 +47,7 @@ for fasta in "${FILES[@]}"; do
 
     base=$(basename "$fasta")
 
-    # Extraer el nombre base
+    # Extract base name
     if [ "$TYPE" == "genome" ]; then
         extracted=$(echo "$base" | sed -E 's/.*_([^_]+)_Genome.fasta/\1/')
     elif [ "$TYPE" == "gene" ]; then
@@ -57,7 +57,7 @@ for fasta in "${FILES[@]}"; do
         exit 1
     fi
 
-    # Ejecutar infoseq
+    # infoseq execution
     #infoseq -only -name -length -pgc "$fasta" | while read line; do
     infoseq -only -name -length -pgc "$fasta" | tail -n +2 | while read -r line; do
 
