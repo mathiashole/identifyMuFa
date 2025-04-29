@@ -70,7 +70,7 @@ for fasta in "${FILES[@]}"; do
         #GC=$(awk "BEGIN {printf \"%.3f\", $GC_RAW/100}")
         GC=$(awk "BEGIN {printf \"%.3f\", $GC_RAW/100}")
 
-        # Limpiar ID
+        # Parse ID
         ID=$(echo "$ID" | sed 's/=/_/g' | sed 's/[:;].*//g' | tr -d ' ')
 
         echo -e "${extracted}\t${ID}\t${LENGTH}\t${GC}"
