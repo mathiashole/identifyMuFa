@@ -58,7 +58,6 @@ for fasta in "${FILES[@]}"; do
     fi
 
     # infoseq execution
-    #infoseq -only -name -length -pgc "$fasta" | while read line; do
     infoseq -only -name -length -pgc "$fasta" | tail -n +2 | while read -r line; do
 
         ID=$(echo "$line" | awk '{print $1}')
