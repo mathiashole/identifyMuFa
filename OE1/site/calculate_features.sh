@@ -2,7 +2,7 @@
 
 # =============================
 # Script to calculate length and GC with infoseq
-# Usage: ./calculate_features.sh genome file1.fasta file2.fasta ...
+# Usage: ./calculate_features.sh -type genome -out ../output/features.tsv -fasta file1.fasta file2.fasta ...
 # =============================
 
 # Global variabls
