@@ -63,7 +63,6 @@ for fasta in "${FILES[@]}"; do
 
         ID=$(echo "$line" | awk '{print $1}')
         LENGTH=$(echo "$line" | awk '{print $2}')
-        #GC_RAW=$(echo "$line" | awk '{print $3}')
         GC_RAW=$(echo "$line" | awk '{print $3}' | tr -d '%')
 
         # Calcular GC en decimal (dividir por 100 y redondear a 3 decimales)
