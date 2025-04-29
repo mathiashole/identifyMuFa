@@ -21,7 +21,7 @@ while [[ "$#" -gt 0 ]]; do
             exit 0
             ;;
         *)
-            echo "Parámetro desconocido: $1" >&2
+            echo "Unknown parametres: $1" >&2
             exit 1 ;;
     esac
     shift
