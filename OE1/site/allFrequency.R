@@ -1,0 +1,78 @@
+#!/usr/bin/env Rscript
+
+# Call library
+suppressPackageStartupMessages({
+  library(seqinr)
+  library(dplyr)
+  library(parallel)
+
+})
+
+# Funciones
+
+# Function to count dinucleotides
+count_dinucleotides <- function(sequence) {
+  counts <- seqinr::count(sequence, 2)
+  freqs <- counts / sum(counts)
+  freqs <- round(freqs, 3)
+  return(freqs)
+}
+
+# Function to count trinucleotides
+count_trinucleotides <- function(sequence) {
+  counts <- seqinr::count(sequence, 3)
+  freqs <- counts / sum(counts)
+  freqs <- round(freqs, 3)
+  return(freqs)
+}
+
+nucleotide_frequncy <- function(fasta_files, type_frequency = "dinucleotide") {
+  results <- data.frame()  # Initialize the empty data frame for the results
+
+  # Iterate over each FASTA file in the folder
+  for (fasta_file in fasta_files) {
+    sequences <- read.fasta(fasta_file)
+    ids <- names(sequences)
+    
+    # Base name of file
+    base_name <- basename(fasta_file)
+    # Regular expresion for extract diferents parts
+    extracted_names <- sub(".*_([^_]+)\\.fasta$", "\\1", base_name)
+    
+    # Get dinucleotide or trinucleotide frequencies for each sequence within a file
+    for (i in seq_along(sequences)) {
+      seq <- getSequence(sequences[[i]])
+
+      if (type_frequency == "trinucleotide") {
+        freqs <- count_trinucleotides(seq)
+      } else if (type_frequency == "dinucleotide") {
+        freqs <- count_dinucleotides(seq)
+      }
+      
+      # Create a row with file name, ID and frequencies
+      row <- c(File = extracted_names, ID = ids[i], freqs)
+      # row <- data.frame(File = extracted_names, ID = ids[i], t(freqs), stringsAsFactors = FALSE)
+
+      results <- results %>% bind_rows(row)
+    }
+  }
+
+  return(results)
+}
+
+# ---- MAIN ----
+
+args <- commandArgs(trailingOnly = TRUE)
+
+if (length(args) < 2) {
+  stop("Usage: ./calculate_nucleotide_frequencies.R <dinucleotide|trinucleotide> <fasta_file1> [fasta_file2 ...]")
+}
+
+type <- args[1]
+files <- args[-1]
+
+result <- nucleotide_frequncy(files, type_frequency = type)
+
+outfile <- paste0(type, "_frequencies.tsv")
+write.table(result, file = outfile, sep = "\t", quote = FALSE, row.names = FALSE)
+cat("Output written to", outfile, "\n")
