@@ -34,7 +34,7 @@ if [[ -z "$TYPE" || -z "$OUTPUT" || ${#FILES[@]} -eq 0 ]]; then
     exit 1
 fi
 
-# Archivo de salida
+# Output file
 OUTPUT="features.tsv"
 echo -e "file\tID\tLength\tGC_Content" > "$OUTPUT"
 
