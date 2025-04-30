@@ -293,5 +293,13 @@ execution_module <- function(data, output_dir) {
           next
         }
 
+        cat("Processing JOIN FILE: ", data$concat_nucleotide_command[i], "\n")
+        path_file_concat_origin_new <- file.path(output_dir, data$concat_origin_new_gen[i])
+        system(data$concat_nucleotide_command[i])
+        if (!file.exists(path_file_concat_origin_new)) {
+          cat("Error: JOIN FILE did not create the file", file.path(output_dir, data$concat_origin_new_gen[i]), "\n")
+          next
+        }
+
       }
 }
