@@ -119,6 +119,8 @@ generate_commands <- function(data, output_dir) {
                                   file.path(output_dir, "blast_result", data$brefiner_blastp), "--format", "id", "--output",
                                   file.path(output_dir, data$new_gen_protein))
 
+  data$concat_nucleotide_command <- paste("cat", file.path(output_dir, data$new_gen), file.path(output_dir, data$out_gscissors_high), ">", file.path(output_dir, data$concat_origin_new_gen))
+
   return(data)
 }
 
