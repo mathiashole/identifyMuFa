@@ -36,6 +36,8 @@ transform_data <- function(data) {
   data$calssifier_result <- paste0("filtered_multigenic_family_", data$no_fasta_basename, "_classified.tsv")
   data$new_gen <- paste0("new_gen_", data$fasta_basename)
   data$new_gen_protein <- paste0("new_gen_protein_", data$fasta_basename)
+  data$concat_origin_new_gen <- paste0("origin_and_new_gen_", data$fasta_basename)
+  data$concat_origin_new_gen_prot <- paste0("origin_and_new_gen_protein_", data$fasta_basename)
   
   return(data)
 }
@@ -116,6 +118,8 @@ generate_commands <- function(data, output_dir) {
   data$gs_new_gen_prot_command <- paste(GSCISSORS, "--fasta", file.path(output_dir, data$gorf_result_file_prot), "--coordinates",
                                   file.path(output_dir, "blast_result", data$brefiner_blastp), "--format", "id", "--output",
                                   file.path(output_dir, data$new_gen_protein))
+
+  data$concat_nucleotide_command <- paste("cat", file.path(output_dir, data$new_gen), file.path(output_dir, data$out_gscissors_high), ">", file.path(output_dir, data$concat_origin_new_gen))
 
   return(data)
 }
@@ -286,6 +290,14 @@ execution_module <- function(data, output_dir) {
         system(data$gs_new_gen_prot_command[i])
         if (!file.exists(path_file_gs_new_gen_prot)) {
           cat("Error: GSCISSORS did not create the file", file.path(output_dir, data$new_gen_protein[i]), "\n")
+          next
+        }
+
+        cat("Processing JOIN FILE: ", data$concat_nucleotide_command[i], "\n")
+        path_file_concat_origin_new <- file.path(output_dir, data$concat_origin_new_gen[i])
+        system(data$concat_nucleotide_command[i])
+        if (!file.exists(path_file_concat_origin_new)) {
+          cat("Error: JOIN FILE did not create the file", file.path(output_dir, data$concat_origin_new_gen[i]), "\n")
           next
         }
 
