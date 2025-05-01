@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.6.32">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
 <meta name="author" content="Mathias">
+
 <title>Análisis genómico comparativo de genes DGF-1 en Trypanosoma Cruzi</title>
 <style>
 code{white-space: pre-wrap;}
@@ -54,6 +57,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
+
 <script src="geneFeature_files/libs/clipboard/clipboard.min.js"></script>
 <script src="geneFeature_files/libs/quarto-html/quarto.js"></script>
 <script src="geneFeature_files/libs/quarto-html/popper.min.js"></script>
@@ -63,17 +67,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="geneFeature_files/libs/quarto-html/quarto-syntax-highlighting-fc6d358c97f25a8ea829b86655043430.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="geneFeature_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="geneFeature_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="geneFeature_files/libs/bootstrap/bootstrap-48972e06b888b3abdceb77e41c660eb4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script src="geneFeature_files/libs/core-js-2.5.3/shim.min.js"></script><script src="geneFeature_files/libs/react-18.2.0/react.min.js"></script><script src="geneFeature_files/libs/react-18.2.0/react-dom.min.js"></script><script src="geneFeature_files/libs/reactwidget-2.0.0/react-tools.js"></script><link href="geneFeature_files/libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
-<script src="geneFeature_files/libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="geneFeature_files/libs/reactable-0.4.4/reactable.css" rel="stylesheet">
+<link href="geneFeature_files/libs/bootstrap/bootstrap-48972e06b888b3abdceb77e41c660eb4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="geneFeature_files/libs/core-js-2.5.3/shim.min.js"></script>
+<script src="geneFeature_files/libs/react-18.2.0/react.min.js"></script>
+<script src="geneFeature_files/libs/react-18.2.0/react-dom.min.js"></script>
+<script src="geneFeature_files/libs/reactwidget-2.0.0/react-tools.js"></script>
+<link href="geneFeature_files/libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="geneFeature_files/libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="geneFeature_files/libs/reactable-0.4.4/reactable.css" rel="stylesheet">
 <script src="geneFeature_files/libs/reactable-binding-0.4.4/reactable.js"></script>
+
+
 </head>
+
 <body class="fullcontent">
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
 
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title">Análisis genómico comparativo de genes DGF-1 en <em>Trypanosoma Cruzi</em>
-</h1>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Análisis genómico comparativo de genes DGF-1 en <em>Trypanosoma Cruzi</em></h1>
 </div>
 
 
@@ -93,7 +108,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
 
 
-</header><div class="cell">
+</header>
+
+
+<div class="cell">
 <style type="text/css">
 p {
   text-align: justify
@@ -101,111 +119,125 @@ p {
 
 </style>
 </div>
-<section id="descripcion" class="level2" data-number="1"><h2 data-number="1" class="anchored" data-anchor-id="descripcion">
-<span class="header-section-number">1</span> Descripcion</h2>
+<section id="descripcion" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="descripcion"><span class="header-section-number">1</span> Descripcion</h2>
+<p><img src="https://img.itch.zone/aW1nLzE3MTEyNjE5LmdpZg==/original/2%2BYVZg.gif" class="img-fluid" style="float:right;" alt="Illustration of a detective cat. Artwork by @https://shigemi.itch.io." width="301"></p>
+<p><em>Trypanosoma cruzi</em>, el parásito causante de la enfermedad de Chagas, posee una familia de genes llamada <code>DGF-1</code> que juega un papel clave en su biología. En este estudio, realizamos un análisis comparativo de estos genes en distintos genomas para entender su diversidad y posibles funciones.</p>
 <p>Los datos utilizados en este análisis fueron obtenidas a partir de diferentes genomas de <em>Trypanosoma cruzi</em>, disponibles en <a href="https://tritrypdb.org/tritrypdb/app"><strong>tritrydb</strong></a> y <a href="https://www.ncbi.nlm.nih.gov/"><strong>NCBI</strong></a>.</p>
 <p>A partir de estos genomas, se extrajeron secuencias de los genes <code>DGF-1</code>, con el objetivo de realizar análisis comparativo. Inicialmente se estudió el contenido de <code>GC</code>, <code>longitud de las secuencias</code>, y otros aspectos relevantes para la caracterización de los genes de <code>DGF-1</code>.</p>
-<section id="genomas" class="level3" data-number="1.1"><h3 data-number="1.1" class="anchored" data-anchor-id="genomas">
-<span class="header-section-number">1.1</span> Genomas</h3>
+<section id="genomas" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="genomas"><span class="header-section-number">1.1</span> Genomas</h3>
 <p>Este análisis utiliza los siguientes genomas <code>TriTrypDB-68_TcruziDm28c2018_Genome.fasta, TriTrypDB-68_TcruziBrazilA4_Genome.fasta, TriTrypDB-68_TcruziYC6_Genome.fasta, TcDm25_TcruziTcDm25H1_Genome.fasta</code>. A partir de los cuales se obtienen las secuencias para su estudio.</p>
-</section><section id="librerias-y-datos-a-usar" class="level3" data-number="1.2"><h3 data-number="1.2" class="anchored" data-anchor-id="librerias-y-datos-a-usar">
-<span class="header-section-number">1.2</span> Librerias y datos a usar</h3>
+</section>
+<section id="librerias-y-datos-a-usar" class="level3" data-number="1.2">
+<h3 data-number="1.2" class="anchored" data-anchor-id="librerias-y-datos-a-usar"><span class="header-section-number">1.2</span> Librerias y datos a usar</h3>
 <p>Se cargan las <code>bibliotecas</code> necesarias para el análisis de datos genómicos, así como para la manipulación, transformación y visualización de dataframes, junto con la generación de gráficos en formato de arreglo. A continuación, se crea una lista de archivos que contiene los <code>genomas</code> a analizar, y se inicializa una <code>tabla</code> destinada a almacenar los resultados del análisis de los archivos FASTA.</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Cargar las librerías necesarias</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://seqinr.r-forge.r-project.org/">seqinr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">gridExtra</span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://glin.github.io/reactable/">reactable</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cargar las librerías necesarias</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(seqinr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reactable)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<hr></section></section><section id="procesamiento-de-los-genomas" class="level2" data-number="2"><h2 data-number="2" class="anchored" data-anchor-id="procesamiento-de-los-genomas">
-<span class="header-section-number">2</span> Procesamiento de los genomas</h2>
+<hr>
+</section>
+</section>
+<section id="procesamiento-de-los-genomas" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="procesamiento-de-los-genomas"><span class="header-section-number">2</span> Procesamiento de los genomas</h2>
 <p>Para procesar las secuencias FASTA, se crea una función que genera un dataframe vacío donde se almacenarán los elementos obtenidos a partir de una secuencia dada. Luego, se elimina la ruta del archivo para extraer el nombre del mismo. A continuación, se obtiene el identificador de cada una de las secuencias dentro del archivo FASTA, se calcula la longitud de la secuencia y el contenido de GC utilizando funciones de la biblioteca SEQINR.</p>
-<section id="características-de-los-genomas" class="level3" data-number="2.1"><h3 data-number="2.1" class="anchored" data-anchor-id="características-de-los-genomas">
-<span class="header-section-number">2.1</span> Características de los genomas</h3>
+<section id="características-de-los-genomas" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="características-de-los-genomas"><span class="header-section-number">2.1</span> Características de los genomas</h3>
 <p>Se utiliza ALGO la función mencionada para extraer diversas características de los genomas. Con estos datos, generamos la primera <code>Tabla resumen</code>, que agrupa los contigs de cada genoma <code>TriTrypDB-68_TcruziDm28c2018_Genome.fasta, TriTrypDB-68_TcruziBrazilA4_Genome.fasta, TriTrypDB-68_TcruziYC6_Genome.fasta, TcDm25_TcruziTcDm25H1_Genome.fasta</code>, mostrando el <code>número total de secuencias encontradas</code>, así como la <code>longitud</code> mínima, media y máxima, así como el contenido de <code>GC</code> mínimo, medio y máximo.</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Llamamos a la funcion para obtener GC y largo de cada contig, de cada genoma</span></span>
-<span><span class="co"># genomes &lt;- calculate_fasta_feature(data_transformed$fasta_file, "genome")</span></span>
-<span></span>
-<span><span class="co"># genomes &lt;- transform_columns(genomes, "ID")</span></span>
-<span></span>
-<span><span class="co"># path_genome_safe_tsv &lt;- file.path("output_directory/", paste0("genome_gc_length.tsv"))</span></span>
-<span><span class="co">#path_genome_safe &lt;- file.path("output_directory/", paste0("genome_gc_length.csv"))</span></span>
-<span><span class="co">#write.csv(genomes, file = path_genome_safe, row.names = FALSE, col.names = TRUE, quote = FALSE)</span></span>
-<span><span class="co"># write.table(genomes, file = path_genome_safe_tsv, row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)</span></span>
-<span></span>
-<span><span class="co"># Load the table generated by the second script</span></span>
-<span><span class="co"># genomes &lt;- read.table("output_directory/genome_gc_length.tsv", sep = "\t", header = TRUE)</span></span>
-<span><span class="va">genomes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"output_directory/genome_gc_length.csv"</span>, sep <span class="op">=</span> <span class="st">","</span>, header <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span></span>
-<span></span>
-<span><span class="co"># Crear una tabla con el conteo de secuencias por archivo</span></span>
-<span><span class="va">genomes_summary</span> <span class="op">&lt;-</span> <span class="va">genomes</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">file</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>Total_Sequences <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>            min_length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">Length</span><span class="op">)</span>,</span>
-<span>            mean_length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Length</span><span class="op">)</span>, <span class="fl">0</span><span class="op">)</span>,</span>
-<span>            max_length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">Length</span><span class="op">)</span>,</span>
-<span>            min_gc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">GC_Content</span><span class="op">)</span>,</span>
-<span>            mean_gc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">GC_Content</span><span class="op">)</span>, <span class="fl">3</span><span class="op">)</span>,</span>
-<span>            max_gc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">GC_Content</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Llamamos a la funcion para obtener GC y largo de cada contig, de cada genoma</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># genomes &lt;- calculate_fasta_feature(file.path("../../../study/maestria/genomic_data", transformed$fasta_basename), "genome")</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># genomes &lt;- transform_columns(genomes, "ID")</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># path_genome_safe_tsv &lt;- file.path("output_directory/", paste0("genome_gc_length.tsv"))</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># path_genome_safe &lt;- file.path("output_directory/", paste0("genome_gc_length.csv"))</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># write.csv(genomes, file = path_genome_safe, row.names = FALSE, col.names = TRUE, quote = FALSE)</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># write.table(genomes, file = path_genome_safe_tsv, row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the table generated by the second script</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># genomes &lt;- read.table("output_directory/genome_gc_length.tsv", sep = "\t", header = TRUE)</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>genomes <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"../output_directory/genome_gc_length.csv"</span>, <span class="at">sep =</span> <span class="st">","</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear una tabla con el conteo de secuencias por archivo</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>genomes_summary <span class="ot">&lt;-</span> genomes <span class="sc">%&gt;%</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(file) <span class="sc">%&gt;%</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Total_Sequences =</span> <span class="fu">n</span>(),</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>            <span class="at">min_length =</span> <span class="fu">min</span>(Length),</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_length =</span> <span class="fu">round</span>(<span class="fu">mean</span>(Length), <span class="dv">0</span>),</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>            <span class="at">max_length =</span> <span class="fu">max</span>(Length),</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>            <span class="at">min_gc =</span> <span class="fu">min</span>(GC_Content),</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_gc =</span> <span class="fu">round</span>(<span class="fu">mean</span>(GC_Content), <span class="dv">3</span>),</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>            <span class="at">max_gc =</span> <span class="fu">max</span>(GC_Content))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="tabla-resumen-de-los-genomas" class="level3" data-number="2.2"><h3 data-number="2.2" class="anchored" data-anchor-id="tabla-resumen-de-los-genomas">
-<span class="header-section-number">2.2</span> Tabla resumen de los genomas</h3>
+</section>
+<section id="tabla-resumen-de-los-genomas" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="tabla-resumen-de-los-genomas"><span class="header-section-number">2.2</span> Tabla resumen de los genomas</h3>
 <div class="cell">
 <div class="cell-output-display">
-<div class="reactable html-widget html-fill-item" id="htmlwidget-3057835420fae7e3c6a9" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-3057835420fae7e3c6a9">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"file":["TcruziBrazilA4","TcruziDm28c2018","TcruziTcDm25H1","TcruziYC6"],"Total_Sequences":[402,636,35,266],"min_length":[703,911,47166,678],"mean_length":[113325,83761,1105091,177512],"max_length":[2738928,1645565,2824530,2951016],"min_gc":[0.415,0.363,0.242,0.445],"mean_gc":[0.533,0.519,0.505,0.524],"max_gc":[0.697,0.707,0.539,0.6]},"columns":[{"id":"file","name":"file","type":"character"},{"id":"Total_Sequences","name":"Total_Sequences","type":"numeric"},{"id":"min_length","name":"min_length","type":"numeric"},{"id":"mean_length","name":"mean_length","type":"numeric"},{"id":"max_length","name":"max_length","type":"numeric"},{"id":"min_gc","name":"min_gc","type":"numeric"},{"id":"mean_gc","name":"mean_gc","type":"numeric"},{"id":"max_gc","name":"max_gc","type":"numeric"}],"highlight":true,"dataKey":"02482dfea1094724c39d7bc52c115ef5"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div class="reactable html-widget html-fill-item" id="htmlwidget-d75f0caf784cb0da3bae" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-d75f0caf784cb0da3bae">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"file":["TcruziBrazilA4","TcruziDm28c2018","TcruziTcDm25H1","TcruziYC6"],"Total_Sequences":[402,636,35,266],"min_length":[703,911,47166,678],"mean_length":[113325,83761,1105091,177512],"max_length":[2738928,1645565,2824530,2951016],"min_gc":[0.415,0.363,0.242,0.445],"mean_gc":[0.533,0.519,0.505,0.524],"max_gc":[0.697,0.707,0.539,0.6]},"columns":[{"id":"file","name":"file","type":"character"},{"id":"Total_Sequences","name":"Total_Sequences","type":"numeric"},{"id":"min_length","name":"min_length","type":"numeric"},{"id":"mean_length","name":"mean_length","type":"numeric"},{"id":"max_length","name":"max_length","type":"numeric"},{"id":"min_gc","name":"min_gc","type":"numeric"},{"id":"mean_gc","name":"mean_gc","type":"numeric"},{"id":"max_gc","name":"max_gc","type":"numeric"}],"highlight":true,"dataKey":"02482dfea1094724c39d7bc52c115ef5"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
-</section><section id="visualización-de-la-longitud-y-contenido-de-gc-de-los-genomas" class="level3" data-number="2.3"><h3 data-number="2.3" class="anchored" data-anchor-id="visualización-de-la-longitud-y-contenido-de-gc-de-los-genomas">
-<span class="header-section-number">2.3</span> Visualización de la Longitud y Contenido de GC de los Genomas</h3>
+</section>
+<section id="visualización-de-la-longitud-y-contenido-de-gc-de-los-genomas" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="visualización-de-la-longitud-y-contenido-de-gc-de-los-genomas"><span class="header-section-number">2.3</span> Visualización de la Longitud y Contenido de GC de los Genomas</h3>
 <p>En esta sección, se generarán gráficos que representan el <code>contenido de GC</code> y la <code>longitud</code> de cada genoma. Se implementan funciones específicas para cada gráfico, lo que permite reutilizar el código de manera eficiente en otras partes del análisis. Para crear estas funciones se implementara las bibliotecas <code>ggridges</code>, <code>ggbeeswarm</code> y <code>cowplot</code>.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset nav-pills">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">GC</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Length</a></li>
-</ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">GC</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Length</a></li></ul>
 <div class="tab-content nav-pills">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <p>La función <code>plot_violin_gc</code> genera un gráfico de violín que muestra la distribución del contenido de GC en distintos genomas <code>TriTrypDB-68_TcruziDm28c2018_Genome.fasta, TriTrypDB-68_TcruziBrazilA4_Genome.fasta, TriTrypDB-68_TcruziYC6_Genome.fasta, TcDm25_TcruziTcDm25H1_Genome.fasta</code>.</p>
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://wilkelab.org/ggridges/">ggridges</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/eclarke/ggbeeswarm">ggbeeswarm</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://wilkelab.org/cowplot/">cowplot</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">genomes</span><span class="op">$</span><span class="va">Length</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">genomes</span><span class="op">$</span><span class="va">Length</span>, scientific <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="co"># Changed format</span></span>
-<span></span>
-<span><span class="co"># Inspired by http://tom-e-white.com/datavision/05-genome-size.html domain of https://github.com/tomwhite</span></span>
-<span><span class="co"># GC plotting function</span></span>
-<span><span class="va">plot_violin_gc</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">plot_title</span>, <span class="va">y_label</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">file</span>, y <span class="op">=</span> <span class="va">GC_Content</span>, fill <span class="op">=</span> <span class="va">file</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_violin.html">geom_violin</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.7</span>, width <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.1</span>, fill <span class="op">=</span> <span class="st">"white"</span>, alpha <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_fill_brewer</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Dark2"</span><span class="op">)</span> <span class="op">+</span>  <span class="co"># Apply RColorBrewer's Dark2 Palette</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="va">y_label</span><span class="op">)</span> <span class="op">+</span>  <span class="co"># Customize the ylab</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
-<span>      title <span class="op">=</span> <span class="va">plot_title</span>,  <span class="co"># Customize the title</span></span>
-<span>      caption <span class="op">=</span> <span class="st">"Data source: Facultad de Ciencias, Udelar"</span></span>
-<span>    <span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://wilkelab.org/cowplot/reference/theme_minimal_grid.html">theme_minimal_vgrid</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>axis.line.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>, axis.ticks.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="op">}</span></span>
-<span></span>
-<span><span class="co"># Function plot_violin_gc call</span></span>
-<span><span class="fu">plot_violin_gc</span><span class="op">(</span></span>
-<span>  data <span class="op">=</span> <span class="va">genomes</span>, </span>
-<span>  plot_title <span class="op">=</span> <span class="st">"Genome GC"</span>, </span>
-<span>  y_label <span class="op">=</span> <span class="st">"GC Content"</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell quarto-layout-panel" data-layout="[100]">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggridges)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggbeeswarm)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cowplot)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>genomes<span class="sc">$</span>Length <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>((<span class="fu">format</span>(genomes<span class="sc">$</span>Length, <span class="at">scientific =</span> <span class="cn">TRUE</span>))) <span class="co"># Changed format</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspired by http://tom-e-white.com/datavision/05-genome-size.html domain of https://github.com/tomwhite</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># GC plotting function</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>plot_violin_gc <span class="ot">&lt;-</span> <span class="cf">function</span>(data, plot_title, y_label) {</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> file, <span class="at">y =</span> GC_Content, <span class="at">fill =</span> file)) <span class="sc">+</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_violin</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">width =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span>  <span class="co"># Apply RColorBrewer's Dark2 Palette</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(y_label) <span class="sc">+</span>  <span class="co"># Customize the ylab</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> plot_title,  <span class="co"># Customize the title</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">"Data source: Facultad de Ciencias, Udelar"</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal_vgrid</span>() <span class="sc">+</span> </span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.line.y =</span> <span class="fu">element_blank</span>(), <span class="at">axis.ticks.y =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Function plot_violin_gc call</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_violin_gc</span>(</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> genomes, </span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot_title =</span> <span class="st">"Genome GC"</span>, </span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">y_label =</span> <span class="st">"GC Content"</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell quarto-layout-panel" data-layout="[100]">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="geneFeature_files/figure-html/plotting-genome-gc-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption>Secuencias por genoma y contenido GC.</figcaption></figure>
+<figure class="figure">
+<p><img src="geneFeature_files/figure-html/plotting-genome-gc-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Secuencias por genoma y contenido GC.</figcaption>
+</figure>
 </div>
 </div>
 </div>
@@ -213,44 +245,49 @@ p {
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <p>La función de R <code>plot_violin_length</code> crea un gráfico de violín que ilustra la distribución de las longitudes genómicas de los diferentes genomas <code>TriTrypDB-68_TcruziDm28c2018_Genome.fasta, TriTrypDB-68_TcruziBrazilA4_Genome.fasta, TriTrypDB-68_TcruziYC6_Genome.fasta, TcDm25_TcruziTcDm25H1_Genome.fasta</code>.</p>
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Function to plot the length of genomes</span></span>
-<span><span class="va">plot_violin_length</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">type</span>, <span class="va">plot_title</span>, <span class="va">x_label</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">12345</span><span class="op">)</span></span>
-<span>  <span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">Length</span>, <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">file</span>, <span class="op">-</span><span class="va">Length</span>, FUN <span class="op">=</span> <span class="va">median</span><span class="op">)</span>, color <span class="op">=</span> <span class="va">file</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="co"># reorder(file, -Length, FUN=median)</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_quasirandom.html">geom_quasirandom</a></span><span class="op">(</span>groupOnX <span class="op">=</span> <span class="cn">FALSE</span>, show.legend <span class="op">=</span> <span class="cn">FALSE</span>, size <span class="op">=</span> <span class="fl">1</span>, dodge.width <span class="op">=</span> <span class="fl">0.9</span>, alpha <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
-<span>      title <span class="op">=</span> <span class="va">plot_title</span>,  <span class="co"># Title customization</span></span>
-<span>      x <span class="op">=</span> <span class="va">x_label</span>,  <span class="co"># Custom x-axis label</span></span>
-<span>      caption <span class="op">=</span> <span class="st">"Data source: Facultad de Ciencias, Udelar"</span></span>
-<span>    <span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://wilkelab.org/cowplot/reference/theme_minimal_grid.html">theme_minimal_vgrid</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>axis.title.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>, axis.line.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>, axis.ticks.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_color_brewer</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Dark2"</span><span class="op">)</span></span>
-<span></span>
-<span>    <span class="co"># Conditional to choose the type of scale on the x axis</span></span>
-<span>    <span class="kw">if</span> <span class="op">(</span><span class="va">type</span> <span class="op">==</span> <span class="st">"genome"</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">p</span> <span class="op">&lt;-</span> <span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_log10</a></span><span class="op">(</span></span>
-<span>      breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span><span class="op">^</span><span class="fl">2</span>, <span class="fl">10</span><span class="op">^</span><span class="fl">3</span>, <span class="fl">10</span><span class="op">^</span><span class="fl">4</span>, <span class="fl">10</span><span class="op">^</span><span class="fl">5</span>, <span class="fl">10</span><span class="op">^</span><span class="fl">6</span>, <span class="fl">10</span><span class="op">^</span><span class="fl">7</span>, <span class="fl">10</span><span class="op">^</span><span class="fl">8</span>, <span class="fl">10</span><span class="op">^</span><span class="fl">9</span>, <span class="fl">10</span><span class="op">^</span><span class="fl">10</span><span class="op">)</span>,</span>
-<span>      labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/trans_format.html">trans_format</a></span><span class="op">(</span><span class="st">"log10"</span>, <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/parse_format.html">math_format</a></span><span class="op">(</span><span class="fl">10</span><span class="op">^</span><span class="va">.x</span><span class="op">)</span><span class="op">)</span></span>
-<span>    <span class="op">)</span></span>
-<span>  <span class="op">}</span></span>
-<span></span>
-<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span>
-<span><span class="op">}</span></span>
-<span></span>
-<span><span class="co"># Function plot_violin_length call</span></span>
-<span><span class="fu">plot_violin_length</span><span class="op">(</span></span>
-<span>  data <span class="op">=</span> <span class="va">genomes</span>,</span>
-<span>  <span class="st">"genome"</span>, </span>
-<span>  plot_title <span class="op">=</span> <span class="st">"Genome size"</span>, </span>
-<span>  x_label <span class="op">=</span> <span class="st">"Number of base pairs"</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell quarto-layout-panel" data-layout="[100]">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to plot the length of genomes</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>plot_violin_length <span class="ot">&lt;-</span> <span class="cf">function</span>(data, type, plot_title, x_label) {</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(<span class="dv">12345</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data, <span class="fu">aes</span>(Length, <span class="fu">reorder</span>(file, <span class="sc">-</span>Length, <span class="at">FUN =</span> median), <span class="at">color =</span> file)) <span class="sc">+</span> <span class="co"># reorder(file, -Length, FUN=median)</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_quasirandom</span>(<span class="at">groupOnX =</span> <span class="cn">FALSE</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">dodge.width =</span> <span class="fl">0.9</span>, <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> plot_title,  <span class="co"># Title customization</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> x_label,  <span class="co"># Custom x-axis label</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">"Data source: Facultad de Ciencias, Udelar"</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal_vgrid</span>() <span class="sc">+</span> </span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.title.y =</span> <span class="fu">element_blank</span>(), <span class="at">axis.line.y =</span> <span class="fu">element_blank</span>(), <span class="at">axis.ticks.y =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Conditional to choose the type of scale on the x axis</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (type <span class="sc">==</span> <span class="st">"genome"</span>) {</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">scale_x_log10</span>(</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">10</span><span class="sc">^</span><span class="dv">2</span>, <span class="dv">10</span><span class="sc">^</span><span class="dv">3</span>, <span class="dv">10</span><span class="sc">^</span><span class="dv">4</span>, <span class="dv">10</span><span class="sc">^</span><span class="dv">5</span>, <span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>, <span class="dv">10</span><span class="sc">^</span><span class="dv">7</span>, <span class="dv">10</span><span class="sc">^</span><span class="dv">8</span>, <span class="dv">10</span><span class="sc">^</span><span class="dv">9</span>, <span class="dv">10</span><span class="sc">^</span><span class="dv">10</span>),</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">trans_format</span>(<span class="st">"log10"</span>, scales<span class="sc">::</span><span class="fu">math_format</span>(<span class="dv">10</span><span class="sc">^</span>.x))</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(p)</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Function plot_violin_length call</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_violin_length</span>(</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> genomes,</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>  <span class="st">"genome"</span>, </span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot_title =</span> <span class="st">"Genome size"</span>, </span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">x_label =</span> <span class="st">"Number of base pairs"</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell quarto-layout-panel" data-layout="[100]">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="geneFeature_files/figure-html/plotting-genome-length-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption>Secuencias por genoma y contenido GC.</figcaption></figure>
+<figure class="figure">
+<p><img src="geneFeature_files/figure-html/plotting-genome-length-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Secuencias por genoma y contenido GC.</figcaption>
+</figure>
 </div>
 </div>
 </div>
@@ -258,64 +295,71 @@ p {
 </div>
 </div>
 </div>
-<hr></section></section><section id="procesamiento-del-total-de-las-secuencias-codificantes" class="level2" data-number="3"><h2 data-number="3" class="anchored" data-anchor-id="procesamiento-del-total-de-las-secuencias-codificantes">
-<span class="header-section-number">3</span> Procesamiento del total de las secuencias codificantes</h2>
+<hr>
+</section>
+</section>
+<section id="procesamiento-del-total-de-las-secuencias-codificantes" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="procesamiento-del-total-de-las-secuencias-codificantes"><span class="header-section-number">3</span> Procesamiento del total de las secuencias codificantes</h2>
 <p>Se llama a la funcion <code>calculate_fasta_feature</code> para calcular en el total de <code>secuencia codificante</code> el contenido de <code>GC</code> y la <code>longitud (pb)</code>. Finalmente, creamos una <code>tabla resumen</code>, que agrupa el <code>total secuencias codificantes</code> por cada genoma <code>TriTrypDB-68_TcruziDm28c2018_Genome.fasta, TriTrypDB-68_TcruziBrazilA4_Genome.fasta, TriTrypDB-68_TcruziYC6_Genome.fasta, TcDm25_TcruziTcDm25H1_Genome.fasta</code>, mostrando así como la <code>longitud</code> mínima, media y máxima, así como el contenido de <code>GC</code> mínimo, medio y máximo.</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Llamamos a la funcion para obtener GC y largo de cada contig, de cada genoma</span></span>
-<span><span class="co"># all_code_prot &lt;- calculate_fasta_feature(rest_code_prot, "gene")</span></span>
-<span></span>
-<span><span class="co"># all_code_prot &lt;- transform_columns(all_code_prot, "ID")</span></span>
-<span></span>
-<span><span class="co"># path_all_prot_safe_tsv &lt;- file.path("output_directory/", paste0("all_code_protein_gc_length.tsv"))</span></span>
-<span><span class="co">#path_all_prot_safe &lt;- file.path("output_directory/", paste0("all_code_protein_gc_length.csv"))</span></span>
-<span><span class="co">#write.csv(all_code_prot, file = path_all_prot_safe, row.names = FALSE, col.names = TRUE, quote = FALSE)</span></span>
-<span><span class="co"># write.table(all_code_prot, file = path_all_prot_safe_tsv, row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)</span></span>
-<span></span>
-<span><span class="co"># Load the table generated by the second script</span></span>
-<span><span class="co"># all_code_prot_data &lt;- read.table("output_directory/all_code_protein_gc_length.tsv", sep = "\t", header = TRUE)</span></span>
-<span><span class="va">all_code_prot_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"output_directory/all_code_protein_gc_length.csv"</span>, sep <span class="op">=</span> <span class="st">","</span>, header <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Crear una tabla con el conteo de secuencias por archivo</span></span>
-<span><span class="va">all_code_prot_summary</span> <span class="op">&lt;-</span> <span class="va">all_code_prot_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">file</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>Total_Sequences <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>            min_length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">Length</span><span class="op">)</span>,</span>
-<span>            mean_length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Length</span><span class="op">)</span>, <span class="fl">0</span><span class="op">)</span>,</span>
-<span>            max_length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">Length</span><span class="op">)</span>,</span>
-<span>            min_gc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">GC_Content</span><span class="op">)</span>,</span>
-<span>            mean_gc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">GC_Content</span><span class="op">)</span>, <span class="fl">3</span><span class="op">)</span>,</span>
-<span>            max_gc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">GC_Content</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Llamamos a la funcion para obtener GC y largo de cada contig, de cada genoma</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># all_code_prot &lt;- calculate_fasta_feature(file.path(output_dir ,transformed$out_rest_gscissors), "gene")</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># all_code_prot &lt;- transform_columns(all_code_prot, "ID")</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># path_all_prot_safe_tsv &lt;- file.path("output_directory/", paste0("all_code_protein_gc_length.tsv"))</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># path_all_prot_safe &lt;- file.path("output_directory/", paste0("all_code_protein_gc_length.csv"))</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># write.csv(all_code_prot, file = path_all_prot_safe, row.names = FALSE, col.names = TRUE, quote = FALSE)</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># write.table(all_code_prot, file = path_all_prot_safe_tsv, row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the table generated by the second script</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co"># all_code_prot_data &lt;- read.table("output_directory/all_code_protein_gc_length.tsv", sep = "\t", header = TRUE)</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>all_code_prot_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"../output_directory/all_code_protein_gc_length.csv"</span>, <span class="at">sep =</span> <span class="st">","</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear una tabla con el conteo de secuencias por archivo</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>all_code_prot_summary <span class="ot">&lt;-</span> all_code_prot_data <span class="sc">%&gt;%</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(file) <span class="sc">%&gt;%</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Total_Sequences =</span> <span class="fu">n</span>(),</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>            <span class="at">min_length =</span> <span class="fu">min</span>(Length),</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_length =</span> <span class="fu">round</span>(<span class="fu">mean</span>(Length), <span class="dv">0</span>),</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>            <span class="at">max_length =</span> <span class="fu">max</span>(Length),</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>            <span class="at">min_gc =</span> <span class="fu">min</span>(GC_Content),</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_gc =</span> <span class="fu">round</span>(<span class="fu">mean</span>(GC_Content), <span class="dv">3</span>),</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>            <span class="at">max_gc =</span> <span class="fu">max</span>(GC_Content))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<section id="tabla-resumen-de-secuencias-codificantes-por-genoma" class="level3" data-number="3.1"><h3 data-number="3.1" class="anchored" data-anchor-id="tabla-resumen-de-secuencias-codificantes-por-genoma">
-<span class="header-section-number">3.1</span> Tabla resumen de secuencias codificantes por genoma</h3>
+<section id="tabla-resumen-de-secuencias-codificantes-por-genoma" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="tabla-resumen-de-secuencias-codificantes-por-genoma"><span class="header-section-number">3.1</span> Tabla resumen de secuencias codificantes por genoma</h3>
 <div class="cell">
 <div class="cell-output-display">
-<div class="reactable html-widget html-fill-item" id="htmlwidget-f2cd884b8b4702069f97" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-f2cd884b8b4702069f97">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"file":["TcruziBrazilA4","TcruziDm28c2018","TcruziTcDm25H1","TcruziYC6"],"Total_Sequences":[14233,15319,18096,14268],"min_length":[102,156,7,141],"mean_length":[1264,1459,1356,1394],"max_length":[19908,15471,48501,19908],"min_gc":[0.277,0.277,0.278,0.249],"mean_gc":[0.541,0.531,0.542,0.54],"max_gc":[0.751,0.707,0.749,0.744]},"columns":[{"id":"file","name":"file","type":"character"},{"id":"Total_Sequences","name":"Total_Sequences","type":"numeric"},{"id":"min_length","name":"min_length","type":"numeric"},{"id":"mean_length","name":"mean_length","type":"numeric"},{"id":"max_length","name":"max_length","type":"numeric"},{"id":"min_gc","name":"min_gc","type":"numeric"},{"id":"mean_gc","name":"mean_gc","type":"numeric"},{"id":"max_gc","name":"max_gc","type":"numeric"}],"highlight":true,"dataKey":"12bef9b85fd5a27bdee2e6a5847dcb08"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div class="reactable html-widget html-fill-item" id="htmlwidget-5bf5f80fe868cc41ad09" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-5bf5f80fe868cc41ad09">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"file":["TcruziBrazilA4","TcruziDm28c2018","TcruziTcDm25H1","TcruziYC6"],"Total_Sequences":[14233,15319,18096,14268],"min_length":[102,156,7,141],"mean_length":[1264,1459,1356,1394],"max_length":[19908,15471,48501,19908],"min_gc":[0.277,0.277,0.278,0.249],"mean_gc":[0.541,0.531,0.542,0.54],"max_gc":[0.751,0.707,0.749,0.744]},"columns":[{"id":"file","name":"file","type":"character"},{"id":"Total_Sequences","name":"Total_Sequences","type":"numeric"},{"id":"min_length","name":"min_length","type":"numeric"},{"id":"mean_length","name":"mean_length","type":"numeric"},{"id":"max_length","name":"max_length","type":"numeric"},{"id":"min_gc","name":"min_gc","type":"numeric"},{"id":"mean_gc","name":"mean_gc","type":"numeric"},{"id":"max_gc","name":"max_gc","type":"numeric"}],"highlight":true,"dataKey":"12bef9b85fd5a27bdee2e6a5847dcb08"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div class="tabset-margin-container"></div><div class="panel-tabset nav-pills">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">GC</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Length</a></li>
-</ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">GC</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Length</a></li></ul>
 <div class="tab-content nav-pills">
 <div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
 <p>Llamamos a la funcion <code>plot_violin_gc</code>, dando lugar a un gráfico violín que muestra la distribución del contenido de GC en distintos genomas de las secuencias.</p>
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Function plot_violin_gc call</span></span>
-<span><span class="fu">plot_violin_gc</span><span class="op">(</span></span>
-<span>  data <span class="op">=</span> <span class="va">all_code_prot_data</span>, </span>
-<span>  plot_title <span class="op">=</span> <span class="st">"Coding sequence GC"</span>, </span>
-<span>  y_label <span class="op">=</span> <span class="st">"GC Content"</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell quarto-layout-panel" data-layout="[100]">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function plot_violin_gc call</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_violin_gc</span>(</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> all_code_prot_data, </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot_title =</span> <span class="st">"Coding sequence GC"</span>, </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">y_label =</span> <span class="st">"GC Content"</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell quarto-layout-panel" data-layout="[100]">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="geneFeature_files/figure-html/plotting-gc%20all%20coding%20protein-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption>Secuencias por genoma y contenido GC.</figcaption></figure>
+<figure class="figure">
+<p><img src="geneFeature_files/figure-html/plotting-gc%20all%20coding%20protein-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Secuencias por genoma y contenido GC.</figcaption>
+</figure>
 </div>
 </div>
 </div>
@@ -323,19 +367,24 @@ p {
 </div>
 <div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
 <p>Además, reutilizamos la función previamente empleada para graficar la distribución del genoma, pero esta vez generamos un gráfico que muestra la distribución de las longitudes de todas las secuencias codificantes, correspondientes a cada genoma.</p>
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Function plot_violin_length call</span></span>
-<span><span class="fu">plot_violin_length</span><span class="op">(</span></span>
-<span>  data <span class="op">=</span> <span class="va">all_code_prot_data</span>,</span>
-<span>  <span class="st">"genome"</span>, </span>
-<span>  plot_title <span class="op">=</span> <span class="st">"coding sequence size"</span>, </span>
-<span>  x_label <span class="op">=</span> <span class="st">"Number of base pairs"</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell quarto-layout-panel" data-layout="[100]">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function plot_violin_length call</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_violin_length</span>(</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> all_code_prot_data,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"genome"</span>, </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot_title =</span> <span class="st">"coding sequence size"</span>, </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">x_label =</span> <span class="st">"Number of base pairs"</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell quarto-layout-panel" data-layout="[100]">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="geneFeature_files/figure-html/plotting-length%20all%20coding%20protein-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption>Secuencias por genoma y largo total de la secuencia.</figcaption></figure>
+<figure class="figure">
+<p><img src="geneFeature_files/figure-html/plotting-length%20all%20coding%20protein-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Secuencias por genoma y largo total de la secuencia.</figcaption>
+</figure>
 </div>
 </div>
 </div>
@@ -343,58 +392,64 @@ p {
 </div>
 </div>
 </div>
-<hr></section></section><section id="procesamiento-de-las-secuencias-dgf-1" class="level2" data-number="4"><h2 data-number="4" class="anchored" data-anchor-id="procesamiento-de-las-secuencias-dgf-1">
-<span class="header-section-number">4</span> Procesamiento de las secuencias <code>DGF-1</code>
-</h2>
-<p>La función <code>calculate_fasta_feature</code> se usa para calcular para cada secuencia <code>out_:DGF-1_protein_coding_gene:_TriTrypDB-68_TcruziDm28c2018.fasta, out_:DGF-1_protein_coding_gene:_TriTrypDB-68_TcruziBrazilA4.fasta, out_:DGF-1_protein_coding_gene:_TriTrypDB-68_TcruziYC6.fasta, out_:DGF-1_polypeptide:_TcDm25_TcruziTcDm25H1.fasta</code> el contenido de <code>GC</code> y la <code>longitud (pb)</code> de <code>DGF-1</code>. Se crea una <code>tabla resumen</code>, que agrupa las secuencias por cada genoma <code>TriTrypDB-68_TcruziDm28c2018_Genome.fasta, TriTrypDB-68_TcruziBrazilA4_Genome.fasta, TriTrypDB-68_TcruziYC6_Genome.fasta, TcDm25_TcruziTcDm25H1_Genome.fasta</code>, mostrando el <code>DGF-1</code>, así como la <code>longitud</code> mínima, media y máxima, así como el contenido de <code>GC</code> mínimo, medio y máximo.</p>
+<hr>
+</section>
+</section>
+<section id="procesamiento-de-las-secuencias-dgf-1" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="procesamiento-de-las-secuencias-dgf-1"><span class="header-section-number">4</span> Procesamiento de las secuencias <code>DGF-1</code></h2>
+<p>La función <code>calculate_fasta_feature</code> se usa para calcular para cada secuencia el contenido de <code>GC</code> y la <code>longitud (pb)</code> de <code>DGF-1</code>. Se crea una <code>tabla resumen</code>, que agrupa las secuencias por cada genoma <code>TriTrypDB-68_TcruziDm28c2018_Genome.fasta, TriTrypDB-68_TcruziBrazilA4_Genome.fasta, TriTrypDB-68_TcruziYC6_Genome.fasta, TcDm25_TcruziTcDm25H1_Genome.fasta</code>, mostrando el <code>DGF-1</code>, así como la <code>longitud</code> mínima, media y máxima, así como el contenido de <code>GC</code> mínimo, medio y máximo.</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">target_protein</span> <span class="op">&lt;-</span> <span class="fu">calculate_fasta_feature</span><span class="op">(</span><span class="va">fasta_files</span>, <span class="st">"gene"</span><span class="op">)</span></span>
-<span><span class="va">target_protein</span> <span class="op">&lt;-</span> <span class="fu">transform_columns</span><span class="op">(</span><span class="va">target_protein</span>, <span class="st">"ID"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Crear una tabla con el conteo de secuencias por archivo</span></span>
-<span><span class="va">file_sequence_counts</span> <span class="op">&lt;-</span> <span class="va">target_protein</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">file</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>Total_Sequences <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>            min_length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">Length</span><span class="op">)</span>,</span>
-<span>            mean_length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Length</span><span class="op">)</span>, <span class="fl">0</span><span class="op">)</span>,</span>
-<span>            max_length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">Length</span><span class="op">)</span>,</span>
-<span>            min_gc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">GC_Content</span><span class="op">)</span>,</span>
-<span>            mean_gc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">GC_Content</span><span class="op">)</span>, <span class="fl">3</span><span class="op">)</span>,</span>
-<span>            max_gc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">GC_Content</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Mostrar la tabla de conteo de secuencias</span></span>
-<span><span class="fu"><a href="https://glin.github.io/reactable/reference/reactable.html">reactable</a></span><span class="op">(</span><span class="va">file_sequence_counts</span>, highlight <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<div class="reactable html-widget html-fill-item" id="htmlwidget-11241bccba6eab2a3265" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-11241bccba6eab2a3265">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"file":["TcruziBrazilA4","TcruziDm28c2018","TcruziTcDm25H1","TcruziYC6"],"Total_Sequences":[44,75,192,102],"min_length":[267,7380,228,220],"mean_length":[6021,10334,5944,8811],"max_length":[10500,10821,10551,10521],"min_gc":[0.553,0.621,0.577,0.588],"mean_gc":[0.634,0.637,0.648,0.643],"max_gc":[0.698,0.644,0.691,0.688]},"columns":[{"id":"file","name":"file","type":"character"},{"id":"Total_Sequences","name":"Total_Sequences","type":"numeric"},{"id":"min_length","name":"min_length","type":"numeric"},{"id":"mean_length","name":"mean_length","type":"numeric"},{"id":"max_length","name":"max_length","type":"numeric"},{"id":"min_gc","name":"min_gc","type":"numeric"},{"id":"mean_gc","name":"mean_gc","type":"numeric"},{"id":"max_gc","name":"max_gc","type":"numeric"}],"highlight":true,"dataKey":"1558261d8e56c3170cd8af476364a4e4"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>target_protein <span class="ot">&lt;-</span> <span class="fu">calculate_fasta_feature</span>(<span class="fu">file.path</span>(output_dir, transformed<span class="sc">$</span>out_gscissors_all), <span class="st">"gene"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>target_protein <span class="ot">&lt;-</span> <span class="fu">transform_columns</span>(target_protein, <span class="st">"ID"</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear una tabla con el conteo de secuencias por archivo</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>file_sequence_counts <span class="ot">&lt;-</span> target_protein <span class="sc">%&gt;%</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(file) <span class="sc">%&gt;%</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Total_Sequences =</span> <span class="fu">n</span>(),</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">min_length =</span> <span class="fu">min</span>(Length),</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_length =</span> <span class="fu">round</span>(<span class="fu">mean</span>(Length), <span class="dv">0</span>),</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">max_length =</span> <span class="fu">max</span>(Length),</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">min_gc =</span> <span class="fu">min</span>(GC_Content),</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_gc =</span> <span class="fu">round</span>(<span class="fu">mean</span>(GC_Content), <span class="dv">3</span>),</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">max_gc =</span> <span class="fu">max</span>(GC_Content))</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostrar la tabla de conteo de secuencias</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="fu">reactable</span>(file_sequence_counts, <span class="at">highlight =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="reactable html-widget html-fill-item" id="htmlwidget-66a54b29d82bb5a4b7f6" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-66a54b29d82bb5a4b7f6">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"file":["TcruziBrazilA4","TcruziDm28c2018","TcruziTcDm25H1","TcruziYC6"],"Total_Sequences":[44,75,192,102],"min_length":[267,7380,228,220],"mean_length":[6021,10334,5944,8811],"max_length":[10500,10821,10551,10521],"min_gc":[0.553,0.621,0.577,0.588],"mean_gc":[0.634,0.637,0.648,0.643],"max_gc":[0.698,0.644,0.691,0.688]},"columns":[{"id":"file","name":"file","type":"character"},{"id":"Total_Sequences","name":"Total_Sequences","type":"numeric"},{"id":"min_length","name":"min_length","type":"numeric"},{"id":"mean_length","name":"mean_length","type":"numeric"},{"id":"max_length","name":"max_length","type":"numeric"},{"id":"min_gc","name":"min_gc","type":"numeric"},{"id":"mean_gc","name":"mean_gc","type":"numeric"},{"id":"max_gc","name":"max_gc","type":"numeric"}],"highlight":true,"dataKey":"1558261d8e56c3170cd8af476364a4e4"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
-<section id="visualización-de-la-longitud-y-contenido-de-gc-de-dgf-1" class="level3" data-number="4.1"><h3 data-number="4.1" class="anchored" data-anchor-id="visualización-de-la-longitud-y-contenido-de-gc-de-dgf-1">
-<span class="header-section-number">4.1</span> Visualización de la Longitud y Contenido de GC de <code>DGF-1</code>
-</h3>
-<p>Se generan gráficos que representan el <code>contenido de GC</code> y la <code>longitud</code> de cada secuencia <code>out_:DGF-1_protein_coding_gene:_TriTrypDB-68_TcruziDm28c2018.fasta, out_:DGF-1_protein_coding_gene:_TriTrypDB-68_TcruziBrazilA4.fasta, out_:DGF-1_protein_coding_gene:_TriTrypDB-68_TcruziYC6.fasta, out_:DGF-1_polypeptide:_TcDm25_TcruziTcDm25H1.fasta</code> de <code>DGF-1</code>. En esta seccion reutilizaremos parte del codigo escrito llamando a las funciones que crean los plot de <code>GC</code> y de <code>longitud</code> de las secuencias.</p>
+<section id="visualización-de-la-longitud-y-contenido-de-gc-de-dgf-1" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="visualización-de-la-longitud-y-contenido-de-gc-de-dgf-1"><span class="header-section-number">4.1</span> Visualización de la Longitud y Contenido de GC de <code>DGF-1</code></h3>
+<p>Se generan gráficos que representan el <code>contenido de GC</code> y la <code>longitud</code> de cada secuencia de <code>DGF-1</code>. En esta seccion reutilizaremos parte del codigo escrito llamando a las funciones que crean los plot de <code>GC</code> y de <code>longitud</code> de las secuencias.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset nav-pills">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">GC</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">Length</a></li>
-</ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">GC</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">Length</a></li></ul>
 <div class="tab-content nav-pills">
 <div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
 <p>Se usa la funcion <code>plot_violin_gc</code>, dando lugar a un gráfico violín que muestra la distribución del contenido de GC en distintos genomas de las secuencias <code>DGF-1</code>.</p>
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">var_title_gc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">key_name</span>,<span class="st">" GC"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Function plot_violin_gc call</span></span>
-<span><span class="fu">plot_violin_gc</span><span class="op">(</span></span>
-<span>  data <span class="op">=</span> <span class="va">target_protein</span>, </span>
-<span>  plot_title <span class="op">=</span> <span class="va">var_title_gc</span>, </span>
-<span>  y_label <span class="op">=</span> <span class="st">"GC Content"</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell quarto-layout-panel" data-layout="[100]">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>var_title_gc <span class="ot">&lt;-</span> <span class="fu">paste0</span>(key_name,<span class="st">" GC"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Function plot_violin_gc call</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_violin_gc</span>(</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> target_protein, </span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot_title =</span> var_title_gc, </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">y_label =</span> <span class="st">"GC Content"</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell quarto-layout-panel" data-layout="[100]">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="geneFeature_files/figure-html/plotting-gc-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption>Secuencias por genoma y contenido GC.</figcaption></figure>
+<figure class="figure">
+<p><img src="geneFeature_files/figure-html/plotting-gc-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Secuencias por genoma y contenido GC.</figcaption>
+</figure>
 </div>
 </div>
 </div>
@@ -402,22 +457,27 @@ p {
 </div>
 <div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
 <p>Se usa la función previamente empleada para graficar la distribución del genoma, pero esta vez generamos un gráfico que muestra la distribución de las longitudes de las distintas secuencias de <code>DGF-1</code>, correspondientes a cada genoma.</p>
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">var_title</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">key_name</span>,<span class="st">" size"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Function plot_violin_length call</span></span>
-<span><span class="fu">plot_violin_length</span><span class="op">(</span></span>
-<span>  data <span class="op">=</span> <span class="va">target_protein</span>,</span>
-<span>  <span class="st">"gene"</span>, </span>
-<span>  plot_title <span class="op">=</span> <span class="va">var_title</span>, </span>
-<span>  x_label <span class="op">=</span> <span class="st">"Number of base pairs"</span></span>
-<span><span class="op">)</span></span>
-<span><span class="va">palmer_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"black"</span>, <span class="st">"green"</span>, <span class="st">"blue"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell quarto-layout-panel" data-layout="[100]">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>var_title <span class="ot">&lt;-</span> <span class="fu">paste0</span>(key_name,<span class="st">" size"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Function plot_violin_length call</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_violin_length</span>(</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> target_protein,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"gene"</span>, </span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot_title =</span> var_title, </span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">x_label =</span> <span class="st">"Number of base pairs"</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>palmer_colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"black"</span>, <span class="st">"green"</span>, <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell quarto-layout-panel" data-layout="[100]">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="geneFeature_files/figure-html/plotting-length-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption>Secuencias por genoma y largo total de la secuencia.</figcaption></figure>
+<figure class="figure">
+<p><img src="geneFeature_files/figure-html/plotting-length-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Secuencias por genoma y largo total de la secuencia.</figcaption>
+</figure>
 </div>
 </div>
 </div>
@@ -425,35 +485,38 @@ p {
 </div>
 </div>
 </div>
-<hr></section></section><section id="filtrado-de-las-secuencias-de-dgf-1-por-el-largo" class="level2" data-number="5"><h2 data-number="5" class="anchored" data-anchor-id="filtrado-de-las-secuencias-de-dgf-1-por-el-largo">
-<span class="header-section-number">5</span> Filtrado de las secuencias de DGF-1 por el largo</h2>
+<hr>
+</section>
+</section>
+<section id="filtrado-de-las-secuencias-de-dgf-1-por-el-largo" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="filtrado-de-las-secuencias-de-dgf-1-por-el-largo"><span class="header-section-number">5</span> Filtrado de las secuencias de DGF-1 por el largo</h2>
 <p>Se filtran las secuencias de DGF-1 de acuerdo a un largo mínimo (8000 pb). Las secuencias menores a este minimo se descartaran para este analisis inicial, y serán estudiadas para determinar si son pseudogenes.</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># length_min &lt;- mean(target_protein$Length)</span></span>
-<span><span class="co"># length_min &lt;- median(file_sequence_counts$mean_length)</span></span>
-<span><span class="va">length_min</span> <span class="op">&lt;-</span> <span class="fl">8000</span></span>
-<span></span>
-<span><span class="va">filter_data_higher</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">target_protein</span>, <span class="va">Length</span> <span class="op">&gt;=</span> <span class="va">length_min</span><span class="op">)</span> </span>
-<span><span class="va">filter_data_smaller</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">target_protein</span>, <span class="va">Length</span> <span class="op">&lt;=</span> <span class="va">length_min</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># length_min &lt;- mean(target_protein$Length)</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># length_min &lt;- median(file_sequence_counts$mean_length)</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># length_min &lt;- 8000</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># filter_data_higher &lt;- filter(target_protein, Length &gt;= length_min) </span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># filter_data_smaller &lt;- filter(target_protein, Length &lt;= length_min)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<section id="resumen-de-información-de-dgf-1-completas-en-cada-genoma-filtradas-por-largo" class="level3" data-number="5.1"><h3 data-number="5.1" class="anchored" data-anchor-id="resumen-de-información-de-dgf-1-completas-en-cada-genoma-filtradas-por-largo">
-<span class="header-section-number">5.1</span> Resumen de Información de DGF-1 completas en cada genoma (filtradas por largo)</h3>
+<section id="resumen-de-información-de-dgf-1-completas-en-cada-genoma-filtradas-por-largo" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="resumen-de-información-de-dgf-1-completas-en-cada-genoma-filtradas-por-largo"><span class="header-section-number">5.1</span> Resumen de Información de DGF-1 completas en cada genoma (filtradas por largo)</h3>
 <p>Se genera una tabla con las estadístias descriptivas de las DGF-1 completas</p>
 <div class="cell">
 <div class="cell-output-display">
-<div class="reactable html-widget html-fill-item" id="htmlwidget-9479b4fd1cf6254e9f26" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-9479b4fd1cf6254e9f26">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"file":["TcruziBrazilA4","TcruziDm28c2018","TcruziTcDm25H1","TcruziYC6"],"Total_Sequences":[21,74,76,84],"min_length":[8701,8865,8658,8790],"mean_length":[10183,10374,10261,10374],"max_length":[10500,10821,10551,10521],"min_gc":[0.58,0.628,0.58,0.588],"mean_gc":[0.635,0.638,0.637,0.639],"max_gc":[0.644,0.644,0.643,0.645]},"columns":[{"id":"file","name":"file","type":"character"},{"id":"Total_Sequences","name":"Total_Sequences","type":"numeric"},{"id":"min_length","name":"min_length","type":"numeric"},{"id":"mean_length","name":"mean_length","type":"numeric"},{"id":"max_length","name":"max_length","type":"numeric"},{"id":"min_gc","name":"min_gc","type":"numeric"},{"id":"mean_gc","name":"mean_gc","type":"numeric"},{"id":"max_gc","name":"max_gc","type":"numeric"}],"highlight":true,"dataKey":"86b11ec4593f007d723d6841ce410936"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div class="reactable html-widget html-fill-item" id="htmlwidget-3d892e1a284a2d480314" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-3d892e1a284a2d480314">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"file":["TcruziBrazilA4","TcruziDm28c2018","TcruziTcDm25H1","TcruziYC6"],"Total_Sequences":[18,71,67,82],"min_length":[10056,10131,10003,9951],"mean_length":[10388,10412,10399,10401],"max_length":[10500,10821,10551,10521],"min_gc":[0.58,0.633,0.58,0.588],"mean_gc":[0.635,0.638,0.637,0.639],"max_gc":[0.644,0.644,0.643,0.645]},"columns":[{"id":"file","name":"file","type":"character"},{"id":"Total_Sequences","name":"Total_Sequences","type":"numeric"},{"id":"min_length","name":"min_length","type":"numeric"},{"id":"mean_length","name":"mean_length","type":"numeric"},{"id":"max_length","name":"max_length","type":"numeric"},{"id":"min_gc","name":"min_gc","type":"numeric"},{"id":"mean_gc","name":"mean_gc","type":"numeric"},{"id":"max_gc","name":"max_gc","type":"numeric"}],"highlight":true,"dataKey":"468467f842ec2baefea8abb3a718a92e"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
-</section><section id="visualización-de-la-longitud-y-contenido-de-gc-de-dgf-1-completas" class="level3" data-number="5.2"><h3 data-number="5.2" class="anchored" data-anchor-id="visualización-de-la-longitud-y-contenido-de-gc-de-dgf-1-completas">
-<span class="header-section-number">5.2</span> Visualización de la Longitud y Contenido de GC de <code>DGF-1</code> completas</h3>
+</section>
+<section id="visualización-de-la-longitud-y-contenido-de-gc-de-dgf-1-completas" class="level3" data-number="5.2">
+<h3 data-number="5.2" class="anchored" data-anchor-id="visualización-de-la-longitud-y-contenido-de-gc-de-dgf-1-completas"><span class="header-section-number">5.2</span> Visualización de la Longitud y Contenido de GC de <code>DGF-1</code> completas</h3>
 <p>Se representan el <code>contenido de GC</code> y la <code>longitud</code> de cada secuencia de <code>DGF-1</code> completas (filtrada por un <code>largo minimo</code>).</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset nav-pills">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href="">GC</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false" href="">Length</a></li>
-</ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href="">GC</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false" href="">Length</a></li></ul>
 <div class="tab-content nav-pills">
 <div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
 <p>Se usa la funcion <code>plot_violin_gc</code>, para representar la distribución del contenido de GC en distintos genomas de las secuencias <code>DGF-1</code> filtradas por un largo minimo.</p>
@@ -464,8 +527,10 @@ p {
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="geneFeature_files/figure-html/plotting-GC-filter-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption>Secuencias por genoma y largo total de la secuencia.</figcaption></figure>
+<figure class="figure">
+<p><img src="geneFeature_files/figure-html/plotting-GC-filter-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Secuencias por genoma y largo total de la secuencia.</figcaption>
+</figure>
 </div>
 </div>
 </div>
@@ -480,8 +545,10 @@ p {
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="geneFeature_files/figure-html/plotting-length-filter-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption>Secuencias por genoma y largo total de la secuencia.</figcaption></figure>
+<figure class="figure">
+<p><img src="geneFeature_files/figure-html/plotting-length-filter-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Secuencias por genoma y largo total de la secuencia.</figcaption>
+</figure>
 </div>
 </div>
 </div>
@@ -489,13 +556,16 @@ p {
 </div>
 </div>
 </div>
-<hr></section></section><section id="resumen-de-información-de-secuencias-anotadas-como-dgf-1-menores-al-largo-minimo-establecido" class="level2" data-number="6"><h2 data-number="6" class="anchored" data-anchor-id="resumen-de-información-de-secuencias-anotadas-como-dgf-1-menores-al-largo-minimo-establecido">
-<span class="header-section-number">6</span> Resumen de Información de secuencias anotadas como <code>DGF-1</code> menores al largo minimo establecido</h2>
+<hr>
+</section>
+</section>
+<section id="resumen-de-información-de-secuencias-anotadas-como-dgf-1-menores-al-largo-minimo-establecido" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="resumen-de-información-de-secuencias-anotadas-como-dgf-1-menores-al-largo-minimo-establecido"><span class="header-section-number">6</span> Resumen de Información de secuencias anotadas como <code>DGF-1</code> menores al largo minimo establecido</h2>
 <p>Se crea una nueva tabla resumen a partir de las secuencias que se descartaran por no cumplir con el minimo de largo establecido.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div class="reactable html-widget html-fill-item" id="htmlwidget-dfb8703c397de0b08375" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-dfb8703c397de0b08375">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"file":["TcruziBrazilA4","TcruziDm28c2018","TcruziTcDm25H1","TcruziYC6"],"Total_Sequences":[23,1,116,18],"min_length":[267,7380,228,220],"mean_length":[2220,7380,3116,1516],"max_length":[7644,7380,7504,7232],"min_gc":[0.553,0.621,0.577,0.597],"mean_gc":[0.634,0.621,0.656,0.661],"max_gc":[0.698,0.621,0.691,0.688]},"columns":[{"id":"file","name":"file","type":"character"},{"id":"Total_Sequences","name":"Total_Sequences","type":"numeric"},{"id":"min_length","name":"min_length","type":"numeric"},{"id":"mean_length","name":"mean_length","type":"numeric"},{"id":"max_length","name":"max_length","type":"numeric"},{"id":"min_gc","name":"min_gc","type":"numeric"},{"id":"mean_gc","name":"mean_gc","type":"numeric"},{"id":"max_gc","name":"max_gc","type":"numeric"}],"highlight":true,"dataKey":"13333460016a6833a1885badb4e0e960"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div class="reactable html-widget html-fill-item" id="htmlwidget-ac8ce9faa5d8f73cde0a" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-ac8ce9faa5d8f73cde0a">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"file":["TcruziBrazilA4","TcruziDm28c2018","TcruziTcDm25H1","TcruziYC6"],"Total_Sequences":[26,4,125,20],"min_length":[267,7380,228,220],"mean_length":[2997,8954,3556,2293],"max_length":[9410,9801,9835,9772],"min_gc":[0.553,0.621,0.577,0.597],"mean_gc":[0.634,0.63,0.654,0.658],"max_gc":[0.698,0.636,0.691,0.688]},"columns":[{"id":"file","name":"file","type":"character"},{"id":"Total_Sequences","name":"Total_Sequences","type":"numeric"},{"id":"min_length","name":"min_length","type":"numeric"},{"id":"mean_length","name":"mean_length","type":"numeric"},{"id":"max_length","name":"max_length","type":"numeric"},{"id":"min_gc","name":"min_gc","type":"numeric"},{"id":"mean_gc","name":"mean_gc","type":"numeric"},{"id":"max_gc","name":"max_gc","type":"numeric"}],"highlight":true,"dataKey":"09442c0906cf30339293d66da6d960f2"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <!-- ```{r}
@@ -536,7 +606,11 @@ min_length <- 8000  # Set the desired minimum length
 filter_sequences_by_length(input_files, min_length)
 
 ``` -->
-</section></main><!-- /main column --><script id="quarto-html-after-body" type="application/javascript">
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -957,6 +1031,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 

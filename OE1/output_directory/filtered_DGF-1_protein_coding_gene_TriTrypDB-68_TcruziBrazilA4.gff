@@ -1,0 +1,44 @@
+TcBrA4_Chr11	VEuPathDB	protein_coding_gene	1032310	1033866	.	-	.	ID=TcBrA4_0119970;description=dispersed gene family protein 1 (DGF-1)%2C putative;ebi_biotype=protein_coding
+TcBrA4_Chr11	VEuPathDB	protein_coding_gene	1034014	1042764	.	-	.	ID=TcBrA4_0119980;description=dispersed gene family protein 1 (DGF-1)%2C putative;ebi_biotype=protein_coding
+TcBrA4_Chr11	VEuPathDB	protein_coding_gene	384024	384983	.	-	.	ID=TcBrA4_0117700;description=dispersed gene family protein 1 (DGF-1)%2C putative;ebi_biotype=protein_coding
+TcBrA4_Chr11	VEuPathDB	protein_coding_gene	385254	385898	.	-	.	ID=TcBrA4_0117710;description=dispersed gene family protein 1 (DGF-1)%2C putative (fragment);ebi_biotype=protein_coding
+TcBrA4_Chr11	VEuPathDB	protein_coding_gene	388478	389287	.	-	.	ID=TcBrA4_0117730;description=dispersed gene family protein 1 (DGF-1)%2C putative (fragment);ebi_biotype=protein_coding
+TcBrA4_Chr11	VEuPathDB	protein_coding_gene	389528	389896	.	-	.	ID=TcBrA4_0117740;description=dispersed gene family protein 1 (DGF-1)%2C putative (fragment);ebi_biotype=protein_coding
+TcBrA4_Chr11	VEuPathDB	protein_coding_gene	390092	390736	.	-	.	ID=TcBrA4_0117750;description=dispersed gene family protein 1 (DGF-1)%2C putative;ebi_biotype=protein_coding
+TcBrA4_Chr11	VEuPathDB	protein_coding_gene	879190	882423	.	+	.	ID=TcBrA4_0119550;description=dispersed gene family protein 1 (DGF-1)%2C putative;ebi_biotype=protein_coding
+TcBrA4_Chr11	VEuPathDB	protein_coding_gene	892482	893762	.	+	.	ID=TcBrA4_0119590;description=dispersed gene family protein 1 (DGF-1)%2C putative;ebi_biotype=protein_coding
+TcBrA4_Chr11	VEuPathDB	protein_coding_gene	895262	897769	.	+	.	ID=TcBrA4_0119600;description=dispersed gene family protein 1 (DGF-1)%2C putative;ebi_biotype=protein_coding
+TcBrA4_Chr11	VEuPathDB	protein_coding_gene	897855	901208	.	+	.	ID=TcBrA4_0119610;description=dispersed gene family protein 1 (DGF-1)%2C putative (fragment);ebi_biotype=protein_coding
+TcBrA4_Chr11	VEuPathDB	protein_coding_gene	922210	932658	.	+	.	ID=TcBrA4_0119650;description=dispersed gene family protein 1 (DGF-1)%2C putative;ebi_biotype=protein_coding
+TcBrA4_Chr11	VEuPathDB	protein_coding_gene	959355	966998	.	+	.	ID=TcBrA4_0119760;description=dispersed gene family protein 1 (DGF-1)%2C putative;ebi_biotype=protein_coding
+TcBrA4_Chr13	VEuPathDB	protein_coding_gene	870751	881199	.	+	.	ID=TcBrA4_0185900;description=dispersed gene family protein 1 (DGF-1)%2C putative;ebi_biotype=protein_coding
+TcBrA4_Chr14	VEuPathDB	protein_coding_gene	428213	438604	.	-	.	ID=TcBrA4_0185530;description=dispersed gene family protein 1 (DGF-1)%2C putative;ebi_biotype=protein_coding
+TcBrA4_Chr14	VEuPathDB	protein_coding_gene	797833	801153	.	+	.	ID=TcBrA4_0135340;description=dispersed gene family protein 1 (DGF-1)%2C putative;ebi_biotype=protein_coding
+TcBrA4_Chr17	VEuPathDB	protein_coding_gene	843745	852445	.	-	.	ID=TcBrA4_0186020;description=dispersed gene family protein 1 (DGF-1)%2C putative;ebi_biotype=protein_coding
+TcBrA4_Chr17	VEuPathDB	protein_coding_gene	875418	885707	.	-	.	ID=TcBrA4_0185670;description=dispersed gene family protein 1 (DGF-1)%2C putative;ebi_biotype=protein_coding
+TcBrA4_Chr18	VEuPathDB	protein_coding_gene	850706	861106	.	+	.	ID=TcBrA4_0185600;description=dispersed gene family protein 1 (DGF-1)%2C putative;ebi_biotype=protein_coding
+TcBrA4_Chr19	VEuPathDB	protein_coding_gene	217794	228263	.	+	.	ID=TcBrA4_0185650;description=dispersed gene family protein 1 (DGF-1)%2C putative;ebi_biotype=protein_coding
+TcBrA4_Chr19	VEuPathDB	protein_coding_gene	800182	810630	.	+	.	ID=TcBrA4_0185640;description=dispersed gene family protein 1 (DGF-1)%2C putative;ebi_biotype=protein_coding
+TcBrA4_Chr1	VEuPathDB	protein_coding_gene	1829156	1839535	.	+	.	ID=TcBrA4_0185590;description=dispersed gene family protein 1 (DGF-1)%2C putative;ebi_biotype=protein_coding
+TcBrA4_Chr1	VEuPathDB	protein_coding_gene	19411	28820	.	-	.	ID=TcBrA4_0185990;description=dispersed gene family protein 1 (DGF-1)%2C putative;ebi_biotype=protein_coding
+TcBrA4_Chr1	VEuPathDB	protein_coding_gene	505412	515758	.	+	.	ID=TcBrA4_0185580;description=dispersed gene family protein 1 (DGF-1)%2C putative;ebi_biotype=protein_coding
+TcBrA4_Chr22	VEuPathDB	protein_coding_gene	20233	30630	.	-	.	ID=TcBrA4_0185560;description=dispersed gene family protein 1 (DGF-1)%2C putative;ebi_biotype=protein_coding
+TcBrA4_Chr23	VEuPathDB	protein_coding_gene	10599	21022	.	-	.	ID=TcBrA4_0185940;description=dispersed gene family protein 1 (DGF-1)%2C putative;ebi_biotype=protein_coding
+TcBrA4_Chr24	VEuPathDB	protein_coding_gene	315214	325713	.	-	.	ID=TcBrA4_0185570;description=dispersed gene family protein 1 (DGF-1)%2C putative;ebi_biotype=protein_coding
+TcBrA4_Chr25	VEuPathDB	protein_coding_gene	150654	153574	.	+	.	ID=TcBrA4_0185890;description=dispersed gene family protein 1 (DGF-1)%2C putative (fragment);ebi_biotype=protein_coding
+TcBrA4_Chr26	VEuPathDB	protein_coding_gene	359491	359757	.	-	.	ID=TcBrA4_0006470;description=dispersed gene family protein 1 (DGF-1)%2C putative (fragment);ebi_biotype=protein_coding
+TcBrA4_Chr26	VEuPathDB	protein_coding_gene	441304	451359	.	+	.	ID=TcBrA4_0185540;description=dispersed gene family protein 1 (DGF-1)%2C putative;ebi_biotype=protein_coding
+TcBrA4_Chr28	VEuPathDB	protein_coding_gene	641449	651834	.	+	.	ID=TcBrA4_0185620;description=dispersed gene family protein 1 (DGF-1)%2C putative;ebi_biotype=protein_coding
+TcBrA4_Chr30	VEuPathDB	protein_coding_gene	564222	574604	.	+	.	ID=TcBrA4_0185550;description=dispersed gene family protein 1 (DGF-1)%2C putative;ebi_biotype=protein_coding
+TcBrA4_Chr32	VEuPathDB	protein_coding_gene	485135	495562	.	+	.	ID=TcBrA4_0185630;description=dispersed gene family protein 1 (DGF-1)%2C putative;ebi_biotype=protein_coding
+TcBrA4_Chr3	VEuPathDB	protein_coding_gene	1734785	1745176	.	-	.	ID=TcBrA4_0185610;description=dispersed gene family protein 1 (DGF-1)%2C putative;ebi_biotype=protein_coding
+TcBrA4_Chr5	VEuPathDB	protein_coding_gene	416363	423535	.	-	.	ID=TcBrA4_0186010;description=dispersed gene family protein 1 (DGF-1)%2C putative;ebi_biotype=protein_coding
+TcBrA4_Chr5	VEuPathDB	protein_coding_gene	84928	85949	.	-	.	ID=TcBrA4_0186000;description=dispersed gene family protein 1 (DGF-1)%2C putative (fragment);ebi_biotype=protein_coding
+TcBrA4_Chr6	VEuPathDB	protein_coding_gene	117673	118017	.	+	.	ID=TcBrA4_0185980;description=dispersed gene family protein 1 (DGF-1)%2C putative (fragment);ebi_biotype=protein_coding
+TcBrA4_Chr6	VEuPathDB	protein_coding_gene	172805	175852	.	+	.	ID=TcBrA4_0185970;description=dispersed gene family protein 1 (DGF-1)%2C putative (fragment);ebi_biotype=protein_coding
+TcBrA4_Chr6	VEuPathDB	protein_coding_gene	528691	530608	.	-	.	ID=TcBrA4_0185960;description=dispersed gene family protein 1 (DGF-1)%2C putative (fragment);ebi_biotype=protein_coding
+TcBrA4_Chr7	VEuPathDB	protein_coding_gene	1302978	1313366	.	+	.	ID=TcBrA4_0185660;description=dispersed gene family protein 1 (DGF-1)%2C putative;ebi_biotype=protein_coding
+TcBrA4_Contig257	VEuPathDB	protein_coding_gene	26306	28718	.	+	.	ID=TcBrA4_0185910;description=dispersed gene family protein 1 (DGF-1)%2C putative (fragment);ebi_biotype=protein_coding
+TcBrA4_Contig283	VEuPathDB	protein_coding_gene	8078	10391	.	-	.	ID=TcBrA4_0185920;description=dispersed gene family protein 1 (DGF-1)%2C putative (fragment);ebi_biotype=protein_coding
+TcBrA4_Contig37	VEuPathDB	protein_coding_gene	1	2298	.	-	.	ID=TcBrA4_0185930;description=dispersed gene family protein 1 (DGF-1)%2C putative (fragment);ebi_biotype=protein_coding
+TcBrA4_Contig44	VEuPathDB	protein_coding_gene	1605	2626	.	-	.	ID=TcBrA4_0185950;description=dispersed gene family protein 1 (DGF-1)%2C putative (fragment);ebi_biotype=protein_coding
