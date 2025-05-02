@@ -26,7 +26,7 @@ done
 # Check required arguments
 if [[ -z "$BLAST_FILE" ]] || [[ -z "$LENGTH_MIN" ]]; then
     echo "Error: Missing required arguments."
-    echo "Usage: $0 -file <filename> -l <length_min> [-e <evalue_max>] [-col <column_to_print>] [-i <identity_min>] [-uniq]"
+    echo "Usage: $0 -file <filename> -l <length_min> [-e <evalue_max>] [-col <column_to_print>] [-i <identity_min>] [-uniq] [-self <true|false>]"
     exit 1
 fi
 
