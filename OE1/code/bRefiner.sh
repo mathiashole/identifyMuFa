@@ -6,6 +6,7 @@ LENGTH_MIN=0
 EVALUE_MAX=1  # Default 1 (accepts all values)
 UNIQ_SORT=false  # By default, do NOT apply sort | uniq
 COLUMN_TO_PRINT="ALL"  # Default: print all columns
+SELF_FILTER=true  # By default, filter self-hits
 
 # Parse arguments
 while [[ "$#" -gt 0 ]]; do
