@@ -137,6 +137,9 @@ generate_commands <- function(data, output_dir) {
   # }
   data$bRefiner_command <- paste(BREFINER , "-file", file.path(output_dir, "blast_result", data$blastp_origin_result), "-i", 80, "-l", data$length / 3 * 0.8, "-col", 1, "-uniq") ## Need mean calculated option
 
+  data$gs_origin_out_high_command <- paste(GSCISSORS, "--fasta", file.path(output_dir, data$out_gscissors_high), "--coordinates",
+                                  file.path(output_dir, "blast_result", data$brefiner_origin_blastp), "--format", "id", "--output",
+                                  file.path(output_dir, data$new_gen))
 
   data$concat_nucleotide_command <- paste("cat", file.path(output_dir, data$new_gen), file.path(output_dir, data$out_gscissors_high), ">", file.path(output_dir, data$concat_origin_new_gen))
 
