@@ -153,19 +153,6 @@ sub read_fasta {
 }
 
 sub extract_sequence {
-    # my ($sequence, $start_coordinate, $end_coordinate) = @_;
-    # $start_coordinate--;
-    # $end_coordinate--;
-
-    # my $length = abs($end_coordinate - $start_coordinate) + 1;
-    # my $result = '';
-
-    # if ($start_coordinate <= $end_coordinate) {
-    #     $result = substr($sequence, $start_coordinate, $length);
-    # } else {
-    #     my $seq_aux = substr($sequence, $end_coordinate, $length);
-    #     $result = reverse_complement($seq_aux);
-    # }
 
     # return $result;
     my ($sequence, $start_coordinate, $end_coordinate, $strand) = @_;
