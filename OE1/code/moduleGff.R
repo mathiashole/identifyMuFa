@@ -349,7 +349,6 @@ execution_module <- function(data, output_dir) {
         }
 
         cat("Processing GSCISSORS: ", data$gs_annotation_out_high_command[i], "\n")
-        # Check if FILTER_SEQ created the expected file
         path_file_gs_high_filtered <- file.path(output_dir, data$out_gscissors_high_filtered_nucl[i])
         system(data$gs_annotation_out_high_command[i])
         if (!file.exists(path_file_gs_high_filtered)) {
