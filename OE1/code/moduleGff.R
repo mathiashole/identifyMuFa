@@ -316,12 +316,11 @@ execution_module <- function(data, output_dir) {
           next
         }
 
-                cat("Processing GORF: ", data$gorf_command[i], "\n")
-        system(data$gorf_command[i])
-        # Check if SPDIFFSIZE created the expect file
-        path_file_gorf <- file.path(output_dir, data$gorf_result_file_prot[i])
-        if (!file.exists(path_file_gorf)) {
-          cat("Error: GORF did not create the file", file.path(output_dir, data$gorf_result_file_prot[i]), "\n")
+                cat("Processing GORF: ", data$gorf_annotation_command[i], "\n")
+        system(data$gorf_annotation_command[i])
+        path_file_gorf_annotation <- file.path(output_dir, data$gorf_origin_file_prot[i])
+        if (!file.exists(path_file_gorf_annotation)) {
+          cat("Error: GORF did not create the file", file.path(output_dir, data$gorf_origin_file_prot[i]), "\n")
           next
         }
 
