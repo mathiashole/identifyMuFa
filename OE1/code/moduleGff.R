@@ -39,7 +39,7 @@ transform_data <- function(data) {
   data$gorf_origin_file_prot <- paste0("getorf_protein_", data$out_gscissors_high)
   data$blastp_origin_result <- paste0("blastp_getorf_protein_out_high_", data$keyword_sum, "_", data$no_gff_basename, ".txt")
   data$brefiner_origin_blastp <- paste0("bRefiner_blastp_getorf_protein_out_high_", data$keyword_sum, "_", data$no_gff_basename, ".txt")
-  data$out_gscissors_high_filtered <- paste0("bRefiner_", data$out_gscissors_high)
+  data$out_gscissors_high_filtered_nucl <- paste0("bRefiner_", data$out_gscissors_high)
   data$concat_origin_new_gen <- paste0("origin_and_new_gen_", data$fasta_basename)
   data$concat_origin_new_gen_prot <- paste0("origin_and_new_gen_protein_", data$fasta_basename)
   
@@ -140,7 +140,7 @@ generate_commands <- function(data, output_dir) {
 
   data$gs_origin_out_high_command <- paste(GSCISSORS, "--fasta", file.path(output_dir, data$out_gscissors_high), "--coordinates",
                                   file.path(output_dir, "blast_result", data$brefiner_origin_blastp), "--format", "id", "--output",
-                                  file.path(output_dir, data$new_gen))
+                                  file.path(output_dir, data$out_gscissors_high_filtered_nucl))
 
   data$concat_nucleotide_command <- paste("cat", file.path(output_dir, data$new_gen), file.path(output_dir, data$out_gscissors_high), ">", file.path(output_dir, data$concat_origin_new_gen))
 
