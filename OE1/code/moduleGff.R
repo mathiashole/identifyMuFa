@@ -340,19 +340,19 @@ execution_module <- function(data, output_dir) {
           next
         }
 
-        cat("Processing JOIN FILE: ", data$concat_nucleotide_command[i], "\n")
-        path_file_concat_origin_new <- file.path(output_dir, data$concat_origin_new_gen[i])
-        system(data$concat_nucleotide_command[i])
-        if (!file.exists(path_file_concat_origin_new)) {
-          cat("Error: JOIN FILE did not create the file", file.path(output_dir, data$concat_origin_new_gen[i]), "\n")
-          next
-        }
-
         cat("Processing GSCISSORS: ", data$gs_annotation_out_high_command[i], "\n")
         path_file_gs_high_filtered <- file.path(output_dir, data$out_gscissors_high_filtered_nucl[i])
         system(data$gs_annotation_out_high_command[i])
         if (!file.exists(path_file_gs_high_filtered)) {
           cat("Error: GSCISSORS did not create the file", file.path(output_dir, data$out_gscissors_high_filtered_nucl[i]), "\n")
+          next
+        }
+
+        cat("Processing JOIN FILE: ", data$concat_nucleotide_command[i], "\n")
+        path_file_concat_origin_new <- file.path(output_dir, data$concat_origin_new_gen[i])
+        system(data$concat_nucleotide_command[i])
+        if (!file.exists(path_file_concat_origin_new)) {
+          cat("Error: JOIN FILE did not create the file", file.path(output_dir, data$concat_origin_new_gen[i]), "\n")
           next
         }
 
