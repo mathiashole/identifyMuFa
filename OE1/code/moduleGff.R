@@ -29,7 +29,6 @@ transform_data <- function(data) {
   data$overlap_result_low <- paste0("low_filtered_multigenic_family_", data$no_fasta_basename, ".fasta") # Extracted sequence < to minimal length
   data$gorf_result_file_prot <- paste0("getorf_protein_", data$overlap_result_high_equal)
   data$gorf_result_file_nucl <- paste0("getorf_", data$overlap_result_high_equal)
-  data$gorf_origin_file_prot <- paste0("getorf_protein_", data$out_gscissors_high)
   # data$blastp_result <- paste0("blastp_out_high_", data$keyword_sum, "_", data$no_gff_basename, ".txt")
   # data$blastp_result <- paste0("blastp_", data$gorf_result_file_prot)
   data$blastp_result <- paste0("blastp_getorf_protein_high_equal_filtered_multigenic_family_", data$no_fasta_basename, ".txt")
@@ -37,6 +36,7 @@ transform_data <- function(data) {
   data$calssifier_result <- paste0("filtered_multigenic_family_", data$no_fasta_basename, "_classified.tsv")
   data$new_gen <- paste0("new_gen_", data$fasta_basename)
   data$new_gen_protein <- paste0("new_gen_protein_", data$fasta_basename)
+  data$gorf_origin_file_prot <- paste0("getorf_protein_", data$out_gscissors_high)
   data$blastp_origin_result <- paste0("blastp_getorf_protein_out_high_", data$keyword_sum, "_", data$no_gff_basename, ".txt")
   data$brefiner_origin_blastp <- paste0("bRefiner_blastp_getorf_protein_out_high_", data$keyword_sum, "_", data$no_gff_basename, ".txt")
   data$concat_origin_new_gen <- paste0("origin_and_new_gen_", data$fasta_basename)
