@@ -124,21 +124,21 @@ generate_commands <- function(data, output_dir) {
                                   file.path(output_dir, data$new_gen_protein))
   
   if ("length" %in% colnames(data)) {
-    data$gorf_command <- paste(GORF, file.path(output_dir, data$out_gscissors_high), output_dir, data$length)
+    data$gorf_annotation_command <- paste(GORF, file.path(output_dir, data$out_gscissors_high), output_dir, data$length)
   } else {
-    data$gorf_command <- paste(GORF, file.path(output_dir, data$out_gscissors_high), output_dir)
+    data$gorf_annotation_command <- paste(GORF, file.path(output_dir, data$out_gscissors_high), output_dir)
   }
 
-  data$allblast_blastp_command <- paste(ALLBLAST, "-type", "blastp", "-qp", file.path(output_dir, data$gorf_origin_file_prot), "-sp", file.path(output_dir, data$out_gscissors_high_translated), "-o", file.path(output_dir, "blast_result"))
+  data$allblast_blastp_annotation_command <- paste(ALLBLAST, "-type", "blastp", "-qp", file.path(output_dir, data$gorf_origin_file_prot), "-sp", file.path(output_dir, data$out_gscissors_high_translated), "-o", file.path(output_dir, "blast_result"))
   
   # if ("length"%in% colnames(data)) {
   #   # data$bRefiner_command <- paste(BREFINER , "-file", file.path(output_dir, "blast_result", data$blastp_origin_result), "-i", 80, "-l", data$length / 3, "-col", 1, "-uniq")
   # } else {
 
   # }
-  data$bRefiner_command <- paste(BREFINER , "-file", file.path(output_dir, "blast_result", data$blastp_origin_result), "-i", 80, "-l", data$length / 3 * 0.8, "-col", 1, "-uniq") ## Need mean calculated option
+  data$bRefiner_annotation_command <- paste(BREFINER , "-file", file.path(output_dir, "blast_result", data$blastp_origin_result), "-i", 80, "-l", data$length / 3 * 0.8, "-col", 1, "-uniq") ## Need mean calculated option
 
-  data$gs_origin_out_high_command <- paste(GSCISSORS, "--fasta", file.path(output_dir, data$out_gscissors_high), "--coordinates",
+  data$gs_annotation_out_high_command <- paste(GSCISSORS, "--fasta", file.path(output_dir, data$out_gscissors_high), "--coordinates",
                                   file.path(output_dir, "blast_result", data$brefiner_origin_blastp), "--format", "id", "--output",
                                   file.path(output_dir, data$out_gscissors_high_filtered_nucl))
 
@@ -313,6 +313,33 @@ execution_module <- function(data, output_dir) {
         system(data$gs_new_gen_prot_command[i])
         if (!file.exists(path_file_gs_new_gen_prot)) {
           cat("Error: GSCISSORS did not create the file", file.path(output_dir, data$new_gen_protein[i]), "\n")
+          next
+        }
+
+                cat("Processing GORF: ", data$gorf_command[i], "\n")
+        system(data$gorf_command[i])
+        # Check if SPDIFFSIZE created the expect file
+        path_file_gorf <- file.path(output_dir, data$gorf_result_file_prot[i])
+        if (!file.exists(path_file_gorf)) {
+          cat("Error: GORF did not create the file", file.path(output_dir, data$gorf_result_file_prot[i]), "\n")
+          next
+        }
+
+        cat("Processing ALLBLAST: ", data$allblast_blastp_command[i], "\n")
+        system(data$allblast_blastp_command[i])
+        # Check if ALLBLAST created the expected file
+        path_file_blastp <- file.path(output_dir, "blast_result", data$blastp_result[i])
+        if (!file.exists(path_file_blastp)) {
+          cat("Error: ALLBLAST did not create the file", file.path(output_dir, "blast_result", data$blastp_result[i]), "\n")
+          next
+        }
+
+        cat("Processing BREFINER: ", data$bRefiner_command[i], "\n")
+        system(data$bRefiner_command[i])
+        # Check if BREFINER created the expected file
+        path_file_brefiner <- file.path(output_dir, "blast_result", data$brefiner_blastp[i])
+        if (!file.exists(path_file_brefiner)) {
+          cat("Error: BREFINER did not create the file", file.path(output_dir, "blast_result", data$brefiner_blastp[i]), "\n")
           next
         }
 
