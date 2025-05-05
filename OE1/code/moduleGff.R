@@ -121,6 +121,22 @@ generate_commands <- function(data, output_dir) {
   data$gs_new_gen_prot_command <- paste(GSCISSORS, "--fasta", file.path(output_dir, data$gorf_result_file_prot), "--coordinates",
                                   file.path(output_dir, "blast_result", data$brefiner_blastp), "--format", "id", "--output",
                                   file.path(output_dir, data$new_gen_protein))
+  
+  if ("length" %in% colnames(data)) {
+    data$gorf_command <- paste(GORF, file.path(output_dir, data$overlap_result_high_equal), output_dir, data$length)
+  } else {
+    data$gorf_command <- paste(GORF, file.path(output_dir, data$overlap_result_high_equal), output_dir)
+  }
+
+  data$allblast_blastp_command <- paste(ALLBLAST, "-type", "blastp", "-qp", file.path(output_dir, data$out_gscissors_high_translated), "-sp", file.path(output_dir, data$gorf_result_file_prot), "-o", file.path(output_dir, "blast_result"))
+  
+  # if ("length"%in% colnames(data)) {
+  #   # data$bRefiner_command <- paste(BREFINER , "-file", file.path(output_dir, "blast_result", data$blastp_result), "-i", 80, "-l", data$length / 3, "-col", 1, "-uniq")
+  # } else {
+
+  # }
+  data$bRefiner_command <- paste(BREFINER , "-file", file.path(output_dir, "blast_result", data$blastp_result), "-i", 80, "-l", data$length / 3 * 0.8, "-col", 2, "-uniq") ## Need mean calculated option
+
 
   data$concat_nucleotide_command <- paste("cat", file.path(output_dir, data$new_gen), file.path(output_dir, data$out_gscissors_high), ">", file.path(output_dir, data$concat_origin_new_gen))
 
