@@ -98,7 +98,7 @@ sub extractor {
 
                 # No match found
                 } else {
-                    warn "Warning: Sequence $name not found in FASTA file\n";
+                    warn "Warning: Sequence '$name' not found. Tried to match: '$base_name'\n";
                     print $log_fh "Sequence $name not found in FASTA file\n" if $log_file;
                 }
             }
