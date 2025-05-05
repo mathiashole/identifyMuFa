@@ -128,7 +128,7 @@ generate_commands <- function(data, output_dir) {
     data$gorf_command <- paste(GORF, file.path(output_dir, data$out_gscissors_high), output_dir)
   }
 
-  data$allblast_blastp_command <- paste(ALLBLAST, "-type", "blastp", "-qp", file.path(output_dir, data$out_gscissors_high_translated), "-sp", file.path(output_dir, data$gorf_result_file_prot), "-o", file.path(output_dir, "blast_result"))
+  data$allblast_blastp_command <- paste(ALLBLAST, "-type", "blastp", "-qp", file.path(output_dir, data$gorf_origin_file_prot), "-sp", file.path(output_dir, data$out_gscissors_high_translated), "-o", file.path(output_dir, "blast_result"))
   
   # if ("length"%in% colnames(data)) {
   #   # data$bRefiner_command <- paste(BREFINER , "-file", file.path(output_dir, "blast_result", data$blastp_result), "-i", 80, "-l", data$length / 3, "-col", 1, "-uniq")
