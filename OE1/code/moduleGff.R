@@ -37,6 +37,8 @@ transform_data <- function(data) {
   data$calssifier_result <- paste0("filtered_multigenic_family_", data$no_fasta_basename, "_classified.tsv")
   data$new_gen <- paste0("new_gen_", data$fasta_basename)
   data$new_gen_protein <- paste0("new_gen_protein_", data$fasta_basename)
+  data$blastp_origin_result <- paste0("blastp_getorf_protein_high_equal_filtered_multigenic_family_", data$no_fasta_basename, ".txt")
+  data$brefiner_origin_blastp <- paste0("bRefiner_blastp_getorf_protein_high_equal_filtered_multigenic_family_", data$no_fasta_basename, ".txt")
   data$concat_origin_new_gen <- paste0("origin_and_new_gen_", data$fasta_basename)
   data$concat_origin_new_gen_prot <- paste0("origin_and_new_gen_protein_", data$fasta_basename)
   
