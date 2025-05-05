@@ -75,6 +75,8 @@ sub extractor {
 
             # Partial match
             } else {
+                my $base_name = $name; 
+                $base_name =~ s/[:;].*//;  # Normalize the base ID
                 my ($match) = grep { /^$name\b/ } keys %hash_sequence;
 
                 if ($match) {
