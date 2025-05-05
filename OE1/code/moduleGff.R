@@ -334,7 +334,6 @@ execution_module <- function(data, output_dir) {
 
         cat("Processing BREFINER: ", data$bRefiner_annotation_command[i], "\n")
         system(data$bRefiner_annotation_command[i])
-        # Check if BREFINER created the expected file
         path_file_brefiner_annotation <- file.path(output_dir, "blast_result", data$brefiner_origin_blastp[i])
         if (!file.exists(path_file_brefiner_annotation)) {
           cat("Error: BREFINER did not create the file", file.path(output_dir, "blast_result", data$brefiner_origin_blastp[i]), "\n")
