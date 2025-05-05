@@ -77,7 +77,15 @@ sub extractor {
             } else {
                 my $base_name = $name; 
                 $base_name =~ s/[:;].*//;  # Normalize the base ID
-                my ($match) = grep { /^$name\b/ } keys %hash_sequence;
+                # my ($match) = grep { /^$name\b/ } keys %hash_sequence;
+
+                my ($match) = grep { 
+                    my $key = $_;
+                    $key eq $name ||                          # Case 1: Exact match
+                    $key =~ /(^|;)[^=;]*=$base_name(;|$)/ ||  # Case 2: Any key=value field
+                    $key =~ /(^|;)ID=[^:;]*:$base_name(;|$)/ || # Case 3: GFF type IDs (ID=XXX:base_name)
+                    $key =~ /\Q$base_name\E/                  # Case 4: Substring (last resort)
+                } keys %hash_sequence;
 
                 if ($match) {
                     my $sequence = $hash_sequence{$match};
