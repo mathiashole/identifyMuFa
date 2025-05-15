@@ -10,6 +10,13 @@ suppressPackageStartupMessages({
 
 # Funciones
 
+# ---- Advanced settings ----
+generate_unique_filename <- function(type) {
+  timestamp <- format(Sys.time(), "%Y%m%d_%H%M%S")
+  paste0("COMBINED_", type, "_", timestamp, ".tsv")
+}
+
+
 # Function to count dinucleotides
 count_dinucleotides <- function(sequence) {
   counts <- seqinr::count(sequence, 2)
