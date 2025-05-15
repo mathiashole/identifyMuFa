@@ -96,17 +96,98 @@ calculate_amino_acid_frequencies <- function(file) {
 
 # ---- MAIN ----
 
-args <- commandArgs(trailingOnly = TRUE)
-
-if (length(args) < 2) {
-  stop("Usage: ./calculate_nucleotide_frequencies.R <dinucleotide|trinucleotide> <fasta_file1> [fasta_file2 ...]")
+parse_arguments <- function() {
+  args <- commandArgs(trailingOnly = TRUE)
+  
+  # Initialize variables
+  aminoacid_files <- NULL
+  dinucleotide_files <- NULL
+  trinucleotide_files <- NULL
+  output_base <- NULL
+  generate_combined <- TRUE
+  
+  # Flag to know what we are reading
+  current_mode <- NULL
+  
+  for (i in seq_along(args)) {
+    if (args[i] %in% c("--aminoacid", "-aa")) {
+      current_mode <- "aminoacid"
+    } 
+    else if (args[i] %in% c("--dinucleotide", "-di")) {
+      current_mode <- "dinucleotide"
+    }
+    else if (args[i] %in% c("--trinucleotide", "-tri")) {
+      current_mode <- "trinucleotide"
+    }
+    else if (args[i] %in% c("--output", "-o")) {
+      output_base <- args[i + 1]
+      i <- i + 1  # Skip value
+    }
+    else if (args[i] %in% c("--no-combined", "-nc")) {
+      generate_combined <- FALSE
+    }
+    else {
+      # Assign files according to the current mode
+      if (!is.null(current_mode)) {
+        if (current_mode == "aminoacid") {
+          aminoacid_files <- c(aminoacid_files, args[i])
+        } 
+        else if (current_mode == "dinucleotide") {
+          dinucleotide_files <- c(dinucleotide_files, args[i])
+        }
+        else if (current_mode == "trinucleotide") {
+          trinucleotide_files <- c(trinucleotide_files, args[i])
+        }
+      }
+    }
+  }
+  
+    # Validate that only one type of analysis is specified
+  analysis_types <- sum(!is.null(aminoacid_files), 
+                     !is.null(dinucleotide_files), 
+                     !is.null(trinucleotide_files))
+  if (sum(analysis_types) != 1) {
+    stop("Must specify exactly one analysis type: --aminoacid, --dinucleotide or --trinucleotide")
+  }
+  
+  # Determine files and type of analysis
+  if (!is.null(aminoacid_files)) {
+    files <- aminoacid_files
+    type <- "aminoacid"
+  } else if (!is.null(dinucleotide_files)) {
+    files <- dinucleotide_files
+    type <- "dinucleotide"
+  } else {
+    files <- trinucleotide_files
+    type <- "trinucleotide"
+  }
+  
+  # Validate files
+  existing_files <- files[file.exists(files)]
+  if (length(existing_files) == 0) {
+    stop("Error: None of the specified files exist")
+  }
+  
+  return(list(
+    type = type,
+    files = existing_files,
+    output_base = output_base,
+    generate_combined = generate_combined
+  ))
 }
 
-type <- args[1]
-files <- args[-1]
 
-result <- nucleotide_frequncy(files, type_frequency = type)
+# args <- commandArgs(trailingOnly = TRUE)
 
-outfile <- paste0(type, "_frequencies.tsv")
-write.table(result, file = outfile, sep = "\t", quote = FALSE, row.names = FALSE)
-cat("Output written to", outfile, "\n")
+# if (length(args) < 2) {
+#   stop("Usage: ./calculate_nucleotide_frequencies.R <dinucleotide|trinucleotide> <fasta_file1> [fasta_file2 ...]")
+# }
+
+# type <- args[1]
+# files <- args[-1]
+
+# result <- nucleotide_frequncy(files, type_frequency = type)
+
+# outfile <- paste0(type, "_frequencies.tsv")
+# write.table(result, file = outfile, sep = "\t", quote = FALSE, row.names = FALSE)
+# cat("Output written to", outfile, "\n")
