@@ -186,7 +186,9 @@ parse_arguments <- function() {
 }
 
 process_files <- function(files, processor_func, type_label, output_base = NULL, generate_combined = TRUE) {
-  all_results <- list()
+  # Lists for storing results
+  all_wide <- list()
+  all_long <- list()
   
   for (file in files) {
     base_name <- tools::file_path_sans_ext(basename(file))
