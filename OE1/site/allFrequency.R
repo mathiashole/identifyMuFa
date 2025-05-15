@@ -195,14 +195,21 @@ process_files <- function(files, processor_func, type_label, output_base = NULL,
     tryCatch({
       result <- processor_func(file)  # Esta variable se llama 'result' (singular)
       
-      # Save individual file - CORRECCIÓN: usar result$ en vez de results$
-      wide_file <- paste0(base_name, "_", type_label, "_frequencies_wide.tsv")
-      write.table(result$wide_format, file = wide_file, sep = "\t", quote = FALSE, row.names = FALSE)
-      cat("Wide format saved to:", wide_file, "\n")
+      if(type_label == "aminoacid") {
+        # Save individual file - CORRECCIÓN: usar result$ en vez de results$
+        wide_file <- paste0(base_name, "_", type_label, "_frequencies_wide.tsv")
+        write.table(result$wide_format, file = wide_file, sep = "\t", quote = FALSE, row.names = FALSE)
+        cat("Wide format saved to:", wide_file, "\n")
 
-      long_file <- paste0(base_name, "_", type_label, "_frequencies_long.tsv")
-      write.table(result$long_format, file = long_file, sep = "\t", quote = FALSE, row.names = FALSE)
-      cat("Long format saved to:", long_file, "\n")
+        long_file <- paste0(base_name, "_", type_label, "_frequencies_long.tsv")
+        write.table(result$long_format, file = long_file, sep = "\t", quote = FALSE, row.names = FALSE)
+        cat("Long format saved to:", long_file, "\n")
+
+        all_results[[file]] <- result$wide_format # for combine used wide
+      } else {
+
+      }
+
       
       # Accumulate for combined files - CORRECCIÓN: usar result$ en vez de results$
       all_results_wide[[file]] <- result$wide_format
