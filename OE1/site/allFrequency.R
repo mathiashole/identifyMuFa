@@ -174,6 +174,43 @@ parse_arguments <- function() {
   ))
 }
 
+process_files <- function(files, processor_func, type_label, output_base = NULL, generate_combined = TRUE) {
+  all_results <- list()
+  
+  for (file in files) {
+    base_name <- tools::file_path_sans_ext(basename(file))
+    cat("Processing:", file, "\n")
+    
+    tryCatch({
+      result <- processor_func(file)
+      
+      # Save individual file
+      individual_file <- paste0(base_name, "_", type_label, "_frequencies.tsv")
+      write.table(result, file = individual_file, sep = "\t", quote = FALSE, row.names = FALSE)
+      cat("Individual results saved to:", individual_file, "\n")
+      
+      all_results[[file]] <- result
+    }, error = function(e) {
+      cat("!! Error processing", file, ":", e$message, "\n")
+    })
+  }
+  
+  # Generate merged file if required
+  if (generate_combined && length(all_results) > 0) {
+    combined_results <- bind_rows(all_results)
+    
+    combined_file <- if (!is.null(output_base)) {
+      paste0(output_base, "_", type_label, "_frequencies.tsv")
+    } else {
+      generate_unique_filename(type_label)
+    }
+    
+    write.table(combined_results, file = combined_file, sep = "\t", quote = FALSE, row.names = FALSE)
+    cat("\nCombined results saved to:", combined_file, "\n")
+  }
+  
+  invisible(all_results)
+}
 
 # args <- commandArgs(trailingOnly = TRUE)
 
