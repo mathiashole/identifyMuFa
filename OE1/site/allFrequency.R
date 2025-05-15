@@ -94,8 +94,13 @@ calculate_amino_acid_frequencies <- function(file) {
                   names_to = "AminoAcid",
                   values_to = "Freq") %>%
       mutate(Freq = Freq * 100)  # Convert to percentage
-      
-  return(results)
+    
+    # Return both tables in a list
+    return(list(
+      wide_format = results,      # Wide format (frequencies as columns)
+      long_format = results_long  # Long format (one row per amino acid)
+    ))
+
 }
 
 # ---- MAIN ----
