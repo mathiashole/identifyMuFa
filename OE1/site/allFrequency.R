@@ -8,12 +8,6 @@ suppressPackageStartupMessages({
   library(tidyr)
 })
 
-# ---- Advanced settings ----
-generate_unique_filename <- function(type) {
-  timestamp <- format(Sys.time(), "%Y%m%d_%H%M%S")
-  paste0("COMBINED_", type, "_", timestamp, ".tsv")
-}
-
 # ---- Calculate function ----
 # Function to count dinucleotides
 count_dinucleotides <- function(sequence) {
