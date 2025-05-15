@@ -267,18 +267,3 @@ main <- function() {
 
 # Execute
 main()
-
-# args <- commandArgs(trailingOnly = TRUE)
-
-# if (length(args) < 2) {
-#   stop("Usage: ./calculate_nucleotide_frequencies.R <dinucleotide|trinucleotide> <fasta_file1> [fasta_file2 ...]")
-# }
-
-# type <- args[1]
-# files <- args[-1]
-
-# result <- nucleotide_frequncy(files, type_frequency = type)
-
-# outfile <- paste0(type, "_frequencies.tsv")
-# write.table(result, file = outfile, sep = "\t", quote = FALSE, row.names = FALSE)
-# cat("Output written to", outfile, "\n")
