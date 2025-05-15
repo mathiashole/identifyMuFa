@@ -254,9 +254,8 @@ main <- function() {
   }
   
   # Process files
-  process_files(
+  process_files_func(
     files = params$files,
-    processor_func = processor,
     type_label = params$type,
     output_base = params$output_base,
     generate_combined = params$generate_combined
