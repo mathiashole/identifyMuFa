@@ -87,10 +87,13 @@ calculate_amino_acid_frequencies <- function(file) {
                  values_fill = list(Frequency = 0)) %>%
       mutate(File = basename(file), Sequence_ID = seq_id) %>%
       relocate(File, Sequence_ID)
-    
-    return(freq_wide)
-  })
-
+  }) %>% 
+    bind_rows() %>%
+    replace(is.na(.), 0) #%>%
+    # pivot_longer(cols = 3:22, names_to = "AminoAcid", values_to = "Freq") %>%
+    # mutate(Freq = Freq * 100)
+  
+  return(results)
 }
 
 # ---- MAIN ----
