@@ -226,11 +226,11 @@ process_files <- function(files, processor_func, type_label, output_base = NULL,
     wide_combined_file <- if (!is.null(output_base)) {
       paste0(output_base, "_", type_label, "_frequencies_wide.tsv")
     } else {
-      generate_unique_filename(type_label)
+      paste0("COMBINED_", type_label, "_wide_", format(Sys.time(), "%Y%m%d_%H%M%S"), ".tsv")
     }
     
-    write.table(combined_results, file = combined_file, sep = "\t", quote = FALSE, row.names = FALSE)
-    cat("\nCombined results saved to:", combined_file, "\n")
+    write.table(combined_wide, file = wide_combined_file, sep = "\t", quote = FALSE, row.names = FALSE)
+    cat("\nCombined results saved to:", wide_combined_file, "\n")
   }
   
   invisible(all_results)
