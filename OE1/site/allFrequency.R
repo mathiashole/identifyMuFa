@@ -60,6 +60,38 @@ nucleotide_frequncy <- function(fasta_files, type_frequency = "dinucleotide") {
   return(results)
 }
 
+# Your exact amino acid frequency function (preserved)
+calculate_amino_acid_frequencies <- function(file) {
+  fasta <- read.fasta(file, seqtype = "AA")
+  
+  amino_acids <- c("A", "R", "N", "D", "C", "Q", "E", "G", "H", "I", "L", "K", "M", "F", "P", "S", "T", "W", "Y", "V")
+  
+  results <- lapply(names(fasta), function(seq_id) {
+    seq <- toupper(getSequence(fasta[[seq_id]], as.string = TRUE)[[1]])
+    aa_counts <- table(factor(strsplit(seq, "")[[1]], levels = amino_acids))
+    total_aa <- sum(aa_counts)
+    
+    freq_df <- data.frame(AminoAcid = names(aa_counts), 
+                         Frequency = as.vector(aa_counts) / total_aa)
+    
+    freq_wide <- freq_df %>%
+      pivot_wider(names_from = AminoAcid, values_from = Frequency,
+                 values_fill = list(Frequency = 0)) %>%
+      mutate(File = basename(file), Sequence_ID = seq_id) %>%
+      relocate(File, Sequence_ID)
+    
+    return(freq_wide)
+  })
+  
+  combined <- bind_rows(results) %>%
+    replace(is.na(.), 0)
+  
+  # Apply your filename transformation
+  combined$File <- gsub(".*_([A-Za-z0-9]+)_translated\\.fasta", "\\1", combined$File)
+  
+  return(combined)
+}
+
 # ---- MAIN ----
 
 args <- commandArgs(trailingOnly = TRUE)
