@@ -16,6 +16,7 @@ generate_unique_filename <- function(type) {
   paste0("COMBINED_", type, "_", timestamp, ".tsv")
 }
 
+# ---- Calculate function ----
 # Function to count dinucleotides
 count_dinucleotides <- function(sequence) {
   counts <- seqinr::count(sequence, 2)
@@ -23,9 +24,6 @@ count_dinucleotides <- function(sequence) {
   freqs <- round(freqs, 3)
   return(freqs)
 }
-
-# ---- Calculate function ----
-
 # Function to count trinucleotides
 count_trinucleotides <- function(sequence) {
   counts <- seqinr::count(sequence, 3)
