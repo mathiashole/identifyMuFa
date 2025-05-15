@@ -61,7 +61,7 @@ nucleotide_frequency <- function(fasta_files, type_frequency = "dinucleotide") {
     }
   }
 
-  return(list(wide = all_results_wide, long = all_results_long))
+  return(results)
 }
 
 # Your exact amino acid frequency function (preserved)
@@ -186,10 +186,8 @@ parse_arguments <- function() {
 }
 
 process_files <- function(files, processor_func, type_label, output_base = NULL, generate_combined = TRUE) {
-  # Lists for storing results
-  all_results_wide <- list()
-  all_results_long <- list()
-
+  all_results <- list()
+  
   for (file in files) {
     base_name <- tools::file_path_sans_ext(basename(file))
     cat("Processing:", file, "\n")
