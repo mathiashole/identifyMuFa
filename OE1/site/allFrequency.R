@@ -187,33 +187,28 @@ parse_arguments <- function() {
 
 process_files <- function(files, processor_func, type_label, output_base = NULL, generate_combined = TRUE) {
   # Lists for storing results
-  all_wide <- list()
-  all_long <- list()
+  all_results_wide <- list()
+  all_results_long <- list()
 
   for (file in files) {
     base_name <- tools::file_path_sans_ext(basename(file))
     cat("Processing:", file, "\n")
     
     tryCatch({
-      result <- processor_func(file)
+      result <- processor_func(file)  # Esta variable se llama 'result' (singular)
       
-      # Save individual file
+      # Save individual file - CORRECCIÓN: usar result$ en vez de results$
       wide_file <- paste0(base_name, "_", type_label, "_frequencies_wide.tsv")
-      write.table(results$wide_format, file = wide_file, sep = "\t", quote = FALSE, row.names = FALSE)
+      write.table(result$wide_format, file = wide_file, sep = "\t", quote = FALSE, row.names = FALSE)
       cat("Wide format saved to:", wide_file, "\n")
 
       long_file <- paste0(base_name, "_", type_label, "_frequencies_long.tsv")
-      write.table(results$long_format, file = long_file, sep = "\t", quote = FALSE, row.names = FALSE)
+      write.table(result$long_format, file = long_file, sep = "\t", quote = FALSE, row.names = FALSE)
       cat("Long format saved to:", long_file, "\n")
-      # # Save individual file
-      # individual_file <- paste0(base_name, "_", type_label, "_frequencies.tsv")
-      # write.table(result, file = individual_file, sep = "\t", quote = FALSE, row.names = FALSE)
-      # cat("Individual results saved to:", individual_file, "\n")
       
-      # all_results[[file]] <- result
-      # Accumulate for combined files
-      all_results_wide[[file]] <- results$wide_format
-      all_results_long[[file]] <- results$long_format
+      # Accumulate for combined files - CORRECCIÓN: usar result$ en vez de results$
+      all_results_wide[[file]] <- result$wide_format
+      all_results_long[[file]] <- result$long_format
     }, error = function(e) {
       cat("!! Error processing", file, ":", e$message, "\n")
     })
@@ -243,7 +238,7 @@ process_files <- function(files, processor_func, type_label, output_base = NULL,
     cat("Combined long format saved to:", long_combined_file, "\n")
   }
   
-  invisible(all_results)
+  invisible(list(wide = all_results_wide, long = all_results_long))
 }
 
 # ---- Main execution ----
