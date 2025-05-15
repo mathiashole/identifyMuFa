@@ -5,7 +5,7 @@ suppressPackageStartupMessages({
   library(seqinr)
   library(dplyr)
   library(parallel)
-
+  library(tidyr)
 })
 
 # ---- Advanced settings ----
