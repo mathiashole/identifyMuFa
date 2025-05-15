@@ -35,10 +35,7 @@ count_trinucleotides <- function(sequence) {
 }
 
 nucleotide_frequncy <- function(fasta_files, type_frequency = "dinucleotide") {
-  sequences <- read.fasta(fasta_file)
-  base_name <- tools::file_path_sans_ext(basename(fasta_file))
-  
-  results <- data.frame()
+  results <- data.frame()  # Initialize the empty data frame for the results
 
   # Iterate over each FASTA file in the folder
   for (fasta_file in fasta_files) {
@@ -93,20 +90,7 @@ calculate_amino_acid_frequencies <- function(file) {
     
     return(freq_wide)
   })
-  
-  combined <- bind_rows(results) %>%
-    replace(is.na(.), 0)
-  
-  # Apply your filename transformation
-  combined$File <- gsub(".*_([A-Za-z0-9]+)_translated\\.fasta", "\\1", combined$File)
 
-  combined_long <- combined %>%
-  pivot_longer(cols = c(3:22),  # Especifica las columnas de aminoácidos
-               names_to = "AminoAcid",  # Nombre de la nueva columna para los nombres de los aminoácidos
-               values_to = "Freq") %>%  # Nombre de la nueva columna para las frecuencias
-  mutate(Freq = Freq * 100)  # Convertir frecuencias a porcentaje
-  
-  return(combined_long)
 }
 
 # ---- MAIN ----
