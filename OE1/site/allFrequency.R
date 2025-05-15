@@ -212,6 +212,33 @@ process_files <- function(files, processor_func, type_label, output_base = NULL,
   invisible(all_results)
 }
 
+# ---- Main execution ----
+main <- function() {
+  # Parsing arguments
+  params <- parse_arguments()
+  
+  # Select processing function
+  processor <- switch(params$type,
+    "aminoacid" = calculate_amino_acid_frequencies,
+    "dinucleotide" = function(x) nucleotide_frequency(x, "dinucleotide"),
+    "trinucleotide" = function(x) nucleotide_frequency(x, "trinucleotide")
+  )
+  
+  # Process files
+  process_files(
+    files = params$files,
+    processor_func = processor,
+    type_label = params$type,
+    output_base = params$output_base,
+    generate_combined = params$generate_combined
+  )
+  
+  cat("\nProcessing completed successfully!\n")
+}
+
+# Execute
+main()
+
 # args <- commandArgs(trailingOnly = TRUE)
 
 # if (length(args) < 2) {
