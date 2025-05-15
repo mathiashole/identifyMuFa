@@ -88,8 +88,14 @@ calculate_amino_acid_frequencies <- function(file) {
   
   # Apply your filename transformation
   combined$File <- gsub(".*_([A-Za-z0-9]+)_translated\\.fasta", "\\1", combined$File)
+
+  combined_long <- combined %>%
+  pivot_longer(cols = c(3:22),  # Especifica las columnas de aminoácidos
+               names_to = "AminoAcid",  # Nombre de la nueva columna para los nombres de los aminoácidos
+               values_to = "Freq") %>%  # Nombre de la nueva columna para las frecuencias
+  mutate(Freq = Freq * 100)  # Convertir frecuencias a porcentaje
   
-  return(combined)
+  return(combined_long)
 }
 
 # ---- MAIN ----
