@@ -211,7 +211,7 @@ process_files <- function(files, processor_func, type_label, output_base = NULL,
       # cat("Individual results saved to:", individual_file, "\n")
       
       # all_results[[file]] <- result
-
+      # Accumulate for combined files
       all_results_wide[[file]] <- results$wide_format
       all_results_long[[file]] <- results$long_format
     }, error = function(e) {
