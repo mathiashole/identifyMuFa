@@ -239,11 +239,19 @@ main <- function() {
   params <- parse_arguments()
   
   # Select processing function
-  processor <- switch(params$type,
-    "aminoacid" = calculate_amino_acid_frequencies,
-    "dinucleotide" = function(x) nucleotide_frequency(x, "dinucleotide"),
-    "trinucleotide" = function(x) nucleotide_frequency(x, "trinucleotide")
-  )
+  if (params$type == "aminoacid") {
+    processor <- calculate_amino_acid_frequencies
+    # Forzar a que process_files espere dos formatos
+    process_files_func <- function(files, ...) {
+      process_files(files, calculate_amino_acid_frequencies, ...)
+    }
+  } else {
+    processor <- function(x) nucleotide_frequency(x, params$type)
+    # Forzar a que process_files espere un solo dataframe
+    process_files_func <- function(files, ...) {
+      process_files(files, function(f) nucleotide_frequency(f, params$type), ...)
+    }
+  }
   
   # Process files
   process_files(
