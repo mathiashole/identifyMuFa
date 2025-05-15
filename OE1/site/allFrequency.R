@@ -231,6 +231,16 @@ process_files <- function(files, processor_func, type_label, output_base = NULL,
     
     write.table(combined_wide, file = wide_combined_file, sep = "\t", quote = FALSE, row.names = FALSE)
     cat("\nCombined results saved to:", wide_combined_file, "\n")
+
+    # Combined long format
+    combined_long <- bind_rows(all_results_long)
+    long_combined_file <- if (!is.null(output_base)) {
+      paste0(output_base, "_", type_label, "_long.tsv")
+    } else {
+      paste0("COMBINED_", type_label, "_long_", format(Sys.time(), "%Y%m%d_%H%M%S"), ".tsv")
+    }
+    write.table(combined_long, file = long_combined_file, sep = "\t", quote = FALSE, row.names = FALSE)
+    cat("Combined long format saved to:", long_combined_file, "\n")
   }
   
   invisible(all_results)
