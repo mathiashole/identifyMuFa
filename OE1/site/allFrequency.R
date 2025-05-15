@@ -220,11 +220,11 @@ process_files <- function(files, processor_func, type_label, output_base = NULL,
   }
   
   # Generate merged file if required
-  if (generate_combined && length(all_results) > 0) {
-    combined_results <- bind_rows(all_results)
+  if (generate_combined && length(all_results_wide) > 0) {
+    combined_wide <- bind_rows(all_results_wide)
     
-    combined_file <- if (!is.null(output_base)) {
-      paste0(output_base, "_", type_label, "_frequencies.tsv")
+    wide_combined_file <- if (!is.null(output_base)) {
+      paste0(output_base, "_", type_label, "_frequencies_wide.tsv")
     } else {
       generate_unique_filename(type_label)
     }
