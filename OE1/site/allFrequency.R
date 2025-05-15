@@ -61,7 +61,7 @@ nucleotide_frequency <- function(fasta_files, type_frequency = "dinucleotide") {
     }
   }
 
-  return(results)
+  return(list(wide = all_results_wide, long = all_results_long))
 }
 
 # Your exact amino acid frequency function (preserved)
