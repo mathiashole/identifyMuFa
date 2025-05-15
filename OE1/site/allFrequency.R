@@ -207,43 +207,30 @@ process_files <- function(files, processor_func, type_label, output_base = NULL,
 
         all_results[[file]] <- result$wide_format # for combine used wide
       } else {
-
+        output_file <- paste0(base_name, "_", type_label, "_frequencies.tsv")
+        write.table(result, output_file, sep = "\t", quote = FALSE, row.names = FALSE)
+        cat("-> Results saved to:", output_file, "\n")
+        
+        all_results[[file]] <- result
       }
 
-      
-      # Accumulate for combined files - CORRECCIÓN: usar result$ en vez de results$
-      all_results_wide[[file]] <- result$wide_format
-      all_results_long[[file]] <- result$long_format
     }, error = function(e) {
       cat("!! Error processing", file, ":", e$message, "\n")
     })
   }
   
   # Generate merged file if required
-  if (generate_combined && length(all_results_wide) > 0) {
-    combined_wide <- bind_rows(all_results_wide)
-    
-    wide_combined_file <- if (!is.null(output_base)) {
-      paste0(output_base, "_", type_label, "_frequencies_wide.tsv")
+  if (generate_combined && length(all_results) > 0) {
+    combined_results <- bind_rows(all_results)
+    combined_file <- if (!is.null(output_base)) {
+      paste0(output_base, "_", type_label, "_frequencies.tsv")
     } else {
-      paste0("COMBINED_", type_label, "_wide_", format(Sys.time(), "%Y%m%d_%H%M%S"), ".tsv")
+      paste0("COMBINED_", type_label, "_", format(Sys.time(), "%Y%m%d_%H%M%S"), ".tsv")
     }
     
-    write.table(combined_wide, file = wide_combined_file, sep = "\t", quote = FALSE, row.names = FALSE)
-    cat("\nCombined results saved to:", wide_combined_file, "\n")
-
-    # Combined long format
-    combined_long <- bind_rows(all_results_long)
-    long_combined_file <- if (!is.null(output_base)) {
-      paste0(output_base, "_", type_label, "_long.tsv")
-    } else {
-      paste0("COMBINED_", type_label, "_long_", format(Sys.time(), "%Y%m%d_%H%M%S"), ".tsv")
-    }
-    write.table(combined_long, file = long_combined_file, sep = "\t", quote = FALSE, row.names = FALSE)
-    cat("Combined long format saved to:", long_combined_file, "\n")
+    write.table(combined_results, combined_file, sep = "\t", quote = FALSE, row.names = FALSE)
+    cat("\nCombined results saved to:", combined_file, "\n")
   }
-  
-  invisible(list(wide = all_results_wide, long = all_results_long))
 }
 
 # ---- Main execution ----
