@@ -8,8 +8,6 @@ suppressPackageStartupMessages({
 
 })
 
-# Funciones
-
 # ---- Advanced settings ----
 generate_unique_filename <- function(type) {
   timestamp <- format(Sys.time(), "%Y%m%d_%H%M%S")
