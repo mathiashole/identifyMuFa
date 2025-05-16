@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # =============================
-# Script para calcular longitud y GC con infoseq
+# Script to calculate length and GC with infoseq
 # Uso:
 #   ./calculate_features.sh -type genome -out ../output/features.tsv -fasta file1.fasta file2.fasta ...
 # =============================
 
-
+# Default variables
 TYPE=""
 OUTPUT=""
 FILES=()
@@ -18,11 +18,11 @@ while [[ "$#" -gt 0 ]]; do
         -out) OUTPUT="$2"; shift ;;
         -fasta) shift; while [[ "$#" -gt 0 && "$1" != -* ]]; do FILES+=("$1"); shift; done ;;
         -h|--help)
-            echo "Uso: $0 -type <genome|gene> -out <ruta_salida.tsv> -fasta <file1.fasta> [file2.fasta ...]"
+            echo "Usage: $0 -type <genome|gene> -out <ruta_salida.tsv> -fasta <file1.fasta> [file2.fasta ...]"
             exit 0
             ;;
         *)
-            echo "Parámetro desconocido: $1" >&2
+            echo "Unknow parameter: $1" >&2
             exit 1 ;;
     esac
     shift
@@ -30,8 +30,8 @@ done
 
 
 if [[ -z "$TYPE" || -z "$OUTPUT" || ${#FILES[@]} -eq 0 ]]; then
-    echo "Error: Faltan argumentos requeridos."
-    echo "Uso: $0 -type <genome|gene> -out <ruta_salida.tsv> -fasta <file1.fasta> [file2.fasta ...]"
+    echo "Error: Missing required arguments."
+    echo "Usage: $0 -type <genome|gene> -out <ruta_salida.tsv> -fasta <file1.fasta> [file2.fasta ...]"
     exit 1
 fi
 
