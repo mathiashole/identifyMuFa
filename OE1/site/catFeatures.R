@@ -45,7 +45,7 @@ echo -e "file\tID\tLength\tGC_Content" > "$OUTPUT"
 
 for fasta in "${FILES[@]}"; do
     if [ ! -f "$fasta" ]; then
-        echo "Archivo no encontrado: $fasta" >&2
+        echo "File not found: $fasta" >&2
         continue
     fi
 
@@ -57,7 +57,7 @@ for fasta in "${FILES[@]}"; do
     elif [ "$TYPE" == "gene" ]; then
         extracted=$(echo "$base" | sed -E 's/.*_([^_]+)\.fasta/\1/')
     else
-        echo "Tipo inválido: $TYPE (usa 'genome' o 'gene')" >&2
+        echo "invalid type: $TYPE (usa 'genome' o 'gene')" >&2
         exit 1
     fi
 
