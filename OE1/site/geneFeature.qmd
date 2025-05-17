@@ -312,7 +312,7 @@ plot_violin_gc <- function(data, plot_title, y_label) {
     
     geom_text(data = count_data,
               aes(x = file, y = max(data$GC_Content, na.rm = TRUE) * 1.05, 
-                  label = paste0("n=", count)),
+                  label = paste0(count)),
               vjust = 0, color = "black", size = 3.5) +
     
     labs(
@@ -403,7 +403,7 @@ plot_violin_length <- function(data, type, plot_title, x_label) {
     scale_color_brewer(palette = "Dark2") +
     
     geom_text(data = label_data,
-              aes(x = Inf, y = file, label = paste0("n=", count)),
+              aes(x = Inf, y = file, label = paste0(count)),
               hjust = -0.2, color = "black", size = 3.5,
               position = position_nudge(y = 0)) +
 
