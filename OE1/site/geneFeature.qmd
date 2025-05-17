@@ -286,18 +286,47 @@ genomes$Length <- as.numeric((format(genomes$Length, scientific = TRUE))) # Chan
 
 # Inspired by http://tom-e-white.com/datavision/05-genome-size.html domain of https://github.com/tomwhite
 # GC plotting function
+# plot_violin_gc <- function(data, plot_title, y_label) {
+#   ggplot(data, aes(x = file, y = GC_Content, fill = file)) +
+#     geom_violin(alpha = 0.7, width = 0.5) + 
+#     geom_boxplot(width = 0.1, fill = "white", alpha = 0.3) +
+#     scale_fill_brewer(palette = "Dark2") +  # Apply RColorBrewer's Dark2 Palette
+#     ylab(y_label) +  # Customize the ylab
+#     labs(
+#       title = plot_title,  # Customize the title
+#       caption = "Data source: Facultad de Ciencias, Udelar"
+#     ) +
+#     theme_minimal_vgrid() + 
+#     theme(axis.line.y = element_blank(), axis.ticks.y = element_blank())
+# }
+
 plot_violin_gc <- function(data, plot_title, y_label) {
+  count_data <- data %>%
+    group_by(file) %>%
+    summarise(count = n(), .groups = "drop")
+  
   ggplot(data, aes(x = file, y = GC_Content, fill = file)) +
     geom_violin(alpha = 0.7, width = 0.5) + 
     geom_boxplot(width = 0.1, fill = "white", alpha = 0.3) +
-    scale_fill_brewer(palette = "Dark2") +  # Apply RColorBrewer's Dark2 Palette
-    ylab(y_label) +  # Customize the ylab
+    scale_fill_brewer(palette = "Dark2") +
+    
+    geom_text(data = count_data,
+              aes(x = file, y = max(data$GC_Content, na.rm = TRUE) * 1.05, 
+                  label = paste0("n=", count)),
+              vjust = 0, color = "black", size = 3.5) +
+    
     labs(
-      title = plot_title,  # Customize the title
+      title = plot_title,
+      y = y_label,
       caption = "Data source: Facultad de Ciencias, Udelar"
     ) +
     theme_minimal_vgrid() + 
-    theme(axis.line.y = element_blank(), axis.ticks.y = element_blank())
+    theme(
+      axis.line.y = element_blank(),
+      axis.ticks.y = element_blank(),
+      plot.margin = margin(5.5, 5.5, 5.5, 5.5, "pt")
+    ) +
+    scale_y_continuous(expand = expansion(mult = c(0.05, 0.15)))
 }
 
 # Function plot_violin_gc call
