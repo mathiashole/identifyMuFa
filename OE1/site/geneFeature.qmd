@@ -846,7 +846,7 @@ var_title <- paste0(key_name," size")
 
 # Function plot_violin_length call
 plot_violin_length(
-  data = target_protein,
+  data = total_gene_annotate,
   "gene", 
   plot_title = var_title, 
   x_label = "Number of base pairs"
