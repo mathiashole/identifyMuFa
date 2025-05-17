@@ -789,7 +789,7 @@ new_gene_annotatet_summary <- new_gene_annotate %>%
 ### Tabla resumen de los nuevos genes
 
 ```{r}
-#| label: summary genome feature and created summary
+#| label: summary genome feature and created summary new gene
 #| echo: false
 #| warning: false
 
@@ -812,7 +812,7 @@ Se usa la funcion `plot_violin_gc`, dando lugar a un gráfico violín que muestr
 
 
 ```{r}
-#| label: plotting-gc
+#| label: plotting-gc re annotate
 #| fig-cap: "Secuencias por genoma y contenido GC re anotadas"
 #| echo: true
 #| warning: false
@@ -836,7 +836,7 @@ plot_violin_gc(
 Se usa la función previamente empleada para graficar la distribución del genoma, pero esta vez generamos un gráfico que muestra la distribución de las longitudes de las distintas secuencias de ``r key_name``, correspondientes a cada genoma.
 
 ```{r}
-#| label: plotting-length
+#| label: plotting-length re annotate
 #| fig-cap: "Secuencias por genoma y largo total de la secuencia re anotadas"
 #| echo: true
 #| warning: false
