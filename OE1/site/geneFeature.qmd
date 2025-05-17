@@ -321,25 +321,72 @@ La función de R `plot_violin_length` crea un gráfico de violín que ilustra la
 #| layout: [[100]]
 
 # Function to plot the length of genomes
+# plot_violin_length <- function(data, type, plot_title, x_label) {
+#   set.seed(12345)
+#   p <- ggplot(data, aes(Length, reorder(file, -Length, FUN = median), color = file)) + # reorder(file, -Length, FUN=median)
+#     geom_quasirandom(groupOnX = FALSE, show.legend = FALSE, size = 1, dodge.width = 0.9, alpha = 0.4) +
+#     labs(
+#       title = plot_title,  # Title customization
+#       x = x_label,  # Custom x-axis label
+#       caption = "Data source: Facultad de Ciencias, Udelar"
+#     ) +
+#     theme_minimal_vgrid() + 
+#     theme(axis.title.y = element_blank(), axis.line.y = element_blank(), axis.ticks.y = element_blank()) +
+#     scale_color_brewer(palette = "Dark2")
+
+#     # Conditional to choose the type of scale on the x axis
+#     if (type == "genome") {
+#     p <- p + scale_x_log10(
+#       breaks = c(10^2, 10^3, 10^4, 10^5, 10^6, 10^7, 10^8, 10^9, 10^10),
+#       labels = scales::trans_format("log10", scales::math_format(10^.x))
+#     )
+#   }
+
+#   return(p)
+# }
+
 plot_violin_length <- function(data, type, plot_title, x_label) {
   set.seed(12345)
-  p <- ggplot(data, aes(Length, reorder(file, -Length, FUN = median), color = file)) + # reorder(file, -Length, FUN=median)
+  plot_data <- data %>%
+    group_by(file) %>%
+    mutate(count = n(),
+           median_length = median(Length)) %>%
+    ungroup() %>%
+    mutate(file = reorder(file, -median_length))
+  
+  label_data <- plot_data %>%
+    distinct(file, .keep_all = TRUE)
+  
+  p <- ggplot(plot_data, aes(Length, file, color = file)) +
     geom_quasirandom(groupOnX = FALSE, show.legend = FALSE, size = 1, dodge.width = 0.9, alpha = 0.4) +
     labs(
-      title = plot_title,  # Title customization
-      x = x_label,  # Custom x-axis label
+      title = plot_title,
+      x = x_label,
       caption = "Data source: Facultad de Ciencias, Udelar"
     ) +
     theme_minimal_vgrid() + 
-    theme(axis.title.y = element_blank(), axis.line.y = element_blank(), axis.ticks.y = element_blank()) +
-    scale_color_brewer(palette = "Dark2")
+    theme(
+      axis.title.y = element_blank(),
+      axis.line.y = element_blank(),
+      axis.ticks.y = element_blank(),
+      plot.margin = margin(5.5, 40, 5.5, 5.5, "pt")
+    ) +
+    scale_color_brewer(palette = "Dark2") +
+    
+    geom_text(data = label_data,
+              aes(x = Inf, y = file, label = paste0("n=", count)),
+              hjust = -0.2, color = "black", size = 3.5,
+              position = position_nudge(y = 0)) +
 
-    # Conditional to choose the type of scale on the x axis
-    if (type == "genome") {
+    coord_cartesian(clip = "off")
+
+  if (type == "genome") {
     p <- p + scale_x_log10(
       breaks = c(10^2, 10^3, 10^4, 10^5, 10^6, 10^7, 10^8, 10^9, 10^10),
       labels = scales::trans_format("log10", scales::math_format(10^.x))
     )
+  } else {
+    p <- p + scale_x_continuous(expand = expansion(mult = c(0.05, 0.2)))
   }
 
   return(p)
