@@ -695,17 +695,16 @@ Se realizó un análisis de t-SNE sobre las frecuencias de dinucleótidos resalt
 #| echo: true
 #| warning: false
 
-
-
 # Function to perform t-SNE and plot
 perform_tsne_highlight <- function(data, highlight_ids, file_col = "File", id_col = "ID", perplexity = 30, max_iter = 1000, col_palette = NULL) {
   # Exclude 'File' and 'ID' columns from numerical analysis
   tsne_data <- data[, !(names(data) %in% c(file_col, id_col))]
   # Convert all columns to numeric format
-  tsne_data <- as.data.frame(lapply(tsne_data, as.numeric))
+  tsne_data[,3:12] <- as.data.frame(lapply(tsne_data[,3:12], as.numeric))
   # removed duplicated row
-  duplicates <- duplicated(tsne_data) # NEED CHECK WITH BOSS
-  tsne_data_clean <- tsne_data[!duplicates, ] # NEED CHECK WITH BOSS
+  duplicates <- duplicated(tsne_data)
+  tsne_data_clean <- tsne_data[!duplicates, ]
+  tsne_data_clean <- na.omit(tsne_data_clean)
   combained_dinucleotide_clean <- data[!duplicates, ] # NEED CHECK WITH BOSS
 
   # Perform t-SNE
