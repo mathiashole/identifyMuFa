@@ -213,11 +213,15 @@ Se llama a la función nucleotide_frequncy() para obtener las tablas de frecuenc
 #| warning: false
 
 # Run the function and get the dinucleotide frequency table
-dinucleotide_table <- nucleotide_frequncy(file.path(output_dir, transformed$out_gscissors_all), type_frequency = "dinucleotide")
+# dinucleotide_table <- nucleotide_frequncy(file.path(output_dir, transformed$out_gscissors_all), type_frequency = "dinucleotide")
 
-trinucleotide_table <- nucleotide_frequncy(file.path(output_dir, transformed$out_gscissors_all), type_frequency = "trinucleotide")
+# trinucleotide_table <- nucleotide_frequncy(file.path(output_dir, transformed$out_gscissors_all), type_frequency = "trinucleotide")
 
 # Read data 
+
+dinucleotide_table <- read.table("dinucleotide_frequency_anotacion.tsv", sep = "\t", header = TRUE, stringsAsFactors = FALSE)
+
+trinucleotide_table <- read.table("trinucleotide_frequency_anotacion.tsv", sep = "\t", header = TRUE, stringsAsFactors = FALSE)
 
 
 ```
