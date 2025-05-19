@@ -74,9 +74,9 @@ input_arg <- file.path("/home/mathias/study/maestria/scoville_data/execution_arg
 data_raw <- read_input(input_arg)
 data <- assign_column_names(data_raw, mode)
 
-key_name <- unique(sort(transformed$keyword1))
+key_name <- "DGF-1"
 
-genome_name <- basename(transformed$fasta_file)
+genome_name <- c("TriTrypDB-68_TcruziDm28c2018_Genome.fasta", "TriTrypDB-68_TcruziBrazilA4_Genome.fasta", "TriTrypDB-68_TcruziYC6_Genome.fasta", "TcDm25_TcruziTcDm25H1_Genome.fasta")  
 
 ```
 
@@ -600,6 +600,7 @@ for (genome in genomes) {
 
 :::
 
+
 <!-- ## Análisis t-SNE de las Frecuencias de Dinucleótidos y Trinucleótidos
 
 Se realizó un análisis de [t-distributed Stochastic Neighbor Embedding (t-SNE)](https://github.com/JoaquinAmatRodrigo/Estadistica-con-R/blob/master/PDF_format/35_Principal_Component_Analysis.pdf) sobre las frecuencias de `dinucleótidos` y `trinucleotidos` combinados en las secuencias `codificantes` de los genomas de ``r genome_name``. El t-SNE es una técnica de reducción de dimensionalidad que preserva las relaciones locales en los datos, lo que facilita la visualización de agrupamientos o patrones subyacentes en las frecuencias nucleotidicas de las secuencias.
@@ -613,7 +614,7 @@ En este análisis, se utiliza la función ggplot() para visualizar los resultado
 
 Se realizó un análisis de t-SNE sobre las frecuencias de dinucleótidos resaltando ``r key_name`` por cada genoma ``r genome_name``. El t-SNE permite reducir la dimensionalidad, preservando las relaciones locales de las frecuencias de dinucleótidos, facilitando la exploración de las relaciones entre secuencias y sus patrones de composición a nivel de `dinucleótidos`. 
 
-```{r}
+###```{r}
 #| label: t-distributed Stochastic Neighbor Embedding analysis with plot dinucleotides
 #| echo: true
 #| warning: false
@@ -695,7 +696,7 @@ perform_result_dinucleotide_tsne$tsne_plot
 
 Ademas, se realizó un análisis de t-SNE sobre las frecuencias de trinucleótidos resaltando ``r key_name`` por cada genoma ``r genome_name``. Permitiendo reducir la dimensionalidad, preservando las relaciones locales de las frecuencias de `trinucleótidos`. 
 
-```{r}
+###```{r}
 #| label: t-distributed Stochastic Neighbor Embedding analysis with plot trinucleotides
 #| echo: true
 #| warning: false
@@ -720,7 +721,7 @@ perform_result_trinucleotide_tsne$tsne_plot
 
 Se realizó un análisis de t-SNE sobre las frecuencias de dinucleótidos resaltando ``r key_name`` por cada genoma ``r genome_name``. El t-SNE permite reducir la dimensionalidad, preservando las relaciones locales de las frecuencias de dinucleótidos, facilitando la exploración de las relaciones entre secuencias y sus patrones de composición a nivel de `dinucleótidos`. 
 
-```{r}
+###```{r}
 #| label: t-distributed Stochastic Neighbor Embedding analysis with plot dinucleotides per genome
 #| echo: true
 #| warning: false
@@ -761,7 +762,7 @@ for (genome in names(tsne_list_dinucloetide)) {
 
 Ademas, se realizó un análisis de t-SNE sobre las frecuencias de trinucleótidos resaltando ``r key_name`` por cada genoma ``r genome_name``. Permitiendo reducir la dimensionalidad, preservando las relaciones locales de las frecuencias de `trinucleótidos`. 
 
-```{r}
+###```{r}
 #| label: t-distributed Stochastic Neighbor Embedding analysis with plot trinucleotides per genome
 #| echo: true
 #| warning: false
