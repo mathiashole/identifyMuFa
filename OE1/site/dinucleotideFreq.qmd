@@ -71,52 +71,12 @@ assign_column_names <- function(data, mode) {
 
 mode <- "gff"
 input_arg <- file.path("/home/mathias/study/maestria/scoville_data/execution_args_9900.tsv")
-
-source_file <- switch(mode,
-  "hybrid" = "../code/moduleHybrid.R",
-  "gff" = "../code/moduleGff.R",
-  "no_gff" = "../code/moduleNoGff.R"
-)
-
-source(source_file)
-
 data_raw <- read_input(input_arg)
 data <- assign_column_names(data_raw, mode)
 
-output_dir <- switch(mode,
-  "hybrid" = "../output_directory_hybrid",
-  "gff" = "../output_directory",
-  "no_gff" = "../output_directory_withoutgff"
-)
-
-if (mode == "hybrid") {
-  message("Modo: HYBRID")
-  transformed <- transform_data_hybrid(data)
-} else if (mode == "gff") {
-  message("Modo: GFF")
-  transformed <- transform_data(data)
-} else if (mode == "no_gff") {
-  message("Modo: NO GFF")
-  transformed <- transform_data_without_gff(data)
-}
-
 key_name <- unique(sort(transformed$keyword1))
-########################################
 
-# directory <- "output_directory/"
-# # Read data frame
-# data_transformed <- read.delim("output_directory/data_transformed.tsv", sep = "\t", header = TRUE)
-# ########################################
-
-# # Obtener la lista de archivos que comienzan con 'out_' y terminan con '.fasta'
-# fasta_files <- paste0(directory, data_transformed$out_gscissors)
 genome_name <- basename(transformed$fasta_file)
-# rest_code_prot <- paste0(directory, data_transformed$out_rest_gscissors)
-
-# genes_work <- basename(fasta_files)
-# prot_name <- sub(".*_:(.*):_.*", "\\1", fasta_files)
-# key_names <- sub("_.*", "\\1", prot_name)
-# key_name <- unique(sort(key_names))
 
 ```
 
@@ -212,17 +172,14 @@ Se llama a la función nucleotide_frequncy() para obtener las tablas de frecuenc
 #| echo: true
 #| warning: false
 
-# Run the function and get the dinucleotide frequency table
-# dinucleotide_table <- nucleotide_frequncy(file.path(output_dir, transformed$out_gscissors_all), type_frequency = "dinucleotide")
-
-# trinucleotide_table <- nucleotide_frequncy(file.path(output_dir, transformed$out_gscissors_all), type_frequency = "trinucleotide")
-
 # Read data 
-
 dinucleotide_table <- read.table("dinucleotide_frequency_anotacion.tsv", sep = "\t", header = TRUE, stringsAsFactors = FALSE)
 
 trinucleotide_table <- read.table("trinucleotide_frequency_anotacion.tsv", sep = "\t", header = TRUE, stringsAsFactors = FALSE)
 
+dinucleotide_all_protein_coding <- read.table("dinucleotide_frequency_all_protein_coding.tsv", sep = "\t", header = TRUE, stringsAsFactors = FALSE)
+
+trinucleotide_all_protein_coding <- read.table("trinucleotide_frequency_all_protein_coding.tsv", sep = "\t", header = TRUE, stringsAsFactors = FALSE)
 
 ```
 
@@ -246,41 +203,7 @@ transform_columns <- function(df, cols) {
 }
 
 dinucleotide_table <- transform_columns(dinucleotide_table, "ID")
-
-# dinucleotide_table_rest_code_prot <- transform_columns(dinucleotide_table_rest_code_prot, "ID")
-
-# trinucleotide_table_rest_code_prot <- transform_columns(trinucleotide_table_rest_code_prot, "ID")
-
 trinucleotide_table <- transform_columns(trinucleotide_table, "ID")
-
-```
-
-
-```{r}
-#| label: write and read big data
-#| echo: false
-#| warning: false
-
-# chack to save extract data on all protein coding
-
-# write.table(dinucleotide_table_rest_code_prot, 
-#             file = "output_directory/dinucleotide_frequency_all_protein_coding.tsv", 
-#             sep = "\t", row.names = FALSE, quote = FALSE)
-
-# write.table(trinucleotide_table_rest_code_prot, 
-#             file = "output_directory/trinucleotide_frequency_all_protein_coding.tsv", 
-#             sep = "\t", row.names = FALSE, quote = FALSE)
-
-# Leer en formato TSV
-dinucleotide_all_protein_coding <- read.table("dinucleotide_frequency_all_protein_coding.tsv", sep = "\t", header = TRUE, stringsAsFactors = FALSE)
-
-trinucleotide_all_protein_coding <- read.table("trinucleotide_frequency_all_protein_coding.tsv", sep = "\t", header = TRUE, stringsAsFactors = FALSE)
-
-
-# # Remover filas con NA usando na.omit()
-# dinucleotide_all_protein_coding <- na.omit(dinucleotide_all_protein_coding)
-# trinucleotide_all_protein_coding <- na.omit(trinucleotide_all_protein_coding)
-
 
 ```
 
