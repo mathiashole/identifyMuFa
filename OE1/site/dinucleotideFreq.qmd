@@ -459,7 +459,7 @@ perform_pca <- function(data, file_col = "File", id_col = "ID") {
     loadings.label = TRUE, 
     loadings.colour = 'grey64', 
     alpha = 0.2, 
-    size = 3
+    size = 1
   ) +
     theme_minimal()
   
