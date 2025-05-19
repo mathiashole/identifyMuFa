@@ -257,7 +257,7 @@ summary_data_coding_prot <- long_freqs_coding_prot %>%
 )
 
 # Procesar todos los archivos target
-all_frequencies_target <- lapply(file.path(output_dir, transformed$out_gscissors_all_prot), calculate_amino_acid_frequencies)
+all_frequencies_target <- read.table("aminoacid_frequency_anotacion.tsv", sep = "\t", header = TRUE)
 
 # Combinar resultados de todos los archivos en un solo dataframe
 # combined_freqs <- bind_rows(all_frequencies_target)
