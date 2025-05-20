@@ -235,7 +235,7 @@ summary_data_coding_prot <- long_freqs_coding_prot %>%
 )
 
 # Procesar todos los archivos target
-all_frequencies_target <- readLines("amino_acid_frequency_all_protein_coding.tsv_aminoacid_frequencies.tsv")
+all_frequencies_target <- readLines("amino_acid_frequency_all_protein_coding.tsv")
 all_frequencies_target <- read.delim(text = all_frequencies_target, header = TRUE)
 cols_num <- 3:22 
 all_frequencies_target[cols_num] <- lapply(all_frequencies_target[cols_num], as.numeric)
