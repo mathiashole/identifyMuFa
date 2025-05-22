@@ -557,24 +557,8 @@ palmer_colors <- c("black", "green", "blue")
 
 ## Filtrado de las secuencias de `r key_name` por el largo
 
-Se filtran las secuencias de `r key_name` de acuerdo a un largo mínimo (8000 pb). 
+Se filtran las secuencias de `r key_name` de acuerdo a un largo mínimo (9900 pb). 
 Las secuencias menores a este minimo se descartaran para este analisis inicial, y serán estudiadas para determinar si son pseudogenes.
-
-```{r}
-#| label: filter-seq
-#| echo: true
-#| warning: false
-
-# length_min <- mean(target_protein$Length)
-# length_min <- median(file_sequence_counts$mean_length)
-# length_min <- 8000
-
-# filter_data_higher <- filter(target_protein, Length >= length_min) 
-# filter_data_smaller <- filter(target_protein, Length <= length_min)
-
-
-```
-
 
 ### Resumen de Información de `r key_name` completas en cada genoma (filtradas por largo)
 
