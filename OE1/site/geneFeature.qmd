@@ -268,6 +268,9 @@ genomes$Length <- as.numeric((format(genomes$Length, scientific = TRUE))) # Chan
 # Inspired by http://tom-e-white.com/datavision/05-genome-size.html domain of https://github.com/tomwhite
 
 plot_violin_gc <- function(data, plot_title, y_label) {
+  # Sorting data
+  data$file <- factor(data$file, levels = sort(unique(data$file)))
+
   count_data <- data %>%
     group_by(file) %>%
     summarise(count = n(), .groups = "drop")
@@ -318,12 +321,15 @@ La función de R `plot_violin_length` crea un gráfico de violín que ilustra la
 
 plot_violin_length <- function(data, type, plot_title, x_label) {
   set.seed(12345)
+  # Sorting data
+  data$file <- factor(data$file, levels = sort(unique(data$file)))
+
   plot_data <- data %>%
     group_by(file) %>%
     mutate(count = n(),
            median_length = median(Length)) %>%
-    ungroup() %>%
-    mutate(file = reorder(file, -median_length))
+    ungroup() #%>%
+    # mutate(file = reorder(file, -median_length))
   
   label_data <- plot_data %>%
     distinct(file, .keep_all = TRUE)
