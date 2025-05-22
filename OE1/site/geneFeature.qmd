@@ -547,8 +547,6 @@ plot_violin_length(
   x_label = "Number of base pairs"
 )
 
-palmer_colors <- c("black", "green", "blue")
-
 ```
 
 :::
