@@ -317,8 +317,8 @@ plot_violin_gc <- function(data, plot_title, y_label) {
     
     labs(
       title = plot_title,
-      y = y_label,
-      caption = "Data source: Facultad de Ciencias, Udelar"
+      y = y_label#,
+      #caption = "Data source: Facultad de Ciencias, Udelar"
     ) +
     theme_minimal_vgrid() + 
     theme(
@@ -390,8 +390,8 @@ plot_violin_length <- function(data, type, plot_title, x_label) {
     geom_quasirandom(groupOnX = FALSE, show.legend = FALSE, size = 1, dodge.width = 0.9, alpha = 0.4) +
     labs(
       title = plot_title,
-      x = x_label,
-      caption = "Data source: Facultad de Ciencias, Udelar"
+      x = x_label#,
+      #caption = "Data source: Facultad de Ciencias, Udelar"
     ) +
     theme_minimal_vgrid() + 
     theme(
