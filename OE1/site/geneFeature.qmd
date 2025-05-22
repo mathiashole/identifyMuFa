@@ -567,7 +567,7 @@ Se genera una tabla con las estadístias descriptivas de las `r key_name` comple
 #| echo: false
 #| warning: false
 
-target_protein_high <- calculate_fasta_feature(file.path(output_dir, transformed$out_gscissors_high), "gene")
+target_protein_high <- read.table("all_high_gene_gc_length.tsv", sep = "\t", header = TRUE)
 target_protein_high <- transform_columns(target_protein_high, "ID")
 
 ## NEED DEBUG HIGH and LOW
@@ -655,7 +655,7 @@ Se crea una nueva tabla resumen a partir de las secuencias que se descartaran po
 #| echo: false
 #| warning: false
 
-target_protein_low <- calculate_fasta_feature(file.path(output_dir, transformed$out_gscissors_low), "gene")
+target_protein_low <- read.table("all_low_gene_gc_length.tsv", sep = "\t", header = TRUE)
 target_protein_low <- transform_columns(target_protein_low, "ID")
 
 # Crear una tabla con el conteo de secuencias por archivo
