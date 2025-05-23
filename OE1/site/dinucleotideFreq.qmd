@@ -555,6 +555,10 @@ for (genome in genomes) {
   # ggsave(paste0("PCA_", genome, ".pdf"), plot = pca_plots[[genome]])  # Save as PDF if needed
 }
 
+
+write_csv(combained_trinucleotide, "combained_trinucleotide.csv", col_names = TRUE)
+# write_tsv(data.frame(ID = highlight_ids), "highlight_ids.txt", col_names = FALSE)
+
 ```
 
 :::
