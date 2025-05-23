@@ -21,58 +21,11 @@ p {
 
 ```
 
-```{r}
-#| label: auxiliary function
-#| echo: false
-#| warning: false
-
-read_input <- function(input_file) {
-  read.delim(input_file, header = FALSE, stringsAsFactors = FALSE, fill = TRUE)
-}
-
-assign_column_names <- function(data, mode) {
-  n <- ncol(data)
-
-  if (mode == "hybrid") {
-    if (n == 6) {
-      colnames(data) <- c("fasta_file", "gff_file", "keyword1", "keyword2", "length", "sequence_file")
-    } else if (n == 5) {
-      colnames(data) <- c("fasta_file", "gff_file", "keyword1", "keyword2", "sequence_file")
-    } else {
-      stop("Unexpected format in HYBRID mode")
-    }
-  } else if (mode == "gff") {
-    if (n == 5) {
-      colnames(data) <- c("fasta_file", "gff_file", "keyword1", "keyword2", "length")
-    } else if (n == 4) {
-      colnames(data) <- c("fasta_file", "gff_file", "keyword1", "keyword2")
-    } else {
-      stop("Unexpected format in GFF mode")
-    }
-  } else if (mode == "no_gff") {
-    if (n == 3) {
-      colnames(data) <- c("fasta_file", "sequence_file", "length")
-    } else if (n == 2) {
-      colnames(data) <- c("fasta_file", "sequence_file")
-    } else {
-      stop("Unexpected format in NO_GFF mode")
-    }
-  }
-
-  return(data)
-}
-
-```
 
 ```{r}
 #| label: charged global variables
 #| echo: false
 #| warning: false
-
-mode <- "gff"
-input_arg <- file.path("/home/mathias/study/maestria/scoville_data/execution_args_9900.tsv")
-data_raw <- read_input(input_arg)
-data <- assign_column_names(data_raw, mode)
 
 key_name <- "DGF-1"
 
@@ -292,7 +245,9 @@ id_vector1 <- combained_trinucleotide$id
 
 # Transform the ID: remove everything after ";" and replace "=" with "_"
 id_vector_cleaned <- gsub(";.*", "", gsub("=", "_", id_vector))
+id_vector_cleaned <- gsub("[:;].*", "", id_vector_cleaned) 
 id_vector_cleaned1 <- gsub(";.*", "", gsub("=", "_", id_vector1))
+id_vector_cleaned1 <- gsub("[:;].*", "", id_vector_cleaned1)  
 # Asignar el vector limpio de vuelta al dataframe
 combained_dinucleotide$id <- id_vector_cleaned
 combained_trinucleotide$id <- id_vector_cleaned1
