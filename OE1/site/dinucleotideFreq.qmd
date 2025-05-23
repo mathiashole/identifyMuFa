@@ -453,6 +453,10 @@ create_pca_highlight_plot <- function(data, highlight_ids, pca_result, genome_co
 
 create_pca_highlight_plot(combained_dinucleotide, highlight_ids, perform_result_dinucleotide_pca$pca_result)
 
+library(readr)
+
+write_csv(combained_dinucleotide, "combained_dinucleotide.csv", col_names = TRUE)
+write_tsv(data.frame(ID = highlight_ids), "highlight_ids.txt", col_names = FALSE)
 
 ```
 
