@@ -664,6 +664,16 @@ Se usa la funcion `plot_violin_gc`, dando lugar a un gráfico violín que muestr
 
 total_gene_annotate <- read.table("total_gene_length_gc.tsv", sep = "\t", header = TRUE)
 
+total_gene_annotatet_summary <- total_gene_annotate %>%
+  group_by(file) %>%
+  summarise(Total_Sequences = n(),
+            min_length = min(Length),
+            mean_length = round(mean(Length), 0),
+            max_length = max(Length),
+            min_gc = min(GC_Content),
+            mean_gc = round(mean(GC_Content), 3),
+            max_gc = max(GC_Content))
+
 var_title_gc <- paste0(key_name," GC")
 
 # Function plot_violin_gc call
