@@ -577,17 +577,14 @@ En este análisis, se utiliza la función ggplot() para visualizar los resultado
 
 Se realizó un análisis de t-SNE sobre las frecuencias de dinucleótidos resaltando ``r key_name`` por cada genoma ``r genome_name``. El t-SNE permite reducir la dimensionalidad, preservando las relaciones locales de las frecuencias de dinucleótidos, facilitando la exploración de las relaciones entre secuencias y sus patrones de composición a nivel de `dinucleótidos`. 
 
-::: {layout-ncol=2}
+
 ![Dm28c](image/dinucleotide_tsne_TcruziDm28c2018.png)
 
 ![BrazilA4](image/dinucleotide_tsne_TcruziBrazilA4.png)
-:::
 
-::: {layout-ncol=2}
 ![YC6](image/dinucleotide_tsne_TcruziYC6.png)
 
 ![Dm25H1](image/dinucleotide_tsne_TcruziTcDm25H1.png)
-:::
 
 
 ## Trinucleotido t-SNE highlighted `r key_name`
