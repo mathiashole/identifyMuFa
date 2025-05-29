@@ -639,7 +639,7 @@ new_gene_annotatet_summary <- new_gene_annotate %>%
 
 
 # Mostrar la tabla de conteo de secuencias
-reactable(new_gene_annotatet_summary, highlight = TRUE)
+# reactable(new_gene_annotatet_summary, highlight = TRUE)
 
 ```
 
