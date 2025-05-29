@@ -577,13 +577,8 @@ En este análisis, se utiliza la función ggplot() para visualizar los resultado
 
 Se realizó un análisis de t-SNE sobre las frecuencias de dinucleótidos resaltando ``r key_name`` por cada genoma ``r genome_name``. El t-SNE permite reducir la dimensionalidad, preservando las relaciones locales de las frecuencias de dinucleótidos, facilitando la exploración de las relaciones entre secuencias y sus patrones de composición a nivel de `dinucleótidos`. 
 
-```{r}
-#| label: t-distributed Stochastic Neighbor Embedding analysis with plot dinucleotides
-#| echo: true
-#| warning: false
-
 ::: {layout-ncol=2}
-![Dm28c](image/dinucleotide_tsne_TcruziDm28c2018.pn)
+![Dm28c](image/dinucleotide_tsne_TcruziDm28c2018.png)
 
 ![BrazilA4](image/dinucleotide_tsne_TcruziBrazilA4.png)
 :::
@@ -594,19 +589,13 @@ Se realizó un análisis de t-SNE sobre las frecuencias de dinucleótidos resalt
 ![Dm25H1](image/dinucleotide_tsne_TcruziTcDm25H1.png)
 :::
 
-```
 
 ## Trinucleotido t-SNE highlighted `r key_name`
 
 Ademas, se realizó un análisis de t-SNE sobre las frecuencias de trinucleótidos resaltando ``r key_name`` por cada genoma ``r genome_name``. Permitiendo reducir la dimensionalidad, preservando las relaciones locales de las frecuencias de `trinucleótidos`. 
 
-```{r}
-#| label: t-distributed Stochastic Neighbor Embedding analysis with plot trinucleotides
-#| echo: true
-#| warning: false
-
 ::: {layout-ncol=2}
-![Dm28c](image/trinucleotide_tsne_TcruziDm28c2018.pn)
+![Dm28c](image/trinucleotide_tsne_TcruziDm28c2018.png)
 
 ![BrazilA4](image/trinucleotide_tsne_TcruziBrazilA4.png)
 :::
@@ -617,7 +606,6 @@ Ademas, se realizó un análisis de t-SNE sobre las frecuencias de trinucleótid
 ![Dm25H1](image/trinucleotide_tsne_TcruziTcDm25H1.png)
 :::
 
-```
 
 :::
 
