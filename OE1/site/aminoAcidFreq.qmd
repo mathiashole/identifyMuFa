@@ -45,20 +45,6 @@ library(ggplot2)
 library(ggfortify)
 library(tidyverse)
 
-##
-
-# library(gridExtra)
-# library(ggridges)
-# library(ggbeeswarm)
-# library(cowplot)
-
-##
-
-# library(Biostrings)
-# library(dplyr)
-# library(purrr)
-# library(tidyr)
-
 ```
 
 
@@ -180,12 +166,8 @@ summary_data_target <- long_freqs_target %>%
 
 ```
 
-::: {.panel-tabset .nav-pills}
 
 ## Amino acid frequency of coding frequency
-
-:::
-
 
 ```{r}
 #| label: Created function to barplot contrast 
