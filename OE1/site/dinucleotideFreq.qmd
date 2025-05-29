@@ -605,11 +605,17 @@ Ademas, se realizó un análisis de t-SNE sobre las frecuencias de trinucleótid
 #| echo: true
 #| warning: false
 
-# Call perform_tsne
-perform_result_trinucleotide_tsne <- perform_tsne_highlight(combained_trinucleotide, highlight_ids = highlight_ids, file_col = "Genome", id_col = "id")
+::: {layout-ncol=2}
+![Dm28c](image/trinucleotide_tsne_TcruziDm28c2018.pn)
 
-# Show plot
-perform_result_trinucleotide_tsne$tsne_plot
+![BrazilA4](image/trinucleotide_tsne_TcruziBrazilA4.png)
+:::
+
+::: {layout-ncol=2}
+![YC6](image/trinucleotide_tsne_TcruziYC6.png)
+
+![Dm25H1](image/trinucleotide_tsne_TcruziTcDm25H1.png)
+:::
 
 ```
 
