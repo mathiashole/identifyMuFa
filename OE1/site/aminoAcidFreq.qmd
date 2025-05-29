@@ -43,22 +43,21 @@ genome_name <- c("TriTrypDB-68_TcruziDm28c2018_Genome.fasta", "TriTrypDB-68_Tcru
 library(seqinr)
 library(ggplot2)
 library(ggfortify)
-library(Rtsne)
 library(tidyverse)
 
 ##
 
-library(gridExtra)
-library(ggridges)
-library(ggbeeswarm)
-library(cowplot)
+# library(gridExtra)
+# library(ggridges)
+# library(ggbeeswarm)
+# library(cowplot)
 
 ##
 
-library(Biostrings)
-library(dplyr)
-library(purrr)
-library(tidyr)
+# library(Biostrings)
+# library(dplyr)
+# library(purrr)
+# library(tidyr)
 
 ```
 
@@ -127,7 +126,13 @@ calculate_amino_acid_frequencies <- function(file) {
   bind_rows(results)
 }
 
-combined_freqs_coding_prot <- read.table("amino_acid_frequency_all_protein_coding.tsv", sep = "\t", header = TRUE)
+library(readr)
+
+combined_freqs_coding_prot <- read_tsv(
+  "amino_acid_frequency_all_protein_coding.tsv",
+  na = c("", "NA"),     # Strings a tratar como NA
+  skip_empty_rows = TRUE
+)
 combined_freqs_coding_prot$File <- gsub(".*_([A-Za-z0-9]+)_translated\\.fasta", "\\1", combined_freqs_coding_prot$File)
 
 long_freqs_coding_prot <- combined_freqs_coding_prot %>%
@@ -179,137 +184,12 @@ summary_data_target <- long_freqs_target %>%
 
 ## Amino acid frequency of coding frequency
 
-```{r}
-#| label: Created function to barplot amino acids frequency 
-#| echo: true
-
-plot_bar_gc <- function(data, plot_title, y_label) {
-  ggplot(data, aes(x = AminoAcid, y = mean_freq, fill = AminoAcid)) +
-    geom_bar(stat = "identity", alpha = 0.7, width = 0.5) + 
-    geom_errorbar(
-      aes(
-        ymin = mean_freq - sd_freq,
-        ymax = mean_freq + sd_freq
-      ),
-      width = 0.4, colour = "orange", alpha = 0.6, size = 0.9
-    ) +
-    geom_text(aes(label = round(mean_freq, 2)), vjust = -0.5, size = 3) +
-    ylab(y_label) + 
-    labs(
-      title = plot_title,  
-      caption = "Data source: Facultad de Ciencias, Udelar"
-    ) +
-    theme_minimal() + 
-    theme(
-      axis.line.y = element_blank(), 
-      axis.ticks.y = element_blank(),
-      axis.text.x = element_text(angle = 45, hjust = 1)
-    )
-}
-
-unique_files <- unique(summary_data_coding_prot$File)
-
-for (file_name in unique_files) {
-  data_subset <- filter(summary_data_coding_prot, File == file_name)
-  
-  print(plot_bar_gc(
-    data_subset, 
-    plot_title = paste("Amino acid frequency -", file_name), 
-    y_label = "Amino acid content"
-  ))
-  
-  # readline(prompt = "Presiona Enter para ver el siguiente gráfico...")
-}
-
-```
-
-
-## `r key_name` amino acid frequency
-
-```{r}
-
-
-unique_files <- unique(summary_data_target$File)
-
-for (file_name in unique_files) {
-  data_subset <- filter(summary_data_target, File == file_name)
-  
-  print(plot_bar_gc(
-    data_subset, 
-    plot_title = paste("Amino acid frequency -", file_name), 
-    y_label = "Amino acid content"
-  ))
-  
-  # readline(prompt = "Presiona Enter para ver el siguiente gráfico...")
-}
-```
-
 :::
 
 
 ```{r}
 #| label: Created function to barplot contrast 
 #| echo: true
-
-# plot_barplot_contrast <- function(data, plot_title, y_label) {
-#   dodge <- position_dodge(width = 0.5)  # Definimos un dodge para ambas capas
-  
-#   ggplot(data, aes(x = AminoAcid, y = mean_freq, fill = supp)) +
-#     geom_bar(
-#       stat = "identity", 
-#       alpha = 0.7, 
-#       width = 0.5, 
-#       position = dodge
-#     ) + 
-#     # geom_errorbar(
-#     #   aes(
-#     #     ymin = mean_freq - sd_freq,
-#     #     ymax = mean_freq + sd_freq
-#     #   ),
-#     #   width = 0.25, 
-#     #   colour = "orange", 
-#     #   alpha = 0.8, 
-#     #   size = 0.7,
-#     #   position = dodge  # Aplicamos el mismo dodge para alinear las barras de error
-#     # ) +
-#     # scale_fill_manual(values = c("rest" = "#E15759", key_name = "#5fd4b1")) +
-#     # geom_text(
-#     #   aes(label = round(mean_freq, 2)), 
-#     #   vjust = -0.5, 
-#     #   size = 3, 
-#     #   position = dodge  # Alineamos también las etiquetas
-#     # ) +
-#     ylab(y_label) + 
-#     labs(
-#       title = plot_title,  
-#       caption = "Data source: Facultad de Ciencias, Udelar"
-#     ) +
-#     theme_minimal() + 
-#     theme(
-#       axis.line.y = element_blank(), 
-#       axis.ticks.y = element_blank(),
-#       axis.text.x = element_text(angle = 45, hjust = 1)
-#     )
-# }
-
-# summary_data_target$supp <- rep(key_name, length(summary_data_target$File))
-# summary_data_coding_prot$supp <- rep("Other", length(summary_data_coding_prot$File))
-
-# target_coding_seq <- bind_rows(summary_data_target, summary_data_coding_prot)
-
-# unique_files <- unique(target_coding_seq$File)
-
-# for (file_name in unique_files) {
-#   data_subset <- filter(target_coding_seq, File == file_name)
-  
-#   print(plot_barplot_contrast(
-#     data_subset, 
-#     plot_title = paste("Amino acid frequency -", file_name), 
-#     y_label = "Amino acid content"
-#   ))
-  
-#   # readline(prompt = "Press Enter to see the next plot...")
-# }
 
 plot_barplot_contrast <- function(data, plot_title, y_label) {
   dodge <- position_dodge(width = 0.5)  # Define dodge for bar alignment
@@ -543,7 +423,7 @@ for (file_name in unique_files) {
 
 :::
 
-```{r}
+<!-- ```{r}
 
 plot_violin_contrast <- function(data, plot_title, y_label) {
   dodge <- position_dodge(width = 0.8)  # define the dodge to separate the groups
@@ -583,7 +463,7 @@ for (file_name in unique_files) {
   
   # readline(prompt = "Presiona Enter para ver el siguiente gráfico...")
 }
-```
+``` -->
 
 ```{r}
 #| label: Created function to barplot contrast group
