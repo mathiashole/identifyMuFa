@@ -12,6 +12,10 @@ format:
 
 ![](https://img.itch.zone/aW1nLzE3MTEyNjE5LmdpZg==/original/2%2BYVZg.gif){style="float:right;" fig-alt="Illustration of a detective cat. Artwork by @shigemi.itch.io." width="301"}
 
+## 🔍 ¿Qué descubrimos?
+
+En este análisis entendermos los patrones ocultos en la composición de aminoácidos de proteínas codificantes de Trypanosoma cruzi, comparando:
+
 ```{css}
 #| echo: false
 
