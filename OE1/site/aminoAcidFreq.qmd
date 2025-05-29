@@ -405,47 +405,6 @@ for (file_name in unique_files) {
 
 :::
 
-<!-- ```{r}
-
-plot_violin_contrast <- function(data, plot_title, y_label) {
-  dodge <- position_dodge(width = 0.8)  # define the dodge to separate the groups
-
-  ggplot(data, aes(x = AminoAcidGroup, y = Freq, fill = supp)) +
-    geom_violin(alpha = 0.7, width = 0.5, position = dodge) +
-    # geom_boxplot(width = 0.1, fill = "white", alpha = 0.3, outlier.shape = NA, position = dodge) +
-    # scale_fill_brewer(palette = "Dark2") + 
-    ylab(y_label) + 
-    labs(
-      title = plot_title, 
-      caption = "Data source: Facultad de Ciencias, Udelar"
-    ) +
-    theme_minimal() + 
-    theme(
-      axis.line.y = element_blank(), 
-      axis.ticks.y = element_blank(),
-      axis.text.x = element_text(angle = 45, hjust = 1)
-    )
-}
-
-long_data_target$supp <- rep(key_name, length(long_data_target$Genome))
-long_data_coding_prot$supp <- rep("rest", length(long_data_coding_prot$Genome))
-
-target_coding_seq_class <- bind_rows(long_data_target , long_data_coding_prot)
-
-unique_files <- unique(target_coding_seq_class$Genome)
-
-for (file_name in unique_files) {
-  data_subset <- filter(target_coding_seq_class, Genome == file_name)
-  
-  print(plot_violin_contrast(
-    data_subset, 
-    plot_title = paste("Frequency of grouped amino acids -", file_name), 
-    y_label = "Amino acid content"
-  ))
-  
-  # readline(prompt = "Presiona Enter para ver el siguiente gráfico...")
-}
-``` -->
 
 ```{r}
 #| label: Created function to barplot contrast group
