@@ -309,7 +309,7 @@ classfied_amino_acids_coding_prot <- classification_aminoacids(combined_freqs_co
 
 ```
 
-::: {.panel-tabset .nav-pills}
+<!-- ::: {.panel-tabset .nav-pills}
 
 ## Frequency of amino acid groups of the coding sequences.
 
@@ -403,7 +403,7 @@ for (file_name in unique_files) {
 
 ```
 
-:::
+::: -->
 
 
 ```{r}
