@@ -564,7 +564,7 @@ write_csv(combained_trinucleotide, "combained_trinucleotide.csv", col_names = TR
 :::
 
 
-<!-- ## Análisis t-SNE de las Frecuencias de Dinucleótidos y Trinucleótidos
+## Análisis t-SNE de las Frecuencias de Dinucleótidos y Trinucleótidos
 
 Se realizó un análisis de [t-distributed Stochastic Neighbor Embedding (t-SNE)](https://github.com/JoaquinAmatRodrigo/Estadistica-con-R/blob/master/PDF_format/35_Principal_Component_Analysis.pdf) sobre las frecuencias de `dinucleótidos` y `trinucleotidos` combinados en las secuencias `codificantes` de los genomas de ``r genome_name``. El t-SNE es una técnica de reducción de dimensionalidad que preserva las relaciones locales en los datos, lo que facilita la visualización de agrupamientos o patrones subyacentes en las frecuencias nucleotidicas de las secuencias.
 
@@ -577,7 +577,7 @@ En este análisis, se utiliza la función ggplot() para visualizar los resultado
 
 Se realizó un análisis de t-SNE sobre las frecuencias de dinucleótidos resaltando ``r key_name`` por cada genoma ``r genome_name``. El t-SNE permite reducir la dimensionalidad, preservando las relaciones locales de las frecuencias de dinucleótidos, facilitando la exploración de las relaciones entre secuencias y sus patrones de composición a nivel de `dinucleótidos`. 
 
-###```{r}
+```{r}
 #| label: t-distributed Stochastic Neighbor Embedding analysis with plot dinucleotides
 #| echo: true
 #| warning: false
@@ -659,7 +659,7 @@ perform_result_dinucleotide_tsne$tsne_plot
 
 Ademas, se realizó un análisis de t-SNE sobre las frecuencias de trinucleótidos resaltando ``r key_name`` por cada genoma ``r genome_name``. Permitiendo reducir la dimensionalidad, preservando las relaciones locales de las frecuencias de `trinucleótidos`. 
 
-###```{r}
+```{r}
 #| label: t-distributed Stochastic Neighbor Embedding analysis with plot trinucleotides
 #| echo: true
 #| warning: false
@@ -675,88 +675,3 @@ perform_result_trinucleotide_tsne$tsne_plot
 :::
 
 ---
-
-##  Análisis t-SNE de las frecuencias nucleotidicas de `secuencias codificantes` por cada `genoma`
-
-::: {.panel-tabset .nav-pills}
-
-## t-SNE highlighted `r key_name` per genome
-
-Se realizó un análisis de t-SNE sobre las frecuencias de dinucleótidos resaltando ``r key_name`` por cada genoma ``r genome_name``. El t-SNE permite reducir la dimensionalidad, preservando las relaciones locales de las frecuencias de dinucleótidos, facilitando la exploración de las relaciones entre secuencias y sus patrones de composición a nivel de `dinucleótidos`. 
-
-###```{r}
-#| label: t-distributed Stochastic Neighbor Embedding analysis with plot dinucleotides per genome
-#| echo: true
-#| warning: false
-
-# Call Map color palette to genomes (including 'Other' for grey)
-# palette_to_genome
-
-# Initialize an empty list to store tsne plots for each genome
-tsne_list_dinucloetide <- list()
-
-# Loop through each genome and call genome to PCA
-for (genome in genomes) {
-  # Subset the data for the current genome
-  genome_data <- subset(combained_dinucleotide, Genome == genome)
-  
-  # Perform tsne on the subsetted data
-  tsne_list_process <- perform_tsne_highlight(genome_data, highlight_ids = highlight_ids, file_col = "Genome", id_col = "id", col_palette = palette_to_genome) # genome_data, dinucleotide_table$ID, pca_result$pca_result, col_palette = palette_to_genome
-
-  tsne_list_dinucloetide[[genome]] <- tsne_list_process
-}
-
-for (genome in names(tsne_list_dinucloetide)) {
-  # get plot of a list
-  tsne_plot <- tsne_list_dinucloetide[[genome]]$tsne_plot
-
-  print(tsne_plot) # Show plots
-  # filename <- paste0("tsne_plot_", genome, ".png") # Save as PDF if needed
-  # ggsave(filename = filename, plot = tsne_plot, width = 8, height = 6, dpi = 300)
-}
-
-# library(gridExtra)
-# plots <- lapply(tsne_list_dinucloetide, function(x) x$tsne_plot) # Get all plot of a list
-# do.call(grid.arrange, c(plots, ncol = 2)) # Show all plot in one image
-
-```
-
-## t-SNE highlighted `r key_name` per genome
-
-Ademas, se realizó un análisis de t-SNE sobre las frecuencias de trinucleótidos resaltando ``r key_name`` por cada genoma ``r genome_name``. Permitiendo reducir la dimensionalidad, preservando las relaciones locales de las frecuencias de `trinucleótidos`. 
-
-###```{r}
-#| label: t-distributed Stochastic Neighbor Embedding analysis with plot trinucleotides per genome
-#| echo: true
-#| warning: false
-
-# Initialize an empty list to store tsne plots for each genome
-tsne_list_trinucleotide <- list()
-
-# Loop through each genome and call genome to PCA
-for (genome in genomes) {
-  # Subset the data for the current genome
-  genome_data <- subset(combained_trinucleotide, Genome == genome)
-  
-  # Perform tsne on the subsetted data
-  tsne_list_process <- perform_tsne_highlight(genome_data, highlight_ids = highlight_ids, file_col = "Genome", id_col = "id", col_palette = palette_to_genome) # genome_data, dinucleotide_table$ID, pca_result$pca_result, col_palette = palette_to_genome
-
-  tsne_list_trinucleotide[[genome]] <- tsne_list_process
-}
-
-for (genome in names(tsne_list_trinucleotide)) {
-  # get plot of a list
-  tsne_plot <- tsne_list_trinucleotide[[genome]]$tsne_plot
-
-  print(tsne_plot) # Show plots
-  # filename <- paste0("tsne_plot_", genome, ".png") # Save as PDF if needed
-  # ggsave(filename = filename, plot = tsne_plot, width = 8, height = 6, dpi = 300)
-}
-
-# library(gridExtra)
-# plots <- lapply(tsne_list_dinucloetide, function(x) x$tsne_plot) # Get all plot of a list
-# do.call(grid.arrange, c(plots, ncol = 2)) # Show all plot in one image
-
-```
-
-::: -->
