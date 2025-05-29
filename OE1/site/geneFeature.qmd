@@ -607,6 +607,8 @@ reactable(file_sequence_counts, highlight = TRUE)
 
 ---
 
+## Caracterizacion de los nuevos genes ``r key_name`` anotados
+
 
 ```{r}
 #| label: new gene
@@ -630,7 +632,6 @@ new_gene_annotatet_summary <- new_gene_annotate %>%
 
 ```
 
-### Tabla resumen de los nuevos genes
 
 ```{r}
 #| label: summary genome feature and created summary new gene
@@ -643,9 +644,9 @@ new_gene_annotatet_summary <- new_gene_annotate %>%
 
 ```
 
-### Visualización de la Longitud y Contenido de GC de el total de genes de``r key_name``
+### Visualización de la Longitud y Contenido de GC de el total de los nuevos genes de``r key_name``
 
-Se generan gráficos que representan el `contenido de GC` y la `longitud` de cada secuencia de ``r key_name``. 
+Se generan gráficos que representan el `contenido de GC` y la `longitud` de cada secuencia de ``r key_name`` re anotadas. 
 En esta seccion reutilizaremos parte del codigo escrito llamando a las funciones que crean los plot de `GC` y de `longitud` de las secuencias.
 
 ::: {.panel-tabset .nav-pills}
