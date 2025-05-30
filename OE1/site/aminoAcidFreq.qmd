@@ -204,7 +204,17 @@ plot_barplot_contrast <- function(data, plot_title, y_label) {
     )
 }
 
-# Map one-letter codes to three-letter codes before plotting
+# Definir el nombre que se usará como etiqueta para los datos target
+key_name <- "Target"  # Puedes cambiarlo si deseas
+
+# Añadir la columna 'supp' correctamente, asegurando que coincida con las filas
+summary_data_target$supp <- key_name
+summary_data_coding_prot$supp <- "Other"
+
+# Combinar ambos datasets
+target_coding_seq <- bind_rows(summary_data_target, summary_data_coding_prot)
+
+# Mapear las letras de los aminoácidos a abreviaciones de tres letras
 amino_acids_one_letter <- c("A", "R", "N", "D", "C", "Q", "E", "G", "H", "I", 
                             "L", "K", "M", "F", "P", "S", "T", "W", "Y", "V")
 amino_acids_three_letter <- c(
@@ -214,30 +224,25 @@ amino_acids_three_letter <- c(
   "Ser", "Thr", "Trp", "Tyr", "Val"
 )
 
-summary_data_target$supp <- rep(key_name, length(summary_data_target$File))
-summary_data_coding_prot$supp <- rep("Other", length(summary_data_coding_prot$File))
-
-
-target_coding_seq <- bind_rows(summary_data_target, summary_data_coding_prot)
-
+# Asegurar que los factores estén en orden correcto con sus etiquetas
 target_coding_seq$AminoAcid <- factor(
-  target_coding_seq$AminoAcid, 
-  levels = amino_acids_one_letter, 
+  target_coding_seq$AminoAcid,
+  levels = amino_acids_one_letter,
   labels = amino_acids_three_letter
 )
 
-unique_files <- unique(target_coding_seq$File)
+# Crear el gráfico por cada archivo
+unique_files <- unique(summary_data_target$File)  # o usa target_coding_seq$File si quieres iterar sobre todos
 
 for (file_name in unique_files) {
-  data_subset <- filter(target_coding_seq, File == file_name)
+  data_subset <- filter(target_coding_seq, File == file_name | supp == "Other")
   
   print(plot_barplot_contrast(
     data_subset, 
     plot_title = paste("Amino acid frequency -", file_name), 
-    y_label = "Amino acid content"
+    y_label = "Amino acid content (%)"
   ))
 }
-
 
 ```
 
