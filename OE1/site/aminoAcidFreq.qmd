@@ -370,8 +370,9 @@ group_columns <- c(
 long_data <- combined_groups %>%
   pivot_longer(cols = all_of(group_columns), names_to = "AminoAcidGroup", values_to = "Frequency")
 
-summary_data <- long_data %>%
-  group_by(group, AminoAcidGroup) %>%
+# 4. Calcular medias y SD por genoma y grupo
+summary_data_by_genome <- long_data %>%
+  group_by(Genome, group, AminoAcidGroup) %>%
   summarise(
     mean_freq = mean(Frequency),
     sd_freq = sd(Frequency),
@@ -395,6 +396,7 @@ ggplot(summary_data, aes(x = AminoAcidGroup, y = mean_freq, fill = group)) +
   ) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  
 
 ```
 
