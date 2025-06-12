@@ -333,20 +333,59 @@ classification_aminoacids <- function(data, genome_col = "File", id_col = "Seque
     "Sulphur" = rowSums(data[, c("C", "M")]),
     "Basic" = rowSums(data[, c("K", "R", "H")]),
     "Acidic" = rowSums(data[, c("D", "E", "N", "Q")]),  # nota: N y Q a veces no se incluyen como ácidos
+    "Polar_Uncharged" = rowSums(data[, c("S", "T", "N", "Q", "Y")]),  # Polar pero sin carga
     "AliphaticHydroxyl" = rowSums(data[, c("S", "T")]),
-    "tRNAsynthetaseClassI" = rowSums(data[, c("E", "Q", "R", "C", "M", "V", "I", "L", "Y", "W")]),
-    "tRNAsynthetaseClassII" = rowSums(data[, c("G", "A", "P", "S", "T", "H", "D", "N", "K", "F")]),
+    "Positive_Charge" = rowSums(data[, c("K", "R", "H")]),  # Lisina, Arginina, Histidina
+    "Negative_Charge" = rowSums(data[, c("D", "E")]),       # Aspartato, Glutamato
+    # "tRNAsynthetaseClassI" = rowSums(data[, c("E", "Q", "R", "C", "M", "V", "I", "L", "Y", "W")]),
+    # "tRNAsynthetaseClassII" = rowSums(data[, c("G", "A", "P", "S", "T", "H", "D", "N", "K", "F")]),
     "Hydrophobic" = rowSums(data[, c("A", "V", "I", "L", "M", "F", "W", "G", "P", "C")]),
-    "Hydrophilic" = rowSums(data[, c("R", "N", "D", "Q", "E", "K", "S", "T", "Y", "H")]),
-    "Hydrophilic_Charged_Positive" = rowSums(data[, c("K", "R", "H")]),
-    "Hydrophilic_Charged_Negative" = rowSums(data[, c("D", "E")]),
-    "Hydrophilic_Uncharged" = rowSums(data[, c("S", "T", "N", "Q", "Y")])
+    "Hydrophilic" = rowSums(data[, c("R", "N", "D", "Q", "E", "K", "S", "T", "Y", "H")])
   )
   return(result_combained_data)
 }
 
 classfied_amino_acids_targt <- classification_aminoacids(all_frequencies_target)
 classfied_amino_acids_coding_prot <- classification_aminoacids(combined_freqs_coding_prot)
+
+# Agregamos una columna de origen a cada conjunto
+classfied_amino_acids_targt$group <- key_name
+classfied_amino_acids_coding_prot$group <- "Other"
+
+# Unimos los datasets
+combined_groups <- bind_rows(classfied_amino_acids_targt, classfied_amino_acids_coding_prot)
+
+# Seleccionamos solo las columnas numéricas de los grupos
+group_columns <- c(
+  "Aliphatic", "Aromatic", "Sulphur", "Basic", "Acidic", "Polar_Uncharged", "Positive_Charge", "Negative_Charge", "AliphaticHydroxyl", "Hydrophobic", "Hydrophilic"
+)
+
+# Convertimos a formato largo
+long_data <- combined_groups %>%
+  pivot_longer(cols = all_of(group_columns), names_to = "AminoAcidGroup", values_to = "Frequency")
+
+summary_data <- long_data %>%
+  group_by(group, AminoAcidGroup) %>%
+  summarise(
+    mean_freq = mean(Frequency),
+    sd_freq = sd(Frequency),
+    .groups = "drop"
+  )
+
+ggplot(summary_data, aes(x = AminoAcidGroup, y = mean_freq, fill = group)) +
+  geom_bar(stat = "identity", position = position_dodge(width = 0.9)) +
+  geom_errorbar(aes(ymin = mean_freq - sd_freq, ymax = mean_freq + sd_freq),
+                position = position_dodge(width = 0.9), width = 0.3) +
+  scale_fill_manual(
+    values = c( "DGF-1" = "#E69F00", "Other" = "#56B4E9")  # colores distintos
+  ) +
+  labs(
+    title = "Amino Acid Group Composition with SD",
+    x = "Group",
+    y = "Mean Frequency ± SD"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 ```
 
