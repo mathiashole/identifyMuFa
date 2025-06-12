@@ -156,8 +156,6 @@ summary_data_target <- long_freqs_target %>%
 # Asumimos que key_name ya está definido previamente
 summary_data_target$supp <- key_name
 
-
-
 ```
 
 
