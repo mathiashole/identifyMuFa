@@ -275,56 +275,6 @@ mayores_en_target_ordenado <- mayores_en_target[order(-mayores_en_target$differe
 
 ```
 
-```{r}
-#| label: table classification amino acids 
-#| echo: false
-
-library(treemap)
-
-Category <- c(
-  rep("Aliphatic", 5), rep("Aromatic", 3), 
-  rep("Sulphur", 2), rep("Basic", 3), 
-  rep("Acidic", 4), rep("Aliphatic Hydroxyl", 2), 
-  rep("Class I tRNA Synthetase", 10), 
-  rep("Class II tRNA Synthetase", 10)
-)
-
-Amino_Acid <- c(
-  "Gly(G)", "Ala(A)", "Val(V)", "Leu(L)", "Ile(I)",  # Aliphatic
-  "Phe(F)", "Trp(W)", "Tyr(Y)",                      # Aromatic
-  "Cys(C)", "Met(M)",                                # Sulphur
-  "Lys(K)", "Arg(R)", "His(H)",                      # Basic
-  "Asp(D)", "Glu(E)", "Asn(N)", "Gln(Q)",            # Acidic
-  "Ser(S)", "Thr(T)",                                # Aliphatic Hydroxyl
-  "Glu(E)", "Gln(Q)", "Arg(R)", "Cys(C)",            # Class I
-  "Met(M)", "Val(V)", "Ile(I)", "Leu(L)", 
-  "Tyr(Y)", "Trp(W)",                               
-  "Gly(G)", "Ala(A)", "Pro(P)", "Ser(S)",            # Class II
-  "Thr(T)", "His(H)", "Asp(D)", "Asn(N)", 
-  "Lys(K)", "Phe(F)"
-)
-
-# Nueva columna: Clase de tRNA (donde no aplica, dejamos NA)
-tRNA_Class <- c(
-  rep(NA, 19),  # No aplica para las primeras 19 categorías
-  rep("Class I", 10), 
-  rep("Class II", 10)
-)
-
-amino_acid_data <- data.frame(Category, Amino_Acid, tRNA_Class)
-
-amino_acid_data$Value <- sample(1:10, nrow(amino_acid_data), replace = TRUE)
-
-treemap(
-  amino_acid_data,
-  index = c("Category", "tRNA_Class", "Amino_Acid"),  # Jerarquía con tercer nivel
-  vSize = "Value",  # Tamaño según los valores aleatorios
-  type = "index",  # Visualización jerárquica
-  palette = "Set3",  # Paleta de colores
-  title = "Treemap de Aminoácidos con Clases de tRNA"
-)
-
-```
 
 ```{r}
 #| label: classification amino acids 
