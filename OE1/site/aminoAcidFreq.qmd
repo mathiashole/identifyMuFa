@@ -380,8 +380,8 @@ summary_data_by_genome <- long_data %>%
   )
 
 library(RColorBrewer)
-
-group_levels <- unique(summary_data$group)
+# 5. Paleta de colores
+group_levels <- unique(summary_data_by_genome$group)
 palette_colors <- setNames(brewer.pal(n = length(group_levels), name = "Set1"), group_levels)
 
 ggplot(summary_data, aes(x = AminoAcidGroup, y = mean_freq, fill = group)) +
