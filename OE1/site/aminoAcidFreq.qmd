@@ -340,10 +340,30 @@ palette_colors <- setNames(brewer.pal(n = length(group_levels), name = "Set1"), 
 for (genome in unique(summary_data_by_genome$Genome)) {
   data_subset <- filter(summary_data_by_genome, Genome == genome)
 
-  p <- ggplot(data_subset, aes(x = AminoAcidGroup, y = mean_freq, fill = group)) +
+  # p <- ggplot(data_subset, aes(x = AminoAcidGroup, y = mean_freq, fill = group)) +
+  #   geom_bar(stat = "identity", position = position_dodge(width = 0.9)) +
+  #   geom_errorbar(aes(ymin = mean_freq - sd_freq, ymax = mean_freq + sd_freq),
+  #                 position = position_dodge(width = 0.9), width = 0.3) +
+  #   scale_fill_manual(values = palette_colors) +
+  #   labs(
+  #     title = paste("Amino Acid Group Composition -", genome),
+  #     x = "Amino Acid Group",
+  #     y = "Mean Frequency ± SD"
+  #   ) +
+  #   theme_minimal() +
+  #   theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+  # print(p)
+    p <- ggplot(data_subset, aes(x = AminoAcidGroup, y = mean_freq, fill = group)) +
     geom_bar(stat = "identity", position = position_dodge(width = 0.9)) +
     geom_errorbar(aes(ymin = mean_freq - sd_freq, ymax = mean_freq + sd_freq),
                   position = position_dodge(width = 0.9), width = 0.3) +
+    geom_text(
+      aes(label = round(mean_freq, 2)),  # redondea a 2 decimales
+      position = position_dodge(width = 0.9),
+      vjust = -0.5,
+      size = 3
+    ) +
     scale_fill_manual(values = palette_colors) +
     labs(
       title = paste("Amino Acid Group Composition -", genome),
