@@ -123,53 +123,38 @@ calculate_amino_acid_frequencies <- function(file) {
 #   na = c("", "NA"),     # Strings a tratar como NA
 #   skip_empty_rows = TRUE
 # )
-combined_freqs_coding_prot <- readLines("amino_acid_frequency_all_protein_coding.tsv")
-combined_freqs_coding_prot <- read.delim(text = combined_freqs_coding_prot, header = TRUE)
-cols_num <- 3:22 
-combined_freqs_coding_prot[cols_num] <- lapply(combined_freqs_coding_prot[cols_num], as.numeric)
+# === 1. Leer y preparar los datos de proteínas codificantes ===
+combined_freqs_coding_prot <- read.delim("amino_acid_frequency_all_protein_coding.tsv", header = TRUE)
+combined_freqs_coding_prot[3:22] <- lapply(combined_freqs_coding_prot[3:22], as.numeric)
 
 combined_freqs_coding_prot$File <- gsub(".*_([A-Za-z0-9]+)_translated\\.fasta", "\\1", combined_freqs_coding_prot$File)
 
 long_freqs_coding_prot <- combined_freqs_coding_prot %>%
-  pivot_longer(cols = c(3:22),  # Especifica las columnas de aminoácidos
-               names_to = "AminoAcid",  # Nombre de la nueva columna para los nombres de los aminoácidos
-               values_to = "Freq") %>%  # Nombre de la nueva columna para las frecuencias
-  mutate(Freq = Freq * 100)  # Convertir frecuencias a porcentaje
+  pivot_longer(cols = 3:22, names_to = "AminoAcid", values_to = "Freq") %>%
+  mutate(Freq = Freq * 100)
 
 summary_data_coding_prot <- long_freqs_coding_prot %>%
   group_by(File, AminoAcid) %>%
-  summarise(
-    mean_freq = mean(Freq),
-    sd_freq = sd(Freq),
-    .groups = "drop"
-)
+  summarise(mean_freq = mean(Freq), sd_freq = sd(Freq), .groups = "drop")
 
-# Procesar todos los archivos target
-all_frequencies_target <- readLines("aminoacid_frequency_re_anotacion.tsv")
-all_frequencies_target <- read.delim(text = all_frequencies_target, header = TRUE)
-amino_acids_one_letter <- 3:22 
-all_frequencies_target[amino_acids_one_letter] <- 
-  lapply(all_frequencies_target[amino_acids_one_letter], as.numeric)
+summary_data_coding_prot$supp <- "Other"
 
-# Extraer nombre del archivo
-all_frequencies_target$File <- gsub(".*_([A-Za-z0-9]+)_Genome\\.fasta", 
-                                    "\\1", 
-                                    all_frequencies_target$File)
+# === 2. Leer y preparar los datos de secuencias objetivo ===
+all_frequencies_target <- read.delim("aminoacid_frequency_re_anotacion.tsv", header = TRUE)
+all_frequencies_target[3:22] <- lapply(all_frequencies_target[3:22], as.numeric)
 
-# Reorganizar en formato largo
+all_frequencies_target$File <- gsub(".*_([A-Za-z0-9]+)_Genome\\.fasta", "\\1", all_frequencies_target$File)
+
 long_freqs_target <- all_frequencies_target %>%
-  pivot_longer(cols = all_of(amino_acids_one_letter), 
-               names_to = "AminoAcid", 
-               values_to = "Freq") %>%
-  mutate(Freq = Freq * 100)  # Solo si originalmente está entre 0 y 1
-  
+  pivot_longer(cols = 3:22, names_to = "AminoAcid", values_to = "Freq") %>%
+  mutate(Freq = Freq * 100)
+
 summary_data_target <- long_freqs_target %>%
   group_by(File, AminoAcid) %>%
-  summarise(
-    mean_freq = mean(Freq),
-    sd_freq = sd(Freq),
-    .groups = "drop"
-  )
+  summarise(mean_freq = mean(Freq), sd_freq = sd(Freq), .groups = "drop")
+
+# Asumimos que key_name ya está definido previamente
+summary_data_target$supp <- key_name
 
 
 
@@ -231,15 +216,16 @@ target_coding_seq$AminoAcid <- factor(
 # Crear el gráfico por cada archivo
 unique_files <- unique(summary_data_target$File)  # o usa target_coding_seq$File si quieres iterar sobre todos
 
-for (file_name in unique_files) {
-  data_subset <- filter(target_coding_seq, File == file_name | supp == "Other")
+# for (file_name in unique_files) {
+#   data_subset <- filter(target_coding_seq, File == file_name | supp == "Other")
   
-  print(plot_barplot_contrast(
-    data_subset, 
-    plot_title = paste("Amino acid frequency -", file_name), 
-    y_label = "Amino acid content (%)"
-  ))
-}
+#   print(plot_barplot_contrast(
+#     data_subset, 
+#     plot_title = paste("Amino acid frequency -", file_name), 
+#     y_label = "Amino acid content (%)"
+#   ))
+# }
+
 
 ```
 
