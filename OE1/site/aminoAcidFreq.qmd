@@ -17,9 +17,9 @@ format:
 Los aminoácidos son los componentes fundamentales de las proteínas, y su composición puede ofrecer información valiosa sobre las propiedades funcionales, estructurales y evolutivas de las secuencias codificantes. 🔍
 En este análisis se comparan dos grupos de secuencias:
 
-    🧪 Secuencias DGF-1: proteínas pertenecientes a la familia multigénica DGF-1 de Trypanosoma cruzi. Esta familia se ha asociado con procesos de interacción parásito-hospedador y presenta una alta variabilidad, por lo que resulta de especial interés biológico.
+🧪 Secuencias DGF-1: proteínas pertenecientes a la familia multigénica DGF-1 de Trypanosoma cruzi. Esta familia se ha asociado con procesos de interacción parásito-hospedador y presenta una alta variabilidad, por lo que resulta de especial interés biológico.
 
-    🧬 Proteínas codificantes del genoma: conjunto de proteínas anotadas como codificantes en los genomas de referencia, usadas como contexto comparativo.
+🧬 Proteínas codificantes del genoma: conjunto de proteínas anotadas como codificantes en los genomas de referencia, usadas como contexto comparativo.
 
 A partir de ambas fuentes, se calcularon las frecuencias relativas de cada aminoácido en cada proteína. Luego, estas frecuencias fueron transformadas a porcentajes para facilitar la comparación, y se calcularon estadísticas resumen (media y desviación estándar) por grupo.
 
