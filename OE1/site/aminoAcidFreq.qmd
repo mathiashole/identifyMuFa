@@ -351,6 +351,7 @@ classification_aminoacids <- function(data, genome_col = "File", id_col = "Seque
   return(result_combained_data)
 }
 
+# 1. Calcular clasificación por grupo químico de aminoácidos
 classfied_amino_acids_targt <- classification_aminoacids(all_frequencies_target)
 classfied_amino_acids_coding_prot <- classification_aminoacids(combined_freqs_coding_prot)
 
@@ -361,12 +362,13 @@ classfied_amino_acids_coding_prot$group <- "Other"
 # Unimos los datasets
 combined_groups <- bind_rows(classfied_amino_acids_targt, classfied_amino_acids_coding_prot)
 
+# 2. Columnas de interés
 # Seleccionamos solo las columnas numéricas de los grupos
 group_columns <- c(
   "Aliphatic", "Aromatic", "Sulphur", "Basic", "Acidic", "Polar_Uncharged", "Positive_Charge", "Negative_Charge", "AliphaticHydroxyl", "Hydrophobic", "Hydrophilic"
 )
 
-# Convertimos a formato largo
+# 3. Convertir a formato largo
 long_data <- combined_groups %>%
   pivot_longer(cols = all_of(group_columns), names_to = "AminoAcidGroup", values_to = "Frequency")
 
