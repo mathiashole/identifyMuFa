@@ -165,65 +165,51 @@ summary_data_target$supp <- key_name
 #| label: Created function to barplot contrast 
 #| echo: true
 
+# === 3. Unir los datos de ambas fuentes ===
+combined_data <- bind_rows(summary_data_target, summary_data_coding_prot)
+
+# Etiquetas de aminoácidos
+amino_acids_one_letter <- c("A", "R", "N", "D", "C", "Q", "E", "G", "H", "I", 
+                            "L", "K", "M", "F", "P", "S", "T", "W", "Y", "V")
+amino_acids_three_letter <- c("Ala", "Arg", "Asn", "Asp", "Cys", "Gln", "Glu", "Gly", 
+                              "His", "Ile", "Leu", "Lys", "Met", "Phe", "Pro", 
+                              "Ser", "Thr", "Trp", "Tyr", "Val")
+
+combined_data$AminoAcid <- factor(
+  combined_data$AminoAcid,
+  levels = amino_acids_one_letter,
+  labels = amino_acids_three_letter
+)
+
+# === 4. Función para graficar ===
 plot_barplot_contrast <- function(data, plot_title, y_label) {
-  dodge <- position_dodge(width = 0.5)  # Define dodge for bar alignment
+  dodge <- position_dodge(width = 0.6)
   
   ggplot(data, aes(x = AminoAcid, y = mean_freq, fill = supp)) +
-    geom_bar(
-      stat = "identity", 
-      alpha = 0.7, 
-      width = 0.5, 
-      position = dodge
-    ) +
-    ylab(y_label) + 
-    labs(
-      title = plot_title,  
-    ) +
-    theme_minimal() + 
+    geom_bar(stat = "identity", alpha = 0.7, width = 0.5, position = dodge) +
+    geom_errorbar(aes(ymin = mean_freq - sd_freq, ymax = mean_freq + sd_freq),
+                  position = dodge, width = 0.2) +
+    ylab(y_label) +
+    labs(title = plot_title) +
+    theme_minimal() +
     theme(
-      axis.line.y = element_blank(), 
+      axis.line.y = element_blank(),
       axis.ticks.y = element_blank(),
       axis.text.x = element_text(angle = 45, hjust = 1)
     )
 }
 
-# Añadir la columna 'supp' correctamente, asegurando que coincida con las filas
-summary_data_target$supp <- key_name
-summary_data_coding_prot$supp <- "Other"
+# === 5. Graficar por cada File ===
+for (file_name in unique(summary_data_target$File)) {
+  data_subset <- combined_data %>%
+    filter(File == file_name)
 
-# Combinar ambos datasets
-target_coding_seq <- bind_rows(summary_data_target, summary_data_coding_prot)
-
-# Mapear las letras de los aminoácidos a abreviaciones de tres letras
-amino_acids_one_letter <- c("A", "R", "N", "D", "C", "Q", "E", "G", "H", "I", 
-                            "L", "K", "M", "F", "P", "S", "T", "W", "Y", "V")
-amino_acids_three_letter <- c(
-  "Ala", "Arg", "Asn", "Asp", "Cys", 
-  "Gln", "Glu", "Gly", "His", "Ile", 
-  "Leu", "Lys", "Met", "Phe", "Pro", 
-  "Ser", "Thr", "Trp", "Tyr", "Val"
-)
-
-# Asegurar que los factores estén en orden correcto con sus etiquetas
-target_coding_seq$AminoAcid <- factor(
-  target_coding_seq$AminoAcid,
-  levels = amino_acids_one_letter,
-  labels = amino_acids_three_letter
-)
-
-# Crear el gráfico por cada archivo
-unique_files <- unique(summary_data_target$File)  # o usa target_coding_seq$File si quieres iterar sobre todos
-
-# for (file_name in unique_files) {
-#   data_subset <- filter(target_coding_seq, File == file_name | supp == "Other")
-  
-#   print(plot_barplot_contrast(
-#     data_subset, 
-#     plot_title = paste("Amino acid frequency -", file_name), 
-#     y_label = "Amino acid content (%)"
-#   ))
-# }
-
+  print(plot_barplot_contrast(
+    data_subset,
+    plot_title = paste("Amino acid frequency -", file_name),
+    y_label = "Amino acid content (%)"
+  ))
+}
 
 ```
 
