@@ -275,6 +275,37 @@ mayores_en_target_ordenado <- mayores_en_target[order(-mayores_en_target$differe
 
 ```
 
+## ✨ Agrupación de aminoácidos por propiedades químicas
+
+Para complementar el análisis individual de los aminoácidos, realizamos una agrupación basada en sus propiedades químicas ⚗️. Esta clasificación permite observar patrones más amplios en la composición de las proteínas, agrupando los aminoácidos según características como su carga, polaridad, hidrofobicidad o presencia de anillos aromáticos 🔬.
+
+En este caso, agrupamos los aminoácidos en las siguientes categorías:
+
+    🧪 Alifáticos: Gly, Ala, Val, Leu, Ile
+
+    🌸 Aromáticos: Phe, Trp, Tyr
+
+    🌱 Con azufre: Cys, Met
+
+    ⚡ Básicos (carga positiva): Lys, Arg, His
+
+    🍋 Ácidos (carga negativa o derivados): Asp, Glu, Asn, Gln
+
+    💧 Polares sin carga: Ser, Thr, Asn, Gln, Tyr
+
+    🧷 Alifáticos hidroxilados: Ser, Thr
+
+    🧲 Cargados positivamente: Lys, Arg, His
+
+    🧪 Cargados negativamente: Asp, Glu
+
+    ☀️ Hidrofóbicos: Ala, Val, Ile, Leu, Met, Phe, Trp, Gly, Pro, Cys
+
+    💦 Hidrofílicos: Arg, Asn, Asp, Gln, Glu, Lys, Ser, Thr, Tyr, His
+
+Esto nos permite comparar, por ejemplo, si la proteína `DGF-1` presenta una preferencia por residuos hidrofóbicos o cargados, en relación con el conjunto general de proteínas codificantes del genoma de Trypanosoma cruzi 🧬.
+
+A continuación, se muestran los gráficos comparativos para cada genoma analizado:
 
 ```{r}
 #| label: classification amino acids 
