@@ -384,18 +384,25 @@ library(RColorBrewer)
 group_levels <- unique(summary_data_by_genome$group)
 palette_colors <- setNames(brewer.pal(n = length(group_levels), name = "Set1"), group_levels)
 
-ggplot(summary_data, aes(x = AminoAcidGroup, y = mean_freq, fill = group)) +
-  geom_bar(stat = "identity", position = position_dodge(width = 0.9)) +
-  geom_errorbar(aes(ymin = mean_freq - sd_freq, ymax = mean_freq + sd_freq),
-                position = position_dodge(width = 0.9), width = 0.3) +
-  scale_fill_manual(values = palette_colors) +
-  labs(
-    title = "Amino Acid Group Composition with SD",
-    x = "Group",
-    y = "Mean Frequency ± SD"
-  ) +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+# 6. Hacer un gráfico por genoma
+for (genome in unique(summary_data_by_genome$Genome)) {
+  data_subset <- filter(summary_data_by_genome, Genome == genome)
+
+  p <- ggplot(data_subset, aes(x = AminoAcidGroup, y = mean_freq, fill = group)) +
+    geom_bar(stat = "identity", position = position_dodge(width = 0.9)) +
+    geom_errorbar(aes(ymin = mean_freq - sd_freq, ymax = mean_freq + sd_freq),
+                  position = position_dodge(width = 0.9), width = 0.3) +
+    scale_fill_manual(values = palette_colors) +
+    labs(
+      title = paste("Amino Acid Group Composition -", genome),
+      x = "Amino Acid Group",
+      y = "Mean Frequency ± SD"
+    ) +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+  print(p)
+}
   
 
 ```
