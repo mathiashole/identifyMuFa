@@ -416,9 +416,14 @@ for (genome in unique(summary_data_by_genome$Genome)) {
 <style>
   .viewer-controls {
     margin-bottom: 1em;
+    text-align: center;
   }
   .viewer-controls > * {
-    margin-right: 1em;
+    margin: 0 1em 1em 1em;
+  }
+  /* Opcional: para que el contenedor de viewport tenga borde sutil */
+  #viewport {
+    border: 1px solid #ccc;
   }
 </style>
 
@@ -432,7 +437,7 @@ for (genome in unique(summary_data_by_genome$Genome)) {
     <option value="fold_2025_05_13_12_36_178_44_dominio_c_terminal_model_4.cif" selected>Modelo 4</option>
   </select>
 
-  <label for="color-select">Color:</label>
+  <label for="color-select"> 🎨 Color:</label>
   <select id="color-select">
     <option value="chainid" selected>Cadenas</option>
     <option value="element">Elemento</option>
