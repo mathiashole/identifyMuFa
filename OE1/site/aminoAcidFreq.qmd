@@ -152,7 +152,7 @@ all_frequencies_target[amino_acids_one_letter] <-
   lapply(all_frequencies_target[amino_acids_one_letter], as.numeric)
 
 # Extraer nombre del archivo
-all_frequencies_target$File <- gsub(".*_([A-Za-z0-9]+)_translated\\.fasta", 
+all_frequencies_target$File <- gsub(".*_([A-Za-z0-9]+)_Genome\\.fasta", 
                                     "\\1", 
                                     all_frequencies_target$File)
 
