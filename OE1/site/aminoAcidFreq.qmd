@@ -187,7 +187,7 @@ plot_barplot_contrast <- function(data, plot_title, y_label) {
   
   ggplot(data, aes(x = AminoAcid, y = mean_freq, fill = supp)) +
     geom_bar(stat = "identity", alpha = 0.7, width = 0.5, position = dodge) +
-    geom_errorbar(aes(ymin = mean_freq - sd_freq, ymax = mean_freq + sd_freq),
+    geom_errorbar(aes(ymin = mean_freq - sd_freq, ymax = mean_freq + sd_freq, alpha = 0.3),
                   position = dodge, width = 0.2) +
     ylab(y_label) +
     labs(title = plot_title) +
@@ -213,6 +213,61 @@ for (file_name in unique(summary_data_target$File)) {
 
 ```
 
+## Diferencia estadistica entre la frequencya de aminoacidos
+
+```{r}
+#| label: Statistic diff
+#| echo: true
+
+library(ggpubr)
+
+# Prueba de normalidad (K-S)
+ks.test(subset(long_freqs_coding_prot, AminoAcid == "L")$Freq, "pnorm") # rechazo H0
+ks.test(subset(long_freqs_target, AminoAcid == "L")$Freq, "pnorm") # Rechazo H0
+
+# más de ~30 muestras por grupo, el t-test es bastante robusto
+
+av_all_prot <- long_freqs_coding_prot
+av_target <- long_freqs_target
+av_all_prot$supp <- "Other"
+av_target$supp <- key_name
+
+combined_long_freqs <- bind_rows(av_target, av_all_prot)
+
+library(broom)
+
+# Comparación por t-test para cada aminoácido
+diff_aminoacids <- combined_long_freqs %>%
+  group_by(AminoAcid) %>%
+  filter(!is.na(Freq)) %>%
+  summarise(
+    t_test = list(t.test(Freq ~ supp)),
+    .groups = "drop"
+  ) %>%
+  mutate(
+    tidy_res = map(t_test, broom::tidy)
+  ) %>%
+  unnest(tidy_res) %>%
+  select(AminoAcid, estimate1, estimate2, p.value, conf.low, conf.high)
+
+# p < 0.05 por defecto, podés ajustar si usás FDR
+sig_diff <- diff_aminoacids %>%
+  filter(p.value < 0.05) %>%
+  arrange(p.value)
+
+mayores_en_target <- subset(sig_diff, estimate1 > estimate2)
+
+# Calcular diferencia (puede ser absoluta o simple)
+mayores_en_target$difference <- mayores_en_target$estimate1 - mayores_en_target$estimate2
+
+# Ordenar por mayor diferencia
+mayores_en_target_ordenado <- mayores_en_target[order(-mayores_en_target$difference), ]
+
+# mayores_significativos <- subset(mayores_en_target_ordenado, p.value < 0.05)
+
+# mayores_significativos
+
+```
 
 ```{r}
 #| label: table classification amino acids 
