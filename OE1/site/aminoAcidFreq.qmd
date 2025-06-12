@@ -147,7 +147,7 @@ summary_data_coding_prot <- long_freqs_coding_prot %>%
 # Procesar todos los archivos target
 all_frequencies_target <- readLines("aminoacid_frequency_re_anotacion.tsv")
 all_frequencies_target <- read.delim(text = all_frequencies_target, header = TRUE)
-cols_num <- 3:22 
+amino_acids_one_letter <- 3:22 
 all_frequencies_target[amino_acids_one_letter] <- 
   lapply(all_frequencies_target[amino_acids_one_letter], as.numeric)
 
@@ -195,7 +195,6 @@ plot_barplot_contrast <- function(data, plot_title, y_label) {
     ylab(y_label) + 
     labs(
       title = plot_title,  
-      caption = "Data source: Facultad de Ciencias, Udelar"
     ) +
     theme_minimal() + 
     theme(
@@ -204,9 +203,6 @@ plot_barplot_contrast <- function(data, plot_title, y_label) {
       axis.text.x = element_text(angle = 45, hjust = 1)
     )
 }
-
-# Definir el nombre que se usará como etiqueta para los datos target
-key_name <- "Target"  # Puedes cambiarlo si deseas
 
 # Añadir la columna 'supp' correctamente, asegurando que coincida con las filas
 summary_data_target$supp <- key_name
