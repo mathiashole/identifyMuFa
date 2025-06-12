@@ -12,9 +12,18 @@ format:
 
 ![](https://img.itch.zone/aW1nLzE3MTEyNjE5LmdpZg==/original/2%2BYVZg.gif){style="float:right;" fig-alt="Illustration of a detective cat. Artwork by @shigemi.itch.io." width="301"}
 
-## 🔍 ¿Qué descubrimos?
+## 🧬 Análisis de la composición de aminoácidos
 
-En este análisis entendermos los patrones ocultos en la composición de aminoácidos de proteínas codificantes de Trypanosoma cruzi, comparando:
+Los aminoácidos son los componentes fundamentales de las proteínas, y su composición puede ofrecer información valiosa sobre las propiedades funcionales, estructurales y evolutivas de las secuencias codificantes. 🔍
+En este análisis se comparan dos grupos de secuencias:
+
+    🧪 Secuencias DGF-1: proteínas pertenecientes a la familia multigénica DGF-1 de Trypanosoma cruzi. Esta familia se ha asociado con procesos de interacción parásito-hospedador y presenta una alta variabilidad, por lo que resulta de especial interés biológico.
+
+    🧬 Proteínas codificantes del genoma: conjunto de proteínas anotadas como codificantes en los genomas de referencia, usadas como contexto comparativo.
+
+A partir de ambas fuentes, se calcularon las frecuencias relativas de cada aminoácido en cada proteína. Luego, estas frecuencias fueron transformadas a porcentajes para facilitar la comparación, y se calcularon estadísticas resumen (media y desviación estándar) por grupo.
+
+El objetivo es evaluar si las proteínas DGF-1 presentan un perfil distintivo en su composición de aminoácidos, lo que podría revelar rasgos funcionales particulares o pistas sobre su historia evolutiva. 🌐
 
 ```{css}
 #| echo: false
@@ -152,7 +161,11 @@ summary_data_target$supp <- key_name
 ```
 
 
-## Amino acid frequency of coding frequency
+## 📊 Comparación de perfiles de aminoácidos
+
+Se construyeron gráficos de barras que muestran la frecuencia media (%) de cada aminoácido, junto con su desviación estándar (SD), diferenciando ambos grupos por color. 🟠🔵
+
+Cada gráfico representa una comparación individual entre una proteína DGF-1 y el conjunto de proteínas codificantes, permitiendo observar patrones particulares o desviaciones notables en la abundancia relativa de ciertos residuos. 💡
 
 ```{r}
 #| label: Created function to barplot contrast 
