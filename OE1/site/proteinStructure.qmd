@@ -124,6 +124,13 @@
       <option value="resname">Residuo</option>
       <option value="residueindex">Índice</option>
       <option value="uniform">Uniforme</option>
+      <option value="secondary">Estructura Secundaria (Helix/Sheet/Loop)</option>
+      <option value="hydrophobicity">Hidrofobicidad</option>
+      <option value="bfactor">B-factor (Flexibilidad)</option>
+      <option value="spectrum">Espectro (Rainbow)</option>
+      <option value="sstruc">Tipo de Hélice (α/β/π)</option>
+      <option value="modelindex">Por Modelo (NMR/Multi-model)</option>
+      <option value="partialcharge">Carga Parcial</option>
     </select>
   </div>
 
