@@ -135,6 +135,14 @@
       <option value="ball+stick">Ball+Stick</option>
       <option value="spacefill">Spacefill</option>
       <option value="licorice">Licorice</option>
+      <option value="trace">Trace</option>
+      <option value="tube">Tube</option>
+      <option value="backbone">Backbone</option>
+      <option value="contact">Contact Points</option>
+      <option value="helixorient">Helix Orientation</option>
+      <option value="hyperball">Hyperball</option>
+      <option value="line">Line</option>
+      <option value="point">Points</option>
     </select>
   </div>
 
