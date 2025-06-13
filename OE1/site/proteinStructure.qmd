@@ -128,6 +128,7 @@
       <option value="ss">Estructura Secundaria (Helix/Sheet/Loop)</option>
       <option value="hydrophobicity">Hidrofobicidad</option>
       <option value="bfactor">B-factor (Flexibilidad)</option>
+      <option value="spectrum">Random </option>
       <option value="spectrum">Espectro (Rainbow)</option>
       <option value="sstruc">Tipo de Hélice (α/β/π)</option>
       <option value="modelindex">Por Modelo (NMR/Multi-model)</option>
