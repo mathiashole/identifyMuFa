@@ -410,7 +410,7 @@ for (genome in unique(summary_data_by_genome$Genome)) {
 
 ```
 
-## 🧬 Visualización interactiva
+<!-- ## 🧬 Visualización interactiva
 
 ```{=html}
 <style>
@@ -535,4 +535,4 @@ for (genome in unique(summary_data_by_genome$Genome)) {
   cargarModelo(document.getElementById("model-select").value);
 </script>
 
-```
+``` -->
