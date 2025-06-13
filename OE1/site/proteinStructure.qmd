@@ -182,6 +182,7 @@
       <option value="cartoon" selected>Cartoon</option>
       <option value="surface">Surface</option>
       <option value="ball+stick">Ball+Stick</option>
+      <option value="label">Label</option>
       <option value="spacefill">Spacefill</option>
       <option value="licorice">Licorice</option>
       <option value="trace">Trace</option>
