@@ -142,33 +142,6 @@
 }
 
 /* final sequence */
-/* Check point */
-.representation-options {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 8px;
-}
-
-.checkbox-option {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  padding: 5px 10px;
-  background-color: #f5f5f5;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.checkbox-option:hover {
-  background-color: #e0e0e0;
-}
-
-.checkbox-option input {
-  margin: 0;
-  cursor: pointer;
-}
-/* Check point */
 
 </style>
 
@@ -203,57 +176,7 @@
     </select>
   </div>
 
-  <!-- Check point -->
   <div class="control-group">
-  <label>Visualización</label>
-  <div class="representation-options">
-    <label class="checkbox-option">
-      <input type="checkbox" name="rep-option" value="cartoon" checked> Cartoon
-    </label>
-    <label class="checkbox-option">
-      <input type="checkbox" name="rep-option" value="surface"> Surface
-    </label>
-    <label class="checkbox-option">
-      <input type="checkbox" name="rep-option" value="ball+stick"> Ball+Stick
-    </label>
-    <label class="checkbox-option">
-      <input type="checkbox" name="rep-option" value="label"> Label
-    </label>
-    <label class="checkbox-option">
-      <input type="checkbox" name="rep-option" value="spacefill"> Spacefill
-    </label>
-    <label class="checkbox-option">
-      <input type="checkbox" name="rep-option" value="licorice"> Licorice
-    </label>
-    <label class="checkbox-option">
-      <input type="checkbox" name="rep-option" value="trace"> Trace
-    </label>
-    <label class="checkbox-option">
-      <input type="checkbox" name="rep-option" value="tube"> Tube
-    </label>
-    <label class="checkbox-option">
-      <input type="checkbox" name="rep-option" value="backbone"> Backbone
-    </label>
-    <label class="checkbox-option">
-      <input type="checkbox" name="rep-option" value="contact"> Contact Points
-    </label>
-    <label class="checkbox-option">
-      <input type="checkbox" name="rep-option" value="helixorient"> Helix Orientation
-    </label>
-    <label class="checkbox-option">
-      <input type="checkbox" name="rep-option" value="hyperball"> Hyperball
-    </label>
-    <label class="checkbox-option">
-      <input type="checkbox" name="rep-option" value="line"> Line
-    </label>
-    <label class="checkbox-option">
-      <input type="checkbox" name="rep-option" value="point"> Points
-    </label>
-  </div>
-</div>
-<!-- Check point -->
-
-  <!-- <div class="control-group">
     <label for="rep-select">Visualización</label>
     <select id="rep-select" class="styled-select">
       <option value="cartoon" selected>Cartoon</option>
@@ -271,7 +194,7 @@
       <option value="line">Line</option>
       <option value="point">Points</option>
     </select>
-  </div> -->
+  </div>
 
   <button onclick="descargarImagen()">
     <span class="icon">📸</span> Capturar
