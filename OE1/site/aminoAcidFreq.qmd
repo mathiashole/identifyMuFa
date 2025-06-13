@@ -446,7 +446,7 @@ for (genome in unique(summary_data_by_genome$Genome)) {
     <option value="uniform">Uniforme</option>
   </select>
 
-  <label for="rep-select">Representación:</label>
+  <label for="rep-select"> 🧱 Representación:</label>
   <select id="rep-select">
     <option value="cartoon" selected>Cartoon</option>
     <option value="surface">Surface</option>
