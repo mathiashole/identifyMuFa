@@ -18,11 +18,11 @@
 <div class="viewer-controls">
   <label for="model-select">Modelo:</label>
   <select id="model-select">
-    <option value="fold_2025_05_13_12_36_178_44_dominio_c_terminal_model_0.cif">Modelo 0</option>
-    <option value="fold_2025_05_13_12_36_178_44_dominio_c_terminal_model_1.cif">Modelo 1</option>
-    <option value="fold_2025_05_13_12_36_178_44_dominio_c_terminal_model_2.cif">Modelo 2</option>
-    <option value="fold_2025_05_13_12_36_178_44_dominio_c_terminal_model_3.cif">Modelo 3</option>
-    <option value="fold_2025_05_13_12_36_178_44_dominio_c_terminal_model_4.cif" selected>Modelo 4</option>
+    <option value="structure_file/fold_2025_05_13_12_36_178_44_dominio_c_terminal_model_0.cif">Modelo 0</option>
+    <option value="structure_file/fold_2025_05_13_12_36_178_44_dominio_c_terminal_model_1.cif">Modelo 1</option>
+    <option value="structure_file/fold_2025_05_13_12_36_178_44_dominio_c_terminal_model_2.cif">Modelo 2</option>
+    <option value="structure_file/fold_2025_05_13_12_36_178_44_dominio_c_terminal_model_3.cif">Modelo 3</option>
+    <option value="structure_file/fold_2025_05_13_12_36_178_44_dominio_c_terminal_model_4.cif" selected>Modelo 4</option>
   </select>
 
   <label for="color-select"> 🎨 Color:</label>
