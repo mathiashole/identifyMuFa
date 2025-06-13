@@ -125,7 +125,7 @@
       <option value="resname">Residuo</option>
       <option value="residueindex">Índice</option>
       <option value="uniform">Uniforme</option>
-      <option value="secondary">Estructura Secundaria (Helix/Sheet/Loop)</option>
+      <option value="ss">Estructura Secundaria (Helix/Sheet/Loop)</option>
       <option value="hydrophobicity">Hidrofobicidad</option>
       <option value="bfactor">B-factor (Flexibilidad)</option>
       <option value="spectrum">Espectro (Rainbow)</option>
