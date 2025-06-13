@@ -213,6 +213,8 @@
 </div>
 
 <div id="viewport"></div>
+<!-- Sequence -->
+<div id="sequence-viewer" style="margin-top: 20px; overflow-x: auto;"></div>
 
 <!-- <style>
   .viewer-controls {
