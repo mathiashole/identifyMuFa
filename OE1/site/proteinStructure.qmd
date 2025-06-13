@@ -184,7 +184,7 @@
     </select>
   </div>
 
-  <!-- <div class="control-group">
+  <div class="control-group">
     <label for="color-select">Color</label>
     <select id="color-select" class="styled-select">
       <option value="chainid" selected>Cadenas</option>
@@ -201,7 +201,7 @@
       <option value="modelindex">Por Modelo (NMR/Multi-model)</option>
       <option value="partialcharge">Carga Parcial</option>
     </select>
-  </div> -->
+  </div>
 
   <!-- Check point -->
   <div class="control-group">
@@ -253,7 +253,7 @@
 </div>
 <!-- Check point -->
 
-  <div class="control-group">
+  <!-- <div class="control-group">
     <label for="rep-select">Visualización</label>
     <select id="rep-select" class="styled-select">
       <option value="cartoon" selected>Cartoon</option>
@@ -271,7 +271,7 @@
       <option value="line">Line</option>
       <option value="point">Points</option>
     </select>
-  </div>
+  </div> -->
 
   <button onclick="descargarImagen()">
     <span class="icon">📸</span> Capturar
