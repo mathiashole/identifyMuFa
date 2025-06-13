@@ -102,6 +102,7 @@
       align-items: flex-start;
     }
   }
+  
 </style>
 
 <div class="viewer-controls">
