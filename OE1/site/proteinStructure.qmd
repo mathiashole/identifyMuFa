@@ -175,8 +175,20 @@
       <option value="partialcharge">Carga Parcial</option>
     </select>
   </div>
+  
+<div id="representation-options">
+  <label><input type="checkbox" value="cartoon" checked> Cartoon</label>
+  <label><input type="checkbox" value="surface"> Surface</label>
+  <label><input type="checkbox" value="ball+stick"> Ball+Stick</label>
+  <label><input type="checkbox" value="spacefill"> Spacefill</label>
+  <label><input type="checkbox" value="licorice"> Licorice</label>
+  <label><input type="checkbox" value="trace"> Trace</label>
+  <label><input type="checkbox" value="tube"> Tube</label>
+  <label><input type="checkbox" value="backbone"> Backbone</label>
+</div>
 
-  <div class="control-group">
+
+  <!-- <div class="control-group">
     <label for="rep-select">Visualización</label>
     <select id="rep-select" class="styled-select">
       <option value="cartoon" selected>Cartoon</option>
@@ -194,7 +206,7 @@
       <option value="line">Line</option>
       <option value="point">Points</option>
     </select>
-  </div>
+  </div> -->
 
   <button onclick="descargarImagen()">
     <span class="icon">📸</span> Capturar
@@ -369,14 +381,32 @@ function mostrarSecuencia(component) {
   sequenceContainer.appendChild(container);
 }
 
-  function actualizarRepresentacion() {
-    if (!currentComponent) return;
-    currentComponent.removeAllRepresentations();
-    const rep = document.getElementById("rep-select").value;
-    const color = document.getElementById("color-select").value;
+  // function actualizarRepresentacion() {
+  //   if (!currentComponent) return;
+  //   currentComponent.removeAllRepresentations();
+  //   const rep = document.getElementById("rep-select").value;
+  //   const color = document.getElementById("color-select").value;
+  //   currentComponent.addRepresentation(rep, { colorScheme: color });
+  //   currentComponent.autoView();
+  // }
+function actualizarRepresentacion() {
+  if (!currentComponent) return;
+
+  currentComponent.removeAllRepresentations();
+  const color = document.getElementById("color-select").value;
+
+  const selectedRepresentations = getSelectedRepresentations();
+  selectedRepresentations.forEach(rep => {
     currentComponent.addRepresentation(rep, { colorScheme: color });
-    currentComponent.autoView();
-  }
+  });
+
+  currentComponent.autoView();
+}
+
+function getSelectedRepresentations() {
+  const checkboxes = document.querySelectorAll('#representation-options input[type="checkbox"]:checked');
+  return Array.from(checkboxes).map(cb => cb.value);
+}
 
   function toggleAutoSpin() {
     autoSpin = !autoSpin;
@@ -395,6 +425,12 @@ function mostrarSecuencia(component) {
 
   document.getElementById("color-select").addEventListener("change", actualizarRepresentacion);
   document.getElementById("rep-select").addEventListener("change", actualizarRepresentacion);
+  // CHECK box
+  // Escuchar cambios en los checkboxes
+  document.querySelectorAll('#representation-options input[type="checkbox"]').forEach(cb => {
+    cb.addEventListener('change', actualizarRepresentacion);
+  });
+
 
   function descargarImagen() {
     stage.makeImage({ factor: 2 }).then(function (blob) {
