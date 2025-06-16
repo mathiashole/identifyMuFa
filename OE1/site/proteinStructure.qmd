@@ -145,6 +145,21 @@
   </button>
 </div>
 
+<!-- Selector para alineamiento -->
+<div class="control-group">
+  <label for="align-select">Modelo para alinear</label>
+  <select id="align-select" class="styled-select">
+    <option value="">-- Seleccionar --</option>
+    <option value="structure_file/fold_2025_05_13_12_36_178_44_dominio_c_terminal_model_0.cif">Modelo 0</option>
+    <option value="structure_file/fold_2025_05_13_12_36_178_44_dominio_c_terminal_model_1.cif">Modelo 1</option>
+    <option value="structure_file/fold_2025_05_13_12_36_178_44_dominio_c_terminal_model_2.cif">Modelo 2</option>
+    <option value="structure_file/fold_2025_05_13_12_36_178_44_dominio_c_terminal_model_3.cif">Modelo 3</option>
+  </select>
+</div>
+
+<button onclick="alinearEstructuras()">🔄 Alinear Estructuras</button>
+<button onclick="limpiarAlineamiento()">🧹 Limpiar Alineamiento</button>
+
 <div id="viewport" style="width: 100%; height: 600px;"></div>
 
 <script src="https://unpkg.com/ngl@2.0.0-dev.38/dist/ngl.js"></script>
