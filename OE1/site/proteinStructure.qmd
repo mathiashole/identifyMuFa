@@ -2,150 +2,33 @@
 
 ```{=html}
 <style>
-  .viewer-controls {
-    margin-bottom: 1.5em;
-    padding: 1em;
-    background: #f8f9fa;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  /* Estilos para los botones toggle de representaciones */
+  .rep-toggle-group {
     display: flex;
     flex-wrap: wrap;
-    gap: 1em;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .control-group {
-    display: flex;
-    align-items: center;
     gap: 0.5em;
-    background: white;
-    padding: 0.5em 1em;
+  }
+  .rep-toggle-button {
+    padding: 0.4em 0.9em;
+    background: #e9ecef;
     border-radius: 6px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  }
-  
-  label {
-    font-weight: 600;
-    color: #495057;
-    font-size: 0.9em;
-  }
-  
-  select {
-    padding: 0.5em 1em;
     border: 1px solid #ced4da;
-    border-radius: 4px;
-    background-color: white;
-    font-size: 0.9em;
-    transition: all 0.2s;
-  }
-  
-  select:hover {
-    border-color: #adb5bd;
-  }
-  
-  select:focus {
-    outline: none;
-    border-color: #4dabf7;
-    box-shadow: 0 0 0 2px rgba(77, 171, 247, 0.2);
-  }
-  
-  button {
-    padding: 0.6em 1.2em;
-    border: none;
-    border-radius: 4px;
-    background-color: #4dabf7;
-    color: white;
-    font-weight: 500;
-    font-size: 0.9em;
     cursor: pointer;
-    transition: all 0.2s;
-    display: flex;
-    align-items: center;
-    gap: 0.5em;
+    user-select: none;
+    font-size: 0.9em;
+    color: #495057;
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
   }
-  
-  button:hover {
-    background-color: #339af0;
-    transform: translateY(-1px);
+  .rep-toggle-button.active {
+    background: #4dabf7;
+    border-color: #339af0;
+    color: white;
   }
-  
-  button:active {
-    transform: translateY(0);
-  }
-  
-  #autoSpinBtn {
-    background-color: #868e96;
-  }
-  
-  #autoSpinBtn.active {
-    background-color: #40c057;
-  }
-  
-  #viewport {
-    width: 100%;
-    height: 600px;
-    border-radius: 8px;
-    border: 1px solid #dee2e6;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-    background: #f1f3f5;
-  }
-  
-  @media (max-width: 768px) {
-    .viewer-controls {
-      flex-direction: column;
-      align-items: stretch;
-    }
-    
-    .control-group {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  }
-
-/* Sequence */
-
-.sequence-container {
-  font-family: monospace;
-  white-space: nowrap;
-  padding: 10px;
-  background: #f5f5f5;
-  border-radius: 4px;
-  margin-top: 15px;
-}
-
-.residue {
-  display: inline-block;
-  padding: 2px 5px;
-  margin: 1px;
-  border-radius: 3px;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.residue:hover {
-  background-color: #4dabf7;
-  color: white;
-  transform: translateY(-2px);
-}
-
-.residue.highlight {
-  background-color: #339af0;
-  color: white;
-  font-weight: bold;
-}
-
-.sequence-label {
-  font-weight: bold;
-  margin-bottom: 5px;
-  color: #495057;
-}
-
-/* final sequence */
-
 </style>
 
 <div class="viewer-controls">
+
+  <!-- Select para modelos -->
   <div class="control-group">
     <label for="model-select">Modelo</label>
     <select id="model-select" class="styled-select">
@@ -157,6 +40,7 @@
     </select>
   </div>
 
+  <!-- Select para color -->
   <div class="control-group">
     <label for="color-select">Color</label>
     <select id="color-select" class="styled-select">
@@ -165,49 +49,37 @@
       <option value="resname">Residuo</option>
       <option value="residueindex">Índice</option>
       <option value="uniform">Uniforme</option>
-      <option value="ss">Estructura Secundaria (Helix/Sheet/Loop)</option>
+      <option value="secondary">Estructura Secundaria (Helix/Sheet/Loop)</option>
       <option value="hydrophobicity">Hidrofobicidad</option>
       <option value="bfactor">B-factor (Flexibilidad)</option>
-      <option value="spectrum">Random </option>
       <option value="spectrum">Espectro (Rainbow)</option>
       <option value="sstruc">Tipo de Hélice (α/β/π)</option>
       <option value="modelindex">Por Modelo (NMR/Multi-model)</option>
       <option value="partialcharge">Carga Parcial</option>
     </select>
   </div>
-  
-<div id="representation-options">
-  <label><input type="checkbox" value="cartoon" checked> Cartoon</label>
-  <label><input type="checkbox" value="surface"> Surface</label>
-  <label><input type="checkbox" value="ball+stick"> Ball+Stick</label>
-  <label><input type="checkbox" value="spacefill"> Spacefill</label>
-  <label><input type="checkbox" value="licorice"> Licorice</label>
-  <label><input type="checkbox" value="trace"> Trace</label>
-  <label><input type="checkbox" value="tube"> Tube</label>
-  <label><input type="checkbox" value="backbone"> Backbone</label>
-</div>
 
-
-  <!-- <div class="control-group">
-    <label for="rep-select">Visualización</label>
-    <select id="rep-select" class="styled-select">
-      <option value="cartoon" selected>Cartoon</option>
-      <option value="surface">Surface</option>
-      <option value="ball+stick">Ball+Stick</option>
-      <option value="label">Label</option>
-      <option value="spacefill">Spacefill</option>
-      <option value="licorice">Licorice</option>
-      <option value="trace">Trace</option>
-      <option value="tube">Tube</option>
-      <option value="backbone">Backbone</option>
-      <option value="contact">Contact Points</option>
-      <option value="helixorient">Helix Orientation</option>
-      <option value="hyperball">Hyperball</option>
-      <option value="line">Line</option>
-      <option value="point">Points</option>
-    </select>
-  </div> -->
-
+  <!-- Botones toggle para visualización múltiple -->
+  <div class="control-group" style="flex-direction: column; align-items: flex-start;">
+    <label>Visualización (puedes seleccionar varias):</label>
+    <div id="rep-toggle-group" class="rep-toggle-group">
+      <div class="rep-toggle-button active" data-rep="cartoon">Cartoon</div>
+      <div class="rep-toggle-button" data-rep="surface">Surface</div>
+      <div class="rep-toggle-button" data-rep="ball+stick">Ball+Stick</div>
+      <div class="rep-toggle-button" data-rep="spacefill">Spacefill</div>
+      <div class="rep-toggle-button" data-rep="licorice">Licorice</div>
+      <div class="rep-toggle-button" data-rep="trace">Trace</div>
+      <div class="rep-toggle-button" data-rep="tube">Tube</div>
+      <div class="rep-toggle-button" data-rep="backbone">Backbone</div>
+      <div class="rep-toggle-button" data-rep="contact">Contact Points</div>
+      <div class="rep-toggle-button" data-rep="helixorient">Helix Orientation</div>
+      <div class="rep-toggle-button" data-rep="hyperball">Hyperball</div>
+      <div class="rep-toggle-button" data-rep="line">Line</div>
+      <div class="rep-toggle-button" data-rep="point">Points</div>
+    </div>
+  </div>
+<!-- seleccionar -->
+ 
   <button onclick="descargarImagen()">
     <span class="icon">📸</span> Capturar
   </button>
@@ -225,189 +97,64 @@
   </button>
 </div>
 
-<div id="viewport"></div>
-<!-- Sequence -->
-<div id="sequence-viewer" style="margin-top: 20px; overflow-x: auto;"></div>
-
-<!-- <style>
-  .viewer-controls {
-    margin-bottom: 1em;
-    text-align: center;
-  }
-  .viewer-controls > * {
-    margin: 0 1em 1em 1em;
-  }
-  /* Opcional: para que el contenedor de viewport tenga borde sutil */
-  #viewport {
-    border: 1px solid #ccc;
-  }
-</style>
-
-<div class="viewer-controls">
-  <label for="model-select">Modelo:</label>
-  <select id="model-select">
-    <option value="structure_file/fold_2025_05_13_12_36_178_44_dominio_c_terminal_model_0.cif">Modelo 0</option>
-    <option value="structure_file/fold_2025_05_13_12_36_178_44_dominio_c_terminal_model_1.cif">Modelo 1</option>
-    <option value="structure_file/fold_2025_05_13_12_36_178_44_dominio_c_terminal_model_2.cif">Modelo 2</option>
-    <option value="structure_file/fold_2025_05_13_12_36_178_44_dominio_c_terminal_model_3.cif">Modelo 3</option>
-    <option value="structure_file/fold_2025_05_13_12_36_178_44_dominio_c_terminal_model_4.cif" selected>Modelo 4</option>
-  </select>
-
-  <label for="color-select"> 🎨 Color:</label>
-  <select id="color-select">
-    <option value="chainid" selected>Cadenas</option>
-    <option value="element">Elemento</option>
-    <option value="resname">Nombre de residuo</option>
-    <option value="residueindex">Índice de residuo</option>
-    <option value="uniform">Uniforme</option>
-  </select>
-
-  <label for="rep-select"> 🧱 Representación:</label>
-  <select id="rep-select">
-    <option value="cartoon" selected>Cartoon</option>
-    <option value="surface">Surface</option>
-    <option value="ball+stick">Ball + Stick</option>
-    <option value="spacefill">Spacefill</option>
-    <option value="licorice">Licorice</option>
-  </select>
-
-  <button onclick="descargarImagen()">📸 Imagen</button>
-  <button onclick="pantallaCompleta()">🖥️ Pantalla completa</button>
-  <button onclick="cambiarPerspectiva()">🎥 Perspectiva</button>
-  <button id="autoSpinBtn" onclick="toggleAutoSpin()">🔄 Auto-rotación: OFF</button>
-</div>
-
-<div id="viewport" style="width: 100%; height: 500px; border: 1px solid #ccc;"></div> -->
+<div id="viewport" style="width: 100%; height: 600px;"></div>
 
 <script src="https://unpkg.com/ngl@2.0.0-dev.38/dist/ngl.js"></script>
 <script>
   let stage = new NGL.Stage("viewport", { backgroundColor: "white" });
   let currentComponent;
   let currentPerspective = "perspective";
-  let autoSpin = false;  // Estado inicial: auto rotación apagada
+  let autoSpin = false;
 
-  // function cargarModelo(file) {
-  //   stage.removeAllComponents();
-  //   stage.loadFile(file).then(function (component) {
-  //     currentComponent = component;
-  //     actualizarRepresentacion();
-  //     stage.autoView();
-  //     // Al cargar un modelo, respetamos el estado actual de autoSpin
-  //     stage.setSpin(autoSpin);
-  //     actualizarBotonAutoSpin();
-  //   });
-  // }
+  // Representaciones activas: cartoon activo por defecto
+  let activeReps = new Set(["cartoon"]);
 
+  // Función para cargar modelo
   function cargarModelo(file) {
-  stage.removeAllComponents();
-  stage.loadFile(file).then(function(component) {
-    currentComponent = component;
-    actualizarRepresentacion();
-    stage.autoView();
-    stage.setSpin(autoSpin);
-    actualizarBotonAutoSpin();
-    
-    // Obtener y mostrar la secuencia
-    mostrarSecuencia(component);
-  });
-}
-
-function mostrarSecuencia(component) {
-  const sequenceContainer = document.getElementById('sequence-viewer');
-  sequenceContainer.innerHTML = '';
-  
-  // Obtener la estructura
-  const structure = component.structure;
-  
-  // Crear contenedor principal
-  const container = document.createElement('div');
-  container.className = 'sequence-container';
-  
-  // Obtener las cadenas (chains)
-  const chains = structure.getChainnames();
-  
-  chains.forEach(chainId => {
-    // Crear sección para cada cadena
-    const chainDiv = document.createElement('div');
-    chainDiv.className = 'sequence-chain';
-    
-    // Añadir etiqueta de la cadena
-    const label = document.createElement('div');
-    label.className = 'sequence-label';
-    label.textContent = `Cadena ${chainId}`;
-    chainDiv.appendChild(label);
-    
-    // Obtener residuos para esta cadena
-    const residues = [];
-    structure.eachResidue(function(residue) {
-      if (residue.chainname === chainId) {
-        residues.push(residue);
-      }
+    stage.removeAllComponents();
+    stage.loadFile(file).then(component => {
+      currentComponent = component;
+      actualizarRepresentaciones();
+      stage.autoView();
+      stage.setSpin(autoSpin);
+      actualizarBotonAutoSpin();
     });
-    
-    // Mostrar secuencia
-    const seqDiv = document.createElement('div');
-    residues.forEach(residue => {
-      const resElem = document.createElement('span');
-      resElem.className = 'residue';
-      resElem.textContent = residue.resname;
-      resElem.title = `Residuo ${residue.resno}: ${residue.resname}`;
-      
-      // Resaltar al hacer hover
-      resElem.addEventListener('mouseover', function() {
-        // Resaltar residuo en la visualización 3D
-        currentComponent.addRepresentation('ball+stick', {
-          sele: `:${residue.resno} and .${chainId}`,
-          color: 'red'
-        });
-        
-        // Resaltar en la secuencia
-        resElem.classList.add('highlight');
-      });
-      
-      resElem.addEventListener('mouseout', function() {
-        // Quitar resaltado
-        currentComponent.removeRepresentation(currentComponent.reprList.length - 1);
-        resElem.classList.remove('highlight');
-      });
-      
-      seqDiv.appendChild(resElem);
+  }
+
+  // Actualiza las representaciones activas según activeReps y color
+  function actualizarRepresentaciones() {
+    if (!currentComponent) return;
+    currentComponent.removeAllRepresentations();
+    const color = document.getElementById("color-select").value;
+    activeReps.forEach(rep => {
+      currentComponent.addRepresentation(rep, { colorScheme: color });
     });
-    
-    chainDiv.appendChild(seqDiv);
-    container.appendChild(chainDiv);
-  });
-  
-  sequenceContainer.appendChild(container);
-}
+    currentComponent.autoView();
+  }
 
-  // function actualizarRepresentacion() {
-  //   if (!currentComponent) return;
-  //   currentComponent.removeAllRepresentations();
-  //   const rep = document.getElementById("rep-select").value;
-  //   const color = document.getElementById("color-select").value;
-  //   currentComponent.addRepresentation(rep, { colorScheme: color });
-  //   currentComponent.autoView();
-  // }
-function actualizarRepresentacion() {
-  if (!currentComponent) return;
+  // Cambiar color: actualiza todas las representaciones
+  document.getElementById("color-select").addEventListener("change", actualizarRepresentaciones);
 
-  currentComponent.removeAllRepresentations();
-  const color = document.getElementById("color-select").value;
-
-  const selectedRepresentations = getSelectedRepresentations();
-  selectedRepresentations.forEach(rep => {
-    currentComponent.addRepresentation(rep, { colorScheme: color });
+  // Manejar clics en botones toggle de representaciones
+  document.getElementById("rep-toggle-group").addEventListener("click", e => {
+    if (!e.target.classList.contains("rep-toggle-button")) return;
+    const rep = e.target.getAttribute("data-rep");
+    if (activeReps.has(rep)) {
+      activeReps.delete(rep);
+      e.target.classList.remove("active");
+    } else {
+      activeReps.add(rep);
+      e.target.classList.add("active");
+    }
+    actualizarRepresentaciones();
   });
 
-  currentComponent.autoView();
-}
+  // Cambio de modelo
+  document.getElementById("model-select").addEventListener("change", e => {
+    cargarModelo(e.target.value);
+  });
 
-function getSelectedRepresentations() {
-  const checkboxes = document.querySelectorAll('#representation-options input[type="checkbox"]:checked');
-  return Array.from(checkboxes).map(cb => cb.value);
-}
-
+  // Funciones auxiliares
   function toggleAutoSpin() {
     autoSpin = !autoSpin;
     stage.setSpin(autoSpin);
@@ -419,21 +166,8 @@ function getSelectedRepresentations() {
     btn.textContent = autoSpin ? "🔄 Auto-rotación: ON" : "🔄 Auto-rotación: OFF";
   }
 
-  document.getElementById("model-select").addEventListener("change", function () {
-    cargarModelo(this.value);
-  });
-
-  document.getElementById("color-select").addEventListener("change", actualizarRepresentacion);
-  document.getElementById("rep-select").addEventListener("change", actualizarRepresentacion);
-  // CHECK box
-  // Escuchar cambios en los checkboxes
-  document.querySelectorAll('#representation-options input[type="checkbox"]').forEach(cb => {
-    cb.addEventListener('change', actualizarRepresentacion);
-  });
-
-
   function descargarImagen() {
-    stage.makeImage({ factor: 2 }).then(function (blob) {
+    stage.makeImage({ factor: 2 }).then(blob => {
       NGL.download(blob, "estructura.png");
     });
   }
@@ -454,8 +188,9 @@ function getSelectedRepresentations() {
     stage.setParameters({ cameraType: currentPerspective });
   }
 
-  // Cargar modelo inicial
+  // Carga inicial
   cargarModelo(document.getElementById("model-select").value);
 </script>
+
 
 ```
