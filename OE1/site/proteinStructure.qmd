@@ -285,8 +285,8 @@ function limpiarSeleccion() {
 
   // Volvemos a agregar solo la representación base, por ejemplo cartoon gris
   currentComponent.addRepresentation("cartoon", {
-    color: "grey",
-    opacity: 0.8
+    color: "chainid",
+    opacity: 0.9
   });
 
   // Actualizamos la vista
