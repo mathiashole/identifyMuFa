@@ -78,7 +78,55 @@
       <div class="rep-toggle-button" data-rep="point">Points</div>
     </div>
   </div>
-<!-- seleccionar -->
+  
+<!-- Selección por rango de residuos -->
+<div class="control-group">
+  <label for="range-select">Seleccionar rango (ej. 10-40)</label>
+  <input type="text" id="range-select" placeholder="10-40" class="styled-select">
+</div>
+
+<!-- Selección por tipo de aminoácido -->
+<div class="control-group">
+  <label for="residue-select">Seleccionar residuos (ej. CYS,ALA)</label>
+  <input type="text" id="residue-select" placeholder="CYS,ALA" class="styled-select">
+</div>
+
+<!-- Estilo para selección -->
+<div class="control-group">
+  <label for="highlight-color">Color para selección</label>
+  <select id="highlight-color" class="styled-select">
+    <option value="red">Rojo</option>
+    <option value="green">Verde</option>
+    <option value="blue">Azul</option>
+    <option value="yellow">Amarillo</option>
+    <option value="magenta">Magenta</option>
+    <option value="cyan">Cian</option>
+    <option value="resname">Residuo</option>
+  </select>
+</div>
+
+<div class="control-group">
+  <label for="highlight-style">Visualizacion para selección</label>
+  <select id="highlight-style" class="styled-select">
+     <option value="surface">Surface</option>
+     <option value="ball+stick">Ball+Stick</option>
+     <option value="spacefill">Spacefill</option>
+     <option value="licorice">Licorice</option>
+     <option value="trace">Trace</option>
+     <option value="tube">Tube</option>
+     <option value="backbone">Backbone</option>
+     <option value="contact">Contact Points</option>
+     <option value="helixorient">Helix Orientation</option>
+     <option value="hyperball">Hyperball</option>
+     <option value="line">Line</option>
+     <option value="point">Points</option>
+  </select>
+</div>
+
+
+<button onclick="resaltarSeleccion()">🔍 Resaltar selección</button>
+<button onclick="limpiarSeleccion()">🧹 Limpiar selección</button>
+
  
   <button onclick="descargarImagen()">
     <span class="icon">📸</span> Capturar
@@ -187,6 +235,63 @@
     currentPerspective = (currentPerspective === "perspective") ? "orthographic" : "perspective";
     stage.setParameters({ cameraType: currentPerspective });
   }
+
+ function resaltarSeleccion() {
+  if (!currentComponent) return;
+
+  const rango = document.getElementById("range-select").value.trim();
+  const residuos = document.getElementById("residue-select").value.trim();
+  const color = document.getElementById("highlight-color").value;
+  const style = document.getElementById("highlight-style").value;
+  
+  let seleccion = [];
+
+  if (rango.match(/^\d+\s*-\s*\d+$/)) {
+    const [start, end] = rango.split("-").map(v => v.trim());
+    seleccion.push(`${start}-${end}`);
+  }
+
+  if (residuos.length > 0) {
+    const residuosClean = residuos.split(",").map(r => r.trim().toUpperCase()).filter(r => r.length === 3);
+    if (residuosClean.length > 0) {
+      const resList = residuosClean.join(" ");
+      seleccion.push(`:resname ${resList}`);  // <-- Cambiado aquí
+    } else {
+      alert("Ingrese residuos válidos (3 letras cada uno, separados por coma). Ej: CYS,ALA");
+      return;
+    }
+  }
+  // if (residuos.match(/^([A-Z]{3})(,[A-Z]{3})*$/i)) {
+  //   const resList = residuos.split(",").map(r => r.trim().toUpperCase()).join(" ");
+  //   seleccion.push(`:${resList}`);
+  // }
+
+  const selString = seleccion.join(" and ");
+
+  if (selString) {
+    currentComponent.addRepresentation(style, {
+      sele: selString,
+      color: color,
+      opacity: 1.0
+    });
+  }
+}
+
+function limpiarSeleccion() {
+  if (!currentComponent) return;
+
+  // Eliminamos todas las representaciones para empezar limpio
+  currentComponent.removeAllRepresentations();
+
+  // Volvemos a agregar solo la representación base, por ejemplo cartoon gris
+  currentComponent.addRepresentation("cartoon", {
+    color: "grey",
+    opacity: 0.8
+  });
+
+  // Actualizamos la vista
+  currentComponent.autoView();
+}
 
   // Carga inicial
   cargarModelo(document.getElementById("model-select").value);
