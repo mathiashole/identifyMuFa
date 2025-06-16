@@ -2,3 +2,5 @@
 *.tsv
 *.csv
 *.html
+OE1/site/structure_file/*.cif
+
