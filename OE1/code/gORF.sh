@@ -50,9 +50,6 @@ adjusted_minsize=$(( MINSIZE * 5 / 100 ))
 # Get the input filename without path
 BASENAME=$(basename "$INPUT_FASTA")
 
-# Construct output file name
-# OUTPUT_FILE="$OUTPUT_DIR/getorf_${MINSIZE}_${BASENAME}"
-# OUTPUT_FILE="$OUTPUT_DIR/getorf_${adjusted_minsize}_${BASENAME}"
 OUTPUT_FILE="$OUTPUT_DIR/getorf_${BASENAME}"
 FILTERED_OUTPUT_FILE="$OUTPUT_DIR/getorf_filtered_${BASENAME}"
 OUTPUT_FILE_TRANSEQ="$OUTPUT_DIR/getorf_protein_${BASENAME}"
