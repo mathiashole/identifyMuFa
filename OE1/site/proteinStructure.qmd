@@ -308,6 +308,46 @@ function limpiarSeleccion() {
   currentComponent.autoView();
 }
 
+  let alignedComponent; // para guardar el modelo alineado
+
+  function alinearEstructuras() {
+    const fileToAlign = document.getElementById("align-select").value;
+    if (!fileToAlign || !currentComponent) {
+      alert("Por favor, selecciona un modelo y asegúrate de que uno esté cargado.");
+      return;
+    }
+
+    // Si ya había un componente alineado, lo removemos
+    if (alignedComponent) {
+      alignedComponent.removeRepresentation(alignedComponent.representationsList[0]);
+      stage.removeComponent(alignedComponent);
+      alignedComponent = null;
+    }
+
+    // Cargamos el modelo a alinear
+    stage.loadFile(fileToAlign).then(component => {
+      alignedComponent = component;
+
+      // Alineamos el componente nuevo al componente actual
+      alignedComponent.superpose(currentComponent);
+
+      // Mostramos con cartoon por defecto
+      alignedComponent.addRepresentation("cartoon", { color: "modelindex" });
+
+      // Lo agregamos a la vista
+      alignedComponent.autoView();
+    });
+  }
+
+  function limpiarAlineamiento() {
+    if (alignedComponent) {
+      alignedComponent.removeAllRepresentations();
+      stage.removeComponent(alignedComponent);
+      alignedComponent = null;
+    }
+    stage.autoView();
+  }
+
   // Carga inicial
   cargarModelo(document.getElementById("model-select").value);
 </script>
