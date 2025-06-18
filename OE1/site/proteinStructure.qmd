@@ -340,6 +340,7 @@ function limpiarSeleccion() {
   currentComponent.autoView();
 }
 
+
   let alignedComponent; // para guardar el modelo alineado
 
   function alinearEstructuras() {
@@ -368,6 +369,8 @@ function limpiarSeleccion() {
 
       // Lo agregamos a la vista
       alignedComponent.autoView();
+
+      calcularRMSD(); 
     });
   }
 
@@ -379,7 +382,8 @@ function limpiarSeleccion() {
     }
     stage.autoView();
   }
-  
+
+
 let membraneComponent = null;  // para guardar la membrana
 let membranePosition = { x: 0, y: 0, z: 0 };
 let membraneRotation = { x: 0, y: 0, z: 0 };  // nueva variable para rotación
