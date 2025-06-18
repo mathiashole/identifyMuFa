@@ -160,9 +160,16 @@
 <button onclick="alinearEstructuras()">🔄 Alinear Estructuras</button>
 <button onclick="limpiarAlineamiento()">🧹 Limpiar Alineamiento</button>
 
-<button onclick="toggleMembrana()" id="membranaBtn">
-  🧫 Membrana: OFF
-</button>
+<div class="control-group" style="margin-top:1em;">
+  <label>🧫 Membrana simulada</label>
+  <button onclick="toggleMembrane()">🔁 Activar / Desactivar</button>
+  <label for="membrane-x">Posición X</label>
+  <input type="range" id="membrane-x" min="-100" max="100" value="0" step="1" oninput="updateMembranePosition()">
+  <label for="membrane-y">Posición Y</label>
+  <input type="range" id="membrane-y" min="-100" max="100" value="0" step="1" oninput="updateMembranePosition()">
+  <label for="membrane-z">Posición Z</label>
+  <input type="range" id="membrane-z" min="-100" max="100" value="0" step="1" oninput="updateMembranePosition()">
+</div>
 
 <div id="viewport" style="width: 100%; height: 600px;"></div>
 
