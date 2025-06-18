@@ -24,6 +24,7 @@
     border-color: #339af0;
     color: white;
   }
+  
 </style>
 
 <div class="viewer-controls">
