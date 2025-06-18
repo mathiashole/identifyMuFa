@@ -160,6 +160,10 @@
 <button onclick="alinearEstructuras()">🔄 Alinear Estructuras</button>
 <button onclick="limpiarAlineamiento()">🧹 Limpiar Alineamiento</button>
 
+<button onclick="toggleMembrana()" id="membranaBtn">
+  🧫 Membrana: OFF
+</button>
+
 <div id="viewport" style="width: 100%; height: 600px;"></div>
 
 <script src="https://unpkg.com/ngl@2.0.0-dev.38/dist/ngl.js"></script>
