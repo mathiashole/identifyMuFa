@@ -303,16 +303,12 @@
     const residuosClean = residuos.split(",").map(r => r.trim().toUpperCase()).filter(r => r.length === 3);
     if (residuosClean.length > 0) {
       const resList = residuosClean.join(" ");
-      seleccion.push(`:resname ${resList}`);  // <-- Cambiado aquí
+      seleccion.push(`:resname ${resList}`);
     } else {
       alert("Ingrese residuos válidos (3 letras cada uno, separados por coma). Ej: CYS,ALA");
       return;
     }
   }
-  // if (residuos.match(/^([A-Z]{3})(,[A-Z]{3})*$/i)) {
-  //   const resList = residuos.split(",").map(r => r.trim().toUpperCase()).join(" ");
-  //   seleccion.push(`:${resList}`);
-  // }
 
   const selString = seleccion.join(" and ");
 
