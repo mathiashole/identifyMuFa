@@ -1,5 +1,7 @@
 ## 🧬 Visualización interactiva
 
+C-terminal de la proteina de t cruzi
+
 ```{=html}
 <style>
   /* Estilos para los botones toggle de representaciones */
