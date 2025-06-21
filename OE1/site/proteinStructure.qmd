@@ -507,6 +507,7 @@ function updateMembraneThickness() {
 
   // Carga inicial
   cargarModelo(document.getElementById("model-select").value);
+  
 </script>
 
 
