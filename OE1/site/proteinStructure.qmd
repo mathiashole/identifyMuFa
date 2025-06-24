@@ -383,10 +383,10 @@ function limpiarSeleccion() {
   }
 
 
-let membraneComponent = null;  // para guardar la membrana
-let membranePosition = { x: 0, y: 0, z: 0 };
-let membraneRotation = { x: 0, y: 0, z: 0 };  // nueva variable para rotación
-let membraneThickness = 1;  // nuevo para controlar grosor (escala del spacing)
+// let membraneComponent = null;  // para guardar la membrana
+// let membranePosition = { x: 0, y: 0, z: 0 };
+// let membraneRotation = { x: 0, y: 0, z: 0 };  // nueva variable para rotación
+// let membraneThickness = 1;  // nuevo para controlar grosor (escala del spacing)
 
 // function crearMembrana() {
 //   if (membraneComponent) {
