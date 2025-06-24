@@ -167,7 +167,7 @@ C-terminal de la proteina de t cruzi
   <label>🧫 Membrana simulada</label>
   <button onclick="toggleMembrane()">🔁 Activar / Desactivar</button>
 <!-- Posición -->
-<div>
+<!-- <div>
   <label>Membrane X: <input id="membrane-x" type="range" min="-20" max="20" step="0.5" value="0" oninput="updateMembranePosition()"></label>
 </div>
 <div>
@@ -191,7 +191,7 @@ C-terminal de la proteina de t cruzi
 <!-- Grosor -->
 <div>
   <label>Thickness: <input id="membrane-thickness" type="range" min="0.5" max="2" step="0.08" value="1" oninput="updateMembraneThickness()"></label>
-</div>
+</div> -->
 
 
 
