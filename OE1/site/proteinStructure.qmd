@@ -383,126 +383,126 @@ function limpiarSeleccion() {
   }
 
 
-let membraneComponent = null;  // para guardar la membrana
-let membranePosition = { x: 0, y: 0, z: 0 };
-let membraneRotation = { x: 0, y: 0, z: 0 };  // nueva variable para rotación
-let membraneThickness = 1;  // nuevo para controlar grosor (escala del spacing)
+// let membraneComponent = null;  // para guardar la membrana
+// let membranePosition = { x: 0, y: 0, z: 0 };
+// let membraneRotation = { x: 0, y: 0, z: 0 };  // nueva variable para rotación
+// let membraneThickness = 1;  // nuevo para controlar grosor (escala del spacing)
 
-function crearMembrana() {
-  if (membraneComponent) {
-    stage.removeComponent(membraneComponent);
-    membraneComponent = null;
-  }
+// function crearMembrana() {
+//   if (membraneComponent) {
+//     stage.removeComponent(membraneComponent);
+//     membraneComponent = null;
+//   }
 
-  let pdbText = "HEADER    Simulated membrane\n";
+//   let pdbText = "HEADER    Simulated membrane\n";
 
-  const gridSize = 20;              // tamaño del plano de membrana
-  const spacing = 2.0;              // espaciado entre átomos
-const totalThickness = membraneThickness * 10;  // escala total del grosor en Ångstroms (ajustable)
-const thicknessLayers = Math.max(1, Math.round(membraneThickness));
-const zSpacing = thicknessLayers > 1 ? totalThickness / (thicknessLayers - 1) : 0;
-  // cantidad de capas
+//   const gridSize = 20;              // tamaño del plano de membrana
+//   const spacing = 2.0;              // espaciado entre átomos
+// const totalThickness = membraneThickness * 10;  // escala total del grosor en Ångstroms (ajustable)
+// const thicknessLayers = Math.max(1, Math.round(membraneThickness));
+// const zSpacing = thicknessLayers > 1 ? totalThickness / (thicknessLayers - 1) : 0;
+//   // cantidad de capas
 
-  let atomIndex = 1;
+//   let atomIndex = 1;
 
-  for (let k = -Math.floor(thicknessLayers / 2); k <= Math.floor(thicknessLayers / 2); k++) {
-    for (let i = -gridSize / 2; i < gridSize / 2; i++) {
-      for (let j = -gridSize / 2; j < gridSize / 2; j++) {
-        // Posición original (plano XY, capas en Z)
-        let x = i * spacing;
-        let y = j * spacing;
-        let z = k * zSpacing;
+//   for (let k = -Math.floor(thicknessLayers / 2); k <= Math.floor(thicknessLayers / 2); k++) {
+//     for (let i = -gridSize / 2; i < gridSize / 2; i++) {
+//       for (let j = -gridSize / 2; j < gridSize / 2; j++) {
+//         // Posición original (plano XY, capas en Z)
+//         let x = i * spacing;
+//         let y = j * spacing;
+//         let z = k * zSpacing;
 
-        // Convertir grados a radianes para las rotaciones
-        const degToRad = Math.PI / 180;
-        let rx = membraneRotation.x * degToRad;
-        let ry = membraneRotation.y * degToRad;
-        let rz = membraneRotation.z * degToRad;
+//         // Convertir grados a radianes para las rotaciones
+//         const degToRad = Math.PI / 180;
+//         let rx = membraneRotation.x * degToRad;
+//         let ry = membraneRotation.y * degToRad;
+//         let rz = membraneRotation.z * degToRad;
 
-        // Rotación en X
-        let y1 = y * Math.cos(rx) - z * Math.sin(rx);
-        let z1 = y * Math.sin(rx) + z * Math.cos(rx);
-        y = y1;
-        z = z1;
+//         // Rotación en X
+//         let y1 = y * Math.cos(rx) - z * Math.sin(rx);
+//         let z1 = y * Math.sin(rx) + z * Math.cos(rx);
+//         y = y1;
+//         z = z1;
 
-        // Rotación en Y
-        let x1 = x * Math.cos(ry) + z * Math.sin(ry);
-        let z2 = -x * Math.sin(ry) + z * Math.cos(ry);
-        x = x1;
-        z = z2;
+//         // Rotación en Y
+//         let x1 = x * Math.cos(ry) + z * Math.sin(ry);
+//         let z2 = -x * Math.sin(ry) + z * Math.cos(ry);
+//         x = x1;
+//         z = z2;
 
-        // Rotación en Z
-        let x2 = x * Math.cos(rz) - y * Math.sin(rz);
-        let y2 = x * Math.sin(rz) + y * Math.cos(rz);
-        x = x2;
-        y = y2;
+//         // Rotación en Z
+//         let x2 = x * Math.cos(rz) - y * Math.sin(rz);
+//         let y2 = x * Math.sin(rz) + y * Math.cos(rz);
+//         x = x2;
+//         y = y2;
 
-        // Agregar desplazamiento de posición
-        x += membranePosition.x;
-        y += membranePosition.y;
-        z += membranePosition.z;
+//         // Agregar desplazamiento de posición
+//         x += membranePosition.x;
+//         y += membranePosition.y;
+//         z += membranePosition.z;
 
-        pdbText += `HETATM${String(atomIndex).padStart(5, ' ')}  C   MEM A   1    ${x.toFixed(3).padStart(8, ' ')}${y.toFixed(3).padStart(8, ' ')}${z.toFixed(3).padStart(8, ' ')}  1.00  0.00           C\n`;
-        atomIndex++;
-      }
-    }
-  }
+//         pdbText += `HETATM${String(atomIndex).padStart(5, ' ')}  C   MEM A   1    ${x.toFixed(3).padStart(8, ' ')}${y.toFixed(3).padStart(8, ' ')}${z.toFixed(3).padStart(8, ' ')}  1.00  0.00           C\n`;
+//         atomIndex++;
+//       }
+//     }
+//   }
 
-  pdbText += "END\n";
+//   pdbText += "END\n";
 
-  stage.loadFile(new Blob([pdbText], { type: "text/plain" }), { ext: "pdb" }).then(component => {
-    membraneComponent = component;
-    membraneComponent.addRepresentation("ball+stick", {
-      colorValue: "orange",
-      radius: 0.8,
-      scale: 1.0,
-      opacity: 0.5,
-    });
-    stage.autoView();
-  });
-}
+//   stage.loadFile(new Blob([pdbText], { type: "text/plain" }), { ext: "pdb" }).then(component => {
+//     membraneComponent = component;
+//     membraneComponent.addRepresentation("ball+stick", {
+//       colorValue: "orange",
+//       radius: 0.8,
+//       scale: 1.0,
+//       opacity: 0.5,
+//     });
+//     stage.autoView();
+//   });
+// }
 
 
-// Función para activar/desactivar membrana
-function toggleMembrane() {
-  if (membraneComponent) {
-    stage.removeComponent(membraneComponent);
-    membraneComponent = null;
-  } else {
-    crearMembrana();
-  }
-}
+// // Función para activar/desactivar membrana
+// function toggleMembrane() {
+//   if (membraneComponent) {
+//     stage.removeComponent(membraneComponent);
+//     membraneComponent = null;
+//   } else {
+//     crearMembrana();
+//   }
+// }
 
-// Actualizar posición de membrana según sliders
-function updateMembranePosition() {
-  membranePosition.x = parseFloat(document.getElementById("membrane-x").value);
-  membranePosition.y = parseFloat(document.getElementById("membrane-y").value);
-  membranePosition.z = parseFloat(document.getElementById("membrane-z").value);
+// // Actualizar posición de membrana según sliders
+// function updateMembranePosition() {
+//   membranePosition.x = parseFloat(document.getElementById("membrane-x").value);
+//   membranePosition.y = parseFloat(document.getElementById("membrane-y").value);
+//   membranePosition.z = parseFloat(document.getElementById("membrane-z").value);
 
-  if (membraneComponent) {
-    crearMembrana();
-  }
-}
+//   if (membraneComponent) {
+//     crearMembrana();
+//   }
+// }
 
-// Actualizar rotación de membrana según sliders
-function updateMembraneRotation() {
-  membraneRotation.x = parseFloat(document.getElementById("membrane-rot-x").value);
-  membraneRotation.y = parseFloat(document.getElementById("membrane-rot-y").value);
-  membraneRotation.z = parseFloat(document.getElementById("membrane-rot-z").value);
+// // Actualizar rotación de membrana según sliders
+// function updateMembraneRotation() {
+//   membraneRotation.x = parseFloat(document.getElementById("membrane-rot-x").value);
+//   membraneRotation.y = parseFloat(document.getElementById("membrane-rot-y").value);
+//   membraneRotation.z = parseFloat(document.getElementById("membrane-rot-z").value);
 
-  if (membraneComponent) {
-    crearMembrana();
-  }
-}
+//   if (membraneComponent) {
+//     crearMembrana();
+//   }
+// }
 
-// Actualizar grosor de membrana
-function updateMembraneThickness() {
-  membraneThickness = parseFloat(document.getElementById("membrane-thickness").value);
+// // Actualizar grosor de membrana
+// function updateMembraneThickness() {
+//   membraneThickness = parseFloat(document.getElementById("membrane-thickness").value);
 
-  if (membraneComponent) {
-    crearMembrana();
-  }
-}
+//   if (membraneComponent) {
+//     crearMembrana();
+//   }
+// }
 
 
   // Carga inicial
