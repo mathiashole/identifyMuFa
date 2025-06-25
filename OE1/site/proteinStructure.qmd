@@ -148,7 +148,7 @@ C-terminal de la proteina de t cruzi
   </button>
 </div>
 
-<!-- Selector para alineamiento -->
+<!-- Select for alignment -->
 <div class="control-group">
   <label for="align-select">Modelo para alinear</label>
   <select id="align-select" class="styled-select">
