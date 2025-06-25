@@ -166,6 +166,7 @@ C-terminal de la proteina de t cruzi
 <div class="control-group" style="margin-top:1em;">
   <label>🧫 Membrana simulada</label>
   <button onclick="toggleMembrane()">🔁 Activar / Desactivar</button>
+  
 <!-- Posición -->
 <!-- <div>
   <label>Membrane X: <input id="membrane-x" type="range" min="-20" max="20" step="0.5" value="0" oninput="updateMembranePosition()"></label>
