@@ -43,7 +43,7 @@ C-terminal de la proteina de t cruzi
     </select>
   </div>
 
-  <!-- Select para color -->
+  <!-- Select for colors -->
   <div class="control-group">
     <label for="color-select">Color</label>
     <select id="color-select" class="styled-select">
