@@ -208,7 +208,7 @@ C-terminal de la proteina de t cruzi
   // Representaciones activas: cartoon activo por defecto
   let activeReps = new Set(["cartoon"]);
 
-  // Función para cargar modelo
+  // Function to charge model
   function cargarModelo(file) {
     stage.removeAllComponents();
     stage.loadFile(file).then(component => {
