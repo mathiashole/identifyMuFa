@@ -2,6 +2,25 @@
 # t-SNE Analysis with Enhanced Visualization Options
 # Author: Mathias Mangino
 # Version: 1.0
+#
+# Usage:
+#   Rscript tsne_script.R --input your_data.csv [options]
+#
+# Options:
+#   -i, --input FILE         Input CSV file path (required)
+#   -o, --output DIR         Output file prefix [default: tsne_results]
+#       --id_col COLUMN      Column name for IDs [default: id]
+#       --file_col COLUMN    Column name for file/genome grouping [default: Genome]
+#       --highlight FILE     File with IDs to highlight (one per line)
+#       --perplexity NUM     t-SNE perplexity [default: 30]
+#       --max_iter NUM       Max t-SNE iterations [default: 1000]
+#       --dims NUM           Output dimensions [default: 2]
+#       --point_size NUM     Point size in plot [default: 3]
+#       --no_pca             Disable PCA preprocessing
+#       --no_normalize       Disable data normalization
+#       --label_points       Label highlighted points with their IDs
+#       --format FORMAT      Output plot format: png, pdf, svg [default: png]
+#   -h, --help               Show this help message and exit
 
 suppressPackageStartupMessages({
   library(Rtsne)
