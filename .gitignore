@@ -2,6 +2,9 @@
 *.tsv
 *.csv
 *.html
+*.js
+*.css
+*.woff
 OE1/site/structure_file/*.cif
 OE1/site/*_file
 
