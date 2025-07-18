@@ -1,6 +1,7 @@
 *.cif
 *.tsv
 *.csv
+*.txt
 *.html
 *.js
 *.css
