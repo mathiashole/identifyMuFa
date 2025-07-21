@@ -260,32 +260,32 @@ C-terminal de la proteina de t cruzi
     actualizarBotonAutoSpin();
   }
 
-  function actualizarBotonAutoSpin() {
-    const btn = document.getElementById("autoSpinBtn");
-    btn.textContent = autoSpin ? "🔄 Auto-rotación: ON" : "🔄 Auto-rotación: OFF";
-  }
-
-  function descargarImagen() {
-    stage.makeImage({ factor: 2 }).then(blob => {
-      NGL.download(blob, "estructura.png");
-    });
-  }
-
-  function pantallaCompleta() {
-    const elem = document.getElementById("viewport");
-    if (elem.requestFullscreen) {
-      elem.requestFullscreen();
-    } else if (elem.webkitRequestFullscreen) {
-      elem.webkitRequestFullscreen();
-    } else if (elem.msRequestFullscreen) {
-      elem.msRequestFullscreen();
+    function actualizarBotonAutoSpin() {
+      const btn = document.getElementById("autoSpinBtn");
+      btn.textContent = autoSpin ? "🔄 Auto-rotación: ON" : "🔄 Auto-rotación: OFF";
     }
-  }
 
-  function cambiarPerspectiva() {
-    currentPerspective = (currentPerspective === "perspective") ? "orthographic" : "perspective";
-    stage.setParameters({ cameraType: currentPerspective });
-  }
+    function descargarImagen() {
+      stage.makeImage({ factor: 2 }).then(blob => {
+        NGL.download(blob, "estructura.png");
+      });
+    }
+
+    function pantallaCompleta() {
+      const elem = document.getElementById("viewport");
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.webkitRequestFullscreen) {
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) {
+        elem.msRequestFullscreen();
+      }
+    }
+
+    function cambiarPerspectiva() {
+      currentPerspective = (currentPerspective === "perspective") ? "orthographic" : "perspective";
+      stage.setParameters({ cameraType: currentPerspective });
+    }
 
  function resaltarSeleccion() {
   if (!currentComponent) return;
