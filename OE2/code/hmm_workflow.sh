@@ -91,6 +91,20 @@ if [[ "$db_type" != "prot" && "$db_type" != "nucl" ]]; then
     exit 1
 fi
 
+# More validations
+for f in "${aln_files[@]}"; do
+    [[ -f "$f" ]] || { echo "File not found: $f" >&2; exit 1; }
+done
+
+for f in "${hmm_files[@]}"; do
+    [[ -f "$f" ]] || { echo "File not found: $f" >&2; exit 1; }
+done
+
+for f in "${db_files[@]}"; do
+    [[ -f "$f" ]] || { echo "Database file not found: $f" >&2; exit 1; }
+done
+
+
 mkdir -p "$outdir"
 
 # Step 1: Build HMMs if alignments provided
