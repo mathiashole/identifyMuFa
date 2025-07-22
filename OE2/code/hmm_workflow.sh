@@ -57,7 +57,7 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-# Validations
+# Validations # BUT NEED DEBUG
 if [[ ${#aln_files[@]} -eq 0 && ${#hmm_files[@]} -eq 0 ]]; then
     echo "Error: Provide either --aln or --hmm files." >&2
     exit 1
