@@ -2,6 +2,24 @@
 
 set -euo pipefail
 
+if [[ $# -eq 0 || "$1" == "--help" ]]; then
+    echo "
+Usage: $0 [OPTIONS]
+
+Required:
+  --aln <aln1> [aln2 ...]       Alignment files (optional if --hmm is provided)
+  --hmm <hmm1> [hmm2 ...]       HMM profile files (optional if --aln is provided)
+  --db <db1> [db2 ...]          Sequence database files
+  --type <prot|nucl>            Type of database: 'prot' (protein) or 'nucl' (nucleotide)
+
+Optional:
+  --outdir <dir>                Output directory (default: hmm_results)
+  --cpu <int>                   Number of CPUs to use (default: 1)
+  --help                        Show this help message and exit
+"
+    exit 0
+fi
+
 # Default
 outdir="hmm_results"
 cpu=1
