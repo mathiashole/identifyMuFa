@@ -128,6 +128,14 @@ for hmm in "${hmm_files[@]}"; do
     # for db in "${db_files[@]}"; do
     #     db_base=$(basename "$db")
     #     result_file="$outdir/${hmm_base}__vs__${db_base}.tbl"
+    hmm_base=$(basename "$hmm")
+    hmm_id="${hmm_base%.hmm}"
+
+    for db in "${db_files[@]}"; do
+        db_base=$(basename "$db")
+        db_id="${db_base%.*}"
+        result_file="$outdir/${hmm_id}_vs_${db_id}.tbl"
+
         if [[ "$db_type" == "prot" ]]; then
             hmmsearch --cpu "$cpu" --tblout "$result_file" "$hmm" "$db"
         else
