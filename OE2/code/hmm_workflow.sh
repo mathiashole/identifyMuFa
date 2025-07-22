@@ -2,6 +2,7 @@
 
 set -euo pipefail
 
+# Set help function
 if [[ $# -eq 0 || "$1" == "--help" ]]; then
     echo "
 Usage: $0 [OPTIONS]
