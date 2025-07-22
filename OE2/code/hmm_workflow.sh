@@ -124,10 +124,10 @@ fi
 # Step 2: Search HMMs in databases
 echo "[INFO] Running HMM search..."
 for hmm in "${hmm_files[@]}"; do
-    hmm_base=$(basename "$hmm" .hmm)
-    for db in "${db_files[@]}"; do
-        db_base=$(basename "$db")
-        result_file="$outdir/${hmm_base}__vs__${db_base}.tbl"
+    # hmm_base=$(basename "$hmm" .hmm)
+    # for db in "${db_files[@]}"; do
+    #     db_base=$(basename "$db")
+    #     result_file="$outdir/${hmm_base}__vs__${db_base}.tbl"
         if [[ "$db_type" == "prot" ]]; then
             hmmsearch --cpu "$cpu" --tblout "$result_file" "$hmm" "$db"
         else
