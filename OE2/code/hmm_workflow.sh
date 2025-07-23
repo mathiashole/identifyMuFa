@@ -101,13 +101,13 @@ if [[ "$db_type" != "prot" && "$db_type" != "nucl" ]]; then
     exit 1
 fi
 
-# More validations
+# More validations check file existence
 for f in "${aln_files[@]}"; do
-    [[ -f "$f" ]] || { echo "File not found: $f" >&2; exit 1; }
+    [[ -f "$f" ]] || { echo "Alignment file not found: $f" >&2; exit 1; }
 done
 
 for f in "${hmm_files[@]}"; do
-    [[ -f "$f" ]] || { echo "File not found: $f" >&2; exit 1; }
+    [[ -f "$f" ]] || { echo "HMM file not found: $f" >&2; exit 1; }
 done
 
 for f in "${db_files[@]}"; do
