@@ -5,8 +5,8 @@ set -euo pipefail
 # ===========================
 # HELP
 # ===========================
-if [[ $# -eq 0 || "$1" == "--help" ]]; then
-    echo "
+show_help() {
+    cat << EOF
 Usage: $0 [OPTIONS]
 
 Required:
@@ -19,9 +19,9 @@ Optional:
   --outdir <dir>                Output directory (default: hmm_results)
   --cpu <int>                   Number of CPUs to use (default: 1)
   --help                        Show this help message and exit
-"
+EOF
     exit 0
-fi
+}
 
 # Default
 outdir="hmm_results"
