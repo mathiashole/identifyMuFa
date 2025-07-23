@@ -23,6 +23,8 @@ EOF
     exit 0
 }
 
+[[ $# -eq 0 || "$1" == "--help" ]] && show_help
+
 # Default
 outdir="hmm_results"
 cpu=1
