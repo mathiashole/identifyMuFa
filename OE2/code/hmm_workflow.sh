@@ -37,6 +37,9 @@ hmm_files=()
 db_files=()
 db_type=""
 
+# ===========================
+# ARGUMENT PARSING
+# ===========================
 while [[ $# -gt 0 ]]; do
     case "$1" in
         --aln)
