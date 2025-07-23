@@ -25,10 +25,12 @@ EOF
 
 [[ $# -eq 0 || "$1" == "--help" ]] && show_help
 
+# ===========================
+# GLOBALVARIABLE
+# ===========================
 # Default
 outdir="hmm_results"
 cpu=1
-
 # Argument parsing
 aln_files=()
 hmm_files=()
