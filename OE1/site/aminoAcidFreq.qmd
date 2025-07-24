@@ -23,7 +23,7 @@ En este análisis se comparan dos grupos de secuencias:
 
 A partir de ambas fuentes, se calcularon las frecuencias relativas de cada aminoácido en cada proteína. Luego, estas frecuencias fueron transformadas a porcentajes para facilitar la comparación, y se calcularon estadísticas resumen (media y desviación estándar) por grupo.
 
-El objetivo es evaluar si las proteínas DGF-1 presentan un perfil distintivo en su composición de aminoácidos, lo que podría revelar rasgos funcionales particulares o pistas sobre su historia evolutiva. 🌐
+El objetivo es evaluar si las proteínas DGF-1 presentan un perfil distintivo en su composición de aminoácidos, lo que podría revelar rasgos funcionales particulares. 🌐
 
 ```{css}
 #| echo: false
