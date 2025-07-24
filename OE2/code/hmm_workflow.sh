@@ -89,7 +89,7 @@ done
 # ===========================
 # VALIDATIONS
 # ===========================
-# Validations # BUT NEED DEBUG
+# Validations
 if [[ ${#aln_files[@]} -eq 0 && ${#hmm_files[@]} -eq 0 ]]; then
     echo "Error: Provide either --aln or --hmm files." >&2
     exit 1
