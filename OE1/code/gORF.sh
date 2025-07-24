@@ -23,6 +23,13 @@ OUTPUT_DIR="$2"
 MINSIZE="$3"
 ALL_MODE=false
 
+# Detect optional flag
+for arg in "$@"; do
+    if [[ "$arg" == "--all" ]]; then
+        ALL_MODE=true
+    fi
+done
+
 # Validate input file
 if [[ ! -f "$INPUT_FASTA" ]]; then
     echo "❌ Error: Input file '$INPUT_FASTA' does not exist." >&2
