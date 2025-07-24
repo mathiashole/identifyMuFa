@@ -63,19 +63,32 @@ FILTERED_OUTPUT_FILE="$OUTPUT_DIR/getorf_filtered_${BASENAME}"
 OUTPUT_FILE_TRANSEQ="$OUTPUT_DIR/getorf_protein_${BASENAME}"
 OUTPUT_FILTERED_FILE_TRANSEQ="$OUTPUT_DIR/getorf_filtered_protein_${BASENAME}"
 
-# Run getorf nucleotide
-getorf -sequence "$INPUT_FASTA" -outseq "$OUTPUT_FILE" -minsize "$MINSIZE" -find 3
-sed -i -E 's/_1(\s*\[)/\1/' "$OUTPUT_FILE"
+if $ALL_MODE; then
+    echo "🔁 Running in no-size-split mode (--all)"
 
-getorf -sequence "$INPUT_FASTA" -outseq "$FILTERED_OUTPUT_FILE" -minsize "$adjusted_minsize" -maxsize "$MINSIZE" -find 3
-sed -i -E 's/_1(\s*\[)/\1/' "$FILTERED_OUTPUT_FILE"
+    # Run getorf to extract ORFs (forward and reverse) above the adjusted minimum size
+    getorf -sequence "$INPUT_FASTA" -outseq "$OUTPUT_FILE" -minsize "$adjusted_minsize" -find 3
+    # Remove "_1" suffix from sequence headers
+    sed -i -E 's/_1(\s*\[)/\1/' "$OUTPUT_FILE"
 
-# Run getorf aminoacid
-getorf -sequence "$INPUT_FASTA" -outseq "$OUTPUT_FILE_TRANSEQ" -minsize "$MINSIZE" -find 1
-sed -i -E 's/_1(\s*\[)/\1/' "$OUTPUT_FILE_TRANSEQ"
+    # Run getorf to extract ORFs in forward strand only
+    getorf -sequence "$INPUT_FASTA" -outseq "$OUTPUT_FILE_TRANSEQ" -minsize "$adjusted_minsize" -find 1
+    # Clean up sequence headers
+    sed -i -E 's/_1(\s*\[)/\1/' "$OUTPUT_FILE_TRANSEQ"
+else
+    # Run getorf nucleotide
+    getorf -sequence "$INPUT_FASTA" -outseq "$OUTPUT_FILE" -minsize "$MINSIZE" -find 3
+    sed -i -E 's/_1(\s*\[)/\1/' "$OUTPUT_FILE"
 
-getorf -sequence "$INPUT_FASTA" -outseq "$OUTPUT_FILTERED_FILE_TRANSEQ" -minsize "$adjusted_minsize" -maxsize "$MINSIZE" -find 1
-sed -i -E 's/_1(\s*\[)/\1/' "$OUTPUT_FILTERED_FILE_TRANSEQ"
+    getorf -sequence "$INPUT_FASTA" -outseq "$FILTERED_OUTPUT_FILE" -minsize "$adjusted_minsize" -maxsize "$MINSIZE" -find 3
+    sed -i -E 's/_1(\s*\[)/\1/' "$FILTERED_OUTPUT_FILE"
+
+    # Run getorf aminoacid
+    getorf -sequence "$INPUT_FASTA" -outseq "$OUTPUT_FILE_TRANSEQ" -minsize "$MINSIZE" -find 1
+    sed -i -E 's/_1(\s*\[)/\1/' "$OUTPUT_FILE_TRANSEQ"
+
+    getorf -sequence "$INPUT_FASTA" -outseq "$OUTPUT_FILTERED_FILE_TRANSEQ" -minsize "$adjusted_minsize" -maxsize "$MINSIZE" -find 1
+    sed -i -E 's/_1(\s*\[)/\1/' "$OUTPUT_FILTERED_FILE_TRANSEQ"
 
 # Check if getorf succeeded
 if [[ $? -eq 0 ]]; then
