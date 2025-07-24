@@ -2,7 +2,7 @@
 
 # Check if getorf is installed
 if ! command -v getorf &> /dev/null; then
-    echo "Error: getorf is not installed or not in the PATH." >&2
+    echo "❌ Error: getorf is not installed or not in the PATH." >&2
     exit 1
 fi
 
@@ -13,7 +13,7 @@ calculate_avg_length() {
 
 # Check arguments
 if [[ $# -lt 2 ]]; then
-    echo "Usage: $0 <input.fasta> <output_directory> [minsize]"
+    echo "Usage: $0 <input.fasta> <output_directory> [minsize] [--all]"
     exit 1
 fi
 
