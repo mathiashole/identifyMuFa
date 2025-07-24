@@ -128,7 +128,7 @@ done
 
 mkdir -p "$outdir"
 
-# Step 1: Build HMMs if alignments provided
+# Build HMMs if alignments provided
 if [[ ${#aln_files[@]} -gt 0 ]]; then
     echo "[INFO] Building HMM profiles from alignments..."
     hmm_files=()
@@ -141,7 +141,7 @@ if [[ ${#aln_files[@]} -gt 0 ]]; then
     done
 fi
 
-# Step 2: Search HMMs in databases
+# Search HMMs in databases
 echo "[INFO] Running HMM search..."
 for hmm in "${hmm_files[@]}"; do
     # hmm_base=$(basename "$hmm" .hmm)
