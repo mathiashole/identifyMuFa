@@ -89,6 +89,7 @@ else
 
     getorf -sequence "$INPUT_FASTA" -outseq "$OUTPUT_FILTERED_FILE_TRANSEQ" -minsize "$adjusted_minsize" -maxsize "$MINSIZE" -find 1
     sed -i -E 's/_1(\s*\[)/\1/' "$OUTPUT_FILTERED_FILE_TRANSEQ"
+fi
 
 # Check if getorf succeeded
 if [[ $? -eq 0 ]]; then
