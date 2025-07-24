@@ -129,17 +129,29 @@ done
 mkdir -p "$outdir"
 
 # Build HMMs if alignments provided
-if [[ ${#aln_files[@]} -gt 0 ]]; then
+# if [[ ${#aln_files[@]} -gt 0 ]]; then
+#     echo "[INFO] Building HMM profiles from alignments..."
+#     hmm_files=()
+#     for aln in "${aln_files[@]}"; do
+#         base=$(basename "$aln")
+#         prefix="${base%.*}"
+#         hmm_out="$outdir/${prefix}.hmm"
+#         hmmbuild --cpu "$cpu" "$hmm_out" "$aln"
+#         hmm_files+=("$hmm_out")
+#     done
+# fi
+build_hmms() {
+    local generated_hmms=()
     echo "[INFO] Building HMM profiles from alignments..."
-    hmm_files=()
     for aln in "${aln_files[@]}"; do
         base=$(basename "$aln")
         prefix="${base%.*}"
         hmm_out="$outdir/${prefix}.hmm"
         hmmbuild --cpu "$cpu" "$hmm_out" "$aln"
-        hmm_files+=("$hmm_out")
+        generated_hmms+=("$hmm_out")
     done
-fi
+    hmm_files+=("${generated_hmms[@]}")
+}
 
 # Search HMMs in databases
 echo "[INFO] Running HMM search..."
