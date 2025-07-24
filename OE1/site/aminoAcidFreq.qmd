@@ -165,7 +165,7 @@ summary_data_target$supp <- key_name
 
 Se construyeron gráficos de barras que muestran la frecuencia media (%) de cada aminoácido, junto con su desviación estándar (SD), diferenciando ambos grupos por color. 🟠🔵
 
-Cada gráfico representa una comparación individual entre una proteína DGF-1 y el conjunto de proteínas codificantes, permitiendo observar patrones particulares o desviaciones notables en la abundancia relativa de ciertos residuos. 💡
+Cada gráfico representa una comparación individual entre una proteína DGF-1 y el conjunto de proteínas codificantes, permitiendo observar patrones particulares o desviaciones en la abundancia relativa de ciertos residuos. 💡
 
 ```{r}
 #| label: Created function to barplot contrast 
