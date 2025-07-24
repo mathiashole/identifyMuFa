@@ -21,6 +21,7 @@ fi
 INPUT_FASTA="$1"
 OUTPUT_DIR="$2"
 MINSIZE="$3"
+ALL_MODE=false
 
 # Validate input file
 if [[ ! -f "$INPUT_FASTA" ]]; then
