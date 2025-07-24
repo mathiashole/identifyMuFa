@@ -25,13 +25,13 @@ ALL_MODE=false
 
 # Validate input file
 if [[ ! -f "$INPUT_FASTA" ]]; then
-    echo "Error: Input file '$INPUT_FASTA' does not exist." >&2
+    echo "❌ Error: Input file '$INPUT_FASTA' does not exist." >&2
     exit 1
 fi
 
 # Validate output directory
 if [[ ! -d "$OUTPUT_DIR" ]]; then
-    echo "Error: Output directory '$OUTPUT_DIR' does not exist." >&2
+    echo "❌ Error: Output directory '$OUTPUT_DIR' does not exist." >&2
     exit 1
 fi
 
@@ -39,10 +39,10 @@ fi
 if [[ -z "$MINSIZE" ]]; then
     MINSIZE=$(calculate_avg_length "$INPUT_FASTA")
     if [[ "$MINSIZE" -le 0 ]]; then
-        echo "Error: Unable to calculate a valid minsize." >&2
+        echo "❌ Error: Unable to calculate a valid minsize." >&2
         exit 1
     fi
-    echo "Using calculated minsize: $MINSIZE"
+    echo "📏 Usando tamaño mínimo estimado: $MINSIZE"
 fi
 
 adjusted_minsize=$(( MINSIZE * 5 / 100 ))
