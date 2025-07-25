@@ -153,16 +153,16 @@ if [[ "$blast_search" == true ]]; then
         
         case "$blast_type" in
             blastn)
-                blastn -query "$query_file" -subject "$genome" -out "$output_blast" -outfmt '6 std qlen slen' -evalue "$evalue"
+                blastn -query "$query_file" -subject "$genome" -out "$output_blast" -outfmt '6 std qlen slen' -evalue "$evalue" -num_threads "$threads"
                 ;;
             blastp)
-                blastp -query "$query_file" -subject "$genome" -out "$output_blast" -outfmt '6 std qlen slen' -evalue "$evalue"
+                blastp -query "$query_file" -subject "$genome" -out "$output_blast" -outfmt '6 std qlen slen' -evalue "$evalue" -num_threads "$threads"
                 ;;
             tblastn)
-                tblastn -query "$query_file" -subject "$genome" -out "$output_blast" -outfmt '6 std qlen slen' -evalue "$evalue"
+                tblastn -query "$query_file" -subject "$genome" -out "$output_blast" -outfmt '6 std qlen slen' -evalue "$evalue" -num_threads "$threads"
                 ;;
             blastx)
-                blastx -query "$query_file" -subject "$genome" -out "$output_blast" -outfmt '6 std qlen slen' -evalue "$evalue"
+                blastx -query "$query_file" -subject "$genome" -out "$output_blast" -outfmt '6 std qlen slen' -evalue "$evalue" -num_threads "$threads"
                 ;;
             *)
                 echo "Error: Unsupported BLAST type '$blast_type'."
