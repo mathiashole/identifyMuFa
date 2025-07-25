@@ -110,7 +110,7 @@ if [[ "$blast_search" == true ]]; then
     mkdir -p "$output_dir"
 
     # Translate query if needed
-    if [[ "$query_type" == "nucleotide" && "$blast_type" =~ ^(blastp|tblastn|blastx)$ ]]; then
+    if [[ "$query_type" == "nucleotide" && "$blast_type" =~ ^(blastp|tblastn|blastx|psiblast)$ ]]; then
         # query_file=$(translate_sequence "$query_file")
         query_file=$(translate_sequence "$query_file" | tail -n 1)
         query_type="protein"
@@ -124,7 +124,7 @@ if [[ "$blast_search" == true ]]; then
         fi
 
         # Translate subject if needed
-        if [[ "$subject_type" == "nucleotide" && "$blast_type" =~ ^(blastp|tblastn)$ ]]; then
+        if [[ "$subject_type" == "nucleotide" && "$blast_type" =~ ^(blastp|tblastn|psiblast)$ ]]; then
             genome=$(translate_sequence "$genome" | tail -n 1)
             subject_type="protein"
         fi # THIS MODULE IS VERY IMPORTANT
