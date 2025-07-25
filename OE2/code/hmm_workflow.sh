@@ -154,27 +154,27 @@ build_hmms() {
 }
 
 # Search HMMs in databases
-echo "[INFO] Running HMM search..."
-for hmm in "${hmm_files[@]}"; do
-    # hmm_base=$(basename "$hmm" .hmm)
-    # for db in "${db_files[@]}"; do
-    #     db_base=$(basename "$db")
-    #     result_file="$outdir/${hmm_base}__vs__${db_base}.tbl"
-    hmm_base=$(basename "$hmm")
-    hmm_id="${hmm_base%.hmm}"
+# echo "[INFO] Running HMM search..."
+# for hmm in "${hmm_files[@]}"; do
+#     # hmm_base=$(basename "$hmm" .hmm)
+#     # for db in "${db_files[@]}"; do
+#     #     db_base=$(basename "$db")
+#     #     result_file="$outdir/${hmm_base}__vs__${db_base}.tbl"
+#     hmm_base=$(basename "$hmm")
+#     hmm_id="${hmm_base%.hmm}"
 
-    for db in "${db_files[@]}"; do
-        db_base=$(basename "$db")
-        db_id="${db_base%.*}"
-        result_file="$outdir/${hmm_id}_vs_${db_id}.tbl"
+#     for db in "${db_files[@]}"; do
+#         db_base=$(basename "$db")
+#         db_id="${db_base%.*}"
+#         result_file="$outdir/${hmm_id}_vs_${db_id}.tbl"
 
-        if [[ "$db_type" == "prot" ]]; then
-            hmmsearch --cpu "$cpu" --tblout "$result_file" "$hmm" "$db"
-        else
-            nhmmer --cpu "$cpu" --tblout "$result_file" "$hmm" "$db"
-        fi
-        echo "[DONE] $result_file"
-    done
-done
+#         if [[ "$db_type" == "prot" ]]; then
+#             hmmsearch --cpu "$cpu" --tblout "$result_file" "$hmm" "$db"
+#         else
+#             nhmmer --cpu "$cpu" --tblout "$result_file" "$hmm" "$db"
+#         fi
+#         echo "[DONE] $result_file"
+#     done
+# done
 
 echo "[ALL DONE] Results saved in $outdir"
