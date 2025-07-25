@@ -177,4 +177,28 @@ build_hmms() {
 #     done
 # done
 
+run_search() {
+    echo "[INFO] Running HMM search..."
+    for hmm in "${hmm_files[@]}"; do
+        hmm_base=$(basename "$hmm")
+        hmm_id="${hmm_base//./_}"
+        hmm_id="${hmm_id%.hmm}"
+
+        for db in "${db_files[@]}"; do
+            db_base=$(basename "$db")
+            db_id="${db_base//./_}"
+            db_id="${db_id%.*}"
+
+            result_file="$outdir/${hmm_id}_vs_${db_id}.tbl"
+
+            if [[ "$db_type" == "prot" ]]; then
+                hmmsearch --cpu "$cpu" --tblout "$result_file" "$hmm" "$db"
+            else
+                nhmmer --cpu "$cpu" --tblout "$result_file" "$hmm" "$db"
+            fi
+            echo "[DONE] $result_file"
+        done
+    done
+}
+
 echo "[ALL DONE] Results saved in $outdir"
