@@ -5,6 +5,7 @@ usage() {
     echo "Usage:"
     echo "  - BLAST search: $0 -type <blast_type> -qp|-qn <query_fasta> -o <output_dir> -sp|-sn <genome_fasta1> [<genome_fasta2> ...]"
     echo "  - Translate only: $0 -transeq <fasta_file1> [<fasta_file2> ...]"
+    echo "  -cpu <int>                 Number of threads to use (default: 1)"
     exit 1
 }
 
