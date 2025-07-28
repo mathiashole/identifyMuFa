@@ -36,7 +36,7 @@ genome_name <- c("TriTrypDB-68_TcruziDm28c2018_Genome.fasta", "TriTrypDB-68_Tcru
 
 ![](https://img.itch.zone/aW1nLzE3MTEyNjE5LmdpZg==/original/2%2BYVZg.gif){style="float:right;" fig-alt="Illustration of a detective cat. Artwork by @https://shigemi.itch.io." width="301"}
 
-En este proyecto analizo la familia génica DGF-1, presente en múltiples copias dentro del genoma de T. cruzi, el parásito que causa la enfermedad de Chagas 🦠.
+En este proyecto analizo la familia génica ``r key_name``, presente en múltiples copias dentro del genoma de T. cruzi, el parásito que causa la enfermedad de Chagas 🦠.
 
 🔍 ¿Qué busco?
 Comprender la diversidad, evolución y función de estos genes, que podrían estar implicados en procesos clave como la evasión inmune y la replicación. Para ello, realizo un análisis comparativo entre diferentes genomas de T. cruzi.
