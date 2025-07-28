@@ -53,6 +53,17 @@ Comprender la diversidad, evolución y función de estos genes, que podrían est
 
 *  Comparación entre genotipos y ensamblados disponibles
 
+🧬 Genomas utilizados
+Los genomas fueron obtenidos de [**tritrydb**](https://tritrypdb.org/tritrypdb/app) y [**NCBI**](https://www.ncbi.nlm.nih.gov/), e incluyen:
+
+*  T. cruzi Dm28c
+
+*  T. cruzi Brazil A4
+
+*  T. cruzi Y C6
+
+*  T. cruzi TcDm25
+
 Los datos utilizados en este análisis fueron obtenidas a partir de diferentes genomas de *Trypanosoma cruzi*, disponibles en [**tritrydb**](https://tritrypdb.org/tritrypdb/app) y [**NCBI**](https://www.ncbi.nlm.nih.gov/).
 
 A partir de estos genomas, se extrajeron secuencias de los genes ``r key_name``, con el objetivo de realizar análisis comparativo. Inicialmente se estudió el contenido de `GC`, `longitud de las secuencias`, y otros aspectos relevantes para la caracterización de los genes de ``r key_name``.
