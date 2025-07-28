@@ -41,7 +41,17 @@ En este proyecto analizo la familia génica ``r key_name``, presente en múltipl
 🔍 ¿Qué busco?
 Comprender la diversidad, evolución y función de estos genes, que podrían estar implicados en procesos clave como la evasión inmune y la replicación. Para ello, realizo un análisis comparativo entre diferentes genomas de T. cruzi.
 
-*Trypanosoma cruzi*, el parásito causante de la enfermedad de Chagas, posee una familia de genes llamada ``r key_name`` que juega un papel clave en su biología. En este estudio, realizamos un análisis comparativo de estos genes en distintos genomas para entender su diversidad y posibles funciones.
+📊 Análisis realizados
+
+*  Longitud y contenido de GC de las secuencias
+
+*  Identificación de pseudogenes
+
+*  Visualización de la distribución cromosómica
+
+*  Asociación con regiones funcionales del genoma (e.g. orígenes de replicación)
+
+*  Comparación entre genotipos y ensamblados disponibles
 
 Los datos utilizados en este análisis fueron obtenidas a partir de diferentes genomas de *Trypanosoma cruzi*, disponibles en [**tritrydb**](https://tritrypdb.org/tritrypdb/app) y [**NCBI**](https://www.ncbi.nlm.nih.gov/).
 
