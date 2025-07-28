@@ -1,5 +1,5 @@
 ---
-title: "Análisis genómico comparativo de genes DGF-1 en *Trypanosoma Cruzi*"
+title: "🧬 Análisis genómico comparativo de genes DGF-1 en *Trypanosoma cruzi*"
 author: "Mathias"
 format:
   html:
