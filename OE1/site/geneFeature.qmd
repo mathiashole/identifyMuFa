@@ -71,52 +71,16 @@ Para la extracción, filtrado y análisis de los genes DGF-1 se emplearon divers
 
   +  stringr, purrr: herramientas auxiliares
 
-🔍 Análisis realizados
-
-    Caracterización de longitud y contenido GC
-
-    Filtrado e identificación de posibles pseudogenes
-
-    Mapeo de genes DGF-1 en los distintos cromosomas
-
-    Análisis comparativo entre cepas y genotipos
-
-    Evaluación de la proximidad a regiones funcionales del genoma, como orígenes de replicación (OriCs)
-
 📊 Análisis realizados
 
-*  Longitud y contenido de GC de las secuencias
+*  Caracterización de longitud y contenido GC
 
-*  Identificación de pseudogenes
+*  Filtrado e identificación de posibles pseudogenes
 
-*  Visualización de la distribución cromosómica
+*  Mapeo de genes ``r key_name`` en los distintos cromosomas
 
-*  Asociación con regiones funcionales del genoma (e.g. orígenes de replicación)
+*  Análisis comparativo entre cepas
 
-*  Comparación entre genotipos y ensamblados disponibles
-
-🧬 Genomas utilizados
-Los genomas fueron obtenidos de [**tritrydb**](https://tritrypdb.org/tritrypdb/app) y [**NCBI**](https://www.ncbi.nlm.nih.gov/), e incluyen:
-
-*  T. cruzi Dm28c
-
-*  T. cruzi Brazil A4
-
-*  T. cruzi Y C6
-
-*  T. cruzi TcDm25
-
-Los datos utilizados en este análisis fueron obtenidas a partir de diferentes genomas de *Trypanosoma cruzi*, disponibles en [**tritrydb**](https://tritrypdb.org/tritrypdb/app) y [**NCBI**](https://www.ncbi.nlm.nih.gov/).
-
-A partir de estos genomas, se extrajeron secuencias de los genes ``r key_name``, con el objetivo de realizar análisis comparativo. Inicialmente se estudió el contenido de `GC`, `longitud de las secuencias`, y otros aspectos relevantes para la caracterización de los genes de ``r key_name``.
-
-### Genomas
-
-Este análisis utiliza los siguientes genomas ``r genome_name``. A partir de los cuales se obtienen las secuencias para su estudio.
-
-### Librerias y datos a usar
-
-Se cargan las `bibliotecas` necesarias para el análisis de datos genómicos, así como para la manipulación, transformación y visualización de dataframes, junto con la generación de gráficos en formato de arreglo. A continuación, se crea una lista de archivos que contiene los `genomas` a analizar, y se inicializa una `tabla` destinada a almacenar los resultados del análisis de los archivos FASTA.
 
 ```{r}
 #| label: load-packages
