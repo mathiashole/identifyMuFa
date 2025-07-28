@@ -211,11 +211,6 @@ Se desarrollaron funciones en R que permiten automatizar y reutilizar el código
 
 *  🐮 `cowplot`: para combinar múltiples gráficos en una sola figura
 
-
-En esta sección, se generarán gráficos que representan el `contenido de GC` y la `longitud` de cada genoma. 
-Se implementan funciones específicas para cada gráfico, lo que permite reutilizar el código de manera eficiente en otras partes del análisis. 
-Para crear estas funciones se implementara las bibliotecas `ggridges`, `ggbeeswarm` y `cowplot`.
-
 ::: {.panel-tabset .nav-pills}
 
 ## GC
