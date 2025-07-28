@@ -41,6 +41,48 @@ En este proyecto analizo la familia génica ``r key_name``, presente en múltipl
 🔍 ¿Qué busco?
 Comprender la diversidad, evolución y función de estos genes, que podrían estar implicados en procesos clave como la evasión inmune y la replicación. Para ello, realizo un análisis comparativo entre diferentes genomas de T. cruzi.
 
+## 🧪 Materiales y Métodos
+
+📂 Datos genómicos utilizados
+Se utilizaron secuencias genómicas completas y anotaciones de genes de distintas cepas de *Trypanosoma cruzi*, descargadas de las bases de datos públicas [**tritrydb**](https://tritrypdb.org/tritrypdb/app) y [**NCBI**](https://www.ncbi.nlm.nih.gov/). Entre los genomas analizados se incluyen:
+
+*  *T. cruzi* Dm28c
+
+*  *T. cruzi* BrazilA4
+
+*  *T. cruzi* YC6
+
+*  *T. cruzi* TcDm25 haplotipo 1 y 2
+
+🔧 Procesamiento y análisis de secuencias
+Para la extracción, filtrado y análisis de los genes DGF-1 se emplearon diversas herramientas bioinformáticas:
+
+*  🧾 InfoSeq (EMBOSS): para obtener estadísticas básicas de las secuencias (longitud, contenido GC, etc.)
+
+*  🐚 Scripts personalizados en Bash y AWK
+
+*  📊 R: para análisis comparativo, exploratorio y visualización de resultados
+
+  +  seqinr, Biostrings: lectura y manipulación de secuencias
+
+  +  ggplot2, patchwork: gráficos y visualizaciones
+
+  +  dplyr, tidyr: procesamiento y organización de datos
+
+  +  stringr, purrr: herramientas auxiliares
+
+🔍 Análisis realizados
+
+    Caracterización de longitud y contenido GC
+
+    Filtrado e identificación de posibles pseudogenes
+
+    Mapeo de genes DGF-1 en los distintos cromosomas
+
+    Análisis comparativo entre cepas y genotipos
+
+    Evaluación de la proximidad a regiones funcionales del genoma, como orígenes de replicación (OriCs)
+
 📊 Análisis realizados
 
 *  Longitud y contenido de GC de las secuencias
