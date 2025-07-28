@@ -201,17 +201,16 @@ reactable(genomes_summary, highlight = TRUE)
 
 ### 📈 Visualización del Contenido de GC y Longitud de los Genomas
 
-Se realizó un análisis descriptivo de los genomas la visualización del contenido de GC (%) y la longitud (en pares de bases) de las distintas cepas analizadas.
+Se realizó un análisis descriptivo de los genomas la visualización del `contenido de GC (%)` y la `longitud (en pares de bases)` de las distintas cepas analizadas.
 
-Para ello se desarrollaron funciones en R que permiten automatizar y reutilizar el código en diferentes etapas del análisis. Las visualizaciones se generaron utilizando los siguientes paquetes:
+Se desarrollaron funciones en R que permiten automatizar y reutilizar el código en diferentes etapas del análisis. Las visualizaciones se generaron utilizando los siguientes paquetes:
 
-*  🎨 ggridges: para representar distribuciones con densidades tipo ridgeline
+*  🎨 `ggridges`: para representar distribuciones con densidades tipo ridgeline
 
-*  🐝 ggbeeswarm: para visualizar la dispersión de los valores individuales sin sobreposición
+*  🐝 `ggbeeswarm`: para visualizar la dispersión de los valores individuales sin sobreposición
 
-*  🐮 cowplot: para combinar múltiples gráficos en una sola figura
+*  🐮 `cowplot`: para combinar múltiples gráficos en una sola figura
 
-Estas representaciones permiten comparar fácilmente la variabilidad entre genomas y detectar posibles patrones de conservación o desviación en las características estructurales de los genes.
 
 En esta sección, se generarán gráficos que representan el `contenido de GC` y la `longitud` de cada genoma. 
 Se implementan funciones específicas para cada gráfico, lo que permite reutilizar el código de manera eficiente en otras partes del análisis. 
