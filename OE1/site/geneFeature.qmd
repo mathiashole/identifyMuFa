@@ -356,6 +356,8 @@ plot_violin_length(
 
 Se realizó un análisis descriptivo de las secuencias codificantes, la visualización del `contenido de GC (%)` y la `longitud (en pares de bases)` de las distintas cepas analizadas.
 
+📊 Tambien, se construye una tabla resumen por genoma ``r genome_name``, que incluye los valores mínimos, medios y máximos tanto de la longitud como del contenido de GC.
+
 <!-- ## Procesamiento del total de las secuencias codificantes
 
 Se llama a la funcion ``calculate_fasta_feature`` para calcular en el total de `secuencia codificante` el contenido de `GC` y la `longitud (pb)`. Finalmente, creamos una `tabla resumen`, que agrupa el `total secuencias codificantes` por cada genoma ``r genome_name``, mostrando así como la `longitud` mínima, media y máxima, así como el contenido de `GC` mínimo, medio y máximo. -->
