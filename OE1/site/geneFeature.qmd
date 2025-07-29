@@ -420,7 +420,8 @@ plot_violin_gc(
 
 ## 📏 Gráfico de Violín de la Longitud de secuencia
 
-Además, reutilizamos la función previamente empleada para graficar la distribución del genoma, pero esta vez generamos un gráfico que muestra la distribución de las longitudes de todas las secuencias codificantes, correspondientes a cada genoma.
+Reutilizamos la función `plot_violin_length` que genera un gráfico de violín que muestra la distribución de longitudes de secuencias en los genomas `r genome_name`.
+📦 Paquetes: ``ggplot2``, ``ggridges``, ``ggbeeswarm``.
 
 ```{r}
 #| label: plotting-length all coding protein
