@@ -275,9 +275,11 @@ plot_violin_gc(
 
 ```
 
-## Length
+## 📏 Gráfico de Violín de la Longitud Genómica
 
-La función de R `plot_violin_length` crea un gráfico de violín que ilustra la distribución de las longitudes genómicas de los diferentes genomas ``r genome_name``.
+La función `plot_violin_length` genera un gráfico de violín que muestra la distribución de longitudes de secuencias en los genomas `r genome_name`.
+📦 Paquetes: ``ggplot2``, ``ggridges``, ``ggbeeswarm``.
+
 
 ```{r}
 #| label: plotting-genome-length
