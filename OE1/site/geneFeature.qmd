@@ -396,9 +396,10 @@ reactable(all_code_prot_summary, highlight = TRUE)
 
 ::: {.panel-tabset .nav-pills}
 
-## GC
+## 🎻 Gráfico de Violín del Contenido de GC
 
-Llamamos a la funcion `plot_violin_gc`, dando lugar a un gráfico violín que muestra la distribución del contenido de GC en distintos genomas de las secuencias.
+La función plot_violin_gc genera un gráfico de violín que muestra la distribución del contenido de GC (%) por genoma `r genome_name`.
+📦 Paquetes: ``ggplot2``, ``ggridges``, ``ggbeeswarm``.
 
 
 ```{r}
@@ -417,7 +418,7 @@ plot_violin_gc(
 
 ```
 
-## Length
+## 📏 Gráfico de Violín de la Longitud de secuencia
 
 Además, reutilizamos la función previamente empleada para graficar la distribución del genoma, pero esta vez generamos un gráfico que muestra la distribución de las longitudes de todas las secuencias codificantes, correspondientes a cada genoma.
 
