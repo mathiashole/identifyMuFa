@@ -352,9 +352,13 @@ plot_violin_length(
 
 ---
 
-## Procesamiento del total de las secuencias codificantes
+## 📈 Visualización del Contenido de GC y Longitud de las secuencias codificantes de cada genoma
 
-Se llama a la funcion ``calculate_fasta_feature`` para calcular en el total de `secuencia codificante` el contenido de `GC` y la `longitud (pb)`. Finalmente, creamos una `tabla resumen`, que agrupa el `total secuencias codificantes` por cada genoma ``r genome_name``, mostrando así como la `longitud` mínima, media y máxima, así como el contenido de `GC` mínimo, medio y máximo.
+Se realizó un análisis descriptivo de las secuencias codificantes, la visualización del `contenido de GC (%)` y la `longitud (en pares de bases)` de las distintas cepas analizadas.
+
+<!-- ## Procesamiento del total de las secuencias codificantes
+
+Se llama a la funcion ``calculate_fasta_feature`` para calcular en el total de `secuencia codificante` el contenido de `GC` y la `longitud (pb)`. Finalmente, creamos una `tabla resumen`, que agrupa el `total secuencias codificantes` por cada genoma ``r genome_name``, mostrando así como la `longitud` mínima, media y máxima, así como el contenido de `GC` mínimo, medio y máximo. -->
 
 ```{r}
 #| label: extract all coding protein feature and created summary
