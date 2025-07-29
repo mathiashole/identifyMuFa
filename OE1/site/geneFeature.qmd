@@ -398,7 +398,7 @@ reactable(all_code_prot_summary, highlight = TRUE)
 
 ## 🎻 Gráfico de Violín del Contenido de GC
 
-La función plot_violin_gc genera un gráfico de violín que muestra la distribución del contenido de GC (%) por genoma `r genome_name`.
+Reutilizamos la función plot_violin_gc genera un gráfico de violín que muestra la distribución del contenido de GC (%) por genoma `r genome_name`.
 📦 Paquetes: ``ggplot2``, ``ggridges``, ``ggbeeswarm``.
 
 
