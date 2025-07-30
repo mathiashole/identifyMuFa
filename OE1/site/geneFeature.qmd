@@ -354,14 +354,11 @@ plot_violin_length(
 
 ## 🧬 Visualización del Contenido de GC y Longitud de las Secuencias Codificantes
 
-Se realizó un análisis descriptivo de las secuencias codificantes de las distintas cepas, enfocándose en su contenido de GC (%) y longitud (en pares de bases).
+Se realizó un análisis descriptivo de las secuencias codificantes de las distintas cepas, enfocándose en su `contenido de GC (%)` y `longitud (en pares de bases)`.
 
 Se utilizaron funciones en R reutilizables para automatizar la generación de gráficos en esta y otras etapas del análisis.
 
-
-Se realizó un análisis descriptivo de las secuencias codificantes, la visualización del `contenido de GC (%)` y la `longitud (en pares de bases)` de las distintas cepas analizadas.
-
-📊 Tambien, se construye una tabla resumen por genoma ``r genome_name``, que incluye los valores mínimos, medios y máximos tanto de la longitud como del contenido de GC.
+📊 Tambien, se construye una tabla resumen por genoma ``r genome_name`` de las secuencias codificantes, que incluye los valores mínimos, medios y máximos tanto de la longitud como del contenido de GC.
 
 ```{r}
 #| label: extract all coding protein feature and created summary
