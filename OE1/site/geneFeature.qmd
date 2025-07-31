@@ -476,7 +476,11 @@ reactable(file_sequence_counts, highlight = TRUE)
 
 ```
 
-### Visualización de la Longitud y Contenido de GC de ``r key_name``
+### 🧬 Análisis del genes ``r key_name``
+
+Se analizó la distribución del contenido de GC (%) y la longitud (pb) de las secuencias correspondientes al gen de interés en cada genoma r genome_name.
+
+Las visualizaciones permiten observar si estas secuencias presentan comportamientos distintos respecto al total de las secuencias codificantes o al genoma completo.
 
 Se generan gráficos que representan el `contenido de GC` y la `longitud` de cada secuencia de ``r key_name``. 
 En esta seccion reutilizaremos parte del codigo escrito llamando a las funciones que crean los plot de `GC` y de `longitud` de las secuencias.
