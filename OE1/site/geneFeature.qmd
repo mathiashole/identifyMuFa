@@ -603,8 +603,8 @@ plot_violin_gc(
 
 ## 📏 Gráfico de Violín de la Longitud
 
-La función plot_violin_length muestra la distribución de longitudes (pb) de las secuencias del gen de interés filtradas.
-📦 Paquetes: ggplot2, ggridges, ggbeeswarm.
+La función `plot_violin_length` muestra la distribución de `longitudes (pb)` de las secuencias del gen de interés filtradas.
+📦 Paquetes: ``ggplot2``, ``ggridges``, ``ggbeeswarm``.
 
 ```{r}
 #| label: plotting-length-filter
