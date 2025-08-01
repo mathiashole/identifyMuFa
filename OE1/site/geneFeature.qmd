@@ -570,9 +570,9 @@ reactable(file_sequence_counts, highlight = TRUE)
 ```
 
 
-### Visualización de la Longitud y Contenido de GC de ``r key_name`` completas
+### 🔎 Gen de Interés Filtrado por Longitud
 
-Se representan el `contenido de GC` y la `longitud` de cada secuencia de ``r key_name`` completas (filtrada por un `largo minimo`). 
+Se aplicó un filtro de calidad excluyendo secuencias del gen de interés con una longitud menor al umbral establecido. Esto permite observar sólo las secuencias con longitud representativa.
 
 ::: {.panel-tabset .nav-pills}
 
