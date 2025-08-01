@@ -601,9 +601,10 @@ plot_violin_gc(
 
 ```
 
-## Length
+## 📏 Gráfico de Violín de la Longitud
 
-Se usa la función `plot_violin_length` para representar distribución de las secuencias ``r key_name`` filtradas.
+La función plot_violin_length muestra la distribución de longitudes (pb) de las secuencias del gen de interés filtradas.
+📦 Paquetes: ggplot2, ggridges, ggbeeswarm.
 
 ```{r}
 #| label: plotting-length-filter
