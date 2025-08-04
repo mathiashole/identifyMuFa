@@ -76,6 +76,13 @@ while [[ $# -gt 0 ]]; do
         --hand) hand=true; shift ;;
         --wid) shift; wid="$1"; shift ;;
         
+        # hmmsearch options
+        --e) shift; evalue="$1"; shift ;;
+        --domE) shift; domevalue="$1"; shift ;;
+        --tblout) shift; tblout="$1"; shift ;;
+        --domtblout) shift; domtblout="$1"; shift ;;
+        --pfamtblout) shift; pfamtblout="$1"; shift ;;
+
         *)
             echo "Unknown argument: $1"
             exit 1
