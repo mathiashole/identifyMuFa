@@ -105,17 +105,11 @@ if [[ "$db_type" != "prot" && "$db_type" != "nucl" ]]; then
 fi
 
 # More validations check file existence
-for f in "${aln_files[@]}"; do
-    [[ -f "$f" ]] || { echo "Alignment file not found: $f" >&2; exit 1; }
-done
+for f in "${aln_files[@]}"; do [[ -f "$f" ]] || { echo "Alignment file not found: $f" >&2; exit 1; }; done
 
-for f in "${hmm_files[@]}"; do
-    [[ -f "$f" ]] || { echo "HMM file not found: $f" >&2; exit 1; }
-done
+for f in "${hmm_files[@]}"; do [[ -f "$f" ]] || { echo "HMM file not found: $f" >&2; exit 1; }; done
 
-for f in "${db_files[@]}"; do
-    [[ -f "$f" ]] || { echo "Database file not found: $f" >&2; exit 1; }
-done
+for f in "${db_files[@]}"; do [[ -f "$f" ]] || { echo "Database file not found: $f" >&2; exit 1; }; done
 
 # Check required tools
 for tool in hmmbuild hmmsearch nhmmer; do
