@@ -44,6 +44,15 @@ EOF
 # Default
 outdir="hmm_results"
 cpu=1
+symfrac=""
+hand=false
+wid=""
+evalue=""
+domevalue=""
+tblout=""
+domtblout=""
+pfamtblout=""
+
 # Argument parsing
 aln_files=()
 hmm_files=()
