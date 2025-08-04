@@ -113,10 +113,7 @@ for f in "${db_files[@]}"; do [[ -f "$f" ]] || { echo "Database file not found: 
 
 # Check required tools
 for tool in hmmbuild hmmsearch nhmmer; do
-    command -v "$tool" >/dev/null 2>&1 || {
-        echo "Required tool '$tool' not found in PATH." >&2
-        exit 1
-    }
+    command -v "$tool" >/dev/null 2>&1 || { echo "Required tool '$tool' not found in PATH." >&2; exit 1; };
 done
 
 mkdir -p "$outdir"
