@@ -64,42 +64,12 @@ db_type=""
 # ===========================
 while [[ $# -gt 0 ]]; do
     case "$1" in
-        --aln)
-            shift
-            while [[ $# -gt 0 && ! "$1" =~ ^-- ]]; do
-                aln_files+=("$1")
-                shift
-            done
-            ;;
-        --hmm)
-            shift
-            while [[ $# -gt 0 && ! "$1" =~ ^-- ]]; do
-                hmm_files+=("$1")
-                shift
-            done
-            ;;
-        --db)
-            shift
-            while [[ $# -gt 0 && ! "$1" =~ ^-- ]]; do
-                db_files+=("$1")
-                shift
-            done
-            ;;
-        --type)
-            shift
-            db_type="$1"
-            shift
-            ;;
-        --outdir)
-            shift
-            outdir="$1"
-            shift
-            ;;
-        --cpu)
-            shift
-            cpu="$1"
-            shift
-            ;;
+        --aln) shift; while [[ $# -gt 0 && ! "$1" =~ ^-- ]]; do aln_files+=("$1"); shift; done ;;
+        --hmm) shift; while [[ $# -gt 0 && ! "$1" =~ ^-- ]]; do hmm_files+=("$1"); shift; done ;;
+        --db) shift; while [[ $# -gt 0 && ! "$1" =~ ^-- ]]; do db_files+=("$1"); shift; done ;;
+        --type) shift; db_type="$1"; shift ;;
+        --outdir) shift; outdir="$1"; shift ;;
+        --cpu) shift; cpu="$1"; shift ;;
         *)
             echo "Unknown argument: $1"
             exit 1
