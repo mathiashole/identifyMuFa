@@ -83,10 +83,7 @@ while [[ $# -gt 0 ]]; do
         --domtblout) shift; domtblout="$1"; shift ;;
         --pfamtblout) shift; pfamtblout="$1"; shift ;;
 
-        *)
-            echo "Unknown argument: $1"
-            exit 1
-            ;;
+        *) echo "Unknown argument: $1" >&2; exit 1 ;;
     esac
 done
 
