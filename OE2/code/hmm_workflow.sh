@@ -70,6 +70,12 @@ while [[ $# -gt 0 ]]; do
         --type) shift; db_type="$1"; shift ;;
         --outdir) shift; outdir="$1"; shift ;;
         --cpu) shift; cpu="$1"; shift ;;
+
+        # hmmbuild options
+        --symfrac) shift; symfrac="$1"; shift ;;
+        --hand) hand=true; shift ;;
+        --wid) shift; wid="$1"; shift ;;
+        
         *)
             echo "Unknown argument: $1"
             exit 1
