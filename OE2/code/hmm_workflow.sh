@@ -118,6 +118,9 @@ done
 
 mkdir -p "$outdir"
 
+# ===========================
+# HMMBUILD
+# ===========================
 build_hmms() {
     local generated_hmms=()
     echo "[INFO] Building HMM profiles from alignments..."
