@@ -19,6 +19,11 @@ Optional:
   --outdir <dir>                Output directory (default: hmm_results)
   --cpu <int>                   Number of CPUs to use (default: 1)
   --help                        Show this help message and exit
+
+hmmbuild options:
+  --symfrac <float>             Minimum fraction of sequences with a symbol (default: none)
+  --hand                        Use hand annotation (requires Stockholm format)
+  --wid <float>                 Effective sequence number weighting (default: none)
 EOF
     exit 0
 }
