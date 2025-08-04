@@ -18,12 +18,20 @@ Required:
 Optional:
   --outdir <dir>                Output directory (default: hmm_results)
   --cpu <int>                   Number of CPUs to use (default: 1)
-  --help                        Show this help message and exit
 
 hmmbuild options:
   --symfrac <float>             Minimum fraction of sequences with a symbol (default: none)
   --hand                        Use hand annotation (requires Stockholm format)
   --wid <float>                 Effective sequence number weighting (default: none)
+  
+hmmsearch output options:
+  --e <float>                   E-value threshold for reporting hits
+  --domE <float>                Domain E-value threshold
+  --tblout <file>               Save table output
+  --domtblout <file>            Save domain table output
+  --pfamtblout <file>           Save pfam-style output
+
+  --help                        Show this help message and exit
 EOF
     exit 0
 }
