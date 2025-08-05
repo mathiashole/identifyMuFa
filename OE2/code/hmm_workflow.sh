@@ -134,7 +134,28 @@ mkdir -p "$outdir"
 #     hmm_files+=("${generated_hmms[@]}")
 # }
 
+build_hmms() {
+    local generated_hmms=()
+    echo "[INFO] Building HMM profiles from alignments..."
+    for aln in "${aln_files[@]}"; do
+        base=$(basename "$aln")
+        prefix="${base%.*}"
+        hmm_out="$outdir/${prefix}.hmm"
 
+        cmd=(hmmbuild --cpu "$cpu")
+
+        [[ -n "$symfrac" ]] && cmd+=(--symfrac "$symfrac")
+        [[ "$hand" == true ]] && cmd+=(--hand)
+        [[ -n "$wid" ]] && cmd+=(--wid "$wid")
+
+        cmd+=("$hmm_out" "$aln")
+
+        echo "[CMD] ${cmd[*]}"
+        "${cmd[@]}"
+        generated_hmms+=("$hmm_out")
+    done
+    hmm_files+=("${generated_hmms[@]}")
+}
 
 run_search() {
     echo "[INFO] Running HMM search..."
