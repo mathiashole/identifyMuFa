@@ -40,7 +40,7 @@ EOF
 [[ $# -eq 0 || "$1" == "--help" ]] && show_help
 
 # ===========================
-# GLOBALVARIABLE
+# GLOBAL VARIABLE
 # ===========================
 # Default
 outdir="hmm_results"
