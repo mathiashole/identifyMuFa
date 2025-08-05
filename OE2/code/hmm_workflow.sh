@@ -72,6 +72,7 @@ while [[ $# -gt 0 ]]; do
         --type) shift; db_type="$1"; shift ;;
         --outdir) shift; outdir="$1"; shift ;;
         --cpu) shift; cpu="$1"; shift ;;
+        --mode) shift; mode="$1"; shift ;;
 
         # hmmbuild options
         --symfrac) shift; symfrac="$1"; shift ;;
