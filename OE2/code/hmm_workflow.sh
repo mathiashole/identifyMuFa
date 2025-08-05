@@ -125,6 +125,13 @@ if [[ "$mode" != "build" && ${#hmm_files[@]} -eq 0 ]]; then
     echo "Error: --hmm is required in modes 'search' and 'all'" >&2; exit 1
 fi
 
+# If --wid is used but no weighting method selected, default to wblosum
+if [[ -n "$wid" && "$wblosum" == false && "$wpb" == false ]]; then
+    echo "[INFO] --wid detected without --wblosum or --wpb. Defaulting to --wblosum."
+    wblosum=true
+fi
+
+
 # More validations check file existence
 for f in "${aln_files[@]}"; do [[ -f "$f" ]] || { echo "Alignment file not found: $f" >&2; exit 1; }; done
 
