@@ -236,8 +236,8 @@ run_search() {
 
 # echo "[ALL DONE] Results saved in $outdir"
 
-[[ ${#aln_files[@]} -gt 0 ]] && build_hmms
-run_search
+# [[ ${#aln_files[@]} -gt 0 ]] && build_hmms
+# run_search
 
 echo "[ALL DONE] Results saved in '$outdir'"
 
