@@ -107,6 +107,20 @@ if [[ "$db_type" != "prot" && "$db_type" != "nucl" ]]; then
     echo "Error: --type must be 'prot' or 'nucl'" >&2; exit 1
 fi
 
+# Mode validation
+
+if [[ "$mode" != "build" && "$mode" != "search" && "$mode" != "all" ]]; then
+    echo "Error: --mode must be 'build', 'search', or 'all'" >&2; exit 1
+fi
+
+if [[ "$mode" != "search" && ${#aln_files[@]} -eq 0 ]]; then
+    echo "Error: --aln is required in modes 'build' and 'all'" >&2; exit 1
+fi
+
+if [[ "$mode" != "build" && ${#hmm_files[@]} -eq 0 ]]; then
+    echo "Error: --hmm is required in modes 'search' and 'all'" >&2; exit 1
+fi
+
 # More validations check file existence
 for f in "${aln_files[@]}"; do [[ -f "$f" ]] || { echo "Alignment file not found: $f" >&2; exit 1; }; done
 
