@@ -45,6 +45,7 @@ EOF
 # Default
 outdir="hmm_results"
 cpu=1
+mode="all"
 symfrac=""
 hand=false
 wid=""
