@@ -121,18 +121,20 @@ mkdir -p "$outdir"
 # ===========================
 # HMMBUILD
 # ===========================
-build_hmms() {
-    local generated_hmms=()
-    echo "[INFO] Building HMM profiles from alignments..."
-    for aln in "${aln_files[@]}"; do
-        base=$(basename "$aln")
-        prefix="${base%.*}"
-        hmm_out="$outdir/${prefix}.hmm"
-        hmmbuild --cpu "$cpu" "$hmm_out" "$aln"
-        generated_hmms+=("$hmm_out")
-    done
-    hmm_files+=("${generated_hmms[@]}")
-}
+# build_hmms() {
+#     local generated_hmms=()
+#     echo "[INFO] Building HMM profiles from alignments..."
+#     for aln in "${aln_files[@]}"; do
+#         base=$(basename "$aln")
+#         prefix="${base%.*}"
+#         hmm_out="$outdir/${prefix}.hmm"
+#         hmmbuild --cpu "$cpu" "$hmm_out" "$aln"
+#         generated_hmms+=("$hmm_out")
+#     done
+#     hmm_files+=("${generated_hmms[@]}")
+# }
+
+
 
 run_search() {
     echo "[INFO] Running HMM search..."
