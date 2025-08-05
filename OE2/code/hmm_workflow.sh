@@ -78,6 +78,8 @@ while [[ $# -gt 0 ]]; do
         --symfrac) shift; symfrac="$1"; shift ;;
         --hand) hand=true; shift ;;
         --wid) shift; wid="$1"; shift ;;
+        --wblosum) wblosum=true; shift ;;
+        --wpb) wpb=true; shift ;;
         
         # hmmsearch options
         --e) shift; evalue="$1"; shift ;;
