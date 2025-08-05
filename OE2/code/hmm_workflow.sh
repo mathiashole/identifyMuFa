@@ -160,6 +160,38 @@ build_hmms() {
 # ===========================
 # HMMSEARCH
 # ===========================
+run_search() {
+    echo "[INFO] Running HMM search..."
+    for hmm in "${hmm_files[@]}"; do
+        hmm_base=$(basename "$hmm")
+        hmm_id="${hmm_base//./_}"
+        hmm_id="${hmm_id%.hmm}"
+
+        for db in "${db_files[@]}"; do
+            db_base=$(basename "$db")
+            db_id="${db_base//./_}"
+            db_id="${db_id%.*}"
+
+            cmd=()
+            if [[ "$db_type" == "prot" ]]; then
+                cmd=(hmmsearch --cpu "$cpu")
+            else
+                cmd=(nhmmer --cpu "$cpu")
+            fi
+
+            [[ -n "$evalue" ]] && cmd+=(--E "$evalue")
+            [[ -n "$domevalue" ]] && cmd+=(--domE "$domevalue")
+            [[ -n "$tblout" ]] && cmd+=(--tblout "$outdir/${hmm_id}_${db_id}.tbl")
+            [[ -n "$domtblout" ]] && cmd+=(--domtblout "$outdir/${hmm_id}_${db_id}.domtbl")
+            [[ -n "$pfamtblout" ]] && cmd+=(--pfamtblout "$outdir/${hmm_id}_${db_id}.pfam")
+
+            cmd+=("$hmm" "$db")
+
+            echo "[CMD] ${cmd[*]}"
+            "${cmd[@]}"
+        done
+    done
+}
 
 # run_search() {
 #     echo "[INFO] Running HMM search..."
