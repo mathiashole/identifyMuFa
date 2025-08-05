@@ -16,6 +16,7 @@ Required:
   --type <prot|nucl>            Type of database: 'prot' (protein) or 'nucl' (nucleotide)
 
 Optional:
+  --mode <all|build|search>     Choose execution mode (default: all)
   --outdir <dir>                Output directory (default: hmm_results)
   --cpu <int>                   Number of CPUs to use (default: 1)
 
