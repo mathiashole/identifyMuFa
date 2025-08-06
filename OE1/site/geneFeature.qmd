@@ -156,9 +156,6 @@ transform_columns <- function(df, cols) {
 
 ```
 
-### Características de los genomas
-
-Se utiliza ALGO la función mencionada para extraer diversas características de los genomas. Con estos datos, generamos la primera `Tabla resumen`, que agrupa los contigs de cada genoma ``r genome_name``, mostrando el  `número total de secuencias encontradas`, así como la `longitud` mínima, media y máxima, así como el contenido de `GC` mínimo, medio y máximo.
 
 ```{r}
 #| label: extract genome feature and created summary
