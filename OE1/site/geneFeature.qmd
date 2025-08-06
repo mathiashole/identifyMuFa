@@ -380,6 +380,8 @@ all_code_prot_summary <- all_code_prot_data %>%
 
 ### Tabla resumen de secuencias codificantes por genoma
 
+Tambien, se construye una tabla resumen por genoma ``r genome_name`` de las secuencias codificantes, que incluye los valores `mínimos`, `media`, `máximos` y `desvio estandar` tanto de la `longitud (pb)` como del contenido de `GC%`.
+
 ```{r}
 #| label: created summary all coding protein 
 #| echo: false
