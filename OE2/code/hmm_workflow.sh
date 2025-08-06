@@ -255,6 +255,9 @@ run_search() {
 # [[ ${#aln_files[@]} -gt 0 ]] && build_hmms
 # run_search
 
+# ===========================
+# EXECUTION
+# ===========================
 [[ "$mode" == "build" || "$mode" == "all" ]] && build_hmms
 [[ "$mode" == "search" || "$mode" == "all" ]] && run_search
 
