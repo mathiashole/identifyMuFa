@@ -180,7 +180,9 @@ genomes_summary <- genomes %>%
 
 ```
 
-### Tabla resumen de los genomas
+### 📊 Tabla resumen de los genomas
+
+Se elaboró una tabla resumen con las principales estadísticas descriptivas de cada genoma analizado. Esta tabla incluye la `media`, `desvío estándar`, `valor mínimo` y `valor máximo` tanto para el `contenido de GC (%)` como para la `longitud del genoma (en pares de bases)`.
 
 ```{r}
 #| label: summary genome feature and created summary
