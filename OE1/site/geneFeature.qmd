@@ -166,7 +166,6 @@ transform_columns <- function(df, cols) {
 genomes <- read.table("genome_gc_length.tsv", sep = "\t", header = TRUE)
 # genomes <- read.csv("../output_directory/genome_gc_length.csv", sep = ",", header = TRUE)
 
-
 # Crear una tabla con el conteo de secuencias por archivo
 genomes_summary <- genomes %>%
   group_by(file) %>%
