@@ -188,7 +188,6 @@ Se elaboró una tabla resumen con las principales estadísticas descriptivas de 
 #| echo: false
 #| warning: false
 
-
 # Mostrar la tabla de conteo de secuencias
 reactable(genomes_summary, highlight = TRUE)
 
