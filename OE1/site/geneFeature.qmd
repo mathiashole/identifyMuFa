@@ -548,7 +548,6 @@ Se genera una tabla con las estadístias descriptivas de las `r key_name` comple
 
 target_protein_high <- read.table("all_high_gene_gc_length.tsv", sep = "\t", header = TRUE)
 
-## NEED DEBUG HIGH and LOW
 # Crear una tabla con el conteo de secuencias por archivo
 file_sequence_counts <- target_protein_high %>%
   group_by(file) %>%
