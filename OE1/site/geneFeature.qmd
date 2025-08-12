@@ -680,18 +680,6 @@ new_gene_annotatet_summary <- new_gene_annotate %>%
 
 ```
 
-
-```{r}
-#| label: summary genome feature and created summary new gene
-#| echo: false
-#| warning: false
-
-
-# Mostrar la tabla de conteo de secuencias
-# reactable(new_gene_annotatet_summary, highlight = TRUE)
-
-```
-
 ### Visualización de la Longitud y Contenido de GC de el total de los nuevos genes de``r key_name``
 
 Se generan gráficos que representan el `contenido de GC` y la `longitud` de cada secuencia de ``r key_name`` re anotadas. 
