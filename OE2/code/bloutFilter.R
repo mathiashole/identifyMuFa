@@ -27,11 +27,16 @@ if (ncol(df) > 20) {
   
   df <- df %>%
     mutate(target_cov = (alito - alifrom + 1) / tlen,
-           query_cov = (hmmto - hmmfrom + 1) / hmmlen) %>%
+           query_cov = (hmmto - hmmfrom + 1) / hmmlen,
+           length_ratio = tlen / hmmlen
+           ) %>%
     filter(Evalue_dom <= EVAL_MAX,
            score_dom >= SCORE_MIN,
            target_cov >= COV_MIN,
-           query_cov >= COV_MIN)
+           query_cov >= COV_MIN,
+           length_ratio >= RATIO_MIN,
+           length_ratio <= RATIO_MAX
+           )
 } else {
   # tblout
   colnames(df)[c(5,6)] <- c("Evalue_full", "score_full")
