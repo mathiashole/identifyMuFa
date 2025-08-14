@@ -1,7 +1,6 @@
 #!/usr/bin/env Rscript
 
 library(dplyr)
-library(readr)
 
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args) < 4) {
