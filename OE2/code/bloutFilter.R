@@ -15,6 +15,48 @@ COV_MIN <- ifelse(length(args) >= 5, as.numeric(args[5]), 0)
 RATIO_MIN <- ifelse(length(args) >= 6, as.numeric(args[6]), -Inf)
 RATIO_MAX <- ifelse(length(args) >= 7, as.numeric(args[7]), Inf)
 
+# init variable values
+infile <- NULL
+outfile <- NULL
+EVAL_MAX <- NULL
+SCORE_MIN <- NULL
+COV_MIN <- NULL
+RATIO_MIN <- -Inf
+RATIO_MAX <- Inf
+
+# Parse arguments manually
+for (i in seq_along(args)) {
+  if (args[i] == "--gff_file" || args[i] == "-g") {
+    gff_file <- args[i + 1]
+  } else if (args[i] == "--keywords" || args[i] == "-k") {
+    keyword_pairs <- args[(i + 1):length(args)]
+  } else if (args[i] == "--number" || args[i] == "-n") {
+    number <- as.integer(args[i + 1])
+  } else if (args[i] == "--strict" || args[i] == "-s") {
+    strict <- TRUE
+  } else if (args[i] == "--layout" || args[i] == "-l") {
+    layout_id <- args[(i + 1):length(args)]
+  } else if (args[i] == "--line_plot" || args[i] == "-lp") {
+    line_plot <- TRUE
+  } else if (args[i] == "--table" || args[i] == "-tab") {
+    table_format <- args[i + 1]
+  } else if (args[i] == "--colors" || args[i] == "-c") {
+    colors_input <- args[(i + 1):length(args)]
+  } else if (args[i] == "--palette" || args[i] == "-p") {
+    palette_name <- args[i + 1]
+  } else if (args[i] == "--fill_file" || args[i] == "-ff") {
+    fill_file <- args[i + 1]
+  } else if (args[i] == "--format" || args[i] == "-f") {
+    file_format <- args[i + 1]
+  } else if (args[i] == "--order_file" || args[i] == "-of") {
+    order_file <- args[i + 1]
+  } else if (args[i] == "--accumulated_plot" || args[i] == "-ap") {
+    accumulated_plot <- TRUE
+  } else if (args[i] == "--summary" || args[i] == "-sm") {
+    summary_args <- TRUE
+  }
+}
+
 df <- read_table2(infile, comment = "#", col_names = FALSE)
 
 if (ncol(df) > 20) {
