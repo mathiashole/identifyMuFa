@@ -3,8 +3,8 @@
 library(dplyr)
 
 args <- commandArgs(trailingOnly = TRUE)
-if (length(args) < 4) {
-  stop("Uso: Rscript filter_hmmer.R input output EVAL_MAX SCORE_MIN [COV_MIN]")
+if (length(args) < 5) {
+  stop("Uso: Rscript bloutFilter.R input output EVAL_MAX SCORE_MIN COV_MIN [RATIO_MIN RATIO_MAX]")
 }
 
 infile <- args[1]
