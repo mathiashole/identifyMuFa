@@ -40,8 +40,8 @@ for (i in seq_along(args)) {
     line_plot <- TRUE
   } else if (args[i] == "--coverage_domain" || args[i] == "-cdom") {
     COV_MIN <- args[i + 1]
-  } else if (args[i] == "--colors" || args[i] == "-c") {
-    colors_input <- args[(i + 1):length(args)]
+  } else if (args[i] == "--coverage_min" || args[i] == "-cmin") {
+    RATIO_MIN <- args[(i + 1):length(args)]
   } else if (args[i] == "--palette" || args[i] == "-p") {
     palette_name <- args[i + 1]
   } else if (args[i] == "--fill_file" || args[i] == "-ff") {
