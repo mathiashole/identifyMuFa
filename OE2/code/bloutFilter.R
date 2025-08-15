@@ -34,8 +34,8 @@ for (i in seq_along(args)) {
     EVAL_MAX <- as.integer(args[i + 1])
   } else if (args[i] == "--strict" || args[i] == "-s") {
     strict <- TRUE
-  } else if (args[i] == "--layout" || args[i] == "-l") {
-    layout_id <- args[(i + 1):length(args)]
+  } else if (args[i] == "--score_dom" || args[i] == "-sdom") {
+    SCORE_MIN <- args[(i + 1):length(args)]
   } else if (args[i] == "--line_plot" || args[i] == "-lp") {
     line_plot <- TRUE
   } else if (args[i] == "--table" || args[i] == "-tab") {
