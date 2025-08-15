@@ -38,8 +38,8 @@ for (i in seq_along(args)) {
     SCORE_MIN <- args[(i + 1):length(args)]
   } else if (args[i] == "--line_plot" || args[i] == "-lp") {
     line_plot <- TRUE
-  } else if (args[i] == "--table" || args[i] == "-tab") {
-    table_format <- args[i + 1]
+  } else if (args[i] == "--coverage_domain" || args[i] == "-cdom") {
+    COV_MIN <- args[i + 1]
   } else if (args[i] == "--colors" || args[i] == "-c") {
     colors_input <- args[(i + 1):length(args)]
   } else if (args[i] == "--palette" || args[i] == "-p") {
