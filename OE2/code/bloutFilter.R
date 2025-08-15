@@ -26,8 +26,8 @@ RATIO_MAX <- Inf
 
 # Parse arguments manually
 for (i in seq_along(args)) {
-  if (args[i] == "--gff_file" || args[i] == "-g") {
-    gff_file <- args[i + 1]
+  if (args[i] == "--in" || args[i] == "-i") {
+    infile <- args[i + 1]
   } else if (args[i] == "--keywords" || args[i] == "-k") {
     keyword_pairs <- args[(i + 1):length(args)]
   } else if (args[i] == "--number" || args[i] == "-n") {
