@@ -30,8 +30,8 @@ for (i in seq_along(args)) {
     infile <- args[i + 1]
   } else if (args[i] == "--output" || args[i] == "-o") {
     outfile <- args[(i + 1):length(args)]
-  } else if (args[i] == "--number" || args[i] == "-n") {
-    number <- as.integer(args[i + 1])
+  } else if (args[i] == "--evalue" || args[i] == "-e") {
+    EVAL_MAX <- as.integer(args[i + 1])
   } else if (args[i] == "--strict" || args[i] == "-s") {
     strict <- TRUE
   } else if (args[i] == "--layout" || args[i] == "-l") {
