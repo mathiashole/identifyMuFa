@@ -3,17 +3,6 @@
 library(dplyr)
 
 args <- commandArgs(trailingOnly = TRUE)
-if (length(args) < 5) {
-  stop("Uso: Rscript bloutFilter.R input output EVAL_MAX SCORE_MIN COV_MIN [RATIO_MIN RATIO_MAX]")
-}
-
-# infile <- args[1]
-# outfile <- args[2]
-# EVAL_MAX <- as.numeric(args[3])
-# SCORE_MIN <- as.numeric(args[4])
-# COV_MIN <- ifelse(length(args) >= 5, as.numeric(args[5]), 0)
-# RATIO_MIN <- ifelse(length(args) >= 6, as.numeric(args[6]), -Inf)
-# RATIO_MAX <- ifelse(length(args) >= 7, as.numeric(args[7]), Inf)
 
 # init variable values
 infile <- NULL
