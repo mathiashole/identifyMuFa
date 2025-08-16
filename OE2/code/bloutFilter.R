@@ -20,7 +20,7 @@ infile <- NULL
 outfile <- NULL
 EVAL_MAX <- NULL
 SCORE_MIN <- NULL
-COV_MIN <- NULL
+COV_MIN <- 0
 RATIO_MIN <- -Inf
 RATIO_MAX <- Inf
 
