@@ -32,28 +32,14 @@ for (i in seq_along(args)) {
     outfile <- args[(i + 1):length(args)]
   } else if (args[i] == "--evalue" || args[i] == "-e") {
     EVAL_MAX <- as.integer(args[i + 1])
-  } else if (args[i] == "--strict" || args[i] == "-s") {
-    strict <- TRUE
   } else if (args[i] == "--score_dom" || args[i] == "-sdom") {
     SCORE_MIN <- args[(i + 1):length(args)]
-  } else if (args[i] == "--line_plot" || args[i] == "-lp") {
-    line_plot <- TRUE
   } else if (args[i] == "--coverage_domain" || args[i] == "-cdom") {
     COV_MIN <- args[i + 1]
   } else if (args[i] == "--coverage_min" || args[i] == "-cmin") {
     RATIO_MIN <- args[(i + 1):length(args)]
   } else if (args[i] == "--coverage_max" || args[i] == "-cmax") {
     RATIO_MAX <- args[i + 1]
-  } else if (args[i] == "--fill_file" || args[i] == "-ff") {
-    fill_file <- args[i + 1]
-  } else if (args[i] == "--format" || args[i] == "-f") {
-    file_format <- args[i + 1]
-  } else if (args[i] == "--order_file" || args[i] == "-of") {
-    order_file <- args[i + 1]
-  } else if (args[i] == "--accumulated_plot" || args[i] == "-ap") {
-    accumulated_plot <- TRUE
-  } else if (args[i] == "--summary" || args[i] == "-sm") {
-    summary_args <- TRUE
   }
 }
 
