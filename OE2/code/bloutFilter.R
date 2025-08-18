@@ -14,21 +14,38 @@ RATIO_MIN <- -Inf
 RATIO_MAX <- Inf
 
 # Parse arguments manually
+# for (i in seq_along(args)) {
+#   if (args[i] == "--input" || args[i] == "-i") {
+#     infile <- args[i + 1]
+#   } else if (args[i] == "--output" || args[i] == "-o") {
+#     outfile <- args[(i + 1):length(args)]
+#   } else if (args[i] == "--evalue" || args[i] == "-e") {
+#     EVAL_MAX <- as.integer(args[i + 1])
+#   } else if (args[i] == "--score_dom" || args[i] == "-sdom") {
+#     SCORE_MIN <- args[(i + 1):length(args)]
+#   } else if (args[i] == "--coverage_domain" || args[i] == "-cdom") {
+#     COV_MIN <- args[i + 1]
+#   } else if (args[i] == "--coverage_min" || args[i] == "-cmin") {
+#     RATIO_MIN <- args[(i + 1):length(args)]
+#   } else if (args[i] == "--coverage_max" || args[i] == "-cmax") {
+#     RATIO_MAX <- args[i + 1]
+#   }
+# }
 for (i in seq_along(args)) {
   if (args[i] == "--input" || args[i] == "-i") {
     infile <- args[i + 1]
   } else if (args[i] == "--output" || args[i] == "-o") {
-    outfile <- args[(i + 1):length(args)]
+    outfile <- args[i + 1]
   } else if (args[i] == "--evalue" || args[i] == "-e") {
-    EVAL_MAX <- as.integer(args[i + 1])
+    EVAL_MAX <- as.numeric(args[i + 1])
   } else if (args[i] == "--score_dom" || args[i] == "-sdom") {
-    SCORE_MIN <- args[(i + 1):length(args)]
+    SCORE_MIN <- as.numeric(args[i + 1])
   } else if (args[i] == "--coverage_domain" || args[i] == "-cdom") {
-    COV_MIN <- args[i + 1]
+    COV_MIN <- as.numeric(args[i + 1])
   } else if (args[i] == "--coverage_min" || args[i] == "-cmin") {
-    RATIO_MIN <- args[(i + 1):length(args)]
+    RATIO_MIN <- as.numeric(args[i + 1])
   } else if (args[i] == "--coverage_max" || args[i] == "-cmax") {
-    RATIO_MAX <- args[i + 1]
+    RATIO_MAX <- as.numeric(args[i + 1])
   }
 }
 
