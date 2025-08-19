@@ -31,23 +31,7 @@ RATIO_MAX <- Inf
 #     RATIO_MAX <- args[i + 1]
 #   }
 # }
-for (i in seq_along(args)) {
-  if (args[i] == "--input" || args[i] == "-i") {
-    infile <- args[i + 1]
-  } else if (args[i] == "--output" || args[i] == "-o") {
-    outfile <- args[i + 1]
-  } else if (args[i] == "--evalue" || args[i] == "-e") {
-    EVAL_MAX <- as.numeric(args[i + 1])
-  } else if (args[i] == "--score_dom" || args[i] == "-sdom") {
-    SCORE_MIN <- as.numeric(args[i + 1])
-  } else if (args[i] == "--coverage_domain" || args[i] == "-cdom") {
-    COV_MIN <- as.numeric(args[i + 1])
-  } else if (args[i] == "--coverage_min" || args[i] == "-cmin") {
-    RATIO_MIN <- as.numeric(args[i + 1])
-  } else if (args[i] == "--coverage_max" || args[i] == "-cmax") {
-    RATIO_MAX <- as.numeric(args[i + 1])
-  }
-}
+
 
 if (is.null(infile) || is.null(outfile)) {
   stop("Usage: Rscript bloutFilter.R --input IN --output OUT --evalue E --score_dom S [--coverage_domain C] [--coverage_min R1] [--coverage_max R2]")
