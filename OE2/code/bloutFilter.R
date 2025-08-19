@@ -49,11 +49,9 @@ for (i in seq_along(args)) {
   }
 }
 
-
 if (is.null(infile) || is.null(outfile)) {
   stop("Usage: Rscript bloutFilter.R --input IN --output OUT --evalue E --score_dom S [--coverage_domain C] [--coverage_min R1] [--coverage_max R2]")
 }
-
 
 df <- read_table2(infile, comment = "#", col_names = FALSE)
 
