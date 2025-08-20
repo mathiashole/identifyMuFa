@@ -31,6 +31,7 @@ RATIO_MAX <- Inf
 #     RATIO_MAX <- args[i + 1]
 #   }
 # }
+
 for (i in seq_along(args)) {
   if (args[i] == "--input" || args[i] == "-i") {
     infile <- args[i + 1]
