@@ -1,6 +1,8 @@
 #!/usr/bin/env Rscript
 
-library(dplyr)
+suppressPackageStartupMessages({
+  library(dplyr)
+})
 
 args <- commandArgs(trailingOnly = TRUE)
 
