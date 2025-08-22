@@ -14,6 +14,8 @@ SCORE_MIN <- NULL
 COV_MIN <- 0
 RATIO_MIN <- -Inf
 RATIO_MAX <- Inf
+MIN_ALI_LEN = 0     # minimum alignment length
+MAX_BIAS_FRAC = 1    # bias/score
 
 # Parse arguments manually
 # for (i in seq_along(args)) {
