@@ -7,7 +7,7 @@
 *.css
 *.woff
 OE1/site/structure_file/*.cif
-OE1/site/*_file
+OE1/site/*_files
 *output_directory*
 OE1/main_feature.R
 
