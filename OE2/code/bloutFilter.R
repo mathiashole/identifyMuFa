@@ -61,7 +61,7 @@ if (is.null(infile) || is.null(outfile)) {
 df <- read_table2(infile, comment = "#", col_names = FALSE)
 
 if (ncol(df) > 20) {
-  # domtblout
+  # domtblout parsing
   colnames(df)[c(3,5,13,14,16,17,18,19)] <- c(
     "tlen", "hmmlen", "Evalue_dom", "score_dom", 
     "hmmfrom", "hmmto", "alifrom", "alito"
@@ -80,7 +80,7 @@ if (ncol(df) > 20) {
            length_ratio <= RATIO_MAX
            )
 } else {
-  # tblout
+  # tblout parsing
   colnames(df)[c(5,6)] <- c("Evalue_full", "score_full")
   
   df <- df %>%
