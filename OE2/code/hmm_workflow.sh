@@ -95,22 +95,6 @@ while [[ $# -gt 0 ]]; do
 done
 
 
-# ===========================
-# VALIDATIONS
-# ===========================
-# Validations
-# if [[ ${#aln_files[@]} -eq 0 && ${#hmm_files[@]} -eq 0 ]]; then
-#     echo "Error: Provide either --aln or --hmm files." >&2; exit 1
-# fi
-
-# if [[ ${#db_files[@]} -eq 0 ]]; then
-#     echo "Error: No database files provided with --db" >&2; exit 1
-# fi
-
-# if [[ "$db_type" != "prot" && "$db_type" != "nucl" ]]; then
-#     echo "Error: --type must be 'prot' or 'nucl'" >&2; exit 1
-# fi
-
 # Mode validation
 
 if [[ "$mode" != "build" && "$mode" != "search" && "$mode" != "all" ]]; then
