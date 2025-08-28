@@ -143,11 +143,6 @@ build_hmms() {
         [[ "$wblosum" == true ]] && cmd+=(--wblosum)
         [[ "$wpb" == true ]] && cmd+=(--wpb)
         [[ -n "$wid" ]] && cmd+=(--wid "$wid")
-        # cmd=(hmmbuild --cpu "$cpu")
-
-        # [[ -n "$symfrac" ]] && cmd+=(--symfrac "$symfrac")
-        # [[ "$hand" == true ]] && cmd+=(--hand)
-        # [[ -n "$wid" ]] && cmd+=(--wid "$wid")
 
         cmd+=("$hmm_out" "$aln")
 
