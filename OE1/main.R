@@ -55,7 +55,9 @@ assign_column_names <- function(data, mode) {
       stop("Unexpected format in GFF mode")
     }
   } else if (mode == "no_gff") {
-    if (n == 3) {
+    if (n == 4) {
+      colnames(data) <- c("fasta_file", "sequence_file", "length", "identity")
+    } else if (n == 3) {
       colnames(data) <- c("fasta_file", "sequence_file", "length")
     } else if (n == 2) {
       colnames(data) <- c("fasta_file", "sequence_file")
