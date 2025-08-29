@@ -65,6 +65,9 @@ generate_commands_without_gff <- function(data, output_dir){
   # } else {
 
   # }
+  
+  identity_value <- if ("identity" %in% colnames(data)) data$identity else 80
+
   data$bRefiner_command <- paste(BREFINER , "-file", file.path(output_dir, "blast_result", data$blastp_result), "-i", 80, "-l", data$length / 3 * 0.8, "-col", 2, "-uniq") ## Need mean calculated option
 
   data$classifier_command <- paste("Rscript", CLASSIFIER, file.path(output_dir, data$overlappingshaive_result), file.path(output_dir, "blast_result", data$brefiner_blastp))
