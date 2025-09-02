@@ -45,6 +45,15 @@ if [ "$UNIQ_SORT" = true ]; then
         if (col == "ALL") print $0;
         else print $col;
     }' "$BLAST_FILE" | sort | uniq > "$OUTPUT_FILE"
+
+# elif [ "$SORT_KEYS" != "" ]; then
+#     awk -v id_min="$IDENTITY_MIN" -v len_min="$LENGTH_MIN" -v evalue_max="$EVALUE_MAX" -v col="$COLUMN_TO_PRINT" '
+#     BEGIN { FS=OFS="\t" }
+#     ($3 >= id_min) && ($4 >= len_min) && ($11 <= evalue_max) && (self_filter == "false" || $1 != $2) {
+#         if (col == "ALL") print $0;
+#         else print $col;
+#     }' "$BLAST_FILE" | sort -t$'\t' -k$(echo $SORT_KEYS | sed 's/,/ -k/g') > "$OUTPUT_FILE"
+
 else
     awk -v id_min="$IDENTITY_MIN" -v len_min="$LENGTH_MIN" -v evalue_max="$EVALUE_MAX" -v col="$COLUMN_TO_PRINT" '
     BEGIN { FS=OFS="\t" }
