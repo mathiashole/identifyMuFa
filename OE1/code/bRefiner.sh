@@ -40,6 +40,12 @@ INPUT_NAME=$(basename "$BLAST_FILE")
 OUTPUT_FILE="$INPUT_DIR/bRefiner_$INPUT_NAME"
 
 # Apply filters
+if [ "$UNIQ_SORT" = true ] && [ "$BEST_ALIGNMENT" = true ]; then
+    echo "Error: -uniq and -best cannot be used together."
+    exit 1
+fi
+
+# Apply filters
 if [ "$UNIQ_SORT" = true ]; then
     awk -v id_min="$IDENTITY_MIN" -v len_min="$LENGTH_MIN" -v evalue_max="$EVALUE_MAX" -v col="$COLUMN_TO_PRINT" '
     BEGIN { FS=OFS="\t" }
