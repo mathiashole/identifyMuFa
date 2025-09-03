@@ -129,7 +129,7 @@ for tool in hmmbuild hmmsearch nhmmer; do
 done
 
 # mkdir -p "$outdir"
-
+mkdir -p "hmms/$outdir" "search/$outdir" "logs/$outdir"
 
 build_hmms() {
     local generated_hmms=()
