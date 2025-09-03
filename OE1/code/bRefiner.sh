@@ -8,6 +8,7 @@ UNIQ_SORT=false    # By default, do NOT apply uniq
 BEST_ALIGNMENT=false  # By default, do NOT pick best hit
 COLUMN_TO_PRINT="ALL" # Default: print all columns
 SELF_FILTER=true   # By default, filter self-hits
+REPORT=false # By default report
 
 # Parse arguments
 while [[ "$#" -gt 0 ]]; do
