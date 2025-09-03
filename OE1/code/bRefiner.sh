@@ -18,6 +18,7 @@ while [[ "$#" -gt 0 ]]; do
         -e) EVALUE_MAX="$2"; shift ;;  # Add evalue filter
         -col) COLUMN_TO_PRINT="$2"; shift ;;
         -uniq) UNIQ_SORT=true ;;  # Apply sorting and unique filtering
+        -best) BEST_ALIGNMENT=true ;;
         -self) SELF_FILTER="$2"; shift ;;  # Add self-hits filter option
         *) echo "Unknown parameter: $1"; exit 1 ;;
     esac
