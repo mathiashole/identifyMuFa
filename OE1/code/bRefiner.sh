@@ -10,6 +10,55 @@ COLUMN_TO_PRINT="ALL" # Default: print all columns
 SELF_FILTER=true   # By default, filter self-hits
 REPORT=false # By default report
 
+generate_report() {
+    local file="$1"
+    local label="$2"
+
+    echo "Report for: $label"
+    awk '{
+        queries[$1]++
+        subjects[$2]++
+        qh[$1]++
+        id[NR]=$3
+        len[NR]=$4
+        sum_id+=$3
+        sum_len+=$4
+        n++
+    } END {
+        avg_id = (n > 0 ? sum_id/n : 0)
+        avg_len = (n > 0 ? sum_len/n : 0)
+
+        for(i=1;i<=n;i++){
+            sd_id += (id[i]-avg_id)^2
+            sd_len += (len[i]-avg_len)^2
+        }
+        sd_id = (n>1 ? sqrt(sd_id/(n-1)) : 0)
+        sd_len = (n>1 ? sqrt(sd_len/(n-1)) : 0)
+
+        asort(id)
+        asort(len)
+        if(n % 2){
+            med_id=id[(n+1)/2]
+            med_len=len[(n+1)/2]
+        } else {
+            med_id=(id[n/2]+id[n/2+1])/2
+            med_len=(len[n/2]+len[n/2+1])/2
+        }
+
+        print "Queries total:", length(queries)
+        print "Queries with hits:", length(qh)
+        print "Unique queries:", length(queries)
+        print "Unique subjects:", length(subjects)
+        print "Avg identity:", avg_id
+        print "SD identity:", sd_id
+        print "Median identity:", med_id
+        print "Avg length:", avg_len
+        print "SD length:", sd_len
+        print "Median length:", med_len
+    }' "$file"
+    echo "------------------------"
+}
+
 # Parse arguments
 while [[ "$#" -gt 0 ]]; do
     case $1 in
