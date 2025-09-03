@@ -73,4 +73,9 @@ else
 fi
 
 
+if [[ $REPORT == true ]]; then
+    generate_report "$INPUT_FILE" "Raw data (unfiltered)"
+    generate_report "$OUTPUT_FILE" "Filtered data"
+fi
+
 echo "Blast Refiner results saved to: $OUTPUT_FILE"
