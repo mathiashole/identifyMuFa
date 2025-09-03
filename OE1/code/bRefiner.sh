@@ -21,6 +21,7 @@ while [[ "$#" -gt 0 ]]; do
         -uniq) UNIQ_SORT=true ;;  # Apply sorting and unique filtering
         -best) BEST_ALIGNMENT=true ;;
         -self) SELF_FILTER="$2"; shift ;;  # Add self-hits filter option
+        -report) REPORT=true ;; # Apply report option
         *) echo "Unknown parameter: $1"; exit 1 ;;
     esac
     shift
