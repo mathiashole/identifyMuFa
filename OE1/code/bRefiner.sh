@@ -4,9 +4,10 @@
 IDENTITY_MIN=0
 LENGTH_MIN=0
 EVALUE_MAX=1  # Default 1 (accepts all values)
-UNIQ_SORT=false  # By default, do NOT apply sort | uniq
-COLUMN_TO_PRINT="ALL"  # Default: print all columns
-SELF_FILTER=true  # By default, filter self-hits
+UNIQ_SORT=false    # By default, do NOT apply uniq
+BEST_ALIGNMENT=false  # By default, do NOT pick best hit
+COLUMN_TO_PRINT="ALL" # Default: print all columns
+SELF_FILTER=true   # By default, filter self-hits
 
 # Parse arguments
 while [[ "$#" -gt 0 ]]; do
@@ -46,7 +47,7 @@ if [ "$UNIQ_SORT" = true ]; then
         else print $col;
     }' "$BLAST_FILE" | sort | uniq > "$OUTPUT_FILE"
 
-elif [ "$SORT_KEYS" != "" ]; then
+elif [ "$BEST_ALIGNMENT" != "" ]; then
     awk -v id_min="$IDENTITY_MIN" -v len_min="$LENGTH_MIN" -v evalue_max="$EVALUE_MAX" -v col="$COLUMN_TO_PRINT" '
     BEGIN { FS=OFS="\t" }
     ($3 >= id_min) && ($4 >= len_min) && ($11 <= evalue_max) && (self_filter == "false" || $1 != $2) {
