@@ -182,6 +182,10 @@ run_search() {
             [[ -n "$domtblout" ]] && cmd+=(--domtblout "$outdir/${hmm_id}_${db_id}.domtbl")
             [[ -n "$pfamtblout" ]] && cmd+=(--pfamtblout "$outdir/${hmm_id}_${db_id}.pfam")
 
+            # [[ -n "$tblout" ]] && cmd+=(--tblout "search/$outdir/${hmm_id}_${db_id}.tbl")
+            # [[ -n "$domtblout" ]] && cmd+=(--domtblout "search/$outdir/${hmm_id}_${db_id}.domtbl")
+            # [[ -n "$pfamtblout" ]] && cmd+=(--pfamtblout "search/$outdir/${hmm_id}_${db_id}.pfam")
+
             cmd+=("$hmm" "$db")
 
             echo "[CMD] ${cmd[*]}"
