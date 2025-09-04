@@ -21,36 +21,21 @@ generate_report() {
         len_sum+=$4; len2_sum+=$4*$4;
         n++
     }
-        avg_id = (n > 0 ? sum_id/n : 0)
-        avg_len = (n > 0 ? sum_len/n : 0)
-
-        for(i=1;i<=n;i++){
-            sd_id += (id[i]-avg_id)^2
-            sd_len += (len[i]-avg_len)^2
-        }
-        sd_id = (n>1 ? sqrt(sd_id/(n-1)) : 0)
-        sd_len = (n>1 ? sqrt(sd_len/(n-1)) : 0)
-
-        asort(id)
-        asort(len)
-        if(n % 2){
-            med_id=id[(n+1)/2]
-            med_len=len[(n+1)/2]
-        } else {
-            med_id=(id[n/2]+id[n/2+1])/2
-            med_len=(len[n/2]+len[n/2+1])/2
-        }
-
-        print "Queries total:", length(queries)
-        print "Queries with hits:", length(qh)
-        print "Unique queries:", length(queries)
-        print "Unique subjects:", length(subjects)
+    END {
+        if (n==0) {print "No data"; exit}
+        avg_id=id_sum/n
+        avg_len=len_sum/n
+        var_id=(id2_sum/n - avg_id*avg_id)
+        var_len=(len2_sum/n - avg_len*avg_len)
+        sd_id=sqrt(var_id)
+        sd_len=sqrt(var_len)
+        print "Queries total:", n
+        print "Unique queries:", length(q)
+        print "Unique subjects:", length(s)
         print "Avg identity:", avg_id
-        print "SD identity:", sd_id
-        print "Median identity:", med_id
+        print "Std identity:", sd_id
         print "Avg length:", avg_len
-        print "SD length:", sd_len
-        print "Median length:", med_len
+        print "Std length:", sd_len
     }' "$file"
     echo "------------------------"
 }
