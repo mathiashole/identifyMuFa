@@ -54,6 +54,8 @@ while [[ "$#" -gt 0 ]]; do
         -best) BEST_ALIGNMENT=true ;;
         -self) SELF_FILTER="$2"; shift ;;  # Add self-hits filter option
         -report) REPORT=true ;; # Apply report option
+        -qcov) Q_COV_MIN="$2"; shift ;;
+        -scov) S_COV_MIN="$2"; shift ;;
         *) echo "Unknown parameter: $1"; exit 1 ;;
     esac
     shift
