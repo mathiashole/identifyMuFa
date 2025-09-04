@@ -9,6 +9,8 @@ BEST_ALIGNMENT=false  # By default, do NOT pick best hit
 COLUMN_TO_PRINT="ALL" # Default: print all columns
 SELF_FILTER=true   # By default, filter self-hits
 REPORT=false # By default report
+Q_COV_MIN=0
+S_COV_MIN=0
 
 generate_report() {
     local file="$1"
