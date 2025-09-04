@@ -103,10 +103,18 @@ else
     }' "$BLAST_FILE" > "$OUTPUT_FILE"
 fi
 
+# Run report if requested
+if [ "$REPORT" = true ]; then
+    echo "Report for: Raw data (unfiltered)"
+    generate_report "$BLAST_FILE"
 
-if [[ $REPORT == true ]]; then
-    generate_report "$INPUT_FILE" "Raw data (unfiltered)"
-    generate_report "$OUTPUT_FILE" "Filtered data"
+    echo
+    echo "Report for: Filtered data"
+    generate_report "$OUTPUT_FILE"
 fi
+# if [[ $REPORT == true ]]; then
+#     generate_report "$INPUT_FILE" "Raw data (unfiltered)"
+#     generate_report "$OUTPUT_FILE" "Filtered data"
+# fi
 
 echo "Blast Refiner results saved to: $OUTPUT_FILE"
