@@ -12,19 +12,15 @@ REPORT=false # By default report
 
 generate_report() {
     local file="$1"
-    local label="$2"
-
-    echo "Report for: $label"
-    awk '{
-        queries[$1]++
-        subjects[$2]++
-        qh[$1]++
-        id[NR]=$3
-        len[NR]=$4
-        sum_id+=$3
-        sum_len+=$4
+    awk '
+    BEGIN { FS="\t"; OFS="\t"; }
+    NR==1 {next} # skip header if any
+    {
+        q[$1]++; s[$2]++;
+        id_sum+=$3; id2_sum+=$3*$3;
+        len_sum+=$4; len2_sum+=$4*$4;
         n++
-    } END {
+    }
         avg_id = (n > 0 ? sum_id/n : 0)
         avg_len = (n > 0 ? sum_len/n : 0)
 
