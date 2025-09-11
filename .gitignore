@@ -10,4 +10,4 @@ OE1/site/structure_file/*.cif
 OE1/site/*_files
 *output_directory*
 OE1/main_feature.R
-
+OE1/site/image
