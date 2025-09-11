@@ -141,7 +141,7 @@ if [[ "$blast_search" == true ]]; then
                 blastx -query "$query_file" -subject "$genome" -out "$output_blast" -outfmt '6 std qlen slen' -evalue "$evalue" -num_threads "$threads"
                 ;;
             psiblast)
-                psiblast -query "$query_file" -subject "$genome" -out "$output_blast" -outfmt '6 std qlen slen' -evalue "$evalue"
+                psiblast -query "$query_file" -subject "$genome" -out "$output_blast" -outfmt '6 std qlen slen' -evalue "$evalue" -num_threads "$threads"
                 ;;
             *)
                 echo "Error: Unsupported BLAST type '$blast_type'."
