@@ -94,7 +94,6 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-
 # Mode validation
 
 if [[ "$mode" != "build" && "$mode" != "search" && "$mode" != "all" ]]; then
