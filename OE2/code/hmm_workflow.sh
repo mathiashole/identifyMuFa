@@ -140,7 +140,7 @@ for tool in hmmbuild hmmsearch nhmmer; do
     command -v "$tool" >/dev/null 2>&1 || { echo "Required tool '$tool' not found in PATH." >&2; exit 1; };
 done
 
-mkdir -p "$outdir"
+# mkdir -p "$outdir"
 # mkdir -p "hmms/$outdir" "search/$outdir" "logs/$outdir"
 
 build_hmms() {
