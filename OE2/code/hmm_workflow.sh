@@ -191,9 +191,12 @@ run_search() {
 
             [[ -n "$evalue" ]] && cmd+=(--E "$evalue")
             [[ -n "$domevalue" ]] && cmd+=(--domE "$domevalue")
-            [[ -n "$tblout" ]] && cmd+=(--tblout "$outdir/${hmm_id}_${db_id}.tbl")
-            [[ -n "$domtblout" ]] && cmd+=(--domtblout "$outdir/${hmm_id}_${db_id}.domtbl")
-            [[ -n "$pfamtblout" ]] && cmd+=(--pfamtblout "$outdir/${hmm_id}_${db_id}.pfam")
+            # [[ -n "$tblout" ]] && cmd+=(--tblout "$outdir/${hmm_id}_${db_id}.tbl")
+            # [[ -n "$domtblout" ]] && cmd+=(--domtblout "$outdir/${hmm_id}_${db_id}.domtbl")
+            # [[ -n "$pfamtblout" ]] && cmd+=(--pfamtblout "$outdir/${hmm_id}_${db_id}.pfam")
+            [[ -n "$tblout" ]] && cmd+=(--tblout "$search_dir/${hmm_id}_${db_id}.tbl")
+            [[ -n "$domtblout" ]] && cmd+=(--domtblout "$search_dir/${hmm_id}_${db_id}.domtbl")
+            [[ -n "$pfamtblout" ]] && cmd+=(--pfamtblout "$search_dir/${hmm_id}_${db_id}.pfam")
 
             cmd+=("$hmm" "$db")
 
