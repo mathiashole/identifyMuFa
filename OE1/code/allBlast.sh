@@ -119,8 +119,6 @@ if [[ "$blast_search" == true ]]; then
             fi
         fi
 
-        # # output_blast="${output_dir}/$(basename "$genome")_blast_results.txt"
-        # output_blast="${output_dir}/${blast_type}_$(basename "$genome").txt"
         # Define BLAST output filename (without .fasta.txt)
         output_blast="${output_dir}/${blast_type}_$(basename "${genome%.fasta}").txt"
 
