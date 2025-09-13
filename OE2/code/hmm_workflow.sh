@@ -94,6 +94,19 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
+# ===========================
+# DIRECTORIES
+# ===========================
+hmms_dir="$outdir/hmms"
+search_dir="$outdir/search"
+logs_dir="$outdir/logs"
+
+mkdir -p "$hmms_dir" "$search_dir" "$logs_dir"
+
+# Central log file
+logfile="$logs_dir/run_$(date +%Y%m%d_%H%M%S).log"
+exec > >(tee -a "$logfile") 2>&1
+
 # Mode validation
 
 if [[ "$mode" != "build" && "$mode" != "search" && "$mode" != "all" ]]; then
