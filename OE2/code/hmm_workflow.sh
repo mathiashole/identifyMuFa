@@ -149,7 +149,8 @@ build_hmms() {
     for aln in "${aln_files[@]}"; do
         base=$(basename "$aln")
         prefix="${base%.*}"
-        hmm_out="$outdir/${prefix}.hmm"
+        # hmm_out="$outdir/${prefix}.hmm"
+        hmm_out="$hmms_dir/${prefix}.hmm"
 
         cmd=(hmmbuild --cpu "$cpu")
 
