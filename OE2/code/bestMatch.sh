@@ -10,3 +10,16 @@ usage() {
     exit 1
 }
 
+# --- Default values ---
+COL=2
+
+# --- Processing command-line arguments ---
+
+while getopts "f:c:o:" opt; do
+    case $opt in
+        f) INPUT=$OPTARG ;;
+        c) COL=$OPTARG ;;
+        o) PREFIJO=$OPTARG ;;
+        *) usage ;;
+    esac
+done
