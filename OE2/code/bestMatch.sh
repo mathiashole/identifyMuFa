@@ -23,3 +23,15 @@ while getopts "f:c:o:" opt; do
         *) usage ;;
     esac
 done
+
+if [[ -z "$INPUT" ]]; then usage; fi
+
+# --- Clean name for output : fasta, fna, txt ---
+if [[ -z "$PREFIJO" ]]; then
+    # Removed the extension to create a clean output name
+    BASE_NAME=$(basename "$INPUT")
+    PREFIJO="${BASE_NAME%.*}" # Remove the last extension
+    PREFIJO="${PREFIJO%.fasta}" # Remove common fasta extensions
+    PREFIJO="${PREFIJO%.fna}"
+    PREFIJO="${PREFIJO%.txt}"
+fi
