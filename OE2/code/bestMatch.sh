@@ -51,3 +51,9 @@ awk -v col="$COL" 'BEGIN{FS=OFS="\t"} {
     else { print $1, $7, $8 }
 }' > "${PREFIJO}_coords.txt"
 
+# --- Reporting ---
+echo "--- Reporting of best matches ---"
+echo "Input: $INPUT"
+echo "Id column: $COL"
+echo "Output: ${PREFIJO}_coords.txt"
+echo "Total unique sequence : $(wc -l < "${PREFIJO}_coords.txt")"
