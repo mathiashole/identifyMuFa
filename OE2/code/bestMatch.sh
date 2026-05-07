@@ -36,3 +36,5 @@ fi
 
 # Logical processing
 # 1. sort -k${COL},${COL}: Sort by the specified column (1 or 2)
+# 2. -k3,3nr -k4,4nr: Sort by identity (column 3) and then by alignment length (column 4) in descending order
+# 3. awk '!seen[$COL]++':
