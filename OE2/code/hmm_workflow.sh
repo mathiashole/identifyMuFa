@@ -226,6 +226,8 @@ build_hmms() {
         hmm_out="$outdir/${prefix}.hmm"
         log_file="$outdir/${prefix}_${timestamp}.log"
 
+        echo "[INFO] Processing $base_name..."
+
         cmd=(hmmbuild --cpu "$cpu")
 
         [[ "$wblosum" == true ]] && cmd+=(--wblosum)
