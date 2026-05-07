@@ -23,3 +23,13 @@ while getopts "f:c:o:" opt; do
 done
 
 if [[ -z "$INPUT" ]]; then usage; fi # Check if input file is provided
+
+# Remove extension from input file to create prefix if not provided
+if [[ -z "$PREFIJO" ]]; then
+    # Remove extension from input file to create prefix
+    BASE_NAME=$(basename "$INPUT")
+    PREFIJO="${BASE_NAME%.*}" # remove extension
+    PREFIJO="${PREFIJO%.fasta}" # remove .fasta if present
+    PREFIJO="${PREFIJO%.fna}"
+    PREFIJO="${PREFIJO%.txt}"
+fi
