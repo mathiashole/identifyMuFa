@@ -228,6 +228,12 @@ build_hmms() {
 
         echo "[INFO] Processing $base_name..."
 
+        # Analyze alignment and get recommendations
+        stats_tmp=$(mktemp)
+        auto_params=($(analyze_alignment "$aln" 2> "$stats_tmp"))
+        stats_info=$(cat "$stats_tmp")
+        rm "$stats_tmp"
+
         cmd=(hmmbuild --cpu "$cpu")
 
         [[ "$wblosum" == true ]] && cmd+=(--wblosum)
