@@ -157,6 +157,12 @@ analyze_alignment() {
         recs+=("--wpb") # If identity is very high, use position-based weighting to avoid over-representation of nearly identical sequences
     fi
 
+    if (( $(echo "$gap_pct > 30" | bc -l) )); then
+        recs+=("--symfrac 0.2") # If there are many gaps, require a higher fraction of sequences to have a symbol to include that column
+    elif (( $(echo "$gap_pct < 10" | bc -l) )); then
+        recs+=("--symfrac 0.6") # If there are few gaps, can be more lenient with including columns
+    fi
+    echo "${recs[@]}"
 }
 
 # # ===========================
