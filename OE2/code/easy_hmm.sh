@@ -2,9 +2,9 @@
 
 set -euo pipefail
 
-# ===========================
+
 # HELP
-# ===========================
+
 show_help() {
     cat << EOF
 Usage: $0 [OPTIONS]
@@ -42,9 +42,9 @@ EOF
 
 [[ $# -eq 0 || "$1" == "--help" ]] && show_help
 
-# ===========================
+
 # GLOBAL VARIABLE
-# ===========================
+
 # Default
 outdir="hmm_results"
 cpu=1
@@ -69,9 +69,9 @@ db_type=""
 # Timestamp for log files (hour_daymonthyear)
 timestamp=$(date +"%H%M_%d%m%Y")
 
-# ===========================
+
 # ARGUMENT PARSING
-# ===========================
+
 while [[ $# -gt 0 ]]; do
     case "$1" in
         --aln) shift; while [[ $# -gt 0 && ! "$1" =~ ^-- ]]; do aln_files+=("$1"); shift; done ;;
