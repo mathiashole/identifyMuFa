@@ -110,6 +110,8 @@ for tool in hmmbuild hmmsearch nhmmer infoalign bc; do
     command -v "$tool" >/dev/null 2>&1 || { echo "Error: '$tool' no instalado." >&2; exit 1; }
 done
 
+# ALIGNMENT ANALYSIS FUNCTION
+
 analyze_alignment() {
     local aln=$1
     local output
