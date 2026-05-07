@@ -260,10 +260,6 @@ run_search() {
         # search file log created in the back step, but we can also create a search-specific log if needed
         log_file="$outdir/${prefix}_${timestamp}.log"
 
-        # hmm_base=$(basename "$hmm")
-        # hmm_id="${hmm_base//./_}"
-        # hmm_id="${hmm_id%.hmm}"
-
         for db in "${db_files[@]}"; do
             db_prefix=$(basename "$db" | cut -d. -f1)
             {
@@ -272,20 +268,9 @@ run_search() {
                 echo "Time: $(date)"
             } >> "$log_file"
 
-            # db_base=$(basename "$db")
-            # db_id="${db_base//./_}"
-            # db_id="${db_id%.*}"
-
             cmd=()
             [[ "$db_type" == "prot" ]] && cmd=(hmmsearch --cpu "$cpu") || cmd=(nhmmer --cpu "$cpu")
             
-
-            # if [[ "$db_type" == "prot" ]]; then
-            #     cmd=(hmmsearch --cpu "$cpu")
-            # else
-            #     cmd=(nhmmer --cpu "$cpu")
-            # fi
-
             [[ -n "$evalue" ]] && cmd+=(--E "$evalue")
             [[ -n "$domevalue" ]] && cmd+=(--domE "$domevalue")
             [[ "$tblout" == true ]] && cmd+=(--tblout "$outdir/${prefix}_vs_${db_prefix}.tbl")
