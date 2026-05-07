@@ -259,12 +259,19 @@ run_search() {
         prefix=$(basename "$hmm" .hmm)
         # search file log created in the back step, but we can also create a search-specific log if needed
         log_file="$outdir/${prefix}_${timestamp}.log"
-        
-        hmm_base=$(basename "$hmm")
-        hmm_id="${hmm_base//./_}"
-        hmm_id="${hmm_id%.hmm}"
+
+        # hmm_base=$(basename "$hmm")
+        # hmm_id="${hmm_base//./_}"
+        # hmm_id="${hmm_id%.hmm}"
 
         for db in "${db_files[@]}"; do
+            db_prefix=$(basename "$db" | cut -d. -f1)
+            {
+                echo -e "\n=== SEARCH STEP ==="
+                echo "Database: $db"
+                echo "Time: $(date)"
+            } >> "$log_file"
+            
             db_base=$(basename "$db")
             db_id="${db_base//./_}"
             db_id="${db_id%.*}"
