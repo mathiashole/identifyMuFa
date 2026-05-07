@@ -120,7 +120,7 @@ analyze_alignment() {
         return
     fi
 
-    local metrics
+    local metrics # metrics will hold the average identity and gap percentage
     metrics=$(echo "$output" | grep -v "^#" | grep -v "USA" | awk '
         BEGIN {sum_id=0; sum_gl=0; sum_al=0; count=0} 
         {
