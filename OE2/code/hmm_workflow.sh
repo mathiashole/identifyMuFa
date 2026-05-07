@@ -149,6 +149,13 @@ analyze_alignment() {
 
     echo "METRICS|ID:${avg_id}%|GAPS:${gap_pct}%" >&2
 
+    local recs=()
+    # Conditional recommendations based on metrics
+    if (( $(echo "$avg_id < 25" | bc -l) )); then
+        recs+=("--wblosum") # If identity is very low, use BLOSUM weighting to help with distant relationships
+    elif (( $(echo "$avg_id > 85" | bc -l) )); then
+        recs+=("--wpb") # If identity is very high, use position-based weighting to avoid over-representation of nearly identical sequences
+    fi
 
 }
 
