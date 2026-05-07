@@ -281,6 +281,16 @@ build_hmms() {
             echo -e "Schematic Weighting: $weight_desc"
             echo -e "Symfrac: $sym_desc"
             echo -e "Command that would be executed: \033[1;32m${cmd[*]}\033[0m\n"
+        else
+            {
+                echo "=== HMMER PIPELINE LOG ==="
+                echo "Date: $(date)"
+                echo "Analysis Stats: $stats_info"
+                echo "Weighting Scheme: $weight_desc"
+                echo "Symfrac: $sym_desc"
+                echo "Final Command: ${cmd[*]}"
+                echo "---------------------------"
+            } > "$log_file"
 
     #     echo "[CMD] ${cmd[*]}"
     #     "${cmd[@]}"
