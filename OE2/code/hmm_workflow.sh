@@ -114,6 +114,12 @@ analyze_alignment() {
     local aln=$1
     local output
     
+    # Trying to run infoalign, if it fails, print unknown metrics and return
+    if ! output=$(infoalign -sequence "$aln" -filter -auto 2>/dev/null); then
+        echo "METRICS|ID:unknown|GAPS:unknown" >&2
+        return
+    fi
+
 
 }
 
