@@ -271,12 +271,15 @@ run_search() {
                 echo "Database: $db"
                 echo "Time: $(date)"
             } >> "$log_file"
-            
-            db_base=$(basename "$db")
-            db_id="${db_base//./_}"
-            db_id="${db_id%.*}"
+
+            # db_base=$(basename "$db")
+            # db_id="${db_base//./_}"
+            # db_id="${db_id%.*}"
 
             cmd=()
+            [[ "$db_type" == "prot" ]] && cmd=(hmmsearch --cpu "$cpu") || cmd=(nhmmer --cpu "$cpu")
+            
+
             if [[ "$db_type" == "prot" ]]; then
                 cmd=(hmmsearch --cpu "$cpu")
             else
