@@ -55,10 +55,10 @@ wid=""
 wblosum=false
 wpb=false
 evalue=""
-domevalue=""
-tblout=""
-domtblout=""
-pfamtblout=""
+tblout=false
+domtblout=false
+pfamtblout=false
+dry_run=false
 
 # Argument parsing
 aln_files=()
