@@ -13,3 +13,8 @@ usage() {
 COL=2
 
 # --- Parse arguments
+while getopts "f:c:o:" opt; do
+    case $opt in
+
+    esac
+done
