@@ -242,11 +242,11 @@ build_hmms() {
 
         cmd+=("$hmm_out" "$aln")
 
-        echo "[CMD] ${cmd[*]}"
-        "${cmd[@]}"
-        generated_hmms+=("$hmm_out")
-    done
-    hmm_files+=("${generated_hmms[@]}")
+    #     echo "[CMD] ${cmd[*]}"
+    #     "${cmd[@]}"
+    #     generated_hmms+=("$hmm_out")
+    # done
+    # hmm_files+=("${generated_hmms[@]}")
 }
 
 # ===========================
