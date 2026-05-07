@@ -120,6 +120,29 @@ analyze_alignment() {
         return
     fi
 
+    local metrics
+    metrics=$(echo "$output" | grep -v "^#" | grep -v "USA" | awk '
+        BEGIN {sum_id=0; sum_gl=0; sum_al=0; count=0} 
+        {
+            # Basado en tu output:
+            # $4 = AlignLen
+            # $6 = GapLen
+            # $7 = Ident
+            if($4 > 0) {
+                sum_id += $7; 
+                sum_gl += $6; 
+                sum_al += $4; 
+                count++;
+            }
+        } 
+        END {
+            if(count > 0) {
+                # Identidad media (%) y Gaps medios (%)
+                printf "%.2f %.2f", (sum_id/sum_al)*100, (sum_gl/sum_al)*100
+            } else {
+                printf "0 0"
+            }
+        }')
 
 }
 
