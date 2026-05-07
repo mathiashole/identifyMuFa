@@ -251,9 +251,8 @@ build_hmms() {
     hmm_files+=("${generated_hmms[@]}")
 }
 
-# ===========================
-# HMMSEARCH
-# ===========================
+# HMMSEARCH FUNCTION
+
 run_search() {
     echo "[INFO] Running HMM search..."
     for hmm in "${hmm_files[@]}"; do
