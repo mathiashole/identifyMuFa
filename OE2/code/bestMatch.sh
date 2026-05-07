@@ -15,6 +15,9 @@ COL=2
 # --- Parse arguments
 while getopts "f:c:o:" opt; do
     case $opt in
-
+        f) INPUT=$OPTARG ;;
+        c) COL=$OPTARG ;;
+        o) PREFIJO=$OPTARG ;;
+        *) usage ;;
     esac
 done
