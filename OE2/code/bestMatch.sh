@@ -39,3 +39,5 @@ fi
 # 2. -k3,3nr -k4,4nr: Sort by identity (column 3) and then by alignment length (column 4) in descending order
 # 3. awk '!seen[$COL]++': Keep only best ID
 # 4. awk final" Extract Id, start and end positions
+
+sort -k"${COL},${COL}" -k3,3nr -k4,4nr "$INPUT" | \
