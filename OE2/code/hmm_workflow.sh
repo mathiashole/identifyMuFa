@@ -292,11 +292,12 @@ build_hmms() {
                 echo "---------------------------"
             } > "$log_file"
 
-    #     echo "[CMD] ${cmd[*]}"
-    #     "${cmd[@]}"
-    #     generated_hmms+=("$hmm_out")
-    # done
-    # hmm_files+=("${generated_hmms[@]}")
+            echo -e "\033[0;32m[EXEC]\033[0m Generando perfil..."
+            "${cmd[@]}" >> "$log_file" 2>&1
+            generated_hmms+=("$hmm_out")
+        fi
+    done
+    hmm_files+=("${generated_hmms[@]}")
 }
 
 # ===========================
