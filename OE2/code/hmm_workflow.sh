@@ -255,7 +255,16 @@ build_hmms() {
                 fi
             done
         fi
-        
+
+        # 2. Logic to determine weighting method
+        local weight_desc="Default (GSC)"
+        if [[ "$wblosum" == true ]]; then 
+            cmd+=(--wblosum); weight_desc="Manual (--wblosum)" # If user explicitly chose wblosum 
+        elif [[ "$wpb" == true ]]; then 
+            cmd+=(--wpb); weight_desc="Manual (--wpb)" # If user explicitly chose wpb
+
+        fi
+
     #     echo "[CMD] ${cmd[*]}"
     #     "${cmd[@]}"
     #     generated_hmms+=("$hmm_out")
