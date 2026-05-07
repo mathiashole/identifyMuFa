@@ -280,11 +280,11 @@ run_search() {
             [[ "$db_type" == "prot" ]] && cmd=(hmmsearch --cpu "$cpu") || cmd=(nhmmer --cpu "$cpu")
             
 
-            if [[ "$db_type" == "prot" ]]; then
-                cmd=(hmmsearch --cpu "$cpu")
-            else
-                cmd=(nhmmer --cpu "$cpu")
-            fi
+            # if [[ "$db_type" == "prot" ]]; then
+            #     cmd=(hmmsearch --cpu "$cpu")
+            # else
+            #     cmd=(nhmmer --cpu "$cpu")
+            # fi
 
             [[ -n "$evalue" ]] && cmd+=(--E "$evalue")
             [[ -n "$domevalue" ]] && cmd+=(--domE "$domevalue")
