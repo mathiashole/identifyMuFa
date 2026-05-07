@@ -247,9 +247,15 @@ build_hmms() {
         if [[ -n "$symfrac" ]]; then
             cmd+=(--symfrac "$symfrac")
             sym_desc="Manual ($symfrac)"
-
+        else
+            for i in "${!auto_params[@]}"; do
+                if [[ "${auto_params[$i]}" == "--symfrac" ]]; then
+                    cmd+=(--symfrac "${auto_params[$((i+1))]}")
+                    sym_desc="Recommended (${auto_params[$((i+1))]})"
+                fi
+            done
         fi
-
+        
     #     echo "[CMD] ${cmd[*]}"
     #     "${cmd[@]}"
     #     generated_hmms+=("$hmm_out")
