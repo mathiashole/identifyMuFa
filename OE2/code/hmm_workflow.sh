@@ -144,6 +144,12 @@ analyze_alignment() {
             }
         }')
 
+    local avg_id=$(echo "$metrics" | cut -d' ' -f1)
+    local gap_pct=$(echo "$metrics" | cut -d' ' -f2)
+
+    echo "METRICS|ID:${avg_id}%|GAPS:${gap_pct}%" >&2
+
+
 }
 
 # # ===========================
