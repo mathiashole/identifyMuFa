@@ -102,6 +102,14 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
+# VALIDATIONS
+mkdir -p "$outdir"
+
+# Check required tools
+for tool in hmmbuild hmmsearch nhmmer infoalign bc; do
+    command -v "$tool" >/dev/null 2>&1 || { echo "Error: '$tool' no instalado." >&2; exit 1; }
+done
+
 # ===========================
 # DIRECTORIES
 # ===========================
