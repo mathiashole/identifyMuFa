@@ -272,6 +272,9 @@ build_hmms() {
             done
         fi
 
+        [[ "$hand" == true ]] && cmd+=(--hand)
+        cmd+=("$hmm_out" "$aln")
+        
     #     echo "[CMD] ${cmd[*]}"
     #     "${cmd[@]}"
     #     generated_hmms+=("$hmm_out")
