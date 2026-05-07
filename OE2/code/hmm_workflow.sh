@@ -242,6 +242,14 @@ build_hmms() {
 
         cmd+=("$hmm_out" "$aln")
 
+        # 1. Logic to determine symfrac
+        local sym_desc="Default (0.5)"
+        if [[ -n "$symfrac" ]]; then
+            cmd+=(--symfrac "$symfrac")
+            sym_desc="Manual ($symfrac)"
+
+        fi
+
     #     echo "[CMD] ${cmd[*]}"
     #     "${cmd[@]}"
     #     generated_hmms+=("$hmm_out")
