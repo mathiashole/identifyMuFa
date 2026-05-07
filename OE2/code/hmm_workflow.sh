@@ -256,6 +256,10 @@ build_hmms() {
 run_search() {
     echo "[INFO] Running HMM search..."
     for hmm in "${hmm_files[@]}"; do
+        prefix=$(basename "$hmm" .hmm)
+        # search file log created in the back step, but we can also create a search-specific log if needed
+        log_file="$outdir/${prefix}_${timestamp}.log"
+        
         hmm_base=$(basename "$hmm")
         hmm_id="${hmm_base//./_}"
         hmm_id="${hmm_id%.hmm}"
