@@ -51,3 +51,7 @@ awk -v col="$COL" 'BEGIN{FS=OFS="\t"} {
 
 # Print summary report
 echo "Report of processed file"
+echo "Entrada: $INPUT"
+echo "Columna de ID: $COL"
+echo "Salida: ${PREFIJO}_coords.txt"
+echo "Total de secuencias únicas: $(wc -l < "${PREFIJO}_coords.txt")"
