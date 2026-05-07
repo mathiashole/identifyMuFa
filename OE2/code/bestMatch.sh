@@ -21,3 +21,5 @@ while getopts "f:c:o:" opt; do
         *) usage ;;
     esac
 done
+
+if [[ -z "$INPUT" ]]; then usage; fi # Check if input file is provided
