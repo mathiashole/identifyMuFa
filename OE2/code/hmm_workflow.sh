@@ -262,7 +262,14 @@ build_hmms() {
             cmd+=(--wblosum); weight_desc="Manual (--wblosum)" # If user explicitly chose wblosum 
         elif [[ "$wpb" == true ]]; then 
             cmd+=(--wpb); weight_desc="Manual (--wpb)" # If user explicitly chose wpb
-
+        else
+            for p in "${auto_params[@]}"; do
+                if [[ "$p" == "--wblosum" ]]; then
+                    cmd+=(--wblosum); weight_desc="Recommended (--wblosum)" # If infoalign recommended wblosum based on low identity
+                elif [[ "$p" == "--wpb" ]]; then
+                    cmd+=(--wpb); weight_desc="Recommended (--wpb)" # If infoalign recommended wpb based on high identity
+                fi
+            done
         fi
 
     #     echo "[CMD] ${cmd[*]}"
