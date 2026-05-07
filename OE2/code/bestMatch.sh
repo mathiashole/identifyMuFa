@@ -48,3 +48,6 @@ awk -v col="$COL" 'BEGIN{FS=OFS="\t"} {
     if (col == 2) { print $2, $9, $10 }
     else { print $1, $7, $8 }
 }' > "${PREFIJO}_coords.txt"
+
+# Print summary report
+echo "Report of processed file"
