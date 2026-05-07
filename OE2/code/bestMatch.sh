@@ -33,3 +33,6 @@ if [[ -z "$PREFIJO" ]]; then
     PREFIJO="${PREFIJO%.fna}"
     PREFIJO="${PREFIJO%.txt}"
 fi
+
+# Logical processing
+# 1. sort -k${COL},${COL}: Sort by the specified column (1 or 2)
