@@ -300,18 +300,18 @@ run_search() {
     done
 }
 
-# ===========================
-# EXECUTION
-# ===========================
+# EXECUTION STEPS
+
 [[ "$mode" == "build" || "$mode" == "all" ]] && build_hmms
 [[ "$mode" == "search" || "$mode" == "all" ]] && run_search
 
+echo "[FINISHED] Logs y resultados en: $outdir"
 # echo "[ALL DONE] Results saved in '$outdir'"
-echo "[SUMMARY]"
-echo "  HMMs built: ${#hmm_files[@]}"
-echo "  Databases searched: ${#db_files[@]}"
-echo "  Output directories:"
-echo "    HMMs:    $hmms_dir"
-echo "    Search:  $search_dir"
-echo "    Logs:    $logs_dir"
+# echo "[SUMMARY]"
+# echo "  HMMs built: ${#hmm_files[@]}"
+# echo "  Databases searched: ${#db_files[@]}"
+# echo "  Output directories:"
+# echo "    HMMs:    $hmms_dir"
+# echo "    Search:  $search_dir"
+# echo "    Logs:    $logs_dir"
 
