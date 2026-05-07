@@ -8,3 +8,5 @@ usage() {
     echo "  -o: Prefix for output file. Default is 'best_matches'."
     exit 1
 }
+
+# --- Parse arguments
