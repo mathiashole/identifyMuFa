@@ -42,3 +42,9 @@ fi
 
 sort -k"${COL},${COL}" -k3,3nr -k4,4nr "$INPUT" | \
 awk -v col="$COL" 'BEGIN{FS=OFS="\t"} !seen[$col]++' | \
+awk -v col="$COL" 'BEGIN{FS=OFS="\t"} {
+    # Si filtramos por Subject (2), las coordenadas suelen ser 9 y 10.
+    # Si filtramos por Query (1), las coordenadas suelen ser 7 y 8.
+    if (col == 2) { print $2, $9, $10 }
+    else { print $1, $7, $8 }
+}' > "${PREFIJO}_coords.txt"
