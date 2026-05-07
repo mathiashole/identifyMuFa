@@ -220,12 +220,11 @@ analyze_alignment() {
 
 build_hmms() {
     local generated_hmms=()
-    echo "[INFO] Building HMM profiles from alignments..."
     for aln in "${aln_files[@]}"; do
-        base=$(basename "$aln")
-        prefix="${base%.*}"
-        # hmm_out="$outdir/${prefix}.hmm"
-        hmm_out="$hmms_dir/${prefix}.hmm"
+        base_name=$(basename "$aln")
+        prefix="${base_name%.*}"
+        hmm_out="$outdir/${prefix}.hmm"
+        log_file="$outdir/${prefix}_${timestamp}.log"
 
         cmd=(hmmbuild --cpu "$cpu")
 
