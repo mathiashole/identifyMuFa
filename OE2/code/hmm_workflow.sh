@@ -293,9 +293,9 @@ run_search() {
             [[ "$pfamtblout" == true ]] && cmd+=(--pfamtblout "$outdir/${prefix}_vs_${db_prefix}_pfamtblout.txt")
 
             cmd+=("$hmm" "$db")
-
-            echo "[CMD] ${cmd[*]}"
-            "${cmd[@]}"
+            
+            echo "Search Command: ${cmd[*]}" >> "$log_file"
+            "${cmd[@]}" >> "$log_file" 2>&1
         done
     done
 }
