@@ -216,6 +216,8 @@ analyze_alignment() {
 # mkdir -p "$outdir"
 # mkdir -p "hmms/$outdir" "search/$outdir" "logs/$outdir"
 
+# HMM BUILDING FUNCTION
+
 build_hmms() {
     local generated_hmms=()
     echo "[INFO] Building HMM profiles from alignments..."
