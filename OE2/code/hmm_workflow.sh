@@ -273,8 +273,15 @@ build_hmms() {
         fi
 
         [[ "$hand" == true ]] && cmd+=(--hand)
-        cmd+=("$hmm_out" "$aln")
-        
+        cmd+=("$hmm_out" "$aln") # hmmbuild syntax: hmmbuild [options] <hmmfile> <alnfile>
+
+        if [[ "$dry_run" == true ]]; then
+            echo -e "\n\033[1;33m=== Recomendation(DRY-RUN) ===\033[0m"
+            echo -e "Analysis Stats: $stats_info"
+            echo -e "Schematic Weighting: $weight_desc"
+            echo -e "Symfrac: $sym_desc"
+            echo -e "Command that would be executed: \033[1;32m${cmd[*]}\033[0m\n"
+
     #     echo "[CMD] ${cmd[*]}"
     #     "${cmd[@]}"
     #     generated_hmms+=("$hmm_out")
