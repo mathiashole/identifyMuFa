@@ -288,6 +288,9 @@ run_search() {
 
             [[ -n "$evalue" ]] && cmd+=(--E "$evalue")
             [[ -n "$domevalue" ]] && cmd+=(--domE "$domevalue")
+            [[ "$tblout" == true ]] && cmd+=(--tblout "$outdir/${prefix}_vs_${db_prefix}.tbl")
+            [[ "$domtblout" == true ]] && cmd+=(--domtblout "$outdir/${prefix}_vs_${db_prefix}.domtbl")
+            [[ "$pfamtblout" == true ]] && cmd+=(--pfamtblout "$outdir/${prefix}_vs_${db_prefix}_pfamtblout.txt")
 
             cmd+=("$hmm" "$db")
 
