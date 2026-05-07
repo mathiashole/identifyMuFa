@@ -66,6 +66,9 @@ hmm_files=()
 db_files=()
 db_type=""
 
+# Timestamp for log files (hour_daymonthyear)
+timestamp=$(date +"%H%M_%d%m%Y")
+
 # ===========================
 # ARGUMENT PARSING
 # ===========================
