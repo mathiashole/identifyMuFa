@@ -96,6 +96,8 @@ while [[ $# -gt 0 ]]; do
         --domtblout) shift; domtblout="$1"; shift ;;
         --pfamtblout) shift; pfamtblout="$1"; shift ;;
 
+        --dry-run) dry_run=true; shift ;;
+
         *) echo "Unknown argument: $1" >&2; exit 1 ;;
     esac
 done
