@@ -167,55 +167,6 @@ analyze_alignment() {
     echo "${recs[@]}"
 }
 
-# # ===========================
-# # DIRECTORIES
-# # ===========================
-# hmms_dir="$outdir/hmms"
-# search_dir="$outdir/search"
-# logs_dir="$outdir/logs"
-
-# mkdir -p "$hmms_dir" "$search_dir" "$logs_dir"
-
-# # Central log file
-# logfile="$logs_dir/run_$(date +%Y%m%d_%H%M%S).log"
-# exec > >(tee -a "$logfile") 2>&1
-
-# # Mode validation
-
-# if [[ "$mode" != "build" && "$mode" != "search" && "$mode" != "all" ]]; then
-#     echo "Error: --mode must be 'build', 'search', or 'all'" >&2; exit 1
-# fi
-
-# if [[ "$mode" != "search" && ${#aln_files[@]} -eq 0 ]]; then
-#     echo "Error: --aln is required in modes 'build' and 'all'" >&2; exit 1
-# fi
-
-# if [[ "$mode" != "build" && ${#hmm_files[@]} -eq 0 ]]; then
-#     echo "Error: --hmm is required in modes 'search' and 'all'" >&2; exit 1
-# fi
-
-# # If --wid is used but no weighting method selected, default to wblosum
-# if [[ -n "$wid" && "$wblosum" == false && "$wpb" == false ]]; then
-#     echo "[INFO] --wid detected without --wblosum or --wpb. Defaulting to --wblosum."
-#     wblosum=true
-# fi
-
-
-# # More validations check file existence
-# for f in "${aln_files[@]}"; do [[ -f "$f" ]] || { echo "Alignment file not found: $f" >&2; exit 1; }; done
-
-# for f in "${hmm_files[@]}"; do [[ -f "$f" ]] || { echo "HMM file not found: $f" >&2; exit 1; }; done
-
-# for f in "${db_files[@]}"; do [[ -f "$f" ]] || { echo "Database file not found: $f" >&2; exit 1; }; done
-
-# # Check required tools
-# for tool in hmmbuild hmmsearch nhmmer; do
-#     command -v "$tool" >/dev/null 2>&1 || { echo "Required tool '$tool' not found in PATH." >&2; exit 1; };
-# done
-
-# mkdir -p "$outdir"
-# mkdir -p "hmms/$outdir" "search/$outdir" "logs/$outdir"
-
 # HMM BUILDING FUNCTION
 
 build_hmms() {
