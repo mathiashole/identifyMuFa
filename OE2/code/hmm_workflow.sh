@@ -15,6 +15,9 @@ Required:
   --db <db1> [db2 ...]          Sequence database files
   --type <prot|nucl>            Type of database: 'prot' (protein) or 'nucl' (nucleotide)
 
+Modo Recomendación:
+  --dry-run                     Analyze and print commands without executing (for testing)
+
 Optional:
   --mode <all|build|search>     Choose execution mode (default: all)
   --outdir <dir>                Output directory (default: hmm_results)
