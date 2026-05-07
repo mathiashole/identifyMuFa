@@ -41,3 +41,4 @@ fi
 # 4. awk final" Extract Id, start and end positions
 
 sort -k"${COL},${COL}" -k3,3nr -k4,4nr "$INPUT" | \
+awk -v col="$COL" 'BEGIN{FS=OFS="\t"} !seen[$col]++' | \
