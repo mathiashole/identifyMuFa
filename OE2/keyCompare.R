@@ -2,6 +2,7 @@
 
 # Charge libary
 #----------------------------------------------------------------------
-
+suppressPackageStartupMessages({
   library(dplyr)
   library(readr)
+})
