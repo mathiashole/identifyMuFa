@@ -69,5 +69,9 @@ clean_tm_domains <- function(df) {
         group_by(file, target_name) %>%
         # sort by start position
         arrange(st, .by_group = TRUE) %>%
+        summarise(
+            tlen = first(tlen),
+            gap = if(n() > 1) max(lead(st) - en, na.rm = TRUE) else 0,
+        )
 
 }
