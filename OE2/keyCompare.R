@@ -111,3 +111,6 @@ tm_df <- filter(tm_df, (end_tm - start_tm) >= (tlen*0.35))
 
 map_df <- read_tsv(opts$map_file, col_names = FALSE, col_types = cols()) %>%
   rename(file = X2, target_name = X1)
+
+map_df <- map_df %>%
+  distinct(file)
