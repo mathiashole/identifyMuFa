@@ -24,6 +24,6 @@ parse_args_manual <- function(args) {
         if (args[i] == "--rib_file") {
             opts$rib_file <- args[i + 1]
             i <- i + 1
-        }
-
+        } else if ()
+    }
 }
