@@ -23,7 +23,7 @@ parse_args_manual <- function(args) {
     while (i <= length(args)) {
         flag <- args[i]
 
-        if (flag == "-rib" || args[i] == "--rib_file") {
+        if (flag == "-rib" || flag == "--rib_file") {
             opts$rib_file <- args[i + 1]
             i <- i + 1
         } else if ()
