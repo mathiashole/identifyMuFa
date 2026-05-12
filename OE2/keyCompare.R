@@ -71,6 +71,7 @@ clean_tm_domains <- function(df) {
         arrange(st, .by_group = TRUE) %>%
         summarise(
             tlen = first(tlen),
+            # Calculate gap between consecutive domains
             gap = if(n() > 1) max(lead(st) - en, na.rm = TRUE) else 0,
             # Logical priority a domain >= 370, if not, fushion
             start_tm = if(any((en - st) >= 370)) { 
