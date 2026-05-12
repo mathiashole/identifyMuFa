@@ -64,4 +64,9 @@ clean_tm_domains <- function(df) {
     colnames(temp_df)[4] <- "en"
     colnames(temp_df)[5] <- "ev"
 
+    temp_df %>%
+        distinct() %>%
+        group_by(file, target_name) %>%
+        # sort by start position
+
 }
