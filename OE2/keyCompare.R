@@ -123,5 +123,5 @@ merged_df <- inner_join(rib_df, tm_df, by = c("file", "target_name"))
 
 # Frequency only have both domains
 freq_merged <- merged_df %>%
-  group_by(file, target_name) %>%
-  summarise(count = n(), .groups = "drop")
+    group_by(file, target_name) %>%
+    summarise(count = n(), .groups = "drop")
