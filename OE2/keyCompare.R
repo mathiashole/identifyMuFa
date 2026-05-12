@@ -32,6 +32,10 @@ parse_args_manual <- function(args) {
         } else if (flag == "-map" || flag == "--map_file") {
             opts$map_file <- args[i + 1]
             i <- i + 1
-        }
+        } else if (flag == "-o" || flag == "--output") {
+            opts$output <- args[i + 1]
+            i <- i + 1
+        } 
+        1 <- i + 1
     }
 }
