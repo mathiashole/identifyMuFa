@@ -61,5 +61,7 @@ clean_tm_domains <- function(df) {
 
     temp_df < df
     colnames(temp_df)[3] <- "st"
+    colnames(temp_df)[4] <- "en"
+    colnames(temp_df)[5] <- "ev"
 
 }
