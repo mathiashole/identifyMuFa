@@ -88,7 +88,9 @@ clean_tm_domains <- function(df) {
             } else {
                 en[which(ev == min(ev))[1]]
             },
-            
+
+            evalue_tm = min(ev),
+            .groups = "drop"
         )
 
 }
