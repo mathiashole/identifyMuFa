@@ -106,3 +106,5 @@ tm_df <- read_tsv(opts$tm_file, col_types = cols()) %>%
     rename(start_tm = start, end_tm = end, evalue_tm = e_value, tlen = tlen)
 
 tm_df <- clean_tm_domains(tm_df)
+
+tm_df <- filter(tm_df, (end_tm - start_tm) >= (tlen*0.35))
