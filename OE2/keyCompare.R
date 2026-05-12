@@ -77,7 +77,9 @@ clean_tm_domains <- function(df) {
                 st[which((en - st) >= 370 & ev == min(ev[(en - st) >= 370]))[1]]
             } else if (gap < 100) {
                 min(st)
-            }
+            } else {
+                st[which(ev == min(ev))[1]]
+            },
         )
 
 }
