@@ -128,3 +128,8 @@ freq_merged <- merged_df %>%
 
 # IDs with only rib domains
 only_rib_df <- anti_join(rib_df, tm_df, by = c("file", "target_name"))
+
+# Frequency only have rib domains
+freq_only_rib <- only_rib_df %>%
+  group_by(file, target_name) %>%
+  summarise(count = n(), .groups = "drop")
