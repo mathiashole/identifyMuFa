@@ -40,3 +40,8 @@ parse_args_manual <- function(args) {
     }
     return(opts)
 }
+
+# Main execution point
+#------------------------------------------------------------------------
+args <- commandArgs(trailingOnly = TRUE)
+opts <- parse_args_manual(args)
