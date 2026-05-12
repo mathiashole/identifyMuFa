@@ -29,6 +29,9 @@ parse_args_manual <- function(args) {
         } else if (flag == "-tm" || flag == "--tm_file") {
             opts$tm_file <- args[i + 1]
             i <- i + 1
+        } else if (flag == "-map" || flag == "--map_file") {
+            opts$map_file <- args[i + 1]
+            i <- i + 1
         }
     }
 }
