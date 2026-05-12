@@ -96,3 +96,6 @@ clean_tm_domains <- function(df) {
     # final result take correct name and select columns
     select(file, target_name, start_tm, end_tm, evalue_tm, tlen)
 }
+
+rib_df <- read_tsv(opts$rib_file, col_types = cols()) %>%
+  rename(start_rib = start, end_rib = end, evalue_rib = e_value, tlen = tlen)
