@@ -11,12 +11,14 @@ suppressPackageStartupMessages({
 #----------------------------------------------------------------------
 #------------------------------------------------------------------------
 parse_args_manual <- function(args) {
-  # Init list to store arguments
-  opts <- list(
-    rib_file = NULL,
-    tm_file  = NULL,
-    map_file = "mapping_ids.tsv",
-    output   = "coincident_domains.tsv"
-  )
+    # Init list to store arguments
+    opts <- list(
+        rib_file = NULL,
+        tm_file  = NULL,
+        map_file = "mapping_ids.tsv",
+        output   = "coincident_domains.tsv"
+    )
+
+
 
 }
