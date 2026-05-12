@@ -133,3 +133,6 @@ only_rib_df <- anti_join(rib_df, tm_df, by = c("file", "target_name"))
 freq_only_rib <- only_rib_df %>%
     group_by(file, target_name) %>%
     summarise(count = n(), .groups = "drop")
+
+# IDs with only tm domains
+only_tm_df <- anti_join(tm_df, rib_df, by = c("file", "target_name"))
