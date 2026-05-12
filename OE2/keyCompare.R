@@ -59,4 +59,7 @@ if (is.null(opts$rib_file) || is.null(opts$tm_file)) {
 
 clean_tm_domains <- function(df) {
 
+    temp_df < df
+    colnames(temp_df)[3] <- "st"
+
 }
