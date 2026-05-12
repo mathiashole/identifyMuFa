@@ -125,3 +125,6 @@ merged_df <- inner_join(rib_df, tm_df, by = c("file", "target_name"))
 freq_merged <- merged_df %>%
     group_by(file, target_name) %>%
     summarise(count = n(), .groups = "drop")
+
+# IDs with only rib domains
+only_rib_df <- anti_join(rib_df, tm_df, by = c("file", "target_name"))
