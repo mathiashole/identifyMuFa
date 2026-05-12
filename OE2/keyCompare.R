@@ -101,3 +101,6 @@ rib_df <- read_tsv(opts$rib_file, col_types = cols()) %>%
     rename(start_rib = start, end_rib = end, evalue_rib = e_value, tlen = tlen)
 
 rib_df <- filter(rib_df, (end_rib - start_rib) >= mean(tlen)*0.4)
+
+tm_df <- read_tsv(opts$tm_file, col_types = cols()) %>%
+  rename(start_tm = start, end_tm = end, evalue_tm = e_value, tlen = tlen)
