@@ -56,3 +56,7 @@ if (is.null(opts$rib_file) || is.null(opts$tm_file)) {
 #----------------------------------------------------------------------
 # read the tables, asume they have tsv format
 # Rename columns to have a common key for joining
+
+clean_tm_domains <- function(df) {
+
+}
