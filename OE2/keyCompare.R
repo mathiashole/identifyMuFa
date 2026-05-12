@@ -51,3 +51,8 @@ if (is.null(opts$rib_file) || is.null(opts$tm_file)) {
     cat("Usage: ./keyCompare.R --rib_file and --tm_file are required.\n")
     quit(status = 1)
 }
+
+# 1. Charge data
+#----------------------------------------------------------------------
+# read the tables, asume they have tsv format
+# Rename columns to have a common key for joining
