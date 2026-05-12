@@ -72,6 +72,7 @@ clean_tm_domains <- function(df) {
         summarise(
             tlen = first(tlen),
             gap = if(n() > 1) max(lead(st) - en, na.rm = TRUE) else 0,
+            # Logical priority a domain >= 370, if not, fushion
         )
 
 }
