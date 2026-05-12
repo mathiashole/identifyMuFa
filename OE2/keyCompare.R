@@ -75,7 +75,9 @@ clean_tm_domains <- function(df) {
             # Logical priority a domain >= 370, if not, fushion
             start_tm = if(any((en - st) >= 370)) { 
                 st[which((en - st) >= 370 & ev == min(ev[(en - st) >= 370]))[1]]
-            } else {}
+            } else if (gap < 100) {
+                min(st)
+            }
         )
 
 }
