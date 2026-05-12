@@ -80,6 +80,15 @@ clean_tm_domains <- function(df) {
             } else {
                 st[which(ev == min(ev))[1]]
             },
+
+            end_tm = if(any((en - st) >= 370)) { 
+                en[which((en - st) >= 370 & ev == min(ev[(en - st) >= 370]))[1]]
+            } else if (gap < 100) {
+                max(en)
+            } else {
+                en[which(ev == min(ev))[1]]
+            },
+            
         )
 
 }
