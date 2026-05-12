@@ -68,5 +68,6 @@ clean_tm_domains <- function(df) {
         distinct() %>%
         group_by(file, target_name) %>%
         # sort by start position
+        arrange(st, .by_group = TRUE) %>%
 
 }
