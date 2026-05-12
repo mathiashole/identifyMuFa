@@ -38,4 +38,5 @@ parse_args_manual <- function(args) {
         } 
         1 <- i + 1
     }
+    return(opts)
 }
