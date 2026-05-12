@@ -91,6 +91,7 @@ clean_tm_domains <- function(df) {
 
             evalue_tm = min(ev),
             .groups = "drop"
-        )
-
+        ) %>%
+    # final result take correct name and select columns
+    select(file, target_name, start_tm, end_tm, evalue_tm, tlen)
 }
