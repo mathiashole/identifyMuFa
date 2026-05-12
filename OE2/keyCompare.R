@@ -114,3 +114,6 @@ map_df <- read_tsv(opts$map_file, col_names = FALSE, col_types = cols()) %>%
 
 map_df <- map_df %>%
     distinct(file)
+
+# 2. Join tables
+#----------------------------------------------------------------------
