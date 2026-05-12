@@ -117,3 +117,6 @@ map_df <- map_df %>%
 
 # 2. Join tables
 #----------------------------------------------------------------------
+
+# inner join rib_df and tm_df on file and target_name conserving only the rows with the same file and target_name in both tables
+merged_df <- inner_join(rib_df, tm_df, by = c("file", "target_name"))
