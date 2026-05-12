@@ -45,3 +45,9 @@ parse_args_manual <- function(args) {
 #------------------------------------------------------------------------
 args <- commandArgs(trailingOnly = TRUE)
 opts <- parse_args_manual(args)
+
+# Validation of required arguments
+if (is.null(opts$rib_file) || is.null(opts$tm_file)) {
+    cat("Usage: ./keyCompare.R --rib_file and --tm_file are required.\n")
+    quit(status = 1)
+}
