@@ -176,3 +176,10 @@ both_7rib <- merged_df %>%
 
 # 5. Read a mapping dataframe obtein all spacies
 #----------------------------------------------------------------------
+
+summary_table <- mapp_df %>%
+    full_join(count_rib, by = "file") %>%
+    full_join(count_tm, by = "file") %>%
+    full_join(count_both, by = "file") %>%
+    full_join(both_7rib, by = "file")
+
