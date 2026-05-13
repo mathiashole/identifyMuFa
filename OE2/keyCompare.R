@@ -161,4 +161,5 @@ count_rib <- only_rib_df %>%
 
 count_tm <- only_tm_df %>%
     group_by(file) %>%
-    summarise(tm = n()) # count total tm column group by file
+    summarise(tm = n_distinct(target_name)) # count distinct tm in target_name and column group by file
+
