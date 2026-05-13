@@ -158,3 +158,7 @@ summary_df <- merged_df %>%
 count_rib <- only_rib_df %>%
     group_by(file) %>%
     summarise(rib = n())
+
+count_tm <- only_tm_df %>%
+    group_by(file) %>%
+    summarise(tm = n())
