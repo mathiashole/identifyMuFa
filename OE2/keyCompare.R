@@ -197,3 +197,6 @@ write_csv(summary_table, opts$output)
 
 # Created main directory for domain text files
 dir.create("domain_txt_files", showWarnings = FALSE)
+
+# 7. Function to export different dataframe of domain
+#-------------------------------------------------------------------------
