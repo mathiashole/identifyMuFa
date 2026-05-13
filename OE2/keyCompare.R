@@ -163,3 +163,6 @@ count_tm <- only_tm_df %>%
     group_by(file) %>%
     summarise(tm = n_distinct(target_name)) # count distinct tm in target_name and column group by file
 
+count_both <- merged_df %>%
+    group_by(file) %>%
+    summarise(both = n_distinct(target_name)) # count distinct target names with both domains and column group by file
