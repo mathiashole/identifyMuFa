@@ -174,7 +174,7 @@ both_7rib <- merged_df %>%
     group_by(file) %>%
     summarise(DGF1 = n_distinct(target_name), .groups = "drop") # finaly count distinct target names group by file
 
-# 5. Read a mapping dataframe obtein all spacies
+# 5. Edit mapping dataframe and create seven rib id
 #----------------------------------------------------------------------
 
 summary_table <- mapp_df %>%
@@ -190,3 +190,4 @@ sevenRibId <- merged_df %>%
     group_by(file) %>%
     filter(n_rib == 7) %>% # filtered of number of rib
     distinct(file, target_name)
+
