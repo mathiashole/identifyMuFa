@@ -191,3 +191,9 @@ sevenRibId <- merged_df %>%
     filter(n_rib == 7) %>% # filtered of number of rib
     distinct(file, target_name)
 
+# 6. Save results
+#------------------------------------------------------------------------
+write_csv(summary_table, opts$output)
+
+# Created main directory for domain text files
+dir.create("domain_txt_files", showWarnings = FALSE)
