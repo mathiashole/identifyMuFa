@@ -178,8 +178,8 @@ both_7rib <- merged_df %>%
 #----------------------------------------------------------------------
 
 summary_table <- mapp_df %>%
-    full_join(count_rib, by = "file") %>%
-    full_join(count_tm, by = "file") %>%
-    full_join(count_both, by = "file") %>%
-    full_join(both_7rib, by = "file") %>%
+    full_join(count_rib, by = "file") %>% # join with the dataframe containing IDs with rib domains
+    full_join(count_tm, by = "file") %>% # join with the dataframe containing IDs with tm domains
+    full_join(count_both, by = "file") %>% # join with the dataframe containing IDs with both domains
+    full_join(both_7rib, by = "file") %>% # join with the dataframe containing IDs with 7 rib domains
     mutate(rib = coalesce(rib, 0), tm = coalesce(tm, 0), both = coalesce(both, 0), DGF1 = coalesce(DGF1, 0)) # fill NAs with 0
