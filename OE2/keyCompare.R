@@ -141,3 +141,5 @@ only_tm_df <- anti_join(tm_df, rib_df, by = c("file", "target_name"))
 freq_only_tm <- only_tm_df %>%
     group_by(file, target_name) %>%
     summarise(count = n(), .groups = "drop")
+
+# 3. Count frequencies per specie (column 'file')
