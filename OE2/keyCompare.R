@@ -203,4 +203,9 @@ dir.create("domain_txt_files", showWarnings = FALSE)
 
 save_domain_files <- function(df, cols_to_keep, outdir) {
 
+    dir.create(outdir, recursive = TRUE, showWarnings = FALSE) # create directory by name
+
+    split_df <- split(df, df$file) # split df
+
+
 } 
