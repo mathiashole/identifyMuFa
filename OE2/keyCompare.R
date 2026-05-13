@@ -185,4 +185,6 @@ summary_table <- mapp_df %>%
     mutate(rib = coalesce(rib, 0), tm = coalesce(tm, 0), both = coalesce(both, 0), DGF1 = coalesce(DGF1, 0)) # fill NAs with 0
 
 sevenRibId <- merged_df %>%
-    
+    group_by(file, target_name) %>%
+    summarise(n_rib = n_distinct(paste(start_rib, end_rib)), .groups = "drop") %>% # count distinct rib domains because obtein start and end coordinates
+    group_by(file) %>%
