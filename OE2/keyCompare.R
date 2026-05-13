@@ -151,3 +151,6 @@ summary_df <- merged_df %>%
         uniq_domain = n_distinct(target_name)
     ) %>%
     arrange(desc(both_domains))
+
+# 4. Count domain per category
+#----------------------------------------------------------------------
