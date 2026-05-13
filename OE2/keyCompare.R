@@ -169,3 +169,4 @@ count_both <- merged_df %>%
 
 both_7rib <- merged_df %>%
     group_by(file, target_name) %>%
+    summarise(n_rib = n_distinct(paste(start_rib, end_rib)), .groups = "drop") %>%
