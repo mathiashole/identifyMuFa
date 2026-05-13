@@ -188,3 +188,4 @@ sevenRibId <- merged_df %>%
     group_by(file, target_name) %>%
     summarise(n_rib = n_distinct(paste(start_rib, end_rib)), .groups = "drop") %>% # count distinct rib domains because obtein start and end coordinates
     group_by(file) %>%
+    filter(n_rib == 7) %>% # filtered of number of rib
