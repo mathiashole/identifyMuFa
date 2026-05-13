@@ -183,3 +183,6 @@ summary_table <- mapp_df %>%
     full_join(count_both, by = "file") %>% # join with the dataframe containing IDs with both domains
     full_join(both_7rib, by = "file") %>% # join with the dataframe containing IDs with 7 rib domains
     mutate(rib = coalesce(rib, 0), tm = coalesce(tm, 0), both = coalesce(both, 0), DGF1 = coalesce(DGF1, 0)) # fill NAs with 0
+
+sevenRibId <- merged_df %>%
+    
