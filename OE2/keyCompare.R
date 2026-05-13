@@ -181,5 +181,5 @@ summary_table <- mapp_df %>%
     full_join(count_rib, by = "file") %>%
     full_join(count_tm, by = "file") %>%
     full_join(count_both, by = "file") %>%
-    full_join(both_7rib, by = "file")
-
+    full_join(both_7rib, by = "file") %>%
+    mutate(rib = coalesce(rib, 0), tm = coalesce(tm, 0), both = coalesce(both, 0), DGF1 = coalesce(DGF1, 0)) # fill NAs with 0
