@@ -143,3 +143,11 @@ freq_only_tm <- only_tm_df %>%
     summarise(count = n(), .groups = "drop")
 
 # 3. Count frequencies per specie (column 'file')
+#----------------------------------------------------------------------
+
+summary_df <- merged_df %>%
+    group_by(file) %>%
+    summarise(both_domains = n(),
+        uniq_domain = n_distinct(target_name)
+    ) %>%
+    arrange(desc(both_domains))
