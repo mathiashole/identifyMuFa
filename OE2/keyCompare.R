@@ -200,3 +200,7 @@ dir.create("domain_txt_files", showWarnings = FALSE)
 
 # 7. Function to export different dataframe of domain
 #-------------------------------------------------------------------------
+
+save_domain_files <- function(df, cols_to_keep, outdir) {
+
+} 
