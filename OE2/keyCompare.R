@@ -154,3 +154,7 @@ summary_df <- merged_df %>%
 
 # 4. Count domain per category
 #----------------------------------------------------------------------
+
+count_rib <- only_rib_df %>%
+    group_by(file) %>%
+    summarise(rib = n())
