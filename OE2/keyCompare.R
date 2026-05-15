@@ -247,4 +247,11 @@ save_id_files <- function(df, outdir) {
 # 8. Save domain files for each category
 #-------------------------------------------------------------------------
 
-save_id_files(sevenRibId, "domain_txt_files/sevenRib")
+save_id_files(
+    df = sevenRibId,
+    outdir = "domain_txt_files/sevenRib") # save files with 7 rib domains
+
+save_domain_files(
+    df = only_rib_df,
+    cols_to_keep = c("target_name", "start_rib", "end_rib"),
+    outdir = "domain_txt_files/only_rib") # save files with only rib domains
