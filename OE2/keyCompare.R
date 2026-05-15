@@ -236,6 +236,9 @@ save_id_files <- function(df, outdir) {
 
         outfile <- file.path(outdir, outname) # create path for output file
 
+        outdf <- subdf %>%
+            distinct(target_name) # get distinct target names
+
     }
 
 }
