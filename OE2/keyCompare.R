@@ -209,6 +209,9 @@ save_domain_files <- function(df, cols_to_keep, outdir) {
 
     for (fname in names(split_df)) {
         subdf <- split_df[[fname]]
+        # Change final extansion to .txt
+        outname <- fname %>%
+            sub("\\.(fasta|fna)$", ".txt", ., ignore.case = TRUE)
     }
 
 } 
