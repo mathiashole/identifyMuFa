@@ -212,6 +212,8 @@ save_domain_files <- function(df, cols_to_keep, outdir) {
         # Change final extansion to .txt
         outname <- fname %>%
             sub("\\.(fasta|fna)$", ".txt", ., ignore.case = TRUE)
+        # Select only the columns to keep
+        outdf <- subdf[, cols_to_keep, drop = FALSE]
     }
 
 } 
