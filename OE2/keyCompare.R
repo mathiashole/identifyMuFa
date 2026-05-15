@@ -259,4 +259,9 @@ save_domain_files(
 save_domain_files(
     df = only_tm_df,
     cols_to_keep = c("target_name", "start_tm", "end_tm"),
-    outdir = "domain_txt_files/only_tm") # save files with only tm domains  
+    outdir = "domain_txt_files/only_tm") # save files with only tm domains
+
+save_domain_files(
+    df = merged_df,
+    cols_to_keep = c("target_name", "start_rib", "end_rib", "start_tm", "end_tm"),
+    outdir = "domain_txt_files/merged") # save files with both domains
