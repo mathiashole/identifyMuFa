@@ -230,6 +230,9 @@ save_id_files <- function(df, outdir) {
 
     for (fname in names(split_df)) {
         subdf <- split_df[[fname]] # get the sub dataframe for the current file
+        # Change final extansion to .txt
+        outname <- fname %>%
+            sub("\\.(fasta|fna)$", ".txt", ., ignore.case = TRUE)
 
     }
 
