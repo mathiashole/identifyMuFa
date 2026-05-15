@@ -221,3 +221,9 @@ save_domain_files <- function(df, cols_to_keep, outdir) {
         write.table(outdf, file = outfile, sep = "\t", row.names = FALSE, col.names = TRUE, quote = FALSE)
     }
 } 
+
+save_id_files <- function(df, outdir) {
+
+
+
+}
