@@ -239,6 +239,7 @@ save_id_files <- function(df, outdir) {
         outdf <- subdf %>%
             distinct(target_name) # get distinct target names
 
-    }
+        write.table(outdf, file = outfile, sep = "\t", row.names = FALSE, col.names = TRUE, quote = FALSE)
 
+    }
 }
