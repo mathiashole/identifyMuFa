@@ -226,6 +226,8 @@ save_id_files <- function(df, outdir) {
 
     dir.create(outdir, recursive = TRUE, showWarnings = FALSE) # create directory by name
 
+    split_df <- split(df, df$file) # split df
+
 
 
 }
