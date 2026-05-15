@@ -234,6 +234,8 @@ save_id_files <- function(df, outdir) {
         outname <- fname %>%
             sub("\\.(fasta|fna)$", ".txt", ., ignore.case = TRUE)
 
+        outfile <- file.path(outdir, outname) # create path for output file
+
     }
 
 }
