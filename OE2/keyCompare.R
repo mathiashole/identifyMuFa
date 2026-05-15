@@ -208,6 +208,7 @@ save_domain_files <- function(df, cols_to_keep, outdir) {
     split_df <- split(df, df$file) # split df
 
     for (fname in names(split_df)) {
+        subdf <- split_df[[fname]]
     }
 
 } 
