@@ -228,6 +228,8 @@ save_id_files <- function(df, outdir) {
 
     split_df <- split(df, df$file) # split df
 
+    for (fname in names(split_df)) {
 
+    }
 
 }
