@@ -217,6 +217,8 @@ save_domain_files <- function(df, cols_to_keep, outdir) {
 
         # Select only the columns to keep
         outdf <- subdf[, cols_to_keep, drop = FALSE]
+
+        write.table(outdf, file = outfile, sep = "\t", row.names = FALSE, col.names = TRUE, quote = FALSE)
     }
 
 } 
