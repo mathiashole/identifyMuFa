@@ -243,3 +243,6 @@ save_id_files <- function(df, outdir) {
 
     }
 }
+
+# 8. Save domain files for each category
+#-------------------------------------------------------------------------
