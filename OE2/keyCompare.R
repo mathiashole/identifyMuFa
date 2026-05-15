@@ -224,6 +224,8 @@ save_domain_files <- function(df, cols_to_keep, outdir) {
 
 save_id_files <- function(df, outdir) {
 
+    dir.create(outdir, recursive = TRUE, showWarnings = FALSE) # create directory by name
+
 
 
 }
