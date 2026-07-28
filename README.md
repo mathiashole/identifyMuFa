@@ -1,4 +1,4 @@
-# identifyMuFa
+# Blast-and-HMM-searches
 
 [![R](https://img.shields.io/badge/R-276DC3?style=for-the-badge&logo=R&logoColor=white&labelColor=101010)](https://www.r-project.org/about.html)
 [![bash](https://img.shields.io/badge/bash-4EAA25?style=for-the-badge&logo=gnubash&logoColor=white&labelColor=101010)](https://www.gnu.org/software/bash/)
@@ -6,7 +6,9 @@
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/mathiashole/identifyMuFa?style=for-the-badge&labelColor=101010&color=white)
 ![GitHub](https://img.shields.io/github/license/mathiashole/identifyMuFa?color=%23179287&style=for-the-badge&logoColor=white&labelColor=101010&cacheSeconds=60)
 
-`identifyMuFa` Characterization and evolutionary history gene family
+`Blast-and-HMM-searches` 
+
+A modular pipeline for homology-based gene family identification, re-annotation, pseudogene detection, and profile HMM searches across genomes and proteomes. The workflow combines BLAST, ORF prediction, HMMER, and custom R scripts to identify complete genes, pseudogenes, and distant homologs from genomic or proteomic datasets.
 
 ## :book: Features
 
