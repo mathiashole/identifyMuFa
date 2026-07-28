@@ -6,8 +6,7 @@
 *.js
 *.css
 *.woff
-OE1/site/structure_file/*.cif
-OE1/site/*_files
+OE1/site
 *output_directory*
 OE1/main_feature.R
-OE1/site/image
+
