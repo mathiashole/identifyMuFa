@@ -54,7 +54,7 @@ Builds profile Hidden Markov Models (HMMs) from multiple sequence alignments and
 
 ---
 
-# Dependencies
+## Dependencies
 
 The pipeline requires the following software:
 
