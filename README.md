@@ -49,7 +49,6 @@ Builds profile Hidden Markov Models (HMMs) from multiple sequence alignments and
 - Multiple sequence alignment
 - HMM construction
 - HMMER searches
-- ORF extraction from genomic assemblies
 - Domain detection
 - Candidate protein reconstruction
 
