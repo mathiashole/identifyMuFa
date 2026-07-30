@@ -38,6 +38,23 @@ Identifies homologous loci using BLAST searches, reconstructs fragmented genomic
 - Gene/pseudogene classification
 - Export annotated coordinates and sequences
 
+---
+
+### OE2 — Profile HMM Search
+
+Builds profile Hidden Markov Models (HMMs) from multiple sequence alignments and searches genomes or proteomes for distant homologs. For genomes lacking protein annotations, ORFs are automatically extracted prior to HMM screening.
+
+#### Main tasks
+
+- Multiple sequence alignment
+- HMM construction
+- HMMER searches
+- ORF extraction from genomic assemblies
+- Domain detection
+- Candidate protein reconstruction
+
+---
+
 ## :wrench: Usage
 
 x
