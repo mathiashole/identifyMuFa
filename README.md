@@ -23,6 +23,15 @@ A modular pipeline for homology-based gene family identification, re-annotation,
 - Support for genomes with or without annotated proteomes.
 - Fully configurable for any gene family.
 
+## Modules
+
+### OE1 — Gene Identification and Re-annotation
+
+Identifies homologous loci using BLAST searches, reconstructs fragmented genomic regions, predicts open reading frames (ORFs), and classifies candidates as complete genes or pseudogenes according to user-defined similarity, coverage, and ORF-length thresholds.
+
+#### Main tasks
+
+
 ## :wrench: Usage
 
 x
