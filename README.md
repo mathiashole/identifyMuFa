@@ -12,7 +12,16 @@ A modular pipeline for homology-based gene family identification, re-annotation,
 
 ## :book: Features
 
-x
+### Features
+
+- Identification of gene family members using BLAST.
+- Reconstruction of fragmented loci.
+- Automatic ORF prediction.
+- Gene and pseudogene classification based on customizable thresholds.
+- Profile HMM construction from multiple sequence alignments.
+- Detection of distant homologs using HMMER.
+- Support for genomes with or without annotated proteomes.
+- Fully configurable for any gene family.
 
 ## :wrench: Usage
 
