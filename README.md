@@ -31,6 +31,12 @@ Identifies homologous loci using BLAST searches, reconstructs fragmented genomic
 
 #### Main tasks
 
+- BLASTn/BLASTp homology searches
+- Merge nearby BLAST hits
+- ORF prediction
+- Gene boundary reconstruction
+- Gene/pseudogene classification
+- Export annotated coordinates and sequences
 
 ## :wrench: Usage
 
