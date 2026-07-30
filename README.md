@@ -54,6 +54,20 @@ Builds profile Hidden Markov Models (HMMs) from multiple sequence alignments and
 
 ---
 
+# Dependencies
+
+The pipeline requires the following software:
+
+| Software | Purpose |
+|----------|---------|
+| BLAST+ | Sequence similarity searches |
+| EMBOSS (`transeq`, `getorf`) | ORF prediction and translation |
+| HMMER | Profile HMM construction and searches |
+| MAFFT | Multiple sequence alignment |
+| R (≥ 4.2 recommended) | Data processing and visualization |
+| Bash | Workflow execution |
+
+
 ## :wrench: Usage
 
 x
