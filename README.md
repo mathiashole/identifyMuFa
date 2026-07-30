@@ -23,8 +23,6 @@ A modular pipeline for homology-based gene family identification, re-annotation,
 - Support for genomes with or without annotated proteomes.
 - Fully configurable for any gene family.
 
----
-
 ## Modules
 
 ### OE1 — Gene Identification and Re-annotation
