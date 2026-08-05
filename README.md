@@ -12,8 +12,6 @@ A modular pipeline for homology-based gene family identification, re-annotation,
 
 ## :book: Features
 
-### Features
-
 - Identification of gene family members using BLAST.
 - Reconstruction of fragmented loci.
 - Automatic ORF prediction.
