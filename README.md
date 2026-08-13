@@ -70,8 +70,16 @@ The pipeline requires the following software:
 
 ## :wrench: Usage
 
-x
+### Usage O1
 
+### Execution Options:
+
+#### 1. Using the Terminal
+-  Navigate to the folder `OE1` containing `main.R` and execute the script with the necessary arguments:
+
+```{bash, eval = FALSE}
+Rscript main.R --no_gff <config.tsv>
+```
 ## :hammer: in progress ...
 
 
