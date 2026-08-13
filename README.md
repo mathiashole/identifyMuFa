@@ -76,6 +76,11 @@ The pipeline requires the following software:
 ```{bash, eval = FALSE}
 Rscript main.R --no_gff <config.tsv>
 ```
+
+#### Example of `config.tsv`
+
+
+
 ## :hammer: in progress ...
 
 
