@@ -79,7 +79,9 @@ Rscript main.R --no_gff <config.tsv>
 
 #### Example of `config.tsv`
 
-
+| /Path/to/genome | /Path/to/gene-searches | 900 | 60 |
+| /Path/to/other-genome | /Path/to/gene-searches (same or other) | 500 | 80 |
+| /Path/to/other-genome | /Path/to/gene-searches (same or other) | 1900 | 50 |
 
 ## :hammer: in progress ...
 
