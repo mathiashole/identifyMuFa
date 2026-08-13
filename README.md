@@ -68,9 +68,7 @@ The pipeline requires the following software:
 
 ## :wrench: Usage
 
-### Usage O1
-
-### Execution Options:
+### Usage OE1
 
 #### 1. Using the Terminal
 -  Navigate to the folder `OE1` containing `main.R` and execute the script with the necessary arguments:
