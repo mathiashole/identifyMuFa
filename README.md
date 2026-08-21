@@ -109,6 +109,17 @@ DATABASE_DIR="/Path/to/Proteome directory" # all proteomes
 DATABASE_EXT="*.fasta" # All proteomes require the same extent
 CPU=25
 
+# Output result
+OUTPUT_DIR="result_blast" # Name output blast directory
+OUTPUT_PREFIX="domain_multi"
+ALIGNMENT_FINAL="all_domain.fasta"
+
+# PATH OF SCRIPTS
+# Check that all routes are correct
+PATH_ALLBLAST="../OE1/code/allBlast.sh"
+PATH_GSCISSORS="../OE1/code/Genomics_Scissors/gscissors.pl"
+PATH_BESTMATCH="./code/bestMatch.sh"
+PATH_EASYHMM="./code/easy_hmm.sh"
 
 ```
 
