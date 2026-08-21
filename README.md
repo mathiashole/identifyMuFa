@@ -91,8 +91,10 @@ Rscript main.R --no_gff <config.tsv>
 -  Navigate to the folder `OE2` containing `main.sh` and execute the script with the necessary arguments:
 
 ```{bash, eval = FALSE}
-./main.sh --config <config.sh file>
+./main.sh --config <config.sh>
 ```
+
+#### Example of `config.sh`
 
 ```{bash, eval = FALSE}
 # ============================================================
