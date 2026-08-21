@@ -91,8 +91,6 @@ Rscript main.R --no_gff <config.tsv>
 -  Navigate to the folder `OE2` containing `main.sh` and execute the script with the necessary arguments:
 
 
-| /Path/to/other-genome | /Path/to/gene-searches (same or other) | 1900 | 50 |
-
 ## :hammer: in progress ...
 
 
