@@ -90,6 +90,27 @@ Rscript main.R --no_gff <config.tsv>
 #### 1. Using the Terminal
 -  Navigate to the folder `OE2` containing `main.sh` and execute the script with the necessary arguments:
 
+```{bash, eval = FALSE}
+# ============================================================
+# RUNNING CONFIG
+# ============================================================
+
+# List of query file
+QUERY_FILES=(
+    "/Path/to/domain_1.fasta"
+    "/Path/to/domain_2.fasta"
+    "/Path/to/domain_3.fasta"
+)
+
+SUBJECT_BLAST="/Path/to/genome.fasta"
+
+# HMMER CONFIG
+DATABASE_DIR="/Path/to/Proteome directory" # all proteomes
+DATABASE_EXT="*.fasta" # All proteomes require the same extent
+CPU=25
+
+
+```
 
 ## :hammer: in progress ...
 
